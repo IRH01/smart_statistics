@@ -3,7 +3,7 @@ package com.hhly.smartdata.service.authentication;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.hhly.smartdata.mapper.authentication.FunctionRepository;
+import com.hhly.smartdata.mapper.authentication.FunctionMapper;
 import com.hhly.smartdata.model.authentication.Function;
 import com.hhly.smartdata.model.authentication.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class FunctionService{
 
     @Autowired
-    private FunctionRepository functionRepository;
+    private FunctionMapper functionRepository;
 
     @Autowired
     private PermissionService permissionService;

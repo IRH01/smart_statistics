@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="baseUser">
+<mapper namespace="com.hhly.smartdata.mapper.authentication.UserMapper">
+
     <resultMap id="UserMap" type="com.hhly.smartdata.model.authentication.User">
         <id column="user_id" property="userId"/>
         <result column="username" property="username"/>
@@ -10,6 +11,7 @@
         <result column="create_time" property="createTime"/>
         <result column="locale" property="locale"/>
     </resultMap>
+
     <sql id="User_Base_Column_List">
         user_id,
         username,
@@ -19,6 +21,7 @@
         create_time,
         locale
     </sql>
+
     <sql id="where_condition">
         <where>
             and user_id != -1
@@ -39,6 +42,7 @@
             </if>
         </where>
     </sql>
+
     <select id="getByUsername" resultMap="UserMap"
             parameterType="string">
         select
@@ -46,12 +50,14 @@
         from tbl_user
         where username = #{username}
     </select>
+
     <select id="getUser" resultMap="UserMap" parameterType="java.lang.Integer">
         select
         <include refid="User_Base_Column_List"/>
         from tbl_user
         where user_id = #{userId}
     </select>
+
     <select id="searchUsers" resultMap="UserMap"
             parameterType="com.hhly.smartdata.model.authentication.User">
         select
@@ -59,33 +65,13 @@
         from tbl_user
         <include refid="where_condition"/>
     </select>
+
     <delete id="delete" parameterType="java.lang.Integer">
         DELETE
         FROM
         tbl_user
         WHERE user_id = #{userId}
     </delete>
-    <!-- <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.User"
-        useGeneratedKeys="true" keyProperty="user_id">
-        <selectKey resultType="int" order="BEFORE" keyProperty="userId">
-            SELECT USER_SEQ.NEXTVAL FROM dual
-        </selectKey>
-        INSERT INTO tbl_user (
-        user_id,
-        username,
-        password,
-        user_status,
-        user_type
-        )
-        VALUES
-        (
-        #{userId},
-        #{username},
-        #{password},
-        #{userStatus},
-        #{userType}
-        )
-    </insert> -->
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.User"
             useGeneratedKeys="true" keyProperty="user_id">

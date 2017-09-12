@@ -3,10 +3,6 @@ package com.hhly.smartdata.model.authentication;
 import java.util.Date;
 
 public class Role{
-    public static final String ROLECHANNEL = "渠道";
-    public static final String ROLECP = "cp";
-    public static final String ROLEADMIN = "超级管理员";
-    public static final String ROLEAINNER = "内部用户";
     private Integer id;
 
     private String name;
@@ -71,16 +67,13 @@ public class Role{
     public boolean equals(Object o){
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
-
         Role role = (Role) o;
-
         if(createTime != null ? !createTime.equals(role.createTime) : role.createTime != null) return false;
         if(id != null ? !id.equals(role.id) : role.id != null) return false;
         if(name != null ? !name.equals(role.name) : role.name != null) return false;
         if(owned != null ? !owned.equals(role.owned) : role.owned != null) return false;
         if(permission != null ? !permission.equals(role.permission) : role.permission != null) return false;
-        if(permissionIds != null ? !permissionIds.equals(role.permissionIds) : role.permissionIds != null)
-            return false;
+        if(permissionIds != null ? !permissionIds.equals(role.permissionIds) : role.permissionIds != null) return false;
 
         return true;
     }
@@ -102,6 +95,4 @@ public class Role{
                 + createTime + ", owned=" + owned + ", permission="
                 + permission + ", permissionIds=" + permissionIds + "]";
     }
-
-
 }

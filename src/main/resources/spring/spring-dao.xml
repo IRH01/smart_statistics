@@ -28,18 +28,23 @@
         <property name="defaultAutoCommit" value="${database.defaultAutoCommit}"/>
         <property name="disableJMX" value="${database.disableJMX}"/>
     </bean>
-    <bean id="baseSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="baseDataSource"/>
-        <property name="configLocation" value="classpath:mapper/config-base.xml"/>
-    </bean>
 
-    <bean id="baseTransactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <bean id="baseTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="baseDataSource"/>
     </bean>
 
     <bean id="baseSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg ref="baseSqlSessionFactory"/>
+        <constructor-arg index="0" ref="baseSqlSessionFactory"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="baseSqlSessionFactory"/>
+        <property name="basePackage" value="com.hhly.smartdata.mapper"/>
+    </bean>
+
+    <bean id="baseSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="baseDataSource"/>
+        <property name="configLocation" value="classpath:mapper/config-base.xml"/>
     </bean>
 
     <tx:advice id="txAdvice" transaction-manager="baseTransactionManager">
@@ -54,8 +59,6 @@
     </tx:advice>
 
     <aop:config proxy-target-class="true">
-        <aop:advisor pointcut="execution(* com.hhly.smartdata.base.service.*.*(..))"
-                     advice-ref="txAdvice"/>
         <aop:advisor pointcut="execution(* com.hhly.smartdata.service.*.*(..))"
                      advice-ref="txAdvice"/>
     </aop:config>

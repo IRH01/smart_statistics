@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.hhly.smartdata.mapper.authentication.MenuRepository;
+import com.hhly.smartdata.mapper.authentication.MenuMapper;
 import com.hhly.smartdata.model.authentication.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.Map;
 @Service
 public class MenuService{
     @Autowired
-    private MenuRepository menuRepository;
+    private MenuMapper menuRepository;
     @Autowired
     private RoleService roleService;
 

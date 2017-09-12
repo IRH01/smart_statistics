@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="baseRole">
+<mapper namespace="com.hhly.smartdata.mapper.authentication.RoleMapper">
+
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Role">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
@@ -23,7 +24,6 @@
 
         </where>
     </sql>
-
 
     <select id="getRolesByUserId" resultMap="BaseResultMap"
             parameterType="integer">
@@ -67,6 +67,7 @@
             #{id}
         </foreach>
     </select>
+
     <delete id="delete" parameterType="java.lang.Integer">
         delete from tbl_role
         where id = #{id}
@@ -84,7 +85,6 @@
         </foreach>
     </delete>
 
-
     <delete id="delUsersByRole" parameterType="list">
         delete
         from
@@ -95,7 +95,6 @@
                  close=")">
             #{id}
         </foreach>
-
     </delete>
 
     <delete id="delPerm" parameterType="string">
@@ -105,6 +104,7 @@
         where
         permission=#{perm}
     </delete>
+
     <delete id="deleteUserRoles" parameterType="int">
         delete
         from
@@ -112,40 +112,6 @@
         where
         user_id=#{userId}
     </delete>
-
-    <!-- <insert id="insertRolePermission" parameterType="com.hhly.smartdata.model.authentication.RolePermission" useGeneratedKeys="true" keyProperty="id">
-        <selectKey resultType="int" order="BEFORE" keyProperty="id">
-            SELECT ROLE_PERMISSION_SEQ.NEXTVAL FROM dual
-        </selectKey>
-        insert into tbl_role_permission (id,role_id , permission)
-        values (#{id}, #{roleId} , #{permission} )
-    </insert>
-
-    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Role"
-        useGeneratedKeys="true" keyProperty="id">
-        <selectKey resultType="int" order="BEFORE" keyProperty="id">
-            SELECT ROLE_SEQ.NEXTVAL FROM dual
-        </selectKey>
-        insert into tbl_role (id,name, create_time
-        )
-        values (#{id},#{name}, #{createTime}
-        )
-    </insert>
-    <insert id="insertUserRole" parameterType="map"
-        useGeneratedKeys="true" keyProperty="id">
-        <selectKey resultType="int" order="BEFORE" keyProperty="id">
-            SELECT USER_ROLE_SEQ.NEXTVAL FROM dual
-        </selectKey>
-        INSERT INTO tbl_user_role
-        (id,
-         user_id,
-         role_id)
-        VALUES
-        (#{id},
-         #{userId},
-         #{roleId})
-    </insert> -->
-
 
     <insert id="insertRolePermission" parameterType="com.hhly.smartdata.model.authentication.RolePermission"
             useGeneratedKeys="true" keyProperty="id">
@@ -162,6 +128,7 @@
         values (#{name}, #{createTime}
         )
     </insert>
+
     <insert id="insertUserRole" parameterType="map"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO tbl_user_role
@@ -186,6 +153,5 @@
         </set>
         where id = #{id}
     </update>
-
 
 </mapper>

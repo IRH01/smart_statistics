@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="userChannel">
+<mapper namespace="com.hhly.smartdata.mapper.authentication.UserChannelMapper">
+
     <resultMap id="UserChannelMap" type="com.hhly.smartdata.model.authentication.UserChannel">
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
@@ -15,10 +16,12 @@
         from tbl_user_channel
         where user_id = #{userId}
     </select>
+
     <delete id="deleteByUserId" parameterType="java.lang.Integer">
         delete from tbl_user_channel
         where user_id = #{userId}
     </delete>
+
     <insert id="batchAdd" parameterType="java.util.List" useGeneratedKeys="false">
         insert into tbl_user_channel (
         user_id,

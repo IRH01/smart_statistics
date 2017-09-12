@@ -1,8 +1,8 @@
 package com.hhly.smartdata.service.authentication;
 
-import com.hhly.smartdata.mapper.authentication.AdminRepository;
+import com.hhly.smartdata.mapper.authentication.AdminMapper;
 import com.hhly.smartdata.mapper.authentication.UserChannelMapper;
-import com.hhly.smartdata.mapper.authentication.UserRepository;
+import com.hhly.smartdata.mapper.authentication.UserMapper;
 import com.hhly.smartdata.model.authentication.Admin;
 import com.hhly.smartdata.model.authentication.UserChannel;
 import com.hhly.smartdata.util.page.Page;
@@ -17,9 +17,9 @@ import java.util.List;
 public class AdminService{
 
     @Autowired
-    private AdminRepository adminRepository;
+    private AdminMapper adminRepository;
     @Autowired
-    private UserRepository userRepository;
+    private UserMapper userRepository;
     @Autowired
     private UserChannelMapper userChannelRepository;
 

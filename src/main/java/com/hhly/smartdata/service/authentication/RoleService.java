@@ -1,7 +1,7 @@
 package com.hhly.smartdata.service.authentication;
 
 import com.google.common.collect.Maps;
-import com.hhly.smartdata.mapper.authentication.RoleRepository;
+import com.hhly.smartdata.mapper.authentication.RoleMapper;
 import com.hhly.smartdata.model.authentication.Role;
 import com.hhly.smartdata.model.authentication.RolePermission;
 import com.hhly.smartdata.util.page.Page;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class RoleService{
 
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleMapper roleRepository;
 
     public List<Role> getRolesByUserId(int userId){
         return roleRepository.getRolesByUserId(userId);

@@ -7,9 +7,6 @@ import java.util.Date;
 
 public class Menu implements Serializable{
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -8614419898853239774L;
 
     private Integer id;

@@ -6,7 +6,6 @@ public class Node{
     private String name;
     private String icon;
     private Boolean checked;
-    //是否是叶子节点
     private boolean isLeaf;
     private String title;
     private String data;

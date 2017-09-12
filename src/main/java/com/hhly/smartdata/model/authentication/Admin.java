@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 
 public class Admin extends User{
-
     private Integer id;
     private String name;
     private String email;
@@ -23,7 +22,6 @@ public class Admin extends User{
     public void setId(Integer id){
         this.id = id;
     }
-
 
     public String getName(){
         return name;

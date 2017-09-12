@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="baseAdmin">
-    <resultMap id="AdminMap" type="com.hhly.smartdata.model.authentication.Admin"
-               extends="baseUser.UserMap">
+<mapper namespace="com.hhly.smartdata.mapper.authentication.AdminMapper">
+
+    <resultMap id="AdminMap" type="com.hhly.smartdata.model.authentication.Admin">
         <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="user_status" property="userStatus"/>
+        <result column="user_type" property="userType"/>
+        <result column="create_time" property="createTime"/>
         <result column="user_id" property="userId"/>
         <result column="name" property="name"/>
         <result column="email" property="email"/>
@@ -13,6 +18,7 @@
         <result column="type" property="type"/>
         <result column="locale" property="locale"/>
     </resultMap>
+
     <sql id="Base_Column_List">
         id,
         user_id,
@@ -23,6 +29,7 @@
         job_no,
         TYPE
     </sql>
+
     <sql id="with_user">
         admin.id,
         admin.user_id,
@@ -47,6 +54,7 @@
         u.user_id
         where id = #{id}
     </select>
+
     <select id="searchAdmins" resultMap="AdminMap" resultType="com.hhly.smartdata.model.authentication.Admin">
         select
         <include refid="with_user"/>
@@ -69,35 +77,16 @@
         </where>
         order by u.user_status asc,u.create_time desc
     </select>
+
     <delete id="delete" parameterType="java.lang.Integer">
         delete from tbl_admin
         where id = #{id}
     </delete>
+
     <delete id="deleteByUserId" parameterType="java.lang.Integer">
         delete from tbl_admin
         where user_id = #{userId}
     </delete>
-    <!-- <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Admin" useGeneratedKeys="true" keyProperty="id">
-        <selectKey resultType="int" order="BEFORE" keyProperty="id">
-            SELECT ADMIN_SEQ.NEXTVAL FROM dual
-        </selectKey>
-        insert into tbl_admin
-        (id,
-         user_id,
-         name,
-         email,
-         tel,
-         job_no,
-         type)
-        values
-        (#{id},
-         #{userId},
-         #{name},
-         #{email},
-         #{tel},
-         #{jobNo},
-         #{type})
-    </insert> -->
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Admin" useGeneratedKeys="true"
             keyProperty="id">

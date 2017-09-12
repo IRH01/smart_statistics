@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="baseMenu">
+<mapper namespace="com.hhly.smartdata.mapper.authentication.MenuMapper">
+
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Menu">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="permission" property="permission" jdbcType="VARCHAR"/>
@@ -10,9 +11,11 @@
         <result column="menu_index" property="index" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
     <sql id="Base_Column_List">
         id, permission, parent_id, name, url, menu_index, create_time
     </sql>
+
     <sql id="where_condition">
         <where>
             <if test="id != null">
@@ -35,6 +38,7 @@
             </if>
         </where>
     </sql>
+
     <select id="getMenuByPerms" resultType="com.hhly.smartdata.model.authentication.Menu"
             parameterType="list">
         SELECT
@@ -49,6 +53,7 @@
         </foreach>
         ORDER BY parent_id,menu_index
     </select>
+
     <select id="searchMenu" resultMap="BaseResultMap"
             parameterType="com.hhly.smartdata.model.authentication.Menu">
         select
@@ -57,6 +62,7 @@
         <include refid="where_condition"/>
         order by parent_id,menu_index
     </select>
+
     <delete id="delete" parameterType="com.hhly.smartdata.model.authentication.Menu">
         delete from tbl_menu
         <include refid="where_condition"/>
@@ -66,29 +72,6 @@
         delete from tbl_menu
         where id=#{id}
     </delete>
-    <!-- <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Menu"
-        useGeneratedKeys="true" keyProperty="id">
-        <selectKey resultType="int" order="BEFORE" keyProperty="id">
-            SELECT MENU_SEQ.NEXTVAL FROM dual
-        </selectKey>
-        insert into tbl_menu
-        (
-         id,
-         permission,
-         parent_id,
-         name,
-         url,
-         menu_index
-        )
-        values (
-         #{id},
-         #{permission,jdbcType=VARCHAR},
-         #{parentId,jdbcType=INTEGER},
-         #{name,jdbcType=VARCHAR},
-         #{url,jdbcType=VARCHAR},
-         #{index,jdbcType=INTEGER}
-        )
-    </insert> -->
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Menu"
             useGeneratedKeys="true" keyProperty="id">

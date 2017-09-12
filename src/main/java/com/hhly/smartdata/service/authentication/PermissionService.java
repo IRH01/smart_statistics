@@ -1,9 +1,9 @@
 package com.hhly.smartdata.service.authentication;
 
 import com.google.common.collect.Sets;
-import com.hhly.smartdata.mapper.authentication.MenuRepository;
-import com.hhly.smartdata.mapper.authentication.PermissionRepository;
-import com.hhly.smartdata.mapper.authentication.RoleRepository;
+import com.hhly.smartdata.mapper.authentication.MenuMapper;
+import com.hhly.smartdata.mapper.authentication.PermissionMapper;
+import com.hhly.smartdata.mapper.authentication.RoleMapper;
 import com.hhly.smartdata.model.authentication.Menu;
 import com.hhly.smartdata.model.authentication.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ import java.util.Set;
 @Service
 public class PermissionService{
     @Autowired
-    private PermissionRepository permissionRepository;
+    private PermissionMapper permissionRepository;
     @Autowired
-    private MenuRepository menuRepository;
+    private MenuMapper menuRepository;
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleMapper roleRepository;
 
 
     public List<Permission> searchPerms(Permission perm){

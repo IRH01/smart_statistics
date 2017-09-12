@@ -88,6 +88,14 @@ public class User{
         this.createTime = createTime;
     }
 
+    public String getLocale(){
+        return locale;
+    }
+
+    public void setLocale(String locale){
+        this.locale = locale;
+    }
+
     @Override
     public String toString(){
         return "User [userId=" + userId + ", username=" + username
@@ -95,15 +103,4 @@ public class User{
                 + ", userType=" + userType + ", createTime=" + createTime
                 + ", locale=" + locale + ", newPassword=" + newPassword + "]";
     }
-
-
-    public String getLocale(){
-        return locale;
-    }
-
-
-    public void setLocale(String locale){
-        this.locale = locale;
-    }
-
 }

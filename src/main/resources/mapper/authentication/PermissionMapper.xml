@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="basePermission">
+<mapper namespace="com.hhly.smartdata.mapper.authentication.PermissionMapper">
+
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Permission">
         <id column="permission" property="permission" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="function_id" property="functionId" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
     <sql id="Base_Column_List">permission, name, function_id,
         create_time
     </sql>
+
     <sql id="where_conditions">
         <where>
             <if test="permission != null">
@@ -41,7 +44,6 @@
         group by b.permission , b.name , b.function_id , b.create_time
     </select>
 
-
     <select id="get" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
@@ -66,6 +68,7 @@
         tbl_permission
         <include refid="where_conditions"/>
     </select>
+
     <delete id="delete" parameterType="com.hhly.smartdata.model.authentication.Permission">
         DELETE
         FROM
@@ -83,6 +86,7 @@
         (#{permission,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
         #{functionId,jdbcType=INTEGER})
     </insert>
+
     <update id="update" parameterType="com.hhly.smartdata.model.authentication.Permission">
         update tbl_permission
         <set>

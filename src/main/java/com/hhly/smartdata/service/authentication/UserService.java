@@ -1,6 +1,6 @@
 package com.hhly.smartdata.service.authentication;
 
-import com.hhly.smartdata.mapper.authentication.UserRepository;
+import com.hhly.smartdata.mapper.authentication.UserMapper;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.util.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class UserService{
     @Autowired
-    private UserRepository userRepository;
+    private UserMapper userRepository;
 
     public User getUserByUsername(String username){
         User user = new User();
