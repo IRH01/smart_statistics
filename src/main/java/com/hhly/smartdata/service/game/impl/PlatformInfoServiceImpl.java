@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PlatformInfoServiceImpl extends PlatformInfoService{
+public class PlatformInfoServiceImpl implements PlatformInfoService{
     @Autowired
     PlatformInfoReposity platformInfoReposity;
 

@@ -4,6 +4,6 @@ import com.hhly.smartdata.model.game.CountryInfo;
 
 import java.util.List;
 
-public abstract class CountryInfoService{
-    public abstract List<CountryInfo> getExistDataCountryInfo();
+public interface CountryInfoService{
+    List<CountryInfo> getExistDataCountryInfo();
 }

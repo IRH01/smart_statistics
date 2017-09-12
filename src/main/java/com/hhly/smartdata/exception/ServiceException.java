@@ -1,4 +1,4 @@
-package com.hhly.smartdata.service.authentication;
+package com.hhly.smartdata.exception;
 
 public class ServiceException extends RuntimeException{
 
@@ -11,9 +11,7 @@ public class ServiceException extends RuntimeException{
      */
 
     public ServiceException(String message){
-
         super(message);
-
     }
 
     /**
@@ -24,9 +22,7 @@ public class ServiceException extends RuntimeException{
      */
 
     public ServiceException(String message, Throwable cause){
-
         super(message, cause);
-
     }
 
     /**
@@ -36,9 +32,7 @@ public class ServiceException extends RuntimeException{
      */
 
     public ServiceException(Throwable cause){
-
         super(cause);
-
     }
 
 }

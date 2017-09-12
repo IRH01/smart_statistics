@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CountryInfoServiceImpl extends CountryInfoService{
+public class CountryInfoServiceImpl implements CountryInfoService{
     @Autowired
     CountryInfoReposity CountryInfoReposity;
 
