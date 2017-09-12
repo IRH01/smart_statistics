@@ -2,70 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="infoPositionStatD">
 
-	<resultMap type="com.hhly.smartdata.dto.PositionByInfo" id="findPositionByInfoMapper">
-		<result column="position_name" property="positionName"></result>
-		<result column="position_id" property="positionId"></result>
-		<result column="info_id" property="infoId"></result>
-		<result column="domain_id" property="domainId"></result>
-		<result column="click_cnt" property="clickCnt"></result>
-		<result column="stay_cnt" property="stayCnt"></result>
-		<result column="ip_cnt" property="ipCnt"></result>
-	</resultMap>
+    <resultMap type="com.hhly.smartdata.dto.PositionByInfo" id="findPositionByInfoMapper">
+        <result column="position_name" property="positionName"></result>
+        <result column="position_id" property="positionId"></result>
+        <result column="info_id" property="infoId"></result>
+        <result column="domain_id" property="domainId"></result>
+        <result column="click_cnt" property="clickCnt"></result>
+        <result column="stay_cnt" property="stayCnt"></result>
+        <result column="ip_cnt" property="ipCnt"></result>
+    </resultMap>
 
-	<select id="findPositionByInfo" parameterType="map" resultMap="findPositionByInfoMapper">
-		select GETALLPOSNAME(t.tbl_id) position_name,t.tbl_id as position_id,d.info_id,d.click_cnt,d.stay_cnt,d.ip_cnt,d.domain_id
-		from tbl_dm_add_info_posit_stat_d d
-		join tbl_dw_dim_position t on (d.position_id = t.tbl_id)
+    <select id="findPositionByInfo" parameterType="map" resultMap="findPositionByInfoMapper">
+        select GETALLPOSNAME(t.tbl_id) position_name,t.tbl_id as
+        position_id,d.info_id,d.click_cnt,d.stay_cnt,d.ip_cnt,d.domain_id
+        from tbl_dm_add_info_posit_stat_d d
+        join tbl_dw_dim_position t on (d.position_id = t.tbl_id)
 
-		where 1= 1
-		<if test="domain != null">
-			and d.domain_id = #{domain}
-		</if>
-		<if test="date != null">
-			and date_format(d.etl_date,'%Y-%m-%d') = #{date}
-		</if>
-		<if test="infoId != null">
-			and d.info_id = #{infoId}
-		</if>
-		order by position_name asc
-	</select>
-	
-	
-	<resultMap type="com.hhly.smartdata.dto.InfoByPosition" id="findInfoByPositionMapper">
-		 <result column="position_name" property="positionName"></result>
-		 <result column="info_name" property="infoName"></result>
-		 <result column="info_id" property="infoId"></result>
-		 <result column="click_cnt" property="clickCnt"></result>
-		 <result column="stay_cnt" property="stayCnt"></result>
-		 <result column="ip_cnt" property="ipCnt"></result>
-		 <result column="position_id" property="positionId"></result>
-		 <result column="domain_id" property="domainId"></result>
-		 <result column="updated_date" property="updateDate"/>
-	</resultMap>
-	
-	
-	<select id="findInfoByPosition" parameterType="map" resultMap="findInfoByPositionMapper">
-		select p.position_name,i.info_name,d.info_id,d.click_cnt,d.stay_cnt,d.ip_cnt,d.domain_id,d.position_id,d.updated_date
-		from tbl_dm_add_info_posit_stat_d d 
-		join  tbl_dw_dim_info i on (d.info_id = i.tbl_id) 
-		join tbl_dw_dim_position p on(p.tbl_id = d.position_id)
+        where 1= 1
+        <if test="domain != null">
+            and d.domain_id = #{domain}
+        </if>
+        <if test="date != null">
+            and date_format(d.etl_date,'%Y-%m-%d') = #{date}
+        </if>
+        <if test="infoId != null">
+            and d.info_id = #{infoId}
+        </if>
+        order by position_name asc
+    </select>
 
-		where 1= 1
-		<if test="domain != null">
-			and d.domain_id = #{domain}
-		</if>
-		<if test="date != null">
-			and date_format(d.etl_date,'%Y-%m-%d') = #{date}
-		</if>
-		<if test="positionId!= null">
-			and d.position_id = #{positionId}
-		</if>
-		order by d.updated_date asc
-	</select>
-	
-	
-	
-	
+
+    <resultMap type="com.hhly.smartdata.dto.InfoByPosition" id="findInfoByPositionMapper">
+        <result column="position_name" property="positionName"></result>
+        <result column="info_name" property="infoName"></result>
+        <result column="info_id" property="infoId"></result>
+        <result column="click_cnt" property="clickCnt"></result>
+        <result column="stay_cnt" property="stayCnt"></result>
+        <result column="ip_cnt" property="ipCnt"></result>
+        <result column="position_id" property="positionId"></result>
+        <result column="domain_id" property="domainId"></result>
+        <result column="updated_date" property="updateDate"/>
+    </resultMap>
+
+
+    <select id="findInfoByPosition" parameterType="map" resultMap="findInfoByPositionMapper">
+        select
+        p.position_name,i.info_name,d.info_id,d.click_cnt,d.stay_cnt,d.ip_cnt,d.domain_id,d.position_id,d.updated_date
+        from tbl_dm_add_info_posit_stat_d d
+        join tbl_dw_dim_info i on (d.info_id = i.tbl_id)
+        join tbl_dw_dim_position p on(p.tbl_id = d.position_id)
+
+        where 1= 1
+        <if test="domain != null">
+            and d.domain_id = #{domain}
+        </if>
+        <if test="date != null">
+            and date_format(d.etl_date,'%Y-%m-%d') = #{date}
+        </if>
+        <if test="positionId!= null">
+            and d.position_id = #{positionId}
+        </if>
+        order by d.updated_date asc
+    </select>
 
 
 </mapper>

@@ -1,10 +1,9 @@
 package com.hhly.smartdata.service.ybf.impl;
 
+import com.hhly.smartdata.service.ybf.DimAccTypeService;
 import org.springframework.stereotype.Service;
 
-import com.hhly.smartdata.service.ybf.DimAccTypeService;
-
 @Service
-public class DimAccTypeServiceImpl implements DimAccTypeService {
+public class DimAccTypeServiceImpl implements DimAccTypeService{
 
 }

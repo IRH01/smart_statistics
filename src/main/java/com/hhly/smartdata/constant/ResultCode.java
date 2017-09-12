@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by wy on 13-7-2.
  */
-public class ResultCode {
+public class ResultCode{
     public static final int OK = 200;
     public static final int ERROR_CODE = 400;
     public static final int ERROR_USER = 401;
@@ -18,7 +18,7 @@ public class ResultCode {
     public static Map<Integer, String> errorMsgs = new HashMap<Integer, String>();
 
 
-    static {
+    static{
         errorMsgs.put(OK, "操作成功");
         errorMsgs.put(ERROR_USER, "错误的用户,请输入正确的账号.");
         errorMsgs.put(ERROR_CODE, "错误的验证码,请输入正确的验证码.");

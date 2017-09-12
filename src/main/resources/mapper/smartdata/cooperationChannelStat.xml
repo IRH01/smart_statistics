@@ -1,58 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cooperationChannelStat">
-	<resultMap type="CooperationChannelStat" id="CooperationChannelStatMap">
-		<result property="statDate" column="stat_date"/>
-		<result property="channelId" column="channel_id"/>
-		<result property="channelName" column="channel_name"/>
-		<result property="platformId" column="platform_id"/>
-		<result property="platformName" column="platform_name"/>
-		<result property="regUCnt" column="reg_ucnt"/>
-		<result property="payUCnt" column="pay_ucnt"/>
-		<result property="payAmount" column="pay_amount"/>
-		<result property="consumeAmount" column="consume_amount"/>
-		<result property="accountBalance" column="account_balance"/>
-	</resultMap>
-	
-	<select id="find" resultMap="CooperationChannelStatMap" parameterType="map">
-		select 
-			cp.stat_date,
-			cp.channel_id,
-			cp.platform_id,
-			cp.reg_ucnt,
-			cp.pay_ucnt,
-			cp.pay_amount,
-			cp.consume_amount,
-			cp.account_balance,
-			c.chname as channel_name,
-			p.name as platform_name
-		from (select 
-				stat_date,
-				channel_id,
-				platform_id,
-				max(reg_ucnt) as reg_ucnt,
-				max(pay_ucnt) as pay_ucnt,
-				max(pay_amount) as pay_amount,
-				sum(consume_amount) as consume_amount,
-				sum(account_balance) as account_balance
-			from tbl_cperation_channel_stat
-			where 1 = 1
-			<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-			<if test="platformId != null and platformId != ''">and platform_id like CONCAT(CONCAT('%',#{platformId}),'%')</if>
-			<if test="dateStart != null and dateStart != ''">and date_format(stat_date,'%Y-%m-%d') &gt;= #{dateStart}</if>
-			<if test="dateEnd != null and dateEnd != ''">and date_format(stat_date,'%Y-%m-%d') &lt;= #{dateEnd}</if>
-			group by stat_date,channel_id,platform_id
-		) cp
-		left join channel c
-			on c.chid = cp.channel_id
-		left join gp_tbl_platform_info p 
-			on p.id = cp.platform_id
-		join tbl_user_channel uc
-			on uc.channel_id = cp.channel_id
-		where 1=1
-			<if test="channelName != null and channelName != ''">and c.chname like CONCAT(CONCAT('%',#{channelName}),'%')</if>
-			<if test="platformName != null and platformName != ''">and p.name like CONCAT(CONCAT('%',#{platformName}),'%')</if>
-			<if test="userId != null and userId != ''">and uc.user_id = #{userId}</if>
-		order by cp.stat_date desc
-	</select>
+    <resultMap type="CooperationChannelStat" id="CooperationChannelStatMap">
+        <result property="statDate" column="stat_date"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="channelName" column="channel_name"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="platformName" column="platform_name"/>
+        <result property="regUCnt" column="reg_ucnt"/>
+        <result property="payUCnt" column="pay_ucnt"/>
+        <result property="payAmount" column="pay_amount"/>
+        <result property="consumeAmount" column="consume_amount"/>
+        <result property="accountBalance" column="account_balance"/>
+    </resultMap>
+
+    <select id="find" resultMap="CooperationChannelStatMap" parameterType="map">
+        select
+        cp.stat_date,
+        cp.channel_id,
+        cp.platform_id,
+        cp.reg_ucnt,
+        cp.pay_ucnt,
+        cp.pay_amount,
+        cp.consume_amount,
+        cp.account_balance,
+        c.chname as channel_name,
+        p.name as platform_name
+        from (select
+        stat_date,
+        channel_id,
+        platform_id,
+        max(reg_ucnt) as reg_ucnt,
+        max(pay_ucnt) as pay_ucnt,
+        max(pay_amount) as pay_amount,
+        sum(consume_amount) as consume_amount,
+        sum(account_balance) as account_balance
+        from tbl_cperation_channel_stat
+        where 1 = 1
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="platformId != null and platformId != ''">and platform_id like CONCAT(CONCAT('%',#{platformId}),'%')
+        </if>
+        <if test="dateStart != null and dateStart != ''">and date_format(stat_date,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(stat_date,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+        group by stat_date,channel_id,platform_id
+        ) cp
+        left join channel c
+        on c.chid = cp.channel_id
+        left join gp_tbl_platform_info p
+        on p.id = cp.platform_id
+        join tbl_user_channel uc
+        on uc.channel_id = cp.channel_id
+        where 1=1
+        <if test="channelName != null and channelName != ''">and c.chname like CONCAT(CONCAT('%',#{channelName}),'%')
+        </if>
+        <if test="platformName != null and platformName != ''">and p.name like CONCAT(CONCAT('%',#{platformName}),'%')
+        </if>
+        <if test="userId != null and userId != ''">and uc.user_id = #{userId}</if>
+        order by cp.stat_date desc
+    </select>
 </mapper>

@@ -1,177 +1,182 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="channalAgent">
-	<resultMap type="ChannalAgent" id="ChannalAgentMap"  extends="lossDaily.LossDailyMap">
-		<result property="statDate" column="stat_date"/>
-		<result property="accountNo" column="account_no"/>
-		<result property="promotNo" column="promot_no"/>
-		<result property="channelNo" column="channel_no"/>
-		<result property="registAmount" column="regist_amount"/>
-		<result property="incomeSum" column="income_sum"/>
-		<result property="startTimes" column="start_times"/>
-		<result property="avguseTime" column="avguse_time"/>
-	</resultMap>
-	
-	<resultMap type="ChannalDetails" id="ChannalDetailsMap"  extends="lossDaily.LossDailyMap">
-		<result property="statDate" column="stat_date"/>
-		<result property="accountNo" column="account_no"/>
-		<result property="promotNo" column="promot_no"/>
-		<result property="channelId" column="channel_id"/>
-		<result property="channelName" column="channel_name"/>
-		<result property="regCount" column="reg_count"/>
-		<result property="rechargeAmount" column="recharge_amount"/>
-		<result property="startTime" column="start_time"/>
-		<result property="avgTime" column="avg_time"/>
-	</resultMap>
-	
-	<resultMap type="ChannalCostDetails" id="ChannalCostDetailsMap"  extends="lossDaily.LossDailyMap">
-		<result property="accountNo" column="account_no"/>
-		<result property="promotNo" column="promot_no"/>
-		<result property="channelId" column="channel_id"/>
-		<result property="orderNo" column="order_no"/>
-		<result property="userName" column="user_name"/>
-		<result property="userId" column="user_id"/>
-		<result property="costAmount" column="cost_amount"/>
-		<result property="platformId" column="platform_id"/>
-		<result property="payType" column="pay_type"/>
-		<result property="costTime" column="cost_time"/>
-	</resultMap>
-	
-	<resultMap type="ChannalRegistDetails" id="ChannalRegistDetailsMap"  extends="lossDaily.LossDailyMap">
-		<result property="accountNo" column="account_no"/>
-		<result property="promotNo" column="promot_no"/>
-		<result property="channelId" column="channel_id"/>
-		<result property="userName" column="user_name"/>
-		<result property="userId" column="user_id"/>
-		<result property="registAddress" column="regist_address"/>
-		<result property="registTime" column="regist_time"/>
-	</resultMap>
-	
-	<select id="find" resultMap="ChannalAgentMap" parameterType="map">
-		select date_format(stat_date,'%Y-%m-%d') as stat_date, account_no, promot_no, channel_no, 
-		regist_amount, FORMAT(income_sum,2) as income_sum, start_times, avguse_time
-		from tbl_gp_agent_channel
-		where 1=1
-		<if test="accountNo != null and accountNo != ''">and account_no like CONCAT(CONCAT('%',#{accountNo}),'%')</if>
-		<if test="promotNo != null and promotNo != ''">and promot_no like CONCAT(CONCAT('%',#{promotNo}),'%')</if>
-	</select>
-	
-	<select id="count" resultType="int" parameterType="map">
-		select count(1)
-		from tbl_gp_agent_channel
-		where 1=1
-		<if test="accountNo != null and accountNo != ''">and account_no like CONCAT(CONCAT('%',#{accountNo}),'%')</if>
-		<if test="promotNo != null and promotNo != ''">and promot_no like CONCAT(CONCAT('%',#{promotNo}),'%')</if>
-	</select>
-	
-	<select id="findChannelDetails" resultMap="ChannalDetailsMap" parameterType="map">
-		select date_format(stat_date,'%Y-%m-%d') as stat_date, account_no, promot_no, channel_id, channel_name, reg_count, 
-		FORMAT(recharge_amount, 2) as recharge_amount, start_time, avg_time
-		from view_gp_channel_stat_d
-		where 1=1
-		<if test="accountNo != null and accountNo != ''">and account_no like CONCAT(CONCAT('%',#{accountNo}),'%')</if>
-		<if test="promotNo != null and promotNo != ''">and promot_no like CONCAT(CONCAT('%',#{promotNo}),'%')</if>
-		<if test="channelName != null and channelName != ''">and channel_name like CONCAT(CONCAT('%',#{channelName}),'%')</if>
-		<if test="regCountStart != null and regCountStart != ''">and reg_count &gt;= #{regCountStart} </if>
-		<if test="regCountEnd != null and regCountEnd != ''">and reg_count &lt;= #{regCountEnd} </if>
-		<if test="rechargeAmountStart != null and rechargeAmountStart != ''">and recharge_amount &gt;= #{rechargeAmountStart} </if>
-		<if test="rechargeAmountEnd != null and rechargeAmountEnd != ''">and recharge_amount &lt;= #{rechargeAmountEnd} </if>
-		<if test="startTimeStart != null and startTimeStart != ''">and start_time &gt;= #{startTimeStart} </if>
-		<if test="startTimeEnd != null and startTimeEnd != ''">and start_time &lt;= #{startTimeEnd} </if>
-		<if test="avgTimeStart != null and avgTimeStart != ''">and avg_time &gt;= #{avgTimeStart} </if>
-		<if test="avgTimeEnd != null and avgTimeEnd != ''">and avg_time &lt;= #{avgTimeEnd} </if>
-	</select>
-	
-	<select id="countChannelDetails" resultType="int" parameterType="map">
-		select count(1)
-		from view_gp_channel_stat_d
-		where 1=1
-		<if test="accountNo != null and accountNo != ''">and account_no like CONCAT(CONCAT('%',#{accountNo}),'%')</if>
-		<if test="promotNo != null and promotNo != ''">and promot_no like CONCAT(CONCAT('%',#{promotNo}),'%')</if>
-		<if test="channelName != null and channelName != ''">and channel_name like CONCAT(CONCAT('%',#{channelName}),'%')</if>
-		<if test="regCountStart != null and regCountStart != ''">and reg_count &gt;= #{regCountStart} </if>
-		<if test="regCountEnd != null and regCountEnd != ''">and reg_count &lt;= #{regCountEnd} </if>
-		<if test="rechargeAmountStart != null and rechargeAmountStart != ''">and recharge_amount &gt;= #{rechargeAmountStart} </if>
-		<if test="rechargeAmountEnd != null and rechargeAmountEnd != ''">and recharge_amount &lt;= #{rechargeAmountEnd} </if>
-		<if test="startTimeStart != null and startTimeStart != ''">and start_time &gt;= #{startTimeStart} </if>
-		<if test="startTimeEnd != null and startTimeEnd != ''">and start_time &lt;= #{startTimeEnd} </if>
-		<if test="avgTimeStart != null and avgTimeStart != ''">and avg_time &gt;= #{avgTimeStart} </if>
-		<if test="avgTimeEnd != null and avgTimeEnd != ''">and avg_time &lt;= #{avgTimeEnd} </if>
-	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<select id="findChannelCostDetails" resultMap="ChannalCostDetailsMap" parameterType="map">
-		select account_no, promot_no, channel_id, order_no, user_name, user_id, FORMAT(cost_amount,2) as cost_amount, 
-		platform_id, pay_type, date_format(cost_time,'%Y-%m-%d %H:%i:%s') as cost_time
-		from view_gp_cost_detail
-		where 1=1
-		<if test="accountNo != null and accountNo != ''">and account_no = #{accountNo}</if>
-		<if test="promotNo != null and promotNo != ''">and promot_no = #{promotNo}</if>
-		<if test="channelId != null and channelId != ''">and channel_id = #{channelId}</if>
-		<if test="userName != null and userName != ''">and user_name like CONCAT(CONCAT('%',#{userName}),'%')</if>
-		<if test="platformId != null and platformId != ''">and platform_id = #{platformId}</if>
-		<if test="payType != null and payType != ''">and pay_type = #{payType}</if>
-		<if test="costAmountStart != null and costAmountStart != ''">and cost_amount &gt;= #{costAmountStart} </if>
-		<if test="costAmountEnd != null and costAmountEnd != ''">and cost_amount &lt;= #{costAmountEnd} </if>
-		<if test="dateStart != null and dateStart != ''">and date_format(cost_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-		<if test="dateEnd != null and dateEnd != ''">and date_format(cost_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-	</select>
-	
-	<select id="countChannelCostDetails" resultType="int" parameterType="map">
-		select count(1)
-		from view_gp_cost_detail
-		where 1=1
-		<if test="accountNo != null and accountNo != ''">and account_no = #{accountNo}</if>
-		<if test="promotNo != null and promotNo != ''">and promot_no = #{promotNo}</if>
-		<if test="channelId != null and channelId != ''">and channel_id = #{channelId}</if>
-		<if test="userName != null and userName != ''">and user_name like CONCAT(CONCAT('%',#{userName}),'%')</if>
-		<if test="platformId != null and platformId != ''">and platform_id = #{platformId}</if>
-		<if test="payType != null and payType != ''">and pay_type = #{payType}</if>
-		<if test="costAmountStart != null and costAmountStart != ''">and cost_amount &gt;= #{costAmountStart} </if>
-		<if test="costAmountEnd != null and costAmountEnd != ''">and cost_amount &lt;= #{costAmountEnd} </if>
-		<if test="dateStart != null and dateStart != ''">and date_format(cost_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-		<if test="dateEnd != null and dateEnd != ''">and date_format(cost_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	<select id="findChannelRegistDetails" resultMap="ChannalRegistDetailsMap" parameterType="map">
-		select account_no, promot_no, channel_id, user_id, user_name, regist_address, date_format(regist_time,'%Y-%m-%d %H:%i:%s') as regist_time
-		from tbl_gp_user_regist_detail
-		where 1=1
-		<if test="accountNo != null and accountNo != ''">and account_no = #{accountNo}</if>
-		<if test="promotNo != null and promotNo != ''">and promot_no = #{promotNo}</if>
-		<if test="channelId != null and channelId != ''">and channel_id = #{channelId}</if>
-		<if test="userName != null and userName != ''">and user_name like CONCAT(CONCAT('%',#{userName}),'%')</if>
-		<if test="userId != null and userId != ''">and user_id like CONCAT(CONCAT('%',#{userId}),'%')</if>
-		<if test="registAddress != null and registAddress != ''">and regist_address like CONCAT(CONCAT('%',#{registAddress}),'%')</if>
-		<if test="dateStart != null and dateStart != ''">and date_format(regist_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-		<if test="dateEnd != null and dateEnd != ''">and date_format(regist_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-	</select>
-	
-	<select id="countChannelRegistDetails" resultType="int" parameterType="map">
-		select count(1)
-		from tbl_gp_user_regist_detail
-		where 1=1
-		<if test="accountNo != null and accountNo != ''">and account_no = #{accountNo}</if>
-		<if test="promotNo != null and promotNo != ''">and promot_no = #{promotNo}</if>
-		<if test="channelId != null and channelId != ''">and channel_id = #{channelId}</if>
-		<if test="userName != null and userName != ''">and user_name like CONCAT(CONCAT('%',#{userName}),'%')</if>
-		<if test="userId != null and userId != ''">and user_id like CONCAT(CONCAT('%',#{userId}),'%')</if>
-		<if test="registAddress != null and registAddress != ''">and regist_address like CONCAT(CONCAT('%',#{registAddress}),'%')</if>
-		<if test="dateStart != null and dateStart != ''">and date_format(regist_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-		<if test="dateEnd != null and dateEnd != ''">and date_format(regist_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-	</select>
+    <resultMap type="ChannalAgent" id="ChannalAgentMap" extends="lossDaily.LossDailyMap">
+        <result property="statDate" column="stat_date"/>
+        <result property="accountNo" column="account_no"/>
+        <result property="promotNo" column="promot_no"/>
+        <result property="channelNo" column="channel_no"/>
+        <result property="registAmount" column="regist_amount"/>
+        <result property="incomeSum" column="income_sum"/>
+        <result property="startTimes" column="start_times"/>
+        <result property="avguseTime" column="avguse_time"/>
+    </resultMap>
+
+    <resultMap type="ChannalDetails" id="ChannalDetailsMap" extends="lossDaily.LossDailyMap">
+        <result property="statDate" column="stat_date"/>
+        <result property="accountNo" column="account_no"/>
+        <result property="promotNo" column="promot_no"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="channelName" column="channel_name"/>
+        <result property="regCount" column="reg_count"/>
+        <result property="rechargeAmount" column="recharge_amount"/>
+        <result property="startTime" column="start_time"/>
+        <result property="avgTime" column="avg_time"/>
+    </resultMap>
+
+    <resultMap type="ChannalCostDetails" id="ChannalCostDetailsMap" extends="lossDaily.LossDailyMap">
+        <result property="accountNo" column="account_no"/>
+        <result property="promotNo" column="promot_no"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="userName" column="user_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="costAmount" column="cost_amount"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="payType" column="pay_type"/>
+        <result property="costTime" column="cost_time"/>
+    </resultMap>
+
+    <resultMap type="ChannalRegistDetails" id="ChannalRegistDetailsMap" extends="lossDaily.LossDailyMap">
+        <result property="accountNo" column="account_no"/>
+        <result property="promotNo" column="promot_no"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="registAddress" column="regist_address"/>
+        <result property="registTime" column="regist_time"/>
+    </resultMap>
+
+    <select id="find" resultMap="ChannalAgentMap" parameterType="map">
+        select date_format(stat_date,'%Y-%m-%d') as stat_date, account_no, promot_no, channel_no,
+        regist_amount, FORMAT(income_sum,2) as income_sum, start_times, avguse_time
+        from tbl_gp_agent_channel
+        where 1=1
+        <if test="accountNo != null and accountNo != ''">and account_no like CONCAT(CONCAT('%',#{accountNo}),'%')</if>
+        <if test="promotNo != null and promotNo != ''">and promot_no like CONCAT(CONCAT('%',#{promotNo}),'%')</if>
+    </select>
+
+    <select id="count" resultType="int" parameterType="map">
+        select count(1)
+        from tbl_gp_agent_channel
+        where 1=1
+        <if test="accountNo != null and accountNo != ''">and account_no like CONCAT(CONCAT('%',#{accountNo}),'%')</if>
+        <if test="promotNo != null and promotNo != ''">and promot_no like CONCAT(CONCAT('%',#{promotNo}),'%')</if>
+    </select>
+
+    <select id="findChannelDetails" resultMap="ChannalDetailsMap" parameterType="map">
+        select date_format(stat_date,'%Y-%m-%d') as stat_date, account_no, promot_no, channel_id, channel_name,
+        reg_count,
+        FORMAT(recharge_amount, 2) as recharge_amount, start_time, avg_time
+        from view_gp_channel_stat_d
+        where 1=1
+        <if test="accountNo != null and accountNo != ''">and account_no like CONCAT(CONCAT('%',#{accountNo}),'%')</if>
+        <if test="promotNo != null and promotNo != ''">and promot_no like CONCAT(CONCAT('%',#{promotNo}),'%')</if>
+        <if test="channelName != null and channelName != ''">and channel_name like
+            CONCAT(CONCAT('%',#{channelName}),'%')
+        </if>
+        <if test="regCountStart != null and regCountStart != ''">and reg_count &gt;= #{regCountStart}</if>
+        <if test="regCountEnd != null and regCountEnd != ''">and reg_count &lt;= #{regCountEnd}</if>
+        <if test="rechargeAmountStart != null and rechargeAmountStart != ''">and recharge_amount &gt;=
+            #{rechargeAmountStart}
+        </if>
+        <if test="rechargeAmountEnd != null and rechargeAmountEnd != ''">and recharge_amount &lt;=
+            #{rechargeAmountEnd}
+        </if>
+        <if test="startTimeStart != null and startTimeStart != ''">and start_time &gt;= #{startTimeStart}</if>
+        <if test="startTimeEnd != null and startTimeEnd != ''">and start_time &lt;= #{startTimeEnd}</if>
+        <if test="avgTimeStart != null and avgTimeStart != ''">and avg_time &gt;= #{avgTimeStart}</if>
+        <if test="avgTimeEnd != null and avgTimeEnd != ''">and avg_time &lt;= #{avgTimeEnd}</if>
+    </select>
+
+    <select id="countChannelDetails" resultType="int" parameterType="map">
+        select count(1)
+        from view_gp_channel_stat_d
+        where 1=1
+        <if test="accountNo != null and accountNo != ''">and account_no like CONCAT(CONCAT('%',#{accountNo}),'%')</if>
+        <if test="promotNo != null and promotNo != ''">and promot_no like CONCAT(CONCAT('%',#{promotNo}),'%')</if>
+        <if test="channelName != null and channelName != ''">and channel_name like
+            CONCAT(CONCAT('%',#{channelName}),'%')
+        </if>
+        <if test="regCountStart != null and regCountStart != ''">and reg_count &gt;= #{regCountStart}</if>
+        <if test="regCountEnd != null and regCountEnd != ''">and reg_count &lt;= #{regCountEnd}</if>
+        <if test="rechargeAmountStart != null and rechargeAmountStart != ''">and recharge_amount &gt;=
+            #{rechargeAmountStart}
+        </if>
+        <if test="rechargeAmountEnd != null and rechargeAmountEnd != ''">and recharge_amount &lt;=
+            #{rechargeAmountEnd}
+        </if>
+        <if test="startTimeStart != null and startTimeStart != ''">and start_time &gt;= #{startTimeStart}</if>
+        <if test="startTimeEnd != null and startTimeEnd != ''">and start_time &lt;= #{startTimeEnd}</if>
+        <if test="avgTimeStart != null and avgTimeStart != ''">and avg_time &gt;= #{avgTimeStart}</if>
+        <if test="avgTimeEnd != null and avgTimeEnd != ''">and avg_time &lt;= #{avgTimeEnd}</if>
+    </select>
+
+
+    <select id="findChannelCostDetails" resultMap="ChannalCostDetailsMap" parameterType="map">
+        select account_no, promot_no, channel_id, order_no, user_name, user_id, FORMAT(cost_amount,2) as cost_amount,
+        platform_id, pay_type, date_format(cost_time,'%Y-%m-%d %H:%i:%s') as cost_time
+        from view_gp_cost_detail
+        where 1=1
+        <if test="accountNo != null and accountNo != ''">and account_no = #{accountNo}</if>
+        <if test="promotNo != null and promotNo != ''">and promot_no = #{promotNo}</if>
+        <if test="channelId != null and channelId != ''">and channel_id = #{channelId}</if>
+        <if test="userName != null and userName != ''">and user_name like CONCAT(CONCAT('%',#{userName}),'%')</if>
+        <if test="platformId != null and platformId != ''">and platform_id = #{platformId}</if>
+        <if test="payType != null and payType != ''">and pay_type = #{payType}</if>
+        <if test="costAmountStart != null and costAmountStart != ''">and cost_amount &gt;= #{costAmountStart}</if>
+        <if test="costAmountEnd != null and costAmountEnd != ''">and cost_amount &lt;= #{costAmountEnd}</if>
+        <if test="dateStart != null and dateStart != ''">and date_format(cost_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(cost_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+    </select>
+
+    <select id="countChannelCostDetails" resultType="int" parameterType="map">
+        select count(1)
+        from view_gp_cost_detail
+        where 1=1
+        <if test="accountNo != null and accountNo != ''">and account_no = #{accountNo}</if>
+        <if test="promotNo != null and promotNo != ''">and promot_no = #{promotNo}</if>
+        <if test="channelId != null and channelId != ''">and channel_id = #{channelId}</if>
+        <if test="userName != null and userName != ''">and user_name like CONCAT(CONCAT('%',#{userName}),'%')</if>
+        <if test="platformId != null and platformId != ''">and platform_id = #{platformId}</if>
+        <if test="payType != null and payType != ''">and pay_type = #{payType}</if>
+        <if test="costAmountStart != null and costAmountStart != ''">and cost_amount &gt;= #{costAmountStart}</if>
+        <if test="costAmountEnd != null and costAmountEnd != ''">and cost_amount &lt;= #{costAmountEnd}</if>
+        <if test="dateStart != null and dateStart != ''">and date_format(cost_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(cost_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+    </select>
+
+
+    <select id="findChannelRegistDetails" resultMap="ChannalRegistDetailsMap" parameterType="map">
+        select account_no, promot_no, channel_id, user_id, user_name, regist_address, date_format(regist_time,'%Y-%m-%d
+        %H:%i:%s') as regist_time
+        from tbl_gp_user_regist_detail
+        where 1=1
+        <if test="accountNo != null and accountNo != ''">and account_no = #{accountNo}</if>
+        <if test="promotNo != null and promotNo != ''">and promot_no = #{promotNo}</if>
+        <if test="channelId != null and channelId != ''">and channel_id = #{channelId}</if>
+        <if test="userName != null and userName != ''">and user_name like CONCAT(CONCAT('%',#{userName}),'%')</if>
+        <if test="userId != null and userId != ''">and user_id like CONCAT(CONCAT('%',#{userId}),'%')</if>
+        <if test="registAddress != null and registAddress != ''">and regist_address like
+            CONCAT(CONCAT('%',#{registAddress}),'%')
+        </if>
+        <if test="dateStart != null and dateStart != ''">and date_format(regist_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(regist_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+    </select>
+
+    <select id="countChannelRegistDetails" resultType="int" parameterType="map">
+        select count(1)
+        from tbl_gp_user_regist_detail
+        where 1=1
+        <if test="accountNo != null and accountNo != ''">and account_no = #{accountNo}</if>
+        <if test="promotNo != null and promotNo != ''">and promot_no = #{promotNo}</if>
+        <if test="channelId != null and channelId != ''">and channel_id = #{channelId}</if>
+        <if test="userName != null and userName != ''">and user_name like CONCAT(CONCAT('%',#{userName}),'%')</if>
+        <if test="userId != null and userId != ''">and user_id like CONCAT(CONCAT('%',#{userId}),'%')</if>
+        <if test="registAddress != null and registAddress != ''">and regist_address like
+            CONCAT(CONCAT('%',#{registAddress}),'%')
+        </if>
+        <if test="dateStart != null and dateStart != ''">and date_format(regist_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(regist_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+    </select>
 </mapper>

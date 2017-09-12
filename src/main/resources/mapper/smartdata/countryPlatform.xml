@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="countryPlatform">
-	<resultMap type="CountryPlatform" id="CountryPlatformMap">
-		<result property="platformTerminal" column="platform_terminal"/>
-		<result property="platformTerminalName" column="platform_terminal_name"/>
-		<result property="platformId" column="platform_id"/>
-		<result property="platformName" column="platform_name"/>
-		<result property="userCount" column="user_count"/>
-		<result property="rechargeCount" column="recharge_count"/>
-		<result property="rechargeAmount" column="recharge_amount"/>
-		<result property="onlineCount" column="online_count"/>
-	</resultMap>
-	
-	<select id="find" resultMap="CountryPlatformMap" parameterType="map">
-		select 
-			c.*,
-			p.name as platform_name,
-			t.name as platform_terminal_name
-		from
-		(
-			select
-				platform_terminal,
-				platform_id,
-				sum(user_count) as user_count,
-				sum(recharge_count) as recharge_count,
-				sum(recharge_amount) as recharge_amount,
-				sum(online_count) as online_count
-			from view_gp_country_plateform 
-			where 1=1
-				<if test="platformTerminal != null and platformTerminal != ''">and platform_terminal = #{platformTerminal} </if>
-				<if test="country != null and country != ''">and country = #{country} </if>
-				<if test="dateStart != null and dateStart != ''">and date_format(create_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-				<if test="dateEnd != null and dateEnd != ''">and date_format(create_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-			group by platform_terminal,platform_id
-		)c
-		left join gp_tbl_platform_info p
-			on c.platform_id = p.id
-		left join tbl_gp_plat_terminal_info t
-			on c.platform_terminal = t.id
-		<if test="1 == order and orderField != null and orderField != ''">
-			order by ${orderField} desc
-		</if>
-		<if test="2 == order and orderField != null and orderField != ''">
-			order by ${orderField} asc
-		</if>
-	</select>
+    <resultMap type="CountryPlatform" id="CountryPlatformMap">
+        <result property="platformTerminal" column="platform_terminal"/>
+        <result property="platformTerminalName" column="platform_terminal_name"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="platformName" column="platform_name"/>
+        <result property="userCount" column="user_count"/>
+        <result property="rechargeCount" column="recharge_count"/>
+        <result property="rechargeAmount" column="recharge_amount"/>
+        <result property="onlineCount" column="online_count"/>
+    </resultMap>
+
+    <select id="find" resultMap="CountryPlatformMap" parameterType="map">
+        select
+        c.*,
+        p.name as platform_name,
+        t.name as platform_terminal_name
+        from
+        (
+        select
+        platform_terminal,
+        platform_id,
+        sum(user_count) as user_count,
+        sum(recharge_count) as recharge_count,
+        sum(recharge_amount) as recharge_amount,
+        sum(online_count) as online_count
+        from view_gp_country_plateform
+        where 1=1
+        <if test="platformTerminal != null and platformTerminal != ''">and platform_terminal = #{platformTerminal}</if>
+        <if test="country != null and country != ''">and country = #{country}</if>
+        <if test="dateStart != null and dateStart != ''">and date_format(create_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(create_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+        group by platform_terminal,platform_id
+        )c
+        left join gp_tbl_platform_info p
+        on c.platform_id = p.id
+        left join tbl_gp_plat_terminal_info t
+        on c.platform_terminal = t.id
+        <if test="1 == order and orderField != null and orderField != ''">
+            order by ${orderField} desc
+        </if>
+        <if test="2 == order and orderField != null and orderField != ''">
+            order by ${orderField} asc
+        </if>
+    </select>
 </mapper>

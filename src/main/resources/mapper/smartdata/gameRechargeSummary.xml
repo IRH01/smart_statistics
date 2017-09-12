@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gameRechargeSummary">
-	<resultMap type="GameRechargeSummary" id="GameRechargeSummaryMap">
-		<result property="platformId" column="platform_id"/>
-		<result property="serverId" column="server_id"/>
-		<result property="areaId" column="area_id"/>
-		<result property="totalAmount" column="total_amount"/>
-		<result property="receiptAmount" column="receipt_amount"/>
-		<result property="fee" column="fee"/>
-		<result property="createTime" column="create_time"/>
-		<result property="updateTime" column="update_time"/>
-	</resultMap>
-	
-	<resultMap type="GameRechargeStatistic" id="GameRechargeStatisticMap">
-		<result property="orderAmount" column="order_amount"/>
-		<result property="receiptAmount" column="receipt_amount"/>
-		<result property="commissions" column="commissions"/>
-	</resultMap>
-	
-	<!-- 统计所有充值的钱 -->
-	<select id="statistics" resultMap="GameRechargeStatisticMap" parameterType="string">
-		select 
-			sum(s.order_amount) order_amount,
-			sum(s.receipt_amount) receipt_amount,
-			sum(s.commissions) commissions
-		from view_gp_all_recharge_sum s
-		where 1=1
-			<if test="_parameter != null and _parameter !='' ">  
-		        and s.country=#{_parameter}  
-		    </if>  
-	</select>
-	
-	<!-- 统计充值到乐盈盈平台的钱 -->
-	<select id="statisticsRcg2Lyb" resultType="Double" parameterType="string">
-		select
-    		sum(amount) AS amount
-  		from view_gp_all_recharge_sum
-  		where 1=1
-    		<if test="_parameter != null and _parameter !='' ">  
-		        and country=#{_parameter} 
-		    </if> 
-	</select>
-	
-	<!-- 统计乐盈币充值到游戏的钱 -->
-	<select id="statisticsLyb2Game" resultType="Double" parameterType="string">
-		select
-    		sum(lyb_2_yx_amt) AS amount
-  		from view_gp_all_recharge_sum
-  		where 1=1
-    		<if test="_parameter != null and _parameter !='' ">  
-		        and country=#{_parameter} 
-		    </if> 
-	</select>
+    <resultMap type="GameRechargeSummary" id="GameRechargeSummaryMap">
+        <result property="platformId" column="platform_id"/>
+        <result property="serverId" column="server_id"/>
+        <result property="areaId" column="area_id"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="receiptAmount" column="receipt_amount"/>
+        <result property="fee" column="fee"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <resultMap type="GameRechargeStatistic" id="GameRechargeStatisticMap">
+        <result property="orderAmount" column="order_amount"/>
+        <result property="receiptAmount" column="receipt_amount"/>
+        <result property="commissions" column="commissions"/>
+    </resultMap>
+
+    <!-- 统计所有充值的钱 -->
+    <select id="statistics" resultMap="GameRechargeStatisticMap" parameterType="string">
+        select
+        sum(s.order_amount) order_amount,
+        sum(s.receipt_amount) receipt_amount,
+        sum(s.commissions) commissions
+        from view_gp_all_recharge_sum s
+        where 1=1
+        <if test="_parameter != null and _parameter !='' ">
+            and s.country=#{_parameter}
+        </if>
+    </select>
+
+    <!-- 统计充值到乐盈盈平台的钱 -->
+    <select id="statisticsRcg2Lyb" resultType="Double" parameterType="string">
+        select
+        sum(amount) AS amount
+        from view_gp_all_recharge_sum
+        where 1=1
+        <if test="_parameter != null and _parameter !='' ">
+            and country=#{_parameter}
+        </if>
+    </select>
+
+    <!-- 统计乐盈币充值到游戏的钱 -->
+    <select id="statisticsLyb2Game" resultType="Double" parameterType="string">
+        select
+        sum(lyb_2_yx_amt) AS amount
+        from view_gp_all_recharge_sum
+        where 1=1
+        <if test="_parameter != null and _parameter !='' ">
+            and country=#{_parameter}
+        </if>
+    </select>
 </mapper>

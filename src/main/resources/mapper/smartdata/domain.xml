@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="domain">
-	<resultMap type="Domain" id="DomainMap">
-		<result property="tblId" column="tbl_id"/>
-		<result property="domainName" column="domain_name"/>
-		<result property="status" column="status"/>
-		<result property="createdDate" column="created_date"/>
-		<result property="createdUser" column="created_user"/>
-		<result property="updatedDate" column="updated_date"/>
-		<result property="updatedUser" column="updated_user"/>
-	</resultMap>
-	<!-- 获取所有有效的域名 -->
-	<select id="getAllAvailableDomain" resultMap="DomainMap">
-		select 
-			tbl_id,
-			domain_name,
-			status
-		from tbl_dw_dim_domain
-		where status = '0'
+    <resultMap type="Domain" id="DomainMap">
+        <result property="tblId" column="tbl_id"/>
+        <result property="domainName" column="domain_name"/>
+        <result property="status" column="status"/>
+        <result property="createdDate" column="created_date"/>
+        <result property="createdUser" column="created_user"/>
+        <result property="updatedDate" column="updated_date"/>
+        <result property="updatedUser" column="updated_user"/>
+    </resultMap>
+    <!-- 获取所有有效的域名 -->
+    <select id="getAllAvailableDomain" resultMap="DomainMap">
+        select
+        tbl_id,
+        domain_name,
+        status
+        from tbl_dw_dim_domain
+        where status = '0'
         order by created_date
-	</select>
+    </select>
 </mapper>

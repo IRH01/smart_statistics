@@ -1,18 +1,17 @@
 package com.hhly.smartdata.mapper.ybf;
 
+import com.hhly.smartdata.dto.YbfWebStatH;
+import com.hhly.smartdata.mapper.authentication.BaseRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
-
-import com.hhly.smartdata.mapper.authentication.BaseRepository;
-import com.hhly.smartdata.dto.YbfWebStatH;
-
 @Repository
-public class YbfWebStatHRepository extends BaseRepository {
+public class YbfWebStatHRepository extends BaseRepository{
 
-	public List<YbfWebStatH> findYbfWebStatH(Map<String, String> param) {
+    public List<YbfWebStatH> findYbfWebStatH(Map<String, String> param){
 
-		return this.template.selectList("ybfWebStatH.find", param);
-	}
+        return this.template.selectList("ybfWebStatH.find", param);
+    }
 }

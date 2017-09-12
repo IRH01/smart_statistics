@@ -1,81 +1,94 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="consumerUser">
-	<resultMap type="ConsumerUser" id="ConsumerUserMap"  extends="lossDaily.LossDailyMap">
-		<result property="userId" column="USER_ID"/>
-		<result property="nickName" column="NICKNAME"/>
-		<result property="orderNo" column="ORDERNO"/>
-		<result property="handleTime" column="handle_time"/>
-		<result property="rechargeType" column="recharge_type"/>
-		<result property="beforeCash" column="before_cash"/>
-		
-		<result property="lyb" column="lyb"/>
-		<result property="afterCash" column="after_cash"/>
-		<result property="channelId" column="channel_id"/>
-		<result property="platformName" column="platform_name"/>
-		<result property="serverName" column="server_name"/>
-		<result property="applyTime" column="apply_time"/>
-		<result property="status" column="status"/>
-	</resultMap>
-	
-	<select id="find" resultMap="ConsumerUserMap" parameterType="map">
-		select orderno, user_id, nickname, date_format(handle_time,'%Y-%m-%d %H:%i:%s') as handle_time, recharge_type, 
-		FORMAT(before_cash,2) as before_cash, 
-		FORMAT(lyb,2) as lyb, 
-		FORMAT(after_cash,2) as after_cash
-		from view_cosume_detail
-		where 1=1
-		<if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
-		<if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
-		<if test="rechargeType != null and rechargeType != ''">and recharge_type like CONCAT(CONCAT('%',#{rechargeType}),'%')</if>
-		<if test="dateStart != null and dateStart != ''">and date_format(handle_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-		<if test="dateEnd != null and dateEnd != ''">and date_format(handle_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-		
-		order by ifnull(handle_time,date_format('1990-01-01','%Y-%m-%d')) desc
-	</select>
-	
-	<select id="findCon" resultMap="ConsumerUserMap" parameterType="map">
-		select orderno, user_id, nickname, channel_id, platform_name, server_name, 
-		FORMAT(lyb,2) as lyb, recharge_type, 
-			date_format(apply_time,'%Y-%m-%d %H:%i:%s') as apply_time, date_format(handle_time,'%Y-%m-%d %H:%i:%s') as handle_time, status 
-		from view_cosume_detail
-		where 1=1
-		<if test="orderId != null and orderId != ''">and orderno like CONCAT(CONCAT('%',#{orderId}),'%')</if>
-		<if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
-		<if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
-		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-		<if test="platformName != null and platformName != ''">and platform_name like CONCAT(CONCAT('%',#{platformName}),'%')</if>
-		<if test="rechargeType != null and rechargeType != ''">and recharge_type like CONCAT(CONCAT('%',#{rechargeType}),'%')</if>
-		
-		<if test="dateStart != null and dateStart != ''">and date_format(apply_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-		<if test="dateEnd != null and dateEnd != ''">and date_format(apply_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-		order by ifnull(handle_time,date_format('1990-01-01','%Y-%m-%d')) desc
-	</select>
-	
-	
-	<select id="count" resultType="int" parameterType="map">
-		select count(1)
-		from view_cosume_detail
-		where 1=1
-		<if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
-		<if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
-		<if test="rechargeType != null and rechargeType != ''">and recharge_type like CONCAT(CONCAT('%',#{rechargeType}),'%')</if>
-		<if test="dateStart != null and dateStart != ''">and date_format(handle_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-		<if test="dateEnd != null and dateEnd != ''">and date_format(handle_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-	</select>
-	
-	<select id="countList" resultType="int" parameterType="map">
-		select count(1)
-		from view_cosume_detail
-		where 1=1
-		<if test="orderId != null and orderId != ''">and orderno like CONCAT(CONCAT('%',#{orderId}),'%')</if>
-		<if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
-		<if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
-		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-		<if test="platformName != null and platformName != ''">and platform_name like CONCAT(CONCAT('%',#{platformName}),'%')</if>
-		<if test="rechargeType != null and rechargeType != ''">and recharge_type like CONCAT(CONCAT('%',#{rechargeType}),'%')</if>
-		
-		<if test="dateStart != null and dateStart != ''">and date_format(apply_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-		<if test="dateEnd != null and dateEnd != ''">and date_format(apply_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-	</select>
+    <resultMap type="ConsumerUser" id="ConsumerUserMap" extends="lossDaily.LossDailyMap">
+        <result property="userId" column="USER_ID"/>
+        <result property="nickName" column="NICKNAME"/>
+        <result property="orderNo" column="ORDERNO"/>
+        <result property="handleTime" column="handle_time"/>
+        <result property="rechargeType" column="recharge_type"/>
+        <result property="beforeCash" column="before_cash"/>
+
+        <result property="lyb" column="lyb"/>
+        <result property="afterCash" column="after_cash"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="platformName" column="platform_name"/>
+        <result property="serverName" column="server_name"/>
+        <result property="applyTime" column="apply_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="find" resultMap="ConsumerUserMap" parameterType="map">
+        select orderno, user_id, nickname, date_format(handle_time,'%Y-%m-%d %H:%i:%s') as handle_time, recharge_type,
+        FORMAT(before_cash,2) as before_cash,
+        FORMAT(lyb,2) as lyb,
+        FORMAT(after_cash,2) as after_cash
+        from view_cosume_detail
+        where 1=1
+        <if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
+        <if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
+        <if test="rechargeType != null and rechargeType != ''">and recharge_type like
+            CONCAT(CONCAT('%',#{rechargeType}),'%')
+        </if>
+        <if test="dateStart != null and dateStart != ''">and date_format(handle_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(handle_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+
+        order by ifnull(handle_time,date_format('1990-01-01','%Y-%m-%d')) desc
+    </select>
+
+    <select id="findCon" resultMap="ConsumerUserMap" parameterType="map">
+        select orderno, user_id, nickname, channel_id, platform_name, server_name,
+        FORMAT(lyb,2) as lyb, recharge_type,
+        date_format(apply_time,'%Y-%m-%d %H:%i:%s') as apply_time, date_format(handle_time,'%Y-%m-%d %H:%i:%s') as
+        handle_time, status
+        from view_cosume_detail
+        where 1=1
+        <if test="orderId != null and orderId != ''">and orderno like CONCAT(CONCAT('%',#{orderId}),'%')</if>
+        <if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
+        <if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="platformName != null and platformName != ''">and platform_name like
+            CONCAT(CONCAT('%',#{platformName}),'%')
+        </if>
+        <if test="rechargeType != null and rechargeType != ''">and recharge_type like
+            CONCAT(CONCAT('%',#{rechargeType}),'%')
+        </if>
+
+        <if test="dateStart != null and dateStart != ''">and date_format(apply_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(apply_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+        order by ifnull(handle_time,date_format('1990-01-01','%Y-%m-%d')) desc
+    </select>
+
+
+    <select id="count" resultType="int" parameterType="map">
+        select count(1)
+        from view_cosume_detail
+        where 1=1
+        <if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
+        <if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
+        <if test="rechargeType != null and rechargeType != ''">and recharge_type like
+            CONCAT(CONCAT('%',#{rechargeType}),'%')
+        </if>
+        <if test="dateStart != null and dateStart != ''">and date_format(handle_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(handle_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+    </select>
+
+    <select id="countList" resultType="int" parameterType="map">
+        select count(1)
+        from view_cosume_detail
+        where 1=1
+        <if test="orderId != null and orderId != ''">and orderno like CONCAT(CONCAT('%',#{orderId}),'%')</if>
+        <if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
+        <if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="platformName != null and platformName != ''">and platform_name like
+            CONCAT(CONCAT('%',#{platformName}),'%')
+        </if>
+        <if test="rechargeType != null and rechargeType != ''">and recharge_type like
+            CONCAT(CONCAT('%',#{rechargeType}),'%')
+        </if>
+
+        <if test="dateStart != null and dateStart != ''">and date_format(apply_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(apply_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+    </select>
 </mapper>

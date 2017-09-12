@@ -3,89 +3,89 @@ package com.hhly.smartdata.dto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class InfoStatDShower {
-   
-	public static final String formatStyle = "yyyy-MM-dd HH:mm:ss";
-	
-	private String infoTypeName;
-	
-	//咨询的标题
-	private String infoName;
-	
-	private String infoId;
-	
-	private String createDate;
-	
-	private long clickCnt;
-	
-	private long stayCnt;
-	
-	private long userCnt;
-	
-	private long ipCnt;
+public class InfoStatDShower{
 
-	public String getInfoTypeName() {
-		return infoTypeName;
-	}
+    public static final String formatStyle = "yyyy-MM-dd HH:mm:ss";
 
-	public void setInfoTypeName(String infoTypeName) {
-		this.infoTypeName = infoTypeName;
-	}
+    private String infoTypeName;
 
-	public String getInfoName() {
-		return infoName;
-	}
+    //咨询的标题
+    private String infoName;
 
-	public void setInfoName(String infoName) {
-		this.infoName = infoName;
-	}
+    private String infoId;
 
-	public String getCreateDate() {
-		return createDate;
-	}
+    private String createDate;
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = new SimpleDateFormat(formatStyle).format(createDate);
-	}
+    private long clickCnt;
 
-	public long getClickCnt() {
-		return clickCnt;
-	}
+    private long stayCnt;
 
-	public void setClickCnt(long clickCnt) {
-		this.clickCnt = clickCnt;
-	}
+    private long userCnt;
 
-	public long getStayCnt() {
-		return stayCnt;
-	}
+    private long ipCnt;
 
-	public void setStayCnt(long stayCnt) {
-		this.stayCnt = stayCnt;
-	}
+    public String getInfoTypeName(){
+        return infoTypeName;
+    }
 
-	public long getUserCnt() {
-		return userCnt;
-	}
+    public void setInfoTypeName(String infoTypeName){
+        this.infoTypeName = infoTypeName;
+    }
 
-	public void setUserCnt(long userCnt) {
-		this.userCnt = userCnt;
-	}
+    public String getInfoName(){
+        return infoName;
+    }
 
-	public long getIpCnt() {
-		return ipCnt;
-	}
+    public void setInfoName(String infoName){
+        this.infoName = infoName;
+    }
 
-	public void setIpCnt(long ipCnt) {
-		this.ipCnt = ipCnt;
-	}
+    public String getCreateDate(){
+        return createDate;
+    }
 
-	public String getInfoId() {
-		return infoId;
-	}
+    public void setCreateDate(Date createDate){
+        this.createDate = new SimpleDateFormat(formatStyle).format(createDate);
+    }
 
-	public void setInfoId(String infoId) {
-		this.infoId = infoId;
-	}
-	
+    public long getClickCnt(){
+        return clickCnt;
+    }
+
+    public void setClickCnt(long clickCnt){
+        this.clickCnt = clickCnt;
+    }
+
+    public long getStayCnt(){
+        return stayCnt;
+    }
+
+    public void setStayCnt(long stayCnt){
+        this.stayCnt = stayCnt;
+    }
+
+    public long getUserCnt(){
+        return userCnt;
+    }
+
+    public void setUserCnt(long userCnt){
+        this.userCnt = userCnt;
+    }
+
+    public long getIpCnt(){
+        return ipCnt;
+    }
+
+    public void setIpCnt(long ipCnt){
+        this.ipCnt = ipCnt;
+    }
+
+    public String getInfoId(){
+        return infoId;
+    }
+
+    public void setInfoId(String infoId){
+        this.infoId = infoId;
+    }
+
 }

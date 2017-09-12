@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dimInfo">
-	<resultMap id="DimInfoMap" type="DimInfo">
-		<id property="tblId" column="tbl_id" />
-		<result property="infoId" column="info_id" />
-		<result property="infoName" column="info_name" />
-		<result property="positionId" column="position_id" />
-		<result property="infoTypeId" column="info_type_id" />
-		<result property="createdDate" column="created_date" />
-		<result property="createdUser" column="created_user" />
-		<result property="updatedDate" column="updated_date" />
-		<result property="updatedUser" column="updated_user" />
-	</resultMap>
-	
-	<resultMap id="DimInfoCountMap" type="DimInfoCount">
-		<result property="count" column="count" />
-		<result property="infoTypeName" column="type_name" />
-		<result property="infoTypeId" column="info_type_id" />
-	</resultMap>
-	
-	<sql id="Base_Column_List">
-		tbl_id,
-		inf_id,
-		info_name,
-		position_id,
-		info_type_id,
-		created_date,
-		created_user,
-		updated_date,
-		updated_user
-	</sql>
-	
-	<sql id="condition">
-		<if test="startDate != null">and i.updated_date &gt;= to_date(#{startDate},'yyyy-MM-dd HH24:mi:ss')</if>
-		<if test="endDate != null">and i.updated_date &lt;to_date(#{endDate},'yyyy-MM-dd HH24:mi:ss')</if> 
-		<if test="domainId!=null and domainId!=''">
-			and exists(
-				select p.position_id 
-				from tbl_dw_dim_position p 
-				where i.position_id=p.position_id 
-				start with p.position_id=#{domainId} 
-				connect by prior p.position_id=p.parents_position_id
-			) 
-		</if>  
-	</sql>
-	
-	<select id="get" resultMap="DimInfoMap" parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from tbl_dw_dim_info 
-		where tbl_id = #{tblId}
-	</select>
-	<select id="countAllByDate" resultType="int" parameterType="map">
-		select count(*)
-		from tbl_dw_dim_info i
-		where 1=1
-		<include refid="condition" />
-	</select>
-	<select id="countTypeByDate" resultMap="DimInfoCountMap" parameterType="map">
-		select
-		info.count,
-		info.info_type_id,
-		type.type_name
-		from (
-				select
-				count(*) count,
-				i.info_type_id
-				from tbl_dw_dim_info i
-				where 1=1
-				<include refid="condition" />
-				group by i.info_type_id
-			)info
-		left join tbl_dw_dim_info_type type on info.info_type_id=type.type_id
-	</select>
+    <resultMap id="DimInfoMap" type="DimInfo">
+        <id property="tblId" column="tbl_id"/>
+        <result property="infoId" column="info_id"/>
+        <result property="infoName" column="info_name"/>
+        <result property="positionId" column="position_id"/>
+        <result property="infoTypeId" column="info_type_id"/>
+        <result property="createdDate" column="created_date"/>
+        <result property="createdUser" column="created_user"/>
+        <result property="updatedDate" column="updated_date"/>
+        <result property="updatedUser" column="updated_user"/>
+    </resultMap>
+
+    <resultMap id="DimInfoCountMap" type="DimInfoCount">
+        <result property="count" column="count"/>
+        <result property="infoTypeName" column="type_name"/>
+        <result property="infoTypeId" column="info_type_id"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        tbl_id,
+        inf_id,
+        info_name,
+        position_id,
+        info_type_id,
+        created_date,
+        created_user,
+        updated_date,
+        updated_user
+    </sql>
+
+    <sql id="condition">
+        <if test="startDate != null">and i.updated_date &gt;= to_date(#{startDate},'yyyy-MM-dd HH24:mi:ss')</if>
+        <if test="endDate != null">and i.updated_date &lt;to_date(#{endDate},'yyyy-MM-dd HH24:mi:ss')</if>
+        <if test="domainId!=null and domainId!=''">
+            and exists(
+            select p.position_id
+            from tbl_dw_dim_position p
+            where i.position_id=p.position_id
+            start with p.position_id=#{domainId}
+            connect by prior p.position_id=p.parents_position_id
+            )
+        </if>
+    </sql>
+
+    <select id="get" resultMap="DimInfoMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_dw_dim_info
+        where tbl_id = #{tblId}
+    </select>
+    <select id="countAllByDate" resultType="int" parameterType="map">
+        select count(*)
+        from tbl_dw_dim_info i
+        where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="countTypeByDate" resultMap="DimInfoCountMap" parameterType="map">
+        select
+        info.count,
+        info.info_type_id,
+        type.type_name
+        from (
+        select
+        count(*) count,
+        i.info_type_id
+        from tbl_dw_dim_info i
+        where 1=1
+        <include refid="condition"/>
+        group by i.info_type_id
+        )info
+        left join tbl_dw_dim_info_type type on info.info_type_id=type.type_id
+    </select>
 </mapper>

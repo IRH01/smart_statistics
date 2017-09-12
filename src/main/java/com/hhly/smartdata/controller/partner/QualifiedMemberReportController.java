@@ -15,12 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping(value = "/partner/qlfmbreport")
-public class QualifiedMemberReportController {
+public class QualifiedMemberReportController{
     private static Logger logger = Logger.getLogger(QualifiedMemberReportController.class.getName());
 
     @RequestMapping(value = "/show")
     @RequiresPermissions(value = {"partner:cmsreport"})
-    public ModelAndView show(String userId, String statMonth, Integer gameTypeId, ModelMap modelMap) {
+    public ModelAndView show(String userId, String statMonth, Integer gameTypeId, ModelMap modelMap){
         modelMap.put("statMonth", statMonth);
         modelMap.put("partnerId", userId);
         modelMap.put("gameTypeId", gameTypeId);
@@ -34,7 +34,7 @@ public class QualifiedMemberReportController {
     @RequestMapping(value = "/list", produces = "text/plain;charset=UTF-8")
     @RequiresPermissions(value = {"partner:cmsreport"})
     @ResponseBody
-    public String list(int pageNumber, int pageSize, String partnerId, String statMonth, Integer gameTypeId, String user) {
+    public String list(int pageNumber, int pageSize, String partnerId, String statMonth, Integer gameTypeId, String user){
         String result = "";
         return result;
     }

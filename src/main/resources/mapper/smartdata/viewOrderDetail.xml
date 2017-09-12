@@ -1,268 +1,308 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="viewOrderDetail">
-	<resultMap type="ViewOrderDetail" id="ViewOrderDetailMap">
-		<result property="orderNo" column="orderno"/>
-		<result property="payStatus" column="pay_status"/>
-		<result property="userId" column="user_id"/>
-		<result property="nickName" column="nickname"/>
-		<result property="rechargeWay" column="recharge_way"/>
-		<result property="platformId" column="platform_id"/>
-		<result property="serverId" column="server_id"/>
-		<result property="amount" column="amount"/>
-		<result property="receiptAmount" column="receipt_amount"/>
-		<result property="fee" column="fee"/>
-		<result property="createTime" column="create_time"/>
-		<result property="payTime" column="pay_time"/>
-		<result property="paymentOrderNo" column="payment_orderno"/>
-		<result property="tradeNo" column="trade_no"/>
-		<result property="platformName" column="platform_name"/>
-		<result property="serverName" column="server_name"/>
-		<result property="channelId" column="channel_id"/>
-		<result property="channelName" column="channel_name"/>
-		<result property="orderType" column="order_type"/>
-		<result property="developers" column="developers"/>
-		<result property="countryName" column="country_name"/>
-		<result property="platformTerminalName" column="platform_terminal_name"/>
-	</resultMap>
-	
-	<select id="find" resultMap="ViewOrderDetailMap" parameterType="map">
-		select 
-			d.orderno,
-			d.pay_status,
-			d.user_id,
-			d.nickname,
-			d.recharge_way,
-			d.platform_id,
-			d.server_id,
-			d.amount,
-			d.receipt_amount,
-			d.fee,
-			d.create_time,
-			d.pay_time,
-			d.payment_orderno,
-			d.trade_no,
-			d.channel_id,
-			d.channel_name,
-			d.order_type,
-			d.developers,
-			p.name platform_name,
-			CONCAT(CONCAT(s.area_name,' '),s.name) server_name,
-			c.name country_name,
-			t.name as platform_terminal_name
-		from gp_view_order_detail d
-		left join gp_tbl_platform_info p
-			on p.id = d.platform_id
-		left join gp_tbl_game_server_config s
-			on s.id = d.server_id
-		left join gp_tbl_country_info c
-			on p.country = c.id
-		left join tbl_gp_plat_terminal_info t
-			on p.platform_terminal = t.id
-		where 1=1
-			<if test="orderNo != null and orderNo != ''">and d.orderno like CONCAT(CONCAT('%',#{orderNo}),'%')</if>
-			<if test="user != nulll and user != ''">and (d.user_id like CONCAT(CONCAT('%',#{user}),'%') or d.nickname like CONCAT(CONCAT('%',#{user}),'%'))</if>
-			<if test="amountStart != null and amountStart != ''">and d.amount &gt;= #{amountStart} </if>
-			<if test="amountEnd != null and amountEnd != ''">and d.amount &lt;= #{amountEnd} </if>
-			<if test="platformId != null and platformId != ''">and d.platform_id = #{platformId}</if>
-			<if test="serverId != null and serverId != ''">and d.server_id = #{serverId}</if>
-			<if test="createTimeStart != null and createTimeStart != ''">and date_format(d.create_time,'%Y-%m-%d') &gt;= #{createTimeStart} </if>
-			<if test="createTimeEnd != null and createTimeEnd != ''">and date_format(d.create_time,'%Y-%m-%d') &lt;= #{createTimeEnd} </if>
-			<if test="rechargeWay != null and rechargeWay != ''">and d.recharge_way = #{rechargeWay}</if>
-			<if test="payStatus != null and payStatus != ''">and d.pay_status = #{payStatus}</if>
-			<if test="payTimeStart != null and payTimeStart != ''">and date_format(d.pay_time,'%Y-%m-%d') &gt;= #{payTimeStart} </if>
-			<if test="payTimeEnd != null and payTimeEnd != ''">and date_format(d.pay_time,'%Y-%m-%d') &lt;= #{payTimeEnd} </if>
-			<if test="channelId != null and channelId != ''">and d.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-			<if test="orderType != null and orderType != '' and orderType != 'null'">and d.order_type = #{orderType}</if>
-			<if test="developers != null and developers != ''">and d.developers like CONCAT(CONCAT('%',#{developers}),'%') </if>
-			<if test="paymentOrderNo != null and paymentOrderNo != ''">and d.payment_orderno like CONCAT(CONCAT('%',#{paymentOrderNo}),'%') </if>
-			<if test="tradeNo != null and tradeNo != ''">and d.trade_no like CONCAT(CONCAT('%',#{tradeNo}),'%') </if>
-			<if test="platformTerminal != null and platformTerminal != '' and platformTerminal != -999">and p.platform_terminal = #{platformTerminal} </if>
-			<if test="countryId != null and countryId != ''">and c.id = #{countryId} </if>
-			<trim prefix="order by" suffixOverrides=",">
-			    <if test="payTimeOrder == 1">
-			    	d.pay_time is null, d.pay_time desc ,
-			    </if>
-			    <if test="payTimeOrder == 2">
-			    	d.pay_time is null, d.pay_time asc ,
-			    </if>
-			    <if test="createTimeOrder == 1">
-			    	d.create_time is null, d.create_time desc ,
-			    </if>
-			    <if test="createTimeOrder == 2">
-			    	d.create_time is null, d.create_time asc ,
-			    </if>
-			    <if test="amountOrder == 1">
-			    	d.amount is null, d.amount desc ,
-			    </if>
-			    <if test="amountOrder == 2">
-			    	d.amount is null, d.amount asc ,
-			    </if>
-			    <if test="noOrder == 1">
-			    	d.orderno is null, d.orderno desc 
-			    </if>
-			    <if test="noOrder == 2">
-			    	d.orderno is null, d.orderno asc 
-			    </if>
-  			</trim>
-	</select>
-	
-	<select id="count" resultType="int" parameterType="map">
-		select 
-			count(*) count
-		from gp_view_order_detail d
-		left join gp_tbl_platform_info p
-			on p.id = d.platform_id
-		left join gp_tbl_game_server_config s
-			on s.id = d.server_id
-		left join gp_tbl_country_info c
-			on p.country = c.id
-		left join tbl_gp_plat_terminal_info t
-			on p.platform_terminal = t.id
-		where 1=1
-			<if test="orderNo != null and orderNo != ''">and d.orderno like CONCAT(CONCAT('%',#{orderNo}),'%')</if>
-			<if test="user != nulll and user != ''">and (d.user_id like CONCAT(CONCAT('%',#{user}),'%') or d.nickname like CONCAT(CONCAT('%',#{user}),'%'))</if>
-			<if test="amountStart != null and amountStart != ''">and d.amount &gt;= #{amountStart} </if>
-			<if test="amountEnd != null and amountEnd != ''">and d.amount &lt;= #{amountEnd} </if>
-			<if test="platformId != null and platformId != ''">and d.platform_id = #{platformId}</if>
-			<if test="serverId != null and serverId != ''">and d.server_id = #{serverId}</if>
-			<if test="createTimeStart != null and createTimeStart != ''">and date_format(d.create_time,'%Y-%m-%d') &gt;= #{createTimeStart} </if>
-			<if test="createTimeEnd != null and createTimeEnd != ''">and date_format(d.create_time,'%Y-%m-%d') &lt;= #{createTimeEnd} </if>
-			<if test="rechargeWay != null and rechargeWay != ''">and d.recharge_way = #{rechargeWay}</if>
-			<if test="payStatus != null and payStatus != ''">and d.pay_status = #{payStatus}</if>
-			<if test="payTimeStart != null and payTimeStart != ''">and date_format(d.pay_time,'%Y-%m-%d') &gt;= #{payTimeStart} </if>
-			<if test="payTimeEnd != null and payTimeEnd != ''">and date_format(d.pay_time,'%Y-%m-%d') &lt;= #{payTimeEnd} </if>
-			<if test="channelId != null and channelId != ''">and d.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-			<if test="orderType != null and orderType != '' and orderType != 'null'">and d.order_type = #{orderType}</if>
-			<if test="platformTerminal != null and platformTerminal != '' and platformTerminal != -999">and p.platform_terminal = #{platformTerminal} </if>
-			<if test="countryId != null and countryId != ''">and c.id = #{countryId} </if>
-	</select>
-	
-	<!-- 查询合格会员订单信息 -->
-	<select id="findQlfMemberData" resultMap="ViewOrderDetailMap" parameterType="map">
-		select 
-			d.orderno,
-			d.pay_status,
-			d.user_id,
-			d.nickname,
-			d.recharge_way,
-			d.platform_id,
-			d.server_id,
-			d.amount,
-			d.receipt_amount,
-			d.fee,
-			d.create_time,
-			d.pay_time,
-			d.payment_orderno,
-			d.trade_no,
-			d.channel_id,
-			d.channel_name,
-			d.order_type,
-			d.developers,
-			p.name platform_name,
-			CONCAT(CONCAT(s.area_name,' '),s.name) server_name,
-			c.name country_name
-		from gp_view_order_detail d
-		left join gp_tbl_platform_info p
-			on p.id = d.platform_id
-		left join gp_tbl_game_server_config s
-			on s.id = d.server_id
-		left join gp_tbl_country_info c
-			on p.country = c.id
-		where 1=1
-			and exists(
-				select qm.user_id 
-				from tbl_dw_member_qual_list_mon qm
-				where qm.partner_user_id = #{partnerUserId}  
-				and date_format(qm.month_id,'%Y-%m') = #{monthId}
-				and qm.game_type_id= #{gameTypeId}
-				and qm.user_id = d.user_id
-			)
-			and exists(
-				select gt.game_id
-				from tbl_dim_game_type_con gt
-				where gt.game_type_id = #{gameTypeId}  
-				and gt.game_id = d.platform_id
-			)
-			<if test="orderNo != null and orderNo != ''">and d.orderno like CONCAT(CONCAT('%',#{orderNo}),'%')</if>
-			<if test="user != nulll and user != ''">and (d.user_id like CONCAT(CONCAT('%',#{user}),'%') or d.nickname like CONCAT(CONCAT('%',#{user}),'%'))</if>
-			<if test="amountStart != null and amountStart != ''">and d.amount &gt;= #{amountStart} </if>
-			<if test="amountEnd != null and amountEnd != ''">and d.amount &lt;= #{amountEnd} </if>
-			<if test="platformId != null and platformId != ''">and d.platform_id = #{platformId}</if>
-			<if test="serverId != null and serverId != ''">and d.server_id = #{serverId}</if>
-			<if test="createTimeStart != null and createTimeStart != ''">and date_format(d.create_time,'%Y-%m-%d') &gt;= #{createTimeStart} </if>
-			<if test="createTimeEnd != null and createTimeEnd != ''">and date_format(d.create_time,'%Y-%m-%d') &lt;= #{createTimeEnd} </if>
-			<if test="rechargeWay != null and rechargeWay != ''">and d.recharge_way = #{rechargeWay}</if>
-			<if test="payStatus != null and payStatus != ''">and d.pay_status = #{payStatus}</if>
-			<if test="dateStart != null and dateStart != ''">and date_format(d.pay_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-			<if test="dateEnd != null and dateEnd != ''">and date_format(d.pay_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-			<if test="channelId != null and channelId != ''">and d.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-			<if test="orderType != null and orderType != '' and orderType != 'null'">and d.order_type = #{orderType}</if>
-			<if test="developers != null and developers != ''">and d.developers like CONCAT(CONCAT('%',#{developers}),'%') </if>
-			<if test="paymentOrderNo != null and paymentOrderNo != ''">and d.payment_orderno like CONCAT(CONCAT('%',#{paymentOrderNo}),'%') </if>
-			<if test="tradeNo != null and tradeNo != ''">and d.trade_no like CONCAT(CONCAT('%',#{tradeNo}),'%') </if>
-			<if test="countryId != null and countryId != ''">and c.id = #{countryId} </if>
-			<trim prefix="order by" suffixOverrides=",">
-			    <if test="payTimeOrder == 1">
-			    	d.pay_time is null, d.pay_time desc ,
-			    </if>
-			    <if test="payTimeOrder == 2">
-			    	d.pay_time is null, d.pay_time asc ,
-			    </if>
-			    <if test="createTimeOrder == 1">
-			    	d.create_time is null, d.create_time desc ,
-			    </if>
-			    <if test="createTimeOrder == 2">
-			    	d.create_time is null, d.create_time asc ,
-			    </if>
-			    <if test="amountOrder == 1">
-			    	d.amount is null, d.amount desc ,
-			    </if>
-			    <if test="amountOrder == 2">
-			    	d.pay_time is null, d.pay_time is null, d.amount asc ,
-			    </if>
-			    <if test="noOrder == 1">
-			    	d.orderno is null, d.orderno desc 
-			    </if>
-			    <if test="noOrder == 2">
-			    	d.orderno is null, d.orderno asc 
-			    </if>
-  			</trim>
-	</select>
-	
-	<!-- 统计合格会员订单信息 -->
-	<select id="countQlfMemberData" resultType="int" parameterType="map">
-		select 
-			count(*) count
-		from gp_view_order_detail d
-		where 1=1
-			and exists(
-				select qm.user_id 
-				from tbl_dw_member_qual_list_mon qm
-				where qm.partner_user_id = #{partnerUserId}  
-				and date_format(qm.month_id,'%Y-%m') = #{monthId}
-				and qm.game_type_id= #{gameTypeId}
-				and qm.user_id = d.user_id
-			)
-			and exists(
-				select gt.game_id
-				from tbl_dim_game_type_con gt
-				where gt.game_type_id = #{gameTypeId}  
-				and gt.game_id = d.platform_id
-			)
-			<if test="orderNo != null and orderNo != ''">and d.orderno like CONCAT(CONCAT('%',#{orderNo}),'%')</if>
-			<if test="user != nulll and user != ''">and (d.user_id like CONCAT(CONCAT('%',#{user}),'%') or d.nickname like CONCAT(CONCAT('%',#{user}),'%'))</if>
-			<if test="amountStart != null and amountStart != ''">and d.amount &gt;= #{amountStart} </if>
-			<if test="amountEnd != null and amountEnd != ''">and d.amount &lt;= #{amountEnd} </if>
-			<if test="platformId != null and platformId != ''">and d.platform_id = #{platformId}</if>
-			<if test="serverId != null and serverId != ''">and d.server_id = #{serverId}</if>
-			<if test="createTimeStart != null and createTimeStart != ''">and date_format(d.create_time,'%Y-%m-%d') &gt;= #{createTimeStart} </if>
-			<if test="createTimeEnd != null and createTimeEnd != ''">and date_format(d.create_time,'%Y-%m-%d') &lt;= #{createTimeEnd} </if>
-			<if test="rechargeWay != null and rechargeWay != ''">and d.recharge_way = #{rechargeWay}</if>
-			<if test="payStatus != null and payStatus != ''">and d.pay_status = #{payStatus}</if>
-			<if test="dateStart != null and dateStart != ''">and date_format(d.pay_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-			<if test="dateEnd != null and dateEnd != ''">and date_format(d.pay_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-			<if test="channelId != null and channelId != ''">and d.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-			<if test="orderType != null and orderType != '' and orderType != 'null'">and d.order_type = #{orderType}</if>
-	</select>
+    <resultMap type="ViewOrderDetail" id="ViewOrderDetailMap">
+        <result property="orderNo" column="orderno"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="userId" column="user_id"/>
+        <result property="nickName" column="nickname"/>
+        <result property="rechargeWay" column="recharge_way"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="serverId" column="server_id"/>
+        <result property="amount" column="amount"/>
+        <result property="receiptAmount" column="receipt_amount"/>
+        <result property="fee" column="fee"/>
+        <result property="createTime" column="create_time"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="paymentOrderNo" column="payment_orderno"/>
+        <result property="tradeNo" column="trade_no"/>
+        <result property="platformName" column="platform_name"/>
+        <result property="serverName" column="server_name"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="channelName" column="channel_name"/>
+        <result property="orderType" column="order_type"/>
+        <result property="developers" column="developers"/>
+        <result property="countryName" column="country_name"/>
+        <result property="platformTerminalName" column="platform_terminal_name"/>
+    </resultMap>
+
+    <select id="find" resultMap="ViewOrderDetailMap" parameterType="map">
+        select
+        d.orderno,
+        d.pay_status,
+        d.user_id,
+        d.nickname,
+        d.recharge_way,
+        d.platform_id,
+        d.server_id,
+        d.amount,
+        d.receipt_amount,
+        d.fee,
+        d.create_time,
+        d.pay_time,
+        d.payment_orderno,
+        d.trade_no,
+        d.channel_id,
+        d.channel_name,
+        d.order_type,
+        d.developers,
+        p.name platform_name,
+        CONCAT(CONCAT(s.area_name,' '),s.name) server_name,
+        c.name country_name,
+        t.name as platform_terminal_name
+        from gp_view_order_detail d
+        left join gp_tbl_platform_info p
+        on p.id = d.platform_id
+        left join gp_tbl_game_server_config s
+        on s.id = d.server_id
+        left join gp_tbl_country_info c
+        on p.country = c.id
+        left join tbl_gp_plat_terminal_info t
+        on p.platform_terminal = t.id
+        where 1=1
+        <if test="orderNo != null and orderNo != ''">and d.orderno like CONCAT(CONCAT('%',#{orderNo}),'%')</if>
+        <if test="user != nulll and user != ''">and (d.user_id like CONCAT(CONCAT('%',#{user}),'%') or d.nickname like
+            CONCAT(CONCAT('%',#{user}),'%'))
+        </if>
+        <if test="amountStart != null and amountStart != ''">and d.amount &gt;= #{amountStart}</if>
+        <if test="amountEnd != null and amountEnd != ''">and d.amount &lt;= #{amountEnd}</if>
+        <if test="platformId != null and platformId != ''">and d.platform_id = #{platformId}</if>
+        <if test="serverId != null and serverId != ''">and d.server_id = #{serverId}</if>
+        <if test="createTimeStart != null and createTimeStart != ''">and date_format(d.create_time,'%Y-%m-%d') &gt;=
+            #{createTimeStart}
+        </if>
+        <if test="createTimeEnd != null and createTimeEnd != ''">and date_format(d.create_time,'%Y-%m-%d') &lt;=
+            #{createTimeEnd}
+        </if>
+        <if test="rechargeWay != null and rechargeWay != ''">and d.recharge_way = #{rechargeWay}</if>
+        <if test="payStatus != null and payStatus != ''">and d.pay_status = #{payStatus}</if>
+        <if test="payTimeStart != null and payTimeStart != ''">and date_format(d.pay_time,'%Y-%m-%d') &gt;=
+            #{payTimeStart}
+        </if>
+        <if test="payTimeEnd != null and payTimeEnd != ''">and date_format(d.pay_time,'%Y-%m-%d') &lt;= #{payTimeEnd}
+        </if>
+        <if test="channelId != null and channelId != ''">and d.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="orderType != null and orderType != '' and orderType != 'null'">and d.order_type = #{orderType}</if>
+        <if test="developers != null and developers != ''">and d.developers like CONCAT(CONCAT('%',#{developers}),'%')
+        </if>
+        <if test="paymentOrderNo != null and paymentOrderNo != ''">and d.payment_orderno like
+            CONCAT(CONCAT('%',#{paymentOrderNo}),'%')
+        </if>
+        <if test="tradeNo != null and tradeNo != ''">and d.trade_no like CONCAT(CONCAT('%',#{tradeNo}),'%')</if>
+        <if test="platformTerminal != null and platformTerminal != '' and platformTerminal != -999">and
+            p.platform_terminal = #{platformTerminal}
+        </if>
+        <if test="countryId != null and countryId != ''">and c.id = #{countryId}</if>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="payTimeOrder == 1">
+                d.pay_time is null, d.pay_time desc ,
+            </if>
+            <if test="payTimeOrder == 2">
+                d.pay_time is null, d.pay_time asc ,
+            </if>
+            <if test="createTimeOrder == 1">
+                d.create_time is null, d.create_time desc ,
+            </if>
+            <if test="createTimeOrder == 2">
+                d.create_time is null, d.create_time asc ,
+            </if>
+            <if test="amountOrder == 1">
+                d.amount is null, d.amount desc ,
+            </if>
+            <if test="amountOrder == 2">
+                d.amount is null, d.amount asc ,
+            </if>
+            <if test="noOrder == 1">
+                d.orderno is null, d.orderno desc
+            </if>
+            <if test="noOrder == 2">
+                d.orderno is null, d.orderno asc
+            </if>
+        </trim>
+    </select>
+
+    <select id="count" resultType="int" parameterType="map">
+        select
+        count(*) count
+        from gp_view_order_detail d
+        left join gp_tbl_platform_info p
+        on p.id = d.platform_id
+        left join gp_tbl_game_server_config s
+        on s.id = d.server_id
+        left join gp_tbl_country_info c
+        on p.country = c.id
+        left join tbl_gp_plat_terminal_info t
+        on p.platform_terminal = t.id
+        where 1=1
+        <if test="orderNo != null and orderNo != ''">and d.orderno like CONCAT(CONCAT('%',#{orderNo}),'%')</if>
+        <if test="user != nulll and user != ''">and (d.user_id like CONCAT(CONCAT('%',#{user}),'%') or d.nickname like
+            CONCAT(CONCAT('%',#{user}),'%'))
+        </if>
+        <if test="amountStart != null and amountStart != ''">and d.amount &gt;= #{amountStart}</if>
+        <if test="amountEnd != null and amountEnd != ''">and d.amount &lt;= #{amountEnd}</if>
+        <if test="platformId != null and platformId != ''">and d.platform_id = #{platformId}</if>
+        <if test="serverId != null and serverId != ''">and d.server_id = #{serverId}</if>
+        <if test="createTimeStart != null and createTimeStart != ''">and date_format(d.create_time,'%Y-%m-%d') &gt;=
+            #{createTimeStart}
+        </if>
+        <if test="createTimeEnd != null and createTimeEnd != ''">and date_format(d.create_time,'%Y-%m-%d') &lt;=
+            #{createTimeEnd}
+        </if>
+        <if test="rechargeWay != null and rechargeWay != ''">and d.recharge_way = #{rechargeWay}</if>
+        <if test="payStatus != null and payStatus != ''">and d.pay_status = #{payStatus}</if>
+        <if test="payTimeStart != null and payTimeStart != ''">and date_format(d.pay_time,'%Y-%m-%d') &gt;=
+            #{payTimeStart}
+        </if>
+        <if test="payTimeEnd != null and payTimeEnd != ''">and date_format(d.pay_time,'%Y-%m-%d') &lt;= #{payTimeEnd}
+        </if>
+        <if test="channelId != null and channelId != ''">and d.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="orderType != null and orderType != '' and orderType != 'null'">and d.order_type = #{orderType}</if>
+        <if test="platformTerminal != null and platformTerminal != '' and platformTerminal != -999">and
+            p.platform_terminal = #{platformTerminal}
+        </if>
+        <if test="countryId != null and countryId != ''">and c.id = #{countryId}</if>
+    </select>
+
+    <!-- 查询合格会员订单信息 -->
+    <select id="findQlfMemberData" resultMap="ViewOrderDetailMap" parameterType="map">
+        select
+        d.orderno,
+        d.pay_status,
+        d.user_id,
+        d.nickname,
+        d.recharge_way,
+        d.platform_id,
+        d.server_id,
+        d.amount,
+        d.receipt_amount,
+        d.fee,
+        d.create_time,
+        d.pay_time,
+        d.payment_orderno,
+        d.trade_no,
+        d.channel_id,
+        d.channel_name,
+        d.order_type,
+        d.developers,
+        p.name platform_name,
+        CONCAT(CONCAT(s.area_name,' '),s.name) server_name,
+        c.name country_name
+        from gp_view_order_detail d
+        left join gp_tbl_platform_info p
+        on p.id = d.platform_id
+        left join gp_tbl_game_server_config s
+        on s.id = d.server_id
+        left join gp_tbl_country_info c
+        on p.country = c.id
+        where 1=1
+        and exists(
+        select qm.user_id
+        from tbl_dw_member_qual_list_mon qm
+        where qm.partner_user_id = #{partnerUserId}
+        and date_format(qm.month_id,'%Y-%m') = #{monthId}
+        and qm.game_type_id= #{gameTypeId}
+        and qm.user_id = d.user_id
+        )
+        and exists(
+        select gt.game_id
+        from tbl_dim_game_type_con gt
+        where gt.game_type_id = #{gameTypeId}
+        and gt.game_id = d.platform_id
+        )
+        <if test="orderNo != null and orderNo != ''">and d.orderno like CONCAT(CONCAT('%',#{orderNo}),'%')</if>
+        <if test="user != nulll and user != ''">and (d.user_id like CONCAT(CONCAT('%',#{user}),'%') or d.nickname like
+            CONCAT(CONCAT('%',#{user}),'%'))
+        </if>
+        <if test="amountStart != null and amountStart != ''">and d.amount &gt;= #{amountStart}</if>
+        <if test="amountEnd != null and amountEnd != ''">and d.amount &lt;= #{amountEnd}</if>
+        <if test="platformId != null and platformId != ''">and d.platform_id = #{platformId}</if>
+        <if test="serverId != null and serverId != ''">and d.server_id = #{serverId}</if>
+        <if test="createTimeStart != null and createTimeStart != ''">and date_format(d.create_time,'%Y-%m-%d') &gt;=
+            #{createTimeStart}
+        </if>
+        <if test="createTimeEnd != null and createTimeEnd != ''">and date_format(d.create_time,'%Y-%m-%d') &lt;=
+            #{createTimeEnd}
+        </if>
+        <if test="rechargeWay != null and rechargeWay != ''">and d.recharge_way = #{rechargeWay}</if>
+        <if test="payStatus != null and payStatus != ''">and d.pay_status = #{payStatus}</if>
+        <if test="dateStart != null and dateStart != ''">and date_format(d.pay_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(d.pay_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+        <if test="channelId != null and channelId != ''">and d.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="orderType != null and orderType != '' and orderType != 'null'">and d.order_type = #{orderType}</if>
+        <if test="developers != null and developers != ''">and d.developers like CONCAT(CONCAT('%',#{developers}),'%')
+        </if>
+        <if test="paymentOrderNo != null and paymentOrderNo != ''">and d.payment_orderno like
+            CONCAT(CONCAT('%',#{paymentOrderNo}),'%')
+        </if>
+        <if test="tradeNo != null and tradeNo != ''">and d.trade_no like CONCAT(CONCAT('%',#{tradeNo}),'%')</if>
+        <if test="countryId != null and countryId != ''">and c.id = #{countryId}</if>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="payTimeOrder == 1">
+                d.pay_time is null, d.pay_time desc ,
+            </if>
+            <if test="payTimeOrder == 2">
+                d.pay_time is null, d.pay_time asc ,
+            </if>
+            <if test="createTimeOrder == 1">
+                d.create_time is null, d.create_time desc ,
+            </if>
+            <if test="createTimeOrder == 2">
+                d.create_time is null, d.create_time asc ,
+            </if>
+            <if test="amountOrder == 1">
+                d.amount is null, d.amount desc ,
+            </if>
+            <if test="amountOrder == 2">
+                d.pay_time is null, d.pay_time is null, d.amount asc ,
+            </if>
+            <if test="noOrder == 1">
+                d.orderno is null, d.orderno desc
+            </if>
+            <if test="noOrder == 2">
+                d.orderno is null, d.orderno asc
+            </if>
+        </trim>
+    </select>
+
+    <!-- 统计合格会员订单信息 -->
+    <select id="countQlfMemberData" resultType="int" parameterType="map">
+        select
+        count(*) count
+        from gp_view_order_detail d
+        where 1=1
+        and exists(
+        select qm.user_id
+        from tbl_dw_member_qual_list_mon qm
+        where qm.partner_user_id = #{partnerUserId}
+        and date_format(qm.month_id,'%Y-%m') = #{monthId}
+        and qm.game_type_id= #{gameTypeId}
+        and qm.user_id = d.user_id
+        )
+        and exists(
+        select gt.game_id
+        from tbl_dim_game_type_con gt
+        where gt.game_type_id = #{gameTypeId}
+        and gt.game_id = d.platform_id
+        )
+        <if test="orderNo != null and orderNo != ''">and d.orderno like CONCAT(CONCAT('%',#{orderNo}),'%')</if>
+        <if test="user != nulll and user != ''">and (d.user_id like CONCAT(CONCAT('%',#{user}),'%') or d.nickname like
+            CONCAT(CONCAT('%',#{user}),'%'))
+        </if>
+        <if test="amountStart != null and amountStart != ''">and d.amount &gt;= #{amountStart}</if>
+        <if test="amountEnd != null and amountEnd != ''">and d.amount &lt;= #{amountEnd}</if>
+        <if test="platformId != null and platformId != ''">and d.platform_id = #{platformId}</if>
+        <if test="serverId != null and serverId != ''">and d.server_id = #{serverId}</if>
+        <if test="createTimeStart != null and createTimeStart != ''">and date_format(d.create_time,'%Y-%m-%d') &gt;=
+            #{createTimeStart}
+        </if>
+        <if test="createTimeEnd != null and createTimeEnd != ''">and date_format(d.create_time,'%Y-%m-%d') &lt;=
+            #{createTimeEnd}
+        </if>
+        <if test="rechargeWay != null and rechargeWay != ''">and d.recharge_way = #{rechargeWay}</if>
+        <if test="payStatus != null and payStatus != ''">and d.pay_status = #{payStatus}</if>
+        <if test="dateStart != null and dateStart != ''">and date_format(d.pay_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(d.pay_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+        <if test="channelId != null and channelId != ''">and d.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="orderType != null and orderType != '' and orderType != 'null'">and d.order_type = #{orderType}</if>
+    </select>
 </mapper>

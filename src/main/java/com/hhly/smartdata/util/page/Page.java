@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
-public class Page {
+public class Page{
     private static final Logger logger = LoggerFactory.getLogger(Page.class);
 
     public static Integer DEFAULT_PAGESIZE = 20;
@@ -26,7 +26,7 @@ public class Page {
     private String searchUrl;                      //Url地址
     private String pageNoDisp;                     //可以显示的页号(分隔符"|"，总页数变更时更新)
 
-    public Page() {
+    public Page(){
         pageNo = 1;
         pageSize = DEFAULT_PAGESIZE;
         totalRecord = 0;
@@ -36,9 +36,10 @@ public class Page {
         searchUrl = "";
         pageNoDisp = "";
     }
-    public Page(int pageNo,int pageSize){
-        this.pageNo = pageNo>0?pageNo:1;
-        this.pageSize = pageSize>0?pageSize:DEFAULT_PAGESIZE;
+
+    public Page(int pageNo, int pageSize){
+        this.pageNo = pageNo > 0 ? pageNo : 1;
+        this.pageSize = pageSize > 0 ? pageSize : DEFAULT_PAGESIZE;
         totalRecord = 0;
         totalPage = 0;
         params = Maps.newHashMap();
@@ -47,41 +48,16 @@ public class Page {
         pageNoDisp = "";
     }
 
-    public void initParams(HttpServletRequest req){
-        String uri = req.getRequestURI();
-        int pot = uri.indexOf(".do");
-        // 从uri中抽取右侧"/"后字符串作为的acton名 例子中对应的是 "users"
-        searchUrl=uri.substring(0,pot + 3);
-        // 这里是核心代码：遍历 req.getParameterMap() 提取请求参数,要注意数组的情况
-        for (Object key : req.getParameterMap().keySet()) {
-            String[] args = req.getParameterValues(key.toString());
-            if (args.length > 1) {
-                paramLists.put(key.toString(), convertParamArr(args, req));
-            } else {
-                params.put(key.toString(), convertIsoToUtf8(req.getParameter(key.toString()), req));
-            }
-        }
-
-        if (params.get("pageNo") == null) {
-            params.put("pageNo", "1");    // 当前页 缺省值设定
-        } else {
-            pageNo= Integer.parseInt(params.get("pageNo"));
-            // 点击分页标签时的请求 编辑totalRecord 项目（避免重复查询总记录数）
-            totalRecord=Long.parseLong(params.get("totalRecord"));
-        }
-    }
-
-
     /**
      * GET请求时，单个入参的转码处理
      */
-    private static String convertIsoToUtf8(String strIn, HttpServletRequest request) {
-        if (strIn == null || !request.getMethod().equalsIgnoreCase("get")) {
+    private static String convertIsoToUtf8(String strIn, HttpServletRequest request){
+        if(strIn == null || !request.getMethod().equalsIgnoreCase("get")){
             return strIn;
         }
-        try {
+        try{
             return new String(strIn.getBytes("iso-8859-1"), "utf-8");
-        } catch (UnsupportedEncodingException e) {
+        }catch(UnsupportedEncodingException e){
             return strIn;
         }
     }
@@ -90,12 +66,12 @@ public class Page {
      * GET请求时，数组型入参的转码处理
      */
     private static List<String> convertParamArr(String[] param,
-                                                HttpServletRequest request) {
+                                                HttpServletRequest request){
         List<String> list = Lists.newArrayList();
-        if (param != null) {
-            for (String p : param) {
+        if(param != null){
+            for(String p : param){
                 String convertP = convertIsoToUtf8(p, request);
-                if (!list.contains(convertP)) {
+                if(!list.contains(convertP)){
                     list.add(convertP);
                 }
             }
@@ -103,20 +79,44 @@ public class Page {
         return list;
     }
 
+    public void initParams(HttpServletRequest req){
+        String uri = req.getRequestURI();
+        int pot = uri.indexOf(".do");
+        // 从uri中抽取右侧"/"后字符串作为的acton名 例子中对应的是 "users"
+        searchUrl = uri.substring(0, pot + 3);
+        // 这里是核心代码：遍历 req.getParameterMap() 提取请求参数,要注意数组的情况
+        for(Object key : req.getParameterMap().keySet()){
+            String[] args = req.getParameterValues(key.toString());
+            if(args.length > 1){
+                paramLists.put(key.toString(), convertParamArr(args, req));
+            }else{
+                params.put(key.toString(), convertIsoToUtf8(req.getParameter(key.toString()), req));
+            }
+        }
+
+        if(params.get("pageNo") == null){
+            params.put("pageNo", "1");    // 当前页 缺省值设定
+        }else{
+            pageNo = Integer.parseInt(params.get("pageNo"));
+            // 点击分页标签时的请求 编辑totalRecord 项目（避免重复查询总记录数）
+            totalRecord = Long.parseLong(params.get("totalRecord"));
+        }
+    }
+
     /**
      * 查询条件转JSON
      */
-    public String getParaJson() {
+    public String getParaJson(){
         Map<String, Object> map = Maps.newHashMap();
-        for (String key : params.keySet()) {
-            if (params.get(key) != null) {
+        for(String key : params.keySet()){
+            if(params.get(key) != null){
                 map.put(key, params.get(key));
             }
         }
         String json = "";
-        try {
+        try{
             json = JSON.toJSONString(map);
-        } catch (Exception e) {
+        }catch(Exception e){
             logger.error("转换JSON失败", params, e);
         }
         return json;
@@ -125,18 +125,18 @@ public class Page {
     /**
      * 数组查询条件转JSON
      */
-    public String getParaListJson() {
+    public String getParaListJson(){
         Map<String, Object> map = Maps.newHashMap();
-        for (String key : paramLists.keySet()) {
+        for(String key : paramLists.keySet()){
             List<String> lists = paramLists.get(key);
-            if (lists != null && lists.size() > 0) {
+            if(lists != null && lists.size() > 0){
                 map.put(key, lists);
             }
         }
         String json = "";
-        try {
+        try{
             json = JSON.toJSONString(map);
-        } catch (Exception e) {
+        }catch(Exception e){
             logger.error("转换JSON失败", params, e);
         }
         return json;
@@ -145,11 +145,11 @@ public class Page {
     /**
      * 总件数变化时，更新总页数并计算显示样式
      */
-    private void refreshPage() {
+    private void refreshPage(){
         //总页数计算
-        totalPage = (int)(totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize + 1));
+        totalPage = (int) (totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize + 1));
         //防止超出最末页（浏览途中数据被删除的情况）
-        if (pageNo > totalPage && totalPage != 0) {
+        if(pageNo > totalPage && totalPage != 0){
             pageNo = totalPage;
         }
         pageNoDisp = computeDisplayStyleAndPage();
@@ -162,31 +162,31 @@ public class Page {
      * 1,2..5,6,[7],8,9..12,13
      * 1,2..6,7,8,9,10,11,12,[13]
      */
-    private String computeDisplayStyleAndPage() {
+    private String computeDisplayStyleAndPage(){
         List<Integer> pageDisplays = Lists.newArrayList();
-        if (totalPage <= 11) {
-            for (int i = 1; i <= totalPage; i++) {
+        if(totalPage <= 11){
+            for(int i = 1; i <= totalPage; i++){
                 pageDisplays.add(i);
             }
-        } else if (pageNo < 7) {
-            for (int i = 1; i <= 8; i++) {
+        }else if(pageNo < 7){
+            for(int i = 1; i <= 8; i++){
                 pageDisplays.add(i);
             }
             pageDisplays.add(0);// 0 表示 省略部分(下同)
             pageDisplays.add(totalPage - 1);
             pageDisplays.add(totalPage);
-        } else if (pageNo > totalPage - 6) {
+        }else if(pageNo > totalPage - 6){
             pageDisplays.add(1);
             pageDisplays.add(2);
             pageDisplays.add(0);
-            for (int i = totalPage - 7; i <= totalPage; i++) {
+            for(int i = totalPage - 7; i <= totalPage; i++){
                 pageDisplays.add(i);
             }
-        } else {
+        }else{
             pageDisplays.add(1);
             pageDisplays.add(2);
             pageDisplays.add(0);
-            for (int i = pageNo - 2; i <= pageNo + 2; i++) {
+            for(int i = pageNo - 2; i <= pageNo + 2; i++){
                 pageDisplays.add(i);
             }
             pageDisplays.add(0);
@@ -195,68 +195,69 @@ public class Page {
         }
         return Joiner.on("|").join(pageDisplays.toArray());
     }
-    public int getPageNo() {
+
+    public int getPageNo(){
         return pageNo;
     }
 
-    public void setPageNo(int pageNo) {
+    public void setPageNo(int pageNo){
         this.pageNo = pageNo;
     }
 
-    public int getPageSize() {
+    public int getPageSize(){
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(int pageSize){
         this.pageSize = pageSize;
     }
 
-    public long getTotalRecord() {
+    public long getTotalRecord(){
         return totalRecord;
     }
 
-    public void setTotalRecord(long totalRecord) {
+    public void setTotalRecord(long totalRecord){
         this.totalRecord = totalRecord;
         refreshPage();
     }
 
-    public int getTotalPage() {
+    public int getTotalPage(){
         return totalPage;
     }
 
-    public void setTotalPage(int totalPage) {
+    public void setTotalPage(int totalPage){
         this.totalPage = totalPage;
     }
 
-    public Map<String, String> getParams() {
+    public Map<String, String> getParams(){
         return params;
     }
 
-    public void setParams(Map<String, String> params) {
+    public void setParams(Map<String, String> params){
         this.params = params;
     }
 
-    public Map<String, List<String>> getParamLists() {
+    public Map<String, List<String>> getParamLists(){
         return paramLists;
     }
 
-    public void setParamLists(Map<String, List<String>> paramLists) {
+    public void setParamLists(Map<String, List<String>> paramLists){
         this.paramLists = paramLists;
     }
 
-    public String getSearchUrl() {
+    public String getSearchUrl(){
         return searchUrl;
     }
 
-    public void setSearchUrl(String searchUrl) {
+    public void setSearchUrl(String searchUrl){
         this.searchUrl = searchUrl;
     }
 
-    public String getPageNoDisp() {
+    public String getPageNoDisp(){
         return pageNoDisp;
     }
 
-    public void setPageNoDisp(String pageNoDisp) {
+    public void setPageNoDisp(String pageNoDisp){
         this.pageNoDisp = pageNoDisp;
     }
 }

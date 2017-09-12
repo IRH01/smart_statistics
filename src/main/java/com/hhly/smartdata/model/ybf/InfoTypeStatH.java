@@ -3,88 +3,87 @@ package com.hhly.smartdata.model.ybf;
 import java.util.Date;
 
 //资讯类别时段统计表
-public class InfoTypeStatH {
-	
-	private Date etlDate;
-	
-	private String domainId;
-	
-	private String infoTypeId;
-	
-	private long clickCnt;
-	
-	private long stayCnt;
-	
-	private long ipCnt;
-	
-	private Date createdDate;
-	
-	private Date updateDate;
+public class InfoTypeStatH{
 
-	public Date getEtlDate() {
-		return etlDate;
-	}
+    private Date etlDate;
 
-	public void setEtlDate(Date etlDate) {
-		this.etlDate = etlDate;
-	}
+    private String domainId;
 
-	public String getDomainId() {
-		return domainId;
-	}
+    private String infoTypeId;
 
-	public void setDomainId(String domainId) {
-		this.domainId = domainId;
-	}
+    private long clickCnt;
 
-	public String getInfoTypeId() {
-		return infoTypeId;
-	}
+    private long stayCnt;
 
-	public void setInfoTypeId(String infoTypeId) {
-		this.infoTypeId = infoTypeId;
-	}
+    private long ipCnt;
 
-	public long getClickCnt() {
-		return clickCnt;
-	}
+    private Date createdDate;
 
-	public void setClickCnt(long clickCnt) {
-		this.clickCnt = clickCnt;
-	}
+    private Date updateDate;
 
-	public long getStayCnt() {
-		return stayCnt;
-	}
+    public Date getEtlDate(){
+        return etlDate;
+    }
 
-	public void setStayCnt(long stayCnt) {
-		this.stayCnt = stayCnt;
-	}
+    public void setEtlDate(Date etlDate){
+        this.etlDate = etlDate;
+    }
 
-	public long getIpCnt() {
-		return ipCnt;
-	}
+    public String getDomainId(){
+        return domainId;
+    }
 
-	public void setIpCnt(long ipCnt) {
-		this.ipCnt = ipCnt;
-	}
+    public void setDomainId(String domainId){
+        this.domainId = domainId;
+    }
 
-	public Date getCreatedDate() {
-		return createdDate;
-	}
+    public String getInfoTypeId(){
+        return infoTypeId;
+    }
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
+    public void setInfoTypeId(String infoTypeId){
+        this.infoTypeId = infoTypeId;
+    }
 
-	public Date getUpdateDate() {
-		return updateDate;
-	}
+    public long getClickCnt(){
+        return clickCnt;
+    }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
-	
-	
+    public void setClickCnt(long clickCnt){
+        this.clickCnt = clickCnt;
+    }
+
+    public long getStayCnt(){
+        return stayCnt;
+    }
+
+    public void setStayCnt(long stayCnt){
+        this.stayCnt = stayCnt;
+    }
+
+    public long getIpCnt(){
+        return ipCnt;
+    }
+
+    public void setIpCnt(long ipCnt){
+        this.ipCnt = ipCnt;
+    }
+
+    public Date getCreatedDate(){
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate){
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdateDate(){
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate){
+        this.updateDate = updateDate;
+    }
+
 
 }

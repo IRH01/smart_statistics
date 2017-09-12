@@ -1,7 +1,6 @@
 package com.hhly.smartdata.mapper.authentication;
 
 import com.hhly.smartdata.model.authentication.Menu;
-
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public class MenuRepository extends BaseRepository{
     }
 
     public int delById(Integer id){
-        return template.delete("baseMenu.delById",id);
+        return template.delete("baseMenu.delById", id);
     }
 
     public List<Menu> getMenuByPerms(List<String> permIds){
@@ -22,7 +21,7 @@ public class MenuRepository extends BaseRepository{
     }
 
     public int insert(Menu record){
-        return template.insert("baseMenu.insert",record);
+        return template.insert("baseMenu.insert", record);
     }
 
     public List<Menu> searchMenu(Menu condition){

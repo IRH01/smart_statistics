@@ -2,10 +2,10 @@ package com.hhly.smartdata.controller.authentication;
 
 import com.google.code.kaptcha.Producer;
 import com.google.common.collect.Maps;
-import com.hhly.smartdata.model.authentication.User;
-import com.hhly.smartdata.service.authentication.UserService;
 import com.hhly.smartdata.constant.SysConstant;
 import com.hhly.smartdata.exception.IncorrectCaptchaException;
+import com.hhly.smartdata.model.authentication.User;
+import com.hhly.smartdata.service.authentication.UserService;
 import com.hhly.smartdata.util.DateUtil;
 import com.hhly.smartdata.util.SecurityUtil;
 import com.hhly.smartdata.util.SessionUtil;

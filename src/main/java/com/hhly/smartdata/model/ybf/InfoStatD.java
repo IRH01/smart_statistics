@@ -4,95 +4,95 @@ import java.util.Date;
 
 
 //资讯统计
-public class InfoStatD {
-   
-	private Date etlDate;
-	
-	private String domainId;
-	
-	private String infoId;
-	
-	private String infoTypeId;
-	
-	private long clickCnt;
-	
-	private long stayCnt;
-	
-	private long ipCnt;
-	
-	private Date createdDate;
-	
-	private Date updatedDate;
+public class InfoStatD{
 
-	public Date getEtlDate() {
-		return etlDate;
-	}
+    private Date etlDate;
 
-	public void setEtlDate(Date etlDate) {
-		this.etlDate = etlDate;
-	}
+    private String domainId;
 
-	public String getDomainId() {
-		return domainId;
-	}
+    private String infoId;
 
-	public void setDomainId(String domainId) {
-		this.domainId = domainId;
-	}
+    private String infoTypeId;
 
-	public String getInfoId() {
-		return infoId;
-	}
+    private long clickCnt;
 
-	public void setInfoId(String infoId) {
-		this.infoId = infoId;
-	}
+    private long stayCnt;
 
-	public String getInfoTypeId() {
-		return infoTypeId;
-	}
+    private long ipCnt;
 
-	public void setInfoTypeId(String infoTypeId) {
-		this.infoTypeId = infoTypeId;
-	}
+    private Date createdDate;
 
-	public long getClickCnt() {
-		return clickCnt;
-	}
+    private Date updatedDate;
 
-	public void setClickCnt(long clickCnt) {
-		this.clickCnt = clickCnt;
-	}
+    public Date getEtlDate(){
+        return etlDate;
+    }
 
-	public long getStayCnt() {
-		return stayCnt;
-	}
+    public void setEtlDate(Date etlDate){
+        this.etlDate = etlDate;
+    }
 
-	public void setStayCnt(long stayCnt) {
-		this.stayCnt = stayCnt;
-	}
+    public String getDomainId(){
+        return domainId;
+    }
 
-	public long getIpCnt() {
-		return ipCnt;
-	}
+    public void setDomainId(String domainId){
+        this.domainId = domainId;
+    }
 
-	public void setIpCnt(long ipCnt) {
-		this.ipCnt = ipCnt;
-	}
+    public String getInfoId(){
+        return infoId;
+    }
 
-	public Date getCreatedDate() {
-		return createdDate;
-	}
+    public void setInfoId(String infoId){
+        this.infoId = infoId;
+    }
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
+    public String getInfoTypeId(){
+        return infoTypeId;
+    }
 
-	public Date getUpdatedDate() {
-		return updatedDate;
-	}
+    public void setInfoTypeId(String infoTypeId){
+        this.infoTypeId = infoTypeId;
+    }
 
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
-	}
+    public long getClickCnt(){
+        return clickCnt;
+    }
+
+    public void setClickCnt(long clickCnt){
+        this.clickCnt = clickCnt;
+    }
+
+    public long getStayCnt(){
+        return stayCnt;
+    }
+
+    public void setStayCnt(long stayCnt){
+        this.stayCnt = stayCnt;
+    }
+
+    public long getIpCnt(){
+        return ipCnt;
+    }
+
+    public void setIpCnt(long ipCnt){
+        this.ipCnt = ipCnt;
+    }
+
+    public Date getCreatedDate(){
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate){
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate(){
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate){
+        this.updatedDate = updatedDate;
+    }
 }

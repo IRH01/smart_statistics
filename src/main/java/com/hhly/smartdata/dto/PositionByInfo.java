@@ -1,76 +1,76 @@
 package com.hhly.smartdata.dto;
 
-public class PositionByInfo {
-    
-	private String infoId;
-	
-	private String positionId;
-	
-	private String domainId;
-	
-	private String positionName;
-	
-	private long clickCnt;
-	
-	private long stayCnt;
-	
-	private long ipCnt;
+public class PositionByInfo{
 
-	public String getInfoId() {
-		return infoId;
-	}
+    private String infoId;
 
-	public void setInfoId(String infoId) {
-		this.infoId = infoId;
-	}
+    private String positionId;
 
-	public String getPositionId() {
-		return positionId;
-	}
+    private String domainId;
 
-	public void setPositionId(String positionId) {
-		this.positionId = positionId;
-	}
+    private String positionName;
 
-	public String getPositionName() {
-		return positionName;
-	}
+    private long clickCnt;
 
-	public void setPositionName(String positionName) {
-		this.positionName = positionName;
-	}
+    private long stayCnt;
 
-	public long getClickCnt() {
-		return clickCnt;
-	}
+    private long ipCnt;
 
-	public void setClickCnt(long clickCnt) {
-		this.clickCnt = clickCnt;
-	}
+    public String getInfoId(){
+        return infoId;
+    }
 
-	public long getStayCnt() {
-		return stayCnt;
-	}
+    public void setInfoId(String infoId){
+        this.infoId = infoId;
+    }
 
-	public void setStayCnt(long stayCnt) {
-		this.stayCnt = stayCnt;
-	}
+    public String getPositionId(){
+        return positionId;
+    }
 
-	public long getIpCnt() {
-		return ipCnt;
-	}
+    public void setPositionId(String positionId){
+        this.positionId = positionId;
+    }
 
-	public void setIpCnt(long ipCnt) {
-		this.ipCnt = ipCnt;
-	}
+    public String getPositionName(){
+        return positionName;
+    }
 
-	public String getDomainId() {
-		return domainId;
-	}
+    public void setPositionName(String positionName){
+        this.positionName = positionName;
+    }
 
-	public void setDomainId(String domainId) {
-		this.domainId = domainId;
-	}
-	
-	
+    public long getClickCnt(){
+        return clickCnt;
+    }
+
+    public void setClickCnt(long clickCnt){
+        this.clickCnt = clickCnt;
+    }
+
+    public long getStayCnt(){
+        return stayCnt;
+    }
+
+    public void setStayCnt(long stayCnt){
+        this.stayCnt = stayCnt;
+    }
+
+    public long getIpCnt(){
+        return ipCnt;
+    }
+
+    public void setIpCnt(long ipCnt){
+        this.ipCnt = ipCnt;
+    }
+
+    public String getDomainId(){
+        return domainId;
+    }
+
+    public void setDomainId(String domainId){
+        this.domainId = domainId;
+    }
+
+
 }

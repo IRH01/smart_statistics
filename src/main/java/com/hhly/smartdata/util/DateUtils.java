@@ -4,19 +4,12 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * Description:日期时间操作的工具类
- *
- * 
  */
-public class DateUtils {
+public class DateUtils{
     /**
      * 日期格式(yyyy-MM-dd)
      */
@@ -74,9 +67,9 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static DateFormat getDateFormat(String formatStr) {
+    public static DateFormat getDateFormat(String formatStr){
         DateFormat df = dateFormatMap.get(formatStr);
-        if (df == null) {
+        if(df == null){
             df = new SimpleDateFormat(formatStr);
             dateFormatMap.put(formatStr, df);
         }
@@ -90,14 +83,14 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static Date getDate(String dateTimeStr, String formatStr) {
-        try {
-            if (dateTimeStr == null || dateTimeStr.equals("")) {
+    public static Date getDate(String dateTimeStr, String formatStr){
+        try{
+            if(dateTimeStr == null || dateTimeStr.equals("")){
                 return null;
             }
             DateFormat sdf = DateUtils.getDateFormat(formatStr);
             return sdf.parse(dateTimeStr);
-        } catch (ParseException e) {
+        }catch(ParseException e){
             throw new RuntimeException(e);
         }
     }
@@ -109,14 +102,14 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static Date convertDate(String dateTimeStr) {
-        try {
-            if (dateTimeStr == null || dateTimeStr.equals("")) {
+    public static Date convertDate(String dateTimeStr){
+        try{
+            if(dateTimeStr == null || dateTimeStr.equals("")){
                 return null;
             }
             DateFormat sdf = DateUtils.getDateFormat(yyyy_MM_dd_HH_mm_ss_EN);
             return sdf.parse(dateTimeStr);
-        } catch (ParseException e) {
+        }catch(ParseException e){
             throw new RuntimeException(e);
         }
     }
@@ -128,7 +121,7 @@ public class DateUtils {
      * @param dateTimeStr
      * @return
      */
-    public static Date getDate(String dateTimeStr) {
+    public static Date getDate(String dateTimeStr){
         return getDate(dateTimeStr, yyyy_MM_dd_EN);
     }
 
@@ -139,11 +132,11 @@ public class DateUtils {
      * @return
      * @throws BusinessException
      */
-    public static Date transferDate(String date) throws Exception {
-        if (date == null || date.length() < 1)
+    public static Date transferDate(String date) throws Exception{
+        if(date == null || date.length() < 1)
             return null;
 
-        if (date.length() != 8)
+        if(date.length() != 8)
             throw new Exception("日期格式错误");
         String con = "-";
 
@@ -153,7 +146,7 @@ public class DateUtils {
 
         int month = Integer.parseInt(mm);
         int day = Integer.parseInt(dd);
-        if (month < 1 || month > 12 || day < 1 || day > 31)
+        if(month < 1 || month > 12 || day < 1 || day > 31)
             throw new Exception("日期格式错误");
 
         String str = yyyy + con + mm + con + dd;
@@ -166,7 +159,7 @@ public class DateUtils {
      * @param date
      * @return
      */
-    public static String dateToDateString(Date date) {
+    public static String dateToDateString(Date date){
         return dateToDateString(date, yyyy_MM_dd_HH_mm_ss_EN);
     }
 
@@ -177,7 +170,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static String dateToDateString(Date date, String formatStr) {
+    public static String dateToDateString(Date date, String formatStr){
         DateFormat df = getDateFormat(formatStr);
         return df.format(date);
     }
@@ -190,7 +183,7 @@ public class DateUtils {
      * @param formatStr2
      * @return
      */
-    public static String stringToDateString(String date, String formatStr1, String formatStr2) {
+    public static String stringToDateString(String date, String formatStr1, String formatStr2){
         Date d = getDate(date, formatStr1);
         DateFormat df = getDateFormat(formatStr2);
 
@@ -202,7 +195,7 @@ public class DateUtils {
      *
      * @return
      */
-    public static String getCurDate() {
+    public static String getCurDate(){
         return dateToDateString(new Date(), yyyy_MM_dd_EN);
     }
 
@@ -211,7 +204,7 @@ public class DateUtils {
      *
      * @return
      */
-    public static String getCurCNDate() {
+    public static String getCurCNDate(){
         return dateToDateString(new Date(), yyyy_MM_dd_CN);
     }
 
@@ -220,7 +213,7 @@ public class DateUtils {
      *
      * @return
      */
-    public static String getCurDateTime() {
+    public static String getCurDateTime(){
         return dateToDateString(new Date(), yyyy_MM_dd_HH_mm_ss_EN);
     }
 
@@ -229,7 +222,7 @@ public class DateUtils {
      *
      * @return
      */
-    public static String getCurZhCNDateTime() {
+    public static String getCurZhCNDateTime(){
         return dateToDateString(new Date(), yyyy_MM_dd_HH_mm_ss_CN);
     }
 
@@ -238,7 +231,7 @@ public class DateUtils {
      *
      * @return
      */
-    public static String getCurENDateTime() {
+    public static String getCurENDateTime(){
         return dateToDateString(new Date(), yyyyMMddHHmmss_EN);
     }
 
@@ -249,7 +242,7 @@ public class DateUtils {
      * @param time2
      * @return
      */
-    public static long compareDateStr(String time1, String time2) {
+    public static long compareDateStr(String time1, String time2){
         Date d1 = getDate(time1);
         Date d2 = getDate(time2);
         return d2.getTime() - d1.getTime();
@@ -261,7 +254,7 @@ public class DateUtils {
      * @param hours
      * @return
      */
-    public static long getMicroSec(BigDecimal hours) {
+    public static long getMicroSec(BigDecimal hours){
         BigDecimal bd;
         bd = hours.multiply(new BigDecimal(3600 * 1000));
         return bd.longValue();
@@ -274,7 +267,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static String getDateStringOfYear(int years, String formatStr) {
+    public static String getDateStringOfYear(int years, String formatStr){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(new Date());
         now.add(Calendar.YEAR, years);
@@ -288,7 +281,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static String getDateStringOfMon(int months, String formatStr) {
+    public static String getDateStringOfMon(int months, String formatStr){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(new Date());
         now.add(Calendar.MONTH, months);
@@ -302,7 +295,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static String getDateStringOfDay(int days, String formatStr) {
+    public static String getDateStringOfDay(int days, String formatStr){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(new Date());
         now.add(Calendar.DATE, days);
@@ -316,7 +309,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static String getDateStringOfHour(int hours, String formatStr) {
+    public static String getDateStringOfHour(int hours, String formatStr){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(new Date());
         now.add(Calendar.HOUR_OF_DAY, hours);
@@ -331,7 +324,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static String getDateOfMon(String date, int mon, String formatStr) {
+    public static String getDateOfMon(String date, int mon, String formatStr){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(DateUtils.getDate(date, formatStr));
         now.add(Calendar.MONTH, mon);
@@ -346,7 +339,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static String getDateOfDay(String date, int day, String formatStr) {
+    public static String getDateOfDay(String date, int day, String formatStr){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(DateUtils.getDate(date, formatStr));
         now.add(Calendar.DATE, day);
@@ -361,7 +354,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static String getDateOfMin(String date, int mins, String formatStr) {
+    public static String getDateOfMin(String date, int mins, String formatStr){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(DateUtils.getDate(date, formatStr));
         now.add(Calendar.SECOND, mins * 60);
@@ -376,7 +369,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static Date getDateOfMin(Date date, int mins) {
+    public static Date getDateOfMin(Date date, int mins){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(date);
         now.add(Calendar.SECOND, mins * 60);
@@ -390,7 +383,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static String getDateStringOfMin(int mins, String formatStr) {
+    public static String getDateStringOfMin(int mins, String formatStr){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(new Date());
         now.add(Calendar.MINUTE, mins);
@@ -403,7 +396,7 @@ public class DateUtils {
      * @param mins
      * @return
      */
-    public static Date getDateOfMin(int mins) {
+    public static Date getDateOfMin(int mins){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(new Date());
         now.add(Calendar.MINUTE, mins);
@@ -417,7 +410,7 @@ public class DateUtils {
      * @param formatStr
      * @return
      */
-    public static String getDateStringOfSec(int sec, String formatStr) {
+    public static String getDateStringOfSec(int sec, String formatStr){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(new Date());
         now.add(Calendar.SECOND, sec);
@@ -429,7 +422,7 @@ public class DateUtils {
      *
      * @return
      */
-    public static int getMonthDay(Date date) {
+    public static int getMonthDay(Date date){
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         return c.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -441,7 +434,7 @@ public class DateUtils {
      *
      * @return
      */
-    public static int getCurentMonthDay() {
+    public static int getCurentMonthDay(){
         Date date = Calendar.getInstance().getTime();
         return getMonthDay(date);
     }
@@ -451,7 +444,7 @@ public class DateUtils {
      *
      * @return
      */
-    public static int getMonthDay(String date) {
+    public static int getMonthDay(String date){
         Date strDate = getDate(date, yyyy_MM_dd_EN);
         return getMonthDay(strDate);
     }
@@ -462,7 +455,7 @@ public class DateUtils {
      * @param d
      * @return
      */
-    public static int getYear(Date d) {
+    public static int getYear(Date d){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(d);
         return now.get(Calendar.YEAR);
@@ -474,7 +467,7 @@ public class DateUtils {
      * @param d
      * @return
      */
-    public static int getMonth(Date d) {
+    public static int getMonth(Date d){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(d);
         return now.get(Calendar.MONTH) + 1;
@@ -486,7 +479,7 @@ public class DateUtils {
      * @param d
      * @return
      */
-    public static int getDay(Date d) {
+    public static int getDay(Date d){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(d);
         return now.get(Calendar.DAY_OF_MONTH);
@@ -498,7 +491,7 @@ public class DateUtils {
      * @param d
      * @return
      */
-    public static int getHour(Date d) {
+    public static int getHour(Date d){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(d);
         return now.get(Calendar.HOUR_OF_DAY);
@@ -510,7 +503,7 @@ public class DateUtils {
      * @param d
      * @return
      */
-    public static int getMin(Date d) {
+    public static int getMin(Date d){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(d);
         return now.get(Calendar.MINUTE);
@@ -522,7 +515,7 @@ public class DateUtils {
      * @param d
      * @return
      */
-    public static int getSecond(Date d) {
+    public static int getSecond(Date d){
         Calendar now = Calendar.getInstance(TimeZone.getDefault());
         now.setTime(d);
         return now.get(Calendar.SECOND);
@@ -533,10 +526,10 @@ public class DateUtils {
      *
      * @return yyyy-MM-dd
      */
-    public static String getMondayOfThisWeek() {
+    public static String getMondayOfThisWeek(){
         Calendar c = Calendar.getInstance();
         int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
-        if (day_of_week == 0)
+        if(day_of_week == 0)
             day_of_week = 7;
         c.add(Calendar.DATE, -day_of_week + 1);
         return dateToDateString(c.getTime(), yyyy_MM_dd_EN);
@@ -547,10 +540,10 @@ public class DateUtils {
      *
      * @return yyyy-MM-dd
      */
-    public static String getSundayOfThisWeek() {
+    public static String getSundayOfThisWeek(){
         Calendar c = Calendar.getInstance();
         int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
-        if (day_of_week == 0)
+        if(day_of_week == 0)
             day_of_week = 7;
         c.add(Calendar.DATE, -day_of_week + 7);
         return dateToDateString(c.getTime(), yyyy_MM_dd_EN);
@@ -561,10 +554,10 @@ public class DateUtils {
      *
      * @return yyyy-MM-dd
      */
-    public static String getDayOfThisWeek(int num) {
+    public static String getDayOfThisWeek(int num){
         Calendar c = Calendar.getInstance();
         int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
-        if (day_of_week == 0)
+        if(day_of_week == 0)
             day_of_week = 7;
         c.add(Calendar.DATE, -day_of_week + num);
         return dateToDateString(c.getTime(), yyyy_MM_dd_EN);
@@ -575,7 +568,7 @@ public class DateUtils {
      *
      * @return yyyy-MM-dd
      */
-    public static String getDayOfThisMoon(String num) {
+    public static String getDayOfThisMoon(String num){
         String date = dateToDateString(new Date(), yyyy_MM_EN);
         date = date + "-" + num;
         return date;
@@ -586,7 +579,7 @@ public class DateUtils {
      *
      * @return yyyy-MM-dd
      */
-    public static String getWeek(Date date) {
+    public static String getWeek(Date date){
         return String.format(Locale.ENGLISH, "%ta", date);
     }
 
@@ -597,13 +590,13 @@ public class DateUtils {
      * @param time2
      * @return
      */
-    public static long compareDateStr1(String time1, String time2) {
+    public static long compareDateStr1(String time1, String time2){
         Date d1 = getDate1(time1);
         Date d2 = getDate1(time2);
         return d2.getTime() - d1.getTime();
     }
 
-    public static Date getDate1(String dateTimeStr) {
+    public static Date getDate1(String dateTimeStr){
         return getDate(dateTimeStr, yyyy_MM_dd_HH_mm_ss_EN);
     }
 

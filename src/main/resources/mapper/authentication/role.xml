@@ -1,190 +1,191 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="baseRole">
-	<resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Role">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="name" property="name" jdbcType="VARCHAR" />
-		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-	</resultMap>
+    <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Role">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		id, name, create_time
-	</sql>
+    <sql id="Base_Column_List">
+        id, name, create_time
+    </sql>
 
-	<sql id="where_condition">
-		<where>
-				and id!='43'
-			<if test="name != null and name != '' ">
-				and name like #{name , jdbcType=VARCHAR}
-			</if>
-			<if test="id  != null ">
-				and id = #{id , jdbcType=INTEGER}
-			</if>
+    <sql id="where_condition">
+        <where>
+            and id!='43'
+            <if test="name != null and name != '' ">
+                and name like #{name , jdbcType=VARCHAR}
+            </if>
+            <if test="id  != null ">
+                and id = #{id , jdbcType=INTEGER}
+            </if>
 
-		</where>
-	</sql>
-
-
-	<select id="getRolesByUserId" resultMap="BaseResultMap"
-		parameterType="integer">
-		select
-		r.id,r.name,r.create_time
-		from tbl_role r join tbl_user_role u on r.id=u.role_id
-		where u.user_id=#{userId}
-	</select>
-
-	<select id="getChannelRole" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from tbl_role
-		where name=#{name}
-	</select>
-
-	<select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from tbl_role
-		where id = #{id}
-	</select>
-
-	<select id="search" resultMap="BaseResultMap"
-		parameterType="com.hhly.smartdata.model.authentication.Role">
-		select
-		<include refid="Base_Column_List" />
-		from tbl_role
-		<include refid="where_condition" />
-	</select>
-
-	<select id="getPerms" resultType="java.lang.String"
-		parameterType="list">
-		SELECT
-		permission
-		FROM
-		tbl_role_permission
-		WHERE role_id in
-		<foreach collection="list" item="id" separator="," open="("
-			close=")">
-			#{id}
-		</foreach>
-	</select>
-	<delete id="delete" parameterType="java.lang.Integer">
-		delete from tbl_role
-		where id = #{id}
-	</delete>
-
-	<delete id="delPermsByRole" parameterType="list">
-		delete
-		from
-		tbl_role_permission
-		where
-		role_id in
-		<foreach collection="list" item="id" separator="," open="("
-			close=")">
-			#{id}
-		</foreach>
-	</delete>
+        </where>
+    </sql>
 
 
-	<delete id="delUsersByRole" parameterType="list">
-		delete
-		from
-		tbl_user_role
-		where
-		role_id in
-		<foreach collection="list" item="id" separator="," open="("
-			close=")">
-			#{id}
-		</foreach>
+    <select id="getRolesByUserId" resultMap="BaseResultMap"
+            parameterType="integer">
+        select
+        r.id,r.name,r.create_time
+        from tbl_role r join tbl_user_role u on r.id=u.role_id
+        where u.user_id=#{userId}
+    </select>
 
-	</delete>
+    <select id="getChannelRole" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_role
+        where name=#{name}
+    </select>
 
-	<delete id="delPerm" parameterType="string">
-		delete
-		from
-		tbl_role_permission
-		where
-		permission=#{perm}
-	</delete>
-	<delete id="deleteUserRoles" parameterType="int">
-		delete
-		from
-		tbl_user_role
-		where
-		user_id=#{userId}
-	</delete>
+    <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_role
+        where id = #{id}
+    </select>
 
-	<!-- <insert id="insertRolePermission" parameterType="com.hhly.smartdata.model.authentication.RolePermission" useGeneratedKeys="true" keyProperty="id">
-		<selectKey resultType="int" order="BEFORE" keyProperty="id">
-			SELECT ROLE_PERMISSION_SEQ.NEXTVAL FROM dual
-		</selectKey>
-		insert into tbl_role_permission (id,role_id , permission)
-		values (#{id}, #{roleId} , #{permission} )
-	</insert>
+    <select id="search" resultMap="BaseResultMap"
+            parameterType="com.hhly.smartdata.model.authentication.Role">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_role
+        <include refid="where_condition"/>
+    </select>
 
-	<insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Role"
-		useGeneratedKeys="true" keyProperty="id">
-		<selectKey resultType="int" order="BEFORE" keyProperty="id">
-			SELECT ROLE_SEQ.NEXTVAL FROM dual
-		</selectKey> 
-		insert into tbl_role (id,name, create_time
-		)
-		values (#{id},#{name}, #{createTime}
-		)
-	</insert>
-	<insert id="insertUserRole" parameterType="map"
-		useGeneratedKeys="true" keyProperty="id">
-		<selectKey resultType="int" order="BEFORE" keyProperty="id">
-			SELECT USER_ROLE_SEQ.NEXTVAL FROM dual
-		</selectKey> 
-		INSERT INTO tbl_user_role 
-		(id,
-		 user_id,
-		 role_id)
-		VALUES
-		(#{id},
-		 #{userId}, 
-		 #{roleId})
-	</insert> -->
+    <select id="getPerms" resultType="java.lang.String"
+            parameterType="list">
+        SELECT
+        permission
+        FROM
+        tbl_role_permission
+        WHERE role_id in
+        <foreach collection="list" item="id" separator="," open="("
+                 close=")">
+            #{id}
+        </foreach>
+    </select>
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from tbl_role
+        where id = #{id}
+    </delete>
+
+    <delete id="delPermsByRole" parameterType="list">
+        delete
+        from
+        tbl_role_permission
+        where
+        role_id in
+        <foreach collection="list" item="id" separator="," open="("
+                 close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 
-	<insert id="insertRolePermission" parameterType="com.hhly.smartdata.model.authentication.RolePermission" useGeneratedKeys="true" keyProperty="id">
-		
-		insert into tbl_role_permission (role_id , permission)
-		values (#{roleId} , #{permission} )
-	</insert>
+    <delete id="delUsersByRole" parameterType="list">
+        delete
+        from
+        tbl_user_role
+        where
+        role_id in
+        <foreach collection="list" item="id" separator="," open="("
+                 close=")">
+            #{id}
+        </foreach>
 
-	<insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Role"
-		useGeneratedKeys="true" keyProperty="id">
-		
-		insert into tbl_role (name, create_time
-		)
-		values (#{name}, #{createTime}
-		)
-	</insert>
-	<insert id="insertUserRole" parameterType="map"
-		useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO tbl_user_role 
-		(
-		 user_id,
-		 role_id)
-		VALUES
-		(
-		 #{userId}, 
-		 #{roleId})
-	</insert>
+    </delete>
 
-	<update id="update" parameterType="com.hhly.smartdata.model.authentication.Role">
-		update tbl_role
-		<set>
-			<if test="name != null">
-				name = #{name},
-			</if>
-			<if test="createTime != null">
-				create_time = #{createTime},
-			</if>
-		</set>
-		where id = #{id}
-	</update>
+    <delete id="delPerm" parameterType="string">
+        delete
+        from
+        tbl_role_permission
+        where
+        permission=#{perm}
+    </delete>
+    <delete id="deleteUserRoles" parameterType="int">
+        delete
+        from
+        tbl_user_role
+        where
+        user_id=#{userId}
+    </delete>
+
+    <!-- <insert id="insertRolePermission" parameterType="com.hhly.smartdata.model.authentication.RolePermission" useGeneratedKeys="true" keyProperty="id">
+        <selectKey resultType="int" order="BEFORE" keyProperty="id">
+            SELECT ROLE_PERMISSION_SEQ.NEXTVAL FROM dual
+        </selectKey>
+        insert into tbl_role_permission (id,role_id , permission)
+        values (#{id}, #{roleId} , #{permission} )
+    </insert>
+
+    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Role"
+        useGeneratedKeys="true" keyProperty="id">
+        <selectKey resultType="int" order="BEFORE" keyProperty="id">
+            SELECT ROLE_SEQ.NEXTVAL FROM dual
+        </selectKey>
+        insert into tbl_role (id,name, create_time
+        )
+        values (#{id},#{name}, #{createTime}
+        )
+    </insert>
+    <insert id="insertUserRole" parameterType="map"
+        useGeneratedKeys="true" keyProperty="id">
+        <selectKey resultType="int" order="BEFORE" keyProperty="id">
+            SELECT USER_ROLE_SEQ.NEXTVAL FROM dual
+        </selectKey>
+        INSERT INTO tbl_user_role
+        (id,
+         user_id,
+         role_id)
+        VALUES
+        (#{id},
+         #{userId},
+         #{roleId})
+    </insert> -->
+
+
+    <insert id="insertRolePermission" parameterType="com.hhly.smartdata.model.authentication.RolePermission"
+            useGeneratedKeys="true" keyProperty="id">
+
+        insert into tbl_role_permission (role_id , permission)
+        values (#{roleId} , #{permission} )
+    </insert>
+
+    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Role"
+            useGeneratedKeys="true" keyProperty="id">
+
+        insert into tbl_role (name, create_time
+        )
+        values (#{name}, #{createTime}
+        )
+    </insert>
+    <insert id="insertUserRole" parameterType="map"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_user_role
+        (
+        user_id,
+        role_id)
+        VALUES
+        (
+        #{userId},
+        #{roleId})
+    </insert>
+
+    <update id="update" parameterType="com.hhly.smartdata.model.authentication.Role">
+        update tbl_role
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 
 </mapper>

@@ -3,131 +3,131 @@ package com.hhly.smartdata.dto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class YbfWebStatD {
- 
-	public static final String formatStyle = "yyyy-MM-dd";
+public class YbfWebStatD{
 
-	private String etlDate;
+    public static final String formatStyle = "yyyy-MM-dd";
 
-	private String urlId;
+    private String etlDate;
 
-	private long clickCnt;
+    private String urlId;
 
-	private long userCnt;
+    private long clickCnt;
 
-	private long ipCnt;
+    private long userCnt;
 
-	private long stayCnt;
-	
-	private long avgStayCnt;
+    private long ipCnt;
 
-	private long totalUserCnt;
-	
-	private String urlName;
-	
-	private long viewCnt;
-	
-	private long dayTotalUserCnt;
-	
-	/**
-	 * 累计用户所占百分比
-	 */
-	private double userPercent;
-	
+    private long stayCnt;
 
-	public String getEtlDate() {
-		return etlDate;
-	}
+    private long avgStayCnt;
 
-	public void setEtlDate(Date etlDate) {
-		this.etlDate = new SimpleDateFormat(formatStyle).format(etlDate);
-	}
+    private long totalUserCnt;
 
-	public String getUrlId() {
-		return urlId;
-	}
+    private String urlName;
 
-	public void setUrlId(String urlId) {
-		this.urlId = urlId;
-	}
+    private long viewCnt;
 
-	public long getClickCnt() {
-		return clickCnt;
-	}
+    private long dayTotalUserCnt;
 
-	public void setClickCnt(long clickCnt) {
-		this.clickCnt = clickCnt;
-	}
+    /**
+     * 累计用户所占百分比
+     */
+    private double userPercent;
 
-	public long getUserCnt() {
-		return userCnt;
-	}
 
-	public void setUserCnt(long userCnt) {
-		this.userCnt = userCnt;
-	}
+    public String getEtlDate(){
+        return etlDate;
+    }
 
-	public long getIpCnt() {
-		return ipCnt;
-	}
+    public void setEtlDate(Date etlDate){
+        this.etlDate = new SimpleDateFormat(formatStyle).format(etlDate);
+    }
 
-	public void setIpCnt(long ipCnt) {
-		this.ipCnt = ipCnt;
-	}
+    public String getUrlId(){
+        return urlId;
+    }
 
-	public long getStayCnt() {
-		return stayCnt;
-	}
+    public void setUrlId(String urlId){
+        this.urlId = urlId;
+    }
 
-	public void setStayCnt(long stayCnt) {
-		this.stayCnt = stayCnt;
-	}
+    public long getClickCnt(){
+        return clickCnt;
+    }
 
-	public long getTotalUserCnt() {
-		return totalUserCnt;
-	}
+    public void setClickCnt(long clickCnt){
+        this.clickCnt = clickCnt;
+    }
 
-	public void setTotalUserCnt(long totalUserCnt) {
-		this.totalUserCnt = totalUserCnt;
-	}
+    public long getUserCnt(){
+        return userCnt;
+    }
 
-	public String getUrlName() {
-		return urlName;
-	}
+    public void setUserCnt(long userCnt){
+        this.userCnt = userCnt;
+    }
 
-	public void setUrlName(String urlName) {
-		this.urlName = urlName;
-	}
+    public long getIpCnt(){
+        return ipCnt;
+    }
 
-	public long getAvgStayCnt() {
-		avgStayCnt = 0;
-		if(0 != viewCnt){
-			avgStayCnt = stayCnt / viewCnt;
-		}
-		return avgStayCnt;
-	}
+    public void setIpCnt(long ipCnt){
+        this.ipCnt = ipCnt;
+    }
 
-	public long getViewCnt() {
-		return viewCnt;
-	}
+    public long getStayCnt(){
+        return stayCnt;
+    }
 
-	public void setViewCnt(long viewCnt) {
-		this.viewCnt = viewCnt;
-	}
+    public void setStayCnt(long stayCnt){
+        this.stayCnt = stayCnt;
+    }
 
-	public long getDayTotalUserCnt() {
-		return dayTotalUserCnt;
-	}
+    public long getTotalUserCnt(){
+        return totalUserCnt;
+    }
 
-	public void setDayTotalUserCnt(long dayTotalUserCnt) {
-		this.dayTotalUserCnt = dayTotalUserCnt;
-	}
+    public void setTotalUserCnt(long totalUserCnt){
+        this.totalUserCnt = totalUserCnt;
+    }
 
-	public double getUserPercent() {
-		userPercent = 0;
-		if(0 != totalUserCnt){
-			userPercent = dayTotalUserCnt / (double)totalUserCnt;
-		}
-		return userPercent;
-	}
+    public String getUrlName(){
+        return urlName;
+    }
+
+    public void setUrlName(String urlName){
+        this.urlName = urlName;
+    }
+
+    public long getAvgStayCnt(){
+        avgStayCnt = 0;
+        if(0 != viewCnt){
+            avgStayCnt = stayCnt / viewCnt;
+        }
+        return avgStayCnt;
+    }
+
+    public long getViewCnt(){
+        return viewCnt;
+    }
+
+    public void setViewCnt(long viewCnt){
+        this.viewCnt = viewCnt;
+    }
+
+    public long getDayTotalUserCnt(){
+        return dayTotalUserCnt;
+    }
+
+    public void setDayTotalUserCnt(long dayTotalUserCnt){
+        this.dayTotalUserCnt = dayTotalUserCnt;
+    }
+
+    public double getUserPercent(){
+        userPercent = 0;
+        if(0 != totalUserCnt){
+            userPercent = dayTotalUserCnt / (double) totalUserCnt;
+        }
+        return userPercent;
+    }
 }

@@ -1,6 +1,6 @@
 package com.hhly.smartdata.model.authentication;
 
-public class Function {
+public class Function{
     private Integer id;
 
     private Integer parentId;
@@ -9,35 +9,35 @@ public class Function {
 
     private Integer index;
 
-    public Integer getId() {
+    public Integer getId(){
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Integer id){
         this.id = id;
     }
 
-    public Integer getParentId() {
+    public Integer getParentId(){
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Integer parentId){
         this.parentId = parentId;
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getIndex() {
+    public Integer getIndex(){
         return index;
     }
 
-    public void setIndex(Integer index) {
+    public void setIndex(Integer index){
         this.index = index;
     }
 }

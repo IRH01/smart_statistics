@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="platformInfo">
-	<resultMap type="PlatformInfo" id="PlatformInfoMap">
-		<result property="id" column="id"/>
-		<result property="name" column="name"/>
-		<result property="isGame" column="is_game"/>
-		<result property="platformTerminalName" column="platform_terminal_name"/>
-		<result property="createTime" column="create_time"/>
-		<result property="updateTime" column="update_time"/>
-	</resultMap>
-	
-	<select id="getGamePlatformInfo" resultMap="PlatformInfoMap" parameterType="map">
-		select 
-			p.id,
-			p.name,
-			p.is_game,
-			p.create_time,
-			p.update_time,
-			t.name as platform_terminal_name
-		from gp_tbl_platform_info p
-		left join tbl_gp_plat_terminal_info t
-			on p.platform_terminal = t.id
-		where p.country=#{countryId}
-		<if test="platformTerminal != null and platformTerminal != ''">and p.platform_terminal = #{platformTerminal}</if>
-		<!-- order by nlssort(p.name, 'NLS_SORT=SCHINESE_PINYIN_M') asc -->
-		order by CONVERT( p.name USING gbk ) COLLATE gbk_chinese_ci ASC
-	</select>
+    <resultMap type="PlatformInfo" id="PlatformInfoMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="isGame" column="is_game"/>
+        <result property="platformTerminalName" column="platform_terminal_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="getGamePlatformInfo" resultMap="PlatformInfoMap" parameterType="map">
+        select
+        p.id,
+        p.name,
+        p.is_game,
+        p.create_time,
+        p.update_time,
+        t.name as platform_terminal_name
+        from gp_tbl_platform_info p
+        left join tbl_gp_plat_terminal_info t
+        on p.platform_terminal = t.id
+        where p.country=#{countryId}
+        <if test="platformTerminal != null and platformTerminal != ''">and p.platform_terminal = #{platformTerminal}
+        </if>
+        <!-- order by nlssort(p.name, 'NLS_SORT=SCHINESE_PINYIN_M') asc -->
+        order by CONVERT( p.name USING gbk ) COLLATE gbk_chinese_ci ASC
+    </select>
 </mapper>

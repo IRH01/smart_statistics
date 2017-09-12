@@ -1,7 +1,6 @@
 package com.hhly.smartdata.mapper.authentication;
 
 import com.hhly.smartdata.model.authentication.Permission;
-
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class PermissionRepository extends BaseRepository{
     }
 
     public int insert(Permission record){
-        return template.insert("basePermission.insert",record);
+        return template.insert("basePermission.insert", record);
     }
 
     public Permission get(String permission){

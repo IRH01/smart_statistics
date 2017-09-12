@@ -5,14 +5,14 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class PageUtil {
+public class PageUtil{
     private static ThreadLocal<Page> threadPage = new ThreadLocal<Page>();
 
-    public static Page getPage () {
+    public static Page getPage(){
         return threadPage.get();
     }
 
-    public static Page removePage () {
+    public static Page removePage(){
         Page page = threadPage.get();
         threadPage.set(null);
         return page;
@@ -30,8 +30,8 @@ public class PageUtil {
     /**
      * 开始分页，只能对接下来的一个进行分页
      */
-    public static Page startPage(int pageNo,int pageSize) {
-        Page page = new Page(pageNo,pageSize);
+    public static Page startPage(int pageNo, int pageSize){
+        Page page = new Page(pageNo, pageSize);
         return startPage(page);
     }
 

@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="partnerRefWebsiteSum">
-	<resultMap type="PartnerRefWebsiteSum" id="PartnerRefWebsiteSumMap">
-		<result property="referrerWebsiteUrl" column="referrer_website_url"/>
-		<result property="promoteUrl" column="promote_url"/>
-		<result property="partnerNo" column="partner_no"/>
-		<result property="realName" column="real_name"/>
-		<result property="userId" column="userId"/>
-		<result property="pvCount" column="pv_count"/>
-		<result property="uvCount" column="uv_count"/>
-		<result property="ipCount" column="ip_count"/>
-		<result property="registCount" column="regist_count"/>
-		<result property="payCount" column="pay_count"/>
-		<result property="totalDuration" column="total_duration"/>
-		<result property="accessTimes" column="access_times"/>
-		<result property="onePageAccessTimes" column="one_page_access_times"/>
-	</resultMap>
-	
-	<select id="find" resultMap="PartnerRefWebsiteSumMap" parameterType="map">
-		select 
-			h.*,
-			a.user_id,
-			a.partner_no,
-			a.real_name
-		from
-		(
-			select
-				referrer_website_url,
-				promote_url,
-				promote_code,
-				sum(pv_count) as pv_count,
-				sum(uv_count) as uv_count,
-				sum(ip_count) as ip_count,
-				sum(regist_count) as regist_count,
-				sum(pay_count) as pay_count,
-				sum(total_duration) as total_duration,
-				sum(access_times) as access_times,
-				sum(one_page_access_times) as one_page_access_times
-			from tbl_gp_partner_refsite_hourly 
-			where 1=1
-				<if test="dateStart != null and dateStart != ''">and date_format(stat_hour,'%Y-%m-%d') &gt;= #{dateStart} </if>
-				<if test="dateEnd != null and dateEnd != ''">and date_format(stat_hour,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-			group by referrer_website_url,promote_url,promote_code
-		)h
-		join tbl_gp_partner_account a
-			on h.promote_code = a.partner_no 
-		where 1=1
-			<if test="userId != null and userId != ''">and a.user_id like '%'||#{userId}||'%' </if>
-			<if test="name != null and name != ''">and a.real_name like '%'||#{name}||'%' </if>
-		<if test="1 == order and orderField != null and orderField != ''">
-			order by ${orderField} desc
-		</if>
-		<if test="2 == order and orderField != null and orderField != ''">
-			order by ${orderField} asc
-		</if>
-	</select>
+    <resultMap type="PartnerRefWebsiteSum" id="PartnerRefWebsiteSumMap">
+        <result property="referrerWebsiteUrl" column="referrer_website_url"/>
+        <result property="promoteUrl" column="promote_url"/>
+        <result property="partnerNo" column="partner_no"/>
+        <result property="realName" column="real_name"/>
+        <result property="userId" column="userId"/>
+        <result property="pvCount" column="pv_count"/>
+        <result property="uvCount" column="uv_count"/>
+        <result property="ipCount" column="ip_count"/>
+        <result property="registCount" column="regist_count"/>
+        <result property="payCount" column="pay_count"/>
+        <result property="totalDuration" column="total_duration"/>
+        <result property="accessTimes" column="access_times"/>
+        <result property="onePageAccessTimes" column="one_page_access_times"/>
+    </resultMap>
+
+    <select id="find" resultMap="PartnerRefWebsiteSumMap" parameterType="map">
+        select
+        h.*,
+        a.user_id,
+        a.partner_no,
+        a.real_name
+        from
+        (
+        select
+        referrer_website_url,
+        promote_url,
+        promote_code,
+        sum(pv_count) as pv_count,
+        sum(uv_count) as uv_count,
+        sum(ip_count) as ip_count,
+        sum(regist_count) as regist_count,
+        sum(pay_count) as pay_count,
+        sum(total_duration) as total_duration,
+        sum(access_times) as access_times,
+        sum(one_page_access_times) as one_page_access_times
+        from tbl_gp_partner_refsite_hourly
+        where 1=1
+        <if test="dateStart != null and dateStart != ''">and date_format(stat_hour,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(stat_hour,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+        group by referrer_website_url,promote_url,promote_code
+        )h
+        join tbl_gp_partner_account a
+        on h.promote_code = a.partner_no
+        where 1=1
+        <if test="userId != null and userId != ''">and a.user_id like '%'||#{userId}||'%'</if>
+        <if test="name != null and name != ''">and a.real_name like '%'||#{name}||'%'</if>
+        <if test="1 == order and orderField != null and orderField != ''">
+            order by ${orderField} desc
+        </if>
+        <if test="2 == order and orderField != null and orderField != ''">
+            order by ${orderField} asc
+        </if>
+    </select>
 </mapper>

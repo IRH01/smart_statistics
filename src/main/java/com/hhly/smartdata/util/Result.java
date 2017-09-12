@@ -3,7 +3,7 @@ package com.hhly.smartdata.util;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Result {
+public class Result{
     public static final int OK = 0;
     public static final int ERROR_SYSTEM = 1;
     public static final int ERROR_PARAMS = 2;
@@ -30,7 +30,7 @@ public class Result {
     public static final int PARTNER_EMAIL_EXIST = 23;
     private static Map<Integer, String> errorMsgs = new HashMap();
 
-    static {
+    static{
         errorMsgs.put(Integer.valueOf(0), "SUCESS");
         errorMsgs.put(Integer.valueOf(1), "系统错误");
         errorMsgs.put(Integer.valueOf(2), "传递参数有误");
@@ -57,10 +57,10 @@ public class Result {
         errorMsgs.put(Integer.valueOf(23), "邮箱已被注册");
     }
 
-    public Result() {
+    public Result(){
     }
 
-    public static String getErrorMsg(int key) {
+    public static String getErrorMsg(int key){
         return (String) errorMsgs.get(key);
     }
 }

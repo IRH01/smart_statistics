@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dataReportGameRealtime">
-	<resultMap type="DataReportGameRealtime" id="DataReportGameRealtimeMap"  extends="lossDaily.LossDailyMap">
-		<result property="statDate" column="stat_date"/>
-		<result property="gameId" column="game_id"/>
-		<result property="gameName" column="game_name"/>
-		<result property="gameRechargeAmount" column="game_recharge_amount"/>
-		<result property="lybRechargeAmount" column="lyb_recharge_amount"/>
-		<result property="remitAmount" column="remit_amount"/>
-		<result property="rechargeUcnt" column="recharge_ucnt"/>
-		<result property="rechargeCnt" column="recharge_cnt"/>
-		<result property="totalRechargeAmount" column="total_recharge_amount"/>
-		<result property="gameDau" column="game_dau"/>
-		<result property="regUcnt" column="reg_ucnt"/>
-		<result property="createDate" column="create_date"/>
-		<result property="updateDate" column="update_date"/>
-	</resultMap>
-	
-	<select id="find" resultMap="DataReportGameRealtimeMap" parameterType="map">
-		select 
-		stat_date, 
-		game_id, 
-		game_name, 
-		FORMAT(game_recharge_amount,2) as game_recharge_amount, 
-		FORMAT(lyb_recharge_amount,2) as lyb_recharge_amount, 
-		FORMAT(remit_amount,2) as remit_amount, recharge_ucnt, recharge_cnt, 
-		FORMAT(total_recharge_amount,2) as total_recharge_amount, 
-		game_dau, 
-		reg_ucnt,
-		date_format(create_date,'%Y-%m-%d %H:%i:%s') as create_date, 
-		date_format(update_date,'%Y-%m-%d %H:%i:%s') as update_date 
-		from 
-		tbl_gp_game_reatime_report
-		where 
-		date_format(stat_date,'%Y-%m-%d') = date_format(sysdate,'%Y-%m-%d')
-	</select>
+    <resultMap type="DataReportGameRealtime" id="DataReportGameRealtimeMap" extends="lossDaily.LossDailyMap">
+        <result property="statDate" column="stat_date"/>
+        <result property="gameId" column="game_id"/>
+        <result property="gameName" column="game_name"/>
+        <result property="gameRechargeAmount" column="game_recharge_amount"/>
+        <result property="lybRechargeAmount" column="lyb_recharge_amount"/>
+        <result property="remitAmount" column="remit_amount"/>
+        <result property="rechargeUcnt" column="recharge_ucnt"/>
+        <result property="rechargeCnt" column="recharge_cnt"/>
+        <result property="totalRechargeAmount" column="total_recharge_amount"/>
+        <result property="gameDau" column="game_dau"/>
+        <result property="regUcnt" column="reg_ucnt"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
+
+    <select id="find" resultMap="DataReportGameRealtimeMap" parameterType="map">
+        select
+        stat_date,
+        game_id,
+        game_name,
+        FORMAT(game_recharge_amount,2) as game_recharge_amount,
+        FORMAT(lyb_recharge_amount,2) as lyb_recharge_amount,
+        FORMAT(remit_amount,2) as remit_amount, recharge_ucnt, recharge_cnt,
+        FORMAT(total_recharge_amount,2) as total_recharge_amount,
+        game_dau,
+        reg_ucnt,
+        date_format(create_date,'%Y-%m-%d %H:%i:%s') as create_date,
+        date_format(update_date,'%Y-%m-%d %H:%i:%s') as update_date
+        from
+        tbl_gp_game_reatime_report
+        where
+        date_format(stat_date,'%Y-%m-%d') = date_format(sysdate,'%Y-%m-%d')
+    </select>
 </mapper>

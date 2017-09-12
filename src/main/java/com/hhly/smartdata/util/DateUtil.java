@@ -6,63 +6,63 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateUtil {
+public class DateUtil{
+    public static final String MONTH_FORMAT = "yyyy-MM";
     public static SimpleDateFormat sdfYMDHMS = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
     public static SimpleDateFormat sdf0 = new SimpleDateFormat("YYYYMMddHHmmss");
-    public static final String MONTH_FORMAT = "yyyy-MM";
 
-    public static Date parseUtilDate(String dateStr, String pattern) {
-        try {
+    public static Date parseUtilDate(String dateStr, String pattern){
+        try{
             SimpleDateFormat sdf = new SimpleDateFormat(pattern);
             Date date = sdf.parse(dateStr);
             return date;
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
             return null;
         }
     }
 
-    public static Date parseSqlDate(String dateStr, String pattern) {
+    public static Date parseSqlDate(String dateStr, String pattern){
         Date utilDate = parseUtilDate(dateStr, pattern);
-        if (utilDate != null) {
+        if(utilDate != null){
             return new Date(utilDate.getTime());
         }
         return null;
     }
 
-    public static String formatDate(Date date, String pattern) {
-        try {
+    public static String formatDate(Date date, String pattern){
+        try{
             SimpleDateFormat sdf = new SimpleDateFormat(pattern);
             return sdf.format(date);
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
             return null;
         }
     }
 
-    public static String formatDate(java.sql.Date date, String pattern) {
+    public static String formatDate(java.sql.Date date, String pattern){
         Date utilDate = new Date(date.getTime());
         return formatDate(utilDate, pattern);
     }
 
 
-    public static Date add(Date date, int field, int amount) {
+    public static Date add(Date date, int field, int amount){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(field, amount);
         return calendar.getTime();
     }
 
-    public static Date dateFormat(Date date, String format) {
-        if (date == null || format == null || format.length() == 0) {
+    public static Date dateFormat(Date date, String format){
+        if(date == null || format == null || format.length() == 0){
             throw new IllegalArgumentException(" Date and format  must be null");
         }
         String newDate = formatDate(date, format);
         return parseSqlDate(newDate, format);
     }
 
-    public static Date dateAddFormat(Date date, int calendarType, int amount, String format) {
-        if (date == null || format == null || format.length() == 0) {
+    public static Date dateAddFormat(Date date, int calendarType, int amount, String format){
+        if(date == null || format == null || format.length() == 0){
             throw new IllegalArgumentException(" Date and format  must be null");
         }
         Date newDate = add(date, calendarType, amount);
@@ -78,7 +78,7 @@ public class DateUtil {
      * @param second
      * @return
      */
-    public static Date getTime(Date date, int hour, int minute, int second) {
+    public static Date getTime(Date date, int hour, int minute, int second){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, hour);
@@ -93,38 +93,38 @@ public class DateUtil {
      * @param date
      * @return
      */
-    public static String formatDateYYYYMMDDHHmmss(Date date) {
+    public static String formatDateYYYYMMDDHHmmss(Date date){
         return sdfYMDHMS.format(date);
     }
 
-    public static Date parseDate(String dateStr, String format) {
+    public static Date parseDate(String dateStr, String format){
         Date date = null;
 
-        try {
+        try{
             DateFormat df_parseDate = new SimpleDateFormat(format);
             date = df_parseDate.parse(dateStr);
-        } catch (Exception var5) {
+        }catch(Exception var5){
             ;
         }
 
         return date;
     }
 
-    public static Date parseDate(String dateStr) {
+    public static Date parseDate(String dateStr){
         return parseDate(dateStr, "yyyy-MM-dd");
     }
 
-    public static String formatDate(Date date) {
+    public static String formatDate(Date date){
         return formatDateByFormat(date, "yyyy-MM-dd");
     }
 
-    public static String formatDateByFormat(Date date, String format) {
+    public static String formatDateByFormat(Date date, String format){
         String result = "";
-        if (date != null) {
-            try {
+        if(date != null){
+            try{
                 SimpleDateFormat sdf = new SimpleDateFormat(format);
                 result = sdf.format(date);
-            } catch (Exception var4) {
+            }catch(Exception var4){
                 ;
             }
         }
@@ -132,9 +132,27 @@ public class DateUtil {
         return result;
     }
 
-    public String getChineseWeek(Calendar date, String character) {
+    public static String formatDatayyMMDDHHMMSS(Date date){
+        return sdf0.format(date);
+    }
+
+    public static Date getYearMonth(Date date){
+        Date value = null;
+        if(date == null){
+            return date;
+        }else{
+            value = parseDate((new SimpleDateFormat("yyyy-MM")).format(date), "yyyy-MM");
+            return value;
+        }
+    }
+
+    public static String convertYearMonth(Date date){
+        return date == null ? null : (new SimpleDateFormat("yyyy-MM")).format(date);
+    }
+
+    public String getChineseWeek(Calendar date, String character){
         String[] dayNames = new String[]{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-        if ("zh".equals(character)) {
+        if("zh".equals(character)){
             dayNames[0] = "星期日";
             dayNames[1] = "星期一";
             dayNames[2] = "星期二";
@@ -148,34 +166,16 @@ public class DateUtil {
         return dayNames[dayOfWeek - 1];
     }
 
-    public Calendar getNextMonday(Calendar date) {
+    public Calendar getNextMonday(Calendar date){
         Calendar result = null;
         result = date;
 
-        do {
+        do{
             result = (Calendar) result.clone();
             result.add(5, 1);
-        } while (result.get(7) != 2);
+        }while(result.get(7) != 2);
 
         return result;
-    }
-
-    public static String formatDatayyMMDDHHMMSS(Date date) {
-        return sdf0.format(date);
-    }
-
-    public static Date getYearMonth(Date date) {
-        Date value = null;
-        if (date == null) {
-            return date;
-        } else {
-            value = parseDate((new SimpleDateFormat("yyyy-MM")).format(date), "yyyy-MM");
-            return value;
-        }
-    }
-
-    public static String convertYearMonth(Date date) {
-        return date == null ? null : (new SimpleDateFormat("yyyy-MM")).format(date);
     }
 
 }

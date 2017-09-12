@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dataReportGameDay">
-	<resultMap type="DataReportGameDay" id="DataReportGameDayMap"  extends="lossDaily.LossDailyMap">
-		<result property="dataDate" column="data_Date"/>
-		<result property="gameName" column="GAME_NAME"/>
-		<result property="gameRecharge" column="GAME_RECHARGE"/>
-		<result property="lybRecharge" column="LYB_RECHARGE"/>
-		<result property="yxExchange" column="YX_EXCHANGE"/>
-		<result property="allRecharge" column="ALL_RECHARGE"/>
-		<result property="rechargePeople" column="RECHARGE_PEOPLE"/>
-		<result property="rechargeTimes" column="RECHARGE_TIMES"/>
-		<result property="newRegister" column="NEW_REGISTER"/>
-		
-		<result property="arpu" column="arpu"/>
-		<result property="dau" column="dau"/>
-		<result property="wau" column="wau"/>
-		<result property="mau" column="mau"/>
-		<result property="remainRate" column="remain_rate"/>
-		<result property="rechargeRate" column="recharge_rate"/>
-		<result property="remainUsers" column="remain_users"/>
-	</resultMap>
-	
-	<select id="find" resultMap="DataReportGameDayMap" parameterType="map">
-		select game_Name, 
-		        FORMAT(sum(game_recharge),2) as game_Recharge, 
-		        FORMAT(sum(lyb_recharge),2) as lyb_Recharge, 
-		        FORMAT(sum(yx_exchange),2) as yx_Exchange, 
-		        FORMAT(sum(all_recharge),2) as all_Recharge, 
-		        sum(recharge_people) as recharge_People, 
-		        sum(recharge_times) as recharge_Times, 
-		        sum(new_register) as new_Register
-		          from view_gp_game_daily 
-		          where 1=1
-		          <if test="gameName != null and gameName != ''">and game_name like CONCAT(CONCAT('%',#{gameName}),'%')</if>	    
-				  <if test="dateStart != null and dateStart != ''">and date_format(data_date,'%Y-%m-%d') &gt;= #{dateStart} </if>
-				  <if test="dateEnd != null and dateEnd != ''">and date_format(data_date,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-		          group by game_name
-	</select>
-	
-	<select id="findList" resultMap="DataReportGameDayMap" parameterType="map">
-		select date_format(data_date,'%Y-%m-%d') as data_Date, game_name, 
-				FORMAT(game_recharge,2) as game_Recharge, 
-				FORMAT(lyb_recharge,2) as lyb_Recharge, 
-				FORMAT(yx_exchange,2) as yx_Exchange, 
-				FORMAT(all_recharge,2) as all_Recharge, 
-				recharge_people, 
-			    recharge_times, 
-			    new_register,
-			    arpu, dau, wau, mau, remain_rate, recharge_rate, remain_users 
-			    from view_gp_game_daily_sum
-			where 1=1 
-			<if test="gameName != null and gameName != ''">and game_name = #{gameName}</if>	    
-			<if test="dateStart != null and dateStart != ''">and date_format(data_date,'%Y-%m-%d') &gt;= #{dateStart} </if>
-			<if test="dateEnd != null and dateEnd != ''">and date_format(data_date,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-			order by data_date desc
-	</select>
-	
+    <resultMap type="DataReportGameDay" id="DataReportGameDayMap" extends="lossDaily.LossDailyMap">
+        <result property="dataDate" column="data_Date"/>
+        <result property="gameName" column="GAME_NAME"/>
+        <result property="gameRecharge" column="GAME_RECHARGE"/>
+        <result property="lybRecharge" column="LYB_RECHARGE"/>
+        <result property="yxExchange" column="YX_EXCHANGE"/>
+        <result property="allRecharge" column="ALL_RECHARGE"/>
+        <result property="rechargePeople" column="RECHARGE_PEOPLE"/>
+        <result property="rechargeTimes" column="RECHARGE_TIMES"/>
+        <result property="newRegister" column="NEW_REGISTER"/>
+
+        <result property="arpu" column="arpu"/>
+        <result property="dau" column="dau"/>
+        <result property="wau" column="wau"/>
+        <result property="mau" column="mau"/>
+        <result property="remainRate" column="remain_rate"/>
+        <result property="rechargeRate" column="recharge_rate"/>
+        <result property="remainUsers" column="remain_users"/>
+    </resultMap>
+
+    <select id="find" resultMap="DataReportGameDayMap" parameterType="map">
+        select game_Name,
+        FORMAT(sum(game_recharge),2) as game_Recharge,
+        FORMAT(sum(lyb_recharge),2) as lyb_Recharge,
+        FORMAT(sum(yx_exchange),2) as yx_Exchange,
+        FORMAT(sum(all_recharge),2) as all_Recharge,
+        sum(recharge_people) as recharge_People,
+        sum(recharge_times) as recharge_Times,
+        sum(new_register) as new_Register
+        from view_gp_game_daily
+        where 1=1
+        <if test="gameName != null and gameName != ''">and game_name like CONCAT(CONCAT('%',#{gameName}),'%')</if>
+        <if test="dateStart != null and dateStart != ''">and date_format(data_date,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(data_date,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+        group by game_name
+    </select>
+
+    <select id="findList" resultMap="DataReportGameDayMap" parameterType="map">
+        select date_format(data_date,'%Y-%m-%d') as data_Date, game_name,
+        FORMAT(game_recharge,2) as game_Recharge,
+        FORMAT(lyb_recharge,2) as lyb_Recharge,
+        FORMAT(yx_exchange,2) as yx_Exchange,
+        FORMAT(all_recharge,2) as all_Recharge,
+        recharge_people,
+        recharge_times,
+        new_register,
+        arpu, dau, wau, mau, remain_rate, recharge_rate, remain_users
+        from view_gp_game_daily_sum
+        where 1=1
+        <if test="gameName != null and gameName != ''">and game_name = #{gameName}</if>
+        <if test="dateStart != null and dateStart != ''">and date_format(data_date,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(data_date,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+        order by data_date desc
+    </select>
+
 </mapper>

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gamePlatformDaily">
-	<resultMap type="GamePlatformDaily" id="GamePlatformDailyMap" extends="gameTotalDaily.GameTotalDailyMap">
-		<result property="gameId" column="game_id"/>
-		<result property="gameName" column="game_name"/>
-	</resultMap>
-	
-	<select id="find" resultMap="GamePlatformDailyMap" parameterType="map">
-		select 
-			g.stat_date,
-			g.reg_count,
-			g.recharge_count,
-			g.pay_amount,
-			g.reg_total_count,
-			g.dau,
-			g.wau,
-			g.mau,
-			g.create_time,
-			g.update_time,
-			g.game_id,
-			p.name game_name
-		from gp_tbl_game_platform_daily g
-		left join gp_tbl_platform_info p
-			on p.id = g.game_id
-		where 1=1
-			<if test="date != null and date != ''">and date_format(g.stat_date,'%Y-%m-%d') = #{date} </if>
-			<if test="countryId != null and countryId != ''">and p.country = #{countryId} </if>
-		<if test="1 == order and orderField != null and orderField != ''">
-			order by ${orderField} desc
-		</if>
-		<if test="2 == order and orderField != null and orderField != ''">
-			order by ${orderField} asc
-		</if>
-	</select>
+    <resultMap type="GamePlatformDaily" id="GamePlatformDailyMap" extends="gameTotalDaily.GameTotalDailyMap">
+        <result property="gameId" column="game_id"/>
+        <result property="gameName" column="game_name"/>
+    </resultMap>
+
+    <select id="find" resultMap="GamePlatformDailyMap" parameterType="map">
+        select
+        g.stat_date,
+        g.reg_count,
+        g.recharge_count,
+        g.pay_amount,
+        g.reg_total_count,
+        g.dau,
+        g.wau,
+        g.mau,
+        g.create_time,
+        g.update_time,
+        g.game_id,
+        p.name game_name
+        from gp_tbl_game_platform_daily g
+        left join gp_tbl_platform_info p
+        on p.id = g.game_id
+        where 1=1
+        <if test="date != null and date != ''">and date_format(g.stat_date,'%Y-%m-%d') = #{date}</if>
+        <if test="countryId != null and countryId != ''">and p.country = #{countryId}</if>
+        <if test="1 == order and orderField != null and orderField != ''">
+            order by ${orderField} desc
+        </if>
+        <if test="2 == order and orderField != null and orderField != ''">
+            order by ${orderField} asc
+        </if>
+    </select>
 </mapper>

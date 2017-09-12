@@ -1,46 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="debitGame">
-	<resultMap type="DebitGame" id="DebitGameMap"  extends="lossDaily.LossDailyMap">
-		<result property="orderId" column="ORDER_NO"/>
-		<result property="formOrder" column="FROM_ORDER"/>
-		<result property="toOrder" column="TO_ORDER"/>
-		<result property="exchangeStatus" column="EXCHANGE_STATUS"/>
-		<result property="userId" column="USER_ID"/>
-		<result property="nickName" column="NICKNAME"/>
-		<result property="exchangeGame" column="EXCHANGE_F_GAME"/>
-		<result property="exchangeAmount" column="EXCHANGE_AMOUNT"/>
-		<result property="overageAmount" column="OVERAGE_AMOUNT"/>
-		<result property="commitTime" column="COMMIT_TIME"/>
-		<result property="tradeTime" column="TRADE_TIME"/>
-		<result property="exchangeToGame" column="EXCHANGE_TO_GAME"/>
-		<result property="serverId" column="SERVER_ID"/>
-		<result property="exchangeToAmount" column="EXCHANGE_TO_AMOUNT"/>
-	</resultMap>
-	
-	<select id="find" resultMap="DebitGameMap" parameterType="map">
-		select order_no,from_order,to_order,exchange_status,user_id,nickname,exchange_f_game,
-		FORMAT(exchange_amount,2) as EXCHANGE_AMOUNT,
-		FORMAT(overage_amount,2) as OVERAGE_AMOUNT,
-		date_format(commit_time,'%Y-%m-%d %H:%i:%s') as COMMIT_TIME, date_format(trade_time,'%Y-%m-%d %H:%i:%s') as TRADE_TIME,exchange_to_game,server_id
-		from view_game_exchange_list
-		where 1=1
-		<if test="orderId != null and orderId != ''">and order_no like CONCAT(CONCAT('%',#{orderId}),'%')</if>
-		<if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
-		<if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
-		<if test="exchangeGame != null and exchangeGame != ''">and exchange_f_game like CONCAT(CONCAT('%',#{exchangeGame}),'%')</if>
-		<if test="exchangeToGame != null and exchangeToGame != ''">and exchange_to_game like CONCAT(CONCAT('%',#{exchangeToGame}),'%')</if>
-		order by ifnull(trade_time,date_format('1990-01-01','%Y-%m-%d')) desc
-	</select>
-	
-	<select id="count" resultType="int" parameterType="map">
-		select count(1)
-		from view_game_exchange_list
-		where 1=1
-		<if test="orderId != null and orderId != ''">and order_no like CONCAT(CONCAT('%',#{orderId}),'%')</if>
-		<if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
-		<if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
-		<if test="exchangeGame != null and exchangeGame != ''">and exchange_f_game like CONCAT(CONCAT('%',#{exchangeGame}),'%')</if>
-		<if test="exchangeToGame != null and exchangeToGame != ''">and exchange_to_game like CONCAT(CONCAT('%',#{exchangeToGame}),'%')</if>
-	</select>
+    <resultMap type="DebitGame" id="DebitGameMap" extends="lossDaily.LossDailyMap">
+        <result property="orderId" column="ORDER_NO"/>
+        <result property="formOrder" column="FROM_ORDER"/>
+        <result property="toOrder" column="TO_ORDER"/>
+        <result property="exchangeStatus" column="EXCHANGE_STATUS"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="nickName" column="NICKNAME"/>
+        <result property="exchangeGame" column="EXCHANGE_F_GAME"/>
+        <result property="exchangeAmount" column="EXCHANGE_AMOUNT"/>
+        <result property="overageAmount" column="OVERAGE_AMOUNT"/>
+        <result property="commitTime" column="COMMIT_TIME"/>
+        <result property="tradeTime" column="TRADE_TIME"/>
+        <result property="exchangeToGame" column="EXCHANGE_TO_GAME"/>
+        <result property="serverId" column="SERVER_ID"/>
+        <result property="exchangeToAmount" column="EXCHANGE_TO_AMOUNT"/>
+    </resultMap>
+
+    <select id="find" resultMap="DebitGameMap" parameterType="map">
+        select order_no,from_order,to_order,exchange_status,user_id,nickname,exchange_f_game,
+        FORMAT(exchange_amount,2) as EXCHANGE_AMOUNT,
+        FORMAT(overage_amount,2) as OVERAGE_AMOUNT,
+        date_format(commit_time,'%Y-%m-%d %H:%i:%s') as COMMIT_TIME, date_format(trade_time,'%Y-%m-%d %H:%i:%s') as
+        TRADE_TIME,exchange_to_game,server_id
+        from view_game_exchange_list
+        where 1=1
+        <if test="orderId != null and orderId != ''">and order_no like CONCAT(CONCAT('%',#{orderId}),'%')</if>
+        <if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
+        <if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
+        <if test="exchangeGame != null and exchangeGame != ''">and exchange_f_game like
+            CONCAT(CONCAT('%',#{exchangeGame}),'%')
+        </if>
+        <if test="exchangeToGame != null and exchangeToGame != ''">and exchange_to_game like
+            CONCAT(CONCAT('%',#{exchangeToGame}),'%')
+        </if>
+        order by ifnull(trade_time,date_format('1990-01-01','%Y-%m-%d')) desc
+    </select>
+
+    <select id="count" resultType="int" parameterType="map">
+        select count(1)
+        from view_game_exchange_list
+        where 1=1
+        <if test="orderId != null and orderId != ''">and order_no like CONCAT(CONCAT('%',#{orderId}),'%')</if>
+        <if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
+        <if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
+        <if test="exchangeGame != null and exchangeGame != ''">and exchange_f_game like
+            CONCAT(CONCAT('%',#{exchangeGame}),'%')
+        </if>
+        <if test="exchangeToGame != null and exchangeToGame != ''">and exchange_to_game like
+            CONCAT(CONCAT('%',#{exchangeToGame}),'%')
+        </if>
+    </select>
 </mapper>

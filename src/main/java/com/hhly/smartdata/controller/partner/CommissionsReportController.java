@@ -10,12 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/partner/cmsreport")
-public class CommissionsReportController {
+public class CommissionsReportController{
     private static Logger logger = Logger.getLogger(CommissionsReportController.class.getName());
 
     @RequestMapping(value = "/show")
     @RequiresPermissions(value = {"partner:cmsreport"})
-    public ModelAndView show(ModelMap modelMap) {
+    public ModelAndView show(ModelMap modelMap){
         ModelAndView view = new ModelAndView();
         view.setViewName("operative/partner/commissions_report.main");
         return view;
@@ -25,7 +25,7 @@ public class CommissionsReportController {
     @RequestMapping(value = "/getPtnCmsList", produces = "text/plain;charset=UTF-8")
     @RequiresPermissions(value = {"partner:cmsreport"})
     @ResponseBody
-    public String getPtnCmsList(int pageNumber, int pageSize, String realName) {
+    public String getPtnCmsList(int pageNumber, int pageSize, String realName){
         String result = "";
         return result;
     }

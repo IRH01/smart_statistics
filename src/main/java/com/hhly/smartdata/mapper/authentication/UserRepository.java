@@ -1,13 +1,12 @@
 package com.hhly.smartdata.mapper.authentication;
 
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.util.page.Page;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class UserRepository extends BaseRepository{
@@ -28,15 +27,15 @@ public class UserRepository extends BaseRepository{
     }
 
     public int update(User record){
-        return template.update("baseUser.update",record);
+        return template.update("baseUser.update", record);
     }
 
-    public List<User> searchUsers(User condition,Page page){
-    	PageHelper.startPage(page.getPageNo(), page.getPageSize());
-    	List<User> list = template.selectList("baseUser.searchUsers",condition);
-    	PageInfo<User> pageInfo = new PageInfo<User>(list);
-    	page.setTotalPage(pageInfo.getPages());
-    	page.setTotalRecord(pageInfo.getTotal());
+    public List<User> searchUsers(User condition, Page page){
+        PageHelper.startPage(page.getPageNo(), page.getPageSize());
+        List<User> list = template.selectList("baseUser.searchUsers", condition);
+        PageInfo<User> pageInfo = new PageInfo<User>(list);
+        page.setTotalPage(pageInfo.getPages());
+        page.setTotalRecord(pageInfo.getTotal());
         return list;
     }
 }

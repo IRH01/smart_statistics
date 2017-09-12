@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping(value = "/partner/ptnmbbladetail")
-public class PartnerMemberBlaDetailController {
+public class PartnerMemberBlaDetailController{
 
     @Autowired
     private PartnerMemberBlaDetailService partnerMemberBlaDetailService;
@@ -51,7 +51,7 @@ public class PartnerMemberBlaDetailController {
 
     @RequiresPermissions(value = {"partner:checkreport"})
     @RequestMapping(value = "/show")
-    public ModelAndView show(ModelMap modelMap, String partnerUserId, String monthId) {
+    public ModelAndView show(ModelMap modelMap, String partnerUserId, String monthId){
         modelMap.put("partnerUserId", partnerUserId);
         modelMap.put("monthId", monthId);
         ModelAndView view = new ModelAndView();
@@ -62,7 +62,7 @@ public class PartnerMemberBlaDetailController {
     @RequiresPermissions(value = {"partner:checkreport"})
     @RequestMapping(value = "/getPartnerMemberBlaDetails", produces = "text/plain;charset=UTF-8")
     @ResponseBody
-    public String getPartnerMemberBlaDetails(HttpServletRequest request) {
+    public String getPartnerMemberBlaDetails(HttpServletRequest request){
         Map<String, Object> conMap = new HashMap<String, Object>();
         conMap.put("monthId", request.getParameter("monthId"));
         conMap.put("partnerUserId", request.getParameter("partnerUserId"));
@@ -73,7 +73,7 @@ public class PartnerMemberBlaDetailController {
     @RequiresPermissions(value = {"partner:checkreport"})
     @RequestMapping(value = "/getGameTypes", produces = "text/plain;charset=UTF-8")
     @ResponseBody
-    public String getGameTypes(HttpServletRequest request) {
+    public String getGameTypes(HttpServletRequest request){
         Map<String, Object> conMap = new HashMap<String, Object>();
         conMap.put("monthId", request.getParameter("monthId"));
         conMap.put("partnerUserId", request.getParameter("partnerUserId"));
@@ -83,20 +83,20 @@ public class PartnerMemberBlaDetailController {
     @RequiresPermissions(value = {"partner:checkreport"})
     @RequestMapping(value = "/getCommissionInfo", produces = "text/plain;charset=UTF-8")
     @ResponseBody
-    public String getCommissionInfo(String monthId, String partnerUserId, int gameTypeId, int rackBackModel) {
+    public String getCommissionInfo(String monthId, String partnerUserId, int gameTypeId, int rackBackModel){
         return JSONObject.fromObject(partnerMemberBlaDetailService.findOne(monthId, partnerUserId, gameTypeId, rackBackModel)).toString();
     }
 
     @RequiresPermissions(value = {"partner:checkreport"})
     @RequestMapping(value = "/list", produces = "text/plain;charset=UTF-8")
     @ResponseBody
-    public String list(HttpServletRequest request, int pageNumber, int pageSize) {
+    public String list(HttpServletRequest request, int pageNumber, int pageSize){
         String result = "";
         Map<String, Object> conMap = getConditionMap(request);
         return result;
     }
 
-    private Map<String, Object> getConditionMap(HttpServletRequest request) {
+    private Map<String, Object> getConditionMap(HttpServletRequest request){
         Map<String, Object> conMap = new HashMap<String, Object>();
         conMap.put("monthId", request.getParameter("monthId"));
         conMap.put("partnerUserId", request.getParameter("partnerUserId"));
@@ -110,7 +110,7 @@ public class PartnerMemberBlaDetailController {
     @RequiresPermissions(value = {"partner:checkreport"})
     @RequestMapping(value = "/export")
     @ResponseBody
-    public Object export(HttpServletRequest request, HttpSession session) {
+    public Object export(HttpServletRequest request, HttpSession session){
         Map<String, Object> conditionMap = this.getConditionMap(request);
         Map<String, Object> result = new HashMap<String, Object>();
         String filePath = null;
@@ -123,7 +123,7 @@ public class PartnerMemberBlaDetailController {
 
     @RequiresPermissions(value = {"partner:checkreport"})
     @RequestMapping(value = "/download")
-    public void download(String uuid, HttpServletResponse response, HttpSession session) {
+    public void download(String uuid, HttpServletResponse response, HttpSession session){
         String filePath = (String) session.getAttribute(uuid);
         FileUtil.downLoadFile(response, new File(filePath), "合作伙伴对账详情报表");
         FileUtil.delete(filePath);

@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="partnerMemberBlaDetail">
-	<resultMap type="PartnerMemberBlaDetail" id="PartnerMemberBlaDetailMap">
-		<result property="monthId" column="month_id"/>
-		<result property="partnerUserId" column="partner_user_id"/>
-		<result property="gameTypeId" column="game_type_id"/>
-		<result property="gameTypeName" column="game_type_name"/>
-		<result property="rackBackModel" column="rack_back_model"/>
-		<result property="commissionLevel" column="commission_level"/>
-		<result property="commissionPercent" column="commission_percent"/>
-		<result property="commissionAmount" column="commission_amount"/>
-		<result property="activityAmount" column="activity_amount"/>
-		<result property="platformType" column="platform_type"/>
-	</resultMap>
-	
-	<resultMap type="GameType" id="GameTypeMap">
-		<result property="id" column="id"/>
-		<result property="gameTypeName" column="game_type_name"/>
-		<result property="platformType" column="platform_type"/>
-	</resultMap>
-	
-	<select id="findOne" resultMap="PartnerMemberBlaDetailMap" parameterType="map">
-		select
-			b.month_id,
-			b.partner_user_id,
-			b.game_type_id,
-			b.rack_back_model,
-			b.commission_level,
-			b.commission_percent,
-			b.commission_amount,
-			g.game_type_name,
-			g.platform_type
-		from tbl_dm_partner_mem_bla_detail b
-		left join tbl_dim_game_type g
-		on b.game_type_id = g.id
-		where 1=1
-			and b.partner_user_id = #{partnerUserId}
-			and date_format(b.month_id,'%Y-%m') &gt;= #{monthId}
-			and b.game_type_id = #{gameTypeId}
-			and b.rack_back_model = #{rackBackModel}
-	</select>
-	
-	<select id="find" resultMap="PartnerMemberBlaDetailMap" parameterType="map">
-		select
-			b.month_id,
-			b.partner_user_id,
-			b.game_type_id,
-			b.rack_back_model,
-			b.commission_level,
-			b.commission_percent,
-			b.commission_amount,
-			g.game_type_name,
-			g.platform_type
-		from tbl_dm_partner_mem_bla_detail b
-		left join tbl_dim_game_type g
-		on b.game_type_id = g.id
-		where 1=1
-			<if test="partnerUserId != null and partnerUserId != ''">and b.partner_user_id = #{partnerUserId} </if>
-			<if test="monthId != null and monthId != ''">and date_format(b.month_id,'%Y-%m') = #{monthId} </if>
-			<if test="gameTypeId != null and gameTypeId != ''">and b.game_type_id = #{gameTypeId} </if>
-			<if test="rackBackModel != null and rackBackModel != ''">and b.rack_back_model = #{rackBackModel} </if>
-	</select>
-	
-	
-	<select id="findGameType" resultMap="GameTypeMap" parameterType="map">
-		select
-			g.id,
-			g.game_type_name,
-			g.platform_type
-		from tbl_dim_game_type g
-		where exists(
-			select b.game_type_id
-			from tbl_dm_partner_mem_bla_detail b
-			where 1=1
-				and b.game_type_id = g.id
-				<if test="partnerUserId != null and partnerUserId != ''">and b.partner_user_id = #{partnerUserId} </if>
-				<if test="monthId != null and monthId != ''">and date_format(b.month_id,'%Y-%m') = #{monthId} </if>
-		)
-	</select>
+    <resultMap type="PartnerMemberBlaDetail" id="PartnerMemberBlaDetailMap">
+        <result property="monthId" column="month_id"/>
+        <result property="partnerUserId" column="partner_user_id"/>
+        <result property="gameTypeId" column="game_type_id"/>
+        <result property="gameTypeName" column="game_type_name"/>
+        <result property="rackBackModel" column="rack_back_model"/>
+        <result property="commissionLevel" column="commission_level"/>
+        <result property="commissionPercent" column="commission_percent"/>
+        <result property="commissionAmount" column="commission_amount"/>
+        <result property="activityAmount" column="activity_amount"/>
+        <result property="platformType" column="platform_type"/>
+    </resultMap>
+
+    <resultMap type="GameType" id="GameTypeMap">
+        <result property="id" column="id"/>
+        <result property="gameTypeName" column="game_type_name"/>
+        <result property="platformType" column="platform_type"/>
+    </resultMap>
+
+    <select id="findOne" resultMap="PartnerMemberBlaDetailMap" parameterType="map">
+        select
+        b.month_id,
+        b.partner_user_id,
+        b.game_type_id,
+        b.rack_back_model,
+        b.commission_level,
+        b.commission_percent,
+        b.commission_amount,
+        g.game_type_name,
+        g.platform_type
+        from tbl_dm_partner_mem_bla_detail b
+        left join tbl_dim_game_type g
+        on b.game_type_id = g.id
+        where 1=1
+        and b.partner_user_id = #{partnerUserId}
+        and date_format(b.month_id,'%Y-%m') &gt;= #{monthId}
+        and b.game_type_id = #{gameTypeId}
+        and b.rack_back_model = #{rackBackModel}
+    </select>
+
+    <select id="find" resultMap="PartnerMemberBlaDetailMap" parameterType="map">
+        select
+        b.month_id,
+        b.partner_user_id,
+        b.game_type_id,
+        b.rack_back_model,
+        b.commission_level,
+        b.commission_percent,
+        b.commission_amount,
+        g.game_type_name,
+        g.platform_type
+        from tbl_dm_partner_mem_bla_detail b
+        left join tbl_dim_game_type g
+        on b.game_type_id = g.id
+        where 1=1
+        <if test="partnerUserId != null and partnerUserId != ''">and b.partner_user_id = #{partnerUserId}</if>
+        <if test="monthId != null and monthId != ''">and date_format(b.month_id,'%Y-%m') = #{monthId}</if>
+        <if test="gameTypeId != null and gameTypeId != ''">and b.game_type_id = #{gameTypeId}</if>
+        <if test="rackBackModel != null and rackBackModel != ''">and b.rack_back_model = #{rackBackModel}</if>
+    </select>
+
+
+    <select id="findGameType" resultMap="GameTypeMap" parameterType="map">
+        select
+        g.id,
+        g.game_type_name,
+        g.platform_type
+        from tbl_dim_game_type g
+        where exists(
+        select b.game_type_id
+        from tbl_dm_partner_mem_bla_detail b
+        where 1=1
+        and b.game_type_id = g.id
+        <if test="partnerUserId != null and partnerUserId != ''">and b.partner_user_id = #{partnerUserId}</if>
+        <if test="monthId != null and monthId != ''">and date_format(b.month_id,'%Y-%m') = #{monthId}</if>
+        )
+    </select>
 </mapper>

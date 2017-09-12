@@ -11,10 +11,10 @@ import java.security.MessageDigest;
 
 
 public class SecurityUtil{
+    public final static String ENCODEKEY = "v"; //加密串
     /*	protected final static Logger logger = LoggerFactory
                 .getLogger(SecurityUtil.class);*/
     private final static int ITERATIONS = 20;
-    public final static String ENCODEKEY = "v"; //加密串
 
     public static String encrypt(String key, String plainText) throws Exception{
         try{

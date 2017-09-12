@@ -1,68 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gameOrderDetail">
-	<resultMap type="GameOrderDetail" id="GameOrderDetailMap"  extends="lossDaily.LossDailyMap">
-		<result property="paymentDrderno" column="payment_orderno"/>
-		<result property="orderType" column="order_type"/>
-		<result property="platformId" column="platform_id"/>
-		<result property="serverId" column="server_id"/>
-		<result property="amount" column="amount"/>
-		<result property="createTime" column="create_time"/>
-		<result property="payTime" column="pay_time"/>
-		<result property="payStatus" column="pay_status"/>
-		<result property="rechargeWay" column="recharge_way"/>
-		<result property="userId" column="user_id"/>
-		<result property="channelId" column="channel_id"/>
-		<result property="name" column="name"/>
-		
-		<result property="statusId" column="status_id"/>
-		<result property="statusName" column="status_name"/>
-		
-		<result property="produceId" column="produce_id"/>
-		<result property="produceName" column="produce_name"/>
-	</resultMap>
+    <resultMap type="GameOrderDetail" id="GameOrderDetailMap" extends="lossDaily.LossDailyMap">
+        <result property="paymentDrderno" column="payment_orderno"/>
+        <result property="orderType" column="order_type"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="serverId" column="server_id"/>
+        <result property="amount" column="amount"/>
+        <result property="createTime" column="create_time"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="rechargeWay" column="recharge_way"/>
+        <result property="userId" column="user_id"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="name" column="name"/>
 
-	<select id="find" resultMap="GameOrderDetailMap" parameterType="map">
-		select 
-		payment_orderno, order_type, platform_id, server_id, 
-		FORMAT(amount,2) as amount,
-		date_format(create_time,'%Y-%m-%d %H:%i:%s') as create_time, 
-		date_format(pay_time,'%Y-%m-%d %H:%i:%s') as pay_time, 
-		pay_status,  recharge_way, 
-		user_id,  channel_id,
-		name from 
-		view_gp_order_detail_market
-		where 1 = 1
-		<if test="paymentDrderno != null and paymentDrderno != ''">and payment_orderno like CONCAT(CONCAT('%',#{paymentDrderno}),'%')</if>
-		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-		<if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
-		<if test="platformId != null and platformId != ''">and platform_id = #{platformId}</if>
-		<if test="payStatus != null and payStatus != ''">and pay_status = #{payStatus}</if>
-		<if test="dateStart != null and dateStart != ''">and date_format(create_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-		<if test="dateEnd != null and dateEnd != ''">and date_format(create_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-		order by create_time desc
-	</select>
-	
-	
-	<select id="count" resultType="int" parameterType="map">
-		select count(1) from 
-		view_gp_order_detail_market
-		where 1 = 1
-		<if test="paymentDrderno != null and paymentDrderno != ''">and payment_orderno like CONCAT(CONCAT('%',#{paymentDrderno}),'%')</if>
-		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-		<if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
-		<if test="platformId != null and platformId != ''">and platform_id = #{platformId}</if>
-		<if test="payStatus != null and payStatus != ''">and pay_status = #{payStatus}</if>
-		<if test="dateStart != null and dateStart != ''">and date_format(create_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
-		<if test="dateEnd != null and dateEnd != ''">and date_format(create_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
-	</select>
-	
-	
-	<select id="getStates" resultMap="GameOrderDetailMap" parameterType="map">
-		select status_id, status_name from tbl_gp_dim_order_status_market
-	</select>
-	
-	<select id="getProduces" resultMap="GameOrderDetailMap" parameterType="map">
-		select id as produce_id , name as produce_name from view_gp_dim_product_market
-	</select>
+        <result property="statusId" column="status_id"/>
+        <result property="statusName" column="status_name"/>
+
+        <result property="produceId" column="produce_id"/>
+        <result property="produceName" column="produce_name"/>
+    </resultMap>
+
+    <select id="find" resultMap="GameOrderDetailMap" parameterType="map">
+        select
+        payment_orderno, order_type, platform_id, server_id,
+        FORMAT(amount,2) as amount,
+        date_format(create_time,'%Y-%m-%d %H:%i:%s') as create_time,
+        date_format(pay_time,'%Y-%m-%d %H:%i:%s') as pay_time,
+        pay_status, recharge_way,
+        user_id, channel_id,
+        name from
+        view_gp_order_detail_market
+        where 1 = 1
+        <if test="paymentDrderno != null and paymentDrderno != ''">and payment_orderno like
+            CONCAT(CONCAT('%',#{paymentDrderno}),'%')
+        </if>
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
+        <if test="platformId != null and platformId != ''">and platform_id = #{platformId}</if>
+        <if test="payStatus != null and payStatus != ''">and pay_status = #{payStatus}</if>
+        <if test="dateStart != null and dateStart != ''">and date_format(create_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(create_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+        order by create_time desc
+    </select>
+
+
+    <select id="count" resultType="int" parameterType="map">
+        select count(1) from
+        view_gp_order_detail_market
+        where 1 = 1
+        <if test="paymentDrderno != null and paymentDrderno != ''">and payment_orderno like
+            CONCAT(CONCAT('%',#{paymentDrderno}),'%')
+        </if>
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
+        <if test="platformId != null and platformId != ''">and platform_id = #{platformId}</if>
+        <if test="payStatus != null and payStatus != ''">and pay_status = #{payStatus}</if>
+        <if test="dateStart != null and dateStart != ''">and date_format(create_time,'%Y-%m-%d') &gt;= #{dateStart}</if>
+        <if test="dateEnd != null and dateEnd != ''">and date_format(create_time,'%Y-%m-%d') &lt;= #{dateEnd}</if>
+    </select>
+
+
+    <select id="getStates" resultMap="GameOrderDetailMap" parameterType="map">
+        select status_id, status_name from tbl_gp_dim_order_status_market
+    </select>
+
+    <select id="getProduces" resultMap="GameOrderDetailMap" parameterType="map">
+        select id as produce_id , name as produce_name from view_gp_dim_product_market
+    </select>
 </mapper>

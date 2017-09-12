@@ -1,34 +1,32 @@
 package com.hhly.smartdata.service.authentication.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
+import com.hhly.smartdata.mapper.authentication.UserChannelRepository;
+import com.hhly.smartdata.model.authentication.UserChannel;
+import com.hhly.smartdata.service.authentication.UserChannelService;
 import org.springframework.stereotype.Service;
 
-import com.hhly.smartdata.model.authentication.UserChannel;
-import com.hhly.smartdata.mapper.authentication.UserChannelRepository;
-import com.hhly.smartdata.service.authentication.UserChannelService;
+import javax.annotation.Resource;
+import java.util.List;
 
 @Service
-public class UserChannelServiceImpl implements UserChannelService {
-	@Resource
-	private UserChannelRepository userChannelRepository;
-	
-	@Override
-	public int deleteByUserId(Integer userId) {
-		return userChannelRepository.deleteByUserId(userId);
-	}
+public class UserChannelServiceImpl implements UserChannelService{
+    @Resource
+    private UserChannelRepository userChannelRepository;
 
-	@Override
-	public int batchAdd(List<UserChannel> userChannels) {
-		return userChannelRepository.batchAdd(userChannels);
-	}
+    @Override
+    public int deleteByUserId(Integer userId){
+        return userChannelRepository.deleteByUserId(userId);
+    }
 
-	@Override
-	public List<UserChannel> getByUserId(Integer userId) {
-		return userChannelRepository.getByUserId(userId);
-	}
+    @Override
+    public int batchAdd(List<UserChannel> userChannels){
+        return userChannelRepository.batchAdd(userChannels);
+    }
+
+    @Override
+    public List<UserChannel> getByUserId(Integer userId){
+        return userChannelRepository.getByUserId(userId);
+    }
 
 
 }

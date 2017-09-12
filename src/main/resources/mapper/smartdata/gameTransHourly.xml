@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gameTransHourly">
-	<resultMap type="GameTransHourly" id="GameTransHourlyMap">
-		<result property="statHour" column="stat_hour"/>
-		<result property="platformId" column="platform_id"/>
-		<result property="deviceType" column="device_type"/>
-		<result property="regAndLoginCount" column="reg_and_login_count"/>
-		<result property="regAndRechargeTimes" column="reg_and_recharge_times"/>
-		<result property="regAndRechargeCount" column="reg_and_recharge_count"/>
-		<result property="regAndRechargeAmount" column="reg_and_recharge_amount"/>
-		<result property="actAndRechargeTimes" column="act_and_recharge_times"/>
-		<result property="actAndRechargeCount" column="act_and_recharge_count"/>
-		<result property="actAndRechargeAmount" column="act_and_recharge_amount"/>
-		<result property="createTime" column="create_time"/>
-		<result property="updateTime" column="update_time"/>
-	</resultMap>
-	
-	<select id="statistics" resultMap="GameTransHourlyMap" parameterType="map">
-		select 
-			stat_hour,
-			sum(reg_and_login_count) reg_and_login_count,
-			sum(reg_and_recharge_times) reg_and_recharge_times,
-			sum(reg_and_recharge_count) reg_and_recharge_count,
-			sum(reg_and_recharge_amount) reg_and_recharge_amount,
-			sum(act_and_recharge_times) act_and_recharge_times,
-			sum(act_and_recharge_count) act_and_recharge_count,
-			sum(act_and_recharge_amount) act_and_recharge_amount
-		from gp_tbl_game_trans_hourly
-		where 1=1
-			<if test="platformId != null">and platform_id = #{platformId}</if>
-			<if test="date != null">and date_format(stat_hour,'%Y-%m-%d') = #{date}</if>		
-         group by stat_hour
-	</select>
+    <resultMap type="GameTransHourly" id="GameTransHourlyMap">
+        <result property="statHour" column="stat_hour"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="deviceType" column="device_type"/>
+        <result property="regAndLoginCount" column="reg_and_login_count"/>
+        <result property="regAndRechargeTimes" column="reg_and_recharge_times"/>
+        <result property="regAndRechargeCount" column="reg_and_recharge_count"/>
+        <result property="regAndRechargeAmount" column="reg_and_recharge_amount"/>
+        <result property="actAndRechargeTimes" column="act_and_recharge_times"/>
+        <result property="actAndRechargeCount" column="act_and_recharge_count"/>
+        <result property="actAndRechargeAmount" column="act_and_recharge_amount"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="statistics" resultMap="GameTransHourlyMap" parameterType="map">
+        select
+        stat_hour,
+        sum(reg_and_login_count) reg_and_login_count,
+        sum(reg_and_recharge_times) reg_and_recharge_times,
+        sum(reg_and_recharge_count) reg_and_recharge_count,
+        sum(reg_and_recharge_amount) reg_and_recharge_amount,
+        sum(act_and_recharge_times) act_and_recharge_times,
+        sum(act_and_recharge_count) act_and_recharge_count,
+        sum(act_and_recharge_amount) act_and_recharge_amount
+        from gp_tbl_game_trans_hourly
+        where 1=1
+        <if test="platformId != null">and platform_id = #{platformId}</if>
+        <if test="date != null">and date_format(stat_hour,'%Y-%m-%d') = #{date}</if>
+        group by stat_hour
+    </select>
 </mapper>

@@ -3,118 +3,118 @@ package com.hhly.smartdata.dto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class YbfWebStatH {
- 
-	public static final String formatStyle = "HH";
+public class YbfWebStatH{
 
-	private String etlDate;
+    public static final String formatStyle = "HH";
 
-	private String urlId;
+    private String etlDate;
 
-	private long clickCnt;
+    private String urlId;
 
-	private long userCnt;
+    private long clickCnt;
 
-	private long ipCnt;
+    private long userCnt;
 
-	private long stayCnt;
-	
-	private long avgStayCnt;
+    private long ipCnt;
 
-	private long totalUserCnt;
+    private long stayCnt;
 
-	private String urlName;
-	
-	private long viewCnt;
-	
-	private long dayTotalUserCnt;
-	
+    private long avgStayCnt;
 
-	public String getEtlDate() {
-		return etlDate;
-	}
+    private long totalUserCnt;
 
-	public void setEtlDate(Date etlDate) {
-		this.etlDate = new SimpleDateFormat(formatStyle).format(etlDate);
-	}
+    private String urlName;
 
-	public String getUrlId() {
-		return urlId;
-	}
+    private long viewCnt;
 
-	public void setUrlId(String urlId) {
-		this.urlId = urlId;
-	}
+    private long dayTotalUserCnt;
 
-	public long getClickCnt() {
-		return clickCnt;
-	}
 
-	public void setClickCnt(long clickCnt) {
-		this.clickCnt = clickCnt;
-	}
+    public String getEtlDate(){
+        return etlDate;
+    }
 
-	public long getUserCnt() {
-		return userCnt;
-	}
+    public void setEtlDate(Date etlDate){
+        this.etlDate = new SimpleDateFormat(formatStyle).format(etlDate);
+    }
 
-	public void setUserCnt(long userCnt) {
-		this.userCnt = userCnt;
-	}
+    public String getUrlId(){
+        return urlId;
+    }
 
-	public long getIpCnt() {
-		return ipCnt;
-	}
+    public void setUrlId(String urlId){
+        this.urlId = urlId;
+    }
 
-	public void setIpCnt(long ipCnt) {
-		this.ipCnt = ipCnt;
-	}
+    public long getClickCnt(){
+        return clickCnt;
+    }
 
-	public long getStayCnt() {
-		return stayCnt;
-	}
+    public void setClickCnt(long clickCnt){
+        this.clickCnt = clickCnt;
+    }
 
-	public void setStayCnt(long stayCnt) {
-		this.stayCnt = stayCnt;
-	}
+    public long getUserCnt(){
+        return userCnt;
+    }
 
-	public long getTotalUserCnt() {
-		return totalUserCnt;
-	}
+    public void setUserCnt(long userCnt){
+        this.userCnt = userCnt;
+    }
 
-	public void setTotalUserCnt(long totalUserCnt) {
-		this.totalUserCnt = totalUserCnt;
-	}
+    public long getIpCnt(){
+        return ipCnt;
+    }
 
-	public String getUrlName() {
-		return urlName;
-	}
+    public void setIpCnt(long ipCnt){
+        this.ipCnt = ipCnt;
+    }
 
-	public void setUrlName(String urlName) {
-		this.urlName = urlName;
-	}
+    public long getStayCnt(){
+        return stayCnt;
+    }
 
-	public long getViewCnt() {
-		return viewCnt;
-	}
+    public void setStayCnt(long stayCnt){
+        this.stayCnt = stayCnt;
+    }
 
-	public void setViewCnt(long viewCnt) {
-		this.viewCnt = viewCnt;
-	}
-	
-	public long getAvgStayCnt() {
-		avgStayCnt = 0;
-		if(0 != viewCnt){
-			avgStayCnt = stayCnt / viewCnt;
-		}
-		return avgStayCnt;
-	}
+    public long getTotalUserCnt(){
+        return totalUserCnt;
+    }
 
-	public long getDayTotalUserCnt() {
-		return dayTotalUserCnt;
-	}
+    public void setTotalUserCnt(long totalUserCnt){
+        this.totalUserCnt = totalUserCnt;
+    }
 
-	public void setDayTotalUserCnt(long dayTotalUserCnt) {
-		this.dayTotalUserCnt = dayTotalUserCnt;
-	}
+    public String getUrlName(){
+        return urlName;
+    }
+
+    public void setUrlName(String urlName){
+        this.urlName = urlName;
+    }
+
+    public long getViewCnt(){
+        return viewCnt;
+    }
+
+    public void setViewCnt(long viewCnt){
+        this.viewCnt = viewCnt;
+    }
+
+    public long getAvgStayCnt(){
+        avgStayCnt = 0;
+        if(0 != viewCnt){
+            avgStayCnt = stayCnt / viewCnt;
+        }
+        return avgStayCnt;
+    }
+
+    public long getDayTotalUserCnt(){
+        return dayTotalUserCnt;
+    }
+
+    public void setDayTotalUserCnt(long dayTotalUserCnt){
+        this.dayTotalUserCnt = dayTotalUserCnt;
+    }
 }

@@ -1,109 +1,102 @@
 package com.hhly.smartdata.service.game.impl;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.hhly.smartdata.mapper.game.GameSummaryHReposity;
+import com.hhly.smartdata.model.game.GameSummaryHourly;
+import com.hhly.smartdata.service.game.GameSummaryHourlyService;
 import net.sf.json.JSONObject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.hhly.smartdata.model.game.GameSummaryHourly;
-import com.hhly.smartdata.mapper.game.GameSummaryHReposity;
-import com.hhly.smartdata.service.game.GameSummaryHourlyService;
+import java.util.*;
 
 @Service
 public class GameSummaryHourlyServiceImpl implements GameSummaryHourlyService{
-	@Autowired
-	GameSummaryHReposity gameSummaryHReposity;
-	
-	public JSONObject find(String platformId,String date,String deviceTypes, int pageNumber, int pageSize){
-		Map<String, Object> conditions = new HashMap<String, Object>();
-		conditions.put("platformId", platformId);
-		conditions.put("date", date);
-		String[] deviceTypeIds = new String[]{""};
-		if (!StringUtils.isEmpty(deviceTypes)) {
-			deviceTypeIds = deviceTypes.split(",");
-		}
-		conditions.put("deviceTypes", deviceTypeIds);
-		PageHelper.startPage(pageNumber, pageSize);
-		List<GameSummaryHourly> values = gameSummaryHReposity.find(conditions);
-		PageInfo<GameSummaryHourly> pageInfo = new PageInfo<GameSummaryHourly>(values);
-		return JSONObject.fromObject(pageInfo);
-	}
-	
-	public JSONObject getChart(String platformId,String date,String deviceTypes, Set<String> scales) {
-		
-		Map<String, Object> result = new HashMap<String, Object>();
-		List<String> scaleList = new LinkedList<String>();
-		//注册玩家数
-		List<Long> registerCountList = new LinkedList<Long>();
-		// 活跃玩家数
-		List<Long> activeCountList = new LinkedList<Long>();
-		//付费次数
-		List<Long> payTimesList = new LinkedList<Long>();
-		//付费人数
-		List<Long> payCountList = new LinkedList<Long>();
-		//付费金额
-		List<Long> payAmountList = new LinkedList<Long>();
+    @Autowired
+    GameSummaryHReposity gameSummaryHReposity;
 
-		Iterator<String> iterator = scales.iterator();
-		
-		//查询获取数据
-		Map<String, Object> conditions = new HashMap<String, Object>();
-		conditions.put("platformId", platformId);
-		conditions.put("date", date);
-		String[] deviceTypeIds = new String[]{""};
-		if (!StringUtils.isEmpty(deviceTypes)) {
-			deviceTypeIds = deviceTypes.split(",");
-		}
-		conditions.put("deviceTypes", deviceTypeIds);
-		List<GameSummaryHourly> values = gameSummaryHReposity.find(conditions);
+    public JSONObject find(String platformId, String date, String deviceTypes, int pageNumber, int pageSize){
+        Map<String, Object> conditions = new HashMap<String, Object>();
+        conditions.put("platformId", platformId);
+        conditions.put("date", date);
+        String[] deviceTypeIds = new String[]{""};
+        if(!StringUtils.isEmpty(deviceTypes)){
+            deviceTypeIds = deviceTypes.split(",");
+        }
+        conditions.put("deviceTypes", deviceTypeIds);
+        PageHelper.startPage(pageNumber, pageSize);
+        List<GameSummaryHourly> values = gameSummaryHReposity.find(conditions);
+        PageInfo<GameSummaryHourly> pageInfo = new PageInfo<GameSummaryHourly>(values);
+        return JSONObject.fromObject(pageInfo);
+    }
 
-		while (iterator.hasNext()) {
+    public JSONObject getChart(String platformId, String date, String deviceTypes, Set<String> scales){
 
-			long registerCountScale = 0;
-			long activeCountScale = 0;
-			long payTimesScale = 0;
-			long payCountScale = 0;
-			long payAmountScale = 0;
+        Map<String, Object> result = new HashMap<String, Object>();
+        List<String> scaleList = new LinkedList<String>();
+        //注册玩家数
+        List<Long> registerCountList = new LinkedList<Long>();
+        // 活跃玩家数
+        List<Long> activeCountList = new LinkedList<Long>();
+        //付费次数
+        List<Long> payTimesList = new LinkedList<Long>();
+        //付费人数
+        List<Long> payCountList = new LinkedList<Long>();
+        //付费金额
+        List<Long> payAmountList = new LinkedList<Long>();
 
-			String currentScale = iterator.next();
-			for (GameSummaryHourly value : values) {
+        Iterator<String> iterator = scales.iterator();
 
-				if (currentScale.substring(0, 2).equals(value.getStatHour())) {
+        //查询获取数据
+        Map<String, Object> conditions = new HashMap<String, Object>();
+        conditions.put("platformId", platformId);
+        conditions.put("date", date);
+        String[] deviceTypeIds = new String[]{""};
+        if(!StringUtils.isEmpty(deviceTypes)){
+            deviceTypeIds = deviceTypes.split(",");
+        }
+        conditions.put("deviceTypes", deviceTypeIds);
+        List<GameSummaryHourly> values = gameSummaryHReposity.find(conditions);
 
-					registerCountScale = value.getRegisterCount();
-					activeCountScale = value.getActiveCount();
-					payTimesScale = value.getPayTimes();
-					payCountScale = value.getPayCount();
-					payAmountScale = value.getPayAmount();
-				}
-			}
-			registerCountList.add(registerCountScale);
-			activeCountList.add(activeCountScale);
-			payTimesList.add(payTimesScale);
-			payCountList.add(payCountScale);
-			payAmountList.add(payAmountScale);
-			scaleList.add(currentScale);
-		}
+        while(iterator.hasNext()){
 
-		result.put("scales", scaleList);
-		result.put("registerCountList", registerCountList);
-		result.put("activeCountList", activeCountList);
-		result.put("payTimesList", payTimesList);
-		result.put("payCountList", payCountList);
-		result.put("payAmountList", payAmountList);
+            long registerCountScale = 0;
+            long activeCountScale = 0;
+            long payTimesScale = 0;
+            long payCountScale = 0;
+            long payAmountScale = 0;
 
-		return JSONObject.fromObject(result);
+            String currentScale = iterator.next();
+            for(GameSummaryHourly value : values){
 
-	}
+                if(currentScale.substring(0, 2).equals(value.getStatHour())){
+
+                    registerCountScale = value.getRegisterCount();
+                    activeCountScale = value.getActiveCount();
+                    payTimesScale = value.getPayTimes();
+                    payCountScale = value.getPayCount();
+                    payAmountScale = value.getPayAmount();
+                }
+            }
+            registerCountList.add(registerCountScale);
+            activeCountList.add(activeCountScale);
+            payTimesList.add(payTimesScale);
+            payCountList.add(payCountScale);
+            payAmountList.add(payAmountScale);
+            scaleList.add(currentScale);
+        }
+
+        result.put("scales", scaleList);
+        result.put("registerCountList", registerCountList);
+        result.put("activeCountList", activeCountList);
+        result.put("payTimesList", payTimesList);
+        result.put("payCountList", payCountList);
+        result.put("payAmountList", payAmountList);
+
+        return JSONObject.fromObject(result);
+
+    }
 
 }

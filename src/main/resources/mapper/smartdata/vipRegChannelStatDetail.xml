@@ -1,74 +1,89 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="vipRegChannelStatDetail">
-	<resultMap type="VipRegChannelStatDetail" id="VipRegChannelStatDetailMap">
-		<result property="userId" column="user_id"/>
-		<result property="payFirstAmount" column="pay_first_amount"/>
-		<result property="payPlatformId" column="pay_platform_id"/>
-		<result property="payDate" column="pay_date"/>
-		<result property="payAmount" column="pay_amount"/>
-		<result property="loginType" column="login_type"/>
-		<result property="nickName" column="nickname"/>
-		<result property="phone" column="phone"/>
-		<result property="email" column="email"/>
-		<result property="createTime" column="create_time"/>
-		<result property="platformName" column="platform_name"/>
-		<result property="payPlatformName" column="pay_platform_name"/>
-		<result property="isVip" column="is_vip"/>
-	</resultMap>
-	
-	<resultMap type="PlatformInfo" id="PlatformInfoMap">
-		<result property="id" column="id"/>
-		<result property="name" column="name"/>
-	</resultMap>
-	
-	<select id="find" resultMap="VipRegChannelStatDetailMap" parameterType="map">
-		select 
-			s.pay_first_amount,
-			s.pay_platform_id,
-			s.pay_date,
-			s.pay_amount,
-			u.user_id,
-			u.platform_id,
-			u.login_type,
-			u.nickname,
-			u.phone,
-			u.email,
-			u.create_time,
-			p.name as platform_name,
-			p1.name as pay_platform_name,
-			case when pm.partner_id is null then 0 else 1 end as is_vip
-		from gp_tbl_user_info u  
-		left join tbl_vip_reg_channel_detail s
-			on u.user_id = s.user_id
-		left join gp_tbl_platform_info p
-			on p.id = u.platform_id
-		left join gp_tbl_platform_info p1
-			on p1.id = s.pay_platform_id
-		left join tbl_dim_partner_member_con pm
-			on u.user_id = pm.member_id
-		left join channel c
-	 		on c.chid = u.channel_id
-		where 1 = 1
-			<if test="createTimeStart != null and createTimeStart != ''">and date_format(u.create_time,'%Y-%m-%d') &gt;= #{createTimeStart} </if>
-			<if test="createTimeEnd != null and createTimeEnd != ''">and date_format(u.create_time,'%Y-%m-%d') &lt;= #{createTimeEnd} </if>
-			<if test="name != null and name != ''">and (u.user_id like '%'||#{name}||'%' or u.nickname like '%'||#{name}||'%' or u.phone like '%'||#{name}||'%' or u.email like '%'||#{name}||'%')</if>
-			<if test="payFirstAmountStart != null and payFirstAmountStart != ''">and s.pay_first_amount &gt;= #{payFirstAmountStart} </if>
-			<if test="payFirstAmountEnd != null and payFirstAmountEnd != ''">and s.pay_first_amount &lt;= #{payFirstAmountEnd} </if>
-			<if test="payDateStart != null and payDateStart != ''">and date_format(s.pay_date,'%Y-%m-%d') &gt;= #{payDateStart} </if>
-			<if test="payDateEnd != null and payDateEnd != ''">and date_format(s.pay_date,'%Y-%m-%d') &lt;= #{payDateEnd} </if>
-			<if test="channel != null and channel != ''">and c.chid = #{channel} </if>
-			<if test="payPlatformId != null and payPlatformId != ''">and s.pay_platform_id = #{payPlatformId} </if>
-			<if test="isVip != null and isVip != ''">and CASE WHEN pm.partner_id IS NULL THEN 0 ELSE 1 END = #{isVip} </if>
-			<if test="platformName != null and platformName != ''">and p.name like '%'||#{platformName}||'%' </if>
-			<if test="countryId != null and countryId != ''">and p.country = #{countryId} and CASE WHEN p1.country IS NULL THEN #{countryId} ELSE p1.country END = #{countryId}</if>
-		order by u.create_time desc
-	</select>
-	
-	<select id="getPlatformInfos" resultMap="PlatformInfoMap">
-		select distinct(s.pay_platform_id) id,p.name
-		from tbl_vip_reg_channel_detail s
-		left join gp_tbl_platform_info p
-			on p.id = s.pay_platform_id
-	</select>
+    <resultMap type="VipRegChannelStatDetail" id="VipRegChannelStatDetailMap">
+        <result property="userId" column="user_id"/>
+        <result property="payFirstAmount" column="pay_first_amount"/>
+        <result property="payPlatformId" column="pay_platform_id"/>
+        <result property="payDate" column="pay_date"/>
+        <result property="payAmount" column="pay_amount"/>
+        <result property="loginType" column="login_type"/>
+        <result property="nickName" column="nickname"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="createTime" column="create_time"/>
+        <result property="platformName" column="platform_name"/>
+        <result property="payPlatformName" column="pay_platform_name"/>
+        <result property="isVip" column="is_vip"/>
+    </resultMap>
+
+    <resultMap type="PlatformInfo" id="PlatformInfoMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="find" resultMap="VipRegChannelStatDetailMap" parameterType="map">
+        select
+        s.pay_first_amount,
+        s.pay_platform_id,
+        s.pay_date,
+        s.pay_amount,
+        u.user_id,
+        u.platform_id,
+        u.login_type,
+        u.nickname,
+        u.phone,
+        u.email,
+        u.create_time,
+        p.name as platform_name,
+        p1.name as pay_platform_name,
+        case when pm.partner_id is null then 0 else 1 end as is_vip
+        from gp_tbl_user_info u
+        left join tbl_vip_reg_channel_detail s
+        on u.user_id = s.user_id
+        left join gp_tbl_platform_info p
+        on p.id = u.platform_id
+        left join gp_tbl_platform_info p1
+        on p1.id = s.pay_platform_id
+        left join tbl_dim_partner_member_con pm
+        on u.user_id = pm.member_id
+        left join channel c
+        on c.chid = u.channel_id
+        where 1 = 1
+        <if test="createTimeStart != null and createTimeStart != ''">and date_format(u.create_time,'%Y-%m-%d') &gt;=
+            #{createTimeStart}
+        </if>
+        <if test="createTimeEnd != null and createTimeEnd != ''">and date_format(u.create_time,'%Y-%m-%d') &lt;=
+            #{createTimeEnd}
+        </if>
+        <if test="name != null and name != ''">and (u.user_id like '%'||#{name}||'%' or u.nickname like
+            '%'||#{name}||'%' or u.phone like '%'||#{name}||'%' or u.email like '%'||#{name}||'%')
+        </if>
+        <if test="payFirstAmountStart != null and payFirstAmountStart != ''">and s.pay_first_amount &gt;=
+            #{payFirstAmountStart}
+        </if>
+        <if test="payFirstAmountEnd != null and payFirstAmountEnd != ''">and s.pay_first_amount &lt;=
+            #{payFirstAmountEnd}
+        </if>
+        <if test="payDateStart != null and payDateStart != ''">and date_format(s.pay_date,'%Y-%m-%d') &gt;=
+            #{payDateStart}
+        </if>
+        <if test="payDateEnd != null and payDateEnd != ''">and date_format(s.pay_date,'%Y-%m-%d') &lt;= #{payDateEnd}
+        </if>
+        <if test="channel != null and channel != ''">and c.chid = #{channel}</if>
+        <if test="payPlatformId != null and payPlatformId != ''">and s.pay_platform_id = #{payPlatformId}</if>
+        <if test="isVip != null and isVip != ''">and CASE WHEN pm.partner_id IS NULL THEN 0 ELSE 1 END = #{isVip}</if>
+        <if test="platformName != null and platformName != ''">and p.name like '%'||#{platformName}||'%'</if>
+        <if test="countryId != null and countryId != ''">and p.country = #{countryId} and CASE WHEN p1.country IS NULL
+            THEN #{countryId} ELSE p1.country END = #{countryId}
+        </if>
+        order by u.create_time desc
+    </select>
+
+    <select id="getPlatformInfos" resultMap="PlatformInfoMap">
+        select distinct(s.pay_platform_id) id,p.name
+        from tbl_vip_reg_channel_detail s
+        left join gp_tbl_platform_info p
+        on p.id = s.pay_platform_id
+    </select>
 </mapper>

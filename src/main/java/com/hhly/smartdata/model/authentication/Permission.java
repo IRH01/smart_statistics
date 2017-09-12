@@ -2,7 +2,7 @@ package com.hhly.smartdata.model.authentication;
 
 import java.util.Date;
 
-public class Permission {
+public class Permission{
     private String permission;
 
     private String name;
@@ -11,35 +11,35 @@ public class Permission {
 
     private Date createTime;
 
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
 
-    public void setPermission(String permission) {
+    public void setPermission(String permission){
         this.permission = permission == null ? null : permission.trim();
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getFunctionId() {
+    public Integer getFunctionId(){
         return functionId;
     }
 
-    public void setFunctionId(Integer functionId) {
+    public void setFunctionId(Integer functionId){
         this.functionId = functionId;
     }
 
-    public Date getCreateTime() {
+    public Date getCreateTime(){
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime){
         this.createTime = createTime;
     }
 }

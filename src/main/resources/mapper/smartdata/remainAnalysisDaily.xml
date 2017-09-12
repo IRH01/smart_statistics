@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="remainAnalysisDaily">
-	<resultMap type="RemainAnalysisDaily" id="RemainAnalysisDailyMap">
-		<result property="statDate" column="stat_date"/>
-		<result property="platformId" column="platform_id"/>
-		<result property="registerCount" column="register_count"/>
-		<result property="one" column="one"/>
-		<result property="two" column="two"/>
-		<result property="three" column="three"/>
-		<result property="four" column="four"/>
-		<result property="five" column="five"/>
-		<result property="six" column="six"/>
-		<result property="seven" column="seven"/>
-		<result property="fourteen" column="fourteen"/>
-		<result property="thirty" column="thirty"/>
-		<result property="createTime" column="create_time"/>
-		<result property="updateTime" column="update_time"/>
-	</resultMap>
-	
-	<select id="find" resultMap="RemainAnalysisDailyMap" parameterType="map">
-		select 
-			stat_date,
-			platform_id,
-			register_count,
-			one,
-			two,
-			three,
-			four,
-			five,
-			six,
-			seven,
-			fourteen,
-			thirty,
-			create_time,
-			update_time
-		from gp_tbl_remain_analysis_daily
-		where 1=1
-			<if test="platformId != null">and platform_id = #{platformId}</if>
-			<if test="startDate != null and endDate != null">and date_format(stat_date,'%Y-%m-%d') between #{startDate} and #{endDate}</if>		
-         order by stat_date
-	</select>
+    <resultMap type="RemainAnalysisDaily" id="RemainAnalysisDailyMap">
+        <result property="statDate" column="stat_date"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="registerCount" column="register_count"/>
+        <result property="one" column="one"/>
+        <result property="two" column="two"/>
+        <result property="three" column="three"/>
+        <result property="four" column="four"/>
+        <result property="five" column="five"/>
+        <result property="six" column="six"/>
+        <result property="seven" column="seven"/>
+        <result property="fourteen" column="fourteen"/>
+        <result property="thirty" column="thirty"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="find" resultMap="RemainAnalysisDailyMap" parameterType="map">
+        select
+        stat_date,
+        platform_id,
+        register_count,
+        one,
+        two,
+        three,
+        four,
+        five,
+        six,
+        seven,
+        fourteen,
+        thirty,
+        create_time,
+        update_time
+        from gp_tbl_remain_analysis_daily
+        where 1=1
+        <if test="platformId != null">and platform_id = #{platformId}</if>
+        <if test="startDate != null and endDate != null">and date_format(stat_date,'%Y-%m-%d') between #{startDate} and
+            #{endDate}
+        </if>
+        order by stat_date
+    </select>
 </mapper>

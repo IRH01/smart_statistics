@@ -1,112 +1,132 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="userRechargeSummary">
-	<resultMap type="UserRechargeSummary" id="UserRechargeSummaryMap">
-		<result property="platformId" column="platform_id"/>
-		<result property="serverId" column="server_id"/>
-		<result property="areaId" column="area_id"/>
-		<result property="userId" column="user_id"/>
-		<result property="nickName" column="nickname"/>
-		<result property="phone" column="phone"/>
-		<result property="email" column="email"/>
-		<result property="regTime" column="reg_time"/>
-		<result property="totalAmount" column="total_amount"/>
-		<result property="serverName" column="server_name"/>
-		<result property="platformName" column="platform_name"/>
-		<result property="channelId" column="channel_id"/>
-		<result property="channelName" column="channel_name"/>
-		<result property="countryName" column="country_name"/>
-		<result property="countryName" column="country_name"/>
-		<result property="platformTerminalName" column="platform_terminal_name"/>
-	</resultMap>
-	
-	<select id="find" resultMap="UserRechargeSummaryMap" parameterType="map">
-		select 
-			u.platform_id,
-			u.server_id,
-			u.area_id,
-			u.user_id,
-			u.nickname,
-			u.phone,
-			u.email,
-			u.reg_time,
-			u.total_amount,
-			u.channel_id,
-			u.channel_name,
-			p.name platform_name,
-			CONCAT(CONCAT(s.area_name,' '),s.name) server_name,
-			c.name country_name,
-			t.name as platform_terminal_name
-		from gp_view_user_recharge_summary u
-		left join gp_tbl_platform_info p
-			on p.id = u.platform_id
-		left join gp_tbl_game_server_config s
-			on s.id = u.server_id
-		left join gp_tbl_country_info c
-			on p.country = c.id
-		left join tbl_gp_plat_terminal_info t
-			on p.platform_terminal = t.id
-		where 1=1
-			<if test="platformId != null and platformId != '' and platformId != 'null'">and u.platform_id = #{platformId}</if>
-			<if test="user != null and user != ''">and (u.user_id like CONCAT(CONCAT('%',#{user}),'%') or u.nickname like CONCAT(CONCAT('%',#{user}),'%'))</if>
-			<if test="phone != null and phone != ''">and u.phone like CONCAT(CONCAT('%',#{phone}),'%')</if>
-			<if test="email != null and email != ''">and u.email like CONCAT(CONCAT('%',#{email}),'%')</if>
-			<if test="regTimeStart != null and regTimeStart != ''">and date_format(u.reg_time,'%Y-%m-%d') &gt;= #{regTimeStart} </if>
-			<if test="regTimeEnd != null and regTimeEnd != ''">and date_format(u.reg_time,'%Y-%m-%d') &lt;= #{regTimeEnd} </if>
-			<if test="amountStart != nulll and amountStart != ''">and u.total_amount &gt;= #{amountStart} </if>
-			<if test="amountEnd != null and amountEnd != ''">and u.total_amount &lt;= #{amountEnd} </if>
-			<if test="serverId != null and serverId != '' and serverId != 'null'">and u.server_id = #{serverId}</if>
-			<if test="channelId != null and channelId != ''">and u.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-			<if test="channelName != null and channelName != ''">and u.channel_name like CONCAT(CONCAT('%',#{channelName}),'%')</if>
-			<if test="countryId != null and countryId != ''">and c.id = #{countryId} </if>
-			<if test="platformTerminal != null and platformTerminal != '' and platformTerminal != -999">and p.platform_terminal = #{platformTerminal} </if>
-		<trim prefix="order by" suffixOverrides=",">
-				<if test="amountOrder == 1">
-			    	u.total_amount is null, u.total_amount desc ,
-			    </if>
-			    <if test="amountOrder == 2">
-			    	u.total_amount asc is null, u.total_amount asc ,
-			    </if>
-			    <if test="regTimeOrder == 1">
-			    	u.reg_time desc is null, u.reg_time desc ,
-			    </if>
-			    <if test="regTimeOrder == 2">
-			    	u.reg_time asc is null, u.reg_time asc ,
-			    </if>
-			    <if test="userIdOrder == 1">
-			    	u.user_id desc is null, u.user_id desc 
-			    </if>
-			    <if test="userIdOrder == 2">
-			    	u.user_id is null, u.user_id asc 
-			    </if>
-  		</trim>
-	</select>
-	
-	<select id="count" resultType="int" parameterType="map">
-		select 
-			count(*) count
-		from gp_view_user_recharge_summary u
-		left join gp_tbl_platform_info p
-			on p.id = u.platform_id
-		left join gp_tbl_game_server_config s
-			on s.id = u.server_id
-		left join gp_tbl_country_info c
-			on p.country = c.id
-		left join tbl_gp_plat_terminal_info t
-			on p.platform_terminal = t.id
-		where 1=1
-			<if test="platformId != null and platformId != '' and platformId != 'null'">and u.platform_id = #{platformId}</if>
-			<if test="user != null and user != ''">and (u.user_id like CONCAT(CONCAT('%',#{user}),'%') or u.nickname like CONCAT(CONCAT('%',#{user}),'%'))</if>
-			<if test="phone != null and phone != ''">and u.phone like CONCAT(CONCAT('%',#{phone}),'%')</if>
-			<if test="email != null and email != ''">and u.email like CONCAT(CONCAT('%',#{email}),'%')</if>
-			<if test="regTimeStart != null and regTimeStart != ''">and date_format(u.reg_time,'%Y-%m-%d') &gt;= #{regTimeStart} </if>
-			<if test="regTimeEnd != null and regTimeEnd != ''">and date_format(u.reg_time,'%Y-%m-%d') &lt;= #{regTimeEnd} </if>
-			<if test="amountStart != nulll and amountStart != ''">and u.total_amount &gt;= #{amountStart} </if>
-			<if test="amountEnd != null and amountEnd != ''">and u.total_amount &lt;= #{amountEnd} </if>
-			<if test="serverId != null and serverId != '' and serverId != 'null'">and u.server_id = #{serverId}</if>
-			<if test="channelId != null and channelId != ''">and u.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-			<if test="channelName != null and channelName != ''">and u.channel_name like CONCAT(CONCAT('%',#{channelName}),'%')</if>
-			<if test="countryId != null and countryId != ''">and c.id = #{countryId} </if>
-			<if test="platformTerminal != null and platformTerminal != '' and platformTerminal != -999">and p.platform_terminal = #{platformTerminal} </if>
-	</select>
+    <resultMap type="UserRechargeSummary" id="UserRechargeSummaryMap">
+        <result property="platformId" column="platform_id"/>
+        <result property="serverId" column="server_id"/>
+        <result property="areaId" column="area_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="nickName" column="nickname"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="regTime" column="reg_time"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="serverName" column="server_name"/>
+        <result property="platformName" column="platform_name"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="channelName" column="channel_name"/>
+        <result property="countryName" column="country_name"/>
+        <result property="countryName" column="country_name"/>
+        <result property="platformTerminalName" column="platform_terminal_name"/>
+    </resultMap>
+
+    <select id="find" resultMap="UserRechargeSummaryMap" parameterType="map">
+        select
+        u.platform_id,
+        u.server_id,
+        u.area_id,
+        u.user_id,
+        u.nickname,
+        u.phone,
+        u.email,
+        u.reg_time,
+        u.total_amount,
+        u.channel_id,
+        u.channel_name,
+        p.name platform_name,
+        CONCAT(CONCAT(s.area_name,' '),s.name) server_name,
+        c.name country_name,
+        t.name as platform_terminal_name
+        from gp_view_user_recharge_summary u
+        left join gp_tbl_platform_info p
+        on p.id = u.platform_id
+        left join gp_tbl_game_server_config s
+        on s.id = u.server_id
+        left join gp_tbl_country_info c
+        on p.country = c.id
+        left join tbl_gp_plat_terminal_info t
+        on p.platform_terminal = t.id
+        where 1=1
+        <if test="platformId != null and platformId != '' and platformId != 'null'">and u.platform_id = #{platformId}
+        </if>
+        <if test="user != null and user != ''">and (u.user_id like CONCAT(CONCAT('%',#{user}),'%') or u.nickname like
+            CONCAT(CONCAT('%',#{user}),'%'))
+        </if>
+        <if test="phone != null and phone != ''">and u.phone like CONCAT(CONCAT('%',#{phone}),'%')</if>
+        <if test="email != null and email != ''">and u.email like CONCAT(CONCAT('%',#{email}),'%')</if>
+        <if test="regTimeStart != null and regTimeStart != ''">and date_format(u.reg_time,'%Y-%m-%d') &gt;=
+            #{regTimeStart}
+        </if>
+        <if test="regTimeEnd != null and regTimeEnd != ''">and date_format(u.reg_time,'%Y-%m-%d') &lt;= #{regTimeEnd}
+        </if>
+        <if test="amountStart != nulll and amountStart != ''">and u.total_amount &gt;= #{amountStart}</if>
+        <if test="amountEnd != null and amountEnd != ''">and u.total_amount &lt;= #{amountEnd}</if>
+        <if test="serverId != null and serverId != '' and serverId != 'null'">and u.server_id = #{serverId}</if>
+        <if test="channelId != null and channelId != ''">and u.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="channelName != null and channelName != ''">and u.channel_name like
+            CONCAT(CONCAT('%',#{channelName}),'%')
+        </if>
+        <if test="countryId != null and countryId != ''">and c.id = #{countryId}</if>
+        <if test="platformTerminal != null and platformTerminal != '' and platformTerminal != -999">and
+            p.platform_terminal = #{platformTerminal}
+        </if>
+        <trim prefix="order by" suffixOverrides=",">
+            <if test="amountOrder == 1">
+                u.total_amount is null, u.total_amount desc ,
+            </if>
+            <if test="amountOrder == 2">
+                u.total_amount asc is null, u.total_amount asc ,
+            </if>
+            <if test="regTimeOrder == 1">
+                u.reg_time desc is null, u.reg_time desc ,
+            </if>
+            <if test="regTimeOrder == 2">
+                u.reg_time asc is null, u.reg_time asc ,
+            </if>
+            <if test="userIdOrder == 1">
+                u.user_id desc is null, u.user_id desc
+            </if>
+            <if test="userIdOrder == 2">
+                u.user_id is null, u.user_id asc
+            </if>
+        </trim>
+    </select>
+
+    <select id="count" resultType="int" parameterType="map">
+        select
+        count(*) count
+        from gp_view_user_recharge_summary u
+        left join gp_tbl_platform_info p
+        on p.id = u.platform_id
+        left join gp_tbl_game_server_config s
+        on s.id = u.server_id
+        left join gp_tbl_country_info c
+        on p.country = c.id
+        left join tbl_gp_plat_terminal_info t
+        on p.platform_terminal = t.id
+        where 1=1
+        <if test="platformId != null and platformId != '' and platformId != 'null'">and u.platform_id = #{platformId}
+        </if>
+        <if test="user != null and user != ''">and (u.user_id like CONCAT(CONCAT('%',#{user}),'%') or u.nickname like
+            CONCAT(CONCAT('%',#{user}),'%'))
+        </if>
+        <if test="phone != null and phone != ''">and u.phone like CONCAT(CONCAT('%',#{phone}),'%')</if>
+        <if test="email != null and email != ''">and u.email like CONCAT(CONCAT('%',#{email}),'%')</if>
+        <if test="regTimeStart != null and regTimeStart != ''">and date_format(u.reg_time,'%Y-%m-%d') &gt;=
+            #{regTimeStart}
+        </if>
+        <if test="regTimeEnd != null and regTimeEnd != ''">and date_format(u.reg_time,'%Y-%m-%d') &lt;= #{regTimeEnd}
+        </if>
+        <if test="amountStart != nulll and amountStart != ''">and u.total_amount &gt;= #{amountStart}</if>
+        <if test="amountEnd != null and amountEnd != ''">and u.total_amount &lt;= #{amountEnd}</if>
+        <if test="serverId != null and serverId != '' and serverId != 'null'">and u.server_id = #{serverId}</if>
+        <if test="channelId != null and channelId != ''">and u.channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="channelName != null and channelName != ''">and u.channel_name like
+            CONCAT(CONCAT('%',#{channelName}),'%')
+        </if>
+        <if test="countryId != null and countryId != ''">and c.id = #{countryId}</if>
+        <if test="platformTerminal != null and platformTerminal != '' and platformTerminal != -999">and
+            p.platform_terminal = #{platformTerminal}
+        </if>
+    </select>
 </mapper>

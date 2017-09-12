@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="infoPositionStatH">
 
-     
-     <select id="findInfoPositionStatH" resultType="infoPositionStatH" parameterType="map">
+
+    <select id="findInfoPositionStatH" resultType="infoPositionStatH" parameterType="map">
         select * from tbl_dm_add_position_stat_h where 1= 1
         <if test="domain != null">
             and domain_id = #{domain}
@@ -12,12 +12,12 @@
             and date_format(etl_date,'%Y-%m-%d') = #{date}
         </if>
         <if test="positionIdArr != null">
-			and position_id in 
-			<foreach item="item" index="index" collection="positionIdArr" 
-                         open="(" separator="," close=")">
-                        #{item}
-             </foreach>
-		</if>
-     </select>
-	
+            and position_id in
+            <foreach item="item" index="index" collection="positionIdArr"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
 </mapper>

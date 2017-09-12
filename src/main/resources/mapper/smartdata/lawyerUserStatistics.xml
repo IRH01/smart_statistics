@@ -1,73 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="lawyerUserStatistics">
-	<resultMap type="ChannelMonthAllbet" id="ChannelMonthAllbetMap">
-		<result property="rechargeMonth" column="RECHARGE_MONTH"/>
-		<result property="channelId" column="CHANNEL_ID"/>
-		<result property="downloadTimes" column="DOWNLOAD_TIMES"/>
-		<result property="registUsers" column="REGIST_USERS"/>
-		<result property="actionUsers" column="ACTIVE_USERS"/>
-		<result property="rechargeUsers" column="RECHARGE_USERS"/>
-		<result property="rechargeAmount" column="RECHARGE_AMOUNT"/>
-		<result property="betingUsers" column="BETING_USERS"/>
-		<result property="betingAccSum" column="BETING_ACC_SUM"/>
-		
-		<result property="dzBetingUsers" column="DZ_BETING_USERS"/>
-		<result property="dzBetingAccSum" column="DZ_BET_ACC_SUM"/>
-		<result property="djBetingUsers" column="DJ_BETING_USERS"/>
-		<result property="djBetingAccSum" column="DJ_BETING_ACC_SUM"/>
-		
-		<result property="djBetingUsers" column="dj_betting_users"/>
-		<result property="djBetingAccSum" column="dj_bet_acc_sum"/>
-		
-		<result property="rechargeDay" column="recharge_day"/>
-	</resultMap>
-	
-	<select id="getAllChannelMonthAllbet" resultMap="ChannelMonthAllbetMap" parameterType="map">
-		select recharge_month, channel_id, download_times, regist_users, active_users, recharge_users, format(recharge_amount, 2) as RECHARGE_AMOUNT, beting_users, format(beting_acc_sum, 2) as BETING_ACC_SUM from view_channel_month_allbet_sum
-		where 1=1
-		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-		<if test="dateStart != null and dateStart != ''">and recharge_month &gt;= replace(substr(#{dateStart}, 0, 7),'-','') </if>
-		<if test="dateEnd != null and dateEnd != ''">and recharge_month &lt;= replace(substr(#{dateEnd}, 0, 7),'-','') </if>
-	</select>
-	
-	<select id="count" resultType="int" parameterType="map">
-		select count(1) as count from view_channel_month_allbet_sum
-		where 1=1
-		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-		<if test="dateStart != null and dateStart != ''">and recharge_month &gt;= replace(substr(#{dateStart}, 0, 7),'-','') </if>
-		<if test="dateEnd != null and dateEnd != ''">and recharge_month &lt;= replace(substr(#{dateEnd}, 0, 7),'-','') </if>
-	</select>
-	
-	<select id="countMonth" resultType="int" parameterType="map">
-		select count(1) from view_channel_month_sum
-		where 1=1
-		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-		<if test="rechargeMonth != null and rechargeMonth != ''">and recharge_month = #{rechargeMonth}</if>
-	</select>
-	
-	<select id="countDay" resultType="int" parameterType="map">
-		select count(1)  from view_channel_daily_sum
-		where 1=1
-		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-		<if test="rechargeMonth != null and rechargeMonth != ''">and substr(recharge_day, 0, 6) = #{rechargeMonth}</if>
-		<if test="dateStart != null and dateStart != ''">and recharge_day &gt;= replace(#{dateStart},'-','') </if>
-		<if test="dateEnd != null and dateEnd != ''">and recharge_day &lt;= replace(#{dateEnd},'-','') </if>
-	</select>
-	
-	<select id="getChannelMonthSum" resultMap="ChannelMonthAllbetMap" parameterType="map">
-		select recharge_month,channel_id, download_times, regist_users, active_users, recharge_users,format(recharge_amount, 2) as recharge_amount,dz_beting_users,format(dz_bet_acc_sum, 2) as dz_bet_acc_sum,dj_betting_users,format(dj_bet_acc_sum, 2) as dj_bet_acc_sum  from view_channel_month_sum
-		where 1=1
-		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-		<if test="rechargeMonth != null and rechargeMonth != ''">and recharge_month = #{rechargeMonth}</if>
-	</select>
-	
-	<select id="getChannelDaySum" resultMap="ChannelMonthAllbetMap" parameterType="map">
-		select recharge_day,channel_id, download_times, regist_users, active_users, recharge_users,format(RECHARGE_AMOUNT, 2) as RECHARGE_AMOUNT,dz_beting_users,format(dz_bet_acc_sum, 2) as dz_bet_acc_sum,dj_betting_users,format(dj_bet_acc_sum, 2) as dj_bet_acc_sum  from view_channel_daily_sum
-		where 1=1
-		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
-		<if test="rechargeMonth != null and rechargeMonth != ''">and substr(recharge_day, 0, 6) = #{rechargeMonth}</if>
-		<if test="dateStart != null and dateStart != ''">and recharge_day &gt;= replace(#{dateStart},'-','') </if>
-		<if test="dateEnd != null and dateEnd != ''">and recharge_day &lt;= replace(#{dateEnd},'-','') </if>
-	</select>
+    <resultMap type="ChannelMonthAllbet" id="ChannelMonthAllbetMap">
+        <result property="rechargeMonth" column="RECHARGE_MONTH"/>
+        <result property="channelId" column="CHANNEL_ID"/>
+        <result property="downloadTimes" column="DOWNLOAD_TIMES"/>
+        <result property="registUsers" column="REGIST_USERS"/>
+        <result property="actionUsers" column="ACTIVE_USERS"/>
+        <result property="rechargeUsers" column="RECHARGE_USERS"/>
+        <result property="rechargeAmount" column="RECHARGE_AMOUNT"/>
+        <result property="betingUsers" column="BETING_USERS"/>
+        <result property="betingAccSum" column="BETING_ACC_SUM"/>
+
+        <result property="dzBetingUsers" column="DZ_BETING_USERS"/>
+        <result property="dzBetingAccSum" column="DZ_BET_ACC_SUM"/>
+        <result property="djBetingUsers" column="DJ_BETING_USERS"/>
+        <result property="djBetingAccSum" column="DJ_BETING_ACC_SUM"/>
+
+        <result property="djBetingUsers" column="dj_betting_users"/>
+        <result property="djBetingAccSum" column="dj_bet_acc_sum"/>
+
+        <result property="rechargeDay" column="recharge_day"/>
+    </resultMap>
+
+    <select id="getAllChannelMonthAllbet" resultMap="ChannelMonthAllbetMap" parameterType="map">
+        select recharge_month, channel_id, download_times, regist_users, active_users, recharge_users,
+        format(recharge_amount, 2) as RECHARGE_AMOUNT, beting_users, format(beting_acc_sum, 2) as BETING_ACC_SUM from
+        view_channel_month_allbet_sum
+        where 1=1
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="dateStart != null and dateStart != ''">and recharge_month &gt;= replace(substr(#{dateStart}, 0,
+            7),'-','')
+        </if>
+        <if test="dateEnd != null and dateEnd != ''">and recharge_month &lt;= replace(substr(#{dateEnd}, 0, 7),'-','')
+        </if>
+    </select>
+
+    <select id="count" resultType="int" parameterType="map">
+        select count(1) as count from view_channel_month_allbet_sum
+        where 1=1
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="dateStart != null and dateStart != ''">and recharge_month &gt;= replace(substr(#{dateStart}, 0,
+            7),'-','')
+        </if>
+        <if test="dateEnd != null and dateEnd != ''">and recharge_month &lt;= replace(substr(#{dateEnd}, 0, 7),'-','')
+        </if>
+    </select>
+
+    <select id="countMonth" resultType="int" parameterType="map">
+        select count(1) from view_channel_month_sum
+        where 1=1
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="rechargeMonth != null and rechargeMonth != ''">and recharge_month = #{rechargeMonth}</if>
+    </select>
+
+    <select id="countDay" resultType="int" parameterType="map">
+        select count(1) from view_channel_daily_sum
+        where 1=1
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="rechargeMonth != null and rechargeMonth != ''">and substr(recharge_day, 0, 6) = #{rechargeMonth}</if>
+        <if test="dateStart != null and dateStart != ''">and recharge_day &gt;= replace(#{dateStart},'-','')</if>
+        <if test="dateEnd != null and dateEnd != ''">and recharge_day &lt;= replace(#{dateEnd},'-','')</if>
+    </select>
+
+    <select id="getChannelMonthSum" resultMap="ChannelMonthAllbetMap" parameterType="map">
+        select recharge_month,channel_id, download_times, regist_users, active_users,
+        recharge_users,format(recharge_amount, 2) as recharge_amount,dz_beting_users,format(dz_bet_acc_sum, 2) as
+        dz_bet_acc_sum,dj_betting_users,format(dj_bet_acc_sum, 2) as dj_bet_acc_sum from view_channel_month_sum
+        where 1=1
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="rechargeMonth != null and rechargeMonth != ''">and recharge_month = #{rechargeMonth}</if>
+    </select>
+
+    <select id="getChannelDaySum" resultMap="ChannelMonthAllbetMap" parameterType="map">
+        select recharge_day,channel_id, download_times, regist_users, active_users,
+        recharge_users,format(RECHARGE_AMOUNT, 2) as RECHARGE_AMOUNT,dz_beting_users,format(dz_bet_acc_sum, 2) as
+        dz_bet_acc_sum,dj_betting_users,format(dj_bet_acc_sum, 2) as dj_bet_acc_sum from view_channel_daily_sum
+        where 1=1
+        <if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+        <if test="rechargeMonth != null and rechargeMonth != ''">and substr(recharge_day, 0, 6) = #{rechargeMonth}</if>
+        <if test="dateStart != null and dateStart != ''">and recharge_day &gt;= replace(#{dateStart},'-','')</if>
+        <if test="dateEnd != null and dateEnd != ''">and recharge_day &lt;= replace(#{dateEnd},'-','')</if>
+    </select>
 </mapper>

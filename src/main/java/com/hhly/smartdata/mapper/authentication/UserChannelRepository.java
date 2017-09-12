@@ -1,33 +1,35 @@
 package com.hhly.smartdata.mapper.authentication;
 
-import java.util.List;
-
+import com.hhly.smartdata.model.authentication.UserChannel;
 import org.springframework.stereotype.Repository;
 
-import com.hhly.smartdata.model.authentication.UserChannel;
+import java.util.List;
 
 @Repository
 public class UserChannelRepository extends BaseRepository{
-	/**
-	 * 根据userId删除
-	 * @param userId
-	 * @return
-	 */
+    /**
+     * 根据userId删除
+     *
+     * @param userId
+     * @return
+     */
     public int deleteByUserId(Integer userId){
         return template.delete("userChannel.deleteByUserId", userId);
     }
-    
+
     /**
      * 批量插入
+     *
      * @param userChannels
      * @return
      */
     public int batchAdd(List<UserChannel> userChannels){
-    	return template.insert("userChannel.batchAdd", userChannels);
+        return template.insert("userChannel.batchAdd", userChannels);
     }
 
     /**
      * 根据userId查询
+     *
      * @param userId
      * @return
      */

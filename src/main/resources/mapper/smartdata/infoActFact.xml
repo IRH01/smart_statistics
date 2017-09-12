@@ -2,132 +2,132 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="infoActFact">
 
-	<resultMap type="com.hhly.smartdata.dto.HistoryIpDto" id="ipCountMapper">
-		<result column="ip_count" property="ipCount" />
-		<result column="current_date" property="date" />
-	</resultMap>
-	
-	
-	<resultMap type="com.hhly.smartdata.dto.HistoryConsultDto" id="consultCountMapper">
-		<result column="consult_count" property="consultCount" />
-		<result column="current_date" property="date" />
-	</resultMap>
-	
-	<resultMap type="com.hhly.smartdata.dto.HistoryStayTimeDto" id="stayTimeCountMapper">
-		<result column="current_date" property="date" />
-		<result column="stay_time" property="stayTime" />
-	</resultMap>
-	
-	<resultMap type="com.hhly.smartdata.dto.HistoryClickNumberDto" id="clickNumberCountMapper">
-		<result column="current_date" property="date" />
-		<result column="click_number" property="clickNumber" />
-	</resultMap>
-	
-	
-	<!-- 总览：点击量信息 -->
-	<resultMap id="ActCountInfoMap" type="ActCountInfo">
-		<result property="count" column="count" />
-		<result property="unitValue" column="unit_value" />
-		<result property="infoTypeName" column="type_name" />
-		<result property="infoTypeId" column="type_id" />
-	</resultMap>
-	
-	<!-- 根据资讯获取点击量等的查询条件 -->
-	<sql id="countActCondition">
-		<if test="startDate != null">and a.etl_date &gt;= to_date(#{startDate},'yyyy-MM-dd HH24:mi:ss')</if>
-		<if test="endDate != null">and a.etl_date &lt;to_date(#{endDate},'yyyy-MM-dd HH24:mi:ss')</if> 
-		<if test="domainId!=null and domainId!=''">
-			and a.position_id=#{domainId}
-		</if>  
-	</sql>
-	
-	<!-- 根据日期和域名查询所有的点击量 -->
-	<select id="countAllClickByDate" resultType="long" parameterType="map">
-		select 
-	      	sum(a.click_cnt) count
-	      from tbl_dm_info_type_stat_d a 
-	      where 1=1
-	      	<include refid="countActCondition" />
-	</select>
-	<!-- 根据日期和域名计算各个资讯类别的点击量 -->
-	<select id="countClickByTypeAdDate" parameterType="map" resultMap="ActCountInfoMap">
-	  select
-	  act.count,
-	  act.unit_value,
-	  type.type_id,
-	  (case when upper(type.type_id)='EMPTY' then '其他' else type.type_name end)type_name
-	  from (
-	      select 
-	      	sum(a.click_cnt) count,
-	      	sum(a.ip_cnt) unit_value,
-	      	a.info_type_id
-	      from tbl_dm_info_type_stat_d a 
-	      where 1=1
-	      	<include refid="countActCondition" />
-	      group by a.info_type_id
-	  ) act	
-	  left join tbl_dw_dim_info_type type
-	  on act.info_type_id = type.tbl_id
-	  order by type.tbl_id asc
-	</select>
-	
-	<!-- 根据日期和域名查询所有的IP -->
-	<select id="countAllIPByDate" resultType="long" parameterType="map">
-		select 
-	      	sum(a.ip_cnt) count
-	      from tbl_dm_info_type_stat_d a
-	      where 1=1
-	      	<include refid="countActCondition" />
-	</select>
-	<!-- 根据日期和域名计算各个资讯类别下所有行为的IP -->
-	<select id="countIPByTypeAdDate" parameterType="map" resultMap="ActCountInfoMap">
-	  select
-	  act.count,
-	  act.unit_value,
-	  type.type_id,
-	  (case when upper(type.type_id)='EMPTY' then '其他' else type.type_name end)type_name
-	  from  (
-	      select 
-	      	sum(a.ip_cnt) count,
-	      	sum(a.info_cnt) unit_value,
-	      	a.info_type_id
-	      from tbl_dm_info_type_stat_d a 
-	      where 1=1
-	      	<include refid="countActCondition" />
-	      group by a.info_type_id
-	  ) act
-	  left join tbl_dw_dim_info_type type
-	  on act.info_type_id = type.tbl_id
-	  order by type.tbl_id asc
-	</select>
+    <resultMap type="com.hhly.smartdata.dto.HistoryIpDto" id="ipCountMapper">
+        <result column="ip_count" property="ipCount"/>
+        <result column="current_date" property="date"/>
+    </resultMap>
 
-	<!-- 根据日期和域名查询所有的停留时长 -->
-	<select id="countAllStayTimeByDate" resultType="long" parameterType="map">
-		select 
-        	sum(a.stay_cnt)
-	    from tbl_dm_info_type_stat_d a
-	    where 1=1
-	      	<include refid="countActCondition" />
-	</select>
-	<!-- 根据日期和域名计算各个资讯类别下所有行为的停留时长 -->	
-	<select id="countStayTimeByTypeAdDate" parameterType="map" resultMap="ActCountInfoMap">
-	  select
-	  act.count,
-	  act.unit_value,
-	  type.type_id,
-	  (case when upper(type.type_id)='EMPTY' then '其他' else type.type_name end)type_name
-	  from (
-	      select 
-	      	sum(a.stay_cnt) count,
-	      	sum(a.ip_cnt) unit_value,
-	      	a.info_type_id
-	      from tbl_dm_info_type_stat_d a 
-	      where 1=1
-	      	<include refid="countActCondition" />
-	      group by a.info_type_id
-	  ) act 
-	  left join tbl_dw_dim_info_type type
-	  on act.info_type_id = type.tbl_id
-	  order by type.tbl_id asc
-	</select>
+
+    <resultMap type="com.hhly.smartdata.dto.HistoryConsultDto" id="consultCountMapper">
+        <result column="consult_count" property="consultCount"/>
+        <result column="current_date" property="date"/>
+    </resultMap>
+
+    <resultMap type="com.hhly.smartdata.dto.HistoryStayTimeDto" id="stayTimeCountMapper">
+        <result column="current_date" property="date"/>
+        <result column="stay_time" property="stayTime"/>
+    </resultMap>
+
+    <resultMap type="com.hhly.smartdata.dto.HistoryClickNumberDto" id="clickNumberCountMapper">
+        <result column="current_date" property="date"/>
+        <result column="click_number" property="clickNumber"/>
+    </resultMap>
+
+
+    <!-- 总览：点击量信息 -->
+    <resultMap id="ActCountInfoMap" type="ActCountInfo">
+        <result property="count" column="count"/>
+        <result property="unitValue" column="unit_value"/>
+        <result property="infoTypeName" column="type_name"/>
+        <result property="infoTypeId" column="type_id"/>
+    </resultMap>
+
+    <!-- 根据资讯获取点击量等的查询条件 -->
+    <sql id="countActCondition">
+        <if test="startDate != null">and a.etl_date &gt;= to_date(#{startDate},'yyyy-MM-dd HH24:mi:ss')</if>
+        <if test="endDate != null">and a.etl_date &lt;to_date(#{endDate},'yyyy-MM-dd HH24:mi:ss')</if>
+        <if test="domainId!=null and domainId!=''">
+            and a.position_id=#{domainId}
+        </if>
+    </sql>
+
+    <!-- 根据日期和域名查询所有的点击量 -->
+    <select id="countAllClickByDate" resultType="long" parameterType="map">
+        select
+        sum(a.click_cnt) count
+        from tbl_dm_info_type_stat_d a
+        where 1=1
+        <include refid="countActCondition"/>
+    </select>
+    <!-- 根据日期和域名计算各个资讯类别的点击量 -->
+    <select id="countClickByTypeAdDate" parameterType="map" resultMap="ActCountInfoMap">
+        select
+        act.count,
+        act.unit_value,
+        type.type_id,
+        (case when upper(type.type_id)='EMPTY' then '其他' else type.type_name end)type_name
+        from (
+        select
+        sum(a.click_cnt) count,
+        sum(a.ip_cnt) unit_value,
+        a.info_type_id
+        from tbl_dm_info_type_stat_d a
+        where 1=1
+        <include refid="countActCondition"/>
+        group by a.info_type_id
+        ) act
+        left join tbl_dw_dim_info_type type
+        on act.info_type_id = type.tbl_id
+        order by type.tbl_id asc
+    </select>
+
+    <!-- 根据日期和域名查询所有的IP -->
+    <select id="countAllIPByDate" resultType="long" parameterType="map">
+        select
+        sum(a.ip_cnt) count
+        from tbl_dm_info_type_stat_d a
+        where 1=1
+        <include refid="countActCondition"/>
+    </select>
+    <!-- 根据日期和域名计算各个资讯类别下所有行为的IP -->
+    <select id="countIPByTypeAdDate" parameterType="map" resultMap="ActCountInfoMap">
+        select
+        act.count,
+        act.unit_value,
+        type.type_id,
+        (case when upper(type.type_id)='EMPTY' then '其他' else type.type_name end)type_name
+        from (
+        select
+        sum(a.ip_cnt) count,
+        sum(a.info_cnt) unit_value,
+        a.info_type_id
+        from tbl_dm_info_type_stat_d a
+        where 1=1
+        <include refid="countActCondition"/>
+        group by a.info_type_id
+        ) act
+        left join tbl_dw_dim_info_type type
+        on act.info_type_id = type.tbl_id
+        order by type.tbl_id asc
+    </select>
+
+    <!-- 根据日期和域名查询所有的停留时长 -->
+    <select id="countAllStayTimeByDate" resultType="long" parameterType="map">
+        select
+        sum(a.stay_cnt)
+        from tbl_dm_info_type_stat_d a
+        where 1=1
+        <include refid="countActCondition"/>
+    </select>
+    <!-- 根据日期和域名计算各个资讯类别下所有行为的停留时长 -->
+    <select id="countStayTimeByTypeAdDate" parameterType="map" resultMap="ActCountInfoMap">
+        select
+        act.count,
+        act.unit_value,
+        type.type_id,
+        (case when upper(type.type_id)='EMPTY' then '其他' else type.type_name end)type_name
+        from (
+        select
+        sum(a.stay_cnt) count,
+        sum(a.ip_cnt) unit_value,
+        a.info_type_id
+        from tbl_dm_info_type_stat_d a
+        where 1=1
+        <include refid="countActCondition"/>
+        group by a.info_type_id
+        ) act
+        left join tbl_dw_dim_info_type type
+        on act.info_type_id = type.tbl_id
+        order by type.tbl_id asc
+    </select>
 </mapper>
