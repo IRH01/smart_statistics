@@ -15,15 +15,14 @@ import java.util.Set;
 @Service
 public class PermissionService{
     @Autowired
-    private PermissionMapper permissionRepository;
+    private PermissionMapper permissionMapper;
     @Autowired
-    private MenuMapper menuRepository;
+    private MenuMapper menuMapper;
     @Autowired
-    private RoleMapper roleRepository;
-
+    private RoleMapper roleMapper;
 
     public List<Permission> searchPerms(Permission perm){
-        return permissionRepository.searchPerms(perm);
+        return permissionMapper.searchPerms(perm);
     }
 
     public void delete(Permission condition){
@@ -31,11 +30,11 @@ public class PermissionService{
             //删除对应菜单
             Menu menuCondition = new Menu();
             menuCondition.setPermission(perm.getPermission());
-            menuRepository.delete(menuCondition);
+            menuMapper.delete(menuCondition);
             //删除对应角色权限分配
-            roleRepository.delPerm(perm.getPermission());
+            roleMapper.delPerm(perm.getPermission());
             //删除权限
-            permissionRepository.delete(perm);
+            permissionMapper.delete(perm);
         }
     }
 
@@ -52,7 +51,7 @@ public class PermissionService{
             if(!existPerms.contains(perm.getPermission())){
                 delete(perm);//删除关联内容
             }else{
-                permissionRepository.delete(perm);//不删除关联内容
+                permissionMapper.delete(perm);//不删除关联内容
             }
         }
 
@@ -64,15 +63,15 @@ public class PermissionService{
     }
 
     public void save(Permission permission){
-        permissionRepository.insert(permission);
+        permissionMapper.insert(permission);
     }
 
     public List<Permission> queryByRole(List<Integer> roleIds){
-        return permissionRepository.queryByRole(roleIds);
+        return permissionMapper.queryByRole(roleIds);
     }
 
 
     public List<Permission> getAll(){
-        return permissionRepository.getAll();
+        return permissionMapper.getAll();
     }
 }

@@ -2,9 +2,9 @@ package com.hhly.smartdata.service.authentication;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.hhly.smartdata.mapper.authentication.MenuMapper;
+import com.hhly.smartdata.mapper.authentication.RoleMapper;
 import com.hhly.smartdata.model.authentication.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,12 @@ import java.util.Map;
 @Service
 public class MenuService{
     @Autowired
-    private MenuMapper menuRepository;
+    private MenuMapper menuMapper;
     @Autowired
-    private RoleService roleService;
+    private RoleMapper roleMapper;
 
     public List<Menu> getMenuByPerms(List<String> perms){
-        return menuRepository.getMenuByPerms(perms);
+        return menuMapper.getMenuByPerms(perms);
     }
 
     public List<Menu> getAll(){
@@ -29,18 +29,18 @@ public class MenuService{
     }
 
     public List<Menu> searchMenus(Menu menu){
-        return menuRepository.searchMenu(menu);
+        return menuMapper.searchMenu(menu);
     }
 
     public Menu get(Integer id){
         Menu condtion = new Menu();
         condtion.setId(id);
-        List<Menu> menus = menuRepository.searchMenu(condtion);
+        List<Menu> menus = menuMapper.searchMenu(condtion);
         return menus.isEmpty() ? null : menus.get(0);
     }
 
     public void update(Menu menu){
-        menuRepository.update(menu);
+        menuMapper.update(menu);
     }
 
     public Map<String, Integer> updateMenuTree(JSONArray menuTree, Integer parentId){
@@ -55,7 +55,7 @@ public class MenuService{
                 menu.setId(menuJSON.getInteger("id"));
                 update(menu);
             }else{
-                menuRepository.insert(menu);
+                menuMapper.insert(menu);
             }
             ids.put(menuJSON.getString("tId"), menu.getId());
             if(menuJSON.containsKey("children")){
@@ -77,15 +77,14 @@ public class MenuService{
         Collection<Integer> existIds = result.values();
         for(Menu menu : allMenu){
             if(!existIds.contains(menu.getId())){
-                menuRepository.delete(menu);
+                menuMapper.delete(menu);
             }
         }
         return result;
     }
 
     public List<Menu> getMenuListByRole(List<Integer> roleIds){
-        List<String> perms = Lists.newArrayList();
-        perms = roleService.getPerms(roleIds);
+        List<String> perms = roleMapper.getPerms(roleIds);
         System.out.println(perms.size());
         List<Menu> menus = this.getMenuByPerms(perms);
         return menus;

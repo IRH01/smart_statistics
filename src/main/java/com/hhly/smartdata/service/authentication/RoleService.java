@@ -16,34 +16,34 @@ import java.util.Map;
 public class RoleService{
 
     @Autowired
-    private RoleMapper roleRepository;
+    private RoleMapper roleMapper;
 
     public List<Role> getRolesByUserId(int userId){
-        return roleRepository.getRolesByUserId(userId);
+        return roleMapper.getRolesByUserId(userId);
     }
 
     public List<String> getPerms(List<Integer> roleIds){
-        return roleRepository.getPerms(roleIds);
+        return roleMapper.getPerms(roleIds);
     }
 
     public List<Role> search(Role role, Page page){
-        return roleRepository.search(role, page);
+        return roleMapper.search(role, page);
     }
 
     public void delete(Integer roleId){
         List<Integer> roleIdList = new ArrayList<Integer>();
         roleIdList.add(roleId);
         /*删除用户角色关联表*/
-        roleRepository.delUsersByRole(roleIdList);
+        roleMapper.delUsersByRole(roleIdList);
         /* 删除角色权限关联表*/
         delPermsByRole(roleIdList);
         /*删除角色表*/
-        roleRepository.delete(roleId);
+        roleMapper.delete(roleId);
     }
 
     public void insert(Role role){
         /*插入角色*/
-        roleRepository.insert(role);
+        roleMapper.insert(role);
         List<RolePermission> rolePermissionList = new ArrayList<RolePermission>();
         if(role.getPermissionIds().length() > 0){
             if(role.getPermissionIds().indexOf(",") > 0){
@@ -71,7 +71,7 @@ public class RoleService{
         List<Integer> roleLists = new ArrayList<Integer>();
         roleLists.add(role.getId());
         /*根据角色删除权限（角色权限关联表）*/
-        roleRepository.delPermsByRole(roleLists);
+        roleMapper.delPermsByRole(roleLists);
 
         if(role.getPermissionIds().length() > 0){
             if(role.getPermissionIds().indexOf(",") > 0){
@@ -90,33 +90,33 @@ public class RoleService{
             }
         }
         /*修改角色*/
-        roleRepository.update(role);
+        roleMapper.update(role);
         /*更新角色权限*/
         insertRolePermission(rolePermissionList);
 
     }
 
     public int delPermsByRole(List<Integer> roleIds){
-        return roleRepository.delPermsByRole(roleIds);
+        return roleMapper.delPermsByRole(roleIds);
     }
 
     public void insertRolePermission(List<RolePermission> rolePermissionList){
         for(RolePermission rolePermission : rolePermissionList){
-            roleRepository.insertRolePermission(rolePermission);
+            roleMapper.insertRolePermission(rolePermission);
         }
     }
 
     public Role get(Integer id){
-        return roleRepository.get(id);
+        return roleMapper.get(id);
     }
 
     public void allocRole(Integer userId, Integer[] roles){
-        roleRepository.deleteUserRoles(userId);
+        roleMapper.deleteUserRoles(userId);
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", userId);
         for(Integer roleId : roles){
             params.put("roleId", roleId);
-            roleRepository.insertUserRole(params);
+            roleMapper.insertUserRole(params);
         }
     }
 

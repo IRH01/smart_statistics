@@ -4,7 +4,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.hhly.smartdata.mapper.authentication.FunctionMapper;
+import com.hhly.smartdata.mapper.authentication.MenuMapper;
+import com.hhly.smartdata.mapper.authentication.PermissionMapper;
+import com.hhly.smartdata.mapper.authentication.RoleMapper;
 import com.hhly.smartdata.model.authentication.Function;
+import com.hhly.smartdata.model.authentication.Menu;
 import com.hhly.smartdata.model.authentication.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,17 +21,21 @@ import java.util.Map;
 public class FunctionService{
 
     @Autowired
-    private FunctionMapper functionRepository;
-
+    private FunctionMapper functionMapper;
     @Autowired
-    private PermissionService permissionService;
+    private PermissionMapper permissionMapper;
+    @Autowired
+    private MenuMapper menuMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
     public List<Function> getAll(){
-        return functionRepository.search(null);//查询条件为null，即查询全部
+        //查询条件为null，即查询全部
+        return functionMapper.search(null);
     }
 
     public void save(Function function){
-        functionRepository.insert(function);
+        functionMapper.insert(function);
     }
 
     /**
@@ -78,20 +86,29 @@ public class FunctionService{
     }
 
     public void update(Function function){
-        functionRepository.update(function);
+        functionMapper.update(function);
     }
 
     public void delete(Integer id){
-
         Permission permCondition = new Permission();
         permCondition.setFunctionId(id);
-        permissionService.delete(permCondition);//删除功能下的权限--同时删除关联资源
-
-        functionRepository.delete(id);
+        //删除功能下的权限--同时删除关联资源
+        List<Permission> permissions = permissionMapper.searchPerms(permCondition);
+        for(Permission perm : permissions){
+            //删除对应菜单
+            Menu menuCondition = new Menu();
+            menuCondition.setPermission(perm.getPermission());
+            menuMapper.delete(menuCondition);
+            //删除对应角色权限分配
+            roleMapper.delPerm(perm.getPermission());
+            //删除权限
+            permissionMapper.delete(perm);
+        }
+        functionMapper.delete(id);
     }
 
     public List<Function> queryByRole(List<Integer> roleIds){
-        return functionRepository.queryByRole(roleIds);
+        return functionMapper.queryByRole(roleIds);
     }
 
 }

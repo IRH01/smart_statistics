@@ -14,12 +14,12 @@ import java.util.List;
 @Service
 public class UserService{
     @Autowired
-    private UserMapper userRepository;
+    private UserMapper userMapper;
 
     public User getUserByUsername(String username){
         User user = new User();
         try{
-            user = userRepository.getByUsername(username);
+            user = userMapper.getByUsername(username);
         }catch(Exception e){
             e.printStackTrace();
             System.out.println(e);
@@ -28,23 +28,23 @@ public class UserService{
     }
 
     public List<User> searchUsers(User condition, Page page){
-        return userRepository.searchUsers(condition, page);
+        return userMapper.searchUsers(condition, page);
     }
 
     public int update(User user){
-        return userRepository.update(user);
+        return userMapper.update(user);
     }
 
     public User getUser(Integer id){
-        return userRepository.getUser(id);
+        return userMapper.getUser(id);
     }
 
     public User saveUser(User user){
-        userRepository.insert(user);
+        userMapper.insert(user);
         return user;
     }
 
     public int delete(Integer id){
-        return userRepository.delete(id);
+        return userMapper.delete(id);
     }
 }

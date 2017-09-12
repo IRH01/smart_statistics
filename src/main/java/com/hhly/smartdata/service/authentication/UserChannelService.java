@@ -10,18 +10,18 @@ import java.util.List;
 @Service
 public class UserChannelService{
     @Autowired
-    private UserChannelMapper userChannelRepository;
+    private UserChannelMapper userChannelMapper;
 
     public int deleteByUserId(Integer userId){
-        return userChannelRepository.deleteByUserId(userId);
+        return userChannelMapper.deleteByUserId(userId);
     }
 
     public int batchAdd(List<UserChannel> userChannels){
-        return userChannelRepository.batchAdd(userChannels);
+        return userChannelMapper.batchAdd(userChannels);
     }
 
     public List<UserChannel> getByUserId(Integer userId){
-        return userChannelRepository.getByUserId(userId);
+        return userChannelMapper.getByUserId(userId);
     }
 
 }

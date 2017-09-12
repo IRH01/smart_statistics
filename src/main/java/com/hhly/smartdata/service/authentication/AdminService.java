@@ -17,20 +17,20 @@ import java.util.List;
 public class AdminService{
 
     @Autowired
-    private AdminMapper adminRepository;
+    private AdminMapper adminMapper;
     @Autowired
-    private UserMapper userRepository;
+    private UserMapper userMapper;
     @Autowired
-    private UserChannelMapper userChannelRepository;
+    private UserChannelMapper userChannelMapper;
 
     public List<Admin> searchAdmins(Admin condition, Page page){
-        return adminRepository.searchAdmins(condition, page);
+        return adminMapper.searchAdmins(condition, page);
     }
 
     @Transactional
     public void save(Admin admin){
-        userRepository.insert(admin);
-        adminRepository.insert(admin);
+        userMapper.insert(admin);
+        adminMapper.insert(admin);
         if(admin.getChannelIds().length() > 0){
             List<UserChannel> userChannels = new ArrayList<UserChannel>();
             if(admin.getChannelIds().indexOf(",") > 0){
@@ -47,15 +47,15 @@ public class AdminService{
                 userChannel.setChannelId(admin.getChannelIds());
                 userChannels.add(userChannel);
             }
-            userChannelRepository.batchAdd(userChannels);
+            userChannelMapper.batchAdd(userChannels);
         }
     }
 
     @Transactional
     public void update(Admin admin){
-        userRepository.update(admin);
-        adminRepository.update(admin);
-        userChannelRepository.deleteByUserId(admin.getUserId());
+        userMapper.update(admin);
+        adminMapper.update(admin);
+        userChannelMapper.deleteByUserId(admin.getUserId());
         if(admin.getChannelIds().length() > 0){
             List<UserChannel> userChannels = new ArrayList<UserChannel>();
             if(admin.getChannelIds().indexOf(",") > 0){
@@ -73,18 +73,18 @@ public class AdminService{
                 userChannel.setChannelId(admin.getChannelIds());
                 userChannels.add(userChannel);
             }
-            userChannelRepository.batchAdd(userChannels);
+            userChannelMapper.batchAdd(userChannels);
         }
     }
 
     public Admin get(Integer id){
-        return adminRepository.get(id);
+        return adminMapper.get(id);
     }
 
     @Transactional
     public int deleteByUserId(int userId){
-        int result = adminRepository.deleteByUserId(userId);
-        result = userRepository.delete(userId);
+        int result = adminMapper.deleteByUserId(userId);
+        result = userMapper.delete(userId);
         return result;
     }
 
