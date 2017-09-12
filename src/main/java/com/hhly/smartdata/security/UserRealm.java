@@ -20,8 +20,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +29,13 @@ import java.util.Set;
 
 public class UserRealm extends AuthorizingRealm{
 
-    @Resource
+    @Autowired
     private UserService userService;
-    @Resource
+    @Autowired
     private RoleService roleService;
-    @Resource
+    @Autowired
     private PermissionService permissionService;
-    @Resource
+    @Autowired
     private MenuService menuService;
 
     @Override

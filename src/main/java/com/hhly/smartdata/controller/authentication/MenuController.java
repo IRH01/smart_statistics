@@ -5,13 +5,13 @@ import com.google.common.collect.Lists;
 import com.hhly.smartdata.model.authentication.Menu;
 import com.hhly.smartdata.service.authentication.MenuService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +20,7 @@ import java.util.Map;
 @RequestMapping("/sys/menu")
 public class MenuController{
 
-    @Resource
+    @Autowired
     private MenuService menuService;
 
     @RequestMapping("/list.do")

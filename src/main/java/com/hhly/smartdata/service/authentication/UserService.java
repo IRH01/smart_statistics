@@ -1,23 +1,50 @@
 package com.hhly.smartdata.service.authentication;
 
+import com.hhly.smartdata.mapper.authentication.UserRepository;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.util.page.Page;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by vxbb
  */
-public interface UserService{
-    User getUserByUsername(String username);
+@Service
+public class UserService{
+    @Autowired
+    private UserRepository userRepository;
 
-    List<User> searchUsers(User condition, Page page);
+    public User getUserByUsername(String username){
+        User user = new User();
+        try{
+            user = userRepository.getByUsername(username);
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println(e);
+        }
+        return user;
+    }
 
-    int update(User user);
+    public List<User> searchUsers(User condition, Page page){
+        return userRepository.searchUsers(condition, page);
+    }
 
-    User getUser(Integer id);
+    public int update(User user){
+        return userRepository.update(user);
+    }
 
-    User saveUser(User user);
+    public User getUser(Integer id){
+        return userRepository.getUser(id);
+    }
 
-    int delete(Integer id);
+    public User saveUser(User user){
+        userRepository.insert(user);
+        return user;
+    }
+
+    public int delete(Integer id){
+        return userRepository.delete(id);
+    }
 }

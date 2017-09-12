@@ -1,31 +1,78 @@
 package com.hhly.smartdata.service.authentication;
 
+import com.google.common.collect.Sets;
+import com.hhly.smartdata.mapper.authentication.MenuRepository;
+import com.hhly.smartdata.mapper.authentication.PermissionRepository;
+import com.hhly.smartdata.mapper.authentication.RoleRepository;
+import com.hhly.smartdata.model.authentication.Menu;
 import com.hhly.smartdata.model.authentication.Permission;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
-public interface PermissionService{
-    List<Permission> searchPerms(Permission perm);
+@Service
+public class PermissionService{
+    @Autowired
+    private PermissionRepository permissionRepository;
+    @Autowired
+    private MenuRepository menuRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
 
-    /**
-     * 删除对应权限--同时删除关联资源
-     *
-     * @param condition 删除条件
-     */
-    void delete(Permission condition);
+    public List<Permission> searchPerms(Permission perm){
+        return permissionRepository.searchPerms(perm);
+    }
 
-    /**
-     * 根据funcId，调整对应关联的权限
-     *
-     * @param funcId 功能id
-     * @param perms  新的权限列表(可能包含部分旧的权限)
-     */
-    void batchUpdatePerms(Integer funcId, List<Permission> perms);
+    public void delete(Permission condition){
+        for(Permission perm : searchPerms(condition)){
+            //删除对应菜单
+            Menu menuCondition = new Menu();
+            menuCondition.setPermission(perm.getPermission());
+            menuRepository.delete(menuCondition);
+            //删除对应角色权限分配
+            roleRepository.delPerm(perm.getPermission());
+            //删除权限
+            permissionRepository.delete(perm);
+        }
+    }
 
-    void save(Permission permission);
+    public void batchUpdatePerms(Integer funcId, List<Permission> perms){
+        Set<String> existPerms = Sets.newHashSet();
+        for(Permission perm : perms){
+            existPerms.add(perm.getPermission());
+        }
+        //查询已存在权限
+        Permission condition = new Permission();
+        condition.setFunctionId(funcId);
+        //循环对不存在的权限进行删除
+        for(Permission perm : searchPerms(condition)){
+            if(!existPerms.contains(perm.getPermission())){
+                delete(perm);//删除关联内容
+            }else{
+                permissionRepository.delete(perm);//不删除关联内容
+            }
+        }
 
-    List<Permission> queryByRole(List<Integer> roleIds);
+        //重新添加权限
+        for(Permission permission : perms){
+            permission.setFunctionId(funcId);
+            save(permission);
+        }
+    }
 
-    List<Permission> getAll();
+    public void save(Permission permission){
+        permissionRepository.insert(permission);
+    }
+
+    public List<Permission> queryByRole(List<Integer> roleIds){
+        return permissionRepository.queryByRole(roleIds);
+    }
+
+
+    public List<Permission> getAll(){
+        return permissionRepository.getAll();
+    }
 }

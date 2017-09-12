@@ -5,10 +5,10 @@ import com.hhly.smartdata.model.authentication.Admin;
 import com.hhly.smartdata.model.authentication.Node;
 import com.hhly.smartdata.model.authentication.Role;
 import com.hhly.smartdata.model.authentication.User;
+import com.hhly.smartdata.service.ChannelPlatformService;
 import com.hhly.smartdata.service.authentication.AdminService;
 import com.hhly.smartdata.service.authentication.RoleService;
 import com.hhly.smartdata.service.authentication.UserService;
-import com.hhly.smartdata.service.game.operative.ChannelPlatformService;
 import com.hhly.smartdata.util.page.Page;
 import com.hhly.smartdata.util.page.PageUtil;
 import org.apache.shiro.authz.annotation.Logical;
@@ -16,6 +16,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -33,13 +33,13 @@ import java.util.Map;
 @RequestMapping("/admin/admin")
 public class AdminController{
     private final static Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
-    @Resource
+    @Autowired
     private UserService userService;
-    @Resource
+    @Autowired
     private RoleService roleService;
-    @Resource
+    @Autowired
     private AdminService adminService;
-    @Resource
+    @Autowired
     private ChannelPlatformService channelPlatformService;
 
     @RequestMapping("/list")

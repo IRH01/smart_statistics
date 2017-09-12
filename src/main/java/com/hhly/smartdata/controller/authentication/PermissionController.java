@@ -4,20 +4,20 @@ import com.alibaba.fastjson.JSON;
 import com.hhly.smartdata.model.authentication.Permission;
 import com.hhly.smartdata.service.authentication.PermissionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
 @RequestMapping("/sys/perm")
 public class PermissionController{
-    @Resource
+    @Autowired
     private PermissionService permissionService;
 
 

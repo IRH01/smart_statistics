@@ -4,20 +4,20 @@ import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Maps;
 import com.hhly.smartdata.service.authentication.FunctionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/sys/func")
 public class FunctionController{
 
-    @Resource
+    @Autowired
     private FunctionService functionService;
 
     @RequestMapping("/list")
