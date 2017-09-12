@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserChannelRepository extends BaseRepository{
+public class UserChannelMapper extends BaseRepository{
     /**
      * 根据userId删除
      *

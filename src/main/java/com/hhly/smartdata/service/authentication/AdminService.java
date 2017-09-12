@@ -1,7 +1,7 @@
 package com.hhly.smartdata.service.authentication;
 
 import com.hhly.smartdata.mapper.authentication.AdminRepository;
-import com.hhly.smartdata.mapper.authentication.UserChannelRepository;
+import com.hhly.smartdata.mapper.authentication.UserChannelMapper;
 import com.hhly.smartdata.mapper.authentication.UserRepository;
 import com.hhly.smartdata.model.authentication.Admin;
 import com.hhly.smartdata.model.authentication.UserChannel;
@@ -21,7 +21,7 @@ public class AdminService{
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private UserChannelRepository userChannelRepository;
+    private UserChannelMapper userChannelRepository;
 
     public List<Admin> searchAdmins(Admin condition, Page page){
         return adminRepository.searchAdmins(condition, page);
