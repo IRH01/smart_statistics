@@ -15,8 +15,10 @@ import java.util.Map;
 
 @Service
 public class FunctionService{
+
     @Autowired
     private FunctionRepository functionRepository;
+
     @Autowired
     private PermissionService permissionService;
 
