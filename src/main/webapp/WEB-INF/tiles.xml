@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- 前端页面模板 -->
+	<definition name="template_main" template="/WEB-INF/view/template/main.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/view/template/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/view/template/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/template/body.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/view/template/footer.jsp" />
+		<put-attribute name="firstNav" value="" />
+		<put-attribute name="secondNav" value="" />
+	</definition>
+
+
+	<!-- 引用整体模板 视图名 + .main -->
+	<definition name="*.main" extends="template_main">
+		<put-attribute name="body" value="/WEB-INF/view/views/{1}.jsp" />
+	</definition>
+	<definition name="*/*.main" extends="template_main">
+		<put-attribute name="body" value="/WEB-INF/view/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="*/*/*.main" extends="template_main">
+		<put-attribute name="body"
+			value="/WEB-INF/view/views/{1}/{2}/{3}.jsp" />
+	</definition>
+	<definition name="*/*/*/*.main" extends="template_main">
+		<put-attribute name="body"
+			value="/WEB-INF/view/views/{1}/{2}/{3}/{4}.jsp" />
+	</definition>
+	<definition name="*/*/*/*/*.main" extends="template_main">
+		<put-attribute name="body"
+			value="/WEB-INF/view/views/{1}/{2}/{3}/{4}/{5}.jsp" />
+	</definition>
+	<definition name="*/*/*/*/*/*.main" extends="template_main">
+		<put-attribute name="body"
+			value="/WEB-INF/view/views/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
+	</definition>
+
+	<!--登陆 -->
+	<definition name="login" template="/WEB-INF/view/views/login/login.jsp" />
+	<definition name="register" template="/WEB-INF/view/views/login/register.jsp" />
+	<definition name="forgetPassWord"
+		template="/WEB-INF/view/views/login/passwordget.jsp" />
+	<definition name="emailgetPassWord"
+		template="/WEB-INF/view/views/login/emailgetPassWord.jsp" />
+	<definition name="validateResetPassWord"
+		template="/WEB-INF/view/views/login/resetPassword.jsp" />
+	<definition name="successResetPassWord"
+		template="/WEB-INF/view/views/login/successReset.jsp" />
+	<definition name="errorDisable"
+		template="/WEB-INF/view/views/login/emailDisAble.jsp" />
+	<definition name="success" extends="template_main">
+		<put-attribute name="body"
+			value="/WEB-INF/view/message/success.jsp" />
+	</definition>
+	<definition name="error" extends="template_main">
+		<put-attribute name="body" value="/WEB-INF/view/message/error.jsp" />
+	</definition>
+	<definition name="exception" extends="template_main">
+		<put-attribute name="body"
+			value="/WEB-INF/view/error/exception.jsp" />
+	</definition>
+	<definition name="main" extends="template_main" />
+	<definition name="order"
+		template="/WEB-INF/view/views/sp/ordercompensate/order.jsp" />
+	<!-- 佣金报表 -->
+	<definition name="operative/partner/cmsmreport/show" template="/WEB-INF/view/views/operative/partner/commissions_monthly_report.jsp" />
+	<definition name="operative/partner/mbcmsreport/show" template="/WEB-INF/view/views/operative/partner/member_commissions_report.jsp" />
+	<definition name="operative/partner/agentcmsreport/show" template="/WEB-INF/view/views/operative/partner/agent_commissions_report.jsp" />
+	<definition name="operative/partner/qlfmbreport/show" template="/WEB-INF/view/views/operative/partner/qualified_member_report.jsp" />
+	<definition name="operative/partner/agentsinforeport/show" template="/WEB-INF/view/views/operative/partner/agents_info_report.jsp" />
+	<definition name="operative/game/operative/vipregchannel/detail" template="/WEB-INF/view/views/operative/game/operative/vipregchannel/detail.jsp" />
+	<definition name="operative/game/operative/vipregchannel/partnerinfo" template="/WEB-INF/view/views/operative/game/operative/vipregchannel/partner_member_con.jsp" />
+	<definition name="operative/game/operative/countryrcg/countryplatform" template="/WEB-INF/view/views/operative/game/operative/countryrcg/country_platform.jsp" />
+	
+	<definition name="operative/partner/ptnmbbladetail/show" template="/WEB-INF/view/views/operative/partner/partner_member_bla_detail.jsp" />
+</tiles-definitions>

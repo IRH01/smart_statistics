@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gameTotalDaily">
+	<resultMap type="GameTotalDaily" id="GameTotalDailyMap">
+		<result property="statDate" column="stat_date"/>
+		<result property="regCount" column="reg_count"/>
+		<result property="rechargeCount" column="recharge_count"/>
+		<result property="payAmount" column="pay_amount"/>
+		<result property="regTotalCount" column="reg_total_count"/>
+		<result property="dau" column="dau"/>
+		<result property="wau" column="wau"/>
+		<result property="mau" column="mau"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<select id="find" resultMap="GameTotalDailyMap" parameterType="map">
+		select 
+			stat_date,
+			reg_count,
+			recharge_count,
+			pay_amount,
+			reg_total_count,
+			dau,
+			wau,
+			mau,
+			create_time,
+			update_time
+		from gp_tbl_game_total_daily
+		where 1=1
+			<if test="dateStart != null and dateStart != ''">and DATE_FORMAT(stat_date,'%Y-%m-%d') &gt;= #{dateStart} </if>
+			<if test="dateEnd != null and dateEnd != ''">and DATE_FORMAT(stat_date,'%Y-%m-%d') &lt;= #{dateEnd} </if>
+			<if test="countryId != null and countryId != ''">and country = #{countryId} </if>
+		<if test="1 == order and orderField != null and orderField != ''">
+			order by ${orderField} desc
+		</if>
+		<if test="2 == order and orderField != null and orderField != ''">
+			order by ${orderField} asc
+		</if>
+	</select>
+</mapper>

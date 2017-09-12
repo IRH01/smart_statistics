@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="terminalType">
+	<resultMap type="TerminalType" id="TerminalTypeMap">
+		<result property="type" column="type"/>
+		<result property="name" column="name"/>
+		<result property="orderNo" column="order_no"/>
+	</resultMap>
+	
+	<select id="getAll" resultMap="TerminalTypeMap">
+		select 
+			type,
+			name,
+			order_no
+		from gp_tbl_terminal_type_d
+        order by order_no
+	</select>
+</mapper>

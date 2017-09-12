@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="countryOrder">
+	<resultMap type="CountryOrder" id="CountryOrderMap">
+		<result property="country" column="country"/>
+		<result property="registCount" column="regist_count"/>
+		<result property="userCount" column="user_count"/>
+		<result property="rechargeCount" column="recharge_count"/>
+		<result property="rechargeAmount" column="recharge_amount"/>
+	</resultMap>
+	
+	<select id="find" resultMap="CountryOrderMap" parameterType="map">
+		select
+			d.*,
+			c.name as country_name 
+		from
+		(
+			select
+				country,
+				sum(regist_count) as regist_count,
+				sum(user_count) as user_count,
+				sum(recharge_count) as recharge_count,
+				sum(recharge_amount) as recharge_amount
+			from view_gp_country_order
+			where 1=1
+				<if test="dateStart != null and dateStart != ''">and date_format(create_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
+				<if test="dateEnd != null and dateEnd != ''">and date_format(create_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
+			group by country
+		)d
+		left join gp_tbl_country_info c
+		on c.id = d.country
+	</select>
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lmdzPresentLog">
+	<resultMap type="LmdzPresentLog" id="LmdzPresentLogMap">
+		<result property="platformId" column="platform_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="presentTime" column="present_time"/>
+		<result property="anchorName" column="anchor_name"/>
+		<result property="anchorId" column="anchor_id"/>
+		<result property="presentName" column="present_name"/>
+		<result property="presentCount" column="present_count"/>
+		<result property="settleAmount" column="settle_amount"/>
+		<result property="type" column="type"/>
+		<result property="presentOrderNo" column="present_orderno"/>
+	</resultMap>
+	
+	<select id="find" resultMap="LmdzPresentLogMap" parameterType="map">
+		select
+			lp.platform_id,
+			lp.user_id,
+			lp.present_time,
+			lp.anchor_name,
+			lp.anchor_id,
+			lp.present_name,
+			lp.present_count,
+			lp.settle_amount,
+			lp.type,
+			lp.present_orderno
+		from tbl_ods_lmdz_present_log lp
+		where 1=1
+			and exists(
+				select qm.user_id 
+				from tbl_dw_member_qual_list_mon qm
+				where qm.partner_user_id = #{partnerUserId}  
+				and date_format(qm.month_id,'%Y-%m') = #{monthId}
+				and qm.game_type_id= #{gameTypeId}
+				and qm.user_id = lp.user_id
+			)
+			and exists(
+				select gt.game_id
+				from tbl_dim_game_type_con gt
+				where gt.game_type_id = #{gameTypeId}  
+				and gt.game_id = lp.platform_id
+			)
+			<if test="dateStart != null and dateStart != ''">and date_format(lp.present_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
+			<if test="dateEnd != null and dateEnd != ''">and date_format(lp.present_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
+		order by lp.present_time desc
+	</select>
+	
+	<select id="count" resultType="int" parameterType="map">
+		select 
+			count(*) count
+		from tbl_ods_lmdz_present_log lp
+		where 1=1
+			and exists(
+				select qm.user_id 
+				from tbl_dw_member_qual_list_mon qm
+				where qm.partner_user_id = #{partnerUserId}  
+				and date_format(qm.month_id,'%Y-%m') = #{monthId}
+				and qm.game_type_id= #{gameTypeId}
+				and qm.user_id = lp.user_id
+			)
+			and exists(
+				select gt.game_id
+				from tbl_dim_game_type_con gt
+				where gt.game_type_id = #{gameTypeId}  
+				and gt.game_id = lp.platform_id
+			)
+			<if test="dateStart != null and dateStart != ''">and date_format(lp.present_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
+			<if test="dateEnd != null and dateEnd != ''">and date_format(lp.present_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
+	</select>
+</mapper>

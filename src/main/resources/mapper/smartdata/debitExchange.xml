@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="debitExchange">
+	<resultMap type="DebitExchange" id="DebitExchangeMap"  extends="lossDaily.LossDailyMap">
+		<result property="orderId" column="ORDER_NO"/>
+		<result property="exchangeStatus" column="EXCHANGE_STATUS"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="exchangeGame" column="EXCHANGE_F_GAME"/>
+		<result property="exchangeAmout" column="EXCHANGE_AMOUNT"/>
+		<result property="commitTime" column="COMMIT_TIME"/>
+		<result property="tradeTime" column="TRADE_TIME"/>
+	</resultMap>
+	
+	<select id="find" resultMap="DebitExchangeMap" parameterType="map">
+		select order_no,exchange_status,user_id,nickname,exchange_f_game,
+		FORMAT(exchange_amount,2) as EXCHANGE_AMOUNT,date_format(commit_time,'%Y-%m-%d %H:%i:%s') as COMMIT_TIME,
+		date_format(trade_time,'%Y-%m-%d %H:%i:%s') as TRADE_TIME from view_exchange_list
+		where 1=1
+		<if test="orderId != null and orderId != ''">and order_no like CONCAT(CONCAT('%',#{orderId}),'%')</if>
+		<if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
+		<if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
+		<if test="exchangeGame != null and exchangeGame != ''">and exchange_f_game like CONCAT(CONCAT('%',#{exchangeGame}),'%')</if>
+		<if test="dateStart != null and dateStart != ''">and date_format(commit_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
+		<if test="dateEnd != null and dateEnd != ''">and date_format(commit_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
+		
+		order by ifnull(commit_time, date_format('1990-01-01','%Y-%m-%d')) desc
+	</select>
+	
+	<select id="count" resultType="int" parameterType="map">
+		select count(1) from view_exchange_list
+		where 1=1
+		<if test="orderId != null and orderId != ''">and order_no like CONCAT(CONCAT('%',#{orderId}),'%')</if>
+		<if test="userId1 != null and userId1 != ''">and user_id like CONCAT(CONCAT('%',#{userId1}),'%')</if>
+		<if test="nickName != null and nickName != ''">and nickname like CONCAT(CONCAT('%',#{nickName}),'%')</if>
+		<if test="exchangeGame != null and exchangeGame != ''">and exchange_f_game like CONCAT(CONCAT('%',#{exchangeGame}),'%')</if>
+		<if test="dateStart != null and dateStart != ''">and date_format(commit_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
+		<if test="dateEnd != null and dateEnd != ''">and date_format(commit_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
+	</select>
+</mapper>

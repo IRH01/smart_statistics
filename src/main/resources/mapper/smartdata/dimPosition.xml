@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dimPosition">
+	<resultMap id="DimPositionMap" type="DimPosition">
+		<id property="tblId" column="tbl_id" />
+		<result property="positionId" column="position_id" />
+		<result property="positionName" column="position_name" />
+		<result property="parentPositionId" column="parents_position_id" />
+		<result property="originSys" column="origin_sys" />
+		<result property="originId" column="origin_id" />
+		<result property="createdDate" column="created_date" />
+		<result property="createdUser" column="created_user" />
+		<result property="updatedDate" column="updated_date" />
+		<result property="updatedUser" column="updated_user" />
+	</resultMap>
+	
+	<resultMap id="NodeMap" type="com.hhly.smartdata.model.authentication.Node">
+		<result property="id" column="tbl_id" />
+		<result property="name" column="position_name" />
+		<result property="pId" column="parents_position_id" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		tbl_id,
+		position_id,
+		position_name,
+		parents_position_id,
+		origin_sys,
+		origin_id,
+		created_date,
+		created_user,
+		updated_date,
+		updated_user
+	</sql>
+
+
+	<select id="get" resultMap="DimPositionMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_dw_dim_position
+		where tbl_id = #{tblId}
+	</select>
+
+	<select id="getDomains" resultMap="DimPositionMap">
+		select 
+		<include refid="Base_Column_List" />
+		from tbl_dw_dim_position
+		where (parents_position_id = '0')
+		order by tbl_id asc
+	</select>
+	
+	<!-- 获取非域名的位置信息 -->
+	<select id="getPositions" resultMap="NodeMap">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_dw_dim_position p
+    	where p.parents_position_id != '0'
+    	start with p.tbl_id=#{domainId}
+    	connect by prior p.tbl_id=p.parents_position_id
+		order by p.tbl_id asc
+	</select>
+</mapper>

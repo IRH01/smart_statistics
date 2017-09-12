@@ -1,0 +1,2857 @@
+####################基础############################
+label.navigation.basis.bdTrackingNo.add=基础 > 运单号库 > 添加
+label.navigation.basis.bdTrackingNo.edit=基础 > 运单号库 > 编辑
+label.navigation.basis.bdTrackingNo.imp=基础 > 运单号库 > 导入
+label.navigation.basis.bdTrackingNo.list=基础 > 运单号库 > 列表
+label.navigation.basis.bdBank.add=基础 >银行账户 > 添加
+label.navigation.basis.bdBank.edit=基础 >银行账户 > 编辑
+label.navigation.basis.bdBank.list=基础 >银行账户 > 列表
+label.navigation.basis.sysConsignor.add=基础 > 客户 > 增加
+label.navigation.basis.sysConsignor.imp=基础 > 客户 > 导入
+label.navigation.basis.sysConsignor.edit=基础 > 客户 > 编辑
+label.navigation.basis.sysConsignor.list=基础 > 客户 > 列表
+label.navigation.basis.sysConsignor.batchedit=基础 > 客户 > 批量修改
+label.navigation.basis.sysConsignor.editcode=基础 > 客户 > 修改编码
+label.navigation.basis.sysConsignor.editpwd=基础 > 客户 > 修改密码
+label.navigation.basis.sysConsignor.login=客服系统 > 客户登陆
+entity.bdType.serialNo=序号
+entity.Page.show=每页显示
+entity.add.admin=添加管理员
+entity.update.admin=编辑管理员
+entity.base.info=基本信息
+entity.admin.repeat.password=重复密码
+entity.admin.role=管理角色
+entity.admin.isEnable=是否启用
+entity.admin.yes=是
+entity.admin.no=否
+entity.admin.password.warning=如果要修改密码,请填写密码,若留空,密码将保持不变!
+entity.personal.info=个人资料
+entity.admin.superAccount=超级账号
+entity.admin.list=管理员列表
+pager.total=总记录数
+pager.a.total=共
+pager=页
+entity.admin.job=岗位
+last.login.time=最后登录时间
+last.login.IP=最后登录IP
+normal=正常
+not.enabled=未启用
+locked=已锁定
+certificate.expired=凭证过期
+admin.list.edit=编辑
+not.find.any.record=没有找到任何记录!
+edit.profile=编辑个人资料
+department=部门
+current.password=当前密码
+new.password=新密码
+system.password.error.msg=系统提示：如果要修改密码，请先填写当前密码，如留空，则密码保持不变
+system.url.address=URL地址
+system.channel=频道
+system.contingent=队伍
+system.guild.bar=公会吧
+system.subject=帖子
+system.areaCode.CN=中国大陆
+system.areaCode.TW=台湾
+system.exportExcel=导出excel
+game.packs.list=游戏礼包列表
+package.details=礼包详情
+bbs.private.subject=BBS私有主题
+bbs.public.subject=BBS公共主题
+topics.posts=话题帖子
+need.to.send=需要发送
+not.need.to.send=不需要发送
+system.sent=已发送
+system.Unsent=未发送
+system.Read=已读
+system.Unread=未读
+system.Bound=已绑定
+system.Unbound=未绑定
+system.Cover=封面
+system.Non.Cover=非封面
+system.familyInfo=家族
+albumInfo.not.exist=相册信息不存在
+system.Other=其他
+system.No.on-line=未上线
+system.on-line=已上线
+system.Not.reviewed=未审核
+system.Audited=已审核
+system.Home=首页
+system.Girls=女郎
+system.recommended.team.list=推荐队伍列表
+system.anchor.charts=主播排行榜
+system.Activity=活动
+system.Invalid=无效
+system.Effective=有效
+system.additional.items=增加项目
+system.Select.export.field=选择导出字段
+system.all.select=全选
+system.not.used=未使用
+system.used=已使用
+system.Beauty=美女
+system.Expert=专家
+system.Keep.playing=陪玩
+system.By.Mai=下麦
+system.On.wheat=上麦
+system.Show=秀场
+system.Sifu=私服
+system.General=普通
+system.open=开启
+system.Disabled=禁用
+system.official.rooms=官方系统房间
+system.Beautiful.game.room=美女游戏房间
+system.Not.started=未开始
+system.In.progress=进行中
+system.Closed=已结束
+system.Reset.Password=重设密码
+system.default.password=默认密码为123456
+system.Text.Service=文字客服
+system.Video.Service=视频客服
+system.Shut.down=关闭
+system.Turn.on=打开
+system.Hall=大厅
+system.video=视频
+system.delete=删除
+system.need=需要
+system.not.need=不需
+system.View=查看
+system.Submit=提交
+system.Carry.out=完成
+system.group=群
+system.Feedback=反馈
+system.Report=举报
+system.Report.photo=举报相片
+system.Discloses=公开
+system.anonymous=匿名
+system.Keep.playing.in.screening.panel.display=>0则在陪玩筛选面板显示，< 0则不显示
+system.It.appears.in.the.list=>0才在列表显示，并影响顺序
+system.Separated.by.a.space.between.the.labels=(标签之间空格隔开)
+system.For.example=例如
+system.After.the.change=变更后
+system.Before.the.change=变更前
+system.Article=物品
+system.Column=栏
+system.Module=模块
+system.Program=方案
+system.Display.name.can.not.be.more.than.20.characters=显示名称不得超过20个字！
+system.configuration.seat.integer=如果配置座位，请配整数！
+system.Full.Channel=全频道
+system.On-line=线上
+system.The.line=线下
+system.Add.the.need.for.log.monitoring.methods=添加需进行日志监控的方法
+system.Method.Editor.need.to.log.monitoring=编辑需进行日志监控的方法
+system.Operation.name=操作名称
+system.Class.Action=Action类
+system.Action.Method=Action方法
+system.need.for.log.monitoring.methods=添加需进行日志监控的方法
+system.Blog.List=日志列表
+system.Operator=操作员
+system.Log.content=日志内容
+system.Operation.IP=操作IP
+system.Log.information=日志信息
+system.Record.Time=记录时间
+system.Role.Management=角色管理
+system.Station.news=站内消息
+system.Inbox=收件箱
+system.Outbox=发件箱
+system.Operation.Log.Management=操作日志管理
+system.View.Log=查看日志
+system.Logging.Configuration=日志配置
+system.Content.Management=内容管理
+system.Navigation.Management=导航管理
+system.Article.Management=文章管理
+system.Article.Categories=文章分类
+system.Links=友情链接
+system.Template.Manager=模板管理
+system.Dynamic.Template.Manager=动态模板管理
+system.Static.template.management=静态模板管理
+system.Mail.template.management=邮件模板管理
+system.Cache.Management=缓存管理
+system.Update.Cache=更新缓存
+system.Site.static.management=网站静态管理
+system.A.key.site.updates=一键网站更新
+system.Article.Update=文章更新
+system.Updated.titles=商品更新
+system.Site.Settings=网站设置
+system.System.Settings=系统设置
+system.Online.Service=在线客服
+system.Payment.Management=支付管理
+system.Payments=支付方式
+system.Distribution.Management=配送管理
+system.Delivery=配送方式
+system.Area.Management=地区管理
+system.Logistics=物流公司
+system.Everyone=所有人
+system.Association.president=公会会长
+system.No.member.of.the.Association=无公会成员
+system.There.guild.members=有公会成员
+system.Push.rich.news=推送富消息
+system.Jump.to.the.application.within.the.page=跳转到应用内页面
+system.Common.room=普通房间
+system.Entertainment=娱乐圈
+system.Points.Mall=积分商城
+system.Ordinary.packs=普通礼包
+system.VIP.Package=VIP礼包
+system.Wallet=钱包
+system.Show.room=秀场房间
+system.Game.room=游戏房间
+system.Direct.download=直接下载
+system.Start.page.link.push=启动页图片推送
+system.Image.ratio=图片比例
+system.All.Recommended=全部推荐
+system.All.the.hottest=全部最热
+system.All.Latest=全部最新
+system.Men.Recommended=男性推荐
+system.Men.hottest=男性最热
+system.Men.Latest=男性最新
+system.Women.Recommended=女性推荐
+system.Women.hottest=女性最热
+system.Women.Latest=女性最新
+system.Create=创建
+system.Welcome.Yunva.background.management.system=欢迎使用云娃后台管理系统！
+system.Sysname=系统名称:
+system.Yunva.background.management.system=云娃后台管理系统
+system.Version=系统版本
+system.Business.Edition=商业版
+system.Forum=交流论坛
+system.Online.inquiry=在线查询
+system.Authorization.Tips=授权提示
+system.Copyright.Tips=在未取得商业授权之前，您不能将本软件应用于商业用途
+system.Pending.Transaction=待处理事务
+system.Untreated.Order=未处理订单
+system.Order.List=订单列表
+system.Waiting.for.shipping.orders=等待发货订单数
+system.Unread.messages=未读消息
+system.Untreated.out.registration.number=未处理缺货登记数
+system.Arrival.Notice=到货通知
+system.System.Information=系统信息
+system.Java.version=Java版本
+system.Operating.system.name=操作系统名称
+system.Operating.system.architecture=操作系统构架
+system.Operating.System.Version=操作系统版本
+system.Current.working.directory=当前工作目录
+system.Temporary.file.path=临时文件路径
+system.Information.and.Statistics=信息统计
+system.added.our.merchandise=已上架商品
+system.The.shelves.of.goods=已下架商品
+system.Total.Members=会员总数
+system.Total.number.of.articles=文章总数
+system.Commodity.Management=商品管理
+system.Order.Processing=订单处理
+system.Member.Management=会员管理
+system.Page.Content=页面内容
+system.Yunva.Management.Center=云娃管理中心
+system.Please.enter.your.account=请输入您的账号
+system.Please.enter.the.verification.code=请输入验证码
+system.Plus.room.group=加房间群
+system.Beauty.to.accompany.play=美女陪玩
+system.Experts.keep.playing=专家陪玩
+system.Shelves=下架
+system.Default=默认
+system.Not.authorized=不授权
+system.Authorize=授权
+system.Operatively=可操作
+system.Inoperable=不可操作
+system.Privilege=特权
+system.New.hand=新手
+system.Activation=激活码
+system.Coupons=点券
+system.Integration=积分
+system.Open.Package=开放礼包
+system.Group.Package=群礼包
+system.President=会长
+system.Vice-president=副会长
+system.Veteran.member=元老成员
+system.Guild.Administrator=公会管理员
+system.Association.Senior.Member=公会资深会员
+system.Association.Senior1.Member=公会高级会员
+system.Association.Junior.Member=公会初级会员
+system.not.show=不显示
+system.has.show=显示
+system.Not=不可以
+system.Can=可以
+system.yaya=呀呀
+system.Top=充值
+system.Direct.Billing=直付
+system.Gift.Certificate=礼券
+system.Recharge.completion=充值完成
+system.info.updated=信息已更新
+system.error.Pending=充值异常(待审核)
+system.error.Audit.not.passed=充值异常(审核未通过)
+system.Add.Role=添加角色
+system.Edit.Role=编辑角色
+system.Permissions.list=权限清单
+system.Page.content.management=页面内容管理
+system.Administrator.Management=管理员管理
+system.Administrator.Name=管理员
+system.normalUser.Name=普通用户
+system.Find=查找
+system.Systems.built=系统内置
+system.Built-in.permission.system.can.not.be.deleted=系统内置权限不允许删除!
+system.appling=申请中
+system.Rejected=已拒绝
+system.It.has.agreed=已同意
+system.links.can.not.show=图片无法展示
+system.Golden.fried.live.video=真人视频炸金花
+system.one.day=一天
+system.all.day=终身
+system.Member=成员
+system.team.leader=队长
+system.Do.not.use=不使用
+system.Use=使用
+system.Permanent=永久
+system.day=天
+system.hour=小时
+system.Ticket=票
+system.or=或
+system.and=且
+system.Not.limited=不限
+system.add=新增
+system.approved=已通过审核
+system.Not.approved=未通过审核
+system.Accreditation=认证中
+system.Offline=不在线
+system.have.read=已读取
+system.Upload.speed=上传速度
+system.Luck=运气
+system.Package=礼包
+system.In.kind=实物
+system.Submit=提交中
+system.received=已领取
+system.submit.error=提交失败
+system.lottery=转盘抽奖
+system.not.receive=未领取
+system.Receive.complete=领取完成
+system.lottery.not.successful=抽奖未成功
+system.lottery.successful.yes=抽奖成功有奖品
+system.lottery.successful.no=抽奖成功奖品为无
+system.delivery.prize=系统正在派送奖品
+system.delivery.success=已派送完成
+system.Customer.reception=客服接收
+system.Connection=连接
+system.Recommendation=推荐
+system.No.Distinguish.Client=不区分客户端
+system.android.Client=android端
+system.IOS.Client=ios端
+system.mallItem=积分商城
+system.taskList=任务列表
+system.isPublic=是否是公共
+system.Overall.situation=全局
+system.only.Nickname=仅昵称
+system.description=描述
+
+
+
+
+
+
+
+
+
+
+
+####################修改会长############################
+entity.president.union=公会
+entity.president.newPresidentID=新会长
+message.president.tip=<p style="font-weightbold;">说明：</p><p style="font-weightbold;">1、新任命的会长必须为无公会成员</p><p style="font-weightbold;">2、任命新会长成功后，旧会长将会改为普通成员</p><ol></ol>
+label.navigation.base.president.modify=公会管理 > 修改会长 > 编辑
+
+####################礼包管理############################
+entity.present.id=礼包id
+entity.present.presentName=礼包名称
+entity.present.currencyType=货币类型
+entity.present.presentType=礼包类别
+entity.present.giftCollectType=礼包类型
+entity.present.game=对应游戏
+entity.present.platform=适用平台
+entity.present.area=适用区服
+entity.present.validTime=有效起止日期
+entity.present.memo=礼包说明
+entity.present.giftContent=礼包物品
+entity.present.usingMemo=使用说明
+entity.present.giftComment=备注
+entity.present.giftIntroduce=使用说明
+entity.present.cdKey=cdkey
+entity.present.unions=发放公会列表
+entity.present.GroupUnions=发放群列表
+entity.present.addUnion=添加
+entity.present.serialNo=序号
+entity.present.union=公会
+entity.present.mediaType=状态
+entity.present.unionId=公会ID
+entity.present.maxQty=发放数量
+entity.present.price=售价
+entity.present.levelLimit=领取最低要求等级
+menu.basis.guild.list=公会列表
+entity.guild.id=公会ID
+entity.guild.guildName=公会名称
+menu.basis.group.list=群列表
+entity.group.id=群ID
+entity.group.groupName=群名称
+entity.present.tip=<p style="font-weightbold;">说明：</p><p style="font-weightbold;">1、礼包类别分为特权、新手和激活码</p><p style="font-weightbold;">2、发放公会列表为空时，为对全体用户开放</p><ol></ol>
+label.navigation.base.present.list=基础管理 > 礼包管理 > 列表
+label.navigation.base.present.add=基础管理 > 礼包管理 > 添加
+label.navigation.base.present.edit=基础管理 > 礼包管理 > 编辑
+
+####################APK管理############################
+entity.apk.game=游戏名
+entity.apk.downloadUrl=下载地址
+entity.apk.guild=公会
+entity.apk.status=状态
+entity.apk.uploadTime=上传时间
+entity.apk.downloadTimes=下载次数
+entity.apk.apkFile=apk文件
+entity.apk.apkName=文件名
+entity.apk.union=公会
+entity.apk.fileSize=文件大小
+entity.apk.type=上传服务类型
+entity.apk.type0=yunva服务器
+entity.apk.type1=阿里云服务器
+entity.apk.assignType=是否指定文件名上传
+entity.apk.assignType0=不指定
+entity.apk.assignType1=指定
+menu.basis.apk.uploadAPK=上传apk文件
+message.guildApk.tip=<p style="font-weightbold;">说明：</p><p style="font-weightbold;">1、如果选择公会apk文件为公会的下载文件,不选公会apk文件将作为所选游戏的下载文件</p><p style="font-weightbold;">2、会长账号公会为必填项</p><ol></ol>
+label.navigation.base.apkManage.list=基础管理 > apk管理 > 列表
+entity.aliFile.id=主键id
+entity.aliFile.aliFileName=阿里云上文件名
+entity.aliFile.fileName=文件原名
+entity.aliFile.eTag=ETag
+entity.aliFile.isSuccess=是否上传成功
+entity.aliFile.downUrl=下载url
+entity.aliFile.createTime=创建时间
+entity.aliFile.isSuccess0=否
+entity.aliFile.isSuccess1=成功
+
+####################广告位设置############################
+entity.advertise.link=展示图片（480*240）
+entity.advertise.modifylink=修改图片
+entity.advertise.rank=热度
+entity.advertise.linkAddr=跳转地址
+entity.advertise.skipType=跳转到
+menu.basis.advertise.add=添加广告位
+label.navigation.base.advertise.list=系统设置 > 广告位设置 > 列表
+label.navigation.base.advertise.input=系统设置 > 广告位设置 > 编辑
+
+####################活动页设置############################
+entity.exercise.rank=热度
+entity.exercise.barName=贴吧名称
+entity.exercise.link=展示信息（图片：446*170）
+entity.exercise.modifylink=修改图片
+entity.exercise.linkAddr=跳转地址
+entity.exercise.bottom=底部名称
+entity.exercise.morePosts=更多帖子
+entity.exercise.post1=帖子1
+entity.exercise.post2=帖子2
+menu.basis.exercise.add=添加活动页
+label.navigation.base.exercise.list=系统设置 > 活动页设置 > 列表
+label.navigation.base.exercise.add=系统设置 > 活动页设置 > 添加
+label.navigation.base.exercise.modify=系统设置 > 活动页设置 > 编辑
+
+####################频道管理############################
+entity.channelInfo.roomId=频道ID
+entity.channelInfo.type=频道类型
+entity.channelInfo.belongId=所属编号
+entity.channelInfo.roomName=频道名字
+entity.channelInfo.roomIconUrl=频道图标
+entity.channelInfo.backgroundUrl=背景图
+entity.channelInfo.roomNotice=频道公告
+entity.channelInfo.peopleCount=人数
+entity.channelInfo.mediaType=状态
+entity.channelInfo.recommend=推荐度
+entity.channelInfo.hot=热度
+entity.channelInfo.hotType=热度类型
+entity.channelInfo.description=房间描述
+entity.channelInfo.channelType=频道类型
+entity.channelInfo.groupId=所属群
+entity.channelInfo.gameId=擅长应用
+entity.channelInfo.roomGame=房间游戏
+entity.channelInfo.createTime=创建时间
+entity.channelInfo.updateTime=更改时间
+entity.channelInfo.isConfig=是否配置默认道具
+label.navigation.base.channelInfo.list=系统设置 > 频道管理 > 列表
+label.navigation.base.channelInfo.add=系统设置 > 频道管理 > 添加
+label.navigation.base.channelInfo.modify=系统设置 > 频道管理 > 编辑
+
+####################帖子管理############################
+entity.gameBar.game=游戏名
+entity.gameBar.id=帖子id
+entity.gameBar.creator=发帖人
+entity.gameBar.content=内容
+entity.gameBar.imgUrl=图片
+entity.gameBar.topic=主题
+entity.gameBar.hot=热度
+entity.gameBar.topTime=置顶时间
+entity.subjectInfo.yunvaId=云娃ID
+entity.subjectInfo.nickname=发帖人
+entity.subjectInfo.iconUrl=用户头像
+entity.subjectInfo.roomId=房间ID
+entity.subjectInfo.roomName=房间名称
+entity.subjectInfo.subjectContent=内容
+entity.subjectInfo.anonymous=是否匿名
+entity.subjectInfo.type=类型
+entity.subjectInfo.title=标题
+entity.subjectInfo.voiceUrl=选择语音
+entity.subjectInfo.links=选择图片
+entity.subjectInfo.createTime=建立时间
+entity.subjectInfo.auditTime=审核时间
+entity.subjectInfo.voiceDuration=语音时长
+entity.subjectInfo.sendType=发送方式
+entity.subjectInfo.sendTime=发送时间
+entity.subjectInfo.msgTitle=消息标题
+entity.subjectInfo.msgContent=消息描述
+label.navigation.base.gameBar.editHotList=基础管理 > 帖子管理 > 主题帖子列表
+label.navigation.base.gameBar.list=基础管理 > 帖子管理 > 列表
+label.navigation.base.gameBar.add=基础管理 > 帖子管理 > 添加
+label.navigation.base.gameBar.edit=基础管理 > 帖子管理 > 编辑
+label.navigation.base.gameBar.editHot=基础管理 > 帖子管理 > 修改热度
+entity.gameBarImgUrl.detail=图片明细
+####################吧主申请管理############################
+entity.barMasterApply.applier=申请人
+entity.barMasterApply.applierID=申请人ID
+entity.barMasterApply.yayaLevel=呀呀等级
+entity.barMasterApply.barName=游戏
+entity.barMasterApply.createTime=申请日期
+label.navigation.base.barMasterApply.list=基础管理 > 吧主申请管理 > 列表
+
+####################吧主管理############################
+entity.barMaster.barName=游戏吧
+entity.barMaster.master=吧主
+entity.barMaster.yayaLevel=呀呀等级
+entity.barMaster.masterID=吧主ID
+menu.basis.barMaster.add=添加吧主
+label.navigation.base.barMaster.list=基础管理 > 吧主管理 > 列表
+label.navigation.base.barMaster.add=基础管理 > 吧主管理 > 添加
+
+#######################用户权限管理#########################
+entity.adminAuth.yunvaId=用户ID
+entity.adminAuth.yunvaName=用户
+entity.adminAuth.authText=权限列表
+entity.adminAuth.authType=权限类型
+entity.auth.authId=权限ID
+entity.auth.authName=权限名称
+entity.authResource.list=权限资源列表
+entity.auth.addAuth=添加
+label.navigation.base.adminAuth.list=基础管理 > 用户权限管理 > 列表
+label.navigation.base.adminAuth.add=基础管理 > 用户权限管理 > 添加
+label.navigation.base.adminAuth.edit=基础管理 > 用户权限管理 > 编辑
+entity.admin.phone=电话
+entity.admin.qq=qq
+entity.admin.aliww=阿里旺旺
+entity.admin.skype=skype
+entity.admin.contactWay=云娃ID
+
+#######################游戏吧管理#########################
+label.navigation.base.gameBarInfo.list=基础管理 > 游戏吧管理 > 列表
+label.navigation.base.gameBarInfo.add=基础管理 > 游戏吧管理 > 添加
+entity.gameBarInfo.gameId=游戏
+entity.gameBarInfo.manager=吧主
+entity.gameBarInfo.peopleCount=人数
+entity.gameBarInfo.guildCount=公会数
+entity.gameBarInfo.giftCount=礼包数
+entity.gameBarInfo.createTime=创建时间
+
+#######################发积分（旧名金币）#########################
+label.navigation.base.sendYayaMoney.add=基础管理 > 发积分 > 添加
+entity.sendYayaMoney.yunvaIdList=云娃ID列表
+entity.sendYayaMoney.count=积分值
+entity.sendYayaMoney.remark=备注
+entity.sendYayaMoney.yunvaIdList.warnning=提醒:ID之间请用换行符隔开,ID的数量上限为50
+
+#######################送豆芽#########################
+label.navigation.base.sendDouya.add=基础管理 > 送豆芽 > 添加
+entity.sendDouya.yunvaIdList=云娃ID列表
+entity.sendDouya.count=豆芽数量
+entity.sendDouya.remark=备注
+entity.sendDouya.yunvaIdList.warnning=提醒:ID之间请用换行符隔开,ID的数量上限为50
+
+#######################充值管理#########################
+label.navigation.base.rechargeManage.add=基础管理 > 充值管理 > 添加
+entity.rechargeManage.yunvaId=云娃ID
+entity.rechargeManage.count=金额
+entity.rechargeManage.remark=备注
+entity.rechargeManage.remark.warnning=提醒:备注信息请填银行流水号
+
+
+#######################查询云娃ID#########################
+label.navigation.query.phoneBindInfo.list=查询报表 > 查询云娃ID > 列表
+entity.phoneBindInfo.area=区域
+entity.phoneBindInfo.phone=手机号码
+entity.phoneBindInfo.yunvaId=云娃账号
+
+#######################分天新增用户#########################
+label.navigation.query.useraddday.list=查询报表 > 分天新增用户 > 列表
+entity.useraddday.rq=日期
+entity.useraddday.total=新增用户
+entity.useraddday.user=总用户数
+
+#######################分天访问用户#########################
+label.navigation.query.visituser.list=查询报表 > 分天访问用户 > 列表
+entity.visituser.rq=日期
+entity.visituser.total=访问用户
+
+
+#######################公会信息#########################
+label.navigation.basic.guildInfo.list=公会管理 > 公会信息 > 列表
+label.navigation.basic.guildInfo.changeId=公会管理 > 公会信息 > 修改ID
+entity.guildInfo.id=公会ID
+entity.guildInfo.newGuildId=新ID
+entity.guildInfo.guildName=公会名称
+entity.guildInfo.peopleCount=公会人数
+entity.guildInfo.hot=热度
+
+#######################队伍信息#########################
+label.navigation.basic.troopInfo.list=基础管理 > 队伍管理 > 列表
+label.navigation.basic.troopInfo.input=基础管理 > 队伍管理 > 编辑
+label.navigation.basic.troopInfo.changeId=基础管理 > 队伍管理 > 修改ID
+label.navigation.basic.userTroop.list=基础管理 > 队伍成员管理 > 列表
+entity.troopInfo.id=队伍ID
+entity.troopInfo.newTroopId=新ID
+entity.troopInfo.troopName=队伍名称
+entity.troopInfo.gameId=游戏ID
+entity.troopInfo.owner=所有者
+entity.troopInfo.maxSize=最大人数
+entity.troopInfo.hot=热度
+entity.userTroop.yunvaId=云娃账号
+entity.userTroop.roleId=角色
+entity.userTroop.accessToken=token
+
+#######################消息推送#########################
+label.navigation.base.msgPush.add=基础管理 > 消息推送 > 添加
+label.navigation.base.msgPush.list=基础管理 > 消息推送 > 列表
+label.navigation.base.msgPush.edit=基础管理 > 消息推送 > 编辑
+entity.msgPush.pushType=推送至
+entity.msgPush.yunvaIdList=云娃ID列表
+entity.msgPush.msgType=消息类型
+entity.msgPush.actionType=动作类型
+entity.msgPush.content=消息内容
+entity.msgPush.title=消息标题
+entity.msgPush.notificationUri=推送至uri
+entity.msgPush.deadline=有效期
+entity.msgPush.pushCount=已经推送数量
+entity.msgPush.sex=性别
+entity.msgPush.levelRange=等级区间
+entity.msgPush.pushFrom=推送人云娃ID
+entity.msgPush.messageType=推送类型
+entity.msgPush.picFile=图片
+entity.msgPush.yunvaIdList.warnning=提醒:ID之间请用换行符隔开,ID的数量上限为100
+entity.msgPush.detail=富消息明细
+entity.msgPush.coverUrl=封面图片
+entity.msgPush.summary=摘要
+entity.msgPush.type=跳转类型
+entity.msgPush.url=跳转url
+entity.msgPush.itemTitle=富消息标题
+entity.msgPush.iosSupportType=提醒：IOS下仅支持URL、转盘、积分商城、任务列表、主播排行榜的跳转
+
+#######################房间信息#########################
+label.navigation.yayaSdk.roomInfo.list=呀呀SDK > 房间信息 > 列表
+label.navigation.yayaSdk.roomInfo.add=呀呀SDK > 房间信息 > 添加
+label.navigation.yayaSdk.roomInfo.edit=呀呀SDK > 房间信息 > 编辑
+entity.roomInfo.roomId=房间编号
+entity.roomInfo.appId=应用编号
+entity.roomInfo.roomName=房间名称
+entity.roomInfo.roomIndex=优先级(越大越前)
+entity.roomInfo.roomUrl=图片URL
+entity.roomInfo.roomPic=图片
+entity.roomInfo.newRoomPic=新图片
+entity.roomInfo.roomPeoples=房间人数
+
+#######################用户分天交友数量#########################
+label.navigation.base.friendCount.listcount=查询报表 > 用户分天交友数量 > 列表
+entity.friendCount.startDate=开始日期
+entity.friendCount.endDate=结束日期
+entity.friendCount.Date=日期
+entity.friendCount.dayCount=数量
+
+#######################用户充值流水#########################
+label.navigation.userReport.rechargeOrder.list=查询报表 > 用户充值流水 > 列表
+entity.rechargeOrder.yunvaId=充值账号
+entity.rechargeOrder.userOrderId=用户订单号
+entity.rechargeOrder.transactionId=交易流水号
+entity.rechargeOrder.requestType=请求类型
+entity.rechargeOrder.cardType=充值类型
+entity.rechargeOrder.status=状态
+entity.rechargeOrder.realMoney=成功金额(单位:分)
+entity.rechargeOrder.cardMoney=订单金额(单位:分)
+entity.rechargeOrder.cardNo=充值卡卡号
+entity.rechargeOrder.channelId=渠道编号
+entity.rechargeOrder.sourceId=入口编号
+entity.rechargeOrder.appName=应用名称
+entity.rechargeOrder.forConsume=消费交易流水号
+entity.rechargeOrder.notifyStatus=通知状态
+entity.rechargeOrder.operate=操作
+entity.rechargeOrder.operateButton=变更通知
+entity.rechargeOrder.orderStatus=账单状态
+entity.rechargeOrder.orderStatus.none=不限
+entity.rechargeOrder.orderStatus.error=账单异常（需调整状态）
+
+#######################用户消费情况#########################
+label.navigation.userReport.giftOrder.list=查询报表 > 用户消费情况 > 列表
+label.navigation.userReport.giftOrder.queryten=查询报表 > 呀呀报表 > 礼物消费排名
+entity.giftOrder.yunvaId=云娃用户账号
+entity.giftOrder.receiverYunvaId=礼物接收者账号
+entity.giftOrder.status=状态
+entity.giftOrder.status.success=成功
+entity.giftOrder.status.failing=失败
+entity.giftOrder.status.process=处理中
+entity.giftOrder.goodsId=物品编号
+entity.giftOrder.appId=应用编号
+entity.giftOrder.goodsName=物品名称
+entity.giftOrder.goodsType=物品类型
+entity.giftOrder.goodsPrice=物品价格
+entity.giftOrder.sumPrice=总价
+entity.giftOrder.goodsItems=物品数量
+entity.giftOrder.createTime=时间
+entity.giftOrder.startTime=开始时间
+entity.giftOrder.endTime=结束时间
+entity.giftOrder.dateRange=创建时间范围
+
+
+#######################用户余额信息#########################
+label.navigation.userReport.userCurrency.list=查询报表 > 用户余额 > 列表
+entity.userCurrency.yunvaId=充值账号
+entity.userCurrency.minBalance=最低余额
+entity.userCurrency.type=类型
+entity.userCurrency.balance=余额
+entity.userCurrency.updateTime=更新时间
+entity.usercurrency.type.douya=豆芽
+entity.usercurrency.type.jinbi=积分
+
+#######################主播接受礼物明细#########################
+label.navigation.userReport.giftitem.list=查询报表 > 主播礼物明细 > 列表
+entity.giftitem.date=日期
+entity.giftitem.goodid=商品id
+entity.giftitem.goodname=商品名
+entity.giftitem.goodsnum=商品数量
+entity.giftitem.total=总金额
+label.navigation.userReport.gifttotal.list=查询报表 > 主播礼物总金额 > 列表
+
+label.navigation.userReport.queryuserapp.list=查询报表 > 查询用户来源 > 列表
+entity.queryuserapp.yunvaid=用户
+entity.queryuserapp.appName=应用名称
+
+#######################收入管理#########################
+label.navigation.incomeManage.incomeQuery.list=收入管理 > 收入查询 > 列表
+label.navigation.incomeManage.incomeQuery.add=收入管理 > 收入查询 > 添加
+label.navigation.incomeManage.incomeQuery.edit=收入管理 > 收入查询 > 编辑
+entity.cooperateIncome.channelName=渠道名称
+entity.cooperateIncome.gameCount=关联游戏数
+entity.cooperateIncome.totalIncome=总收入
+entity.cooperateIncome.orderCount=总订单数
+entity.cooperateIncome.guildId=公会ID
+entity.cooperateIncome.guildName=公会名称
+entity.cooperateIncomeDetail.gameName=游戏名
+entity.cooperateIncomeDetail.channelPackage=渠道包
+entity.cooperateIncomeDetail.totalIncome=收入
+entity.cooperateIncomeDetail.registerCount=注册人数
+entity.cooperateIncomeDetail.consumptionCount=消费人数
+entity.cooperateIncomeDetail.realIncome=实际收入
+entity.cooperateIncomeDetail.orderCount=订单数
+entity.cooperateIncome.detail=收入明细
+entity.cooperateIncome.detailCreateDate=明细创建时间
+
+label.navigation.consume.list=收入管理 > 消费查询 > 列表
+label.navigation.consume.add=收入管理 > 消费查询 > 添加
+label.navigation.consume.edit=收入管理 > 消费查询 > 编辑
+entity.consume.account=账号
+entity.consume.total=金额
+
+
+
+
+
+#######################用户信息########################
+label.navigation.base.userInfo2.addQuery=呀呀报表 > 用户新增数 > 查询
+label.navigation.base.userInfo2.userHourCount=呀呀报表 > 查询分时用户数量  > 查询
+entity.userInfo2.hour=时间区域
+entity.userInfo2.totalAmount=新增用户数
+entity.userInfo2.startData=起始日期
+entity.userInfo2.endData=终止日期
+entity.userInfo2.Data=日期
+entity.userInfo2.appVersion=应用
+entity.userInfo2.qq=QQ号码
+entity.userInfo2.email=电子邮箱地址
+label.navigation.base.imLogin.addQuery=呀呀报表 > 用户访问数 > 查询
+entity.imLogin.totalAmount=访问数
+entity.navigation.base.UserAmount.addQuery=呀呀报表 > 分时在线用户 > 查询
+entity.UserAmount.data=分时
+entity.UserAmount.Avgcount=均值
+entity.UserAmount.Maxcount=峰值
+entity.navigation.base.TroopAmount.addQuery=呀呀报表 > 分时在线队伍 > 查询
+entity.TroopAmount.data=分时
+entity.TroopAmount.Avgcount=均值
+entity.TroopAmount.Maxcount=峰值
+entity.navigation.base.guildArm.channel=呀呀报表 > 新增用户渠道 > 查询
+entity.channel.id=渠道ID
+entity.channel.amount=渠道数量
+entity.channel.name=渠道名称
+entity.navigation.base.guildArm.addQuery=查询报表 > 查询公会军团 > 查询
+entity.guildArm.id=公会ID
+entity.guildArm.total=军团数
+entity.guildArm.name=公会名称
+entity.navigation.base.guildUser.addQuery=查询报表 > 查询公会用户 > 查询
+entity.guildUser.level=等级
+entity.guildUser.exp=经验
+entity.guildUser.total=用户数
+entity.guild.total=公会总数
+entity.navigation.base.guildsignin.addQuery=查询报表 > 公会签到人数 > 查询
+entity.guildsignin.level=日期
+entity.guildsignin.exp=公会id
+entity.guildsignin.total=签到数
+entity.navigation.base.rechargeOrder.addQuery=呀呀报表 > 查询呀呀充值 > 查询
+entity.navigation.base.rechargeOrder.total=充值额（元）
+entity.navigation.base.sdkgift.addQuery=合作报表 > 消费金额情况 > 查询
+entity.navigation.base.sdkgift.total=消费额
+entity.navigation.base.rechargeOrderUser.addQuery=呀呀报表 > 呀呀充值用户 > 查询
+entity.navigation.base.rechargeOrderUser.total=总数
+entity.navigation.base.yayatrading.addQuery=呀呀报表 > 呀呀消费金额 > 查询
+entity.navigation.base.yayatradingUser.addQuery=呀呀报表 > 呀呀消费用户 > 查询
+entity.navigation.base.yayatradingUserGuild.addQuery=呀呀报表 > 呀呀充值公会 > 查询
+entity.yayatradingUserGuild.user=公会
+entity.yayatradingUserGuild.total=充值额（元）
+entity.navigation.base.UserGuild.addQuery=查询报表 > 查询用户军团 > 查询
+entity.UserGuild.UserId=用户ID
+entity.UserGuild.GuildName=公会名称
+entity.navigation.base.userRechargeOrder.addQuery=查询报表 > 用户充值金额 > 查询
+entity.userRechargeOrder.UserId=用户ID
+entity.userRechargeOrder.Total=总金额
+entity.userRechargeOrder.min=最小金额
+entity.userRechargeOrder.max=最大金额
+entity.navigation.base.yayatradingRoom.addQuery=呀呀报表 > 呀呀房间消费 > 查询
+entity.navigation.base.GuildtradingRoom.addQuery=查询报表 > 紫马房间消费 > 查询
+entity.yayatradingRoom.date=日期
+entity.yayatradingRoom.room=房间
+entity.yayatradingRoom.total=消费额（元）
+entity.navigation.base.bbs.addQuery=查询报表 > 新增帖子总数 > 查询
+entity.bbs.date=日期
+enrity.bbs.totay=帖子数
+entity.navigation.base.GiftToal.addQuery=呀呀报表 > 礼物消费金额 > 查询
+entity.GiftTotal.date=日期
+entity.GiftTotal.goodId=商品Id
+entity.GiftTotal.goodName=商品名称
+entity.GiftTotal.amount=商品消费数
+entity.GiftTotal.total=总金额
+entity.navigation.base.Zhubo.addQuery=呀呀报表 > 主播接受金额 > 查询
+entity.Zhubo.name=主播
+entity.Zhubo.total=总金额
+entity.navigation.base.sysclick.addQuery=呀呀报表 > 呀呀首页点击 > 查询
+entity.sysclick.date=日期
+entity.sysclick.type=类别
+entity.sysclick.jt=具体
+entity.sysclick.click=点击数
+entity.sysclick.userTotal=用户数
+entity.navigation.base.gameqdtotal.addQuery=查询报表 > 游戏启动次数 > 查询
+entity.gameqdtotal.date=日期
+entity.gameqdtotal.id=游戏Id
+entity.gameqdtotal.name=游戏名称
+entitu.gameqdtotal.user=用户数
+entitu.gameqdtotal.sum=启动次数
+
+entity.navigation.base.guildroomtotal.addQuery=查询报表 > 紫马房间消费 > 查询
+entity.guildroomtotal.date=日期
+entity.guildroomtotal.roomid=房间
+entity.guildroomtotal.total=金额
+
+label.navigation.userReport.zmgifttotal.list=查询报表 > 紫马主播礼物 > 查询
+
+entity.navigation.base.operatetyperesourcetype.addQuery=查询报表 > 话题帖子回复 > 查询
+entity.navigation.base.receivegifttotal.addQuery=查询报表 > 主播接受金额 > 查询
+entity.operatetyperesourcetype.Id=帖子ID
+entity.operatetyperesourcetype.userId=用户ID
+entitu.operatetyperesourcetype.name=用户昵称
+entitu.operatetyperesourcetype.guild=公会
+entitu.operatetyperesourcetype.content=回复内容
+entitu.operatetyperesourcetype.date=回复时间
+
+entity.navigation.base.yhlb.Query=查询报表 > 用户分天礼包 > 查询
+entity.yhlb.date=日期
+entity.yhlb.id=礼包名称
+entity.yhlb.game=游戏
+entity.yhlb.name=用户Id
+entitu.yhlb.user=礼包数
+entity.navigation.base.yxg.Query=查询报表 > 游戏入住公会 > 查询
+entity.yxg.id=游戏Id
+entity.yxg.name=游戏名称
+entity.yxg.total=公会数
+entity.navigation.base.giveGift.Query=合作报表 > 赠送礼物情况 > 查询
+entity.giveGift.mediaType=状态
+entity.giveGift.id=日期
+entity.giveGift.name=礼物名称
+entity.giveGift.total=礼物数
+entity.giveGift.Money=总金额
+entity.navigation.base.paysuccesscount.Query=合作报表 > 付费人数情况 > 查询
+enity.currency=货币t
+entity.paysuccesscount.mediaType=状态
+entity.paysuccesscount.date=日期
+entity.paysuccesscount.total=总数
+entity.navigation.base.receivegift.Query=合作报表 > 主播接受礼物 > 查询
+entity.receivegift.date=日期
+entity.receivegift.id=主播
+entity.receivegift.total=金额
+entity.navigation.base.receivegiftbyhour.Query=合作报表 > 主播分时礼物 > 查询
+entity.receivegiftbyhour.date=日期
+entity.receivegiftbyhour.hour=小时
+entity.receivegiftbyhour.name=商品名
+entity.receivegiftbyhour.id=主播
+entity.receivegiftbyhour.total=礼物数
+entity.receivegiftbyhour.sum=金额
+entity.navigation.base.requestpaycount.Query=合作报表 > 主播上下麦 > 查询
+entity.requestpaycount.mediaType=房间Id
+entity.requestpaycount.date=日期
+entity.requestpaycount.userId=用户
+entity.requestpaycount.name=昵称
+entity.requestpaycount.operate=操作
+entity.requestpaycount.time=操作时间
+entity.navigation.base.giftbyday.Query=合作报表 > 用户在线情况 > 查询
+entity.giftbyday.date=日期
+entity.giftbyday.hour=小时
+entity.giftbyday.total=总数
+entity.navigation.base.addUserByHour.Query=合作报表 > 分时新增用户 > 查询
+entity.addUserByHour.date=日期
+entity.addUserByHour.hour=小时
+entity.addUserByHour.total=用户数
+entity.navigation.base.addUserByDay.Query=合作报表 > 分天新增用户 > 查询
+entity.addUserByDay.date=日期
+entity.addUserByDay.hour=小时
+entity.addUserByDay.total=用户数
+entity.navigation.base.visitUserByDay.Query=合作报表 > 分天访问用户 > 查询
+entity.navigation.base.visitUserByHour.Query=合作报表 > 分时访问用户 > 查询
+entity.navigation.base.costByHour.Query=合作报表 > 分时钻石情况 > 查询
+entity.costByHour.total=钻石数
+entity.navigation.base.appadduserbyday.Query=合作报表 > 应用新增用户 > 查询
+entity.costByHour.appadduserbyday.date=日期
+entity.costByHour.appadduserbyday.appId=应用id
+entity.costByHour.appadduserbyday.total=总用户数
+
+####################房间视频管理############################
+entity.videoList.appId=应用程序编号
+entity.videoList.videoUrl=视频Url
+entity.videoList.newVideo=新视频
+entity.videoList.type=类型
+entity.videoList.seq=顺序
+entity.videoList.createTime=创建时间
+entity.videoList.file=视频文件
+label.navigation.base.videoList.input=呀呀SDK > 房间视频管理 > 新增
+label.navigation.base.videoList.list=呀呀SDK > 房间视频管理 > 查询
+label.navigation.base.videoList.edit=呀呀SDK > 房间视频管理 > 编辑
+label.navigation.base.roomvisit.edit=SDK报表 > 房间数据访问 > 查询
+
+####################房间图片管理############################
+entity.roomPic.appId=应用程序编号
+entity.roomPic.picUrl=图片Url
+entity.roomPic.createTime=创建时间
+entity.roomPic.file=图片文件
+entity.roomPic.picView=图片预览
+label.navigation.base.roomPic.input=呀呀SDK > 房间图片管理 > 新增
+label.navigation.base.roomPic.list=呀呀SDK > 房间图片管理 > 查询
+label.navigation.base.roomPic.edit=呀呀SDK > 房间图片管理 > 编辑
+
+####################黑名单管理############################
+entity.blackUser.appId=应用程序编号
+entity.blackUser.yunvaId=云娃ID
+entity.blackUser.createTime=创建时间
+label.navigation.base.blackUser.input=呀呀SDK > 黑名单管理 > 新增
+label.navigation.base.blackUser.list=呀呀SDK > 黑名单管理 > 查询
+label.navigation.base.blackUser.edit=呀呀SDK > 黑名单管理 > 编辑
+
+####################公会等级管理############################
+label.navigation.base.guildLevel.input=公会管理 > 公会等级 > 新增
+label.navigation.base.guildLevel.list=公会管理 > 公会等级 > 查询
+label.navigation.base.guildLevel.edit=公会管理 > 公会等级 > 编辑
+entity.guildLevel.guildLevel=公会等级
+entity.guildLevel.needExp=所需经验
+entity.guildLevel.nextExp=下级经验
+entity.guildLevel.theoryDaysBak=理论所需天数
+entity.guildLevel.theoryTotalDaysBak=理论所需总天数
+entity.guildLevel.roomCount=频道数目
+entity.guildLevel.peopleCount=成员数目
+entity.guildLevel.managerCount=管理员数目
+entity.guildLevel.viceChairmanCount=副会长总数
+entity.guildLevel.statesmanCount=公会元老总数
+entity.guildLevel.createTime=创建时间
+entity.guildLevel.updateTime=更改时间
+
+####################用户等级管理############################
+label.navigation.base.userLevel.input=公会管理 > 用户等级 > 新增
+label.navigation.base.userLevel.list=公会管理 > 用户等级 > 查询
+label.navigation.base.userLevel.edit=公会管理 > 用户等级 > 编辑
+entity.userLevel.userLevel=用户等级
+entity.userLevel.needExp=所需经验
+entity.userLevel.nextExp=下一级经验
+entity.userLevel.upgradeExp=升级经验
+entity.userLevel.theoryDaysBak=理论天数
+entity.userLevel.theoryTotalDaysBak=理论总天数
+entity.userLevel.createTime=创建时间
+
+####################公会用户等级管理############################
+label.navigation.base.guildUserLevel.input=公会管理 > 公会用户等级 > 新增
+label.navigation.base.guildUserLevel.list=公会管理 > 公会等级 > 查询
+label.navigation.base.guildUserLevel.edit=公会管理 > 公会等级 > 编辑
+entity.guildUserLevel.guildUserLevel=公会用户等级
+entity.guildUserLevel.headName=头衔
+entity.guildUserLevel.needExp=所需经验
+entity.guildUserLevel.nextExp=下级经验
+entity.guildUserLevel.createTime=创建时间
+entity.guildUserLevel.updateTime=更改时间
+
+####################应用信息管理############################
+label.navigation.base.appInfo.input=礼物管理 > 应用信息 > 新增
+label.navigation.base.appInfo.list=礼物管理 > 应用信息 > 查询
+label.navigation.base.appInfo.edit=礼物管理 > 应用信息 > 编辑
+entity.appInfo.appId=应用编号
+entity.appInfo.appName=应用名称
+entity.appInfo.currenyInfo=货币类型
+entity.appInfo.projectId=方案名称
+entity.appInfo.createTime=创建时间
+entity.appInfo.updateTime=更改时间
+
+####################货币信息管理############################
+label.navigation.base.currencyInfo.input=礼物管理 > 货币信息 > 新增
+label.navigation.base.currencyInfo.list=礼物管理 > 货币信息 > 查询
+label.navigation.base.currencyInfo.edit=礼物管理 > 货币信息 > 编辑
+entity.currencyInfo.currencyType=货币类型
+entity.currencyInfo.appInfo=应用信息
+entity.currencyInfo.currencyName=货币名称
+entity.currencyInfo.currencyRate=货币汇率
+entity.currencyInfo.charmValueSwitch=魅力值开关
+entity.currencyInfo.remark=备注
+entity.currencyInfo.createTime=创建时间
+entity.currencyInfo.updateTime=更改时间
+entity.currency=货币
+
+####################礼物信息管理############################
+label.navigation.base.itemInfo.input=礼物管理 > 礼物信息 > 新增
+label.navigation.base.itemInfo.list=礼物管理 > 礼物信息 > 查询
+label.navigation.base.itemInfo.edit=礼物管理 > 礼物信息 > 编辑
+label.navigation.base.itemInfo.batchOperate=礼物管理 > 礼物信息 > 批量操作
+entity.itemInfo.id=编号
+entity.itemInfo.appId=应用编号
+entity.itemInfo.appName=应用名称
+entity.itemInfo.name=名称
+entity.itemInfo.parentNode=父节点
+entity.itemInfo.sonNode=子节点
+entity.itemInfo.node=节点
+entity.itemInfo.type=类型
+entity.itemInfo.showName=显示名称
+entity.itemInfo.iconUrl=图标
+entity.itemInfo.replace.iconUrl=替换图标
+entity.itemInfo.pcIconUrl=PC图标
+entity.itemInfo.replace.pcIconUrl=替换PC图标
+entity.itemInfo.price=价格
+entity.itemInfo.initialPrice=初始价格
+entity.itemInfo.buyRequired=购买条件
+entity.itemInfo.currencyType=货币类型
+entity.itemInfo.useTimes=使用次数
+entity.itemInfo.validTime=天数
+entity.itemInfo.checkCode=校验码
+entity.itemInfo.loadType=加载类型
+entity.itemInfo.versionId=版本号
+entity.itemInfo.describe=描述
+entity.itemInfo.chatMsg=聊天栏消息/通过内容
+entity.itemInfo.chatPicUrl=聊天栏图标
+entity.itemInfo.replace.chatPicUrl=替换聊天栏图标
+entity.itemInfo.pcChatPicUrl=PC聊天栏图标
+entity.itemInfo.replace.pcChatPicUrl=替换PC聊天栏图标
+entity.itemInfo.cartoonUrl=动画
+entity.itemInfo.replace.cartoonUrl=替换动画
+entity.itemInfo.pcCartoonUrl=PC动画
+entity.itemInfo.replace.pcCartoonUrl=替换PC动画
+entity.itemInfo.charmValue=魅力值
+entity.itemInfo.noticeType=通告类型
+entity.itemInfo.wishType=赠言类型
+entity.itemInfo.wishMsg=赠言内容
+entity.itemInfo.voiceUrl=声音
+entity.itemInfo.replace.voiceUrl=替换声音
+entity.itemInfo.extParam=扩展字段
+entity.itemInfo.beginTime=开始时间
+entity.itemInfo.endTime=结束时间
+entity.itemInfo.mediaType=状态
+entity.itemInfo.createTime=创建时间
+entity.itemInfo.updateTime=更改时间
+entity.itemInfo.order=顺序
+entity.itemInfo.batchFile=批量文件
+entity.itemInfo.extOne=扩展字段一
+entity.itemInfo.extTwo=扩展字段二
+entity.itemInfo.extThree=扩展字段三
+entity.itemInfo.extFour=扩展字段四
+entity.itemInfo.extFive=扩展字段五
+entity.itemInfo.extSix=扩展字段六
+entity.itemInfo.extSeven=扩展字段七
+entity.itemInfo.extEight=扩展字段八
+entity.itemInfo.extNine=扩展字段九
+entity.itemInfo.extTen=扩展字段十
+entity.itemInfo.extEleven=扩展字段十一
+entity.itemInfo.extTwelve=扩展字段十二
+entity.itemInfo.extThirteen=扩展字段十三
+entity.itemInfo.extFourteen=扩展字段十四
+entity.itemInfo.ext.desc=敢聊物品编号/VIP等级:如1,2/道具权限:禁言、解禁、视频文字，1有0无，如100、010,房间编号;特权:特权等级
+entity.itemInfo.extOne.desc=VIP字体颜色,房间座位序号;特权:房间字体显示颜色类似#FFF000
+entity.itemInfo.extTwo.desc=特权(坐骑类别id)
+entity.itemInfo.extThree.desc=特权(几组礼物)
+entity.itemInfo.extFour.desc=特权(个数礼物)
+entity.itemInfo.extFive.desc=特权勋章图片的url
+entity.itemInfo.extSix.desc=特权(坐骑天数)
+entity.itemInfo.extSeven.desc=特权(主播开启／关闭魅力开关 0:关 1:开)
+entity.itemInfo.extEight.desc=(特权:坐骑图片的url)
+entity.itemInfo.extNine.desc=(特权:颜色字 如红色)
+entity.itemInfo.extTen.desc=(特权:跑马灯触发所需货币类型 *表示所有 1豆芽 31积分)
+entity.itemInfo.extEleven.desc=(特权:触发跑马灯礼物每组最低价格,如果配置豆芽，注意单位为分)
+entity.itemInfo.extTwelve.desc=(特权:坐骑名称)
+entity.itemInfo.extThirteen.desc=(特权:特权购买财富等级限制)
+entity.itemInfo.extFourteen.desc=(特权:财富等级Url)
+entity.itemInfo.roomColor=房间字体显示颜色
+entity.itemInfo.privilegeColor=特权颜色
+
+####################礼物类型管理############################
+label.navigation.base.itemType.input=礼物管理 > 礼物类型 > 新增
+label.navigation.base.itemType.list=礼物管理 > 礼物类型 > 查询
+label.navigation.base.itemType.edit=礼物管理 > 礼物类型 > 编辑
+entity.itemType.id=主键
+entity.itemType.type=类型
+entity.itemType.name=名称
+entity.itemType.createTime=创建时间
+
+#######################呀呀下载设置#########################
+entity.apkDownload.apkDownloadUrl=下载地址
+entity.apkDownload.osType=适用平台
+label.navigation.system.apkDownload.list=系统设置 > 呀呀下载设置 > 列表
+label.navigation.system.apkDownload.add=系统设置 > 呀呀下载设置 > 添加
+label.navigation.system.apkDownload.edit=系统设置 > 呀呀下载设置 > 编辑
+
+
+#######################操作角色##############################
+label.navigation.system.powerid.list=马甲管理 > 操作角色 > 列表
+label.navigation.system.powerid.add=马甲管理 > 操作角色 > 添加
+label.navigation.system.powerid.edit=马甲管理 > 操作角色 > 编辑
+entity.powerid.id=编号
+entity.powerid.name=名称
+entity.powerid.type=类别
+
+#######################角色关系##############################
+label.navigation.system.power.list=马甲管理 > 角色关系 > 列表
+label.navigation.system.id.add=马甲管理 > 角色关系 > 添加
+label.navigation.system.power.edit=马甲管理 > 角色关系 > 编辑
+entity.power.id=编号
+entity.power.powerId=操作角色编号
+entity.power.powerName=动作
+entity.power.vestRole=房间角色
+entity.power.vestName=房间角色名称
+entity.power.mediaType=状态
+entity.power.ByvestRole=被作用房间角色
+
+
+#######################角色信息管理##############################
+label.navigation.base.vestRole.input=马甲管理 > 角色信息 > 新增
+label.navigation.base.vestRole.list=马甲管理 > 角色信息 > 查询
+label.navigation.base.vestRole.edit=马甲管理 > 角色信息 > 编辑
+entity.vestRole.role=角色Id
+entity.vestRole.roleName=角色名称
+entity.vestRole.womanIcon=女性图标
+entity.vestRole.replace.womanIcon=替换女性图标
+entity.vestRole.manIcon=男性图标
+entity.vestRole.replace.manIcon=替换男性图标
+entity.vestRole.color=字体颜色
+
+#######################房间角色信息管理##############################
+label.navigation.yunvaTest.vest.input=马甲管理 > 房间角色信息 > 新增
+label.navigation.yunvaTest.vest.list=马甲管理 > 房间角色信息 > 查询
+label.navigation.yunvaTest.vest.edit=马甲管理 > 房间角色信息 > 编辑
+entity.vest.yunvaId=用户编号
+entity.vest.id=编号
+entity.vest.userid=用户编号
+entity.vest.roomid=房间id
+entity.vest.roomName=房间名称
+entity.vest.role=角色名称
+entity.vest.ctime=创建时间
+entity.vest.validity=失效时间
+
+#######################赠送用户座驾##############################
+label.navigation.base.userMatNotifyReq.input=用户座驾修改
+entity.userMatNotifyReq.yunvaId=云娃账号
+entity.userMatNotifyReq.goodsId=座驾
+entity.userMatNotifyReq.day=天数
+
+#######################查询用户座驾##############################
+label.navigation.base.userMat.list=礼物管理 > 用户座驾 > 用户座驾列表
+entity.userMat.yunvaId=云娃账号
+entity.userMat.appName=应用名称
+entity.userMat.matId=坐席ID
+entity.userMat.matUrl=坐席图片
+entity.userMat.matName=坐席名称
+entity.userMat.status=状态
+entity.userMat.validTime=有效时间
+entity.userMat.createTime=建立时间
+entity.userMat.updateTime=更新时间
+
+#######################礼物权限##############################
+label.navigation.base.itemAuth.list=礼物管理 > 礼物权限 > 礼物权限列表
+label.navigation.base.itemAuth.add=礼物管理 > 礼物权限 > 增加
+entity.itemAuth.userId=用户编号
+entity.itemAuth.username=用户名
+entity.itemAuth.name=名称
+entity.itemAuth.appId=应用编号
+entity.itemAuth.appName=应用名称
+
+#######################礼物审核##############################
+label.navigation.base.itemInfoAudit.list=礼物管理 > 礼物审核 > 列表
+label.navigation.base.itemInfoAudit.view=礼物管理 > 礼物审核 > 查看
+entity.itemInfo.operateType=操作类型
+entity.itemInfo.struct=层次结构
+
+#######################礼物图片##############################
+label.navigation.base.itemPic.list=礼物管理 > 礼物图片 > 列表
+label.navigation.base.itemPic.input=礼物管理 > 礼物图片 > 新增
+label.navigation.base.itemPic.edit=礼物管理 > 礼物图片 > 编辑
+entity.itemPic.id=编号
+entity.itemPic.name=名称
+entity.itemPic.appId=应用编号
+entity.itemPic.appName=应用名称
+entity.itemPic.type=类型
+entity.itemPic.file=图片文件
+entity.itemPic.createTime=创建时间
+entity.itemPic.image=图片
+
+#######################sdk消费情况##############################
+label.navigation.userReport.sdkGift.list=查询报表 > SDK消费情况 > 列表
+entity.sdkGift.id=编号
+entity.sdkGift.transactionId=交易流水号
+entity.sdkGift.yunvaId=云娃用户编号
+entity.sdkGift.receiverYunvaId=礼物接收者编号
+entity.sdkGift.status=状态
+entity.sdkGift.goodsId=物品编号
+entity.sdkGift.goodsName=物品名称
+entity.sdkGift.goodsVersion=物品版本
+entity.sdkGift.goodsType=物品类型
+entity.sdkGift.goodsPrice=物品价格(单位:元)
+entity.sdkGift.goodsItems=物品数量
+entity.sdkGift.channelId=渠道编号
+entity.sdkGift.sourceId=入口编号
+entity.sdkGift.appId=应用编号
+entity.sdkGift.sdkAppId=SDK应用编号
+entity.sdkGift.sdkAppVersion=SDK应用版本
+entity.sdkGift.imsi=手机卡串号
+entity.sdkGift.imei=手机串号
+entity.sdkGift.mac=设备机器码
+entity.sdkGift.currency=货币类型
+entity.sdkGift.osType=操作系统类型
+entity.sdkGift.factory=设备生产厂商
+entity.sdkGift.model=设备型号
+entity.sdkGift.roomId=房间编号
+entity.sdkGift.consumeTime=消费时间
+entity.sdkGift.createTime=建立时间
+entity.sdkGift.updateTime=更新时间
+entity.sdkGift.app=应用
+
+label.navigation.userConsume.sdkGift.list=查询报表 > 用户消费金额 > 列表
+entity.userconsume.yunvid=用户
+entity.userconsume.nickname=昵称
+entity.userconsume.wealth=财富等级
+entity.userconsume.total=消费金额
+
+
+
+
+
+
+#######################呀呀更新设置##############################
+label.navigation.systemConfig.yayaUpdate.list=系统设置 > 呀呀更新设置 > 列表
+label.navigation.systemConfig.yayaUpdate.add=系统设置 > 呀呀更新设置 > 新增
+label.navigation.systemConfig.yayaUpdate.edit=系统设置 > 呀呀更新设置 > 编辑
+entity.yayaUpdate.id=编号
+entity.yayaUpdate.appId=应用编号
+entity.yayaUpdate.version=版本
+entity.yayaUpdate.gameId=游戏ID
+entity.yayaUpdate.updateInfo=更新信息
+entity.yayaUpdate.updateFile=更新文件URL
+entity.yayaUpdate.file=更新文件
+entity.yayaUpdate.remark=注释
+entity.yayaUpdate.publish=是否发布
+entity.yayaUpdate.isForce=是否强制更新
+entity.yayaUpdate.createTime=创建时间
+
+#######################sdk报表信息##############################
+label.navigation.userReport.giftOrder.querylwsl=呀呀报表 > 赠送礼物数量 > 列表
+
+#######################sdk报表信息##############################
+label.navigation.sdkReport.sdkInfo.querydwsl=SDK报表 > 分天队伍数量 > 列表
+label.navigation.sdkReport.sdkInfo.queryfwyh=SDK报表 > 分天访问数量 > 列表
+label.navigation.sdkReport.sdkInfo.querysypl=SDK报表 > 分天使用频率 > 列表
+label.navigation.sdkReport.sdkInfo.queryxxsl=SDK报表 > 分天消息条数 > 列表
+label.navigation.sdkReport.sdkInfo.queryxzyh=SDK报表 > 分天新增用户 > 列表
+label.navigation.sdkReport.sdkInfo.statistics=SDK报表 > 留存用户统计 > 列表
+label.navigation.sdkReport.sdkInfo.firstpayment=SDK报表 > 首次充值用户 > 列表
+entity.querySdkInfo.appId=应用
+entity.querySdkInfo.date=日期
+entity.querySdkInfo.dateRange=日期范围
+entity.querySdkInfo.count=数量
+entity.querySdkInfo.yunvaId=用户编号
+entity.statistics.date=日期
+entity.statistics.total=总用户数
+entity.statistics.one=一天后
+entity.statistics.second=二天后
+entity.statistics.seven=七天后
+entity.statistics.fourth=十四后
+entity.statistics.thirty=三十后
+
+
+label.navigation.sdkReport.sdkInfo.retentionroom=SDK报表 >房间滞留用户 > 列表
+entity.retentionroom.zero=当天
+entity.retentionroom.seven=六天后
+entity.retentionroom.fourth=十三后
+entity.retentionroom.thirty=二十九后
+
+label.navigation.sdkReport.sdkInfo.addTroopInfo=SDK报表 > 新增队伍总数 > 列表
+entity.addTroopInfo.date=日期
+entity.addTroopInfo.type=队伍类型
+entity.addTroopInfo.total=队伍数
+
+label.navigation.sdkReport.sdkInfo.adduserpc=SDK报表 > 用户pc新增 > 列表
+entity.adduserpc.date=日期
+entity.adduserpc.total=用户数
+entity.adduserpc.type=类型
+
+label.navigation.sdkReport.sdkInfo.channel=SDK报表 > 查询渠道信息 > 列表
+entity.channel.id=渠道id
+entity.channel.terminal=新增终端
+entity.channel.userTotal=新增用户
+entity.channel.visitUserTotal=访问数
+entity.channel.reorderUserTotal=充值用户数
+entity.channel.reorderTotal=充值金额(单位：分)
+entity.channel.consumeUserTotal=消费用户数
+entity.channel.consumeTotal=消费金额(单位：分)
+
+
+label.navigation.sdkReport.sdkInfo.appinfo=SDK报表 > 查询应用信息 > 列表
+entity.appinfo.id=应用id
+entity.appinfo.time=时间
+entity.appinfo.userTotal=新增用户数
+entity.appinfo.visitTotal=访问用户数
+entity.appinfo.rechargeTotal=消费用户数
+entity.appinfo.consumeTotal=消费金额
+entity.appinfo.currenyType=货币类型
+
+label.navigation.sdkReport.loginfrequency.appinfo=SDK报表 > 用户登录频次 > 列表
+label.navigation.sdkReport.roomtime.appinfo=SDK报表 > 房间用户时长 > 列表
+
+
+
+
+#######################主播收入提成比例##############################
+label.navigation.incomeManage.toastmasterIncomeScale.list=收入管理 > 主播收入提成 > 列表
+label.navigation.incomeManage.toastmasterIncomeScale.add=收入管理 > 主播收入提成 > 新增
+label.navigation.incomeManage.toastmasterIncomeScale.edit=收入管理 > 主播收入提成 > 编辑
+entity.toastmasterIncomeScale.id=主键
+entity.toastmasterIncomeScale.income=收入
+entity.toastmasterIncomeScale.incomeRange=收入范围
+entity.toastmasterIncomeScale.percent=比例
+entity.toastmasterIncomeScale.createTime=创建时间
+
+#######################主播收入##############################
+label.navigation.incomeManage.toastmaster.querytotal=收入管理 > 主播收入 > 列表
+label.navigation.incomeManage.toastmaster.querydetail=收入管理 > 主播收入明细 > 列表
+label.navigation.incomeManage.toastmaster.querytotalbyday=收入管理 > 主播分天收入> 列表
+entity.toastmaster.appId=应用
+entity.toastmaster.yunvaId=主播编号
+entity.toastmaster.dateRange=日期范围
+entity.toastmaster.date=日期
+entity.toastmaster.income=收入
+entity.toastmaster.scale=提成比例
+entity.toastmaster.goodsName=礼物名称
+entity.toastmaster.currency=货币
+entity.toastmaster.goodsItem=礼物数量
+entity.toastmaster.goodsPrice=礼物价格
+entity.toastmaster.goodsTotalPrice=礼物总价
+entity.toastmaster.yayaIncome=呀呀(豆芽)
+entity.toastmaster.zhongshouyouIncome=中手游(钻石)
+entity.toastmaster.mingyouIncome=名游(钻石)
+entity.toastmaster.ganliaoIncome=敢聊(人品)
+
+
+#######################应用管理##############################
+label.navigation.basic.appManage.list=呀呀游戏 > 应用管理 > 列表
+label.navigation.basic.appManage.addExistGame=呀呀游戏 > 应用管理 > 添加至已有游戏
+label.navigation.basic.appManage.addNewGame=呀呀游戏 > 应用管理 > 添加为新游戏
+entity.appManage.id=编号
+entity.appManage.appName=应用名称
+entity.appManage.mediaType=状态
+entity.appManage.appPackage=应用包名
+entity.appManage.icon=图标
+entity.appManage.gameInfo=游戏
+entity.appManage.game=可能归属游戏
+
+#######################游戏信息##############################
+label.navigation.game.gameInfo.list=呀呀游戏 > 游戏信息 > 列表
+label.navigation.game.gameInfo.add=呀呀游戏 > 游戏信息 > 新增
+label.navigation.game.gameInfo.edit=呀呀游戏 > 游戏信息 > 编辑
+label.navigation.game.gameTeam.add=呀呀游戏 > 游戏信息 > 游戏圈子创建
+entity.gameInfo.gameId=游戏编号
+entity.gameInfo.gameName=游戏名称
+entity.gameInfo.isGameTeam=排序
+entity.gameInfo.gamePackage=官方游戏包名
+entity.gameInfo.downUrl=下载地址
+entity.gameInfo.fileSize=文件大小
+entity.gameInfo.iconUrl=图标
+entity.gameInfo.showIconUrl=陪玩游戏展示图标
+entity.gameInfo.hot=热度
+entity.gameInfo.recommend=推荐度
+entity.gameInfo.version=版本号
+entity.gameInfo.source=游戏来源
+entity.gameInfo.content=圈子头
+entity.gameInfo.subjectId=帖子编号
+entity.gameInfo.labels=游戏标签
+entity.guildInfo.present=公会明细
+entity.gameGuild.hot=公会推荐度
+entity.gameInfo.force=是否强制下载
+entity.gameInfo.guildId=推荐公会
+entity.gamePackageRelation.channelId=渠道编号
+entity.gamePackageRelation.gamePackage=应用包名
+entity.gamePackageRelation.downUrl=下载地址
+entity.channelInfo2.channelId=渠道编号
+entity.channelInfo2.channelName=渠道名称
+entity.channelInfo2.list=渠道列表
+entity.gameInfo.recharge=返利开关
+
+#######################游戏包名##############################
+label.navigation.game.gamePackage.list=呀呀游戏 > 游戏包名 > 列表
+label.navigation.game.gamePackage.add=呀呀游戏 > 游戏包名 > 新增
+label.navigation.game.gamePackage.edit=呀呀游戏 > 游戏包名 > 编辑
+entity.gamePackage.gameInfo=游戏
+entity.gamePackage.gameId=游戏编号
+entity.gamePackage.gameName=游戏名称
+entity.gamePackage.gamePackage=游戏包名
+entity.gamePackage.iconUrl=图标
+
+#######################商品管理##############################
+label.navigation.mall.productInfo.list=积分商城 > 商品管理 > 列表
+label.navigation.mall.productInfo.add=积分商城 > 商品管理 > 新增
+label.navigation.mall.productInfo.edit=积分商城 > 商品管理 > 编辑
+entity.productInfo.productName=商品名称
+entity.productInfo.productUrl=商品图片
+entity.productInfo.status=状态
+entity.productInfo.count=库存数量
+entity.productInfo.score=兑换所需积分
+entity.productInfo.remark=物品描述
+entity.productInfo.hot=热度
+
+#######################订单管理##############################
+label.navigation.mall.outOrder.list=积分商城 > 订单管理 > 列表
+label.navigation.mall.outOrder.add=积分商城 > 订单管理 > 新增
+label.navigation.mall.outOrder.edit=积分商城 > 订单管理 > 编辑
+entity.outOrder.yunvaId=云娃账号
+entity.outOrder.telephone=联系电话
+entity.outOrder.status=状态
+entity.outOrder.createTime=创建时间
+entity.outOrderDetail.productId=商品编号
+entity.outOrderDetail.productName=商品名称
+entity.outOrderDetail.count=数量
+entity.outOrderProdect.detail=订单商品明细
+entity.outOrderItemInfo.list=商品列表
+entity.outOrder.createTime=创建时间
+entity.outOrder.updateTime=修改时间
+
+
+#######################众筹管理##############################
+label.navigation.exercise.crowdfund.list=呀呀活动 > 众筹管理 > 列表
+label.navigation.exercise.crowdfund.add=呀呀活动 > 众筹管理 > 新增
+label.navigation.exercise.crowdfund.edit=呀呀活动 > 众筹管理 > 编辑
+entity.exerciseInfo.id=活动编号
+entity.crowdfund.exerciseName=众筹名称
+entity.crowdfund.validTime=众筹起止时间
+entity.crowdfund.status=状态
+entity.crowdfund.exerciseIconUrl=众筹图标
+entity.crowdfund.exerciseIconUrl1=众筹图标(未开始)
+entity.crowdfund.exerciseIconUrl2=众筹图标(进行中)
+entity.crowdfund.exerciseIconUrl3=众筹图标(已结束)
+entity.crowdfund.exerciseListIconUrl=众筹列表图标
+entity.crowdfund.exerciseTopic=众筹主题
+entity.crowdfund.exerciseRule=众筹规则
+entity.crowdfund.exerciseReward=众筹奖励
+entity.crowdfund.exerciseNotice=众筹须知
+entity.crowdfund.yunvaId=发起人云娃账号
+entity.crowdfund.nickName=发起人
+entity.crowdfund.detail=众筹礼物明细
+entity.crowdfundDetail.itemId=礼物编号
+entity.crowdfundDetail.itemName=礼物名称
+entity.crowdfundDetail.itemIconUrl=礼物图标
+entity.crowdfundDetail.itemPrice=礼物单价(单位:分)
+entity.crowdfundDetail.needQuantity=所需数量
+entity.crowdfundDetail.gotQuantity=筹集数量
+entity.itemInfo.itemId=礼物ID
+entity.itemInfo.itemName=礼物名称
+entity.itemInfo.list=礼物列表
+
+#######################众筹礼物配置##############################
+label.navigation.exercise.crowdfundItem.list=呀呀活动 > 众筹礼物配置 > 列表
+label.navigation.exercise.crowdfundItem.add=呀呀活动 > 众筹礼物配置 > 新增
+label.navigation.exercise.crowdfundItem.edit=呀呀活动 > 众筹礼物配置 > 编辑
+entity.crowdfundItem.exerciseName=活动名称
+entity.crowdfundItem.itemId=礼物编号
+entity.crowdfundItem.itemName=礼物名称
+entity.crowdfundItem.itemIconUrl=礼物图标
+entity.crowdfundItem.quantity=数量
+entity.crowdfundItem.totalPrice=总价
+entity.crowdfundItem.createTime=创建时间
+
+#######################投票管理##############################
+label.navigation.exercise.vote.list=呀呀活动 > 投票管理 > 列表
+label.navigation.Participant.list=呀呀活动 > 投票管理 > 参赛人列表
+label.navigation.exercise.vote.add=呀呀活动 > 投票管理 > 新增
+label.navigation.exercise.vote.edit=呀呀活动 > 投票管理 > 编辑
+label.navigation.exercise.vote.view=呀呀活动 > 投票管理 > 查看
+label.navigation.exercise.vote.imp=呀呀活动 > 投票管理 > 参赛人导入
+label.navigation.exercise.publicUser.add=呀呀活动 > 公众号 > 新增
+label.navigation.exercise.publicUser.list=呀呀活动 > 公众号 > 列表
+label.navigation.Participant.addVote=呀呀活动 > 投票管理 > 加票
+label.navigation.exercise.vote.impLegend=参赛人导入
+entity.vote.superPosition=模板下载
+entity.vote.download.superPosition=participantSuperPosition.xls
+entity.vote.exerciseName=投票名称
+entity.vote.validTime=投票起止时间
+entity.vote.status=状态
+entity.vote.exerciseIconUrl=投票图标
+entity.vote.exerciseIconUrl1=投票详情图标(未开始)
+entity.vote.exerciseIconUrl2=投票详情图标(进行中)
+entity.vote.exerciseIconUrl3=投票详情图标(已结束)
+entity.vote.exerciseListIconUrl=投票列表图标
+entity.vote.exerciseTopic=投票主题
+entity.vote.exerciseRule=投票规则
+entity.vote.exerciseReward=投票奖励
+entity.vote.exerciseNotice=投票须知
+entity.vote.yunvaId=发起人云娃账号
+entity.vote.nickName=发起人
+entity.vote.rule=规则
+entity.vote.type=投票类型
+entity.voteRule.canRepeat=能否重复
+entity.vote.priceUnit=票价(单位:豆芽)
+entity.vote.freeQuantity=免费票数
+entity.voteRule.present=送礼投票礼物明细
+entity.voteRule.itemName=礼物名称
+entity.voteRule.itemIconUrl=礼物图标
+entity.voteRule.needQuantity=所需数量
+entity.voteRule.price=礼物单价(单位:分)
+entity.voteRule.payQuantityLimit=付费投票数量上限
+entity.vote.resultUrl=投票结果地址
+entity.vote.isPush=是否发送消息
+entity.exerciseInfo.summary=消息描述
+entity.Participant.yunvaId=云娃账号
+entity.Participant.nickName=昵称
+entity.Participant.iconUrl=头像
+entity.Participant.list=参赛人列表
+entity.Participant.star=星座
+entity.Participant.voteQuantity=票数
+entity.Participant.status=状态
+entity.Participant.createTime=创建时间
+entity.Participant.updateTime=修改时间
+entity.publicUserInfo.yunvaId=公众号
+entity.publicUserInfo.type=类型
+entity.publicUserInfo.belongId=所属编号
+entity.join.rule=参赛要求
+entity.joinRule.level=最低用户等级
+entity.joinRule.charm=最低魅力等级
+entity.joinRule.wealth=最低财富等级
+entity.joinRule.sex=性别
+entity.vote.joinRule.warnning=提示:等级为0表示不限制
+entity.vote.voteQuantity=票数
+entity.vote.photo=照片
+
+#######################明星专场##############################
+label.navigation.exercise.starShow.list=呀呀活动 > 明星专场 > 列表
+label.navigation.exercise.starShow.add=呀呀活动 > 明星专场 > 新增
+label.navigation.exercise.starShow.edit=呀呀活动 > 明星专场 > 编辑
+label.navigation.exercise.starShow.view=呀呀活动 > 明星专场 > 查看
+entity.starShow.exerciseName=明星专场名称
+entity.starShow.validTime=起止时间
+entity.starShow.status=状态
+entity.starShow.exerciseListIconUrl=明星专场列表图标
+entity.starShow.exerciseIconUrl=明星专场图标
+entity.starShow.exerciseIconUrl1=专场详情图标(未开始)
+entity.starShow.exerciseIconUrl2=专场详情图标(进行中)
+entity.starShow.exerciseIconUrl3=专场详情图标(已结束)
+entity.starShow.exerciseTopic=明星专场主题
+entity.starShow.exerciseRule=明星专场规则
+entity.starShow.exerciseReward=明星专场奖励
+entity.starShow.exerciseNotice=明星专场须知
+entity.starShow.yunvaId=发起人云娃账号
+entity.starShow.nickName=发起人
+entity.starShow.roomId=房间号
+entity.starShow.needTicket=是否需要购票
+entity.starShow.exerciseId=相关活动编号
+entity.starShow.fastSpeaks=快速发言列表
+entity.starShow.exerciseRoomIconUrl=房间图片
+entity.starShow.exerciseName.maxLength=(最多10个汉字)
+
+#######################提取比例##############################
+label.navigation.exercise.commissionpercent.list=代理管理 > 提成比例 > 列表
+label.navigation.exercise.commissionpercent.add=代理管理 > 提成比例 > 新增
+label.navigation.exercise.commissionpercent.edit=代理管理 > 提成比例 > 编辑
+label.navigation.exercise.commissionpercent.view=代理管理 > 提成比例 > 查看
+entity.commissionpercent.value=值
+entity.commissionpercent.start=最小值
+entity.commissionpercent.end=最大值
+entity.commissionpercent.percent=比例
+entity.commissionpercent.status=状态
+entity.commissionpercent.createTime=创建时间
+
+#######################代理用户##############################
+label.navigation.exercise.agencyuser.list=代理管理 > 代理用户 > 列表
+label.navigation.base.agencyUser.view=代理管理 > 审核代理 > 查看
+label.navigation.base.agencyUser.changePassword=代理管理 > 用户查询 > 密码修改
+entity.agencyuser.username=用户名
+entity.agencyuser.idCardNumber=深圳证号码
+entity.agencyuser.password=密 码
+entity.agencyuser.confirmPassword=确认密码
+entity.agencyuser.id=代理编号
+entity.agencyuser.channelId=渠道名称
+entity.agencyuser.name=姓名
+entity.agencyuser.phone=电话
+entity.agencyuser.audit=审核
+entity.agencyuser.alipayAccount=支付宝账号
+entity.agencyuser.idCardPost=身份证正面
+entity.agencyuser.idCardOppo=身份证反面
+entity.agencyuser.status=状态
+entity.agencyuser.emailStatus=邮箱状态
+entity.agencyuser.phoneStatus=手机状态
+entity.agencyuser.email=邮件
+entity.agencyuser.falure=失败原因
+entity.agencyuser.createtiem=创建时间
+entity.agencyuser.user.id=用户编号
+entity.agencyuser.user.nickname=昵称
+entity.agencyuser.user.sex=性别
+entity.agencyuser.user.appId=应用编号
+entity.agencyuser.user.appVersion=应用版本
+entity.agencyuser.user.createTime=创建时间
+entity.agencyuser.user.lastLoginTime=最后登陆时间
+
+
+#######################用户查询##############################
+label.navigation.exercise.agencyuser.query.list=代理管理 > 用户查询 > 列表
+label.navigation.exercise.agencyuser.audit.list=代理管理 > 审核代理 > 列表
+label.navigation.base.agencyuser.view=代理管理 > 审核代理 > 查看
+entity.agencyuser.query.channelId=渠道
+
+#######################游戏频道##############################
+label.navigation.base.gameChannel.list=游戏频道 > 游戏频道 > 列表
+label.navigation.base.gameChannel.add=游戏频道 > 游戏频道 > 新增
+label.navigation.base.gameChannel.edit=游戏频道 > 游戏频道 > 编辑
+entity.gameChannel.appId=应用编号
+entity.gameChannel.roomId=房间编号
+entity.gameChannel.tag=标签
+entity.gameChannel.creatTime=创建时间
+
+
+#######################应用白名单##############################
+label.navigation.base.appWhiteList.list=游戏频道 > 应用白名单 > 列表
+label.navigation.base.appWhiteList.add=游戏频道 > 应用白名单 > 新增
+label.navigation.base.appWhiteList.edit=游戏频道 > 应用白名单 > 编辑
+entity.appWhiteList.appId=应用编号
+entity.appWhiteList.createTime=创建时间
+
+#######################问答查询##############################
+label.navigation.base.questionAndAnswer.questionList=游戏频道 > 问答查询 > 问题列表
+label.navigation.base.questionAndAnswer.answerList=游戏频道 > 问答查询 > 答案列表
+entity.question.appId=应用编号
+entity.question.yunvaId=云娃编号
+entity.question.question=问题
+entity.question.creatTime=创建时间
+entity.answer.appId=应用编号
+entity.answer.yunvaId=云娃编号
+entity.answer.answer=回答
+entity.answer.adoption=采纳
+entity.answer.createTime=创建时间
+
+#######################代理私信##############################
+label.navigation.base.agencyMessage.list=代理管理 > 代理私信 > 列表
+label.navigation.base.agencyMessage.view=代理管理 > 代理私信 > 查看
+label.navigation.base.agencyMessage.add=代理管理 > 代理私信 > 新增
+entity.agencyMessage.subject=主题
+entity.agencyMessage.content=内容
+entity.agencyMessage.user=代理用户
+entity.agencyMessage.sendMessage=发送短信
+entity.agencyMessage.sendEmail=发送邮件
+entity.agencyMessage.createTime=创建时间
+entity.agencyMessageUser.userId=用户编号
+entity.agencyMessageUser.sendMessage=是否发送短信
+entity.agencyMessageUser.sendMail=是否发送邮件
+entity.agencyMessageUser.read=是否已读
+
+#########################提成记录############################
+label.navigation.base.commissionHistory.list = 代理管理 > 提成记录 > 列表
+label.navigation.base.commissionHistory.add  = 代理管理 > 提成记录 > 新增
+label.navigation.base.commissionHistory.edit = 代理管理 > 提成记录 > 编辑
+entity.commissionHistory.userId=代理人编号
+entity.commissionHistory.amount=充值金额（单位：元）
+entity.commissionHistory.dateRange=提成时间范围
+entity.commissionHistory.percent=提成比例
+entity.commissionHistory.commission=提成佣金(单位：元)
+entity.commissionHistory.commissionTime=提成时间
+entity.commissionHistory.createTime=创建时间
+
+#########################代理充值查询#################################
+label.navigation.base.agencyRechargeOrder.amount.list=代理管理 > 代理充值 > 列表
+label.navigation.base.agencyRechargeOrder.amountByDay.list=代理管理 > 代理分天充值 > 列表
+entity.agencyRechargeOrder.agencyUserId=代理编号
+entity.agencyRechargeOrder.yunvaId=代理下用户编号
+entity.agencyRechargeOrder.amount=充值金额(单位：元)
+entity.agencyRechargeOrder.date=日期
+entity.agencyRechargeOrder.dateRange=日期范围
+
+#######################呀呀女郎管理##############################
+label.navigation.base.yayaGirl.list=基础管理 > 星秀管理 > 列表
+entity.yayaGirl.yunvaId=云娃id
+entity.yayaGirl.sex=性别
+entity.yayaGirl.nickName=昵称
+entity.yayaGirl.iconUrl=头像
+entity.yayaGirl.createTime=创建时间
+entity.yayaGirl.auth=认证
+entity.yayaGirl.cancel=取消
+entity.yayaGirl.isOnline=在线
+entity.yayaGirl.realName=真实姓名
+entity.yayaGirl.weixinName=微信名
+entity.yayaGirl.fansCount=粉丝数量
+entity.yayaGirl.content=取消原因
+entity.yayaGirl.hot=推荐度
+entity.yayaGirl.authInfo=认证详情
+entity.yayaGirl.hotInfo=推荐度详情
+entity.yayaGirl.sloganUrl=口号
+entity.yayaGirl.phone=手机号
+
+#######################聊天室管理##############################
+label.navigation.base.chatRoom.list=基础管理 > 聊天室管理 > 列表
+label.navigation.base.chatRoom.edit=基础管理 > 聊天室管理 > 添加
+label.navigation.base.chatRoom.add=基础管理 > 聊天室管理 > 添加
+entity.chatRoom.roomid=房间id
+entity.chatRoom.roomName=房间名称
+entity.chatRoom.device=设备
+entity.chatRoom.appId=appId
+entity.chatRoom.createTime=创建时间
+entity.RoomDbset.id=dbsetId
+entity.RoomDbset.mykey=key键
+entity.RoomDbset.val=val值
+entity.RoomDbset.detail=dbSet明细
+entity.chatRoom.maxCount=房间最大人数
+entity.chatRoom.disable=是否禁用
+entity.chatRoom.roomType=房间类型
+entity.chatRoom.pwd=房间密码
+
+#######################频道消息推送管理##############################
+label.navigation.informationList.list=基础管理 >频道消息推送 > 列表
+label.navigation.base.informationList.add=基础管理 >频道消息推送 > 添加
+label.navigation.base.informationList.edit=基础管理 >频道消息推送 > 编辑
+entity.informationList.id=列表id
+entity.informationList.listName=列表名称
+entity.informationList.createTime=创建时间
+entity.informationList.informationContent=列表内容
+entity.informationList.pushChannel=推送频道
+entity.informationList.listContent=列表内容
+entity.channelMessage.id=序号
+entity.channelMessage.messageType=类型
+entity.channelMessage.messageContent=内容
+entity.pushTarget.id=序号
+entity.pushTarget.targetId=频道id
+entity.pushTarget.pushTime=推送时间段
+entity.pushTarget.pushKey=推送开关
+entity.pushTarget.pushFrequency=推送频率
+
+#######################广告管理模块##############################
+label.navigation.bannerInfo.list=基础管理 >banner信息列表 > 列表
+label.navigation.base.bannerInfo.edit=基础管理 >banner信息列表 > 编辑
+label.navigation.base.bannerInfo.add=基础管理 >banner信息列表 > 添加
+entity.bannerInfo.id=bannerId
+entity.bannerInfo.name=名称
+entity.bannerInfo.createTime=创建时间
+entity.bannerInfo.type=类型
+entity.bannerInfo.iconUrl=图标
+entity.bannerInfo.skipType=跳转类型
+entity.bannerInfo.skipTarget=跳转目的地
+entity.bannerInfo.hot=热度
+entity.bannerInfo.mediaType=状态
+entity.bannerInfo.osType=系统类型
+entity.bannerInfo.areaCode=地区代码
+
+#######################呀呀家族审核##############################
+label.navigation.yayaFamilyAudit.list=呀呀管理 > 家族申请管理 > 列表
+label.navigation.yayaFamilyAudit.list.input=呀呀管理 > 家族申请管理 > 通过
+entity.familyCreateApply.yunvaId=云娃编号
+entity.familyCreateApply.nickname=昵称
+entity.familyCreateApply.count=申请次数
+entity.familyCreateApply.createTime=申请时间
+entity.familyCreateApply.familyId=家族编号
+entity.familyCreateApply.audit=呀呀家族申请审核
+
+#######################聊天敏感词##############################
+label.navigation.yayaSensitive.list=呀呀管理 > 聊天敏感词 > 列表
+label.navigation.yayaSensitive.input=呀呀管理 > 聊天敏感词 > 新增
+label.navigation.yayaSensitive.edit=呀呀管理 > 聊天敏感词 > 编辑
+entity.yayaSensitive.id=编号
+entity.yayaSensitive.wordText=敏感词
+
+#######################呀呀黑名单##############################
+label.navigation.yayaManage.yayaBlackUser.list=呀呀管理 > 呀呀黑名单 > 列表
+label.navigation.yayaManage.yayaBlackUser.input=呀呀管理 > 呀呀黑名单 > 新增
+label.navigation.yayaManage.yayaBlackUser.edit=呀呀管理 > 呀呀黑名单 > 编辑
+entity.yayaBlackUser.searchProperty=参数类型
+entity.yayaBlackUser.searchValue=参数值
+entity.yayaBlackUser.id=编号
+entity.yayaBlackUser.yunvaId=云娃编号
+entity.yayaBlackUser.ip=ip地址
+entity.yayaBlackUser.imei=手机串号
+entity.yayaBlackUser.imsi=SIM卡串号
+entity.yayaBlackUser.mac=MAC地址
+entity.yayaBlackUser.actionType=用户状态
+entity.yayaBlackUser.shieldType=屏蔽等级
+entity.yayaBlackUser.text=备注
+entity.yayaBlackUser.expireTime=解除黑名单时间
+entity.yayaBlackUser.updateTime=更新时间
+entity.yayaBlackUser.createTime=创建时间
+
+######################呀呀星秀|活动黑名单####################
+label.navigation.yayaManage.yayaGirlBlackUser.list=呀呀管理 > 星秀黑名单 > 列表
+label.navigation.yayaManage.yayaGirlBlackUser.input=呀呀管理 > 星秀黑名单 > 新增
+label.navigation.yayaManage.yayaGirlBlackUser.edit=呀呀管理 > 星秀黑名单 > 编辑
+entity.yayaGirlBlackUser.createTime=创建时间
+entity.yayaGirlBlackUser.yunvaId=云娃编号
+entity.yayaGirlBlackUser.type=类型
+entity.yayaGirlBlackUser.remark=备注
+
+######################呀呀星秀|活动黑名单####################
+label.navigation.yayaManage.bbsBlackUser.list=呀呀管理 > BBS黑名单 > 列表
+label.navigation.yayaManage.bbsBlackUser.input=呀呀管理 > BBS黑名单 > 新增
+label.navigation.yayaManage.bbsBlackUser.edit=呀呀管理 > BBS黑名单 > 编辑
+entity.bbsBlackUser.id=编号
+entity.bbsBlackUser.createTime=创建时间
+entity.bbsBlackUser.yunvaId=云娃编号
+entity.bbsBlackUser.remark=备注
+
+######################家族信息###############################
+label.navigation.familyInfo.list=呀呀管理 > 家族信息 > 列表
+label.navigation.familyInfo.view=呀呀管理 > 家族信息 > 查看
+entity.familyInfo.id=家族编号
+entity.familyInfo.name=家族名字
+entity.familyInfo.type=家族类型
+entity.familyInfo.iconUrl=家族图标
+entity.familyInfo.backgroundUrl=家族背景图标
+entity.familyInfo.introduce=家族介绍
+entity.familyInfo.notice=家族公告
+entity.familyInfo.manifesto=家族宣言
+entity.familyInfo.headName=家族马甲
+entity.familyInfo.level=家族等级
+entity.familyInfo.exp=家族经验
+entity.familyInfo.wealth=财富(用户贡献)
+entity.familyInfo.needApply=是否需要申请
+entity.familyInfo.peopleCount=人数
+entity.familyInfo.wealthRank=财富排名
+entity.familyInfo.rank=排名
+entity.familyInfo.mood=人气
+entity.familyInfo.moodRank=人气排名
+entity.familyInfo.hot=热度
+entity.familyInfo.mediaType=状态
+entity.familyInfo.todayAddExp=家族每天经验最大限制
+entity.familyInfo.lastExpTime=上一次家族经验增加的时间
+entity.familyInfo.rankDeadline=排名截止时间
+entity.familyInfo.createTime=创建时间
+entity.familyInfo.updateTime=更改时间
+entity.familyInfo.bbs=家族贴吧
+entity.familyInfo.album=家族相册
+entity.familyInfo.creator=家族族长
+entity.familyInfo.adminCount=管理员
+entity.familyInfo.goddessCount=家族宝贝
+
+########################家族帖子信息###############################
+label.navigation.familySubjectInfo.list=呀呀管理 > 帖子信息 > 列表
+label.navigation.familySubjectInfo.view=呀呀管理 > 帖子信息 > 查看
+entity.familySubjectInfo.id=帖子编号
+entity.familySubjectInfo.yunvaId=发帖人云娃编号
+entity.familySubjectInfo.nickname=用户昵称
+entity.familySubjectInfo.sex=性别
+entity.familySubjectInfo.star=星座
+entity.familySubjectInfo.iconUrl=用户头像
+entity.familySubjectInfo.roomId=房间编号
+entity.familySubjectInfo.roomName=房间名称
+entity.familySubjectInfo.title=标题
+entity.familySubjectInfo.subjectContent=帖子内容
+entity.familySubjectInfo.anonymous=是否匿名
+entity.familySubjectInfo.auditType=审核类型
+entity.familySubjectInfo.voiceUrl=语音地址
+entity.familySubjectInfo.voiceDuration=语音时长(单位:秒)
+entity.familySubjectInfo.links=帖子图片
+entity.familySubjectInfo.createTime=建立时间
+entity.familySubjectInfo.auditTime=审核时间
+entity.familySubjectInfo.praiseCount=赞同数
+entity.familySubjectInfo.replyCount=评论数
+
+#####################帖子回复信息########################
+label.navigation.subjectReply.list=呀呀管理 > 帖子回复信息 > 列表
+entity.subjectReplyInfo.replyId=评论编号
+entity.subjectReplyInfo.yunvaId=用户编号
+entity.subjectReplyInfo.nickname=用户昵称
+entity.subjectReplyInfo.sex=性别
+entity.subjectReplyInfo.star=星座
+entity.subjectReplyInfo.iconUrl=用户头像
+entity.subjectReplyInfo.subjectId=主题编号
+entity.subjectReplyInfo.replyContent=评论内容
+entity.subjectReplyInfo.voiceUrl=语音地址
+entity.subjectReplyInfo.voiceDuration=语音时长(单位:秒)
+entity.subjectReplyInfo.createTime=建立时间
+
+#####################家族相册########################
+label.navigation.familyAlbumInfo.list=呀呀管理 > 家族相册信息 > 列表
+label.navigation.familyAlbumInfo.view=呀呀管理 > 家族相册信息 > 查看
+entity.FamilyAlbumInfo.albumId=相册编号
+entity.FamilyAlbumInfo.belongId=所属编号
+entity.FamilyAlbumInfo.creator=创建者
+entity.FamilyAlbumInfo.comment=说明
+entity.FamilyAlbumInfo.voiceUrl=语音URL
+entity.FamilyAlbumInfo.voiceDuration=语音长度(单位:秒)
+entity.FamilyAlbumInfo.photoUrl=相片大图
+entity.FamilyAlbumInfo.smallPhotoUrl=相片小图
+entity.FamilyAlbumInfo.cover=是否封面
+entity.FamilyAlbumInfo.hot=热度
+entity.FamilyAlbumInfo.recommend=推荐度
+entity.FamilyAlbumInfo.mediaType=状态
+entity.FamilyAlbumInfo.createTime=创建时间
+entity.FamilyAlbumInfo.updateTime=更改时间
+entity.FamilyAlbumInfo.albumPraiseCount=点赞数量
+entity.FamilyAlbumInfo.albumReplyCount=评论数量
+
+####################家族成员############################
+label.navigation.userFamily.list=呀呀管理 > 家族成员信息 > 列表
+label.navigation.userFamily.edit=呀呀管理 > 家族成员信息 > 编辑
+label.navigation.userFamily.view=呀呀管理 > 家族成员信息 > 查看
+entity.userFamily.yunvaId=云娃编号
+entity.userFamily.familyId=家族编号
+entity.userFamily.roleId=角色编号
+entity.userFamily.goddess=是否女神
+entity.userFamily.contribution=贡献
+entity.userFamily.createTime=创建时间
+entity.userFamily.updateTime=更改时间
+entity.userFamily.nickname=昵称
+entity.userFamily.icon=图标
+entity.userFamily.wealth=财富等级
+entity.userFamily.charm=魅力等级
+entity.userFamily.elite=是否精英
+
+####################用户信息############################
+label.navigation.yayaManage.userInfo.list=呀呀管理 > 用户信息信息 > 列表
+label.navigation.yayaManage.userInfo.edit=呀呀管理 > 用户信息信息 > 编辑
+label.navigation.yayaManage.userInfo.album.list=呀呀管理 > 用户相册信息 > 列表
+label.navigation.yayaManage.userInfo.album.edit=呀呀管理 > 用户相册信息 > 编辑
+label.navigation.yayaManage.userInfo.album.input=呀呀管理 > 用户相册信息 > 新增
+entity.yayaUserInfo.id=云娃编号
+entity.yayaUserInfo.nickname=昵称
+entity.yayaUserInfo.iconUrl=头像
+entity.yayaUserInfo.sex=性别
+entity.yayaUserInfo.signature=签名
+entity.yayaUserInfo.level=等级
+entity.yayaUserInfo.exp=经验
+entity.yayaUserInfo.phone=手机号码
+entity.yayaUserInfo.auth=认证
+entity.yayaUserInfo.authRank=认证排名
+entity.yayaUserInfo.authRankDeadline=认证排名截止时间
+entity.yayaUserInfo.hot=热度
+entity.yayaUserInfo.isOnline=是否在线
+entity.yayaUserInfo.realName=真实名称
+entity.yayaUserInfo.weixinName=微信名
+entity.yayaUserInfo.sloganUrl=口号
+entity.yayaUserInfo.sloganDuration=口号时长
+entity.yayaUserInfo.comment=简介
+entity.yayaUserInfo.fansCount=粉丝数量
+entity.yayaUserInfo.praiseCount=点赞数量
+entity.yayaUserInfo.osType=系统类型
+entity.yayaUserInfo.runningDays=连续登录天数
+entity.yayaUserInfo.lastAwardTime=最近奖励时间
+entity.yayaUserInfo.lastLoginTime=最近登录时间
+entity.yayaUserInfo.lastStatisticTime=最近统计时间(统计连续登录次数的时间点)
+entity.yayaUserInfo.accessInstanceid=接入实例编号
+entity.yayaUserInfo.accessSessionid=session编号
+entity.yayaUserInfo.phoneNumber=电话号码
+entity.yayaUserInfo.pushMsgId=推送消息的id
+entity.yayaUserInfo.onlineTime=当日在线时长(单位:秒)
+entity.yayaUserInfo.createTime=创建时间
+entity.yayaUserInfo.updateTime=更改时间
+entity.yayaUserInfo.editPassword.info=重置密码
+entity.yayaUserInfo.appInfo.appName=用户渠道来源
+entity.yayaUserInfo.userWealthMedal.wmName=爵位
+entity.yayaUserInfo.accountType=用户类型
+
+#################相册举报#######################
+label.navigation.albumReport.list=呀呀管理 > 相册举报 > 列表
+label.navigation.albumReport.view=呀呀管理 > 相册举报 > 查看
+entity.albumReport.id=编号
+entity.albumReport.yunvaId=举报人云娃编号
+entity.albumReport.nickname=相册主人昵称
+entity.albumReport.icon=相册主人图标
+entity.albumReport.albumId=相册编号
+entity.albumReport.remark=举报理由
+entity.albumReport.mediaType=状态
+entity.albumReport.createTime=创建时间
+
+#################相册信息#####################
+entity.albumInfo.albumType=相册类型
+entity.albumInfo.creator=创建者
+entity.albumInfo.cover=是否封面
+entity.albumInfo.comment=说明
+entity.albumInfo.voiceUrl=语音地址
+entity.albumInfo.voiceDuration=语音长度
+entity.albumInfo.photoUrl=相片
+entity.albumInfo.hot=热度
+entity.albumInfo.recommend=推荐度
+entity.albumInfo.createTime=创建时间
+
+#################客服sdk应用配置信息#####################
+label.navigation.cs.appConfig.list=客服SDK > 应用会话时间 > 列表
+label.navigation.cs.appConfig.input=客服SDK > 应用会话时间 > 新增
+label.navigation.cs.appConfig.edit=客服SDK > 应用会话时间 > 编辑
+entity.appConfig.id=编号
+entity.appConfig.appId=应用编号
+entity.appConfig.sessionMaxSeconds=最大会话时间(单位:秒)
+entity.appConfig.createTime=建立时间
+entity.appConfig.updateTime=更新时间
+
+#################帖子举报#######################
+label.navigation.subjectReport.list=呀呀管理 > 帖子举报 > 列表
+label.navigation.subjectReport.view=呀呀管理 > 帖子举报 > 查看
+entity.subjectReport.id=编号
+entity.subjectReport.yunvaId=云娃编号
+entity.subjectReport.subjectId=主题编号
+entity.subjectReport.subjectTitle=主题标题
+entity.subjectReport.subjectContent=主题内容
+entity.subjectReport.subjectName=标题创建者
+entity.subjectReport.subjectIcon=标题创建者头像
+entity.subjectReport.remark=举报理由
+entity.subjectReport.createTime=创建时间
+
+#################客服sdk房间信息#####################
+label.navigation.cs.appRoom.list=客服SDK > 房间配置 > 列表
+label.navigation.cs.appRoom.edit=客服SDK > 房间配置 > 编辑
+entity.appRoom.id=编号
+entity.appRoom.appId=应用编号
+entity.appRoom.appName=应用名称
+entity.appRoom.roomId=房间编号
+entity.appRoom.roomKey=房间密码
+entity.appRoom.status=视频状态
+entity.appRoom.type=类型
+entity.appRoom.createTime=建立时间
+entity.appRoom.updateTime=更新时间
+
+#####################客服sdk客服配置####################
+label.navigation.cs.appCs.list=客服SDK > 客服配置 > 列表
+label.navigation.cs.appCs.input=客服SDK > 客服配置 > 新增
+label.navigation.cs.appCs.edit=客服SDK > 客服配置 > 编辑
+entity.appCs.id=编号
+entity.appCs.appId=应用编号
+entity.appCs.yunvaId=客服账号
+entity.appCs.nickname=昵称
+entity.appCs.roomId=房间编号
+entity.appCs.type=类型
+entity.appCs.status=状态
+entity.appCs.createTime=建立时间
+entity.appCs.updateTime=更新时间
+
+#####################客服sdk客服上下线记录####################
+label.navigation.cs.csLogin.list=客服SDK > 客服上下班 > 列表
+entity.csLogin.id=编号
+entity.csLogin.appId=应用编号
+entity.csLogin.type=类型
+entity.csLogin.yunvaId=客服编号
+entity.csLogin.identifier=登陆编号
+entity.csLogin.createTime=上线时间
+entity.csLogin.updateTime=下线时间
+
+#####################客服sdk用户投诉客服####################
+label.navigation.cs.csSessionComplaints.list=客服SDK > 用户投诉客服 > 列表
+entity.sessionComplaints.id=编号
+entity.sessionComplaints.sessionId=会话编号
+entity.sessionComplaints.yunvaId=用户编号
+entity.sessionComplaints.csId=客服编号
+entity.sessionComplaints.msg=投诉内容
+entity.sessionComplaints.voice=语音地址
+entity.sessionComplaints.pic=图片
+entity.sessionComplaints.ext=扩展内容
+entity.sessionComplaints.createTime=建立时间
+
+#####################客服sdk客服回复详情####################
+label.navigation.cs.csSession.list=客服SDK > 用户投诉客服 > 列表
+label.navigation.cs.csSession.msgList=客服SDK > 用户投诉客服 > 对话列表
+entity.csSession.id=编号
+entity.csSession.sessionId=会话编号
+entity.csSession.appId=应用编号
+entity.csSession.yunvaId=用户编号
+entity.csSession.csId=客服编号
+entity.csSession.grade=分数
+entity.csSession.type=类型
+entity.csSession.createTime=建立时间
+entity.csSession.updateTime=更新时间
+entity.sessionMsg.id=编号
+entity.sessionMsg.sessionId=会话编号
+entity.sessionMsg.yunvaId=发送账号
+entity.sessionMsg.toYunvaId=接收账号
+entity.sessionMsg.msg=文字
+entity.sessionMsg.voice=语音
+entity.sessionMsg.pic=图片
+entity.sessionMsg.createTime=建立时间
+
+#####################座位所属管理####################
+label.navigation.roomSeat.list=基础管理 > 座位所属管理 > 列表
+label.navigation.base.roomSeat.input=基础管理 > 座位所属管理 > 添加
+label.navigation.base.roomSeat.edit=基础管理 > 座位所属管理 > 编辑
+entity.itemInfo.appId = 应用编号
+entity.itemInfo.ext = 房间编号
+entity.roomSeat.name = 座位名称
+entity.userSeat.yunvaId=云娃id
+entity.userSeat.seatId=座位ID
+entity.userSeat.seatComment=座位描述
+entity.userSeat.validTime=有效时间
+entity.userSeat.roomId=房间id
+entity.itemInfo.isExistUser=座位是否已被占用
+entity.itemInfo.roomValidTime=有效期
+
+#####################家族申请创建忽略####################
+label.navigation.familyCreateApplyIgnore.list=呀呀管理 > 家族忽略名单 > 列表
+entity.familyCreateApplyIgnore.id=编号
+entity.familyCreateApplyIgnore.yunvaId=云娃编号
+entity.familyCreateApplyIgnore.createTime=创建时间
+
+#####################帖子评论管理####################
+label.navigation.replyInfo.list=基础管理 > 评论信息 > 列表
+entity.replyInfo.id=编号
+entity.replyInfo.yunvaId=云娃编号
+entity.replyInfo.nickname=用户昵称
+entity.replyInfo.sex=用户性别
+entity.replyInfo.star=星座
+entity.replyInfo.iconUrl=用户头像
+entity.replyInfo.subjectId=帖子id
+entity.replyInfo.replyContent=评论内容
+entity.replyInfo.voiceUrl=语音地址
+entity.replyInfo.createTime=创建时间
+
+#####################靓号管理####################
+label.navigation.base.beautifulNum.list=基础管理 > 靓号管理 > 列表
+label.navigation.base.beautifulNum.input=基础管理 > 靓号管理 > 添加
+label.navigation.base.beautifulNum.edit=基础管理 > 靓号管理 > 编辑
+entity.beautifulNum.id=靓号id
+entity.beautifulNum.operatorId=操作者id
+entity.beautifulNum.status=使用状态
+entity.beautifulNum.createTime=注册时间
+entity.beautifulNum.remark=备注
+entity.beautifulNum.sharerName=分配者姓名
+entity.beautifulNum.sharerPhone=分配者手机
+entity.beautifulNum.sharerNum=分配者身份证
+entity.userInfo2.password=靓号密码
+entity.userInfo2.nickName=靓号昵称
+entity.beautifulNum.type=注册类型
+entity.beautifulNum.type0=靓号注册
+entity.beautifulNum.type1=普通号码注册
+
+######################视频客服SDK最大房间####################
+label.navigation.cs.maxRoom.list=客服SDK > 应用最大房间 > 列表
+label.navigation.cs.maxRoom.input=客服SDK > 应用最大房间 > 新增
+label.navigation.cs.maxRoom.edit=客服SDK > 应用最大房间 > 编辑
+entity.cs.maxRoom.id=主键
+entity.cs.maxRoom.appId=应用编号
+entity.cs.maxRoom.max=最大房间数目
+entity.cs.maxRoom.createTime=创建时间
+
+######################视频客服SDK最大客服####################
+label.navigation.cs.maxCs.list=客服SDK > 应用最大客服 > 列表
+label.navigation.cs.maxCs.input=客服SDK > 应用最大客服 > 新增
+label.navigation.cs.maxCs.edit=客服SDK > 应用最大客服 > 编辑
+entity.cs.maxCs.id=主键
+entity.cs.maxCs.appId=应用编号
+entity.cs.maxCs.max=最大客服数目
+entity.cs.maxCs.createTime=创建时间
+
+
+######################陪玩管理####################
+label.navigation.game.gameChair.list=游戏审核 > 陪玩管理 > 列表
+entity.gameChair.id=陪玩Id
+entity.gameChair.yunvaId=陪玩云娃Id
+entity.gameChair.name=陪玩昵称
+entity.gameChair.gameId=游戏Id
+entity.gameChair.roomId=房间Id
+entity.gameChair.hot=热度
+entity.gameChair.createTime=创建时间
+entity.gameChair.iconUrl=上传图片
+
+######################渠道信息####################
+label.navigation.channel.channelInfo.list=系统设置 > 渠道管理 > 列表
+label.navigation.channel.channelInfo.edit=系统设置 > 渠道管理 > 编辑
+label.navigation.channel.channelInfo.add=系统设置 > 渠道管理 > 添加
+entity.channelInfo2.id=渠道id
+entity.channelInfo2.channelId=渠道编号
+entity.channelInfo2.channelName=渠道名称
+entity.channelInfo2.description=描述
+entity.channelInfo2.createTime=创建时间
+entity.channelInfo2.updateTime=修改时间
+
+
+######################充值返利订单####################
+label.navigation.yayaGame.gameRechargeDetail.list=呀呀游戏 > 充值返利订单 > 列表
+label.navigation.gameRechargeDetail.orderException=呀呀游戏 > 充值返利订单 > 订单异常
+label.navigation.gameRechargeDetail.orderComplete=呀呀游戏 > 充值返利订单 > 完成订单
+entity.gameRechargeDetail.transactionId=订单号
+entity.gameRechargeDetail.yunvaId=云娃账号
+entity.gameRechargeDetail.createTime=创建时间
+entity.gameRechargeDetail.mediaType=状态
+entity.gameRechargeDetail.gameInfo=游戏
+entity.gameRechargeDetail.gameUserType=游戏账号类型
+entity.gameRechargeDetail.gameUserId=游戏账号
+entity.gameRechargeDetail.gameCareer=游戏职业
+entity.gameRechargeDetail.gameSex=角色性别
+entity.gameRechargeDetail.gameUserPassword=游戏密码
+entity.gameRechargeDetail.gameServerName=游戏大区名称
+entity.gameRechargeDetail.gameRoleName=游戏角色名称
+entity.gameRechargeDetail.douya=豆芽
+entity.gameRechargeDetail.getGameCurrency=充值金额
+entity.gameRechargeDetail.returnDouya=返还豆芽
+entity.gameRechargeDetail.returnGameCoupon=返还礼券
+entity.gameRechargeDetail.phone=手机号码
+entity.gameRechargeDetail.qq=QQ
+entity.gameRechargeDetail.remark=备注
+entity.gameRechargeDetail.operator=操作者
+entity.gameRechargeDetail.operateTime=操作时间
+entity.gameRechargeDetail.detail=游戏充值信息
+
+######################充值返利配置####################
+label.navigation.yayaGame.gameRechargeReturn.list=呀呀游戏 > 充值返利配置 > 列表
+label.navigation.yayaGame.gameRechargeReturn.add=呀呀游戏 > 充值返利配置 > 添加
+label.navigation.yayaGame.gameRechargeReturn.edit=呀呀游戏 > 充值返利配置 > 编辑
+entity.gameRechargeReturn.game=游戏
+entity.gameRechargeReturn.currencyType=货币类型
+entity.gameRechargeReturn.rate=返还率(%)
+entity.gameRechargeReturn.minDouya=起始豆芽数量
+entity.gameRechargeReturn.maxDouya=终止豆芽数量
+entity.gameRechargeReturn.mediaType=状态
+
+#######################用户禁言##################
+label.navigation.yayaServer2.userNospeak.list=呀呀管理 > 用户禁言 > 列表
+label.navigation.yayaServer2.userNospeak.add=呀呀管理 > 用户禁言 > 添加
+entity.userNospeak.id=编号
+entity.userNospeak.yunvaId=用户编号
+entity.userNospeak.roomId=房间编号
+entity.userNospeak.createTime=创建时间
+
+#######################房间播出时间#########################
+label.navigation.roomTime.list=呀呀SDK > 房间播出时间 > 列表
+label.navigation.roomTime.add =呀呀SDK > 房间播出时间 > 添加
+label.navigation.roomTime.edit=呀呀SDK > 房间播出时间 > 编辑
+entity.roomTime.id=编号
+entity.roomTime.roomId=房间编号
+entity.roomTime.start=开播时间
+entity.roomTime.end=结束时间
+entity.roomTime.createTime=建立时间
+entity.roomTime.updateTime=更新时间
+
+#####################相册评论管理####################
+label.navigation.albumReply.list=基础管理 > 相册评论 > 列表
+entity.albumReply.replyId=评论编号
+entity.albumReply.yunvaId=用户编号
+entity.albumReply.albumId=相册编号
+entity.albumReply.content=评论内容
+entity.albumReply.voiceUrl=语音地址
+entity.albumReply.createTime=建立时间
+
+#####################终端禁言####################
+label.navigation.yunvaAaa2Server2.LoginUserInfo2.list=呀呀管理 > 终端禁言 > 列表
+label.navigation.yunvaAaa2Server2.LoginUserInfo2.add=呀呀管理 > 终端禁言
+entity.LoginUserInfo2.id=用户id
+entity.LoginUserInfo2.nickname=用户昵称
+entity.LoginUserInfo2.accountType=账户类型
+entity.LoginUserInfo2.imsi=IMSI
+entity.LoginUserInfo2.imei=IMEI
+entity.LoginUserInfo2.mac=MAC
+entity.LoginUserInfo2.loginTime=登录时间
+entity.LoginUserInfo2.roomId=房间id
+entity.LoginUserInfo2.effective=禁言时间
+
+#####################群管理####################
+label.navigation.yayaServer2.GroupInfo.list=呀呀管理 > 群管理 > 列表
+label.navigation.yayaServer2.GroupInfo.input=呀呀管理 > 群管理 > 查看
+entity.GroupInfo.id=群id
+entity.GroupInfo.groupName=群名称
+entity.GroupInfo.iconUrl=群图片
+entity.GroupInfo.hot=推荐度
+entity.GroupInfo.groupRoomId=频道ID
+entity.GroupInfo.userCount=群成员数
+entity.GroupInfo.createTime=创建时间
+entity.GroupInfo.isRoomId=已有频道
+entity.GroupInfo.belongId=群主
+entity.GroupInfo.groupUsers=群成员数
+entity.GroupInfo.groupIcons=群相册数
+entity.GroupInfo.groupBbs=群说吧
+entity.GroupInfo.groupGames=群游戏数
+
+#####################群成员####################
+label.navigation.yayaServer2.UserGroup.list=呀呀管理 > 群成员> 列表
+label.navigation.yayaServer2.UserGroup.input=呀呀管理 > 群成员 > 查看
+entity.UserGroup.yunvaId=用户Id
+entity.UserGroup.nickName=用户名称
+entity.UserGroup.iconUrl=用户头像
+entity.UserGroup.role=群身份
+entity.UserGroup.isCustomer=是否女神
+entity.UserGroup.createTime=入群时间
+
+#####################群相册####################
+label.navigation.yayaServer2.AlbumInfo.list=呀呀管理 > 群相册> 列表
+label.navigation.yayaServer2.AlbumInfo.input=呀呀管理 > 群相册 > 查看
+entity.AlbumInfo.albumId=相册编号
+entity.AlbumInfo.creator=创建者id
+entity.AlbumInfo.nickName=创建者名称
+entity.AlbumInfo.photoUrl=图片
+entity.AlbumInfo.cover=是否封面
+entity.AlbumInfo.comment=说明
+entity.AlbumInfo.voiceUrl=语音URL
+entity.AlbumInfo.voiceDuration=语音长度(S)
+entity.AlbumInfo.createTime=创建时间
+
+#####################群游戏####################
+label.navigation.yayaServer2.GroupApk.list=呀呀管理 > 群游戏> 列表
+label.navigation.yayaServer2.GroupApk.input=呀呀管理 > 群游戏 > 查看
+entity.GroupApk.gameId=游戏ID
+entity.GroupApk.gameName=游戏名称
+entity.GroupApk.isAdept=是否擅长*(唯一)
+entity.GroupApk.gameIcon=游戏icon
+entity.GroupApk.downUrl=群下载地址
+entity.GroupApk.downTimes=下载次数
+entity.GroupApk.fileSize=文件大小
+entity.GroupApk.hot=热度
+entity.GroupApk.mediaType=状态
+
+#####################主播上麦时间统计####################
+label.navigation.yunvaAdmin.CompereTime.list=呀呀SDK > 主播上麦时间统计> 列表
+entity.CompereTime.createTime=日期
+entity.CompereTime.yunvaId=用户ID
+entity.CompereTime.nickname=用户昵称
+entity.CompereTime.timeTotal=上麦时长统计(分钟)
+entity.CompereTime.roomId=房间ID
+entity.CompereTime.description=在线时长详情
+
+#####################私聊内容查询####################
+label.navigation.yunvaAdmin.WhisperInfo.list=呀呀SDK > 私聊内容查询> 列表
+entity.WhisperInfo.sourceId=(用户1)id
+entity.WhisperInfo.nickName=(用户1)昵称
+entity.WhisperInfo.targetId=(用户2)id
+entity.WhisperInfo.targetName=(用户2)昵称
+entity.WhisperInfo.content=发言内容
+entity.WhisperInfo.createTime=发言时间
+
+#####################房间聊天内容查询####################
+label.navigation.yunvaAdmin.RoomChat.list=呀呀SDK > 房间聊天内容查询> 列表
+entity.RoomChat.roomId=房间ID
+entity.RoomChat.yunvaId=用户ID
+entity.RoomChat.nickName=用户昵称
+entity.RoomChat.content=发言内容
+entity.RoomChat.createTime=发言时间
+
+#####################陪玩后台列表####################
+label.navigation.yayaServer2.ChairInfo.list=呀呀管理> 陪玩后台> 列表
+label.navigation.yayaServer2.ChairInfo.input=呀呀管理> 陪玩后台> 新增
+label.navigation.yayaServer2.ChairInfo.edit=呀呀管理> 陪玩后台> 编辑
+entity.ChairInfo.roomId=房间ID
+entity.ChairInfo.yunvaId=用户ID
+entity.ChairInfo.nickName=用户昵称
+entity.ChairInfo.playType=客服类型
+entity.ChairInfo.roleId=陪玩房间
+entity.ChairInfo.micState=陪玩状态
+entity.ChairInfo.hot=推荐度
+entity.ChairInfo.belongRoom=所属房间
+entity.ChairInfo.iconUrl=主播封面
+entity.ChairInfo.role=主播类型
+
+#####################私服后台列表####################
+label.navigation.yayaServer2.PrivateService.list=呀呀管理> 私服后台> 列表
+label.navigation.yayaServer2.PrivateService.input=呀呀管理> 私服后台> 新增
+label.navigation.yayaServer2.PrivateService.edit=呀呀管理> 私服后台> 编辑
+entity.ChairInfo.yunvaId=用户ID
+entity.ChairInfo.nickName=用户昵称
+entity.PrivateService.roomId=私服房间
+entity.PrivateService.show=私服状态
+entity.PrivateService.hot=推荐值
+entity.PrivateService.priceBase=基本价格
+entity.PrivateService.priceUnit=计时价格（分钟）
+entity.PrivateService.callBack=是否可以回拨
+
+#####################房间申请后台####################
+label.navigation.yayaServer2.RoomApplyInfo.list=呀呀管理> 房间申请> 列表
+label.navigation.yayaServer2.RoomApplyInfo.input=呀呀管理> 房间申请> 新增
+label.navigation.yayaServer2.RoomApplyInfo.edit=呀呀管理> 房间申请> 编辑
+entity.RoomApplyInfo.yunvaId=用户ID
+entity.RoomApplyInfo.nickName=用户昵称
+entity.RoomApplyInfo.id=频道ID
+entity.RoomApplyInfo.createTime=申请时间
+entity.RoomApplyInfo.applyState=处理状态
+entity.RoomApplyInfo.remark=备注
+entity.RoomApplyInfo.remarkInfo=拒绝原因
+
+#####################道具列表####################
+label.navigation.yayaServer2.PlayRoomGift.list=呀呀管理> 道具管理> 列表
+label.navigation.yayaServer2.PlayRoomGift.edit=呀呀管理> 道具管理> 编辑
+entity.PlayRoomGift.roomId=房间ID
+entity.PlayRoomGift.yunvaId=云娃ID
+entity.PlayRoomGift.giftType=道具类别
+entity.PlayRoomGift.hot=顺序
+entity.PlayRoomGift.giftName=道具名称
+entity.PlayRoomGift.price=基本价格
+entity.PlayRoomGift.priceUnit=计时价格（分钟）
+entity.PlayRoomGift.show=上架
+
+#####################服务订单####################
+label.navigation.yayaServer2.ChairOrderInfo.list=呀呀管理> 服务订单> 列表
+label.navigation.yayaServer2.ChairOrderInfo.edit=呀呀管理> 服务订单> 详情
+entity.ChairOrderInfo.yunvaId=申请用户
+entity.ChairOrderInfo.nickName=申请用户名称
+entity.ChairOrderInfo.score=用户评价分
+entity.ChairOrderInfo.type=服务类型
+entity.ChairOrderInfo.remark=申诉内容
+entity.ChairOrderInfo.roomId=所属频道
+entity.ChairOrderInfo.receiveId=处理人
+entity.ChairOrderInfo.receiveName=处理人昵称
+entity.ChairOrderInfo.time=处理时长
+entity.ChairOrderInfo.price=扣去积分
+entity.ChairOrderInfo.createTime=创建时间
+entity.ChairOrderInfo.updateTime=修改时间
+entity.ChairOrderInfo.isComplain=是否申诉
+
+#####################用户反馈####################
+label.navigation.yayaServer2.feedBackInfo.list=呀呀管理 > 用户反馈 > 列表
+label.navigation.yayaServer2.feedBackInfo.view=呀呀管理 > 用户反馈 > 查看
+entity.feedBackInfo.yunvaId=云娃账号
+entity.feedBackInfo.contect=反馈内容
+entity.feedBackInfo.mediaType=状态
+entity.feedBackInfo.type=类型
+entity.feedBackInfo.createTime=创建时间
+entity.feedBackInfo.updateTime=修改时间
+
+#####################代理管理####################
+label.softwareVersion.list=代理管理 > 软件版本 > 列表
+label.softwareVersion.eidt=代理管理 > 软件版本 > 编辑
+label.softwareVersion.input=代理管理 > 软件版本 > 新增
+entity.softwareVersion.type=软件类型
+entity.softwareVersion.version=软件版本
+entity.feedBackInfo.contect=反馈内容
+entity.feedBackInfo.mediaType=状态
+entity.feedBackInfo.type=类型
+entity.feedBackInfo.createTime=创建时间
+entity.feedBackInfo.updateTime=修改时间
+
+#####################任务配置####################
+label.taskInfo.list=呀呀管理 > 软件版本 > 列表
+label.taskInfo.eidt=呀呀管理 > 任务配置 > 编辑
+entity.taskInfo.id=任务Id
+entity.taskInfo.type=任务类型
+entity.taskInfo.title=任务标题
+entity.taskInfo.description=任务描述
+entity.taskInfo.count=统计条目
+entity.taskInfo.score=积分
+entity.taskInfo.hot=热度
+entity.taskInfo.osType=系统类型
+entity.taskInfo.exp=经验
+entity.taskInfo.type3=连续单次
+entity.taskInfo.type4=连续终生
+
+#####################现金积分礼物####################
+label.navigation.base.giftScoreInfo.list=系统设置 > 现金积分信息 > 列表
+label.navigation.base.giftScoreInfo.eidt=系统设置 > 现金积分信息 > 编辑
+label.navigation.base.giftScoreInfo.input=系统设置 > 现金积分信息 > 编辑
+entity.giftScoreInfo.id=编号
+entity.giftScoreInfo.giftName=礼物名称
+entity.giftScoreInfo.iconUrl=礼物图片
+entity.giftScoreInfo.price=基础价格
+entity.giftScoreInfo.currencyType=货币类型
+entity.giftScoreInfo.versionId=版本
+entity.giftScoreInfo.ext=扩展字段(汇率)
+entity.giftScoreInfo.hot=推荐度
+entity.giftScoreInfo.show=是否上架
+entity.giftScoreInfo.createTime=创建时间
+
+#####################呀呀官网banner####################
+label.navigation.base.webBannerInfo.list=系统设置 > 呀呀官网banner > 列表
+label.navigation.base.webBannerInfo.eidt=系统设置 > 呀呀官网banner > 编辑
+label.navigation.base.webBannerInfo.input=系统设置 > 呀呀官网banner > 新增
+entity.webBannerInfo.id=编号
+entity.webBannerInfo.name=名称
+entity.webBannerInfo.iconUrl=图标
+entity.webBannerInfo.bgColor=banner背景色
+entity.webBannerInfo.redirectUrl=跳转链接
+entity.webBannerInfo.index=排序
+entity.webBannerInfo.createTime=创建时间
+
+#####################红包信息####################
+label.navigation.base.redPacketInfo.list=呀呀管理 > 红包信息 > 列表
+entity.redPacketInfo.id=编号
+entity.redPacketInfo.transactionId=红包流水号
+entity.redPacketInfo.yunvaId=发起人
+entity.redPacketInfo.createTime=发起时间
+entity.redPacketInfo.packageType=红包类型
+entity.redPacketInfo.content=红包描述
+entity.redPacketInfo.price=红包总金额
+entity.redPacketInfo.packageCount=红包份数
+entity.redPacketInfo.backPrice=返还余额
+entity.redPacketInfo.useCount=红包领取情况
+entity.redPacketInfo.mediaType=红包状态
+entity.redPacketDetail.owner=领取人
+entity.redPacketDetail.price=领取金额
+entity.redPacketDetail.createTime=领取时间
+entity.redPacketDetail.transactionId=红包流水号
+
+#####################积分物品管理####################
+label.navigation.mallItem.list=积分商城 > 物品管理 > 列表
+label.navigation.mallItem.eidt=积分商城 > 物品管理 > 编辑
+label.navigation.mallItem.input=积分商城 > 物品管理 > 新增
+entity.mallItem.id=编号
+entity.mallItem.itemName=物品名称
+entity.mallItem.iconUrl=物品图片
+entity.mallItem.iconCount=物品数量
+entity.mallItem.price=兑换积分数值
+entity.mallItem.itemDesc=商品描述
+entity.mallItem.convertUsers=兑换人数
+entity.mallItem.createTime=创建时间
+entity.mallItem.status=状态值
+entity.mallItem.type=物品类型
+entity.mallItem.hot=热度
+entity.mallItem.belongId=所属编号
+entity.mallItem.currencyType=货币类型
+
+#####################积分物品订单管理####################
+label.navigation.mallDelivery.list=积分商城 > 订单信息管理 > 列表
+label.navigation.mallDelivery.eidt=积分商城 > 订单信息管理 > 编辑
+label.navigation.mallDelivery.input=积分商城 > 订单信息管理 > 新增
+entity.mallDelivery.id=编号
+entity.mallDelivery.yunvaId=云娃编号
+entity.mallDelivery.belongId=物品编号
+entity.mallDelivery.transactionId=订单流水号
+entity.mallDelivery.cdKey=CDKEY
+entity.mallDelivery.name=联系人名称
+entity.mallDelivery.tel=联系人电话
+entity.mallDelivery.address=联系人地址
+entity.mallDelivery.status=订单状态
+entity.mallDelivery.createTime=创建时间
+entity.mallDelivery.deliveryTime=发货时间
+entity.mallDelivery.remark=订单备注
+
+
+#####################转盘抽奖记录####################
+label.navigation.lotteryDetail.list=积分商城 > 转盘抽奖记录 > 列表
+label.navigation.lotteryDetail.VIEW=积分商城 > 转盘抽奖记录 > 查看
+entity.lotteryDetail.id=编号
+entity.lotteryDetail.yunvaId=云娃编号
+entity.lotteryDetail.lotteryId=抽奖转盘编号
+entity.lotteryDetail.transactionId=订单流水号
+entity.lotteryDetail.itemId=奖品编号
+entity.lotteryDetail.itemName=奖品名称
+entity.lotteryDetail.itemContent=奖品内容
+entity.lotteryDetail.status=状态
+entity.lotteryDetail.receiveStatus=领取状态
+entity.lotteryDetail.remark=备注
+entity.lotteryDetail.updateTime=更新时间
+entity.lotteryDetail.receiveTime=领取时间
+entity.lotteryDetail.createTime=创建时间
+entity.lotteryDetail.type=中奖类型
+
+#####################转盘奖品配送####################
+label.navigation.lotteryDelivery.list=积分商城 > 转盘奖品配送 > 列表
+label.navigation.lotteryDelivery.edit=积分商城 > 转盘奖品配送 > 查看
+entity.lotteryDelivery.id=编号
+entity.lotteryDelivery.yunvaId=云娃编号
+entity.lotteryDelivery.transactionId=获奖流水号
+entity.lotteryDelivery.name=联系人名称
+entity.lotteryDelivery.tel=联系人电话
+entity.lotteryDelivery.address=联系人地址
+entity.lotteryDelivery.status=状态
+entity.lotteryDelivery.remark=备注
+entity.lotteryDelivery.startDeliveryTime=开始配送时间
+entity.lotteryDelivery.deliveredTime=配送完成时间
+entity.lotteryDelivery.createTime=创建时间
+
+#####################百度appkey####################
+label.navigation.appBaiduKey.list=呀呀SDK > 百度appkey > 列表
+label.navigation.appBaiduKey.edit=呀呀SDK > 百度appkey > 编辑
+label.navigation.appBaiduKey.input=呀呀SDK > 百度appkey > 新增
+entity.appBaiduKey.id=应用编号
+entity.appBaiduKey.apiKey=ApiKey
+entity.appBaiduKey.secretKey=secretKey
+entity.appBaiduKey.mediaType=状态
+entity.appBaiduKey.createTime=创建时间
+entity.appBaiduKey.updateTime=更改时间
+
+#####################活动勋章####################
+label.navigation.userTaskMedal.list=系统设置 > 活动勋章 > 列表
+label.navigation.userTaskMedal.edit=系统设置 > 活动勋章 > 编辑
+label.navigation.userTaskMedal.input=系统设置 > 活动勋章 > 新增
+entity.userTaskMedal.id=应用编号
+entity.userTaskMedal.roomId=房间ID
+entity.userTaskMedal.yunvaId=云娃ID
+entity.userTaskMedal.iconUrl=勋章图片
+entity.userTaskMedal.overTime=过期时间
+entity.userTaskMedal.index=勋章下标
+entity.userTaskMedal.createTime=创建时间
+entity.userTaskMedal.updateTime=修改时间
+
+#####################特权信息####################
+label.navigation.privilegeInfo.list=积分商城 > 特权信息 > 列表
+label.navigation.privilegeInfo.edit=积分商城 > 特权信息 > 编辑
+label.navigation.privilegeInfo.input=积分商城 > 特权信息 > 新增
+entity.privilegeInfo.id=编号
+entity.privilegeInfo.privilegeName=特权名称
+entity.privilegeInfo.privilegeLevel=特权级别
+entity.privilegeInfo.privilegeIconBig=特权图标（大）
+entity.privilegeInfo.privilegeIconSmall=特权图标（小)
+entity.privilegeInfo.privilegeDesc=描述
+entity.privilegeInfo.speakColor=发言颜色
+entity.privilegeInfo.colorValid=是否生效
+entity.privilegeInfo.numGroups=组数
+entity.privilegeInfo.priceLowest=最低价格
+entity.privilegeInfo.belongType=附送物品类型
+entity.privilegeInfo.belongId=附送物品id
+entity.privilegeInfo.createTime=创建时间
+entity.privilegeInfo.updateTime=修改时间
+
+###################转盘奖品配置##################
+label.navigation.lottery.list=积分商城 > 转盘抽奖配置 > 列表
+label.navigation.lottery.edit=积分商城 > 转盘抽奖配置 > 编辑
+label.navigation.lottery.view=积分商城 > 转盘抽奖配置 > 查看
+label.navigation.lottery.input=积分商城 > 转盘抽奖配置 > 新增
+entity.lottery.id=编号
+entity.lottery.osType=系统类型
+entity.lottery.entrance=抽奖入口
+entity.lottery.price=消耗
+entity.lottery.currencyType=货币类型
+entity.lottery.picUrl=转盘图片
+entity.lottery.desc=抽奖描述
+entity.lottery.status=状态
+entity.lottery.online=在线状态
+entity.lottery.beginTime=开始时间
+entity.lottery.endTime=截止时间
+entity.lottery.createTime=创建时间
+entity.lottery.price.desc=当货币为豆芽时单位是分，即如果填写100，实际为1豆芽
+
+######################转盘奖品配置############################
+label.navigation.lotteryItem.list=积分商城 > 转盘抽奖配置 > 奖品 > 列表
+label.navigation.lotteryItem.edit=积分商城 > 转盘抽奖配置 > 奖品 > 编辑
+label.navigation.lotteryItem.view=积分商城 > 转盘抽奖配置 > 奖品 > 查看
+label.navigation.lotteryItem.input=积分商城 > 转盘抽奖配置 > 奖品 > 新增
+entity.lotteryItem.id=编号
+entity.lotteryItem.lotteryId=抽奖编号
+entity.lotteryItem.name=奖品名称
+entity.lotteryItem.itemType=奖品类型
+entity.lotteryItem.picUrl=奖品图片
+entity.lotteryItem.index=奖品顺序
+entity.lotteryItem.rate=奖品概率
+entity.lotteryItem.quantity=奖品数量
+entity.lotteryItem.desc=奖品描述
+entity.lotteryItem.goodsId=中奖物品编号
+entity.lotteryItem.goodsCount=中奖物品数量
+entity.lotteryItem.goodsCount.desc=当中奖物品为豆芽时，此处的数量单位为分，即配置100，只会给用户奖励1个豆芽
+entity.lotteryItem.isEmpty=是否为无
+entity.lotteryItem.isDefault=是否默认
+entity.lotteryItem.isDefault.desc=默认的奖品只能配置一个，不允许配置多个
+entity.lotteryItem.isShow=是否统计展示
+entity.lotteryItem.createTime=创建时间
+
+############################抽奖配置################################
+label.navigation.startLottery.view=积分商城 > 转盘抽奖 > 抽奖
+entity.startLottery.yunvaIds=中奖云娃编号(逗号,分隔)
+entity.startLottery.lotteryItemId=奖品
+entity.startLottery.type=操作类型
+entity.startLottery.lotteryId=转盘编号
+entity.startLottery.times=次数
+
+#####################价格折扣####################
+label.navigation.privilegeDiscount.list=积分商城 > 价格折扣 > 列表
+label.navigation.privilegeDiscount.edit=积分商城 > 价格折扣 > 编辑
+label.navigation.privilegeDiscount.input=积分商城 > 价格折扣 > 新增
+entity.privilegeDiscount.id=编号
+entity.privilegeDiscount.startScore=起始值
+entity.privilegeDiscount.endScore=截止值
+entity.privilegeDiscount.discountRate=折扣率
+entity.privilegeDiscount.createTime=创建时间
+entity.privilegeDiscount.updateTime=修改时间
+
+#####################视频分辨率适配################
+label.navigation.videoResolution.list=系统设置 > 分辨率适配 > 列表
+label.navigation.videoResolution.edit=系统设置 > 分辨率适配 > 编辑
+label.navigation.videoResolution.input=系统设置 > 分辨率适配 > 新增
+entity.videoResolution.id=编号
+entity.videoResolution.brand=手机品牌
+entity.videoResolution.phoneModel=手机型号
+entity.videoResolution.level=匹配等级
+entity.videoResolution.biggerWidth=大视频宽度
+entity.videoResolution.biggerHeight=大视频高度
+entity.videoResolution.smallerWidth=小视频宽度
+entity.videoResolution.smallerHeight=小视频高度
+entity.videoResolution.updateTime=更新时间
+entity.videoResolution.createTime=创建时间
+
+####################赠送座驾配置###########################
+label.navigation.giveMountsConfig.list=呀呀活动 > 赠送座驾配置 > 列表
+label.navigation.giveMountsConfig.edit=呀呀活动 > 赠送座驾配置 > 编辑
+label.navigation.giveMountsConfig.input=呀呀活动 > 赠送座驾配置 > 新增
+entity.giveMountsConfig.id=编号
+entity.giveMountsConfig.type=类型
+entity.giveMountsConfig.itemId=礼物编号
+entity.giveMountsConfig.itemName=坐骑名称
+entity.giveMountsConfig.itemDays=赠送坐骑天数
+entity.giveMountsConfig.iconUrl=座驾图标
+entity.giveMountsConfig.updateTime=更新时间
+entity.giveMountsConfig.createTime=创建时间
+
+#####################用户赠送座驾详细信息#########################
+label.navigation.userMountsDetail.list=呀呀活动 > 赠送座驾详情 > 列表
+entity.userMountsDetail.yunvaId=用户编号
+entity.userMountsDetail.type=类型
+entity.userMountsDetail.transactionId=赠送流水号
+entity.userMountsDetail.itemId=座驾编号
+entity.userMountsDetail.itemName=座驾名称
+entity.userMountsDetail.iconUrl=座驾图片
+entity.userMountsDetail.days=天数
+entity.userMountsDetail.status=状态
+entity.userMountsDetail.remark=备注
+entity.userMountsDetail.createTime=创建时间
+
+#####################用户赠送座驾详细信息#########################
+label.navigation.userMountsDetail.list=呀呀活动 > 赠送座驾详情 > 列表
+entity.userMountsDetail.yunvaId=用户编号
+entity.userMountsDetail.type=类型
+entity.userMountsDetail.transactionId=赠送流水号
+entity.userMountsDetail.itemId=座驾编号
+entity.userMountsDetail.itemName=座驾名称
+entity.userMountsDetail.iconUrl=座驾图片
+entity.userMountsDetail.days=天数
+entity.userMountsDetail.status=状态
+entity.userMountsDetail.remark=备注
+entity.userMountsDetail.createTime=创建时间
+
+#####################私服回拨表#########################
+label.navigation.serviceCallbackInfo.list=基础管理 > 用户私服历史 > 列表
+label.navigation.serviceCallbackInfo.view=基础管理 > 用户私服历史 > 详情
+entity.serviceCallbackInfo.id=编号
+entity.serviceCallbackInfo.yunvaId=用户编号
+entity.serviceCallbackInfo.receiveId=处理者
+entity.serviceCallbackInfo.roomId=房间ID
+entity.serviceCallbackInfo.transactionId=流水单号
+entity.serviceCallbackInfo.mediaType=状态
+entity.serviceCallbackInfo.score=分数
+entity.serviceCallbackInfo.scoreState=打分状态
+entity.serviceCallbackInfo.createTime=创建时间
+entity.serviceCallbackInfo.updateTime=修改时间
+system.serviceCallbackInfo.state3=用户未进入房间
+system.serviceCallbackInfo.state4=主播未进入房间
+system.serviceCallbackInfo.state5=主播挂断
+system.serviceCallbackInfo.state6=用户挂断
+system.serviceCallbackInfo.state7=主播拒绝
+system.serviceCallbackInfo.state8=用户拒绝
+system.serviceCallbackInfo.state9=用户没钱
+system.serviceCallbackInfo.state10=主播网络异常
+system.serviceCallbackInfo.state11=用户网络异常
+system.serviceCallbackInfo.scoreState0=未打分
+system.serviceCallbackInfo.scoreState1=打分
+
+#####################陪玩主播私服历史#########################
+label.navigation.playOrderInfo.list=基础管理 > 陪玩历史 > 列表
+label.navigation.playOrderInfo.view=基础管理 > 陪玩历史 > 详情
+entity.playOrderInfo.id=编号
+entity.playOrderInfo.yunvaId=用户编号
+entity.playOrderInfo.receiveId=处理者
+entity.playOrderInfo.roomId=房间ID
+entity.playOrderInfo.giftId=礼物ID
+entity.playOrderInfo.giftName=礼物名称
+entity.playOrderInfo.transactionId=流水单号
+entity.playOrderInfo.mediaType=状态
+entity.playOrderInfo.priceBase=基础价
+entity.playOrderInfo.priceUnit=单位时间价
+entity.playOrderInfo.priceUnitCount=单位价总和
+entity.playOrderInfo.score=分数
+entity.playOrderInfo.scoreState=打分状态
+entity.playOrderInfo.currencyType=货币类型
+entity.playOrderInfo.allTime=打分状态
+entity.playOrderInfo.receiveTime=接收时间
+entity.playOrderInfo.deductTime=上次扣费时间
+entity.playOrderInfo.createTime=创建时间
+entity.playOrderInfo.updateTime=修改时间
+system.playOrderInfo.state3=用户未进入房间
+system.playOrderInfo.state4=主播未进入房间
+system.playOrderInfo.state5=主播挂断
+system.playOrderInfo.state6=用户挂断
+system.playOrderInfo.state7=主播拒绝
+system.playOrderInfo.state8=用户拒绝
+system.playOrderInfo.state9=用户没钱
+system.playOrderInfo.state10=主播网络异常
+system.playOrderInfo.state11=用户网络异常
+system.playOrderInfo.state12=用户没钱(未连接)
+system.playOrderInfo.state13=PC监听用户退出(未结束订单)
+system.playOrderInfo.state14=结束用户异常订单
+system.playOrderInfo.scoreState0=未打分
+system.playOrderInfo.scoreState1=打分
+
+#####################主播魅力勋章等级信息表#########################
+label.navigation.chairCharmMedal.list=系统设置 > 主播魅力勋章 > 列表
+label.navigation.chairCharmMedal.edit=系统设置 > 主播魅力勋章 > 编辑
+label.navigation.chairCharmMedal.add=系统设置 > 主播魅力勋章 > 添加
+entity.chairCharmMedal.id=编号
+entity.chairCharmMedal.medalName=勋章名称
+entity.chairCharmMedal.medalIconUrl=勋章图标
+entity.chairCharmMedal.startScore=起始值
+entity.chairCharmMedal.endScore=截止值
+entity.chairCharmMedal.grade=等级
+entity.chairCharmMedal.color=色彩
+entity.chairCharmMedal.createTime=创建时间
+entity.chairCharmMedal.updateTime=更新时间
+
+#####################用户魅力勋章等级信息表#########################
+label.navigation.userCharmMedal.list=系统设置 > 用户魅力勋章 > 列表
+label.navigation.userCharmMedal.edit=系统设置 > 用户魅力勋章 > 编辑
+label.navigation.userCharmMedal.add=系统设置 > 用户魅力勋章 > 添加
+entity.userCharmMedal.id=编号
+entity.userCharmMedal.medalName=勋章名称
+entity.userCharmMedal.medalIconUrl=勋章图标
+entity.userCharmMedal.startScore=起始值
+entity.userCharmMedal.endScore=截止值
+entity.userCharmMedal.grade=等级
+entity.userCharmMedal.createTime=创建时间
+entity.userCharmMedal.updateTime=更新时间
+
+#####################用户财富勋章等级信息表#########################
+label.navigation.userWealthMedal.list=系统设置 > 用户财富勋章 > 列表
+label.navigation.userWealthMedal.edit=系统设置 > 用户财富勋章 > 编辑
+label.navigation.userWealthMedal.input=系统设置 > 用户财富勋章 > 添加
+entity.userWealthMedal.id=编号
+entity.userWealthMedal.medalName=勋章名称
+entity.userWealthMedal.medalIconUrl=勋章图标
+entity.userWealthMedal.startScore=起始值
+entity.userWealthMedal.endScore=截止值
+entity.userWealthMedal.grade=等级
+entity.userWealthMedal.color=色彩
+entity.userWealthMedal.createTime=创建时间
+entity.userWealthMedal.updateTime=更新时间
+entity.userWealthMedal.monthLowestConsum=月最低消费
+
+#####################普通活动#########################
+label.navigation.commonExercise.list=呀呀活动 > 普通活动 > 列表
+label.navigation.commonExercise.edit=呀呀活动 > 普通活动 > 编辑
+label.navigation.commonExercise.add=呀呀活动 > 普通活动 > 添加
+entity.commonExercise.id=编号
+entity.commonExercise.exerciseName=活动名称
+entity.commonExercise.exerciseListIconUrl=列表图片
+entity.commonExercise.yunvaId=发起人
+entity.commonExercise.skipUrl=跳转地址
+entity.commonExercise.validTime=有效期
+entity.commonExercise.status=状态
+entity.commonExercise.createTime=创建时间
+entity.commonExercise.updateTime=更新时间
+
+#####################昵称敏感字#########################
+label.navigation.keywordInfo.list=系统设置 > 昵称敏感字 > 列表
+label.navigation.keywordInfo.add=系统设置 > 昵称敏感字 > 添加
+entity.keywordInfo.id=编号
+entity.keywordInfo.keyword=敏感词
+entity.keywordInfo.type=类型
+entity.keywordInfo.createTime=创建时间
+
+###################系统配置参数信息表#############################
+label.navigation.config.list=系统设置 > 系统配置参数信息 > 列表
+label.navigation.config.edit=系统设置 > 系统配置参数信息 > 编辑
+label.navigation.config.add=系统设置 > 系统配置参数信息 > 添加
+entity.config.id=编号
+entity.config.configName=参数名称
+entity.config.configKey=参数键
+entity.config.configValue=参数值
+entity.config.createTime=创建时间
+entity.config.updateTime=更新时间

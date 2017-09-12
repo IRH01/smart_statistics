@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="baseAdmin">
+	<resultMap id="AdminMap" type="com.hhly.smartdata.model.authentication.Admin"
+		extends="baseUser.UserMap">
+		<id column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="name" property="name" />
+		<result column="email" property="email" />
+		<result column="tel" property="tel" />
+		<result column="depart_id" property="departId" />
+		<result column="job_no" property="jobNo" />
+		<result column="type" property="type" />
+		<result column="locale" property="locale" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,
+		user_id,
+		NAME,
+		email,
+		tel,
+		depart_id,
+		job_no,
+		TYPE
+	</sql>
+	<sql id="with_user">
+		admin.id,
+		admin.user_id,
+		admin.NAME,
+		admin.email,
+		admin.tel,
+		admin.depart_id,
+		admin.job_no,
+		admin.TYPE ,
+		u.username,
+		u.password,
+		u.user_type,
+		u.user_status,
+		u.create_time,
+		u.locale
+	</sql>
+
+	<select id="get" resultMap="AdminMap" parameterType="java.lang.Integer">
+		select
+		<include refid="with_user" />
+		from tbl_admin admin join tbl_user u on admin.user_id =
+		u.user_id
+		where id = #{id}
+	</select>
+	<select id="searchAdmins" resultMap="AdminMap" resultType="com.hhly.smartdata.model.authentication.Admin">
+		select
+		<include refid="with_user" />
+		from tbl_admin admin join tbl_user u on admin.user_id =
+		u.user_id
+		<where>
+				and u.user_id != -1
+			<if test="id !=null">
+				and admin.id = #{id}
+			</if>
+			<if test="username !=null and username != ''">
+				and u.username like concat(concat('%',#{username}),'%')
+			</if>
+			<if test="type != null">
+				and admin.type = #{type}
+			</if>
+			<if test="userStatus !=null and userStatus !=''">
+				and u.user_status = #{userStatus}
+			</if>
+		</where>
+		order by u.user_status asc,u.create_time desc
+	</select>
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from tbl_admin
+		where id = #{id}
+	</delete>
+	<delete id="deleteByUserId" parameterType="java.lang.Integer">
+		delete from tbl_admin
+		where user_id = #{userId}
+	</delete>
+	<!-- <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Admin" useGeneratedKeys="true" keyProperty="id">
+		<selectKey resultType="int" order="BEFORE" keyProperty="id">
+			SELECT ADMIN_SEQ.NEXTVAL FROM dual
+		</selectKey>
+		insert into tbl_admin 
+		(id, 
+		 user_id,
+		 name,
+		 email, 
+		 tel, 
+		 job_no, 
+		 type)
+		values 
+		(#{id},
+		 #{userId},
+		 #{name},
+		 #{email}, 
+		 #{tel}, 
+		 #{jobNo}, 
+		 #{type})
+	</insert> -->
+	
+	<insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Admin" useGeneratedKeys="true" keyProperty="id">
+		
+		insert into tbl_admin 
+		( 
+		 user_id,
+		 name,
+		 email, 
+		 tel, 
+		 job_no, 
+		 type)
+		values 
+		(
+		 #{userId},
+		 #{name},
+		 #{email}, 
+		 #{tel}, 
+		 #{jobNo}, 
+		 #{type})
+	</insert>
+
+	<update id="update" parameterType="com.hhly.smartdata.model.authentication.Admin">
+		update tbl_admin
+		<set>
+			<if test="userId != null">
+				user_id = #{userId},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
+			<if test="tel != null">
+				tel = #{tel},
+			</if>
+			<if test="departId != null">
+				depart_id = #{departId},
+			</if>
+			<if test="jobNo != null">
+				job_no = #{jobNo},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+</mapper>

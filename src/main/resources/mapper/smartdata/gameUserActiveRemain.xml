@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gameUserActiveRemain">
+
+	<resultMap type="GameUserActiveRemain" id="GameUserActiveRemainMap"
+		extends="lossDaily.LossDailyMap">
+		<result property="statDate" column="stat_date" />
+		<result property="channelId" column="channel_id" />
+		<result property="platformId" column="platform_id" />
+		<result property="addUv" column="add_uv" />
+		<result property="remain1Ucnt" column="remain_1_ucnt" />
+		<result property="remain1Rate" column="remain_1_rate" />
+		<result property="remain2Ucnt" column="remain_2_ucnt" />
+		<result property="remain2Rate" column="remain_2_rate" />
+		<result property="remain3Ucnt" column="remain_3_ucnt" />
+		<result property="remain3Rate" column="remain_3_rate" />
+		<result property="remain4Ucnt" column="remain_4_ucnt" />
+		<result property="remain4Rate" column="remain_4_rate" />
+		<result property="remain5Ucnt" column="remain_5_ucnt" />
+		<result property="remain5Rate" column="remain_5_rate" />
+		<result property="remain6Ucnt" column="remain_6_ucnt" />
+		<result property="remain6Rate" column="remain_6_rate" />
+		<result property="remain7Ucnt" column="remain_7_ucnt" />
+		<result property="remain7Rate" column="remain_7_rate" />
+		<result property="remain14Ucnt" column="remain_14_ucnt" />
+		<result property="remain14Rate" column="remain_14_rate" />
+		<result property="remain30Ucnt" column="remain_30_ucnt" />
+		<result property="remain30Rate" column="remain_30_rate" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		
+		<result property="produceId" column="produce_id"/>
+		<result property="produceName" column="produce_name"/>
+	</resultMap>
+
+	<select id="find" resultMap="GameUserActiveRemainMap" parameterType="map">
+		select date_format(stat_date,'%Y-%m-%d') as stat_date, channel_id, platform_id, add_uv, remain_1_ucnt,
+	    CONCAT(FORMAT(remain_1_rate * 100,2), '%') as remain_1_rate, remain_2_ucnt, CONCAT(FORMAT(remain_2_rate * 100,2), '%') as remain_2_rate, remain_3_ucnt,
+	    CONCAT(FORMAT(remain_3_rate * 100,2), '%') as remain_3_rate, remain_4_ucnt, CONCAT(FORMAT(remain_4_rate * 100,2), '%') as remain_4_rate, remain_5_ucnt,
+	    CONCAT(FORMAT(remain_5_rate * 100,2), '%') as remain_5_rate, remain_6_ucnt, CONCAT(FORMAT(remain_6_rate * 100,2), '%') as remain_6_rate, remain_7_ucnt,
+	    CONCAT(FORMAT(remain_7_rate * 100,2), '%') as remain_7_rate, remain_14_ucnt, CONCAT(FORMAT(remain_14_rate * 100,2), '%') as remain_14_rate, remain_30_ucnt,
+	    CONCAT(FORMAT(remain_30_rate * 100,2), '%') as remain_30_rate, date_format(create_time,'%Y-%m-%d') as create_time, date_format(update_time,'%Y-%m-%d') as update_time from
+	    tbl_dm_user_active_remain_day
+	    where 1 = 1
+	    
+		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+		<if test="platformId != null and platformId != ''">and platform_id = #{platformId}</if>
+		<if test="dateStart != null and dateStart != ''">and date_format(stat_date,'%Y-%m-%d') &gt;= #{dateStart} </if>
+		<if test="dateEnd != null and dateEnd != ''">and date_format(stat_date,'%Y-%m-%d') &lt;= #{dateEnd} </if>
+		order by stat_date desc
+	</select>
+
+
+	<select id="count" resultType="int" parameterType="map">
+		select count(1) from
+	    tbl_dm_user_active_remain_day
+	    where 1 = 1
+	    
+		<if test="channelId != null and channelId != ''">and channel_id like CONCAT(CONCAT('%',#{channelId}),'%')</if>
+		<if test="platformId != null and platformId != ''">and platform_id = #{platformId}</if>
+		<if test="dateStart != null and dateStart != ''">and date_format(stat_date,'%Y-%m-%d') &gt;= #{dateStart} </if>
+		<if test="dateEnd != null and dateEnd != ''">and date_format(stat_date,'%Y-%m-%d') &lt;= #{dateEnd} </if>
+	</select>
+	
+	<select id="getProduces" resultMap="GameUserActiveRemainMap" parameterType="map">
+		select id as produce_id , name as produce_name from gp_tbl_platform_info t where t.type = 1 and t.country =0 and t.is_oneself = 0
+	</select>
+</mapper>

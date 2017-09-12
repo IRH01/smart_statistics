@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dimAddInfoColStat">
+
+	<resultMap type="DimAddInfoColStat" id="DimAddInfoColStatMap">
+		<result property="etlDate" column="etl_date" />
+		<result property="domainId" column="domain_id" />
+		<result property="infoTypeId" column="info_type_id" />
+		<result property="clickCnt" column="click_cnt" />
+		<result property="stayCnt" column="stay_cnt" />
+		<result property="ipCnt" column="ip_cnt" />
+		<result property="infoCnt" column="info_cnt" />
+		<result property="createDate" column="create_date" />
+		<result property="updateDate" column="update_date" />
+		<result property="infoTypeName" column="info_type_name" />
+	</resultMap>
+	
+	<!-- 日更新资讯数量信息 -->
+	<resultMap type="ActCountInfo" id="InfoUpdateCntInfoMap">
+		<result property="infoTypeId" column="info_type_id" />
+		<result property="count" column="count" />
+		<result property="infoTypeName" column="info_type_name" />
+	</resultMap>
+
+	<!-- 查询条件 -->
+	<sql id="queryCondition">
+		<if test="startDate != null">and a.etl_date &gt;= to_date(#{startDate},'yyyy-MM-dd HH24:mi:ss')</if>
+		<if test="endDate != null">and a.etl_date &lt;to_date(#{endDate},'yyyy-MM-dd HH24:mi:ss')</if> 
+		<if test="domainId!=null and domainId!=''">
+			and a.domain_id=#{domainId}
+		</if>  
+	</sql>
+	
+	<!-- 获取总的资讯更新数据 -->
+	<select id="countAllInfoCnt" resultType="long" parameterType="map">
+		select 
+	      	sum(a.info_cnt) count
+	      from tbl_dm_add_info_type_stat_d a
+	      where 1=1
+	      	and a.info_type_id!='-99'
+	      	<include refid="queryCondition" />
+	</select>
+	
+	<!-- 获取日更新资讯数量 -->
+    <select id="countTypeInfoCnt" resultMap="InfoUpdateCntInfoMap" parameterType="map">
+      select
+	  info.info_cnt count,
+	  type.type_id info_type_id,
+	  (case when upper(type.type_id)='EMPTY' then '其他' else type.type_name end)info_type_name
+	  from (
+	      select 
+	      	sum(a.info_cnt) info_cnt,
+	      	a.info_type_id
+	      from tbl_dm_add_info_type_stat_d a 
+	      where 1=1 and a.info_type_id!='-99'
+	      	<include refid="queryCondition" />
+	      group by a.info_type_id
+	  ) info 
+	  left join tbl_dw_dim_info_type type
+	  on info.info_type_id = type.tbl_id
+	  order by type.tbl_id asc 
+    </select>
+	
+</mapper>

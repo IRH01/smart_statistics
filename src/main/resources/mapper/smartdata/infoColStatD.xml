@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="infoColStatD">
+
+
+	<resultMap type="InfoColStatD" id="infoColStatDMapper">
+	    <!--  
+		<result column="etl_date" property="etlDate" />
+		-->
+		<result column="domain_id" property="domainId" />
+		<result column="info_type_id" property="infoTypeId" />
+		<result column="click_cnt" property="clickCnt" />
+		<result column="stay_cnt" property="stayCnt" />
+		<result column="ip_cnt" property="ipCnt" />
+		<result column="info_cnt" property="infoCnt" />
+		<!-- 
+		<result column="create_date" property="createDate" />
+		<result column="updated_date" property="updatedDate" />
+        -->
+
+	</resultMap>
+
+	<select id="queryOne" parameterType="map" resultMap="infoColStatDMapper">
+		select
+		d.domain_id,d.info_type_id,d.click_cnt,d.stay_cnt,d.ip_cnt,d.info_cnt
+		from  tbl_dm_add_info_type_stat_d d
+		
+		where 1 =1 
+		<if test="domain != null">
+			and d.domain_id = #{domain}
+		</if>
+		<if test="date != null">
+			and date_format(d.etl_date,'%Y-%m-%d') = #{date}
+		</if>
+		<if test="infoType != null and infoType != ''">
+			and d.info_type_id = #{infoType}
+		</if>
+	</select>
+
+</mapper>

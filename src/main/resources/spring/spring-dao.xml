@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="baseDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close" lazy-init="false">
+        <property name="driverClass" value="${db.driverClassName}"/>
+        <property name="jdbcUrl" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="idleConnectionTestPeriodInSeconds" value="${database.idleConnectionTestPeriodInSeconds}"/>
+        <property name="idleMaxAgeInSeconds" value="${database.idleMaxAge.seconds}"/>
+        <property name="maxConnectionsPerPartition" value="${database.maxConnectionsPerPartition}"/>
+        <property name="minConnectionsPerPartition" value="${database.minConnectionsPerPartition}"/>
+        <property name="partitionCount" value="${database.partitionCount}"/>
+        <property name="acquireIncrement" value="${database.acquireIncrement}"/>
+        <property name="connectionTestStatement" value="select 1"/>
+        <property name="statementsCacheSize" value="${database.statementsCacheSize}"/>
+        <property name="releaseHelperThreads" value="${database.releaseHelperThreads}"/>
+        <property name="logStatementsEnabled" value="${database.logStatementsEnabled}"/>
+        <property name="connectionTimeoutInMs" value="${database.connectionTimeoutInMs}"/>
+        <property name="maxConnectionAgeInSeconds" value="${database.maxConnectionAgeInSeconds}"/>
+        <property name="statisticsEnabled" value="${database.statisticsEnabled}"/>
+        <property name="lazyInit" value="${database.lazyInit}"/>
+        <property name="defaultAutoCommit" value="${database.defaultAutoCommit}"/>
+        <property name="disableJMX" value="${database.disableJMX}"/>
+    </bean>
+    <bean id="baseSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="baseDataSource"/>
+        <property name="configLocation" value="classpath:mapper/config-base.xml"/>
+    </bean>
+
+    <bean id="baseTransactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="baseDataSource"/>
+    </bean>
+
+    <bean id="baseSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="baseSqlSessionFactory"/>
+    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="baseTransactionManager">
+        <tx:attributes>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="query*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="list*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config proxy-target-class="true">
+        <aop:advisor pointcut="execution(* com.hhly.smartdata.base.service.*.*(..))"
+                     advice-ref="txAdvice"/>
+        <aop:advisor pointcut="execution(* com.hhly.smartdata.service.*.*(..))"
+                     advice-ref="txAdvice"/>
+    </aop:config>
+</beans>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lydjBettingLog">
+	<resultMap type="LydjBettingLog" id="LydjBettingLogMap">
+		<result property="platformId" column="platform_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="bettingTime" column="betting_time"/>
+		<result property="settleTime" column="settle_time"/>
+		<result property="bettingAmount" column="betting_amount"/>
+		<result property="bettingOrderNo" column="betting_orderno"/>
+		<result property="currency" column="currency"/>
+		<result property="settleAmount" column="settle_amount"/>
+	</resultMap>
+	
+	<select id="find" resultMap="LydjBettingLogMap" parameterType="map">
+		select
+			 lb.platform_id,
+			 lb.user_id,
+			 lb.betting_time,
+			 lb.settle_time,
+			 lb.betting_amount,
+			 lb.betting_orderno,
+			 lb.currency,
+			 lb.settle_amount
+		from tbl_ods_lydj_betting_log lb
+		where 1=1
+			and exists(
+				select qm.user_id 
+				from tbl_dw_member_qual_list_mon qm
+				where qm.partner_user_id = #{partnerUserId}  
+				and date_format(qm.month_id,'%Y-%m') = #{monthId}
+				and qm.game_type_id= #{gameTypeId}
+				and qm.user_id =  lb.user_id
+			)
+			and exists(
+				select gt.game_id
+				from tbl_dim_game_type_con gt
+				where gt.game_type_id = #{gameTypeId}  
+				and gt.game_id =  lb.platform_id
+			)
+			<if test="dateStart != null and dateStart != ''">and date_format( lb.settle_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
+			<if test="dateEnd != null and dateEnd != ''">and date_format( lb.settle_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
+		order by  lb.settle_time desc
+	</select>
+	
+	<select id="count" resultType="int" parameterType="map">
+		select 
+			count(*) count
+		from tbl_ods_lydj_betting_log lb
+		where 1=1
+			and exists(
+				select qm.user_id 
+				from tbl_dw_member_qual_list_mon qm
+				where qm.partner_user_id = #{partnerUserId}  
+				and date_format(qm.month_id,'%Y-%m') = #{monthId}
+				and qm.game_type_id= #{gameTypeId}
+				and qm.user_id =  lb.user_id
+			)
+			and exists(
+				select gt.game_id
+				from tbl_dim_game_type_con gt
+				where gt.game_type_id = #{gameTypeId}  
+				and gt.game_id =  lb.platform_id
+			)
+			<if test="dateStart != null and dateStart != ''">and date_format( lb.settle_time,'%Y-%m-%d') &gt;= #{dateStart} </if>
+			<if test="dateEnd != null and dateEnd != ''">and date_format( lb.settle_time,'%Y-%m-%d') &lt;= #{dateEnd} </if>
+	</select>
+</mapper>

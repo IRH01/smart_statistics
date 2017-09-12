@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="userRealm"/>
+    </bean>
+
+    <bean id="userRealm" class="com.hhly.smartdata.security.UserRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+    <bean id="credentialsMatcher"
+          class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="MD5"/>
+    </bean>
+
+    <bean id="kickoutSessionControlFilter" class="com.hhly.smartdata.security.KickoutSessionControlFilter">
+        <property name="kickoutAfter" value="false"/>
+        <property name="maxSession" value="1"/>
+        <property name="kickoutUrl" value="/login.do"/>
+    </bean>
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login.do"/>
+        <property name="successUrl" value="/welcome.do"/>
+        <property name="unauthorizedUrl" value="/403.jsp"/>
+        <property name="filters">
+            <util:map>
+                <entry key="authc" value-ref="formAuthenticationFilter"/>
+                <entry key="logout" value-ref="logoutFilter"/>
+                <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /=anon
+                /register.do*=anon
+                /validateUserName.do*=anon
+                /validateUserNameEx.do*=anon
+                /forgetPassWord.do*=anon
+                /emailgetPassWord.do*=anon
+                /validateResetPassWord.do*=anon
+                /resetPassWord.do*=anon
+                /admin/cp/cpregister.do*=anon
+                /fonts/**=anon
+                /css/**=anon
+                /js/**=anon
+                /img/**=anon
+                /kaptchaImage.do**=anon
+                /login.do*=authc
+                /logout.do*=logout
+                /**=authc
+            </value>
+        </property>
+    </bean>
+
+    <bean id="formAuthenticationFilter" class="com.hhly.smartdata.security.LoginFormAuthenticationFilter"/>
+
+    <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter"/>
+</beans>

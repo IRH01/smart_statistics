@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="infoStatD">
+
+
+      <resultMap type="com.hhly.smartdata.dto.InfoStatDShower" id="infoTypeStatHMapper">
+          <result column="type_name" property="infoTypeName"></result>
+          <result column="info_name" property="infoName"></result>
+          <result column="create_date" property="createDate"></result>
+          <result column="click_cnt" property="clickCnt"></result>
+          <result column="stay_cnt" property="stayCnt"></result>
+          <result column="ip_cnt" property="ipCnt"></result>
+          <result column="info_id" property="infoId"></result>
+          
+      </resultMap>
+
+
+     <select id="findInfoStatD" resultMap="infoTypeStatHMapper" parameterType="map">
+        select t.type_name as type_name,i.info_name as info_name,d.create_date as create_date,d.click_cnt as click_cnt,d.stay_cnt as stay_cnt,d.ip_cnt as ip_cnt,d.info_id as info_id
+        from tbl_dm_add_info_stat_d d 
+        join tbl_dw_dim_info i on (d.info_id = i.tbl_id) 
+        join tbl_dw_dim_info_type t on (d.info_type_id = t.tbl_id ) 
+         
+        where 1= 1
+        <if test="domain != null">
+            and d.domain_id = #{domain}
+        </if>
+        <if test="date != null">
+            and date_format(d.etl_date,'%Y-%m-%d') = #{date}
+        </if>
+        <if test="infoType != null and infoType != ''">
+            and d.info_type_id = #{infoType}
+        </if>
+        order by d.info_type_id asc
+     </select>
+	
+</mapper>

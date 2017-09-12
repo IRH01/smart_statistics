@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ybfWebStatD">
+
+	<resultMap type="com.hhly.smartdata.dto.YbfWebStatD" id="ybfWebStatDMapper">
+		<result column="etl_date" property="etlDate" />
+		<result column="url_id" property="urlId" />
+		<result column="click_cnt" property="clickCnt" />
+		<result column="user_cnt" property="userCnt" />
+		<result column="ip_cnt" property="ipCnt" />
+		<result column="stay_cnt" property="stayCnt" />
+		<result column="user_cnt"  property="userCnt"/>
+		<result column="total_user_cnt" property="totalUserCnt" />
+		<result column="day_total_user_cnt" property="dayTotalUserCnt" />
+		<result column="url_name" property="urlName" />
+		<result column="view_cnt" property="viewCnt" />
+	</resultMap>
+
+
+	<select id="find" resultMap="ybfWebStatDMapper" parameterType="map">
+		select
+			d.etl_date,
+			d.url_id,
+			d.click_cnt,
+			d.ip_cnt,
+			d.stay_cnt,
+			d.total_user_cnt,
+			d.day_total_user_cnt,
+			c.url_name,
+			d.view_cnt,
+			d.user_cnt
+		from tbl_dm_ybf_page_url_stat_d d
+		join tbl_dm_dim_ybf_url_stat_cfg c on (c.url_id=d.url_id)
+		where 1 = 1
+		<if test="endDate != null and startDate != null">
+			and date_format(d.etl_date,'%Y-%m-%d') between #{startDate} and  #{endDate}
+		</if>
+		and c.url_id = #{urlId}
+		order by d.click_cnt desc
+
+	</select>
+	
+	<select id="count" resultMap="ybfWebStatDMapper" parameterType="map">
+		select 
+			y.url_id,
+			y.click_cnt,
+			y.ip_cnt,
+			y.stay_cnt,
+			y.day_total_user_cnt,
+			y.view_cnt,
+			y.user_cnt,
+			GETYBFTOTALUSERCNT(y.url_id) total_user_cnt,
+			c.url_name
+		from
+			(select
+				d.url_id,
+				sum(d.click_cnt) click_cnt,
+				sum(d.ip_cnt) ip_cnt,
+				sum(d.stay_cnt) stay_cnt,
+				sum(d.day_total_user_cnt) day_total_user_cnt,
+				sum(d.view_cnt) view_cnt,
+				sum(d.user_cnt) user_cnt
+			from tbl_dm_ybf_page_url_stat_d d
+			where 1 = 1
+				and date_format(d.etl_date,'%Y-%m-%d') between #{startDate} and  #{endDate}
+			group by
+				d.url_id)y
+		left join tbl_dm_dim_ybf_url_stat_cfg c 
+			on c.url_id = y.url_id
+		where c.domain_name = #{domain}
+		order by y.click_cnt desc
+	</select>
+</mapper>

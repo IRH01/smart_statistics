@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gameSummaryDaily">
+	<resultMap type="GameSummaryDaily" id="GameSummaryDailyMap">
+		<result property="statDate" column="stat_date"/>
+		<result property="platformId" column="platform_id"/>
+		<result property="deviceType" column="device_type"/>
+		<result property="registerCount" column="register_count"/>
+		<result property="activeCount" column="active_count"/>
+		<result property="payTimes" column="pay_times"/>
+		<result property="payCount" column="pay_count"/>
+		<result property="payAmount" column="pay_amount"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<select id="find" resultMap="GameSummaryDailyMap" parameterType="map">
+		select 
+			stat_date,
+			sum(register_count) register_count,
+			sum(active_count) active_count,
+			sum(pay_times) pay_times,
+			sum(pay_count) pay_count,
+			sum(pay_amount) pay_amount
+		from gp_tbl_game_summary_daily
+		where 1=1
+			<if test="platformId != null">and platform_id = #{platformId}</if>
+			<if test="startDate != null and endDate != null">and date_format(stat_date,'%Y-%m-%d') between #{startDate} and #{endDate}</if>		
+			<if test="deviceTypes">
+				and device_type in 
+				<foreach item="item" index="index" collection="deviceTypes" 
+	                         open="(" separator="," close=")">
+	                        #{item}
+             	</foreach>
+             </if>
+         group by stat_date
+	</select>
+</mapper>
