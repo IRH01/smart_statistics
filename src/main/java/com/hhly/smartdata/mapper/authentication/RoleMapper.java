@@ -3,6 +3,7 @@ package com.hhly.smartdata.mapper.authentication;
 import com.hhly.smartdata.model.authentication.Role;
 import com.hhly.smartdata.model.authentication.RolePermission;
 import com.hhly.smartdata.util.page.Page;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Map;
 @Repository
 public interface RoleMapper{
 
-    List<Role> search(Role role, Page page);
+    List<Role> search(@Param("filter") Role role, @Param("page") Page page);
 
     int delete(Integer id);
 

@@ -3,10 +3,10 @@
 <mapper namespace="com.hhly.smartdata.mapper.authentication.PermissionMapper">
 
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Permission">
-        <id column="permission" property="permission" jdbcType="VARCHAR"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="function_id" property="functionId" jdbcType="INTEGER"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <id column="permission" property="permission"/>
+        <result column="name" property="name"/>
+        <result column="function_id" property="functionId"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">permission, name, function_id,
@@ -16,19 +16,18 @@
     <sql id="where_conditions">
         <where>
             <if test="permission != null">
-                and permission = #{permission,jdbcType=VARCHAR}
+                and permission = #{permission}
             </if>
             <if test="name != null">
-                and name = #{name,jdbcType=VARCHAR}
+                and name = #{name}
             </if>
             <if test="functionId != null">
-                and function_id = #{functionId,jdbcType=INTEGER}
+                and function_id = #{functionId}
             </if>
         </where>
     </sql>
 
-    <select id="queryByRole" resultMap="BaseResultMap"
-            parameterType="list">
+    <select id="queryByRole" resultMap="BaseResultMap" parameterType="list">
         select
         b.permission ,
         b.name ,
@@ -44,7 +43,7 @@
         group by b.permission , b.name , b.function_id , b.create_time
     </select>
 
-    <select id="get" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="get" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from
@@ -69,7 +68,7 @@
         <include refid="where_conditions"/>
     </select>
 
-    <delete id="delete" parameterType="com.hhly.smartdata.model.authentication.Permission">
+    <delete id="delete">
         DELETE
         FROM
         tbl_permission
@@ -80,24 +79,22 @@
         INSERT INTO tbl_permission (
         permission,
         NAME,
-        function_id
-        )
+        function_id)
         VALUES
-        (#{permission,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-        #{functionId,jdbcType=INTEGER})
+        (#{permission}, #{name},
+        #{functionId})
     </insert>
 
-    <update id="update" parameterType="com.hhly.smartdata.model.authentication.Permission">
+    <update id="update">
         update tbl_permission
         <set>
-
             <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
+                name = #{name},
             </if>
             <if test="functionId != null">
-                function_id = #{functionId,jdbcType=INTEGER},
+                function_id = #{functionId},
             </if>
         </set>
-        where permission = #{permission,jdbcType=INTEGER}
+        where permission = #{permission}
     </update>
 </mapper>

@@ -8,7 +8,7 @@
         <result column="channel_id" property="channelId"/>
     </resultMap>
 
-    <select id="getByUserId" resultMap="UserChannelMap" parameterType="java.lang.Integer">
+    <select id="getByUserId" resultMap="UserChannelMap" >
         select
         id,
         user_id,
@@ -17,7 +17,7 @@
         where user_id = #{userId}
     </select>
 
-    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+    <delete id="deleteByUserId">
         delete from tbl_user_channel
         where user_id = #{userId}
     </delete>
@@ -29,8 +29,8 @@
         )
         <foreach collection="list" item="item" index="index" separator="union all">
             (select
-            #{item.userId,jdbcType=INTEGER},
-            #{item.channelId,jdbcType=VARCHAR}
+            #{item.userId},
+            #{item.channelId}
             from dual)
         </foreach>
     </insert>

@@ -3,30 +3,16 @@
 <mapper namespace="com.hhly.smartdata.mapper.authentication.RoleMapper">
 
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Role">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id, name, create_time
     </sql>
 
-    <sql id="where_condition">
-        <where>
-            and id!='43'
-            <if test="name != null and name != '' ">
-                and name like #{name , jdbcType=VARCHAR}
-            </if>
-            <if test="id  != null ">
-                and id = #{id , jdbcType=INTEGER}
-            </if>
-
-        </where>
-    </sql>
-
-    <select id="getRolesByUserId" resultMap="BaseResultMap"
-            parameterType="integer">
+    <select id="getRolesByUserId" resultMap="BaseResultMap">
         select
         r.id,r.name,r.create_time
         from tbl_role r join tbl_user_role u on r.id=u.role_id
@@ -47,28 +33,33 @@
         where id = #{id}
     </select>
 
-    <select id="search" resultMap="BaseResultMap"
-            parameterType="com.hhly.smartdata.model.authentication.Role">
+    <select id="search" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tbl_role
-        <include refid="where_condition"/>
+        <where>
+            and id!='43'
+            <if test="filter.name != null and filter.name != ''">
+                and name like #{filter.name}
+            </if>
+            <if test="filter.id != null ">
+                and id = #{filter.id}
+            </if>
+        </where>
     </select>
 
-    <select id="getPerms" resultType="java.lang.String"
-            parameterType="list">
+    <select id="getPerms" resultType="java.lang.String" parameterType="list">
         SELECT
         permission
         FROM
         tbl_role_permission
         WHERE role_id in
-        <foreach collection="list" item="id" separator="," open="("
-                 close=")">
+        <foreach collection="list" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
     </select>
 
-    <delete id="delete" parameterType="java.lang.Integer">
+    <delete id="delete" >
         delete from tbl_role
         where id = #{id}
     </delete>
@@ -91,13 +82,12 @@
         tbl_user_role
         where
         role_id in
-        <foreach collection="list" item="id" separator="," open="("
-                 close=")">
+        <foreach collection="list" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
     </delete>
 
-    <delete id="delPerm" parameterType="string">
+    <delete id="delPerm" >
         delete
         from
         tbl_role_permission
@@ -113,35 +103,26 @@
         user_id=#{userId}
     </delete>
 
-    <insert id="insertRolePermission" parameterType="com.hhly.smartdata.model.authentication.RolePermission"
-            useGeneratedKeys="true" keyProperty="id">
-
+    <insert id="insertRolePermission" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_role_permission (role_id , permission)
         values (#{roleId} , #{permission} )
     </insert>
 
-    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Role"
-            useGeneratedKeys="true" keyProperty="id">
-
-        insert into tbl_role (name, create_time
-        )
-        values (#{name}, #{createTime}
-        )
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_role (name, create_time)
+        values (#{name}, #{createTime})
     </insert>
 
-    <insert id="insertUserRole" parameterType="map"
-            useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO tbl_user_role
-        (
+    <insert id="insertUserRole" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_user_role(
         user_id,
         role_id)
-        VALUES
-        (
+        VALUES(
         #{userId},
         #{roleId})
     </insert>
 
-    <update id="update" parameterType="com.hhly.smartdata.model.authentication.Role">
+    <update id="update">
         update tbl_role
         <set>
             <if test="name != null">

@@ -47,7 +47,7 @@
         u.locale
     </sql>
 
-    <select id="get" resultMap="AdminMap" parameterType="java.lang.Integer">
+    <select id="get" resultMap="AdminMap">
         select
         <include refid="with_user"/>
         from tbl_admin admin join tbl_user u on admin.user_id =
@@ -55,52 +55,48 @@
         where id = #{id}
     </select>
 
-    <select id="searchAdmins" resultMap="AdminMap" resultType="com.hhly.smartdata.model.authentication.Admin">
+    <select id="searchAdmins" resultMap="AdminMap">
         select
         <include refid="with_user"/>
-        from tbl_admin admin join tbl_user u on admin.user_id =
+        from tbl_admin admin inner join tbl_user u on admin.user_id =
         u.user_id
         <where>
             and u.user_id != -1
-            <if test="id !=null">
-                and admin.id = #{id}
+            <if test="filter.id !=null">
+                and admin.id = #{filter.id}
             </if>
-            <if test="username !=null and username != ''">
-                and u.username like concat(concat('%',#{username}),'%')
+            <if test="filter.username !=null and filter.username != ''">
+                and u.username like concat(concat('%',#{filter.username}),'%')
             </if>
-            <if test="type != null">
-                and admin.type = #{type}
+            <if test="filter.type != null">
+                and admin.type = #{filter.type}
             </if>
-            <if test="userStatus !=null and userStatus !=''">
-                and u.user_status = #{userStatus}
+            <if test="filter.userStatus !=null and filter.userStatus !=''">
+                and u.user_status = #{filter.userStatus}
             </if>
         </where>
         order by u.user_status asc,u.create_time desc
     </select>
 
-    <delete id="delete" parameterType="java.lang.Integer">
+    <delete id="delete">
         delete from tbl_admin
         where id = #{id}
     </delete>
 
-    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+    <delete id="deleteByUserId">
         delete from tbl_admin
         where user_id = #{userId}
     </delete>
 
-    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Admin" useGeneratedKeys="true"
-            keyProperty="id">
-
-        insert into tbl_admin
-        (
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_admin(
         user_id,
         name,
         email,
         tel,
         job_no,
         type)
-        values
-        (
+        values(
         #{userId},
         #{name},
         #{email},
@@ -109,7 +105,7 @@
         #{type})
     </insert>
 
-    <update id="update" parameterType="com.hhly.smartdata.model.authentication.Admin">
+    <update id="update">
         update tbl_admin
         <set>
             <if test="userId != null">

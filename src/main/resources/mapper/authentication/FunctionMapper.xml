@@ -3,10 +3,10 @@
 <mapper namespace="com.hhly.smartdata.mapper.authentication.FunctionMapper">
 
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Function">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="index" property="function_index" jdbcType="INTEGER"/>
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="index" property="index"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -16,19 +16,18 @@
     <sql id="where_condition">
         <where>
             <if test="parentId != null">
-                and parent_id = #{parentId,jdbcType=INTEGER}
+                and parent_id = #{parentId}
             </if>
             <if test="name != null">
-                and name = #{name,jdbcType=VARCHAR}
+                and name = #{name}
             </if>
             <if test="index != null">
-                and function_index = #{index,jdbcType=INTEGER}
+                and function_index = #{index}
             </if>
         </where>
     </sql>
 
-    <select id="search" resultMap="BaseResultMap"
-            parameterType="com.hhly.smartdata.model.authentication.Function">
+    <select id="search" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from
@@ -42,7 +41,7 @@
         <include refid="Base_Column_List"/>
         from
         tbl_function
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id}
     </select>
 
     <select id="getAll" resultMap="BaseResultMap">
@@ -52,8 +51,7 @@
         tbl_function
     </select>
 
-    <select id="queryByRole" resultMap="BaseResultMap"
-            parameterType="list">
+    <select id="queryByRole" resultMap="BaseResultMap" parameterType="list">
         select
         c.id ,
         c.parent_id ,
@@ -63,8 +61,7 @@
         where a.permission=b.permission
         and c.id=b.function_id
         and a.role_id in
-        <foreach collection="list" item="id" separator="," open="("
-                 close=")">
+        <foreach collection="list" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
         GROUP BY c.id ,c.parent_id,c.NAME,c.function_index
@@ -73,44 +70,41 @@
     <delete id="batchDelete" parameterType="list">
         delete from tbl_function
         where id in
-        <foreach collection="list" open="(" close=")" separator=","
-                 item="id">
+        <foreach collection="list" open="(" close=")" separator="," item="id">
             #{id}
         </foreach>
     </delete>
 
-    <delete id="delete" parameterType="int">
+    <delete id="delete">
         delete
         from
         tbl_function
         where
-        id = #{id,jdbcType=INTEGER}
+        id = #{id}
     </delete>
 
-    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Function"
-            useGeneratedKeys="true" keyProperty="id">
-        insert into tbl_function (parent_id, name,
-        function_index)
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_function (parent_id, name,function_index)
         values (
-        #{parentId,jdbcType=INTEGER},
-        #{name,jdbcType=VARCHAR},
-        #{index,jdbcType=INTEGER})
+        #{parentId},
+        #{name},
+        #{index})
     </insert>
 
     <update id="update" parameterType="com.hhly.smartdata.model.authentication.Function">
-        update tbl_function
+        UPDATE tbl_function
         <set>
             <if test="parentId != null">
-                parent_id = #{parentId,jdbcType=INTEGER},
+                parent_id = #{parentId},
             </if>
             <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
+                name = #{name},
             </if>
             <if test="index != null">
-                function_index = #{index,jdbcType=INTEGER},
+                function_index = #{index},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id}
     </update>
 
 </mapper>

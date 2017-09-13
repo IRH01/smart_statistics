@@ -43,8 +43,7 @@
         </where>
     </sql>
 
-    <select id="getByUsername" resultMap="UserMap"
-            parameterType="string">
+    <select id="getByUsername" resultMap="UserMap">
         select
         <include refid="User_Base_Column_List"/>
         from tbl_user
@@ -58,8 +57,7 @@
         where user_id = #{userId}
     </select>
 
-    <select id="searchUsers" resultMap="UserMap"
-            parameterType="com.hhly.smartdata.model.authentication.User">
+    <select id="searchUsers" resultMap="UserMap">
         select
         <include refid="User_Base_Column_List"/>
         from tbl_user
@@ -73,8 +71,7 @@
         WHERE user_id = #{userId}
     </delete>
 
-    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.User"
-            useGeneratedKeys="true" keyProperty="user_id">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="user_id">
         INSERT INTO tbl_user (
         username,
         password,
@@ -90,7 +87,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.hhly.smartdata.model.authentication.User">
+    <update id="update">
         update tbl_user
         <set>
             <if test="username != null and username != ''">

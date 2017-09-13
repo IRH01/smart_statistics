@@ -3,13 +3,13 @@
 <mapper namespace="com.hhly.smartdata.mapper.authentication.MenuMapper">
 
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Menu">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="permission" property="permission" jdbcType="VARCHAR"/>
-        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="url" property="url" jdbcType="VARCHAR"/>
-        <result column="menu_index" property="index" jdbcType="INTEGER"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <id column="id" property="id"/>
+        <result column="permission" property="permission"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="menu_index" property="index"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -47,15 +47,13 @@
         tbl_menu
         WHERE permission IS NULL
         OR permission IN
-        <foreach collection="list" open="(" close=")" separator=","
-                 item="perm">
+        <foreach collection="list" open="(" close=")" separator="," item="perm">
             #{perm}
         </foreach>
         ORDER BY parent_id,menu_index
     </select>
 
-    <select id="searchMenu" resultMap="BaseResultMap"
-            parameterType="com.hhly.smartdata.model.authentication.Menu">
+    <select id="searchMenu" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tbl_menu
@@ -68,13 +66,12 @@
         <include refid="where_condition"/>
     </delete>
 
-    <delete id="delById" parameterType="int">
+    <delete id="delById">
         delete from tbl_menu
         where id=#{id}
     </delete>
 
-    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Menu"
-            useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Menu" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_menu
         (
         permission,
@@ -84,15 +81,15 @@
         menu_index
         )
         values (
-        #{permission,jdbcType=VARCHAR},
-        #{parentId,jdbcType=INTEGER},
-        #{name,jdbcType=VARCHAR},
-        #{url,jdbcType=VARCHAR},
-        #{index,jdbcType=INTEGER}
+        #{permission},
+        #{parentId},
+        #{name},
+        #{url},
+        #{index}
         )
     </insert>
 
-    <update id="update" parameterType="com.hhly.smartdata.model.authentication.Menu">
+    <update id="update">
         update tbl_menu
         <set>
             <if test="permission != null ">

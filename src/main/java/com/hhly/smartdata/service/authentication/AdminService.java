@@ -6,6 +6,7 @@ import com.hhly.smartdata.mapper.authentication.UserMapper;
 import com.hhly.smartdata.model.authentication.Admin;
 import com.hhly.smartdata.model.authentication.UserChannel;
 import com.hhly.smartdata.util.page.Page;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -9,7 +9,7 @@
         <result property="platformName" column="platform_name"/>
     </resultMap>
 
-    <select id="find" resultMap="ChannelPlatformMap" parameterType="ChannelPlatform">
+    <select id="find" resultMap="ChannelPlatformMap">
         select
         cp.channel_id,
         cp.platform_id,
