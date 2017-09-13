@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/view/common/taglib.jsp"%>
+<%@include file="/WEB-INF/view/template/taglib.jsp"%>
 <script src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
 <div class="sdk-content">
 	<ul class="breadcrumb">

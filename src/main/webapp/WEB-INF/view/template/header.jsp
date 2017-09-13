@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/view/common/taglib.jsp"%>
+<%@include file="/WEB-INF/view/template/taglib.jsp"%>
 <!-- topbar starts -->
 <div class="navbar navbar-sdk">
 	<div class="navbar-inner">

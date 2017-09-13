@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/view/common/taglib.jsp"%>
+<%@include file="/WEB-INF/view/template/taglib.jsp"%>
 <script src="<%=request.getContextPath()%>/js/jquery-1.7.2.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
 <script type="text/javascript">
