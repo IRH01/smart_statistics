@@ -206,12 +206,10 @@
             $("body").bind("mousedown", onCompanyBodyDown);
         }
 
-
         function hideCompanyMenu() {
             $("#menuContent").fadeOut("fast");
             $("body").unbind("mousedown", onCompanyBodyDown);
         }
-
 
         function onCompanyBodyDown(event) {
             if (!(event.target.id == "channel"  || $(event.target).parents("#menuContent").length>0)) {
