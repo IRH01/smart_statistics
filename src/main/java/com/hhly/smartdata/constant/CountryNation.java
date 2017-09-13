@@ -1,6 +1,6 @@
 package com.hhly.smartdata.constant;
 
-public class Constants{
+public class CountryNation{
     //国家中国
     public static final String COUNTRY_CN = "0";
     //国家泰国

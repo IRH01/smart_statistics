@@ -1,6 +1,6 @@
 package com.hhly.smartdata.util;
 
-import com.hhly.smartdata.constant.Constants;
+import com.hhly.smartdata.constant.CountryNation;
 
 /**
  * 常用工具类
@@ -44,15 +44,15 @@ public class ToolUtil{
 
     public static String getCurrencyUnit(String country){
         String currencyUnit = "";
-        if(Constants.COUNTRY_CN.equals(country)){
+        if(CountryNation.COUNTRY_CN.equals(country)){
             currencyUnit = "RMB";
-        }else if(Constants.COUNTRY_MY.equals(country)){
+        }else if(CountryNation.COUNTRY_MY.equals(country)){
             currencyUnit = "MYR";
-        }else if(Constants.COUNTRY_SG.equals(country)){
+        }else if(CountryNation.COUNTRY_SG.equals(country)){
             currencyUnit = "SGD";
-        }else if(Constants.COUNTRY_TH.equals(country)){
+        }else if(CountryNation.COUNTRY_TH.equals(country)){
             currencyUnit = "THB";
-        }else if(Constants.COUNTRY_VN.equals(country)){
+        }else if(CountryNation.COUNTRY_VN.equals(country)){
             currencyUnit = "VND";
         }
         return currencyUnit;
