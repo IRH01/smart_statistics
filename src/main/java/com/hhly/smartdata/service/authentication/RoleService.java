@@ -42,7 +42,6 @@ public class RoleService{
     }
 
     public void insert(Role role){
-        /*插入角色*/
         roleMapper.insert(role);
         List<RolePermission> rolePermissionList = new ArrayList<RolePermission>();
         if(role.getPermissionIds().length() > 0){

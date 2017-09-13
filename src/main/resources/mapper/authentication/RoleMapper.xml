@@ -46,6 +46,9 @@
                 and id = #{filter.id}
             </if>
         </where>
+        <if test="page != null">
+            limit #{page},10
+        </if>
     </select>
 
     <select id="getPerms" resultType="java.lang.String" parameterType="list">
@@ -59,7 +62,7 @@
         </foreach>
     </select>
 
-    <delete id="delete" >
+    <delete id="delete">
         delete from tbl_role
         where id = #{id}
     </delete>
@@ -87,7 +90,7 @@
         </foreach>
     </delete>
 
-    <delete id="delPerm" >
+    <delete id="delPerm">
         delete
         from
         tbl_role_permission
