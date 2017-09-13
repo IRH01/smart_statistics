@@ -8,7 +8,6 @@ import com.hhly.smartdata.model.authentication.Menu;
 import com.hhly.smartdata.model.authentication.Role;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.MenuService;
-import com.hhly.smartdata.service.authentication.PermissionService;
 import com.hhly.smartdata.service.authentication.RoleService;
 import com.hhly.smartdata.service.authentication.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -33,8 +32,6 @@ public class UserRealm extends AuthorizingRealm{
     private UserService userService;
     @Autowired
     private RoleService roleService;
-    @Autowired
-    private PermissionService permissionService;
     @Autowired
     private MenuService menuService;
 

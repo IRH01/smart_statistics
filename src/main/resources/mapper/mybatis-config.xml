@@ -6,6 +6,7 @@
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="jdbcTypeForNull" value="NULL"/>
+        <setting name="logPrefix" value="dao."/>
     </settings>
     <typeAliases>
         <package name="com.hhly.smartdata.model"/>

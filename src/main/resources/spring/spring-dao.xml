@@ -44,7 +44,7 @@
 
     <bean id="baseSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="baseDataSource"/>
-        <property name="configLocation" value="classpath:mapper/config-base.xml"/>
+        <property name="configLocation" value="classpath:mapper/mybatis-config.xml"/>
     </bean>
 
     <tx:advice id="txAdvice" transaction-manager="baseTransactionManager">
