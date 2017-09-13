@@ -54,6 +54,7 @@
                 /fonts/**=anon
                 /css/**=anon
                 /js/**=anon
+                /lib/**=anon
                 /img/**=anon
                 /kaptchaImage.do**=anon
                 /login.do*=authc

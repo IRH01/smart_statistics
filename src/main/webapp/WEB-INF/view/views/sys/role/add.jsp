@@ -4,7 +4,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<script src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
+<script src="<%=request.getContextPath()%>/lib/layer/layer.js"></script>
 <div class="sdk-content">
 	<ul class="breadcrumb">
 		<li>您当前的位置：</li>

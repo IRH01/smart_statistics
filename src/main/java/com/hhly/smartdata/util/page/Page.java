@@ -15,7 +15,7 @@ import java.util.Map;
 public class Page{
     private static final Logger logger = LoggerFactory.getLogger(Page.class);
 
-    public static Integer DEFAULT_PAGE_SIZE = 10;
+    public static Integer DEFAULT_PAGE_SIZE = 5;
     private int pageNo;                    //当前页码
     private int pageSize;                  //每页行数
     private long totalRecord;               //总记录数

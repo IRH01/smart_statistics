@@ -47,7 +47,8 @@
             </if>
         </where>
         <if test="page != null">
-            limit 0,10
+            <bind name="offset" value="(page.pageNo-1)*page.pageSize"/>
+            limit #{offset}, #{page.pageSize}
         </if>
     </select>
 

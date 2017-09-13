@@ -23,15 +23,15 @@
     <![endif]-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-    <script src="<c:url value="/js/jquery-1.11.2.min.js"/>"></script>
-    <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/js/jquery.ztree.all-3.5.min.js"/>"></script>
-    <script src="<c:url value="/js/jquery.validate.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/js/additional-methods.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/js/jquery-validate.bootstrap-tooltip.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/js/jquery.validate.custom.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/js/My97DatePickerBeta/My97DatePicker/WdatePicker.js"/>"></script>
-    <script src="<c:url value="/js/dialogsdk.js"/>"></script>
+    <script src="<c:url value="/lib/jquery-1.11.2.min.js"/>"></script>
+    <script src="<c:url value="/lib/bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/lib/jquery.ztree.all-3.5.min.js"/>"></script>
+    <script src="<c:url value="/lib/jquery.validate.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/lib/additional-methods.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/lib/jquery-validate.bootstrap-tooltip.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/lib/jquery.validate.custom.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"/>"></script>
+    <script src="<c:url value="/lib/dialogsdk.js"/>"></script>
 </head>
 
 <body>

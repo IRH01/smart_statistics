@@ -3,7 +3,7 @@
 <%
     String path = request.getContextPath();
 %>
-<script src="<c:url value="/js/jquery-ui.js"/>"></script>
+<script src="<c:url value="/lib/jquery-ui.js"/>"></script>
 <script type="text/javascript">
      function changeAction(url){
           document.form.action=url;

@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="page1" type="com.hhly.smartdata.util.page.Page "
               required="true" %>
-<script src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
-<script src="<%=request.getContextPath()%>/js/tool.js"></script>
+<script src="<%=request.getContextPath()%>/lib/layer/layer.js"></script>
+<script src="<%=request.getContextPath()%>/lib/tool.js"></script>
 
 <%
 

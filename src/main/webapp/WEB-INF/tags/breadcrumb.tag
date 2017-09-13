@@ -20,7 +20,5 @@
     request.setAttribute("menuList", menuList);
 %>
 <c:forEach items="${menuList}" var="item">
-    <li>${item.name}<%--<c:if test="${item.url!=null}"> <a href="<c:url value="/${item.url}"/>">${item.name}</a></c:if>--%>
-            <%--<c:if test="${item.url==null}"> ${item.name}</c:if>--%>
-    </li>
+    <li>${item.name}</li>
 </c:forEach>
