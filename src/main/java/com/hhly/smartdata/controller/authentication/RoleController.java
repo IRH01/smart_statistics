@@ -41,15 +41,9 @@ public class RoleController{
     @RequiresPermissions("sys_role_list")
     public ModelAndView list(@ModelAttribute Role role, @ModelAttribute Page page){
         PageUtil.startPage(page);
-        String roleName = role.getName();
-        if(!StringUtils.isEmpty(role.getName())){
-            role.setName("%" + role.getName() + "%");
-        }
         List<Role> roleList = roleService.search(role, page);
         Map<String, Object> model = Maps.newHashMap();
         model.put("roleList", roleList);
-
-        role.setName(roleName);
         model.put("role", role);
         return new ModelAndView("/sys/role/list.main", model);
     }

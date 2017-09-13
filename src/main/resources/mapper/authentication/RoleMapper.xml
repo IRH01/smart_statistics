@@ -40,14 +40,14 @@
         <where>
             and id!='43'
             <if test="filter.name != null and filter.name != ''">
-                and name like #{filter.name}
+                and name like CONCAT('%',#{filter.name},'%')
             </if>
             <if test="filter.id != null ">
                 and id = #{filter.id}
             </if>
         </where>
         <if test="page != null">
-            limit #{page},10
+            limit 0,10
         </if>
     </select>
 
