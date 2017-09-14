@@ -9,18 +9,6 @@
 			 -->
 				
 			<a class="navbar-header" href="#"><span>产品运营数据统计后台</span></a>
-
-			<!-- top right -->
-			<%--<div class="btn-group pull-right" style="margin-top:7px">--%>
-			<%--<button type="button" class="btn btn-sm sdk-user dropdown-toggle" data-toggle="dropdown" aria-expanded="false">--%>
-			<%--&lt;%&ndash;${session_user.username} <span class="caret"></span>&ndash;%&gt;--%>
-			<%--</button>--%>
-			<%--<ul class="dropdown-menu" role="menu">--%>
-			<%--<li><a href="<%=path%>/queryProfile.do">个人信息</a></li>--%>
-			<%--<li class="divider"></li>--%>
-			<%--<li><a href="<%=path%>/logout.do">退出</a></li>--%>
-			<%--</ul>--%>
-			<%--</div>--%>
 			<div class="pull-right top-right">
 				<span class="name">您好，${session_user.username}！</span> <a
 					class="user-info" href="<c:url value="/sys/user/editPasswd.do"/>">修改密码</a>

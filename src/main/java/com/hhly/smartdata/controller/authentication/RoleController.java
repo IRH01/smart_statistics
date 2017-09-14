@@ -45,7 +45,8 @@ public class RoleController{
         Map<String, Object> model = Maps.newHashMap();
         model.put("roleList", roleList);
         model.put("role", role);
-        return new ModelAndView("/sys/role/list.main", model);
+//        return new ModelAndView("/sys/role/list.main", model);
+        return new ModelAndView("/system/role/list", model);
     }
 
     @RequestMapping("/{roleID}/delete")
