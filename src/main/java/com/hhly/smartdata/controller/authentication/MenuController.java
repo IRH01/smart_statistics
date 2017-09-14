@@ -26,7 +26,7 @@ public class MenuController{
     @RequestMapping("/list.do")
     @RequiresPermissions("sys_menu_list")
     public String list(){
-        return "sys/menu/list.main";
+        return "system/menu/list";
     }
 
     @RequestMapping("/menuList")

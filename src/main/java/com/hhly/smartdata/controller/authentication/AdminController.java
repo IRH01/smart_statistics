@@ -51,7 +51,7 @@ public class AdminController{
         model.put("adminList", adminService.searchAdmins(condition, page));
         model.put("typeMap", Admin.Type.map());
         model.put("statusMap", User.statusMap);
-        return new ModelAndView("admin/admin/list.main", model);
+        return new ModelAndView("admin/list", model);
     }
 
     /**
@@ -127,7 +127,7 @@ public class AdminController{
     public ModelAndView add(){
         Map<String, Object> model = Maps.newHashMap();
         model.put("typeMap", Admin.Type.map());
-        return new ModelAndView("admin/admin/add.main", model);
+        return new ModelAndView("/admin/add", model);
     }
 
     /**
@@ -152,7 +152,7 @@ public class AdminController{
         Map<String, Object> model = Maps.newHashMap();
         model.put("typeMap", Admin.Type.map());
         model.put("admin", adminService.get(id));
-        return new ModelAndView("admin/admin/edit.main", model);
+        return new ModelAndView("/admin/edit", model);
     }
 
     /**

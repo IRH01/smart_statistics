@@ -50,7 +50,7 @@ public class LoginController{
     @RequestMapping("/welcome.do")
     @RequiresPermissions("welcome")
     public String welcome(HttpServletRequest request, Model model){
-        return "main";
+        return "system/main";
     }
 
     @RequestMapping("/login.do")
@@ -72,19 +72,12 @@ public class LoginController{
         }else if(errorClassName != null){
             req.setAttribute("msg", "系统异常,暂时无法登陆!");
         }
-        return "login";
-    }
-
-    @RequestMapping("/register.do")
-    public String cpReister(Model model){
-        model.addAttribute("peopleCountMap");
-        return "register";
-
+        return "/login/login";
     }
 
     @RequestMapping("/forgetPassWord.do")
     public String forgetPassWord(Model model){
-        return "forgetPassWord";
+        return "/login/passwordget";
     }
 
     @RequestMapping("/validateResetPassWord.do")
@@ -109,7 +102,7 @@ public class LoginController{
             String enUserName = SecurityUtil.encrypt(key, nameAndTime[0]);
             model.addAttribute("db.username", enUserName);
 
-            return "validateResetPassWord";
+            return "/login/validateResetPassWord";
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -122,37 +115,7 @@ public class LoginController{
         User usr = userService.getUserByUsername(deUserName);
         usr.setPassword(new Md5Hash(us.getPassword()).toString());
         userService.update(usr);
-        return "successResetPassWord";
-
-    }
-
-
-    @RequestMapping("/emailgetPassWord.do")
-    public String emailGetPassWord(HttpServletRequest req, Model model) throws Exception{
-        String usrName = req.getParameter("db.username");
-        Date d = new Date();
-        Date dateHalf = DateUtil.add(d, Calendar.MINUTE, 30);
-
-        String date = DateUtil.formatDate(dateHalf, "yyyy-MM-dd HH:mm:ss");
-
-        String decodeUrl = SecurityUtil.encrypt(key, usrName + "," + date);
-        String enUrl = URLEncoder.encode(decodeUrl, "UTF-8");
-        String url = "";
-        url = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/validateResetPassWord.do?" + key + "=" + enUrl;
-
-        MailBean mailBean = new MailBean();
-        mailBean.setSubject("yunva-media密码重置");
-        mailBean.setTo(usrName);//用户名为邮箱
-        Map<String, Object> params = Maps.newHashMap();
-        params.put("db.username", usrName);
-
-        params.put("url", url);
-        params.put("date", date);
-        mailBean.setData(params);
-        //审核驳回--发送邮件
-        mailBean.setTemplate(SysConstant.CP_GET_PASSWORD);
-        model.addAttribute("userName", usrName);
-        return "emailgetPassWord";
+        return "/login/successResetPassWord";
 
     }
 

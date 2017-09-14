@@ -25,7 +25,7 @@ public class FunctionController{
     public ModelAndView list(){
         Map<String, Object> model = Maps.newHashMap();
         model.put("funcList", functionService.getAll());
-        return new ModelAndView("sys/func/list.main", model);
+        return new ModelAndView("system/function/list", model);
     }
 
 

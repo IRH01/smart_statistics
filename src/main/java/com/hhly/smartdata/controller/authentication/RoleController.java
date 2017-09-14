@@ -1,5 +1,6 @@
 package com.hhly.smartdata.controller.authentication;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.hhly.smartdata.constant.SysConstant;
 import com.hhly.smartdata.model.authentication.*;
@@ -45,7 +46,6 @@ public class RoleController{
         Map<String, Object> model = Maps.newHashMap();
         model.put("roleList", roleList);
         model.put("role", role);
-//        return new ModelAndView("/sys/role/list.main", model);
         return new ModelAndView("/system/role/list", model);
     }
 
@@ -60,7 +60,7 @@ public class RoleController{
     @RequiresPermissions("sys_role_add")
     public ModelAndView add(){
         Map<String, Object> model = Maps.newHashMap();
-        return new ModelAndView("/sys/role/add.main", model);
+        return new ModelAndView("/system/role/add", model);
     }
 
     @RequestMapping("/{roleID}/preupdate")
@@ -71,7 +71,7 @@ public class RoleController{
         String permissions = "";
         String permissionIds = "";
 
-        List<Integer> roleIdList = new ArrayList<Integer>();
+        List<Integer> roleIdList = Lists.newArrayList();
         roleIdList.add(role.getId());
        /*拼接获取用户对应的权限*/
         List<Permission> permissionList = permissionService.queryByRole(roleIdList);

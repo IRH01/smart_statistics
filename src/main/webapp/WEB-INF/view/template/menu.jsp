@@ -140,7 +140,6 @@
                     $("a[href='" + curMenu.url + "']").parent().parent().parent().find('.arrow').addClass('select');
                 }
             }
-
         });
 
     </script>

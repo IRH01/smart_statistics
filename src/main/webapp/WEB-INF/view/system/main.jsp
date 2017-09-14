@@ -37,9 +37,9 @@
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
+    <jsp:include page="../template/menu.jsp"/>
     <div class="container-fluid content">
         <div class="row">
-            <jsp:include page="../template/menu.jsp"/>
             <div id="content" class="col-lg-10 col-md-9">
                 <div class="panel-group" id="accordion" role="tablist"
                      aria-multiselectable="true">
@@ -70,7 +70,6 @@
         </div>
         <hr>
     </div>
-    <jsp:include page="../template/footer.jsp"/>
 </div>
 </body>
 </html>
