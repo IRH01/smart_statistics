@@ -106,7 +106,7 @@ public class AdminController{
         Map<String, Object> model = Maps.newHashMap();
         model.put("roleList", allRoles);
         model.put("userId", userId);
-        return new ModelAndView("admin/admin/alloc_role.main", model);
+        return new ModelAndView("admin/alloc_role", model);
     }
 
     /**
@@ -127,7 +127,7 @@ public class AdminController{
     public ModelAndView add(){
         Map<String, Object> model = Maps.newHashMap();
         model.put("typeMap", Admin.Type.map());
-        return new ModelAndView("/admin/add", model);
+        return new ModelAndView("admin/add", model);
     }
 
     /**
@@ -152,7 +152,7 @@ public class AdminController{
         Map<String, Object> model = Maps.newHashMap();
         model.put("typeMap", Admin.Type.map());
         model.put("admin", adminService.get(id));
-        return new ModelAndView("/admin/edit", model);
+        return new ModelAndView("admin/edit", model);
     }
 
     /**

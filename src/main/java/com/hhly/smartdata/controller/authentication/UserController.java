@@ -1,7 +1,6 @@
 package com.hhly.smartdata.controller.authentication;
 
 import com.hhly.smartdata.model.authentication.User;
-import com.hhly.smartdata.service.authentication.AdminService;
 import com.hhly.smartdata.service.authentication.UserService;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ import java.io.UnsupportedEncodingException;
 public class UserController extends BaseController{
     @Autowired
     private UserService userService;
-    @Autowired
-    private AdminService adminService;
 
     /**
      * 初始化密码

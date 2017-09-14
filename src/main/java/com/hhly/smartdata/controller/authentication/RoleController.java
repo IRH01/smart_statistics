@@ -148,12 +148,12 @@ public class RoleController{
     }
 
     /*获取系统的功能权限树*/
-    public List<Node> nodeList(int userId){
+    private List<Node> nodeList(int userId){
         List<Role> roleList = roleService.getRolesByUserId(userId);
-        List<Integer> idList = new ArrayList<Integer>();
-        List<Permission> permissionList = new ArrayList<Permission>();
-        List<Function> functionList = new ArrayList<Function>();
-        List<Node> nodeList = new ArrayList<Node>();
+        List<Integer> idList = Lists.newArrayList();
+        List<Permission> permissionList;
+        List<Function> functionList;
+        List<Node> nodeList = Lists.newArrayList();
 
         for(Role role : roleList){
             idList.add(role.getId());
@@ -162,9 +162,7 @@ public class RoleController{
         if(idList.size() > 0){
             permissionList = permissionService.getAll();
             functionList = functionService.getAll();
-/*
-            permissionList=permissionService.queryByRole(null);
-            functionList=functionService.queryByRole(null);*/
+
             if(functionList.size() > 0){
                 for(Function function : functionList){
                     Node node = new Node();

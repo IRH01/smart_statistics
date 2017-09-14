@@ -97,12 +97,11 @@ public class LoginController{
             Date now = new Date();
             if(date.before(now)){
                 return "errorDisable";
-
             }
             String enUserName = SecurityUtil.encrypt(key, nameAndTime[0]);
             model.addAttribute("db.username", enUserName);
 
-            return "/login/validateResetPassWord";
+            return "/login/resetPassword";
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -115,7 +114,7 @@ public class LoginController{
         User usr = userService.getUserByUsername(deUserName);
         usr.setPassword(new Md5Hash(us.getPassword()).toString());
         userService.update(usr);
-        return "/login/successResetPassWord";
+        return "/login/successReset";
 
     }
 
