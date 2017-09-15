@@ -1,7 +1,7 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="com.hhly.smartdata.constant.SysConstant"%>
 <%@ page import="com.hhly.smartdata.model.authentication.Menu"%>
 <%@ page import="java.util.Map"%>
-<%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/view/template/taglib.jsp"%>
 <%
     String menuId = request.getParameter("menuId");

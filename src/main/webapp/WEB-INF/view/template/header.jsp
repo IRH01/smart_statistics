@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/view/template/taglib.jsp"%>
 <!-- topbar starts -->
 <div class="navbar navbar-sdk">
@@ -11,8 +11,8 @@
 			<a class="navbar-header" href="#"><span>产品运营数据统计后台</span></a>
 			<div class="pull-right top-right">
 				<span class="name">您好，${session_user.username}！</span> <a
-					class="user-info" href="<c:url value="/sys/user/editPasswd.do"/>">修改密码</a>
-				<a class="btn-out" href="<c:url value="/logout.do"/>">退出系统</a>
+					class="user-info" href="/sys/user/editPasswd.do">修改密码</a>
+				<a class="btn-out" href="/logout.do">退出系统</a>
 			</div>
 		</div>
 	</div>

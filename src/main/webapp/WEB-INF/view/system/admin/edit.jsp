@@ -198,49 +198,6 @@
         });
     });
 
-    var CompanySetting = {
-        check: {
-            enable: true,
-            chkStyle: "checkbox"
-        },
-        data: {
-            simpleData: {
-                enable: true
-            }
-        },
-        callback: {
-            onCheck: onCompanyClick,
-        }
-    };
-
-    function onCompanyClick() {
-
-        var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-        var n = "", v = "", d = "";
-        var nodes = zTree.getCheckedNodes(true);
-        nodes.sort(function compare(a, b) {
-            return a.id - b.id;
-        });
-        debugger;
-        for (var i = 0, l = nodes.length; i < l; i++) {
-            if (nodes[i].isParent == false) {
-                n += nodes[i].name + ",";
-                v += nodes[i].id + ",";
-                d += nodes[i].data + ",";
-            }
-        }
-        if (n.length > 0) {
-            n = n.substring(0, n.length - 1) , v = v.substring(0, v.length - 1)
-        }
-        var channel = $("#channel");
-        var channelValue = $("#channelIds");
-
-        channel.attr("value", v);
-        channelValue.attr("value", v);
-        $("#channelName").html(n);
-        $("#platformName").html(d)
-    }
-
     function onShowCompanyTree() {
         var compamyinput = $("#channel");
         $("#menuContent").css({top: compamyinput.outerHeight() + "px"}).slideDown("fast");

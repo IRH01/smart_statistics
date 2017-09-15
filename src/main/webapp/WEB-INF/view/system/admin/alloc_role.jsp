@@ -207,65 +207,10 @@
         }
     };
 
-    function changeAction(url) {
-        document.form.action = url;
-        document.form.submit();
-    }
-
-    var CompanySetting = {
-        check: {
-            enable: true,
-            chkStyle: "checkbox"
-        },
-        data: {
-            simpleData: {
-                enable: true
-            }
-        },
-        callback: {
-            onClick: onCompanyClick
-        }
-    };
-
-    function onCompanyClick(e, treeId, treeNode) {
-        var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-        var n = "", v = "";
-        var nodes = zTree.getCheckedNodes(true);
-        nodes.sort(function compare(a, b) {
-            return a.id - b.id;
-        });
-        for (var i = 0, l = nodes.length; i < l; i++) {
-            if (nodes[i].isParent == false) {
-                n += nodes[i].name + ",";
-                v += nodes[i].id + ",";
-            }
-        }
-        if (n.length > 0) {
-            n = n.substring(0, n.length - 1) , v = v.substring(0, v.length - 1)
-        }
-        var permission = $("#permission");
-        var companyValue = $("#permissionIds");
-        permission.attr("value", n);
-        companyValue.attr("value", v);
-        hideCompanyMenu();
-    }
-
-    function onShowCompanyTree() {
-        var compamyinput = $("#permission");
-        var companyinputOffset = $("#permission").offset();
-        $("#menuContent").css({
-            left: companyinputOffset.left + "px",
-            top: companyinputOffset.top + compamyinput.outerHeight() + "px"
-        }).slideDown("fast");
-        $("body").bind("mousedown", onCompanyBodyDown);
-    }
-
-
     function hideCompanyMenu() {
         $("#menuContent").fadeOut("fast");
         $("body").unbind("mousedown", onCompanyBodyDown);
     }
-
 
     function onCompanyBodyDown(event) {
         if (!(event.target.id == "permission" || $(event.target).parents("#menuContent").length > 0)) {

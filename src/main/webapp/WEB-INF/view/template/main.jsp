@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,6 @@
         <!--/fluid-row-->
         <hr>
     </div>
-    <tiles:insertAttribute name="footer"/>
 </div>
 </body>
 </html>
