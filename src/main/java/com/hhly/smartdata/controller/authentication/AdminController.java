@@ -39,8 +39,8 @@ public class AdminController{
     private RoleService roleService;
     @Autowired
     private AdminService adminService;
-    @Autowired
-    private ChannelPlatformService channelPlatformService;
+//    @Autowired
+//    private ChannelPlatformService channelPlatformService;
 
     @RequestMapping("/list")
     @RequiresPermissions("admin_admin_list")
@@ -177,16 +177,16 @@ public class AdminController{
         return "FAIL";
     }
 
-    @RequestMapping("/{random}/tree")
-    @RequiresPermissions(value = {"admin_admin_add", "admin_admin_edit"}, logical = Logical.OR)
-    @ResponseBody
-    public List<Node> tree(HttpServletRequest request, HttpServletResponse response){
-        Integer userId = null;
-        try{
-            userId = Integer.valueOf(request.getParameter("userId"));
-        }catch(Exception e){
-            LOGGER.info("获取userId失败:" + e);
-        }
-        return channelPlatformService.getTreeNode(userId);
-    }
+//    @RequestMapping("/{random}/tree")
+//    @RequiresPermissions(value = {"admin_admin_add", "admin_admin_edit"}, logical = Logical.OR)
+//    @ResponseBody
+//    public List<Node> tree(HttpServletRequest request, HttpServletResponse response){
+//        Integer userId = null;
+//        try{
+//            userId = Integer.valueOf(request.getParameter("userId"));
+//        }catch(Exception e){
+//            LOGGER.info("获取userId失败:" + e);
+//        }
+//        return channelPlatformService.getTreeNode(userId);
+//    }
 }

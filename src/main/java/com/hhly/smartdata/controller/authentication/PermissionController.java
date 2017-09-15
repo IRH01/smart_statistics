@@ -20,7 +20,6 @@ public class PermissionController{
     @Autowired
     private PermissionService permissionService;
 
-
     @RequestMapping("/searchPerms")
     @RequiresPermissions("sys_perm_search")
     @ResponseBody

@@ -196,14 +196,6 @@
                 }
             }
         });
-        $.ajax({
-            url: "/admin/admin/" + Math.random() + "/tree.do?userId=${admin.userId}",
-            dataType: "json",
-            success: function (date) {
-                $.fn.zTree.init($("#treeDemo"), CompanySetting, date);
-                onCompanyClick();
-            }
-        });
     });
 
     var CompanySetting = {

@@ -1,5 +1,6 @@
 package com.hhly.smartdata.security;
 
+import com.google.common.collect.Lists;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.session.Session;
@@ -13,7 +14,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.Serializable;
 import java.util.Deque;
-import java.util.LinkedList;
 
 public class KickoutSessionControlFilter extends AccessControlFilter{
     private String kickoutUrl; //踢出后到的地址
@@ -68,7 +68,7 @@ public class KickoutSessionControlFilter extends AccessControlFilter{
         // 初始化用户的队列放到缓存里
         Deque<Serializable> deque = cache.get(username);
         if(deque == null){
-            deque = new LinkedList<Serializable>();
+            deque = Lists.newLinkedList();
             cache.put(username, deque);
         }
 
@@ -79,9 +79,8 @@ public class KickoutSessionControlFilter extends AccessControlFilter{
 
         //如果队列里的sessionId数超出最大会话数，开始踢人
         while(deque.size() > maxSession){
-            Serializable kickoutSessionId = null;
+            Serializable kickoutSessionId;
             if(kickoutAfter){ //如果踢出后者
-                kickoutSessionId = deque.getFirst();
                 kickoutSessionId = deque.removeFirst();
             }else{ //否则踢出前者
                 kickoutSessionId = deque.removeLast();

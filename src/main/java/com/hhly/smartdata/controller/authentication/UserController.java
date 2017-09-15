@@ -56,7 +56,6 @@ public class UserController{
         return "sys/user/edit_passwd.main";
     }
 
-
     @RequestMapping("/{random}/valid.do")
     public ModelAndView valid(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
         Boolean b = true;

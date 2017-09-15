@@ -15,8 +15,7 @@
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
 
-    <bean id="credentialsMatcher"
-          class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
         <property name="hashAlgorithmName" value="MD5"/>
     </bean>
 

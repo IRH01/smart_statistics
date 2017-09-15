@@ -35,18 +35,57 @@ public class UserRealm extends AuthorizingRealm{
     @Autowired
     private MenuService menuService;
 
+    /**
+     * 用于认证
+     *
+     * @param authenticationToken
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
-    @SuppressWarnings("unchecked")
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException{
+        Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession();
+        User user = (User) session.getAttribute(SysConstant.SESSION_USER);
+
+        if(user != null){
+            return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
+        }
+
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+
+        // 通过表单接收的用户名
+        String username = token.getUsername();
+        if(username != null && !"".equals(username)){
+            user = userService.getUserByUsername(username);
+
+            if(user != null){
+                if(user.getUserStatus().equals(User.OFF)){
+                    throw new DisabledAccountException("账户被禁用");
+                }
+                return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 用于授权
+     *
+     * @param principalCollection
+     * @return
+     */
+    @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection){
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         User user = (User) session.getAttribute(SysConstant.SESSION_USER);
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         if(user != null){
             Set<String> roleNames = (Set<String>) session.getAttribute(SysConstant.SESSION_USER_ROLES);
             Set<String> permSet = (Set<String>) session.getAttribute(SysConstant.SESSION_USER_PERMS);
-            info.setRoles(roleNames);
-            info.setStringPermissions(permSet);
+            authorizationInfo.setRoles(roleNames);
+            authorizationInfo.setStringPermissions(permSet);
         }else{
             if(principalCollection == null){
                 throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
@@ -68,15 +107,16 @@ public class UserRealm extends AuthorizingRealm{
             }
             //放入角色
             session.setAttribute(SysConstant.SESSION_USER_ROLES, roleNames);
-            info.setRoles(roleNames);
+            authorizationInfo.setRoles(roleNames);
 
             List<String> perms = Lists.newArrayList();
             //获取权限
             if(!roleIds.isEmpty()){
                 perms = roleService.getPerms(roleIds);
                 System.out.println("perms:" + perms);
-                Set<String> permSet = new HashSet<String>(perms);
-                info.setStringPermissions(permSet);
+                Set<String> permSet = new HashSet<>(perms);
+
+                authorizationInfo.setStringPermissions(permSet);
                 session.setAttribute(SysConstant.SESSION_USER_PERMS, permSet);
             }
 
@@ -93,40 +133,6 @@ public class UserRealm extends AuthorizingRealm{
             }
         }
 
-        return info;
-    }
-
-
-    @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException{
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        User user = (User) session.getAttribute(SysConstant.SESSION_USER);
-
-        if(user != null){
-            return new SimpleAuthenticationInfo(
-                    user.getUsername(), user.getPassword(), getName());
-        }
-
-        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-
-        // 通过表单接收的用户名
-        String username = token.getUsername();
-        if(username != null && !"".equals(username)){
-            user = userService.getUserByUsername(username);
-
-            if(user != null){
-                if(user.getUserStatus().equals(User.OFF)){
-                    throw new DisabledAccountException("账户被禁用");
-//            	if(!user.getUserStatus().equals(User.OFF)){
-//                    Exception exception = new DisabledAccountException("账户被禁用");
-//                    exception.printStackTrace();
-//                    throw new DisabledAccountException("账户被禁用");
-                }
-                return new SimpleAuthenticationInfo(
-                        user.getUsername(), user.getPassword(), getName());
-            }
-        }
-        return null;
+        return authorizationInfo;
     }
 }

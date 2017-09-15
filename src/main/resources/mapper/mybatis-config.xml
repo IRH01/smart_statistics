@@ -19,8 +19,8 @@
         <mapper resource="mapper/authentication/PermissionMapper.xml"/>
         <mapper resource="mapper/authentication/RoleMapper.xml"/>
         <mapper resource="mapper/authentication/UserMapper.xml"/>
-        <mapper resource="mapper/authentication/UserChannelMapper.xml"/>
-        <!---->
-        <mapper resource="mapper/smartdata/ChannelPlatformMapper.xml"/>
+        <!--<mapper resource="mapper/authentication/UserChannelMapper.xml"/>-->
+        <!-- -->
+        <!--<mapper resource="mapper/smartdata/ChannelPlatformMapper.xml"/>-->
     </mappers>
 </configuration>
