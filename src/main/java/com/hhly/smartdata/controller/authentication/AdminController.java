@@ -81,8 +81,8 @@ public class AdminController{
      */
     @RequestMapping("/initPwd")
     @RequiresPermissions("admin_admin_initPwd")
-    public @ResponseBody
-    String initPwd(@ModelAttribute User user){
+    @ResponseBody
+    public String initPwd(@ModelAttribute User user){
         user.setPassword(new Md5Hash("123456").toString());
         userService.update(user);
         return "SUCCESS";
@@ -169,8 +169,8 @@ public class AdminController{
      * 删除用户
      */
     @RequestMapping("/del")
-    public @ResponseBody
-    String deleteUser(@RequestParam Integer userId){
+    @ResponseBody
+    public String deleteUser(@RequestParam Integer userId){
         if(0 < adminService.deleteByUserId(userId)){
             return "SUCCESS";
         }
@@ -179,8 +179,8 @@ public class AdminController{
 
     @RequestMapping("/{random}/tree")
     @RequiresPermissions(value = {"admin_admin_add", "admin_admin_edit"}, logical = Logical.OR)
-    public @ResponseBody
-    List<Node> tree(HttpServletRequest request, HttpServletResponse response){
+    @ResponseBody
+    public List<Node> tree(HttpServletRequest request, HttpServletResponse response){
         Integer userId = null;
         try{
             userId = Integer.valueOf(request.getParameter("userId"));

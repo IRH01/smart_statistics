@@ -31,8 +31,8 @@ public class FunctionController{
 
     @RequestMapping("/update")
     @RequiresPermissions("!sys_func_update")
-    public @ResponseBody
-    Map<String, Integer> update(@RequestParam("funcTree") String funcTree){
+    @ResponseBody
+    public Map<String, Integer> update(@RequestParam("funcTree") String funcTree){
         Map<String, Integer> result = functionService.batchUpdateFuncs(JSONArray.parseArray(funcTree), 0);
         return result;
     }

@@ -23,16 +23,16 @@ public class PermissionController{
 
     @RequestMapping("/searchPerms")
     @RequiresPermissions("sys_perm_search")
-    public @ResponseBody
-    List<Permission> searchPerms(@ModelAttribute Permission condition, HttpServletRequest req){
+    @ResponseBody
+    public List<Permission> searchPerms(@ModelAttribute Permission condition, HttpServletRequest req){
         List<Permission> perms = permissionService.searchPerms(condition);
         return perms;
     }
 
     @RequestMapping("/updatePerms")
     @RequiresPermissions("!sys_perm_update")
-    public @ResponseBody
-    String updatePerms(@RequestParam Integer funcId, @RequestParam String permsJson){
+    @ResponseBody
+    public String updatePerms(@RequestParam Integer funcId, @RequestParam String permsJson){
         List<Permission> perms = JSON.parseArray(permsJson, Permission.class);
         permissionService.batchUpdatePerms(funcId, perms);
         return "SUCCESS";

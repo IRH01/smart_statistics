@@ -19,7 +19,8 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequestMapping("/sys/user")
-public class UserController extends BaseController{
+public class UserController{
+
     @Autowired
     private UserService userService;
 
@@ -27,8 +28,8 @@ public class UserController extends BaseController{
      * 初始化密码
      */
     @RequestMapping("/initPwd")
-    public @ResponseBody
-    String initPwd(@ModelAttribute User user){
+    @ResponseBody
+    public String initPwd(@ModelAttribute User user){
         user.setPassword(new Md5Hash("123456").toString());
         userService.update(user);
         return "SUCCESS";
@@ -38,14 +39,14 @@ public class UserController extends BaseController{
     public String modifyPasswd(@ModelAttribute User user, Model model){
         user.setPassword(new Md5Hash(user.getNewPassword()).toString());
         userService.update(user);
-        model.addAttribute(REDIRECT_URL, "/welcome.do");
-        model.addAttribute(MSG, "密码修改成功！");
-        return SUCCESS;
+        model.addAttribute("redirectUrl", "/welcome.do");
+        model.addAttribute("msg", "密码修改成功！");
+        return "success";
     }
 
     @RequestMapping("/verifyPasswd")
-    public @ResponseBody
-    boolean verifyPasswd(@ModelAttribute User user){
+    @ResponseBody
+    public boolean verifyPasswd(@ModelAttribute User user){
         User oldUser = userService.getUser(user.getUserId());
         return oldUser.getPassword().equals(new Md5Hash(user.getPassword()).toString());
     }

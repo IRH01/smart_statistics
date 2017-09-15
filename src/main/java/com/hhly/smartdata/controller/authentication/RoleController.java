@@ -113,8 +113,8 @@ public class RoleController{
 
     @RequestMapping("/{random}/tree")
     @RequiresPermissions(value = {"sys_role_add", "!sys_func_update"}, logical = Logical.OR)
-    public @ResponseBody
-    List<Node> tree(HttpServletRequest request, HttpServletResponse response){
+    @ResponseBody
+    public List<Node> tree(HttpServletRequest request, HttpServletResponse response){
         User user = (User) request.getSession().getAttribute(SysConstant.SESSION_USER);
         return nodeList(user.getUserId());
     }
@@ -122,8 +122,8 @@ public class RoleController{
 
     @RequestMapping("/{random}/edittree")
     @RequiresPermissions("sys_role_update")
-    public @ResponseBody
-    List<Node> edittree(HttpServletRequest request, HttpServletResponse response){
+    @ResponseBody
+    public List<Node> edittree(HttpServletRequest request, HttpServletResponse response){
         User user = (User) request.getSession().getAttribute(SysConstant.SESSION_USER);
         Integer roleId = Integer.parseInt((String) request.getParameter("roleId"));
         /*获取用户的权限*/
@@ -196,8 +196,8 @@ public class RoleController{
     }
 
     @RequestMapping("/validateRoleName")
-    public @ResponseBody
-    boolean validateRoleName(HttpServletRequest req, HttpServletResponse resp){
+    @ResponseBody
+    public boolean validateRoleName(HttpServletRequest req, HttpServletResponse resp){
         String roleName = req.getParameter("name");
         String roleId = req.getParameter("id");
         Role roleCondition = new Role();

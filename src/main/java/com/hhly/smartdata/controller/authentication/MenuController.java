@@ -30,15 +30,15 @@ public class MenuController{
     }
 
     @RequestMapping("/menuList")
-    public @ResponseBody
-    String menuList(){
+    @ResponseBody
+    public String menuList(){
         List<Menu> menuList = menuService.getAll();
         return JSON.toJSONString(menuList);
     }
 
     @RequestMapping("/menuListByRole")
-    public @ResponseBody
-    String menuListByRole(HttpServletRequest req){
+    @ResponseBody
+    public String menuListByRole(HttpServletRequest req){
         String ids = req.getParameter("roleIds");
         String[] idList = ids.split(",");
         List<Integer> roleIds = Lists.newArrayList();
@@ -52,16 +52,16 @@ public class MenuController{
 
     @RequestMapping("/sort.do")
     @RequiresPermissions("sys_menu_sort")
-    public @ResponseBody
-    Map<String, Integer> sort(@RequestParam String menuTree){
+    @ResponseBody
+    public Map<String, Integer> sort(@RequestParam String menuTree){
         Map<String, Integer> result = menuService.sortAndUpdateMenus(JSON.parseArray(menuTree), 0);
         return result;
     }
 
     @RequestMapping("/update")
     @RequiresPermissions("!sys_menu_update")
-    public @ResponseBody
-    String update(@ModelAttribute Menu menu){
+    @ResponseBody
+    public String update(@ModelAttribute Menu menu){
         menuService.update(menu);
         return "SUCCESS";
     }

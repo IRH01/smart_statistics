@@ -1,7 +1,6 @@
 package com.hhly.smartdata.controller.authentication;
 
 import com.google.code.kaptcha.Producer;
-import com.google.common.collect.Maps;
 import com.hhly.smartdata.constant.SysConstant;
 import com.hhly.smartdata.exception.IncorrectCaptchaException;
 import com.hhly.smartdata.model.authentication.User;
@@ -9,7 +8,6 @@ import com.hhly.smartdata.service.authentication.UserService;
 import com.hhly.smartdata.util.DateUtil;
 import com.hhly.smartdata.util.SecurityUtil;
 import com.hhly.smartdata.util.SessionUtil;
-import com.hhly.smartdata.util.mail.MailBean;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -31,10 +29,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
-import java.net.URLEncoder;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 
 @Controller
 public class LoginController{
@@ -122,8 +117,8 @@ public class LoginController{
      * 注册使用,存在不合法
      */
     @RequestMapping("/validateUserName.do")
-    public @ResponseBody
-    boolean ValidateUserName(HttpServletRequest req, HttpServletResponse resp){
+    @ResponseBody
+    public boolean ValidateUserName(HttpServletRequest req, HttpServletResponse resp){
         String usrName = req.getParameter("db.username");
         User usr = userService.getUserByUsername(usrName);
         if(usr == null){
@@ -136,8 +131,8 @@ public class LoginController{
      * 找回密码使用,存在合法,不存在非法
      */
     @RequestMapping("/validateUserNameEx.do")
-    public @ResponseBody
-    boolean validateUserName(HttpServletRequest req, HttpServletResponse resp){
+    @ResponseBody
+    public boolean validateUserName(HttpServletRequest req, HttpServletResponse resp){
         String usrName = req.getParameter("db.username");
         User usr = userService.getUserByUsername(usrName);
         if(usr == null){
