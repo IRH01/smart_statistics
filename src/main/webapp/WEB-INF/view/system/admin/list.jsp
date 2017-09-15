@@ -33,8 +33,8 @@
     <script src="<c:url value="/lib/layer/layer.js"/>"></script>
 <body>
 <div class="wrap">
-    <jsp:include page="../template/header.jsp"/>
-    <jsp:include page="../template/menu.jsp"/>
+    <jsp:include page="../../template/header.jsp"/>
+    <jsp:include page="../../template/menu.jsp"/>
 
     <div class="container-fluid content">
         <div class="row">

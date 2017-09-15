@@ -23,6 +23,11 @@ public class MenuController{
     @Autowired
     private MenuService menuService;
 
+    /**
+     * 菜单列表查询
+     *
+     * @return
+     */
     @RequestMapping("/list.do")
     @RequiresPermissions("sys_menu_list")
     public String list(){

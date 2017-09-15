@@ -50,7 +50,8 @@
         </form>
     </div>
 </div>
-
+</body>
+</html>
 <script type="text/javascript">
     $().ready(function () {
         // validate login form on keyup and submit
@@ -89,5 +90,3 @@
     $.DialogSdk.Error({Width: 350, Height: 200, Title: "错误", Content: '${msg}'});
     </c:if>
 </script>
-</body>
-</html>

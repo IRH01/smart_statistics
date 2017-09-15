@@ -3,10 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -52,7 +48,7 @@
         <div class="text-center top20">
             <span class="re-success">密码修改成功</span>
             <div class="top30">
-                <a href="<%=path%>/login.do" class="btn btn-danger"
+                <a href="/login.do" class="btn btn-danger"
                    style="padding: 8px 10px">&nbsp;&nbsp;返回首页&nbsp;&nbsp;</a>
             </div>
         </div>

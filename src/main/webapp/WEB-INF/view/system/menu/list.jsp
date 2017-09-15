@@ -294,7 +294,6 @@
             "json");
     }
 
-
     function removeTreeNode() {
         hideRMenu();
         var nodes = menuTree.getSelectedNodes();
@@ -307,7 +306,6 @@
             });
         }
     }
-
 
     $(document).ready(function () {
         $.post("/sys/menu/menuList.do",
@@ -324,7 +322,6 @@
             },
             "json");
     });
-
 
     var PermissionSetting = {
         check: {

@@ -3,10 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -80,6 +76,7 @@
     </div>
 </div>
 </body>
+</html>
 <script type="text/javascript">
     $().ready(function () {
         $("#reset").validate({
@@ -108,6 +105,4 @@
         });
 
     });
-
 </script>
-</html>

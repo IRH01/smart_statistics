@@ -12,11 +12,8 @@ public class ResultCode{
     public static final int ERROR_USER = 401;
     public static final int ERROR_STATUS = 402;
     public static final int ERROR_DUPLICATE_ENTRY = 403;
-
     public static final int ERROR_SYSTEM = 500;
-
     public static Map<Integer, String> errorMsgs = new HashMap<Integer, String>();
-
 
     static{
         errorMsgs.put(OK, "操作成功");
