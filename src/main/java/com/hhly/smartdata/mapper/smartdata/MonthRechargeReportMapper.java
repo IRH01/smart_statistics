@@ -2,7 +2,9 @@ package com.hhly.smartdata.mapper.smartdata;
 
 
 import com.hhly.smartdata.model.smartdata.MonthRechargeReport;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MonthRechargeReportMapper{
     int insert(MonthRechargeReport record);
 
