@@ -81,11 +81,6 @@
         });
     });
 
-    function changeKaptchaImage() {
-        $('#kaptchaImage').hide().attr('src', './kaptchaImage.do?' + Math.floor(Math.random() * 100)).fadeIn();
-        event.cancelBubble = true;
-    }
-
     <c:if test="${msg!=null}">
     $.DialogSdk.Error({Width: 350, Height: 200, Title: "错误", Content: '${msg}'});
     </c:if>

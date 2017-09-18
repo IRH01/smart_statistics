@@ -84,7 +84,6 @@
                         type: "POST",
                         url: "validateUserNameEx.do?#username"            //servlet
                     }
-
                 }
             },
             messages: {
