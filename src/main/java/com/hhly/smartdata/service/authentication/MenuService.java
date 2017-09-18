@@ -33,9 +33,9 @@ public class MenuService{
     }
 
     public Menu get(Integer id){
-        Menu condtion = new Menu();
-        condtion.setId(id);
-        List<Menu> menus = menuMapper.searchMenu(condtion);
+        Menu condition = new Menu();
+        condition.setId(id);
+        List<Menu> menus = menuMapper.searchMenu(condition);
         return menus.isEmpty() ? null : menus.get(0);
     }
 

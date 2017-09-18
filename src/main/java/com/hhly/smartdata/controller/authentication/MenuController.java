@@ -1,6 +1,6 @@
 package com.hhly.smartdata.controller.authentication;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
 import com.hhly.smartdata.model.authentication.Menu;
 import com.hhly.smartdata.service.authentication.MenuService;
@@ -38,7 +38,7 @@ public class MenuController{
     @ResponseBody
     public String menuList(){
         List<Menu> menuList = menuService.getAll();
-        return JSON.toJSONString(menuList);
+        return JSONArray.toJSONString(menuList);
     }
 
     @RequestMapping("/menuListByRole")
@@ -52,14 +52,14 @@ public class MenuController{
             roleIds.add(roleId);
         }
         List<Menu> menuList = menuService.getMenuListByRole(roleIds);
-        return JSON.toJSONString(menuList);
+        return JSONArray.toJSONString(menuList);
     }
 
     @RequestMapping("/sort.do")
     @RequiresPermissions("sys_menu_sort")
     @ResponseBody
     public Map<String, Integer> sort(@RequestParam String menuTree){
-        Map<String, Integer> result = menuService.sortAndUpdateMenus(JSON.parseArray(menuTree), 0);
+        Map<String, Integer> result = menuService.sortAndUpdateMenus(JSONArray.parseArray(menuTree), 0);
         return result;
     }
 
