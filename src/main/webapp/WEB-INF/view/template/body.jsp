@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="panel-group" id="accordion" role="tablist"
      aria-multiselectable="true">
     <div class="panel panel-default">
@@ -13,8 +13,10 @@
                     <dl class="clm-ctn" id="clm">
                         <dt>系统管理</dt>
                         <dd>
-                            <a href="#">用户管理</a> <a href="#">角色管理</a> <a href="#">菜单管理</a> <a
-                                href="#">权限管理</a>
+                            <a href="#">用户管理</a>
+                            <a href="#">角色管理</a>
+                            <a href="#">菜单管理</a>
+                            <a href="#">权限管理</a>
                         </dd>
                     </dl>
                 </div>

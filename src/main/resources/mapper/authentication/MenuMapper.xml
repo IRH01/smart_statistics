@@ -71,7 +71,8 @@
         where id=#{id}
     </delete>
 
-    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Menu" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Menu" useGeneratedKeys="true"
+            keyProperty="id">
         insert into tbl_menu
         (
         permission,

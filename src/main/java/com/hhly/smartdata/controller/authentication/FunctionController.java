@@ -28,7 +28,6 @@ public class FunctionController{
         return new ModelAndView("system/function/list", model);
     }
 
-
     @RequestMapping("/update")
     @RequiresPermissions("!sys_func_update")
     @ResponseBody

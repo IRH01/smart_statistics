@@ -2,16 +2,13 @@ package com.hhly.smartdata.controller.authentication;
 
 import com.google.common.collect.Maps;
 import com.hhly.smartdata.model.authentication.Admin;
-import com.hhly.smartdata.model.authentication.Node;
 import com.hhly.smartdata.model.authentication.Role;
 import com.hhly.smartdata.model.authentication.User;
-import com.hhly.smartdata.service.ChannelPlatformService;
 import com.hhly.smartdata.service.authentication.AdminService;
 import com.hhly.smartdata.service.authentication.RoleService;
 import com.hhly.smartdata.service.authentication.UserService;
 import com.hhly.smartdata.util.page.Page;
 import com.hhly.smartdata.util.page.PageUtil;
-import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.slf4j.Logger;
@@ -24,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +34,6 @@ public class AdminController{
     private RoleService roleService;
     @Autowired
     private AdminService adminService;
-//    @Autowired
-//    private ChannelPlatformService channelPlatformService;
 
     @RequestMapping("/list")
     @RequiresPermissions("admin_admin_list")
@@ -176,17 +169,4 @@ public class AdminController{
         }
         return "FAIL";
     }
-
-//    @RequestMapping("/{random}/tree")
-//    @RequiresPermissions(value = {"admin_admin_add", "admin_admin_edit"}, logical = Logical.OR)
-//    @ResponseBody
-//    public List<Node> tree(HttpServletRequest request, HttpServletResponse response){
-//        Integer userId = null;
-//        try{
-//            userId = Integer.valueOf(request.getParameter("userId"));
-//        }catch(Exception e){
-//            LOGGER.info("获取userId失败:" + e);
-//        }
-//        return channelPlatformService.getTreeNode(userId);
-//    }
 }

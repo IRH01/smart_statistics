@@ -8,7 +8,6 @@ import java.util.List;
 @Repository
 public interface PermissionMapper{
 
-
     List<Permission> searchPerms(Permission perm);
 
     List<Permission> queryByRole(List<Integer> roleIds);

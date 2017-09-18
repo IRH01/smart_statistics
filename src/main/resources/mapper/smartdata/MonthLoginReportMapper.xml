@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hhly.smartdata.mapper.smartdata.MonthLoginReportMapper">
+    <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.MonthLoginReport">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="game_code" property="gameCode" jdbcType="VARCHAR"/>
+        <result column="game_name" property="gameName" jdbcType="VARCHAR"/>
+        <result column="statistics_day" property="statisticsDay" jdbcType="VARCHAR"/>
+        <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
+        <result column="login_population" property="loginPopulation" jdbcType="INTEGER"/>
+        <result column="play_population" property="playPopulation" jdbcType="INTEGER"/>
+        <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, game_code, game_name, statistics_day, source_type, login_population, play_population,
+        execute_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from month_login_report
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into month_login_report ( game_code, game_name,
+        statistics_day, source_type, login_population,
+        play_population, execute_time)
+        values (#{gameCode,jdbcType=VARCHAR}, #{gameName,jdbcType=VARCHAR},
+        #{statisticsDay,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT}, #{loginPopulation,jdbcType=INTEGER},
+        #{playPopulation,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
+        insert into month_login_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="gameCode != null">
+                game_code,
+            </if>
+            <if test="gameName != null">
+                game_name,
+            </if>
+            <if test="statisticsDay != null">
+                statistics_day,
+            </if>
+            <if test="sourceType != null">
+                source_type,
+            </if>
+            <if test="loginPopulation != null">
+                login_population,
+            </if>
+            <if test="playPopulation != null">
+                play_population,
+            </if>
+            <if test="executeTime != null">
+                execute_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="gameCode != null">
+                #{gameCode,jdbcType=VARCHAR},
+            </if>
+            <if test="gameName != null">
+                #{gameName,jdbcType=VARCHAR},
+            </if>
+            <if test="statisticsDay != null">
+                #{statisticsDay,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceType != null">
+                #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="loginPopulation != null">
+                #{loginPopulation,jdbcType=INTEGER},
+            </if>
+            <if test="playPopulation != null">
+                #{playPopulation,jdbcType=INTEGER},
+            </if>
+            <if test="executeTime != null">
+                #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
+        update month_login_report
+        <set>
+            <if test="gameCode != null">
+                game_code = #{gameCode,jdbcType=VARCHAR},
+            </if>
+            <if test="gameName != null">
+                game_name = #{gameName,jdbcType=VARCHAR},
+            </if>
+            <if test="statisticsDay != null">
+                statistics_day = #{statisticsDay,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="loginPopulation != null">
+                login_population = #{loginPopulation,jdbcType=INTEGER},
+            </if>
+            <if test="playPopulation != null">
+                play_population = #{playPopulation,jdbcType=INTEGER},
+            </if>
+            <if test="executeTime != null">
+                execute_time = #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
+        update month_login_report
+        set game_code = #{gameCode,jdbcType=VARCHAR},
+        game_name = #{gameName,jdbcType=VARCHAR},
+        statistics_day = #{statisticsDay,jdbcType=VARCHAR},
+        source_type = #{sourceType,jdbcType=TINYINT},
+        login_population = #{loginPopulation,jdbcType=INTEGER},
+        play_population = #{playPopulation,jdbcType=INTEGER},
+        execute_time = #{executeTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

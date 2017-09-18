@@ -19,5 +19,18 @@
         <mapper resource="mapper/authentication/PermissionMapper.xml"/>
         <mapper resource="mapper/authentication/RoleMapper.xml"/>
         <mapper resource="mapper/authentication/UserMapper.xml"/>
+        <!-- -->
+        <mapper resource="mapper/smartdata/DailyCompositeReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/DailyKeepRecordReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/DailyLoignGameReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/DailyRechargeReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/DailyRegisterReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/IntervalGameLaunchReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/IntervalInterfaceReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/IntervalSourceReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/MonthCompositeReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/MonthLoignGameReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/MonthRechargeReportMapper.xml"/>
+        <mapper resource="mapper/smartdata/MonthRegisterReportMapper.xml"/>
     </mappers>
 </configuration>

@@ -9,8 +9,8 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
-    <sql id="Base_Column_List">permission, name, function_id,
-        create_time
+    <sql id="Base_Column_List">
+        permission, name, function_id,create_time
     </sql>
 
     <sql id="where_conditions">
@@ -59,8 +59,7 @@
         tbl_permission
     </select>
 
-    <select id="searchPerms" resultMap="BaseResultMap"
-            parameterType="com.hhly.smartdata.model.authentication.Permission">
+    <select id="searchPerms" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from
@@ -75,7 +74,7 @@
         <include refid="where_conditions"/>
     </delete>
 
-    <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Permission">
+    <insert id="insert">
         INSERT INTO tbl_permission (
         permission,
         NAME,
