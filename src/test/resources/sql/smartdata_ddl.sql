@@ -105,9 +105,9 @@ CREATE TABLE `tbl_user_role` (
 CREATE TABLE interval_game_launch_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '平台实时统计，游戏启动统计',
-   statistics_time      VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计时间(半小时)yyyy-MM-dd HH:30:00',
-   game_code            VARCHAR(10) NOT NULL DEFAULT '' COMMENT '游戏编码',
-   game_name            VARCHAR(10) NOT NULL DEFAULT '' COMMENT '游戏名称',
+   statistics_time      VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计时间(半小时)yyyy-MM-dd HH:30:00',
+   game_code            VARCHAR(64) NOT NULL DEFAULT '' COMMENT '游戏编码',
+   game_name            VARCHAR(50) NOT NULL DEFAULT '' COMMENT '游戏名称',
    launch_count         INT(10) NOT NULL DEFAULT 0 COMMENT '老用户充值次数',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
@@ -119,8 +119,8 @@ CREATE TABLE interval_game_launch_report
 CREATE TABLE interval_interface_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '平台实时统计，接口统计',
-   statistics_time      VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(半小时)yyyy-MM-dd HH:30:00',
-   interface_name       VARCHAR(10) NOT NULL DEFAULT '' COMMENT '接口名称',
+   statistics_time      VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(半小时)yyyy-MM-dd HH:30:00',
+   interface_name       VARCHAR(50) NOT NULL DEFAULT '' COMMENT '接口名称',
    operate_type         TINYINT(2) NOT NULL DEFAULT 0 COMMENT '操作类型类型：1、请求，2、执行完成',
    operate_count        INT(10) NOT NULL DEFAULT 0 COMMENT '操作次数',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
@@ -133,7 +133,7 @@ CREATE TABLE interval_interface_report
 CREATE TABLE interval_source_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '平台实时统计，各端实时统计',
-   statistics_time      VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(半小时)yyyy-MM-dd HH:30:00',
+   statistics_time      VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(半小时)yyyy-MM-dd HH:30:00',
    source_type          TINYINT(2) NOT NULL DEFAULT 0 COMMENT '源端类型：1、PC  2.H5 3.IOS 4.android',
    register_population  INT(10) NOT NULL DEFAULT 0 COMMENT '注册人数',
    login_population     INT(10) NOT NULL DEFAULT 0 COMMENT '登录人数',
@@ -150,7 +150,7 @@ CREATE TABLE interval_source_report
 CREATE TABLE daily_composite_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，综合报表',
-   statistics_day       VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
+   statistics_day       VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
    register_population       INT(10) NOT NULL DEFAULT 0 COMMENT '注册人数',
    register_exp_count INT(10) NOT NULL DEFAULT 0 COMMENT '注册体验量',
    real_exp_count INT(10) NOT NULL DEFAULT 0 COMMENT '真体验',
@@ -176,7 +176,7 @@ CREATE TABLE daily_composite_report
 create table daily_register_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，注册来源统计报表',
-   statistics_day       VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
+   statistics_day       VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
    pc_page_view         INT(10) NOT NULL DEFAULT 0 COMMENT 'pc页面浏览数pv',
    pc_user_view         INT(10) NOT NULL DEFAULT 0 COMMENT 'pc用户访问数uv',
    hfive_population     INT(10) NOT NULL DEFAULT 0 COMMENT 'h5用户数',
@@ -196,7 +196,7 @@ create table daily_register_report
 create table daily_recharge_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，充值来源统计报表',
-   statistics_day       VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
+   statistics_day       VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
    source_type          TINYINT(2) NOT NULL DEFAULT 0 COMMENT '源端类型：1、PC  2.H5 3.IOS 4.android',
    recharge_population   INT(10) NOT NULL DEFAULT 0 COMMENT '充值人数',
    recharge_amount     DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '充值金额',
@@ -213,9 +213,9 @@ create table daily_recharge_report
 create table daily_loign_game_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，充值来源统计报表',
-   game_code            VARCHAR(10) NOT NULL DEFAULT '' COMMENT '游戏编码',
-   game_name            VARCHAR(10) NOT NULL DEFAULT '' COMMENT '游戏名称',
-   statistics_day       VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
+   game_code            VARCHAR(64) NOT NULL DEFAULT '' COMMENT '游戏编码',
+   game_name            VARCHAR(50) NOT NULL DEFAULT '' COMMENT '游戏名称',
+   statistics_day       VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
    source_type          TINYINT(2) NOT NULL DEFAULT 0 COMMENT '源端类型：1、PC  2.H5 3.IOS 4.android',
    login_population     INT(10) NOT NULL DEFAULT 0 COMMENT '登录人数',
    play_population      INT(10) NOT NULL DEFAULT 0 COMMENT '玩游戏人数',
@@ -229,7 +229,7 @@ create table daily_loign_game_report
 create table daily_Keep_record_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，充值来源统计报表',
-   statistics_day       VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
+   statistics_day       VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
    source_type          TINYINT(2) NOT NULL DEFAULT 0 COMMENT '源端类型：1、PC  2.H5 3.IOS 4.android',
    register_count       INT(10) NOT NULL DEFAULT 0 COMMENT '注册人数',
    one       INT(10) NOT NULL DEFAULT 0 COMMENT '1天后留存',
@@ -251,7 +251,7 @@ create table daily_Keep_record_report
 CREATE TABLE month_composite_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '月报表，综合报表',
-   statistics_day       VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(月)yyyy-MM',
+   statistics_day       VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(月)yyyy-MM',
    register_population       INT(10) NOT NULL DEFAULT 0 COMMENT '注册人数',
    register_exp_count INT(10) NOT NULL DEFAULT 0 COMMENT '注册体验量',
    real_exp_count INT(10) NOT NULL DEFAULT 0 COMMENT '真体验',
@@ -277,7 +277,7 @@ CREATE TABLE month_composite_report
 create table month_register_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '月报表，注册来源统计报表',
-   statistics_day       VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(月)yyyy-MM',
+   statistics_day       VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(月)yyyy-MM',
    pc_page_view         INT(10) NOT NULL DEFAULT 0 COMMENT 'pc页面浏览数pv',
    pc_user_view         INT(10) NOT NULL DEFAULT 0 COMMENT 'pc用户访问数uv',
    hfive_population     INT(10) NOT NULL DEFAULT 0 COMMENT 'h5用户数',
@@ -297,7 +297,7 @@ create table month_register_report
 create table month_recharge_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '月报表，充值来源统计报表',
-   statistics_day       VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(月)yyyy-MM',
+   statistics_day       VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(月)yyyy-MM',
    source_type          TINYINT(2) NOT NULL DEFAULT 0 COMMENT '源端类型：1、PC  2.H5 3.IOS 4.android',
    recharge_population   INT(10) NOT NULL DEFAULT 0 COMMENT 'PC-充值人数',
    recharge_amount     DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT 'PC-充值金额',
@@ -314,9 +314,9 @@ create table month_recharge_report
 create table month_loign_game_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，充值来源统计报表',
-   game_code            VARCHAR(10) NOT NULL DEFAULT '' COMMENT '游戏编码',
-   game_name            VARCHAR(10) NOT NULL DEFAULT '' COMMENT '游戏名称',
-   statistics_day       VARCHAR(10) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM',
+   game_code            VARCHAR(64) NOT NULL DEFAULT '' COMMENT '游戏编码',
+   game_name            VARCHAR(50) NOT NULL DEFAULT '' COMMENT '游戏名称',
+   statistics_day       VARCHAR(20) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM',
    source_type          TINYINT(2) NOT NULL DEFAULT 0 COMMENT '源端类型：1、PC  2.H5 3.IOS 4.android',
    login_population     INT(10) NOT NULL DEFAULT 0 COMMENT '登录人数',
    play_population      INT(10) NOT NULL DEFAULT 0 COMMENT '玩游戏人数',
