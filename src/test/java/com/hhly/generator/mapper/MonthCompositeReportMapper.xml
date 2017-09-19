@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hhly.generator.dao.MonthCompositeReportMapper" >
+  <resultMap id="BaseResultMap" type="com.hhly.generator.model.MonthCompositeReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="statistics_day" property="statisticsDay" jdbcType="VARCHAR" />
+    <result column="register_population" property="registerPopulation" jdbcType="INTEGER" />
+    <result column="register_exp_count" property="registerExpCount" jdbcType="INTEGER" />
+    <result column="real_exp_count" property="realExpCount" jdbcType="INTEGER" />
+    <result column="virtual_exp_count" property="virtualExpCount" jdbcType="INTEGER" />
+    <result column="new_user_recharge_population" property="newUserRechargePopulation" jdbcType="INTEGER" />
+    <result column="new_user_recharge_count" property="newUserRechargeCount" jdbcType="INTEGER" />
+    <result column="new_user_recharge_amount" property="newUserRechargeAmount" jdbcType="DECIMAL" />
+    <result column="new_user_login_count" property="newUserLoginCount" jdbcType="INTEGER" />
+    <result column="new_user_play_count" property="newUserPlayCount" jdbcType="INTEGER" />
+    <result column="old_user_recharge_population" property="oldUserRechargePopulation" jdbcType="INTEGER" />
+    <result column="old_user_recharge_count" property="oldUserRechargeCount" jdbcType="INTEGER" />
+    <result column="old_user_recharge_amount" property="oldUserRechargeAmount" jdbcType="DECIMAL" />
+    <result column="old_user_login_count" property="oldUserLoginCount" jdbcType="INTEGER" />
+    <result column="old_user_play_count" property="oldUserPlayCount" jdbcType="INTEGER" />
+    <result column="next_day_stay_count" property="nextDayStayCount" jdbcType="INTEGER" />
+    <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, statistics_day, register_population, register_exp_count, real_exp_count, virtual_exp_count, 
+    new_user_recharge_population, new_user_recharge_count, new_user_recharge_amount, 
+    new_user_login_count, new_user_play_count, old_user_recharge_population, old_user_recharge_count, 
+    old_user_recharge_amount, old_user_login_count, old_user_play_count, next_day_stay_count, 
+    execute_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from month_composite_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.hhly.generator.model.MonthCompositeReport" >
+    insert into month_composite_report (id, statistics_day, register_population, 
+      register_exp_count, real_exp_count, virtual_exp_count, 
+      new_user_recharge_population, new_user_recharge_count, 
+      new_user_recharge_amount, new_user_login_count, 
+      new_user_play_count, old_user_recharge_population, 
+      old_user_recharge_count, old_user_recharge_amount, 
+      old_user_login_count, old_user_play_count, next_day_stay_count, 
+      execute_time)
+    values (#{id,jdbcType=BIGINT}, #{statisticsDay,jdbcType=VARCHAR}, #{registerPopulation,jdbcType=INTEGER}, 
+      #{registerExpCount,jdbcType=INTEGER}, #{realExpCount,jdbcType=INTEGER}, #{virtualExpCount,jdbcType=INTEGER}, 
+      #{newUserRechargePopulation,jdbcType=INTEGER}, #{newUserRechargeCount,jdbcType=INTEGER}, 
+      #{newUserRechargeAmount,jdbcType=DECIMAL}, #{newUserLoginCount,jdbcType=INTEGER}, 
+      #{newUserPlayCount,jdbcType=INTEGER}, #{oldUserRechargePopulation,jdbcType=INTEGER}, 
+      #{oldUserRechargeCount,jdbcType=INTEGER}, #{oldUserRechargeAmount,jdbcType=DECIMAL}, 
+      #{oldUserLoginCount,jdbcType=INTEGER}, #{oldUserPlayCount,jdbcType=INTEGER}, #{nextDayStayCount,jdbcType=INTEGER}, 
+      #{executeTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhly.generator.model.MonthCompositeReport" >
+    insert into month_composite_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="statisticsDay != null" >
+        statistics_day,
+      </if>
+      <if test="registerPopulation != null" >
+        register_population,
+      </if>
+      <if test="registerExpCount != null" >
+        register_exp_count,
+      </if>
+      <if test="realExpCount != null" >
+        real_exp_count,
+      </if>
+      <if test="virtualExpCount != null" >
+        virtual_exp_count,
+      </if>
+      <if test="newUserRechargePopulation != null" >
+        new_user_recharge_population,
+      </if>
+      <if test="newUserRechargeCount != null" >
+        new_user_recharge_count,
+      </if>
+      <if test="newUserRechargeAmount != null" >
+        new_user_recharge_amount,
+      </if>
+      <if test="newUserLoginCount != null" >
+        new_user_login_count,
+      </if>
+      <if test="newUserPlayCount != null" >
+        new_user_play_count,
+      </if>
+      <if test="oldUserRechargePopulation != null" >
+        old_user_recharge_population,
+      </if>
+      <if test="oldUserRechargeCount != null" >
+        old_user_recharge_count,
+      </if>
+      <if test="oldUserRechargeAmount != null" >
+        old_user_recharge_amount,
+      </if>
+      <if test="oldUserLoginCount != null" >
+        old_user_login_count,
+      </if>
+      <if test="oldUserPlayCount != null" >
+        old_user_play_count,
+      </if>
+      <if test="nextDayStayCount != null" >
+        next_day_stay_count,
+      </if>
+      <if test="executeTime != null" >
+        execute_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="statisticsDay != null" >
+        #{statisticsDay,jdbcType=VARCHAR},
+      </if>
+      <if test="registerPopulation != null" >
+        #{registerPopulation,jdbcType=INTEGER},
+      </if>
+      <if test="registerExpCount != null" >
+        #{registerExpCount,jdbcType=INTEGER},
+      </if>
+      <if test="realExpCount != null" >
+        #{realExpCount,jdbcType=INTEGER},
+      </if>
+      <if test="virtualExpCount != null" >
+        #{virtualExpCount,jdbcType=INTEGER},
+      </if>
+      <if test="newUserRechargePopulation != null" >
+        #{newUserRechargePopulation,jdbcType=INTEGER},
+      </if>
+      <if test="newUserRechargeCount != null" >
+        #{newUserRechargeCount,jdbcType=INTEGER},
+      </if>
+      <if test="newUserRechargeAmount != null" >
+        #{newUserRechargeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="newUserLoginCount != null" >
+        #{newUserLoginCount,jdbcType=INTEGER},
+      </if>
+      <if test="newUserPlayCount != null" >
+        #{newUserPlayCount,jdbcType=INTEGER},
+      </if>
+      <if test="oldUserRechargePopulation != null" >
+        #{oldUserRechargePopulation,jdbcType=INTEGER},
+      </if>
+      <if test="oldUserRechargeCount != null" >
+        #{oldUserRechargeCount,jdbcType=INTEGER},
+      </if>
+      <if test="oldUserRechargeAmount != null" >
+        #{oldUserRechargeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="oldUserLoginCount != null" >
+        #{oldUserLoginCount,jdbcType=INTEGER},
+      </if>
+      <if test="oldUserPlayCount != null" >
+        #{oldUserPlayCount,jdbcType=INTEGER},
+      </if>
+      <if test="nextDayStayCount != null" >
+        #{nextDayStayCount,jdbcType=INTEGER},
+      </if>
+      <if test="executeTime != null" >
+        #{executeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhly.generator.model.MonthCompositeReport" >
+    update month_composite_report
+    <set >
+      <if test="statisticsDay != null" >
+        statistics_day = #{statisticsDay,jdbcType=VARCHAR},
+      </if>
+      <if test="registerPopulation != null" >
+        register_population = #{registerPopulation,jdbcType=INTEGER},
+      </if>
+      <if test="registerExpCount != null" >
+        register_exp_count = #{registerExpCount,jdbcType=INTEGER},
+      </if>
+      <if test="realExpCount != null" >
+        real_exp_count = #{realExpCount,jdbcType=INTEGER},
+      </if>
+      <if test="virtualExpCount != null" >
+        virtual_exp_count = #{virtualExpCount,jdbcType=INTEGER},
+      </if>
+      <if test="newUserRechargePopulation != null" >
+        new_user_recharge_population = #{newUserRechargePopulation,jdbcType=INTEGER},
+      </if>
+      <if test="newUserRechargeCount != null" >
+        new_user_recharge_count = #{newUserRechargeCount,jdbcType=INTEGER},
+      </if>
+      <if test="newUserRechargeAmount != null" >
+        new_user_recharge_amount = #{newUserRechargeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="newUserLoginCount != null" >
+        new_user_login_count = #{newUserLoginCount,jdbcType=INTEGER},
+      </if>
+      <if test="newUserPlayCount != null" >
+        new_user_play_count = #{newUserPlayCount,jdbcType=INTEGER},
+      </if>
+      <if test="oldUserRechargePopulation != null" >
+        old_user_recharge_population = #{oldUserRechargePopulation,jdbcType=INTEGER},
+      </if>
+      <if test="oldUserRechargeCount != null" >
+        old_user_recharge_count = #{oldUserRechargeCount,jdbcType=INTEGER},
+      </if>
+      <if test="oldUserRechargeAmount != null" >
+        old_user_recharge_amount = #{oldUserRechargeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="oldUserLoginCount != null" >
+        old_user_login_count = #{oldUserLoginCount,jdbcType=INTEGER},
+      </if>
+      <if test="oldUserPlayCount != null" >
+        old_user_play_count = #{oldUserPlayCount,jdbcType=INTEGER},
+      </if>
+      <if test="nextDayStayCount != null" >
+        next_day_stay_count = #{nextDayStayCount,jdbcType=INTEGER},
+      </if>
+      <if test="executeTime != null" >
+        execute_time = #{executeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhly.generator.model.MonthCompositeReport" >
+    update month_composite_report
+    set statistics_day = #{statisticsDay,jdbcType=VARCHAR},
+      register_population = #{registerPopulation,jdbcType=INTEGER},
+      register_exp_count = #{registerExpCount,jdbcType=INTEGER},
+      real_exp_count = #{realExpCount,jdbcType=INTEGER},
+      virtual_exp_count = #{virtualExpCount,jdbcType=INTEGER},
+      new_user_recharge_population = #{newUserRechargePopulation,jdbcType=INTEGER},
+      new_user_recharge_count = #{newUserRechargeCount,jdbcType=INTEGER},
+      new_user_recharge_amount = #{newUserRechargeAmount,jdbcType=DECIMAL},
+      new_user_login_count = #{newUserLoginCount,jdbcType=INTEGER},
+      new_user_play_count = #{newUserPlayCount,jdbcType=INTEGER},
+      old_user_recharge_population = #{oldUserRechargePopulation,jdbcType=INTEGER},
+      old_user_recharge_count = #{oldUserRechargeCount,jdbcType=INTEGER},
+      old_user_recharge_amount = #{oldUserRechargeAmount,jdbcType=DECIMAL},
+      old_user_login_count = #{oldUserLoginCount,jdbcType=INTEGER},
+      old_user_play_count = #{oldUserPlayCount,jdbcType=INTEGER},
+      next_day_stay_count = #{nextDayStayCount,jdbcType=INTEGER},
+      execute_time = #{executeTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
