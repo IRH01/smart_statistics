@@ -9,7 +9,13 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.hhly.smartdata"/>
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <ref bean="stringHttpMessageConverter"/>
+            <ref bean="mappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
     <aop:config proxy-target-class="true"/>
 
     <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
@@ -28,6 +34,30 @@
                     </props>
                 </constructor-arg>
             </bean>
+        </property>
+    </bean>
+
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Jackson 是Spring 自带的功能 -->
+    <bean id="mappingJackson2HttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+                <value>application/xml;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+                <value>text/plain;charset=UTF-8</value>
+                <value>text/xml;charset=UTF-8</value>
+                <value>text/javascript;charset=UTF-8</value>
+            </list>
         </property>
     </bean>
 

@@ -6,34 +6,43 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <bean id="baseDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close" lazy-init="false">
-        <property name="driverClass" value="${db.driverClassName}"/>
-        <property name="jdbcUrl" value="${db.url}"/>
+    <bean id="baseDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${db.url}"/>
         <property name="username" value="${db.username}"/>
         <property name="password" value="${db.password}"/>
-        <property name="idleConnectionTestPeriodInSeconds" value="${database.idleConnectionTestPeriodInSeconds}"/>
-        <property name="idleMaxAgeInSeconds" value="${database.idleMaxAge.seconds}"/>
-        <property name="maxConnectionsPerPartition" value="${database.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${database.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${database.partitionCount}"/>
-        <property name="acquireIncrement" value="${database.acquireIncrement}"/>
-        <property name="connectionTestStatement" value="select 1"/>
-        <property name="statementsCacheSize" value="${database.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${database.releaseHelperThreads}"/>
-        <property name="logStatementsEnabled" value="${database.logStatementsEnabled}"/>
-        <property name="connectionTimeoutInMs" value="${database.connectionTimeoutInMs}"/>
-        <property name="maxConnectionAgeInSeconds" value="${database.maxConnectionAgeInSeconds}"/>
-        <property name="statisticsEnabled" value="${database.statisticsEnabled}"/>
-        <property name="lazyInit" value="${database.lazyInit}"/>
-        <property name="defaultAutoCommit" value="${database.defaultAutoCommit}"/>
-        <property name="disableJMX" value="${database.disableJMX}"/>
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="1" />
+        <property name="minIdle" value="1" />
+        <property name="maxActive" value="20" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
+        <!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
+        <property name="filters" value="stat" />
     </bean>
 
     <bean id="baseTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="baseDataSource"/>
     </bean>
 
-    <bean id="baseSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+    <bean id="baseSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
         <constructor-arg index="0" ref="baseSqlSessionFactory"/>
     </bean>
 
@@ -59,7 +68,6 @@
     </tx:advice>
 
     <aop:config proxy-target-class="true">
-        <aop:advisor pointcut="execution(* com.hhly.smartdata.service.*.*(..))"
-                     advice-ref="txAdvice"/>
+        <aop:advisor pointcut="execution(* com.hhly.smartdata.service.*.*(..))" advice-ref="txAdvice"/>
     </aop:config>
 </beans>

@@ -13,4 +13,6 @@
     <import resource="spring-mvc.xml"/>
     <import resource="spring-shiro.xml"/>
     <import resource="spring-dao.xml"/>
+    <!--<import resource="spring-redis-cluster.xml"/>-->
+    <import resource="spring-redis-standalone.xml"/>
 </beans>

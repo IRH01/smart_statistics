@@ -3,13 +3,10 @@ package com.hhly.smartdata.exception;
 import org.apache.shiro.authc.AuthenticationException;
 
 /**
- * Created by vxbb
+ * Created by Iritchie.ren
  */
 public class IncorrectCaptchaException extends AuthenticationException{
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -5159093935924846183L;
 
     public IncorrectCaptchaException(){
