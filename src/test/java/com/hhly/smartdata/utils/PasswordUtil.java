@@ -1,4 +1,6 @@
-package com.hhly.smartdata.util;
+package com.hhly.smartdata.utils;
+
+import com.hhly.smartdata.util.Md5Util;
 
 public class PasswordUtil{
     private static final String PREFIX = "43Yhds:><";

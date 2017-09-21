@@ -1,8 +1,8 @@
 package com.hhly.smartdata.controller.authentication;
 
 import com.google.code.kaptcha.Producer;
-import com.hhly.smartdata.constant.SysConstant;
-import com.hhly.smartdata.exception.IncorrectCaptchaException;
+import com.hhly.smartdata.dto.constant.SysConstant;
+import com.hhly.smartdata.util.exception.IncorrectCaptchaException;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.UserService;
 import com.hhly.smartdata.util.DateUtil;
@@ -88,7 +88,7 @@ public class LoginController{
             }
             String nameAndTime[] = decodeUrl.split(",");
             String time = nameAndTime[1];
-            Date date = DateUtil.parseUtilDate(time, "yyyy-MM-dd HH:mm:ss");
+            Date date = DateUtil.string2Date(time, "yyyy-MM-dd HH:mm:ss");
             Date now = new Date();
             if(date.before(now)){
                 return "errorDisable";
@@ -154,7 +154,7 @@ public class LoginController{
         response.setHeader("Pragma", "no-cache");
         response.setContentType("image/jpeg");
         String capText = captchaProducer.createText();
-        SessionUtil.setSessAttr(SysConstant.SESSION_VERIFY_CODE, capText);
+        SessionUtil.setSessionAttr(SysConstant.SESSION_VERIFY_CODE, capText);
         BufferedImage bi = captchaProducer.createImage(capText);
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(bi, "jpg", out);

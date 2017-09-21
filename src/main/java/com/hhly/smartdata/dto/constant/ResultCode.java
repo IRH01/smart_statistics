@@ -1,4 +1,4 @@
-package com.hhly.smartdata.constant;
+package com.hhly.smartdata.dto.constant;
 
 import java.util.HashMap;
 import java.util.Map;

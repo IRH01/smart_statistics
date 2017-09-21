@@ -1,5 +1,5 @@
 <%@ tag import="com.google.common.collect.Lists" %>
-<%@ tag import="com.hhly.smartdata.constant.SysConstant" %>
+<%@ tag import="com.hhly.smartdata.dto.constant.SysConstant" %>
 <%@ tag import="com.hhly.smartdata.model.authentication.Menu" %>
 <%@ tag import="java.util.List" %>
 <%@ tag import="java.util.Map" %>

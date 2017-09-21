@@ -2,7 +2,7 @@ package com.hhly.smartdata.controller.authentication;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.hhly.smartdata.constant.SysConstant;
+import com.hhly.smartdata.dto.constant.SysConstant;
 import com.hhly.smartdata.model.authentication.*;
 import com.hhly.smartdata.service.authentication.FunctionService;
 import com.hhly.smartdata.service.authentication.PermissionService;

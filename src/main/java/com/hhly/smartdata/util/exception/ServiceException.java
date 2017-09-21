@@ -1,4 +1,4 @@
-package com.hhly.smartdata.exception;
+package com.hhly.smartdata.util.exception;
 
 public class ServiceException extends RuntimeException{
 

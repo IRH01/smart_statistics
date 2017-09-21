@@ -1,4 +1,4 @@
-package com.hhly.smartdata.exception;
+package com.hhly.smartdata.util.exception;
 
 import org.apache.shiro.authc.AuthenticationException;
 

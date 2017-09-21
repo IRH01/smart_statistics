@@ -6,22 +6,22 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 public class SessionUtil{
-    public static void setSessAttr(String key, Object value){
+    public static void setSessionAttr(String key, Object value){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         request.getSession().setAttribute(key, value);
     }
 
-    public static void removeSessAllAttr(){
+    public static void removeSessionAllAttr(){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         request.getSession().invalidate();
     }
 
-    public static Object getSessAttr(String key){
+    public static Object getSessionAttr(String key){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return request.getSession().getAttribute(key);
     }
 
-    public static void removeSessAttr(String key){
+    public static void removeSessionAttr(String key){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         request.getSession().removeAttribute(key);
     }

@@ -1,6 +1,4 @@
-package com.hhly.smartdata.constant;
-
-import java.io.File;
+package com.hhly.smartdata.dto.constant;
 
 /**
  *

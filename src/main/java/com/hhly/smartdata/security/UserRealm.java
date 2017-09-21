@@ -3,7 +3,7 @@ package com.hhly.smartdata.security;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.hhly.smartdata.constant.SysConstant;
+import com.hhly.smartdata.dto.constant.SysConstant;
 import com.hhly.smartdata.model.authentication.Menu;
 import com.hhly.smartdata.model.authentication.Role;
 import com.hhly.smartdata.model.authentication.User;
