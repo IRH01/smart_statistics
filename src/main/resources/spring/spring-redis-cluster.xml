@@ -13,67 +13,46 @@
         <property name="testWhileIdle" value="true"/>
     </bean>
 
-    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool" destroy-method="destroy">
-        <constructor-arg ref="jedisPoolConfig"/>
+    <bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
         <constructor-arg>
-            <list>
-                <bean class="redis.clients.jedis.JedisShardInfo">
+            <set>
+                <bean class="redis.clients.jedis.HostAndPort">
                     <constructor-arg index="0" value="192.168.1.10"/>
                     <constructor-arg index="1" value="7000"/>
-                    <constructor-arg index="2" value="instance:01"/>
                 </bean>
-                <bean class="redis.clients.jedis.JedisShardInfo">
+                <bean class="redis.clients.jedis.HostAndPort">
                     <constructor-arg index="0" value="192.168.1.10"/>
                     <constructor-arg index="1" value="7001"/>
-                    <constructor-arg index="2" value="instance:02"/>
                 </bean>
-                <bean class="redis.clients.jedis.JedisShardInfo">
+                <bean class="redis.clients.jedis.HostAndPort">
                     <constructor-arg index="0" value="192.168.1.10"/>
                     <constructor-arg index="1" value="7002"/>
-                    <constructor-arg index="2" value="instance:03"/>
                 </bean>
-                <bean class="redis.clients.jedis.JedisShardInfo">
+                <bean class="redis.clients.jedis.HostAndPort">
                     <constructor-arg index="0" value="192.168.1.12"/>
                     <constructor-arg index="1" value="7000"/>
-                    <constructor-arg index="2" value="instance:04"/>
                 </bean>
-                <bean class="redis.clients.jedis.JedisShardInfo">
+                <bean class="redis.clients.jedis.HostAndPort">
                     <constructor-arg index="0" value="192.168.1.12"/>
                     <constructor-arg index="1" value="7001"/>
-                    <constructor-arg index="2" value="instance:05"/>
                 </bean>
-                <bean class="redis.clients.jedis.JedisShardInfo">
+                <bean class="redis.clients.jedis.HostAndPort">
                     <constructor-arg index="0" value="192.168.1.12"/>
                     <constructor-arg index="1" value="7002"/>
-                    <constructor-arg index="2" value="instance:06"/>
                 </bean>
-                <bean class="redis.clients.jedis.JedisShardInfo">
+                <bean class="redis.clients.jedis.HostAndPort">
                     <constructor-arg index="0" value="192.168.1.13"/>
                     <constructor-arg index="1" value="7000"/>
-                    <constructor-arg index="2" value="instance:07"/>
                 </bean>
-                <bean class="redis.clients.jedis.JedisShardInfo">
+                <bean class="redis.clients.jedis.HostAndPort">
                     <constructor-arg index="0" value="192.168.1.13"/>
                     <constructor-arg index="1" value="7001"/>
-                    <constructor-arg index="2" value="instance:08"/>
                 </bean>
-                <bean class="redis.clients.jedis.JedisShardInfo">
+                <bean class="redis.clients.jedis.HostAndPort">
                     <constructor-arg index="0" value="192.168.1.13"/>
                     <constructor-arg index="1" value="7002"/>
-                    <constructor-arg index="2" value="instance:09"/>
                 </bean>
-            </list>
+            </set>
         </constructor-arg>
     </bean>
-
-    <!--&lt;!&ndash;java帮我们同步sentinel的信息，将主从信息同步到客户端来&ndash;&gt;-->
-    <!--<bean class="redis.clients.jedis.JedisSentinelPool">-->
-        <!--<constructor-arg index="0" value="mymaster"/>-->
-        <!--<constructor-arg index="1">-->
-            <!--<set>-->
-                <!--<value>127.0.0.1:26379</value>-->
-            <!--</set>-->
-        <!--</constructor-arg>-->
-        <!--<constructor-arg index="2" ref="jedisPoolConfig"/>-->
-    <!--</bean>-->
 </beans>
