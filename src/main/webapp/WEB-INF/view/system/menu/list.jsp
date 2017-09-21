@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -360,9 +360,8 @@
     }
 
     function onShowPermissionTree() {
-        var compamyinput = $("#permission");
-        var companyinputOffset = $("#permission").offset();
-        $("#permissionContent").css({top: compamyinput.outerHeight() + "px"}).slideDown("fast");
+        var compamyInput = $("#permission");
+        $("#permissionContent").css({top: compamyInput.outerHeight() + "px"}).slideDown("fast");
         $("body").bind("mousedown", onPermissionBodyDown);
     }
 

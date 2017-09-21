@@ -3,6 +3,7 @@ package com.hhly.smartdata.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -15,34 +16,35 @@ import java.util.List;
  * Created by Iritchie.ren on 2017/9/21.
  */
 @Configuration
+@Profile("default")
 public class RedisConfig{
 
-    @Value("${redis.maxIdle}")
-    private int maxIdle;
+    @Value("#{configProperties['redis.maxIdle']}")
+    private Integer maxIdle;
 
-    @Value("${redis.maxWait}")
-    private int maxWait;
+    @Value("#{configProperties['redis.maxWait']}")
+    private Integer maxWait;
 
-    @Value("${redis.testOnBorrow}")
+    @Value("#{configProperties['redis.testOnBorrow']}")
     private boolean testOnBorrow;
 
-    @Value("${redis.model}")
+    @Value("#{configProperties['redis.model']}")
     private String model;
 
-    @Value("${redis.cluster.nodes}")
+    @Value("#{configProperties['redis.cluster.nodes']}")
     private List<String> nodes;
 
-    @Value("${redis.standalone.hostName}")
+    @Value("#{configProperties['redis.standalone.hostName']}")
     private String hostName;
 
-    @Value("${redis.port}")
-    private int port;
+    @Value("#{configProperties['redis.port']}")
+    private Integer port;
 
-    @Value("${redis.password}")
+    @Value("#{configProperties['redis.password']}")
     private String password;
 
-    @Value("${redis.timeout}")
-    private int timeout;
+    @Value("#{configProperties['redis.timeout']}")
+    private Integer timeout;
 
     @Bean
     public RedisTemplate redisTemplate(JedisConnectionFactory jedisConnectionFactory, StringRedisSerializer stringRedisSerializer){
