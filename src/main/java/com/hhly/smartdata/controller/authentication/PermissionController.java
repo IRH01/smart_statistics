@@ -1,6 +1,7 @@
 package com.hhly.smartdata.controller.authentication;
 
 import com.alibaba.fastjson.JSON;
+import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.authentication.Permission;
 import com.hhly.smartdata.service.authentication.PermissionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

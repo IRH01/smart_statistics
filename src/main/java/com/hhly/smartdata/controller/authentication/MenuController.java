@@ -2,6 +2,7 @@ package com.hhly.smartdata.controller.authentication;
 
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
+import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.authentication.Menu;
 import com.hhly.smartdata.service.authentication.MenuService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -28,7 +29,7 @@ public class MenuController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("/list.do")
+    @RequestMapping("/list")
     @RequiresPermissions("sys_menu_list")
     public String list(){
         return "system/menu/list";
@@ -55,7 +56,7 @@ public class MenuController extends BaseController{
         return JSONArray.toJSONString(menuList);
     }
 
-    @RequestMapping("/sort.do")
+    @RequestMapping("/sort")
     @RequiresPermissions("sys_menu_sort")
     @ResponseBody
     public Map<String, Integer> sort(@RequestParam String menuTree){

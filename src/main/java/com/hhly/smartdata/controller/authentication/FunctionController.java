@@ -2,6 +2,7 @@ package com.hhly.smartdata.controller.authentication;
 
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Maps;
+import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.service.authentication.FunctionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

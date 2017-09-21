@@ -1,6 +1,7 @@
 package com.hhly.smartdata.controller.authentication;
 
 import com.google.common.collect.Maps;
+import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.authentication.Admin;
 import com.hhly.smartdata.model.authentication.Role;
 import com.hhly.smartdata.model.authentication.User;
