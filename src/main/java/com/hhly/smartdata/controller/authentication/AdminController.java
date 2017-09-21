@@ -26,7 +26,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/admin")
-public class AdminController{
+public class AdminController extends BaseController{
     private final static Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
     @Autowired
     private UserService userService;

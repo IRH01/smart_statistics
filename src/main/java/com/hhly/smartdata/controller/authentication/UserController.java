@@ -19,7 +19,7 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequestMapping("/sys/user")
-public class UserController{
+public class UserController extends BaseController{
 
     @Autowired
     private UserService userService;

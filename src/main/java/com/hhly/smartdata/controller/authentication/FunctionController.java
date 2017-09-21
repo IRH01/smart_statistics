@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/sys/func")
-public class FunctionController{
+public class FunctionController extends BaseController{
 
     @Autowired
     private FunctionService functionService;

@@ -1,7 +1,7 @@
 package com.hhly.smartdata.controller.authentication;
 
 import com.google.code.kaptcha.Producer;
-import com.hhly.smartdata.dto.constant.SysConstant;
+import com.hhly.smartdata.util.SysConstant;
 import com.hhly.smartdata.util.exception.IncorrectCaptchaException;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.UserService;
@@ -32,7 +32,7 @@ import java.awt.image.BufferedImage;
 import java.util.Date;
 
 @Controller
-public class LoginController{
+public class LoginController extends BaseController{
 
     @Autowired
     private Producer captchaProducer;

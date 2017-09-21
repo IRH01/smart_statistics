@@ -1,4 +1,4 @@
-package com.hhly.smartdata.dto.constant;
+package com.hhly.smartdata.util;
 
 /**
  *
