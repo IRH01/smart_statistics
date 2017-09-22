@@ -9,11 +9,17 @@ import java.net.UnknownHostException;
  * Created by Iritchie.ren on 2017/9/21.
  */
 public class Result implements Serializable{
-    private static final String SUCCESS_MSG = "操作成功";
-
-    private static int STATUS_OK = 200;
-    private int status = STATUS_OK;
-    private String message = SUCCESS_MSG;
+    /**
+     * 返回状态码
+     */
+    private int status = ResultCode.OK;
+    /**
+     * 返回提示信息
+     */
+    private String message = ResultCode.getMsg(ResultCode.OK);
+    /**
+     * 返回数据
+     */
     private Object data;
 
     public Result(){
@@ -23,21 +29,17 @@ public class Result implements Serializable{
     public static Result success(Object data){
         Result result = new Result();
         result.setStatus(ResultCode.OK);
-        result.setMessage(SUCCESS_MSG);
+        result.setMessage(ResultCode.getMsg(ResultCode.OK));
         result.setData(data);
         return result;
     }
 
-    public static String getSuccessMsg(){
-        return SUCCESS_MSG;
-    }
-
-    public static int getStatusOk(){
-        return STATUS_OK;
-    }
-
-    public static void setStatusOk(int statusOk){
-        STATUS_OK = statusOk;
+    public static Result fail(){
+        Result result = new Result();
+        result.setStatus(ResultCode.ERROR_CODE);
+        result.setMessage(ResultCode.getMsg(ResultCode.ERROR_CODE));
+        result.setData(null);
+        return result;
     }
 
     public int getStatus(){

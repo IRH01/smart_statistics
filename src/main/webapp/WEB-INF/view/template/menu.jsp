@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.hhly.smartdata.util.SysConstant"%>
-<%@ page import="com.hhly.smartdata.model.authentication.Menu"%>
-<%@ page import="java.util.Map"%>
-<%@include file="/WEB-INF/view/template/taglib.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.hhly.smartdata.model.authentication.Menu" %>
+<%@ page import="com.hhly.smartdata.util.SysConstant" %>
+<%@ page import="java.util.Map" %>
+<%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <%
     String menuId = request.getParameter("menuId");
-    if (menuId != null) {
+    if(menuId != null){
         Map<Integer, Menu> menuMap = (Map) session.getAttribute(SysConstant.SESSION_MENU_MAP);
-        if(menuMap.keySet().contains(Integer.valueOf(menuId))) {
+        if(menuMap.keySet().contains(Integer.valueOf(menuId))){
             session.setAttribute("menuId", menuId);
         }else{
-            session.setAttribute("menuId",0);
+            session.setAttribute("menuId", 0);
         }
     }
 %>
@@ -35,42 +35,53 @@
 
     var zNodes = [
         <c:forEach items="${sessionScope.session_user_menu}" varStatus="status" var="menu">
-        { id: ${menu.id}, pId: ${menu.parentId}, name: "${menu.name}"<c:if test="${null != menu.url && !fn:contains(menu.url, '?')}">, url: "<c:url value="/${menu.url}?menuId=${menu.id}"/>", target: "_self"</c:if><c:if test="${null != menu.url && fn:contains(menu.url, '?')}">, url: "<c:url value="/${menu.url}&menuId=${menu.id}"/>", target: "_self"</c:if>}<c:if test="${!status.last}">,
+        {
+            id: ${menu.id}, pId: ${menu.parentId}, name: "${menu.name}"
+            <c:if test="${null != menu.url && !fn:contains(menu.url, '?')}">,
+            url: "<c:url value="/${menu.url}?menuId=${menu.id}"/>",
+            target: "_self"
+            </c:if>
+            <c:if test="${null != menu.url && fn:contains(menu.url, '?')}">,
+            url: "<c:url value="/${menu.url}&menuId=${menu.id}"/>",
+            target: "_self"
+            </c:if>
+        }
+        <c:if test="${!status.last}">,
         </c:if>
         </c:forEach>
-
     ];
     //-->
 </script>
 <%--1为管理员--%>
 <c:if test="${sessionScope.session_user.userType==1}">
 
-	<div class="col-lg-2 col-md-3  sider-box">
-		<div class="panel panel-default" id="menuPanel">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#menuPanel"
-						href="#collapseMenu" aria-expanded="true"
-						aria-controls="collapseOne" class=""> 菜单</a>
-				</h4>
-			</div>
-			<div class="panel-collapse collapse in" id="collapseMenu"
-				role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
-				<div class="main-menu">
-					<ul id="menu" class="ztree">
-					</ul>
-				</div>
-			</div>
-		</div>
-		<script>
-            function leafFilter(node){
-                return !node.isParent&&!node.url
+    <div class="col-lg-2 col-md-3  sider-box">
+        <div class="panel panel-default" id="menuPanel">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#menuPanel"
+                       href="#collapseMenu" aria-expanded="true"
+                       aria-controls="collapseOne" class=""> 菜单</a>
+                </h4>
+            </div>
+            <div class="panel-collapse collapse in" id="collapseMenu"
+                 role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
+                <div class="main-menu">
+                    <ul id="menu" class="ztree">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script>
+            function leafFilter(node) {
+                return !node.isParent && !node.url
             }
+
             $().ready(function () {
                 $.fn.zTree.init($("#menu"), setting, zNodes);
                 zTree_Menu = $.fn.zTree.getZTreeObj("menu");
-                $(zTree_Menu.getNodesByFilter(leafFilter)).each(function(i,item){
-                   zTree_Menu.removeNode(item);
+                $(zTree_Menu.getNodesByFilter(leafFilter)).each(function (i, item) {
+                    zTree_Menu.removeNode(item);
                 });
                 if (menuId != null) {
                     curMenu = zTree_Menu.getNodeByParam("id", menuId);
@@ -80,24 +91,24 @@
                 zTree_Menu.selectNode(curMenu);
             });
         </script>
-	</div>
+    </div>
 </c:if>
 
 
 <%--其他用户使用不同的菜单--%>
 <c:if test="${sessionScope.session_user.userType!=1}">
-	<!-- left menu starts -->
-	<ul id="menu" class="ztree" style="display: none">
-	</ul>
-	<div class="col-lg-2 col-md-3  sider-box">
-		<!-- 侧边栏 -->
-		<div class="sider-bar">
-			<ul class="sider-menu" id="siderMenu">
+    <!-- left menu starts -->
+    <ul id="menu" class="ztree" style="display: none">
+    </ul>
+    <div class="col-lg-2 col-md-3  sider-box">
+        <!-- 侧边栏 -->
+        <div class="sider-bar">
+            <ul class="sider-menu" id="siderMenu">
 
-			</ul>
-		</div>
-	</div>
-	<script>
+            </ul>
+        </div>
+    </div>
+    <script>
 
         $(function () {
             $("#siderMenu").empty();
@@ -116,7 +127,7 @@
                     content += "</li>";
                     $("#siderMenu").append(content);
                 } else {
-                    if(item.url){
+                    if (item.url) {
                         $("#siderMenu").append("<li><a href='" + item.url + "'><span>" + item.name + "</span></a></li>");
                     }
                 }
@@ -126,7 +137,7 @@
                 $(this).find(".arrow").toggleClass("cur").parent().parent().siblings('.sub-menu').slideToggle("fast");
             });
             // 一级菜单最后一个li去掉下划线
-            $('#siderMenu>li:last').css('border','none');
+            $('#siderMenu>li:last').css('border', 'none');
             // 二级菜单最后一个li去掉下划线
             $('#siderMenu .sub-menu').each(function () {
                 $(this).find('li:last').css('border', 'none')
@@ -134,7 +145,7 @@
             if (menuId != null) {
                 curMenu = zTree_Menu.getNodeByParam("id", menuId);
                 $("a[href='" + curMenu.url + "']").toggleClass('on');
-                if(curMenu.getParentNode()&&curMenu.getParentNode().id!=0) {
+                if (curMenu.getParentNode() && curMenu.getParentNode().id != 0) {
                     $("a[href='" + curMenu.url + "']").parent().parent().siblings().addClass('on');
                     $("a[href='" + curMenu.url + "']").parent().parent().slideToggle("fast");
                     $("a[href='" + curMenu.url + "']").parent().parent().parent().find('.arrow').addClass('select');

@@ -7,6 +7,7 @@ import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.AdminService;
 import com.hhly.smartdata.service.authentication.RoleService;
 import com.hhly.smartdata.service.authentication.UserService;
+import com.hhly.smartdata.util.Result;
 import com.hhly.smartdata.util.page.Page;
 import com.hhly.smartdata.util.page.PageUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -75,10 +76,10 @@ public class AdminController extends BaseController{
     @RequestMapping("/initPwd")
     @RequiresPermissions("admin_admin_initPwd")
     @ResponseBody
-    public String initPwd(@ModelAttribute User user){
+    public Result initPwd(@ModelAttribute User user){
         user.setPassword(new Md5Hash("123456").toString());
         userService.update(user);
-        return "SUCCESS";
+        return Result.success(null);
     }
 
     /**
@@ -163,10 +164,10 @@ public class AdminController extends BaseController{
      */
     @RequestMapping("/del")
     @ResponseBody
-    public String deleteUser(@RequestParam Integer userId){
+    public Result deleteUser(@RequestParam Integer userId){
         if(0 < adminService.deleteByUserId(userId)){
-            return "SUCCESS";
+            return Result.success(null);
         }
-        return "FAIL";
+        return Result.fail();
     }
 }

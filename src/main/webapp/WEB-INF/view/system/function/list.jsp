@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -288,13 +288,12 @@
     function updateFunc() {
         var url = "/sys/func/update.do"
         var data = {funcTree: JSON.stringify(funcTree.getNodes())};
-        $.post(url,
-            data,
-            function (json) {
+        $.post(url, data,
+            function (result) {
                 layer.alert("保存成功", {
                     icon: 6
                 });
-                $.each(json, function (tId, id) {
+                $.each(result.data, function (tId, id) {
                     funcTree.getNodeByTId(tId).id = id;
                 })
 

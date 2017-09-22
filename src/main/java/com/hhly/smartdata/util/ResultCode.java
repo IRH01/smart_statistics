@@ -12,34 +12,34 @@ public class ResultCode{
     private ResultCode(){
     }
 
-    public static final int OK = 200;
-    public static final int ERROR_CODE = 400;
-    public static final int ERROR_USER = 401;
-    public static final int ERROR_STATUS = 402;
-    public static final int ERROR_DUPLICATE_ENTRY = 403;
-    public static final int ERROR_SYSTEM = 500;
-    public static final int ERROR_PARAMS = 502;
-    public static final int ERROR_MSG_ID = 503;
-    public static final int PROMOTION_MODE_POSITION_EXIST = 504;
-    public static final int QUALIFIED_EXIST = 505;
-    public static final int RACK_BACK_EXIST = 506;
-    public static final int GAME_TYPE_EXIST = 507;
-    public static final int GAME_TYPE_NAME_EXIST = 508;
-    public static final int USER_SETTLEMENT_EXIST = 509;
-    public static final int PARTNER_USER_NOT_EXIST = 510;
-    public static final int WITHDRAWAL_APPLICATION_EXIST = 511;
-    public static final int PROMOTION_MODE_GAME_EXIST = 512;
-    public static final int PROMOTION_EXIST = 513;
-    public static final int PARTNER_USER_STATE_ERROR = 514;
-    public static final int LOGIN_FAIL_ACCOUNT_OR_PASSWORD_ERROR = 515;
-    public static final int LOGIN_FAIL_ACCOUNT_NOT_EXIST = 516;
-    public static final int LOGIN_FAIL_ACCOUNT_NOT_ENABLE = 517;
-    public static final int LOGIN_FAIL_ACCOUNT_UN_CHECK = 518;
-    public static final int LOGIN_FAIL_ACCOUNT_CHECKED_NO = 519;
-    public static final int PARTNER_USER_EXIST = 520;
-    public static final int FUND_LOGIN_PASSWORD_SAME = 521;
-    public static final int PARTNER_PHONE_EXIST = 522;
-    public static final int PARTNER_EMAIL_EXIST = 523;
+    public static final int OK = 1200;
+    public static final int ERROR_CODE = 1400;
+    public static final int ERROR_USER = 1401;
+    public static final int ERROR_STATUS = 1402;
+    public static final int ERROR_DUPLICATE_ENTRY = 1403;
+    public static final int ERROR_SYSTEM = 1500;
+    public static final int ERROR_PARAMS = 1502;
+    public static final int ERROR_MSG_ID = 1503;
+    public static final int PROMOTION_MODE_POSITION_EXIST = 1504;
+    public static final int QUALIFIED_EXIST = 1505;
+    public static final int RACK_BACK_EXIST = 1506;
+    public static final int GAME_TYPE_EXIST = 1507;
+    public static final int GAME_TYPE_NAME_EXIST = 1508;
+    public static final int USER_SETTLEMENT_EXIST = 1509;
+    public static final int PARTNER_USER_NOT_EXIST = 1510;
+    public static final int WITHDRAWAL_APPLICATION_EXIST = 1511;
+    public static final int PROMOTION_MODE_GAME_EXIST = 1512;
+    public static final int PROMOTION_EXIST = 1513;
+    public static final int PARTNER_USER_STATE_ERROR = 1514;
+    public static final int LOGIN_FAIL_ACCOUNT_OR_PASSWORD_ERROR = 1515;
+    public static final int LOGIN_FAIL_ACCOUNT_NOT_EXIST = 1516;
+    public static final int LOGIN_FAIL_ACCOUNT_NOT_ENABLE = 1517;
+    public static final int LOGIN_FAIL_ACCOUNT_UN_CHECK = 1518;
+    public static final int LOGIN_FAIL_ACCOUNT_CHECKED_NO = 1519;
+    public static final int PARTNER_USER_EXIST = 1520;
+    public static final int FUND_LOGIN_PASSWORD_SAME = 1521;
+    public static final int PARTNER_PHONE_EXIST = 1522;
+    public static final int PARTNER_EMAIL_EXIST = 1523;
     public static Map<Integer, String> msgMap = Maps.newHashMap();
 
     static{
@@ -74,6 +74,6 @@ public class ResultCode{
     }
 
     public static String getMsg(int key){
-        return (String) msgMap.get(key);
+        return msgMap.get(key);
     }
 }

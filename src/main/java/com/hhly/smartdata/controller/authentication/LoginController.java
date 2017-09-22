@@ -116,9 +116,9 @@ public class LoginController extends BaseController{
     /*
      * 注册使用,存在不合法
      */
-    @RequestMapping("/validateUserName.do")
+    @RequestMapping("/validateUserName")
     @ResponseBody
-    public boolean ValidateUserName(HttpServletRequest req, HttpServletResponse resp){
+    public boolean ValidateUserName(HttpServletRequest req){
         String usrName = req.getParameter("db.username");
         User usr = userService.getUserByUsername(usrName);
         if(usr == null){
@@ -130,9 +130,9 @@ public class LoginController extends BaseController{
     /*
      * 找回密码使用,存在合法,不存在非法
      */
-    @RequestMapping("/validateUserNameEx.do")
+    @RequestMapping("/validateUserNameEx")
     @ResponseBody
-    public boolean validateUserName(HttpServletRequest req, HttpServletResponse resp){
+    public boolean validateUserName(HttpServletRequest req){
         String usrName = req.getParameter("db.username");
         User usr = userService.getUserByUsername(usrName);
         if(usr == null){
@@ -141,8 +141,8 @@ public class LoginController extends BaseController{
         return true;
     }
 
-    @RequestMapping("/kaptchaImage.do")
-    public ModelAndView getKaptchaImage(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    @RequestMapping("/kaptchaImage")
+    public ModelAndView getKaptchaImage(HttpServletResponse response) throws Exception{
         //如果用户已登录,直接跳转欢迎页面
         Subject subject = SecurityUtils.getSubject();
         if(subject != null && subject.isAuthenticated()){

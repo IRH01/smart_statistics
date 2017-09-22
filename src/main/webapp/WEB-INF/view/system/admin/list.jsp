@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -212,9 +212,12 @@
         layer.confirm("确认要将密码重置为密码“123456”吗？", {
             btn: ["确认", "取消"] //可以无限个按钮
         }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/initPwd.do"/>", {userId: id}, function () {
-                layer.alert("设置成功", {icon: 6});
-            });
+            $.post("<c:url value="/admin/admin/initPwd.do"/>", {userId: id},
+                function (result) {
+                    if (result.status == 1200) {
+                        layer.alert("设置成功", {icon: 6});
+                    }
+                });
         });
     }
 
@@ -224,8 +227,8 @@
         }, function (index, layero) {
             $.post("<c:url value="/admin/admin/del.do"/>", {
                 userId: id
-            }, function (data) {
-                if ("SUCCESS" == data) {
+            }, function (result) {
+                if (result.status == 1200) {
                     layer.alert("删除成功", {
                         icon: 6
                     });

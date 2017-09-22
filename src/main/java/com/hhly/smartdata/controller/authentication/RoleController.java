@@ -2,15 +2,14 @@ package com.hhly.smartdata.controller.authentication;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.hhly.smartdata.util.SysConstant;
 import com.hhly.smartdata.model.authentication.*;
 import com.hhly.smartdata.service.authentication.FunctionService;
 import com.hhly.smartdata.service.authentication.PermissionService;
 import com.hhly.smartdata.service.authentication.RoleService;
+import com.hhly.smartdata.util.Result;
+import com.hhly.smartdata.util.SysConstant;
 import com.hhly.smartdata.util.page.Page;
 import com.hhly.smartdata.util.page.PageUtil;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -114,37 +112,9 @@ public class RoleController extends BaseController{
     @RequestMapping("/{random}/tree")
     @RequiresPermissions(value = {"sys_role_add", "!sys_func_update"}, logical = Logical.OR)
     @ResponseBody
-    public List<Node> tree(HttpServletRequest request, HttpServletResponse response){
+    public Result tree(HttpServletRequest request, HttpServletResponse response){
         User user = (User) request.getSession().getAttribute(SysConstant.SESSION_USER);
-        return nodeList(user.getUserId());
-    }
-
-
-    @RequestMapping("/{random}/edittree")
-    @RequiresPermissions("sys_role_update")
-    @ResponseBody
-    public List<Node> edittree(HttpServletRequest request, HttpServletResponse response){
-        User user = (User) request.getSession().getAttribute(SysConstant.SESSION_USER);
-        Integer roleId = Integer.parseInt((String) request.getParameter("roleId"));
-        /*获取用户的权限*/
-        List<Integer> roleIdList = new ArrayList<Integer>();
-        roleIdList.add(roleId);
-        List<Permission> permissionList = permissionService.queryByRole(roleIdList);
-        /*拼接用户的权限功能树*/
-        List<Node> nodeList = nodeList(user.getUserId());
-        /*判断权限数是否勾选*/
-        for(Node node : nodeList){
-            String id = node.getId();
-            for(Permission permission : permissionList){
-                if(id.equals(permission.getPermission())){
-                    node.setChecked(true);
-                }
-                if(id.equals(permission.getFunctionId())){
-                    node.setChecked(true);
-                }
-            }
-        }
-        return nodeList;
+        return Result.success(nodeList(user.getUserId()));
     }
 
     /*获取系统的功能权限树*/
@@ -193,26 +163,5 @@ public class RoleController extends BaseController{
             return null;
         }
         return nodeList;
-    }
-
-    @RequestMapping("/validateRoleName")
-    @ResponseBody
-    public boolean validateRoleName(HttpServletRequest req, HttpServletResponse resp){
-        String roleName = req.getParameter("name");
-        String roleId = req.getParameter("id");
-        Role roleCondition = new Role();
-        roleCondition.setName(roleName);
-        List<Role> roles = roleService.search(roleCondition, new Page());
-        if(!CollectionUtils.isEmpty(roles)){
-            //若有传id说明是修改情况，则查询出的roleId与参数roleId不同时，说明不重复，校验成功
-            if(!StringUtils.isEmpty(roleId) && !"null".equalsIgnoreCase(roleId)){
-                Role role = roles.get(0);//获取角色
-                if(role != null && roleId.equalsIgnoreCase(role.getId().toString())){
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
     }
 }

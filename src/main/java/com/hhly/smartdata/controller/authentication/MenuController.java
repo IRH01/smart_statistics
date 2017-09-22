@@ -37,21 +37,14 @@ public class MenuController extends BaseController{
 
     @RequestMapping("/menuList")
     @ResponseBody
-    public String menuList(){
+    public Result menuList(){
         List<Menu> menuList = menuService.getAll();
-        return JSONArray.toJSONString(menuList);
+        return Result.success(menuList);
     }
-
-//    @RequestMapping("/menuList")
-//    @ResponseBody
-//    public Result menuList(){
-//        List<Menu> menuList = menuService.getAll();
-//        return Result.success(menuList);
-//    }
 
     @RequestMapping("/menuListByRole")
     @ResponseBody
-    public String menuListByRole(HttpServletRequest req){
+    public Result menuListByRole(HttpServletRequest req){
         String ids = req.getParameter("roleIds");
         String[] idList = ids.split(",");
         List<Integer> roleIds = Lists.newArrayList();
@@ -60,7 +53,7 @@ public class MenuController extends BaseController{
             roleIds.add(roleId);
         }
         List<Menu> menuList = menuService.getMenuListByRole(roleIds);
-        return JSONArray.toJSONString(menuList);
+        return Result.success(menuList);
     }
 
     @RequestMapping("/sort")

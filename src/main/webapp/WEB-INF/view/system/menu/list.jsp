@@ -141,7 +141,7 @@
 <script type="text/javascript">
 
     var menuTree, rMenu;
-    var funcSetting = {
+    var list_setting = {
         view: {
             showLine: true,
             selectedMulti: false
@@ -156,7 +156,10 @@
         },
         data: {
             simpleData: {
-                enable: true
+                enable: true,
+                idKey: "id",
+                pIdKey: "parentId",
+                rootPId: 0
             }
         },
         callback: {
@@ -310,8 +313,7 @@
     $(document).ready(function () {
         $.post("/sys/menu/menuList.do",
             function (result) {
-                debugger;
-                $.fn.zTree.init($("#menuTree"), funcSetting, result);
+                $.fn.zTree.init($("#menuTree"), list_setting, result.data);
                 menuTree = $.fn.zTree.getZTreeObj("menuTree");
                 <shiro:hasPermission name="!sys_menu_update">
                 menuTree.setting.edit.showRenameBtn = true;
@@ -383,8 +385,9 @@
         $.ajax({
             url: "/sys/role/" + Math.random() + "/tree.do",
             dataType: "json",
-            success: function (data) {
-                if (null != data && data.length > 0) {
+            success: function (result) {
+                var data = result.data;
+                if (data != null && data.length > 0) {
                     for (var i = 0; i < data.length; i++) {
                         //非叶子节点
                         if (!data[i].leaf) {

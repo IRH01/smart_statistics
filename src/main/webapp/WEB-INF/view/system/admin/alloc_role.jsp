@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -167,8 +167,8 @@
         if (ids != "") {
             ids = ids.substring(0, ids.lastIndexOf(","));
             $.post("/sys/menu/menuListByRole.do?", {'roleIds': ids},
-                function (json) {
-                    $.fn.zTree.init($("#menuTree"), funcSetting, json);
+                function (result) {
+                    $.fn.zTree.init($("#menuTree"), funcSetting, result.data);
                     menuTree = $.fn.zTree.getZTreeObj("menuTree");
                     $(menuTree.getNodesByFilter(leafFilter)).each(function (i, item) {
                         menuTree.removeNode(item);
@@ -235,8 +235,8 @@
         $.ajax({
             url: "/sys/role/" + Math.random() + "/tree.do",
             dataType: "json",
-            success: function (date) {
-                $.fn.zTree.init($("#treeDemo"), CompanySetting, date);
+            success: function (result) {
+                $.fn.zTree.init($("#treeDemo"), CompanySetting, result.date);
             }
         });
         checkMove();

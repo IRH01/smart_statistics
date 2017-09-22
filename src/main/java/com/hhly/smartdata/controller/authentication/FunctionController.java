@@ -3,6 +3,7 @@ package com.hhly.smartdata.controller.authentication;
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Maps;
 import com.hhly.smartdata.service.authentication.FunctionService;
+import com.hhly.smartdata.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,8 +32,8 @@ public class FunctionController extends BaseController{
     @RequestMapping("/update")
     @RequiresPermissions("!sys_func_update")
     @ResponseBody
-    public Map<String, Integer> update(@RequestParam("funcTree") String funcTree){
+    public Result update(@RequestParam("funcTree") String funcTree){
         Map<String, Integer> result = functionService.batchUpdateFuncs(JSONArray.parseArray(funcTree), 0);
-        return result;
+        return Result.success(result);
     }
 }
