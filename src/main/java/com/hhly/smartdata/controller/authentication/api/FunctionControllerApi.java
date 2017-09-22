@@ -1,4 +1,4 @@
-package com.hhly.smartdata.controller.authentication;
+package com.hhly.smartdata.controller.authentication.api;
 
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Maps;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/sys/func")
-public class FunctionController extends BaseController{
+public class FunctionControllerApi extends BaseControllerApi{
 
     @Autowired
     private FunctionService functionService;

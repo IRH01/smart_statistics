@@ -1,4 +1,4 @@
-package com.hhly.smartdata.controller.authentication;
+package com.hhly.smartdata.controller.authentication.api;
 
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.UserService;
@@ -19,7 +19,7 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequestMapping("/sys/user")
-public class UserController extends BaseController{
+public class UserControllerApi extends BaseControllerApi{
 
     @Autowired
     private UserService userService;

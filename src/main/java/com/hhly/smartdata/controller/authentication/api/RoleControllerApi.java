@@ -1,4 +1,4 @@
-package com.hhly.smartdata.controller.authentication;
+package com.hhly.smartdata.controller.authentication.api;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -28,7 +28,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/sys/role")
-public class RoleController extends BaseController{
+public class RoleControllerApi extends BaseControllerApi{
     @Autowired
     public RoleService roleService;
     @Autowired

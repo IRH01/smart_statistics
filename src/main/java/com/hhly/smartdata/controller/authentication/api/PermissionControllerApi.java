@@ -1,4 +1,4 @@
-package com.hhly.smartdata.controller.authentication;
+package com.hhly.smartdata.controller.authentication.api;
 
 import com.alibaba.fastjson.JSON;
 import com.hhly.smartdata.model.authentication.Permission;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/sys/perm")
-public class PermissionController extends BaseController{
+public class PermissionControllerApi extends BaseControllerApi{
     @Autowired
     private PermissionService permissionService;
 
