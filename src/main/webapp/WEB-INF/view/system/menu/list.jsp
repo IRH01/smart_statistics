@@ -309,8 +309,9 @@
 
     $(document).ready(function () {
         $.post("/sys/menu/menuList.do",
-            function (json) {
-                $.fn.zTree.init($("#menuTree"), funcSetting, json);
+            function (result) {
+                debugger;
+                $.fn.zTree.init($("#menuTree"), funcSetting, result);
                 menuTree = $.fn.zTree.getZTreeObj("menuTree");
                 <shiro:hasPermission name="!sys_menu_update">
                 menuTree.setting.edit.showRenameBtn = true;

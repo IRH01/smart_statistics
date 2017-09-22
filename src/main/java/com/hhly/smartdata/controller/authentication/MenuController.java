@@ -2,9 +2,9 @@ package com.hhly.smartdata.controller.authentication;
 
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
-import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.authentication.Menu;
 import com.hhly.smartdata.service.authentication.MenuService;
+import com.hhly.smartdata.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +41,13 @@ public class MenuController extends BaseController{
         List<Menu> menuList = menuService.getAll();
         return JSONArray.toJSONString(menuList);
     }
+
+//    @RequestMapping("/menuList")
+//    @ResponseBody
+//    public Result menuList(){
+//        List<Menu> menuList = menuService.getAll();
+//        return Result.success(menuList);
+//    }
 
     @RequestMapping("/menuListByRole")
     @ResponseBody

@@ -1,6 +1,5 @@
 package com.hhly.smartdata.controller.authentication;
 
-import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.UserService;
 import org.apache.shiro.crypto.hash.Md5Hash;

@@ -1,7 +1,6 @@
 package com.hhly.smartdata.controller.authentication;
 
 import com.google.code.kaptcha.Producer;
-import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.util.SysConstant;
 import com.hhly.smartdata.util.exception.IncorrectCaptchaException;
 import com.hhly.smartdata.model.authentication.User;
