@@ -13,12 +13,12 @@ DROP TABLE IF EXISTS interval_source_report;
 DROP TABLE IF EXISTS daily_composite_report;
 DROP TABLE IF EXISTS daily_register_report;
 DROP TABLE IF EXISTS daily_recharge_report;
-DROP TABLE IF EXISTS daily_loign_game_report;
+DROP TABLE IF EXISTS daily_login_report;
 DROP TABLE IF EXISTS daily_Keep_record_report;
 DROP TABLE IF EXISTS month_composite_report;
 DROP TABLE IF EXISTS month_register_report;
 DROP TABLE IF EXISTS month_recharge_report;
-DROP TABLE IF EXISTS month_loign_game_report;
+DROP TABLE IF EXISTS month_login_report;
 
 CREATE TABLE `tbl_admin` (
    `ID` DOUBLE NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -31,7 +31,7 @@ CREATE TABLE `tbl_admin` (
    `TYPE` DOUBLE DEFAULT NULL COMMENT '类型',
    PRIMARY KEY (`ID`),
    UNIQUE KEY `tbl_admin_pk` (`ID`)
-) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ;
 
 
 CREATE TABLE `tbl_function` (
@@ -111,7 +111,7 @@ CREATE TABLE interval_game_launch_report
    launch_count         INT(10) NOT NULL DEFAULT 0 COMMENT '老用户充值次数',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='平台实时统计，游戏启动统计';;
 
 /*==============================================================*/
 /* Table: interface_statistic                                   */
@@ -125,7 +125,7 @@ CREATE TABLE interval_interface_report
    operate_count        INT(10) NOT NULL DEFAULT 0 COMMENT '操作次数',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='平台实时统计，接口统计';
 
 /*==============================================================*/
 /* Table: source_time_interval_statistics                       */
@@ -142,7 +142,7 @@ CREATE TABLE interval_source_report
    recharge_amount      DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '充值金额',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='平台实时统计，各端实时统计';
 
 /*==============================================================*/
 /* Table: daily_composite_report                                */
@@ -168,7 +168,7 @@ CREATE TABLE daily_composite_report
    next_day_stay_count   INT(10) NOT NULL DEFAULT 0 COMMENT '次日留存',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='日报表，综合报表';
 
 /*==============================================================*/
 /* Table: daily_register_source_report                          */
@@ -188,7 +188,7 @@ create table daily_register_report
    android_install_count INT(10) NOT NULL DEFAULT 0 COMMENT 'android安装量',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='日报表，注册来源统计报表';
 
 /*==============================================================*/
 /* Table: daily_loign_source_report                          */
@@ -205,12 +205,12 @@ create table daily_recharge_report
    old_recharge_population      INT(10) NOT NULL DEFAULT 0 COMMENT '老用户充值人数',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='日报表，充值来源统计报表';
 
 /*==============================================================*/
 /* Table: 登录来源统计                         */
 /*==============================================================*/
-create table daily_loign_game_report
+create table daily_login_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，充值来源统计报表',
    game_code            VARCHAR(64) NOT NULL DEFAULT '' COMMENT '游戏编码',
@@ -221,7 +221,7 @@ create table daily_loign_game_report
    play_population      INT(10) NOT NULL DEFAULT 0 COMMENT '玩游戏人数',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='日报表，充值来源统计报表';
 
 /*==============================================================*/
 /* Table: 留存分析                         */
@@ -243,7 +243,7 @@ create table daily_Keep_record_report
    thirty       INT(10) NOT NULL DEFAULT 0 COMMENT '30天后留存',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='日报表，充值来源统计报表';
 
 /*==============================================================*/
 /* Table: month_composite_report                                */
@@ -269,7 +269,7 @@ CREATE TABLE month_composite_report
    next_day_stay_count   INT(10) NOT NULL DEFAULT 0 COMMENT '次日留存',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='月报表，综合报表';
 
 /*==============================================================*/
 /* Table: month_register_source_report                          */
@@ -289,7 +289,7 @@ create table month_register_report
    android_install_count INT(10) NOT NULL DEFAULT 0 COMMENT 'android安装量',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='月报表，注册来源统计报表';
 
 /*==============================================================*/
 /* Table: month_loign_source_report                          */
@@ -306,12 +306,12 @@ create table month_recharge_report
    old_recharge_population      INT(10) NOT NULL DEFAULT 0 COMMENT 'PC-老用户充值人数',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='月报表，充值来源统计报表';
 
 /*==============================================================*/
 /* Table: 登录来源统计                         */
 /*==============================================================*/
-create table month_loign_game_report
+create table month_login_report
 (
    id                   BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，充值来源统计报表',
    game_code            VARCHAR(64) NOT NULL DEFAULT '' COMMENT '游戏编码',
@@ -322,6 +322,6 @@ create table month_loign_game_report
    play_population      INT(10) NOT NULL DEFAULT 0 COMMENT '玩游戏人数',
    execute_time         DATETIME DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`)
-)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='日报表，充值来源统计报表';
 
 

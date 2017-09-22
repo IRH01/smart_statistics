@@ -2,6 +2,7 @@ package com.hhly.smartdata.controller.authentication.api;
 
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
+import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.authentication.Menu;
 import com.hhly.smartdata.service.authentication.MenuService;
 import com.hhly.smartdata.util.Result;
@@ -19,7 +20,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/sys/menu")
-public class MenuControllerApi extends BaseControllerApi{
+public class MenuControllerApi extends BaseController{
 
     @Autowired
     private MenuService menuService;

@@ -1,5 +1,6 @@
 package com.hhly.smartdata.controller.authentication.api;
 
+import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.UserService;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -19,7 +20,7 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequestMapping("/sys/user")
-public class UserControllerApi extends BaseControllerApi{
+public class UserControllerApi extends BaseController{
 
     @Autowired
     private UserService userService;

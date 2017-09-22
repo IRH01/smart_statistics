@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +30,6 @@
     <script src="<c:url value="/lib/additional-methods.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/lib/jquery-validate.bootstrap-tooltip.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/lib/jquery.validate.custom.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"/>"></script>
     <script src="<c:url value="/lib/dialogsdk.js"/>"></script>
 </head>
 

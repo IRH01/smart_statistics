@@ -1,6 +1,7 @@
 package com.hhly.smartdata.controller.authentication.api;
 
 import com.google.common.collect.Maps;
+import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.authentication.Admin;
 import com.hhly.smartdata.model.authentication.Role;
 import com.hhly.smartdata.model.authentication.User;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/admin")
-public class AdminControllerApi extends BaseControllerApi{
+public class AdminControllerApi extends BaseController{
     private final static Logger LOGGER = LoggerFactory.getLogger(AdminControllerApi.class);
     @Autowired
     private UserService userService;

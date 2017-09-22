@@ -1,6 +1,7 @@
 package com.hhly.smartdata.controller.authentication.api;
 
 import com.google.code.kaptcha.Producer;
+import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.util.SysConstant;
 import com.hhly.smartdata.util.exception.IncorrectCaptchaException;
 import com.hhly.smartdata.model.authentication.User;
@@ -32,7 +33,7 @@ import java.awt.image.BufferedImage;
 import java.util.Date;
 
 @Controller
-public class LoginControllerApi extends BaseControllerApi{
+public class LoginControllerApi extends BaseController{
 
     @Autowired
     private Producer captchaProducer;
@@ -48,7 +49,7 @@ public class LoginControllerApi extends BaseControllerApi{
         return "system/main";
     }
 
-    @RequestMapping("/login.do")
+    @RequestMapping("/login")
     public String login(HttpServletRequest req, HttpServletResponse resp){
         //如果用户已登录,直接跳转欢迎页面
         Subject subject = SecurityUtils.getSubject();
@@ -68,49 +69,6 @@ public class LoginControllerApi extends BaseControllerApi{
             req.setAttribute("msg", "系统异常,暂时无法登陆!");
         }
         return "/login/login";
-    }
-
-    @RequestMapping("/forgetPassWord.do")
-    public String forgetPassWord(Model model){
-        return "/login/passwordget";
-    }
-
-    @RequestMapping("/validateResetPassWord.do")
-    public String validateResetPassWord(HttpServletRequest req, Model model){
-        try{
-            String deUrl = req.getParameter(key);
-            String decodeUrl;
-
-            decodeUrl = SecurityUtil.decrypt(key, deUrl);
-
-            if(decodeUrl.indexOf(",") < -1){
-                return "errorDisable";
-            }
-            String nameAndTime[] = decodeUrl.split(",");
-            String time = nameAndTime[1];
-            Date date = DateUtil.string2Date(time, "yyyy-MM-dd HH:mm:ss");
-            Date now = new Date();
-            if(date.before(now)){
-                return "errorDisable";
-            }
-            String enUserName = SecurityUtil.encrypt(key, nameAndTime[0]);
-            model.addAttribute("db.username", enUserName);
-
-            return "/login/resetPassword";
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return "error";
-    }
-
-    @RequestMapping("/resetPassWord.do")
-    public String resetPassWord(@ModelAttribute User us, Model model) throws Exception{
-        String deUserName = SecurityUtil.decrypt(key, us.getUsername());
-        User usr = userService.getUserByUsername(deUserName);
-        usr.setPassword(new Md5Hash(us.getPassword()).toString());
-        userService.update(usr);
-        return "/login/successReset";
-
     }
 
     /*
