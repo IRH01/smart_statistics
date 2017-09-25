@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * UserService Tester.
+ * FunctionService Tester.
  *
  * @author Iritchie.ren
  * @version 1.0
@@ -18,31 +18,47 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/spring/spring-context.xml"})
 @Transactional
-public class UserServiceTest extends BaseTest{
+public class FunctionServiceTest extends BaseTest{
     @Autowired
-    private UserService UserService;
+    private FunctionService FunctionService;
 
     /**
-     * Method: getUserByUsername(String username)
+     * Method: getAll()
      */
     @Test
-    public void testGetUserByUsername() throws Exception{
+    public void testGetAll() throws Exception{
         //TODO: Test goes here...
     }
 
     /**
-     * Method: update(User user)
+     * Method: save(Function function)
+     */
+    @Test
+    public void testSave() throws Exception{
+        //TODO: Test goes here...
+    }
+
+    /**
+     * Method: updateFuncTree(JSONArray funcTree, Integer parentId)
+     */
+    @Test
+    public void testUpdateFuncTree() throws Exception{
+        //TODO: Test goes here...
+    }
+
+    /**
+     * Method: batchUpdateFuncs(JSONArray funcTree, Integer parentId)
+     */
+    @Test
+    public void testBatchUpdateFuncs() throws Exception{
+        //TODO: Test goes here...
+    }
+
+    /**
+     * Method: update(Function function)
      */
     @Test
     public void testUpdate() throws Exception{
-        //TODO: Test goes here...
-    }
-
-    /**
-     * Method: getUser(Integer id)
-     */
-    @Test
-    public void testGetUser() throws Exception{
         //TODO: Test goes here...
     }
 
@@ -51,6 +67,14 @@ public class UserServiceTest extends BaseTest{
      */
     @Test
     public void testDelete() throws Exception{
+        //TODO: Test goes here...
+    }
+
+    /**
+     * Method: queryByRole(List<Integer> roleIds)
+     */
+    @Test
+    public void testQueryByRole() throws Exception{
         //TODO: Test goes here...
     }
 

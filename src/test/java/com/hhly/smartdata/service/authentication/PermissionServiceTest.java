@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * UserService Tester.
+ * PermissionService Tester.
  *
  * @author Iritchie.ren
  * @version 1.0
@@ -18,39 +18,55 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/spring/spring-context.xml"})
 @Transactional
-public class UserServiceTest extends BaseTest{
+public class PermissionServiceTest extends BaseTest{
     @Autowired
-    private UserService UserService;
+    private PermissionService PermissionService;
 
     /**
-     * Method: getUserByUsername(String username)
+     * Method: searchPerms(Permission perm)
      */
     @Test
-    public void testGetUserByUsername() throws Exception{
+    public void testSearchPerms() throws Exception{
         //TODO: Test goes here...
     }
 
     /**
-     * Method: update(User user)
-     */
-    @Test
-    public void testUpdate() throws Exception{
-        //TODO: Test goes here...
-    }
-
-    /**
-     * Method: getUser(Integer id)
-     */
-    @Test
-    public void testGetUser() throws Exception{
-        //TODO: Test goes here...
-    }
-
-    /**
-     * Method: delete(Integer id)
+     * Method: delete(Permission condition)
      */
     @Test
     public void testDelete() throws Exception{
+        //TODO: Test goes here...
+    }
+
+    /**
+     * Method: batchUpdatePerms(Integer funcId, List<Permission> perms)
+     */
+    @Test
+    public void testBatchUpdatePerms() throws Exception{
+        //TODO: Test goes here...
+    }
+
+    /**
+     * Method: save(Permission permission)
+     */
+    @Test
+    public void testSave() throws Exception{
+        //TODO: Test goes here...
+    }
+
+    /**
+     * Method: queryByRole(List<Integer> roleIds)
+     */
+    @Test
+    public void testQueryByRole() throws Exception{
+        //TODO: Test goes here...
+    }
+
+    /**
+     * Method: getAll()
+     */
+    @Test
+    public void testGetAll() throws Exception{
         //TODO: Test goes here...
     }
 

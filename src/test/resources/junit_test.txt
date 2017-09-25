@@ -1,0 +1,84 @@
+########################################################################################
+##
+## Available variables:
+##         $entryList.methodList - List of method composites
+##         $entryList.privateMethodList - List of private method composites
+##         $entryList.fieldList - ArrayList of class scope field names
+##         $entryList.className - class name
+##         $entryList.packageName - package name
+##         $today - Todays date in MM/dd/yyyy format
+##
+##            MethodComposite variables:
+##                $method.name - Method Name
+##                $method.signature - Full method signature in String form
+##                $method.reflectionCode - list of strings representing commented out reflection code to access method (Private Methods)
+##                $method.paramNames - List of Strings representing the method's parameters' names
+##                $method.paramClasses - List of Strings representing the method's parameters' classes
+##
+## You can configure the output class name using "testClass" variable below.
+## Here are some examples:
+## Test${entry.ClassName} - will produce TestSomeClass
+## ${entry.className}Test - will produce SomeClassTest
+##
+########################################################################################
+##
+#macro (cap $strIn)$strIn.valueOf($strIn.charAt(0)).toUpperCase()$strIn.substring(1)#end
+#macro (cap2 $strIn)$strIn.valueOf($strIn.charAt(0)).toLowerCase()$strIn.substring(1)#end
+## Iterate through the list and generate testcase for every entry.
+#foreach ($entry in $entryList)
+#set( $testClass="${entry.className}Test")
+##
+package $entry.packageName;
+
+import com.hhly.smartdata.common.BaseTest;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+* ${entry.className} Tester.
+*
+* @author Iritchie.ren
+* @since <pre>$date</pre>
+* @version 1.0
+*/
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"/spring/spring-context.xml"})
+@Transactional
+public class $testClass extends BaseTest{
+    @Autowired
+    private ${entry.className} #cap(${entry.className});
+
+#foreach($method in $entry.methodList)
+/**
+*
+* Method: $method.signature
+*
+*/
+@Test
+public void test#cap(${method.name})() throws Exception {
+    //TODO: Test goes here...
+}
+
+#end
+
+#foreach($method in $entry.privateMethodList)
+/**
+*
+* Method: $method.signature
+*
+*/
+@Test
+public void test#cap(${method.name})() throws Exception {
+    //TODO: Test goes here...
+#foreach($string in $method.reflectionCode)
+$string
+#end
+}
+
+#end
+}
+#end

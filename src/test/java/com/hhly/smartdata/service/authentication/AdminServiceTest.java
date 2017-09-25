@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * UserService Tester.
+ * AdminService Tester.
  *
  * @author Iritchie.ren
  * @version 1.0
@@ -18,20 +18,28 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/spring/spring-context.xml"})
 @Transactional
-public class UserServiceTest extends BaseTest{
+public class AdminServiceTest extends BaseTest{
     @Autowired
-    private UserService UserService;
+    private AdminService AdminService;
 
     /**
-     * Method: getUserByUsername(String username)
+     * Method: searchAdmins(Admin condition, Page page)
      */
     @Test
-    public void testGetUserByUsername() throws Exception{
+    public void testSearchAdmins() throws Exception{
         //TODO: Test goes here...
     }
 
     /**
-     * Method: update(User user)
+     * Method: save(Admin admin)
+     */
+    @Test
+    public void testSave() throws Exception{
+        //TODO: Test goes here...
+    }
+
+    /**
+     * Method: update(Admin admin)
      */
     @Test
     public void testUpdate() throws Exception{
@@ -39,18 +47,18 @@ public class UserServiceTest extends BaseTest{
     }
 
     /**
-     * Method: getUser(Integer id)
+     * Method: get(Integer id)
      */
     @Test
-    public void testGetUser() throws Exception{
+    public void testGet() throws Exception{
         //TODO: Test goes here...
     }
 
     /**
-     * Method: delete(Integer id)
+     * Method: deleteByUserId(int userId)
      */
     @Test
-    public void testDelete() throws Exception{
+    public void testDeleteByUserId() throws Exception{
         //TODO: Test goes here...
     }
 
