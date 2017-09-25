@@ -15,7 +15,12 @@ public class IntervalSourceReport{
     private String statisticsTime;
 
     /**
-     * 源端类型：1、PC  2.H5 3.IOS 4.android
+     * 统计间隔时间，单位分钟
+     */
+    private Integer intervalTime;
+
+    /**
+     * 源端类型：1、PC 2.android 3.IOS 4.H5
      */
     private Byte sourceType;
 
@@ -49,6 +54,16 @@ public class IntervalSourceReport{
      */
     private Date executeTime;
 
+    /**
+     * 国家简码
+     */
+    private String countryCode;
+
+    /**
+     * 货币单位
+     */
+    private String currencyUnit;
+
     public Long getId(){
         return id;
     }
@@ -63,6 +78,14 @@ public class IntervalSourceReport{
 
     public void setStatisticsTime(String statisticsTime){
         this.statisticsTime = statisticsTime;
+    }
+
+    public Integer getIntervalTime(){
+        return intervalTime;
+    }
+
+    public void setIntervalTime(Integer intervalTime){
+        this.intervalTime = intervalTime;
     }
 
     public Byte getSourceType(){
@@ -119,5 +142,21 @@ public class IntervalSourceReport{
 
     public void setExecuteTime(Date executeTime){
         this.executeTime = executeTime;
+    }
+
+    public String getCountryCode(){
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode){
+        this.countryCode = countryCode;
+    }
+
+    public String getCurrencyUnit(){
+        return currencyUnit;
+    }
+
+    public void setCurrencyUnit(String currencyUnit){
+        this.currencyUnit = currencyUnit;
     }
 }

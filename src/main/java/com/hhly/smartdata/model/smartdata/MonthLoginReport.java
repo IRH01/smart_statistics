@@ -9,19 +9,19 @@ public class MonthLoginReport{
     private Long id;
 
     /**
-     * 游戏编码
-     */
-    private String gameCode;
-
-    /**
-     * 游戏名称
-     */
-    private String gameName;
-
-    /**
      * 统计日期(日)yyyy-MM
      */
-    private String statisticsDay;
+    private String statisticsMonth;
+
+    /**
+     * 平台id或者游戏id
+     */
+    private String platformId;
+
+    /**
+     * 平台或游戏名称
+     */
+    private String platformName;
 
     /**
      * 源端类型：1、PC  2.H5 3.IOS 4.android
@@ -51,28 +51,28 @@ public class MonthLoginReport{
         this.id = id;
     }
 
-    public String getGameCode(){
-        return gameCode;
+    public String getStatisticsMonth(){
+        return statisticsMonth;
     }
 
-    public void setGameCode(String gameCode){
-        this.gameCode = gameCode;
+    public void setStatisticsMonth(String statisticsMonth){
+        this.statisticsMonth = statisticsMonth;
     }
 
-    public String getGameName(){
-        return gameName;
+    public String getPlatformId(){
+        return platformId;
     }
 
-    public void setGameName(String gameName){
-        this.gameName = gameName;
+    public void setPlatformId(String platformId){
+        this.platformId = platformId;
     }
 
-    public String getStatisticsDay(){
-        return statisticsDay;
+    public String getPlatformName(){
+        return platformName;
     }
 
-    public void setStatisticsDay(String statisticsDay){
-        this.statisticsDay = statisticsDay;
+    public void setPlatformName(String platformName){
+        this.platformName = platformName;
     }
 
     public Byte getSourceType(){

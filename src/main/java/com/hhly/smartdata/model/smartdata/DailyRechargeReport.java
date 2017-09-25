@@ -15,7 +15,7 @@ public class DailyRechargeReport{
     private String statisticsDay;
 
     /**
-     * 源端类型：1、PC  2.H5 3.IOS 4.android
+     * 源端类型：1、PC 2.android 3.IOS 4.H5
      */
     private Byte sourceType;
 
@@ -48,6 +48,16 @@ public class DailyRechargeReport{
      * 统计执行日期
      */
     private Date executeTime;
+
+    /**
+     * 国家简码
+     */
+    private String countryCode;
+
+    /**
+     * 货币单位
+     */
+    private String currencyUnit;
 
     public Long getId(){
         return id;
@@ -119,5 +129,21 @@ public class DailyRechargeReport{
 
     public void setExecuteTime(Date executeTime){
         this.executeTime = executeTime;
+    }
+
+    public String getCountryCode(){
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode){
+        this.countryCode = countryCode;
+    }
+
+    public String getCurrencyUnit(){
+        return currencyUnit;
+    }
+
+    public void setCurrencyUnit(String currencyUnit){
+        this.currencyUnit = currencyUnit;
     }
 }

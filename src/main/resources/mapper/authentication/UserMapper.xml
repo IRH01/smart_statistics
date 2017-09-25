@@ -46,33 +46,33 @@
     <select id="getByUsername" resultMap="UserMap">
         select
         <include refid="User_Base_Column_List"/>
-        from tbl_user
+        from auth_user
         where username = #{username}
     </select>
 
     <select id="getUser" resultMap="UserMap" parameterType="java.lang.Integer">
         select
         <include refid="User_Base_Column_List"/>
-        from tbl_user
+        from auth_user
         where user_id = #{userId}
     </select>
 
     <select id="searchUsers" resultMap="UserMap">
         select
         <include refid="User_Base_Column_List"/>
-        from tbl_user
+        from auth_user
         <include refid="where_condition"/>
     </select>
 
     <delete id="delete" parameterType="java.lang.Integer">
         DELETE
         FROM
-        tbl_user
+        auth_user
         WHERE user_id = #{userId}
     </delete>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="user_id">
-        INSERT INTO tbl_user (
+        INSERT INTO auth_user (
         username,
         password,
         user_status,
@@ -88,7 +88,7 @@
     </insert>
 
     <update id="update">
-        update tbl_user
+        update auth_user
         <set>
             <if test="username != null and username != ''">
                 username = #{username},

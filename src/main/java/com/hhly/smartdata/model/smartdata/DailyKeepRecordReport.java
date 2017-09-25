@@ -14,7 +14,7 @@ public class DailyKeepRecordReport{
     private String statisticsDay;
 
     /**
-     * 源端类型：1、PC  2.H5 3.IOS 4.android
+     * 源端类型：1、PC 2.android 3.IOS 4.H5
      */
     private Byte sourceType;
 

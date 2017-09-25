@@ -15,28 +15,28 @@
     <select id="getRolesByUserId" resultMap="BaseResultMap">
         select
         r.id,r.name,r.create_time
-        from tbl_role r join tbl_user_role u on r.id=u.role_id
+        from auth_role r join auth_user_role u on r.id=u.role_id
         where u.user_id=#{userId}
     </select>
 
     <select id="getChannelRole" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from tbl_role
+        from auth_role
         where name=#{name}
     </select>
 
     <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from tbl_role
+        from auth_role
         where id = #{id}
     </select>
 
     <select id="search" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from tbl_role
+        from auth_role
         <where>
             and id!='43'
             <if test="filter.name != null and filter.name != ''">
@@ -56,7 +56,7 @@
         SELECT
         permission
         FROM
-        tbl_role_permission
+        auth_role_permission
         WHERE role_id in
         <foreach collection="list" item="id" separator="," open="(" close=")">
             #{id}
@@ -64,14 +64,14 @@
     </select>
 
     <delete id="delete">
-        delete from tbl_role
+        delete from auth_role
         where id = #{id}
     </delete>
 
     <delete id="delPermsByRole" parameterType="list">
         delete
         from
-        tbl_role_permission
+        auth_role_permission
         where
         role_id in
         <foreach collection="list" item="id" separator="," open="("
@@ -83,7 +83,7 @@
     <delete id="delUsersByRole" parameterType="list">
         delete
         from
-        tbl_user_role
+        auth_user_role
         where
         role_id in
         <foreach collection="list" item="id" separator="," open="(" close=")">
@@ -94,7 +94,7 @@
     <delete id="delPerm">
         delete
         from
-        tbl_role_permission
+        auth_role_permission
         where
         permission=#{perm}
     </delete>
@@ -102,23 +102,23 @@
     <delete id="deleteUserRoles" parameterType="int">
         delete
         from
-        tbl_user_role
+        auth_user_role
         where
         user_id=#{userId}
     </delete>
 
     <insert id="insertRolePermission" useGeneratedKeys="true" keyProperty="id">
-        insert into tbl_role_permission (role_id , permission)
+        insert into auth_role_permission (role_id , permission)
         values (#{roleId} , #{permission} )
     </insert>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        insert into tbl_role (name, create_time)
+        insert into auth_role (name, create_time)
         values (#{name}, #{createTime})
     </insert>
 
     <insert id="insertUserRole" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO tbl_user_role(
+        INSERT INTO auth_user_role(
         user_id,
         role_id)
         VALUES(
@@ -127,7 +127,7 @@
     </insert>
 
     <update id="update">
-        update tbl_role
+        update auth_role
         <set>
             <if test="name != null">
                 name = #{name},

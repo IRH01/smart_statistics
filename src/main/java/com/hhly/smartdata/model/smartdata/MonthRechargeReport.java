@@ -12,10 +12,10 @@ public class MonthRechargeReport{
     /**
      * 统计日期(月)yyyy-MM
      */
-    private String statisticsDay;
+    private String statisticsMonth;
 
     /**
-     * 源端类型：1、PC  2.H5 3.IOS 4.android
+     * 源端类型：1、PC 2.android 3.IOS 4.H5
      */
     private Byte sourceType;
 
@@ -49,6 +49,16 @@ public class MonthRechargeReport{
      */
     private Date executeTime;
 
+    /**
+     * 国家简码
+     */
+    private String countryCode;
+
+    /**
+     * 货币单位
+     */
+    private String currencyUnit;
+
     public Long getId(){
         return id;
     }
@@ -57,12 +67,12 @@ public class MonthRechargeReport{
         this.id = id;
     }
 
-    public String getStatisticsDay(){
-        return statisticsDay;
+    public String getStatisticsMonth(){
+        return statisticsMonth;
     }
 
-    public void setStatisticsDay(String statisticsDay){
-        this.statisticsDay = statisticsDay;
+    public void setStatisticsMonth(String statisticsMonth){
+        this.statisticsMonth = statisticsMonth;
     }
 
     public Byte getSourceType(){
@@ -119,5 +129,21 @@ public class MonthRechargeReport{
 
     public void setExecuteTime(Date executeTime){
         this.executeTime = executeTime;
+    }
+
+    public String getCountryCode(){
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode){
+        this.countryCode = countryCode;
+    }
+
+    public String getCurrencyUnit(){
+        return currencyUnit;
+    }
+
+    public void setCurrencyUnit(String currencyUnit){
+        this.currencyUnit = currencyUnit;
     }
 }

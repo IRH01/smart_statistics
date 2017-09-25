@@ -11,12 +11,12 @@ public class MonthRegisterReport{
     /**
      * 统计日期(月)yyyy-MM
      */
-    private String statisticsDay;
+    private String statisticsMonth;
 
     /**
      * pc页面浏览数pv
      */
-    private Integer pcPageView;
+    private Long pcPageView;
 
     /**
      * pc用户访问数uv
@@ -26,17 +26,17 @@ public class MonthRegisterReport{
     /**
      * h5用户数
      */
-    private Integer hfivePopulation;
+    private Integer h5Population;
 
     /**
      * h5 pv
      */
-    private Integer hfivePageView;
+    private Long h5PageView;
 
     /**
      * h5 uv
      */
-    private Integer hfiveUserView;
+    private Integer h5UserView;
 
     /**
      * ios访问量
@@ -71,19 +71,19 @@ public class MonthRegisterReport{
         this.id = id;
     }
 
-    public String getStatisticsDay(){
-        return statisticsDay;
+    public String getStatisticsMonth(){
+        return statisticsMonth;
     }
 
-    public void setStatisticsDay(String statisticsDay){
-        this.statisticsDay = statisticsDay;
+    public void setStatisticsMonth(String statisticsMonth){
+        this.statisticsMonth = statisticsMonth;
     }
 
-    public Integer getPcPageView(){
+    public Long getPcPageView(){
         return pcPageView;
     }
 
-    public void setPcPageView(Integer pcPageView){
+    public void setPcPageView(Long pcPageView){
         this.pcPageView = pcPageView;
     }
 
@@ -95,28 +95,28 @@ public class MonthRegisterReport{
         this.pcUserView = pcUserView;
     }
 
-    public Integer getHfivePopulation(){
-        return hfivePopulation;
+    public Integer getH5Population(){
+        return h5Population;
     }
 
-    public void setHfivePopulation(Integer hfivePopulation){
-        this.hfivePopulation = hfivePopulation;
+    public void setH5Population(Integer h5Population){
+        this.h5Population = h5Population;
     }
 
-    public Integer getHfivePageView(){
-        return hfivePageView;
+    public Long getH5PageView(){
+        return h5PageView;
     }
 
-    public void setHfivePageView(Integer hfivePageView){
-        this.hfivePageView = hfivePageView;
+    public void setH5PageView(Long h5PageView){
+        this.h5PageView = h5PageView;
     }
 
-    public Integer getHfiveUserView(){
-        return hfiveUserView;
+    public Integer getH5UserView(){
+        return h5UserView;
     }
 
-    public void setHfiveUserView(Integer hfiveUserView){
-        this.hfiveUserView = hfiveUserView;
+    public void setH5UserView(Integer h5UserView){
+        this.h5UserView = h5UserView;
     }
 
     public Integer getIosPopulation(){

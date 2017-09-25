@@ -12,7 +12,7 @@ public class MonthCompositeReport{
     /**
      * 统计日期(月)yyyy-MM
      */
-    private String statisticsDay;
+    private String statisticsMonth;
 
     /**
      * 注册人数
@@ -94,6 +94,16 @@ public class MonthCompositeReport{
      */
     private Date executeTime;
 
+    /**
+     * 国家简码
+     */
+    private String countryCode;
+
+    /**
+     * 货币单位
+     */
+    private String currencyUnit;
+
     public Long getId(){
         return id;
     }
@@ -102,12 +112,12 @@ public class MonthCompositeReport{
         this.id = id;
     }
 
-    public String getStatisticsDay(){
-        return statisticsDay;
+    public String getStatisticsMonth(){
+        return statisticsMonth;
     }
 
-    public void setStatisticsDay(String statisticsDay){
-        this.statisticsDay = statisticsDay;
+    public void setStatisticsMonth(String statisticsMonth){
+        this.statisticsMonth = statisticsMonth;
     }
 
     public Integer getRegisterPopulation(){
@@ -236,5 +246,21 @@ public class MonthCompositeReport{
 
     public void setExecuteTime(Date executeTime){
         this.executeTime = executeTime;
+    }
+
+    public String getCountryCode(){
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode){
+        this.countryCode = countryCode;
+    }
+
+    public String getCurrencyUnit(){
+        return currencyUnit;
+    }
+
+    public void setCurrencyUnit(String currencyUnit){
+        this.currencyUnit = currencyUnit;
     }
 }

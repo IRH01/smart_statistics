@@ -44,7 +44,7 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM
-        tbl_menu
+        auth_menu
         WHERE permission IS NULL
         OR permission IN
         <foreach collection="list" open="(" close=")" separator="," item="perm">
@@ -56,24 +56,24 @@
     <select id="searchMenu" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from tbl_menu
+        from auth_menu
         <include refid="where_condition"/>
         order by parent_id,menu_index
     </select>
 
     <delete id="delete" parameterType="com.hhly.smartdata.model.authentication.Menu">
-        delete from tbl_menu
+        delete from auth_menu
         <include refid="where_condition"/>
     </delete>
 
     <delete id="delById">
-        delete from tbl_menu
+        delete from auth_menu
         where id=#{id}
     </delete>
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.authentication.Menu" useGeneratedKeys="true"
             keyProperty="id">
-        insert into tbl_menu
+        insert into auth_menu
         (
         permission,
         parent_id,
@@ -91,7 +91,7 @@
     </insert>
 
     <update id="update">
-        update tbl_menu
+        update auth_menu
         <set>
             <if test="permission != null ">
                 permission = #{permission},

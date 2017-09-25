@@ -94,6 +94,16 @@ public class DailyCompositeReport{
      */
     private Date executeTime;
 
+    /**
+     * 国家简码
+     */
+    private String countryCode;
+
+    /**
+     * 货币单位。
+     */
+    private String currencyUnit;
+
     public Long getId(){
         return id;
     }
@@ -236,5 +246,21 @@ public class DailyCompositeReport{
 
     public void setExecuteTime(Date executeTime){
         this.executeTime = executeTime;
+    }
+
+    public String getCountryCode(){
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode){
+        this.countryCode = countryCode;
+    }
+
+    public String getCurrencyUnit(){
+        return currencyUnit;
+    }
+
+    public void setCurrencyUnit(String currencyUnit){
+        this.currencyUnit = currencyUnit;
     }
 }

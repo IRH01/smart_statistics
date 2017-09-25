@@ -14,6 +14,16 @@ public class IntervalInterfaceReport{
     private String statisticsTime;
 
     /**
+     * 统计时间间隔。单位分钟。
+     */
+    private Integer intervalTime;
+
+    /**
+     * 接口编号，1.注册，2充值
+     */
+    private Integer interfaceCode;
+
+    /**
      * 接口名称
      */
     private String interfaceName;
@@ -47,6 +57,22 @@ public class IntervalInterfaceReport{
 
     public void setStatisticsTime(String statisticsTime){
         this.statisticsTime = statisticsTime;
+    }
+
+    public Integer getIntervalTime(){
+        return intervalTime;
+    }
+
+    public void setIntervalTime(Integer intervalTime){
+        this.intervalTime = intervalTime;
+    }
+
+    public Integer getInterfaceCode(){
+        return interfaceCode;
+    }
+
+    public void setInterfaceCode(Integer interfaceCode){
+        this.interfaceCode = interfaceCode;
     }
 
     public String getInterfaceName(){

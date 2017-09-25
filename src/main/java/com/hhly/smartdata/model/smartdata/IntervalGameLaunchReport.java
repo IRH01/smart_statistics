@@ -14,14 +14,19 @@ public class IntervalGameLaunchReport{
     private String statisticsTime;
 
     /**
-     * 游戏编码
+     * 统计间隔时间。单位分钟
      */
-    private String gameCode;
+    private Integer intervalTime;
 
     /**
-     * 游戏名称
+     * 平台id或游戏id
      */
-    private String gameName;
+    private Integer platformId;
+
+    /**
+     * 平台名称或游戏名称
+     */
+    private String platformName;
 
     /**
      * 老用户充值次数
@@ -49,20 +54,28 @@ public class IntervalGameLaunchReport{
         this.statisticsTime = statisticsTime;
     }
 
-    public String getGameCode(){
-        return gameCode;
+    public Integer getIntervalTime(){
+        return intervalTime;
     }
 
-    public void setGameCode(String gameCode){
-        this.gameCode = gameCode;
+    public void setIntervalTime(Integer intervalTime){
+        this.intervalTime = intervalTime;
     }
 
-    public String getGameName(){
-        return gameName;
+    public Integer getPlatformId(){
+        return platformId;
     }
 
-    public void setGameName(String gameName){
-        this.gameName = gameName;
+    public void setPlatformId(Integer platformId){
+        this.platformId = platformId;
+    }
+
+    public String getPlatformName(){
+        return platformName;
+    }
+
+    public void setPlatformName(String platformName){
+        this.platformName = platformName;
     }
 
     public Integer getLaunchCount(){

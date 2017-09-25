@@ -31,7 +31,7 @@
         select
         <include refid="Base_Column_List"/>
         from
-        tbl_function
+        auth_function
         <include refid="where_condition"/>
         order by parent_id,function_index
     </select>
@@ -40,7 +40,7 @@
         select
         <include refid="Base_Column_List"/>
         from
-        tbl_function
+        auth_function
         where id = #{id}
     </select>
 
@@ -48,7 +48,7 @@
         select
         <include refid="Base_Column_List"/>
         from
-        tbl_function
+        auth_function
     </select>
 
     <select id="queryByRole" resultMap="BaseResultMap" parameterType="list">
@@ -57,7 +57,7 @@
         c.parent_id ,
         c.name ,
         c.function_index
-        from tbl_role_permission a , tbl_permission b , tbl_function c
+        from auth_role_permission a , auth_permission b , auth_function c
         where a.permission=b.permission
         and c.id=b.function_id
         and a.role_id in
@@ -68,7 +68,7 @@
     </select>
 
     <delete id="batchDelete" parameterType="list">
-        delete from tbl_function
+        delete from auth_function
         where id in
         <foreach collection="list" open="(" close=")" separator="," item="id">
             #{id}
@@ -78,13 +78,13 @@
     <delete id="delete">
         delete
         from
-        tbl_function
+        auth_function
         where
         id = #{id}
     </delete>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO tbl_function (parent_id, name,function_index)
+        INSERT INTO auth_function (parent_id, name,function_index)
         values (
         #{parentId},
         #{name},
@@ -92,7 +92,7 @@
     </insert>
 
     <update id="update" parameterType="com.hhly.smartdata.model.authentication.Function">
-        UPDATE tbl_function
+        UPDATE auth_function
         <set>
             <if test="parentId != null">
                 parent_id = #{parentId},

@@ -33,7 +33,7 @@
         b.name ,
         b.function_id ,
         b.create_time
-        from tbl_role_permission a , tbl_permission b
+        from auth_role_permission a , auth_permission b
         where a.permission=b.permission
         and a.role_id in
         <foreach collection="list" item="id" separator="," open="("
@@ -47,7 +47,7 @@
         select
         <include refid="Base_Column_List"/>
         from
-        tbl_permission
+        auth_permission
         where
         permission = #{permission}
     </select>
@@ -56,26 +56,26 @@
         select
         <include refid="Base_Column_List"/>
         from
-        tbl_permission
+        auth_permission
     </select>
 
     <select id="searchPerms" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from
-        tbl_permission
+        auth_permission
         <include refid="where_conditions"/>
     </select>
 
     <delete id="delete">
         DELETE
         FROM
-        tbl_permission
+        auth_permission
         <include refid="where_conditions"/>
     </delete>
 
     <insert id="insert">
-        INSERT INTO tbl_permission (
+        INSERT INTO auth_permission (
         permission,
         NAME,
         function_id)
@@ -85,7 +85,7 @@
     </insert>
 
     <update id="update">
-        update tbl_permission
+        update auth_permission
         <set>
             <if test="name != null">
                 name = #{name},
