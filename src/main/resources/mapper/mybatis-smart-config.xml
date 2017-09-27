@@ -9,7 +9,9 @@
         <setting name="logPrefix" value="dao."/>
     </settings>
     <typeAliases>
-        <package name="com.hhly.smartdata.model"/>
+        <package name="com.hhly.smartdata.model.authentication"/>
+        <package name="com.hhly.smartdata.model.smartdata"/>
+        <package name="com.hhly.smartdata.model.source"/>
     </typeAliases>
 
     <mappers>
@@ -32,5 +34,11 @@
         <mapper resource="mapper/smartdata/MonthLoginReportMapper.xml"/>
         <mapper resource="mapper/smartdata/MonthRechargeReportMapper.xml"/>
         <mapper resource="mapper/smartdata/MonthRegisterReportMapper.xml"/>
+        <!-- -->
+        <mapper resource="mapper/source/DataGameStartMapper.xml"/>
+        <mapper resource="mapper/source/DataInstallsMapper.xml"/>
+        <mapper resource="mapper/source/DataInterfaceInvokeMapper.xml"/>
+        <mapper resource="mapper/source/DataPlatformStartMapper.xml"/>
+        <mapper resource="mapper/source/DataViewMapper.xml"/>
     </mappers>
 </configuration>

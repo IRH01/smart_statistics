@@ -3,14 +3,19 @@ package com.hhly.smartdata.mapper.source;
 
 import com.hhly.smartdata.model.source.DataGameStart;
 
-public interface DataGameStartMapper {
-    int insert(DataGameStart record);
+import java.util.List;
+import java.util.Map;
 
-    int insertSelective(DataGameStart record);
+public interface DataGameStartMapper{
+    int insert(DataGameStart record) throws Exception;
 
-    DataGameStart selectByPrimaryKey(Long id);
+    int insertSelective(DataGameStart record) throws Exception;
 
-    int updateByPrimaryKeySelective(DataGameStart record);
+    DataGameStart selectByPrimaryKey(Long id) throws Exception;
 
-    int updateByPrimaryKey(DataGameStart record);
+    int updateByPrimaryKeySelective(DataGameStart record) throws Exception;
+
+    int updateByPrimaryKey(DataGameStart record) throws Exception;
+
+    List<Map<String, Object>> selectYesterdayLaunchGameUser() throws Exception;
 }

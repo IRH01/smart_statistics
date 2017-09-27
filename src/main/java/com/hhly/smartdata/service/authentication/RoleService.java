@@ -18,19 +18,19 @@ public class RoleService{
     @Autowired
     private RoleMapper roleMapper;
 
-    public List<Role> getRolesByUserId(int userId){
+    public List<Role> getRolesByUserId(int userId) throws Exception{
         return roleMapper.getRolesByUserId(userId);
     }
 
-    public List<String> getPerms(List<Integer> roleIds){
+    public List<String> getPerms(List<Integer> roleIds) throws Exception{
         return roleMapper.getPerms(roleIds);
     }
 
-    public List<Role> search(Role role, Page page){
+    public List<Role> search(Role role, Page page) throws Exception{
         return roleMapper.search(role, page);
     }
 
-    public void delete(Integer roleId){
+    public void delete(Integer roleId) throws Exception{
         List<Integer> roleIdList = new ArrayList<Integer>();
         roleIdList.add(roleId);
         /*删除用户角色关联表*/
@@ -41,7 +41,7 @@ public class RoleService{
         roleMapper.delete(roleId);
     }
 
-    public void insert(Role role){
+    public void insert(Role role) throws Exception{
         roleMapper.insert(role);
         List<RolePermission> rolePermissionList = new ArrayList<RolePermission>();
         if(role.getPermissionIds().length() > 0){
@@ -64,7 +64,7 @@ public class RoleService{
         insertRolePermission(rolePermissionList);
     }
 
-    public void update(Role role){
+    public void update(Role role) throws Exception{
         List<RolePermission> rolePermissionList = new ArrayList<RolePermission>();
 
         List<Integer> roleLists = new ArrayList<Integer>();
@@ -95,21 +95,21 @@ public class RoleService{
 
     }
 
-    public int delPermsByRole(List<Integer> roleIds){
+    public int delPermsByRole(List<Integer> roleIds) throws Exception{
         return roleMapper.delPermsByRole(roleIds);
     }
 
-    public void insertRolePermission(List<RolePermission> rolePermissionList){
+    public void insertRolePermission(List<RolePermission> rolePermissionList) throws Exception{
         for(RolePermission rolePermission : rolePermissionList){
             roleMapper.insertRolePermission(rolePermission);
         }
     }
 
-    public Role get(Integer id){
+    public Role get(Integer id) throws Exception{
         return roleMapper.get(id);
     }
 
-    public void allocRole(Integer userId, Integer[] roles){
+    public void allocRole(Integer userId, Integer[] roles) throws Exception{
         roleMapper.deleteUserRoles(userId);
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", userId);

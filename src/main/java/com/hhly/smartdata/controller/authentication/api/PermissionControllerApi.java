@@ -25,7 +25,12 @@ public class PermissionControllerApi extends BaseController{
     @RequiresPermissions("sys_perm_search")
     @ResponseBody
     public List<Permission> searchPerms(@ModelAttribute Permission condition, HttpServletRequest req){
-        List<Permission> perms = permissionService.searchPerms(condition);
+        List<Permission> perms = null;
+        try{
+            perms = permissionService.searchPerms(condition);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return perms;
     }
 
@@ -34,7 +39,11 @@ public class PermissionControllerApi extends BaseController{
     @ResponseBody
     public String updatePerms(@RequestParam Integer funcId, @RequestParam String permsJson){
         List<Permission> perms = JSON.parseArray(permsJson, Permission.class);
-        permissionService.batchUpdatePerms(funcId, perms);
+        try{
+            permissionService.batchUpdatePerms(funcId, perms);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "SUCCESS";
     }
 

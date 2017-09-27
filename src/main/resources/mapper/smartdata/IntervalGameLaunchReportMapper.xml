@@ -1,104 +1,113 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hhly.smartdata.mapper.smartdata.IntervalGameLaunchReportMapper">
-    <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="statistics_time" property="statisticsTime" jdbcType="VARCHAR"/>
-        <result column="game_code" property="gameCode" jdbcType="VARCHAR"/>
-        <result column="game_name" property="gameName" jdbcType="VARCHAR"/>
-        <result column="launch_count" property="launchCount" jdbcType="INTEGER"/>
-        <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-        id, statistics_time, game_code, game_name, launch_count, execute_time
-    </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
-        select
-        <include refid="Base_Column_List"/>
-        from interval_game_launch_report
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport"
-            useGeneratedKeys="true" keyProperty="id">
-        insert into interval_game_launch_report (statistics_time, game_code,
-        game_name, launch_count, execute_time
-        )
-        values ( #{statisticsTime,jdbcType=VARCHAR}, #{gameCode,jdbcType=VARCHAR},
-        #{gameName,jdbcType=VARCHAR}, #{launchCount,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP}
-        )
-    </insert>
-    <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport">
-        insert into interval_game_launch_report
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="statisticsTime != null">
-                statistics_time,
-            </if>
-            <if test="gameCode != null">
-                game_code,
-            </if>
-            <if test="gameName != null">
-                game_name,
-            </if>
-            <if test="launchCount != null">
-                launch_count,
-            </if>
-            <if test="executeTime != null">
-                execute_time,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="statisticsTime != null">
-                #{statisticsTime,jdbcType=VARCHAR},
-            </if>
-            <if test="gameCode != null">
-                #{gameCode,jdbcType=VARCHAR},
-            </if>
-            <if test="gameName != null">
-                #{gameName,jdbcType=VARCHAR},
-            </if>
-            <if test="launchCount != null">
-                #{launchCount,jdbcType=INTEGER},
-            </if>
-            <if test="executeTime != null">
-                #{executeTime,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective"
-            parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport">
-        update interval_game_launch_report
-        <set>
-            <if test="statisticsTime != null">
-                statistics_time = #{statisticsTime,jdbcType=VARCHAR},
-            </if>
-            <if test="gameCode != null">
-                game_code = #{gameCode,jdbcType=VARCHAR},
-            </if>
-            <if test="gameName != null">
-                game_name = #{gameName,jdbcType=VARCHAR},
-            </if>
-            <if test="launchCount != null">
-                launch_count = #{launchCount,jdbcType=INTEGER},
-            </if>
-            <if test="executeTime != null">
-                execute_time = #{executeTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport">
-        update interval_game_launch_report
-        set statistics_time = #{statisticsTime,jdbcType=VARCHAR},
-        game_code = #{gameCode,jdbcType=VARCHAR},
-        game_name = #{gameName,jdbcType=VARCHAR},
+<mapper namespace="com.hhly.smartdata.mapper.smartdata.IntervalGameLaunchReportMapper" >
+  <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="statistics_time" property="statisticsTime" jdbcType="VARCHAR" />
+    <result column="interval_time" property="intervalTime" jdbcType="INTEGER" />
+    <result column="platform_id" property="platformId" jdbcType="INTEGER" />
+    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="launch_count" property="launchCount" jdbcType="INTEGER" />
+    <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, statistics_time, interval_time, platform_id, platform_name, launch_count, execute_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from interval_game_launch_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
+    insert into interval_game_launch_report (id, statistics_time, interval_time, 
+      platform_id, platform_name, launch_count, 
+      execute_time)
+    values (#{id,jdbcType=BIGINT}, #{statisticsTime,jdbcType=VARCHAR}, #{intervalTime,jdbcType=INTEGER}, 
+      #{platformId,jdbcType=INTEGER}, #{platformName,jdbcType=VARCHAR}, #{launchCount,jdbcType=INTEGER}, 
+      #{executeTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
+    insert into interval_game_launch_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="statisticsTime != null" >
+        statistics_time,
+      </if>
+      <if test="intervalTime != null" >
+        interval_time,
+      </if>
+      <if test="platformId != null" >
+        platform_id,
+      </if>
+      <if test="platformName != null" >
+        platform_name,
+      </if>
+      <if test="launchCount != null" >
+        launch_count,
+      </if>
+      <if test="executeTime != null" >
+        execute_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="statisticsTime != null" >
+        #{statisticsTime,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalTime != null" >
+        #{intervalTime,jdbcType=INTEGER},
+      </if>
+      <if test="platformId != null" >
+        #{platformId,jdbcType=INTEGER},
+      </if>
+      <if test="platformName != null" >
+        #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="launchCount != null" >
+        #{launchCount,jdbcType=INTEGER},
+      </if>
+      <if test="executeTime != null" >
+        #{executeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
+    update interval_game_launch_report
+    <set >
+      <if test="statisticsTime != null" >
+        statistics_time = #{statisticsTime,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalTime != null" >
+        interval_time = #{intervalTime,jdbcType=INTEGER},
+      </if>
+      <if test="platformId != null" >
+        platform_id = #{platformId,jdbcType=INTEGER},
+      </if>
+      <if test="platformName != null" >
+        platform_name = #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="launchCount != null" >
         launch_count = #{launchCount,jdbcType=INTEGER},
-        execute_time = #{executeTime,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=BIGINT}
-    </update>
+      </if>
+      <if test="executeTime != null" >
+        execute_time = #{executeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
+    update interval_game_launch_report
+    set statistics_time = #{statisticsTime,jdbcType=VARCHAR},
+      interval_time = #{intervalTime,jdbcType=INTEGER},
+      platform_id = #{platformId,jdbcType=INTEGER},
+      platform_name = #{platformName,jdbcType=VARCHAR},
+      launch_count = #{launchCount,jdbcType=INTEGER},
+      execute_time = #{executeTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>

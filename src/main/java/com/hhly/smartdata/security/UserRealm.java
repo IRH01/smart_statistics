@@ -57,7 +57,11 @@ public class UserRealm extends AuthorizingRealm{
         // 通过表单接收的用户名
         String username = token.getUsername();
         if(username != null && !"".equals(username)){
-            user = userService.getUserByUsername(username);
+            try{
+                user = userService.getUserByUsername(username);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
 
             if(user != null){
                 if(user.getUserStatus().equals(User.OFF)){
@@ -91,13 +95,22 @@ public class UserRealm extends AuthorizingRealm{
                 throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
             }
             String username = (String) getAvailablePrincipal(principalCollection);
-            user = userService.getUserByUsername(username);
+            try{
+                user = userService.getUserByUsername(username);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             if(user == null) return null;
             //放入用户
             session.setAttribute(SysConstant.SESSION_USER, user);
 
             //获取角色
-            List<Role> roles = roleService.getRolesByUserId(user.getUserId());
+            List<Role> roles = null;
+            try{
+                roles = roleService.getRolesByUserId(user.getUserId());
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             System.out.println("roles:" + roles);
             List<Integer> roleIds = Lists.newArrayList();
             Set<String> roleNames = Sets.newHashSet();
@@ -112,7 +125,11 @@ public class UserRealm extends AuthorizingRealm{
             List<String> perms = Lists.newArrayList();
             //获取权限
             if(!roleIds.isEmpty()){
-                perms = roleService.getPerms(roleIds);
+                try{
+                    perms = roleService.getPerms(roleIds);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
                 System.out.println("perms:" + perms);
                 Set<String> permSet = new HashSet<>(perms);
 
@@ -122,7 +139,12 @@ public class UserRealm extends AuthorizingRealm{
 
             //获取菜单
             if(perms.size() > 0){
-                List<Menu> menus = menuService.getMenuByPerms(perms);
+                List<Menu> menus = null;
+                try{
+                    menus = menuService.getMenuByPerms(perms);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
                 System.out.println("menus:" + menus);
                 session.setAttribute(SysConstant.SESSION_MENU_KEY, menus);
                 Map<Integer, Menu> menuMap = Maps.newHashMap();

@@ -39,7 +39,12 @@ public class MenuControllerApi extends BaseController{
     @RequestMapping("/menuList")
     @ResponseBody
     public Result menuList(){
-        List<Menu> menuList = menuService.getAll();
+        List<Menu> menuList = null;
+        try{
+            menuList = menuService.getAll();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return Result.success(menuList);
     }
 
@@ -53,7 +58,12 @@ public class MenuControllerApi extends BaseController{
             Integer roleId = Integer.parseInt(s);
             roleIds.add(roleId);
         }
-        List<Menu> menuList = menuService.getMenuListByRole(roleIds);
+        List<Menu> menuList = null;
+        try{
+            menuList = menuService.getMenuListByRole(roleIds);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return Result.success(menuList);
     }
 
@@ -61,7 +71,12 @@ public class MenuControllerApi extends BaseController{
     @RequiresPermissions("sys_menu_sort")
     @ResponseBody
     public Map<String, Integer> sort(@RequestParam String menuTree){
-        Map<String, Integer> result = menuService.sortAndUpdateMenus(JSONArray.parseArray(menuTree), 0);
+        Map<String, Integer> result = null;
+        try{
+            result = menuService.sortAndUpdateMenus(JSONArray.parseArray(menuTree), 0);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return result;
     }
 
@@ -69,7 +84,11 @@ public class MenuControllerApi extends BaseController{
     @RequiresPermissions("!sys_menu_update")
     @ResponseBody
     public String update(@ModelAttribute Menu menu){
-        menuService.update(menu);
+        try{
+            menuService.update(menu);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "SUCCESS";
     }
 
@@ -77,6 +96,11 @@ public class MenuControllerApi extends BaseController{
     @RequiresPermissions("sys_menu_list")
     public @ResponseBody
     Menu menuDetail(@RequestParam Integer id){
-        return menuService.get(id);
+        try{
+            return menuService.get(id);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

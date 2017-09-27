@@ -18,7 +18,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/sys/func")
 public class FunctionControllerApi extends BaseController{
-
     @Autowired
     private FunctionService functionService;
 
@@ -26,7 +25,11 @@ public class FunctionControllerApi extends BaseController{
     @RequiresPermissions("!sys_func_list")
     public ModelAndView list(){
         Map<String, Object> model = Maps.newHashMap();
-        model.put("funcList", functionService.getAll());
+        try{
+            model.put("funcList", functionService.getAll());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return new ModelAndView("system/function/list", model);
     }
 
@@ -34,7 +37,12 @@ public class FunctionControllerApi extends BaseController{
     @RequiresPermissions("!sys_func_update")
     @ResponseBody
     public Result update(@RequestParam("funcTree") String funcTree){
-        Map<String, Integer> result = functionService.batchUpdateFuncs(JSONArray.parseArray(funcTree), 0);
+        Map<String, Integer> result = null;
+        try{
+            result = functionService.batchUpdateFuncs(JSONArray.parseArray(funcTree), 0);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return Result.success(result);
     }
 }

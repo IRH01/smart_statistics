@@ -12,27 +12,44 @@
         <result column="old_recharge_population" property="oldRechargePopulation" jdbcType="INTEGER"/>
         <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
     <sql id="Base_Column_List">
         id, statistics_day, source_type, recharge_population, recharge_amount, recharge_count,
         new_recharge_population, old_recharge_population, execute_time
     </sql>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from daily_recharge_report
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyRechargeReport" useGeneratedKeys="true"
-            keyProperty="id">
-        insert into daily_recharge_report (statistics_day, source_type,
+
+    <select id="selectLastMonthRecharge" resultType="java.util.Map">
+        SELECT
+        source_type AS source_type,
+        SUM(recharge_population) AS recharge_population_sum,
+        SUM(recharge_amount) AS recharge_amount_sum,
+        SUM(recharge_count) AS recharge_count_sum,
+        SUM(new_recharge_population) AS new_recharge_population_sum,
+        SUM(old_recharge_population) AS old_recharge_population_sum
+        FROM
+        daily_recharge_report
+        WHERE statistics_day = '2017-09-25'
+        GROUP BY source_type ;
+    </select>
+
+    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyRechargeReport">
+        insert into daily_recharge_report (id, statistics_day, source_type,
         recharge_population, recharge_amount, recharge_count,
         new_recharge_population, old_recharge_population,
         execute_time)
-        values ( #{statisticsDay,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT},
+        values (#{id,jdbcType=BIGINT}, #{statisticsDay,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT},
         #{rechargePopulation,jdbcType=INTEGER}, #{rechargeAmount,jdbcType=DECIMAL}, #{rechargeCount,jdbcType=INTEGER},
         #{newRechargePopulation,jdbcType=INTEGER}, #{oldRechargePopulation,jdbcType=INTEGER},
         #{executeTime,jdbcType=TIMESTAMP})
     </insert>
+
     <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.DailyRechargeReport">
         insert into daily_recharge_report
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -94,6 +111,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.DailyRechargeReport">
         update daily_recharge_report
         <set>
@@ -124,6 +142,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.DailyRechargeReport">
         update daily_recharge_report
         set statistics_day = #{statisticsDay,jdbcType=VARCHAR},
@@ -136,4 +155,5 @@
         execute_time = #{executeTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
 </mapper>

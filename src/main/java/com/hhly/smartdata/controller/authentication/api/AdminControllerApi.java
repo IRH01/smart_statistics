@@ -13,8 +13,6 @@ import com.hhly.smartdata.util.page.Page;
 import com.hhly.smartdata.util.page.PageUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,7 +27,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin/admin")
 public class AdminControllerApi extends BaseController{
-    private final static Logger LOGGER = LoggerFactory.getLogger(AdminControllerApi.class);
     @Autowired
     private UserService userService;
     @Autowired
@@ -43,7 +40,11 @@ public class AdminControllerApi extends BaseController{
         PageUtil.startPage(page);
         Map<String, Object> model = Maps.newHashMap();
         model.put("condition", condition);
-        model.put("adminList", adminService.searchAdmins(condition, page));
+        try{
+            model.put("adminList", adminService.searchAdmins(condition, page));
+        }catch(Exception e){
+            LOGGER.error(e.getMessage());
+        }
         model.put("typeMap", Admin.Type.map());
         model.put("statusMap", User.statusMap);
         return new ModelAndView("system/admin/list", model);
@@ -56,7 +57,11 @@ public class AdminControllerApi extends BaseController{
     @RequiresPermissions("admin_admin_on")
     public String on(@ModelAttribute User user){
         user.setUserStatus(User.ON);
-        userService.update(user);
+        try{
+            userService.update(user);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "redirect:list.do";
     }
 
@@ -67,7 +72,11 @@ public class AdminControllerApi extends BaseController{
     @RequiresPermissions("admin_admin_off")
     public String off(@ModelAttribute User user){
         user.setUserStatus(User.OFF);
-        userService.update(user);
+        try{
+            userService.update(user);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "redirect:list.do";
     }
 
@@ -79,7 +88,11 @@ public class AdminControllerApi extends BaseController{
     @ResponseBody
     public Result initPwd(@ModelAttribute User user){
         user.setPassword(new Md5Hash("123456").toString());
-        userService.update(user);
+        try{
+            userService.update(user);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return Result.success(null);
     }
 
@@ -89,8 +102,18 @@ public class AdminControllerApi extends BaseController{
     @RequestMapping("/showRoles")
     @RequiresPermissions("admin_admin_allocRole")
     public ModelAndView showRoles(@RequestParam Integer userId){
-        List<Role> hasRoles = roleService.getRolesByUserId(userId);
-        List<Role> allRoles = roleService.search(null, new Page(0, 0));//null 即为查询全部
+        List<Role> hasRoles = null;
+        try{
+            hasRoles = roleService.getRolesByUserId(userId);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        List<Role> allRoles = null;//null 即为查询全部
+        try{
+            allRoles = roleService.search(null, new Page(0, 0));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         for(Role role : allRoles){
             if(hasRoles.contains(role)){
                 role.setOwned(true);
@@ -110,7 +133,11 @@ public class AdminControllerApi extends BaseController{
     @RequestMapping("/allocRole")
     @RequiresPermissions("admin_admin_allocRole")
     public String allocRole(@RequestParam Integer userId, @RequestParam Integer[] role){
-        roleService.allocRole(userId, role);
+        try{
+            roleService.allocRole(userId, role);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "redirect:list.do";
     }
 
@@ -134,7 +161,11 @@ public class AdminControllerApi extends BaseController{
         admin.setPassword(new Md5Hash(admin.getPassword()).toString());
         admin.setUserStatus(User.ON);
         admin.setUserType(User.USER_ADMIN);
-        adminService.save(admin);
+        try{
+            adminService.save(admin);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "redirect:list.do";
     }
 
@@ -146,7 +177,11 @@ public class AdminControllerApi extends BaseController{
     public ModelAndView edit(@RequestParam Integer id){
         Map<String, Object> model = Maps.newHashMap();
         model.put("typeMap", Admin.Type.map());
-        model.put("admin", adminService.get(id));
+        try{
+            model.put("admin", adminService.get(id));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return new ModelAndView("system/admin/edit", model);
     }
 
@@ -156,7 +191,11 @@ public class AdminControllerApi extends BaseController{
     @RequestMapping("/modify")
     @RequiresPermissions("admin_admin_edit")
     public String modify(@ModelAttribute Admin admin){
-        adminService.update(admin);
+        try{
+            adminService.update(admin);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "redirect:list.do";
     }
 
@@ -166,8 +205,12 @@ public class AdminControllerApi extends BaseController{
     @RequestMapping("/del")
     @ResponseBody
     public Result deleteUser(@RequestParam Integer userId){
-        if(0 < adminService.deleteByUserId(userId)){
-            return Result.success(null);
+        try{
+            if(0 < adminService.deleteByUserId(userId)){
+                return Result.success(null);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
         return Result.fail();
     }

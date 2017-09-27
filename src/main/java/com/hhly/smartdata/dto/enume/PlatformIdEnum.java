@@ -1,16 +1,18 @@
 package com.hhly.smartdata.dto.enume;
 
-public enum RoleType{
+/**
+ * Created by Iritchie.ren on 2017/9/25.
+ */
+public enum PlatformIdEnum{
 
-    ROLECHANNEL(1, "渠道"),
-    ROLECP(2, "cp"),
-    ROLEADMIN(3, "超级管理员"),
-    ROLEAINNER(4, "内部用户");
+    LIAO_MEI_DE_ZHOU(1, "撩妹德州"),
+    LE_YING_DIAN_JING(2, "乐盈电竞"),
+    YI_BI_FEN(3, "一比分");
 
     private Integer code;
     private String desc;
 
-    RoleType(Integer code, String desc){
+    PlatformIdEnum(Integer code, String desc){
         this.code = code;
         this.desc = desc;
     }
@@ -23,8 +25,8 @@ public enum RoleType{
         return desc;
     }
 
-    public static RoleType getEnum(Integer code){
-        for(RoleType item : values()){
+    public static PlatformIdEnum getEnum(Integer code){
+        for(PlatformIdEnum item : values()){
             if(item.getCode().equals(code)){
                 return item;
             }

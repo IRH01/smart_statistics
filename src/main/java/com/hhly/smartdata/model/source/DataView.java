@@ -11,37 +11,37 @@ public class DataView{
     /**
      * 国家:0中国 1美国 2泰国 3越南 4韩国 5印尼6繁体7新加坡8马来西亚
      */
-    private Integer country;
+    private Integer country = 0;
 
     /**
      * 客户端标识,识别游客访问(区分PV 和UV)
      */
-    private String clientIdentity;
+    private String clientIdentity = "";
 
     /**
      * 账户（userId）
      */
-    private String userId;
+    private String userId = "";
 
     /**
      * 终端:1.pc 4.h5 5.其他
      */
-    private Integer platformTerminal;
+    private Integer platformTerminal = 0;
 
     /**
      * 域名
      */
-    private String websiteDomain;
+    private String websiteDomain = "";
 
     /**
      * 浏览页面: 1.首页 2.注册 3.充值
      */
-    private Integer pageView;
+    private Integer pageView = 0;
 
     /**
      * 网站路径，不带参数,不计域名
      */
-    private String urlPath;
+    private String urlPath = "";
 
     /**
      * 创建日期

@@ -5,13 +5,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MonthCompositeReportMapper{
-    int insert(MonthCompositeReport record);
+    int insert(MonthCompositeReport record) throws Exception;
 
-    int insertSelective(MonthCompositeReport record);
+    int insertSelective(MonthCompositeReport record) throws Exception;
 
-    MonthCompositeReport selectByPrimaryKey(Long id);
+    MonthCompositeReport selectByPrimaryKey(Long id) throws Exception;
 
-    int updateByPrimaryKeySelective(MonthCompositeReport record);
+    int updateByPrimaryKeySelective(MonthCompositeReport record) throws Exception;
 
-    int updateByPrimaryKey(MonthCompositeReport record);
+    int updateByPrimaryKey(MonthCompositeReport record) throws Exception;
 }

@@ -9,15 +9,15 @@ import java.util.List;
 @Repository
 public interface UserMapper{
 
-    int delete(Integer id);
+    int delete(Integer id) throws Exception;
 
-    int insert(User record);
+    int insert(User record) throws Exception;
 
-    User getUser(Integer id);
+    User getUser(Integer id) throws Exception;
 
-    User getByUsername(String username);
+    User getByUsername(String username) throws Exception;
 
-    int update(User record);
+    int update(User record) throws Exception;
 
-    List<User> searchUsers(User condition, Page page);
+    List<User> searchUsers(User condition, Page page) throws Exception;
 }

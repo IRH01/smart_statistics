@@ -12,97 +12,88 @@ public class MonthCompositeReport{
     /**
      * 统计日期(月)yyyy-MM
      */
-    private String statisticsMonth;
+    private String statisticsMonth = "";
 
     /**
      * 注册人数
      */
-    private Integer registerPopulation;
+    private Integer registerPopulation = 0;
 
     /**
      * 注册体验量
      */
-    private Integer registerExpCount;
+    private Integer registerExpCount = 0;
 
     /**
      * 真体验
      */
-    private Integer realExpCount;
+    private Integer realExpCount = 0;
 
     /**
      * 假体验
      */
-    private Integer virtualExpCount;
+    private Integer virtualExpCount = 0;
 
     /**
      * 新用户充值人数
      */
-    private Integer newUserRechargePopulation;
+    private Integer newUserRechargePopulation = 0;
 
     /**
      * 新用户充值次数
      */
-    private Integer newUserRechargeCount;
+    private Integer newUserRechargeCount = 0;
 
     /**
      * 新用户充值金额
      */
-    private BigDecimal newUserRechargeAmount;
+    private BigDecimal newUserRechargeAmount = new BigDecimal(0);
 
     /**
      * 新用户登录人数
      */
-    private Integer newUserLoginCount;
+    private Integer newUserLoginCount = 0;
 
     /**
      * 新用户玩游戏数
      */
-    private Integer newUserPlayCount;
+    private Integer newUserPlayCount = 0;
 
     /**
      * 老用户充值人数
      */
-    private Integer oldUserRechargePopulation;
+    private Integer oldUserRechargePopulation = 0;
 
     /**
      * 老用户充值次数
      */
-    private Integer oldUserRechargeCount;
+    private Integer oldUserRechargeCount = 0;
 
     /**
      * 老用户充值金额
      */
-    private BigDecimal oldUserRechargeAmount;
+    private BigDecimal oldUserRechargeAmount = new BigDecimal(0);
 
     /**
      * 老用户登录人数
      */
-    private Integer oldUserLoginCount;
+    private Integer oldUserLoginCount = 0;
 
     /**
      * 老用户玩游戏数
      */
-    private Integer oldUserPlayCount;
+    private Integer oldUserPlayCount = 0;
 
     /**
      * 次日留存
      */
-    private Integer nextDayStayCount;
+    private Integer nextDayStayCount = 0;
 
     /**
      * 统计执行日期
      */
     private Date executeTime;
 
-    /**
-     * 国家简码
-     */
-    private String countryCode;
-
-    /**
-     * 货币单位
-     */
-    private String currencyUnit;
 
     public Long getId(){
         return id;
@@ -248,19 +239,4 @@ public class MonthCompositeReport{
         this.executeTime = executeTime;
     }
 
-    public String getCountryCode(){
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode){
-        this.countryCode = countryCode;
-    }
-
-    public String getCurrencyUnit(){
-        return currencyUnit;
-    }
-
-    public void setCurrencyUnit(String currencyUnit){
-        this.currencyUnit = currencyUnit;
-    }
 }

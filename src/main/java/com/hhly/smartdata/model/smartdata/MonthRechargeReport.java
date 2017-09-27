@@ -12,52 +12,43 @@ public class MonthRechargeReport{
     /**
      * 统计日期(月)yyyy-MM
      */
-    private String statisticsMonth;
+    private String statisticsMonth = "";
 
     /**
      * 源端类型：1、PC 2.android 3.IOS 4.H5
      */
-    private Byte sourceType;
+    private Byte sourceType = 0;
 
     /**
      * PC-充值人数
      */
-    private Integer rechargePopulation;
+    private Integer rechargePopulation = 0;
 
     /**
      * PC-充值金额
      */
-    private BigDecimal rechargeAmount;
+    private BigDecimal rechargeAmount = new BigDecimal(0);
 
     /**
      * PC-充值次数
      */
-    private Integer rechargeCount;
+    private Integer rechargeCount = 0;
 
     /**
      * PC-新用户充值人数
      */
-    private Integer newRechargePopulation;
+    private Integer newRechargePopulation = 0;
 
     /**
      * PC-老用户充值人数
      */
-    private Integer oldRechargePopulation;
+    private Integer oldRechargePopulation = 0;
 
     /**
      * 统计执行日期
      */
     private Date executeTime;
 
-    /**
-     * 国家简码
-     */
-    private String countryCode;
-
-    /**
-     * 货币单位
-     */
-    private String currencyUnit;
 
     public Long getId(){
         return id;
@@ -131,19 +122,5 @@ public class MonthRechargeReport{
         this.executeTime = executeTime;
     }
 
-    public String getCountryCode(){
-        return countryCode;
-    }
 
-    public void setCountryCode(String countryCode){
-        this.countryCode = countryCode;
-    }
-
-    public String getCurrencyUnit(){
-        return currencyUnit;
-    }
-
-    public void setCurrencyUnit(String currencyUnit){
-        this.currencyUnit = currencyUnit;
-    }
 }

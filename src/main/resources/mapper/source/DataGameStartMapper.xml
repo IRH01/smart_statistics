@@ -1,138 +1,149 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hhly.smartdata.mapper.source.DataGameStartMapper" >
-  <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.source.DataGameStart" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="country" property="country" jdbcType="INTEGER" />
-    <result column="client_identity" property="clientIdentity" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="VARCHAR" />
-    <result column="platform_terminal" property="platformTerminal" jdbcType="INTEGER" />
-    <result column="platform_id" property="platformId" jdbcType="INTEGER" />
-    <result column="website_domain" property="websiteDomain" jdbcType="VARCHAR" />
-    <result column="url_path" property="urlPath" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, country, client_identity, user_id, platform_terminal, platform_id, website_domain, 
-    url_path, create_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from data_game_start
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <insert id="insert" parameterType="com.hhly.smartdata.model.source.DataGameStart" >
-    insert into data_game_start (id, country, client_identity, 
-      user_id, platform_terminal, platform_id, 
-      website_domain, url_path, create_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{country,jdbcType=INTEGER}, #{clientIdentity,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{platformTerminal,jdbcType=INTEGER}, #{platformId,jdbcType=INTEGER}, 
-      #{websiteDomain,jdbcType=VARCHAR}, #{urlPath,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.hhly.smartdata.model.source.DataGameStart" >
-    insert into data_game_start
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="country != null" >
-        country,
-      </if>
-      <if test="clientIdentity != null" >
-        client_identity,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="platformTerminal != null" >
-        platform_terminal,
-      </if>
-      <if test="platformId != null" >
-        platform_id,
-      </if>
-      <if test="websiteDomain != null" >
-        website_domain,
-      </if>
-      <if test="urlPath != null" >
-        url_path,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="country != null" >
-        #{country,jdbcType=INTEGER},
-      </if>
-      <if test="clientIdentity != null" >
-        #{clientIdentity,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="platformTerminal != null" >
-        #{platformTerminal,jdbcType=INTEGER},
-      </if>
-      <if test="platformId != null" >
-        #{platformId,jdbcType=INTEGER},
-      </if>
-      <if test="websiteDomain != null" >
-        #{websiteDomain,jdbcType=VARCHAR},
-      </if>
-      <if test="urlPath != null" >
-        #{urlPath,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.source.DataGameStart" >
-    update data_game_start
-    <set >
-      <if test="country != null" >
-        country = #{country,jdbcType=INTEGER},
-      </if>
-      <if test="clientIdentity != null" >
+<mapper namespace="com.hhly.smartdata.mapper.source.DataGameStartMapper">
+    <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.source.DataGameStart">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="country" property="country" jdbcType="INTEGER"/>
+        <result column="client_identity" property="clientIdentity" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="platform_terminal" property="platformTerminal" jdbcType="INTEGER"/>
+        <result column="platform_id" property="platformId" jdbcType="INTEGER"/>
+        <result column="website_domain" property="websiteDomain" jdbcType="VARCHAR"/>
+        <result column="url_path" property="urlPath" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, country, client_identity, user_id, platform_terminal, platform_id, website_domain,
+        url_path, create_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from data_game_start
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectYesterdayLaunchGameUser" resultType="java.util.Map">
+        SELECT
+        platform_id AS platformId,
+        platform_terminal AS sourceType,
+        user_id AS userId
+        FROM
+        data_game_start
+        WHERE TO_DAYS(NOW()) - TO_DAYS(create_time) &lt;= 1
+        AND TO_DAYS(NOW()) - TO_DAYS(create_time) &gt; 0
+        GROUP BY platform_id,platform_terminal,user_id
+    </select>
+    <insert id="insert" parameterType="com.hhly.smartdata.model.source.DataGameStart">
+        insert into data_game_start (id, country, client_identity,
+        user_id, platform_terminal, platform_id,
+        website_domain, url_path, create_time
+        )
+        values (#{id,jdbcType=BIGINT}, #{country,jdbcType=INTEGER}, #{clientIdentity,jdbcType=VARCHAR},
+        #{userId,jdbcType=VARCHAR}, #{platformTerminal,jdbcType=INTEGER}, #{platformId,jdbcType=INTEGER},
+        #{websiteDomain,jdbcType=VARCHAR}, #{urlPath,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.hhly.smartdata.model.source.DataGameStart">
+        insert into data_game_start
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="country != null">
+                country,
+            </if>
+            <if test="clientIdentity != null">
+                client_identity,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="platformTerminal != null">
+                platform_terminal,
+            </if>
+            <if test="platformId != null">
+                platform_id,
+            </if>
+            <if test="websiteDomain != null">
+                website_domain,
+            </if>
+            <if test="urlPath != null">
+                url_path,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="country != null">
+                #{country,jdbcType=INTEGER},
+            </if>
+            <if test="clientIdentity != null">
+                #{clientIdentity,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="platformTerminal != null">
+                #{platformTerminal,jdbcType=INTEGER},
+            </if>
+            <if test="platformId != null">
+                #{platformId,jdbcType=INTEGER},
+            </if>
+            <if test="websiteDomain != null">
+                #{websiteDomain,jdbcType=VARCHAR},
+            </if>
+            <if test="urlPath != null">
+                #{urlPath,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.source.DataGameStart">
+        update data_game_start
+        <set>
+            <if test="country != null">
+                country = #{country,jdbcType=INTEGER},
+            </if>
+            <if test="clientIdentity != null">
+                client_identity = #{clientIdentity,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="platformTerminal != null">
+                platform_terminal = #{platformTerminal,jdbcType=INTEGER},
+            </if>
+            <if test="platformId != null">
+                platform_id = #{platformId,jdbcType=INTEGER},
+            </if>
+            <if test="websiteDomain != null">
+                website_domain = #{websiteDomain,jdbcType=VARCHAR},
+            </if>
+            <if test="urlPath != null">
+                url_path = #{urlPath,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.source.DataGameStart">
+        update data_game_start
+        set country = #{country,jdbcType=INTEGER},
         client_identity = #{clientIdentity,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null" >
         user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="platformTerminal != null" >
         platform_terminal = #{platformTerminal,jdbcType=INTEGER},
-      </if>
-      <if test="platformId != null" >
         platform_id = #{platformId,jdbcType=INTEGER},
-      </if>
-      <if test="websiteDomain != null" >
         website_domain = #{websiteDomain,jdbcType=VARCHAR},
-      </if>
-      <if test="urlPath != null" >
         url_path = #{urlPath,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.source.DataGameStart" >
-    update data_game_start
-    set country = #{country,jdbcType=INTEGER},
-      client_identity = #{clientIdentity,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR},
-      platform_terminal = #{platformTerminal,jdbcType=INTEGER},
-      platform_id = #{platformId,jdbcType=INTEGER},
-      website_domain = #{websiteDomain,jdbcType=VARCHAR},
-      url_path = #{urlPath,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

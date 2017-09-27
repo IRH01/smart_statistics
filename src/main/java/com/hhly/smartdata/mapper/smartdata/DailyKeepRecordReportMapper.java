@@ -6,13 +6,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DailyKeepRecordReportMapper{
-    int insert(DailyKeepRecordReport record);
+    int insert(DailyKeepRecordReport record) throws Exception;
 
-    int insertSelective(DailyKeepRecordReport record);
+    int insertSelective(DailyKeepRecordReport record) throws Exception;
 
-    DailyKeepRecordReport selectByPrimaryKey(Long id);
+    DailyKeepRecordReport selectByPrimaryKey(Long id) throws Exception;
 
-    int updateByPrimaryKeySelective(DailyKeepRecordReport record);
+    int updateByPrimaryKeySelective(DailyKeepRecordReport record) throws Exception;
 
-    int updateByPrimaryKey(DailyKeepRecordReport record);
+    int updateByPrimaryKey(DailyKeepRecordReport record) throws Exception;
 }

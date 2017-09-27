@@ -3,50 +3,66 @@
 <mapper namespace="com.hhly.smartdata.mapper.smartdata.DailyLoginReportMapper">
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.DailyLoginReport">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="game_code" property="gameCode" jdbcType="VARCHAR"/>
-        <result column="game_name" property="gameName" jdbcType="VARCHAR"/>
         <result column="statistics_day" property="statisticsDay" jdbcType="VARCHAR"/>
+        <result column="platform_id" property="platformId" jdbcType="INTEGER"/>
         <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
+        <result column="platform_name" property="platformName" jdbcType="VARCHAR"/>
         <result column="login_population" property="loginPopulation" jdbcType="INTEGER"/>
         <result column="play_population" property="playPopulation" jdbcType="INTEGER"/>
         <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
     <sql id="Base_Column_List">
-        id, game_code, game_name, statistics_day, source_type, login_population, play_population,
+        id, statistics_day, platform_id, source_type, platform_name, login_population, play_population,
         execute_time
     </sql>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from daily_login_report
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyLoginReport" useGeneratedKeys="true"
-            keyProperty="id">
-        insert into daily_login_report (game_code, game_name,
-        statistics_day, source_type, login_population,
+
+    <select id="selectLastMonthLogin" resultType="java.util.Map">
+        SELECT
+        platform_id AS platform_id,
+        source_type AS source_type,
+        platform_name AS platform_name,
+        SUM(login_population) AS login_population_sum,
+        SUM(play_population) AS play_population_sum
+        FROM
+        daily_login_report
+        WHERE statistics_day = '2017-09-26'
+        GROUP BY platform_id, source_type
+    </select>
+
+    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyLoginReport">
+        insert into daily_login_report (id, statistics_day, platform_id,
+        source_type, platform_name, login_population,
         play_population, execute_time)
-        values (#{gameCode,jdbcType=VARCHAR}, #{gameName,jdbcType=VARCHAR},
-        #{statisticsDay,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT}, #{loginPopulation,jdbcType=INTEGER},
+        values (#{id,jdbcType=BIGINT}, #{statisticsDay,jdbcType=VARCHAR}, #{platformId,jdbcType=INTEGER},
+        #{sourceType,jdbcType=TINYINT}, #{platformName,jdbcType=VARCHAR}, #{loginPopulation,jdbcType=INTEGER},
         #{playPopulation,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP})
     </insert>
+
     <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.DailyLoginReport">
         insert into daily_login_report
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="gameCode != null">
-                game_code,
-            </if>
-            <if test="gameName != null">
-                game_name,
-            </if>
             <if test="statisticsDay != null">
                 statistics_day,
             </if>
+            <if test="platformId != null">
+                platform_id,
+            </if>
             <if test="sourceType != null">
                 source_type,
+            </if>
+            <if test="platformName != null">
+                platform_name,
             </if>
             <if test="loginPopulation != null">
                 login_population,
@@ -62,17 +78,17 @@
             <if test="id != null">
                 #{id,jdbcType=BIGINT},
             </if>
-            <if test="gameCode != null">
-                #{gameCode,jdbcType=VARCHAR},
-            </if>
-            <if test="gameName != null">
-                #{gameName,jdbcType=VARCHAR},
-            </if>
             <if test="statisticsDay != null">
                 #{statisticsDay,jdbcType=VARCHAR},
             </if>
+            <if test="platformId != null">
+                #{platformId,jdbcType=INTEGER},
+            </if>
             <if test="sourceType != null">
                 #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="platformName != null">
+                #{platformName,jdbcType=VARCHAR},
             </if>
             <if test="loginPopulation != null">
                 #{loginPopulation,jdbcType=INTEGER},
@@ -85,20 +101,21 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.DailyLoginReport">
         update daily_login_report
         <set>
-            <if test="gameCode != null">
-                game_code = #{gameCode,jdbcType=VARCHAR},
-            </if>
-            <if test="gameName != null">
-                game_name = #{gameName,jdbcType=VARCHAR},
-            </if>
             <if test="statisticsDay != null">
                 statistics_day = #{statisticsDay,jdbcType=VARCHAR},
             </if>
+            <if test="platformId != null">
+                platform_id = #{platformId,jdbcType=INTEGER},
+            </if>
             <if test="sourceType != null">
                 source_type = #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="platformName != null">
+                platform_name = #{platformName,jdbcType=VARCHAR},
             </if>
             <if test="loginPopulation != null">
                 login_population = #{loginPopulation,jdbcType=INTEGER},
@@ -112,15 +129,17 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.DailyLoginReport">
         update daily_login_report
-        set game_code = #{gameCode,jdbcType=VARCHAR},
-        game_name = #{gameName,jdbcType=VARCHAR},
-        statistics_day = #{statisticsDay,jdbcType=VARCHAR},
+        set statistics_day = #{statisticsDay,jdbcType=VARCHAR},
+        platform_id = #{platformId,jdbcType=INTEGER},
         source_type = #{sourceType,jdbcType=TINYINT},
+        platform_name = #{platformName,jdbcType=VARCHAR},
         login_population = #{loginPopulation,jdbcType=INTEGER},
         play_population = #{playPopulation,jdbcType=INTEGER},
         execute_time = #{executeTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
 </mapper>

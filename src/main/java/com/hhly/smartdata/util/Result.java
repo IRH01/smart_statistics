@@ -26,6 +26,10 @@ public class Result implements Serializable{
         super();
     }
 
+    public static Result success(){
+        return success("");
+    }
+
     public static Result success(Object data){
         Result result = new Result();
         result.setStatus(ResultCode.OK);
@@ -35,10 +39,14 @@ public class Result implements Serializable{
     }
 
     public static Result fail(){
+        return fail("");
+    }
+
+    public static Result fail(String msg){
         Result result = new Result();
         result.setStatus(ResultCode.ERROR_CODE);
         result.setMessage(ResultCode.getMsg(ResultCode.ERROR_CODE));
-        result.setData(null);
+        result.setData(msg);
         return result;
     }
 

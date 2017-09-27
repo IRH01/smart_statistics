@@ -6,13 +6,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IntervalGameLaunchReportMapper{
-    int insert(IntervalGameLaunchReport record);
+    int insert(IntervalGameLaunchReport record) throws Exception;
 
-    int insertSelective(IntervalGameLaunchReport record);
+    int insertSelective(IntervalGameLaunchReport record) throws Exception;
 
-    IntervalGameLaunchReport selectByPrimaryKey(Long id);
+    IntervalGameLaunchReport selectByPrimaryKey(Long id) throws Exception;
 
-    int updateByPrimaryKeySelective(IntervalGameLaunchReport record);
+    int updateByPrimaryKeySelective(IntervalGameLaunchReport record) throws Exception;
 
-    int updateByPrimaryKey(IntervalGameLaunchReport record);
+    int updateByPrimaryKey(IntervalGameLaunchReport record) throws Exception;
 }

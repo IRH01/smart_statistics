@@ -11,32 +11,32 @@ public class MonthLoginReport{
     /**
      * 统计日期(日)yyyy-MM
      */
-    private String statisticsMonth;
+    private String statisticsMonth = "";
 
     /**
      * 平台id或者游戏id
      */
-    private String platformId;
+    private Integer platformId = 0;
 
     /**
      * 平台或游戏名称
      */
-    private String platformName;
+    private String platformName = "";
 
     /**
      * 源端类型：1、PC  2.H5 3.IOS 4.android
      */
-    private Byte sourceType;
+    private Byte sourceType = 0;
 
     /**
      * 登录人数
      */
-    private Integer loginPopulation;
+    private Integer loginPopulation = 0;
 
     /**
      * 玩游戏人数
      */
-    private Integer playPopulation;
+    private Integer playPopulation = 0;
 
     /**
      * 统计执行日期
@@ -59,11 +59,11 @@ public class MonthLoginReport{
         this.statisticsMonth = statisticsMonth;
     }
 
-    public String getPlatformId(){
+    public Integer getPlatformId(){
         return platformId;
     }
 
-    public void setPlatformId(String platformId){
+    public void setPlatformId(Integer platformId){
         this.platformId = platformId;
     }
 

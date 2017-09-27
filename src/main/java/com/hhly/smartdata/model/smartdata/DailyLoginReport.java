@@ -11,32 +11,32 @@ public class DailyLoginReport{
     /**
      * 统计日期(日)yyyy-MM-dd
      */
-    private String statisticsDay;
+    private String statisticsDay = "";
 
     /**
      * 游戏编码
      */
-    private Integer platformId;
+    private Integer platformId = 0;
 
     /**
      * 源端类型：1、PC 2.H5 3.IOS 4.android
      */
-    private Byte sourceType;
+    private Byte sourceType = 0;
 
     /**
      * 游戏名称
      */
-    private String platformName;
+    private String platformName = "";
 
     /**
      * 登录人数
      */
-    private Integer loginPopulation;
+    private Integer loginPopulation = 0;
 
     /**
      * 玩游戏人数
      */
-    private Integer playPopulation;
+    private Integer playPopulation = 0;
 
     /**
      * 统计执行日期

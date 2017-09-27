@@ -8,20 +8,20 @@ import java.util.List;
 @Repository
 public interface FunctionMapper{
 
-    List<Function> queryByRole(List<Integer> roleIds);
+    List<Function> queryByRole(List<Integer> roleIds)throws Exception;
 
-    int insert(Function record);
+    int insert(Function record)throws Exception;
 
-    Function get(Integer id);
+    Function get(Integer id)throws Exception;
 
-    int update(Function record);
+    int update(Function record)throws Exception;
 
-    List<Function> search(Function condition);
+    List<Function> search(Function condition)throws Exception;
 
-    void batchDelete(List<Integer> ids);
+    void batchDelete(List<Integer> ids)throws Exception;
 
-    void delete(Integer id);
+    void delete(Integer id)throws Exception;
 
-    List<Function> getAll();
+    List<Function> getAll() throws Exception;
 
 }

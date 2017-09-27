@@ -11,37 +11,37 @@ public class DataGameStart{
     /**
      * 国家:0中国 1美国 2泰国 3越南 4韩国 5印尼6繁体7新加坡8马来西亚
      */
-    private Integer country;
+    private Integer country = 0;
 
     /**
      * 客户端标识,识别游客访问
      */
-    private String clientIdentity;
+    private String clientIdentity = "";
 
     /**
      * 账户（userId）
      */
-    private String userId;
+    private String userId = "";
 
     /**
      * 终端:1.pc 2.安卓 3ios 4.h5 5.其他
      */
-    private Integer platformTerminal;
+    private Integer platformTerminal = 0;
 
     /**
      * 平台Id:默认为玩一下平台;PC=1,移动端为31111
      */
-    private Integer platformId;
+    private Integer platformId = 0;
 
     /**
      * 域名
      */
-    private String websiteDomain;
+    private String websiteDomain = "";
 
     /**
      * 网站路径，不带参数,不计域名
      */
-    private String urlPath;
+    private String urlPath = "";
 
     /**
      * 创建日期

@@ -3,14 +3,14 @@ package com.hhly.smartdata.mapper.source;
 
 import com.hhly.smartdata.model.source.DataPlatformStart;
 
-public interface DataPlatformStartMapper {
-    int insert(DataPlatformStart record);
+public interface DataPlatformStartMapper{
+    int insert(DataPlatformStart record) throws Exception;
 
-    int insertSelective(DataPlatformStart record);
+    int insertSelective(DataPlatformStart record) throws Exception;
 
-    DataPlatformStart selectByPrimaryKey(Long id);
+    DataPlatformStart selectByPrimaryKey(Long id) throws Exception;
 
-    int updateByPrimaryKeySelective(DataPlatformStart record);
+    int updateByPrimaryKeySelective(DataPlatformStart record) throws Exception;
 
-    int updateByPrimaryKey(DataPlatformStart record);
+    int updateByPrimaryKey(DataPlatformStart record) throws Exception;
 }

@@ -8,18 +8,18 @@ import java.util.List;
 @Repository
 public interface PermissionMapper{
 
-    List<Permission> searchPerms(Permission perm);
+    List<Permission> searchPerms(Permission perm) throws Exception;
 
-    List<Permission> queryByRole(List<Integer> roleIds);
+    List<Permission> queryByRole(List<Integer> roleIds) throws Exception;
 
-    int delete(Permission perm);
+    int delete(Permission perm) throws Exception;
 
-    int insert(Permission record);
+    int insert(Permission record) throws Exception;
 
-    Permission get(String permission);
+    Permission get(String permission) throws Exception;
 
-    int update(Permission record);
+    int update(Permission record) throws Exception;
 
-    List<Permission> getAll();
+    List<Permission> getAll() throws Exception;
 
 }

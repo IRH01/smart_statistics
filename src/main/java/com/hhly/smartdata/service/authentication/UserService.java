@@ -13,7 +13,7 @@ public class UserService{
     @Autowired
     private UserMapper userMapper;
 
-    public User getUserByUsername(String username){
+    public User getUserByUsername(String username) throws Exception{
         User user = new User();
         try{
             user = userMapper.getByUsername(username);
@@ -24,15 +24,15 @@ public class UserService{
         return user;
     }
 
-    public int update(User user){
+    public int update(User user) throws Exception{
         return userMapper.update(user);
     }
 
-    public User getUser(Integer id){
+    public User getUser(Integer id) throws Exception{
         return userMapper.getUser(id);
     }
 
-    public int delete(Integer id){
+    public int delete(Integer id) throws Exception{
         return userMapper.delete(id);
     }
 }

@@ -11,62 +11,62 @@ public class DailyKeepRecordReport{
     /**
      * 统计日期(日)yyyy-MM-dd
      */
-    private String statisticsDay;
+    private String statisticsDay = "";
 
     /**
      * 源端类型：1、PC 2.android 3.IOS 4.H5
      */
-    private Byte sourceType;
+    private Byte sourceType = 0;
 
     /**
      * 注册人数
      */
-    private Integer registerCount;
+    private Integer registerCount = 0;
 
     /**
      * 1天后留存
      */
-    private Integer one;
+    private Integer one = 0;
 
     /**
      * 2天后留存
      */
-    private Integer two;
+    private Integer two = 0;
 
     /**
      * 3天后留存
      */
-    private Integer three;
+    private Integer three = 0;
 
     /**
      * 4天后留存
      */
-    private Integer four;
+    private Integer four = 0;
 
     /**
      * 5天后留存
      */
-    private Integer five;
+    private Integer five = 0;
 
     /**
      * 6天后留存
      */
-    private Integer six;
+    private Integer six = 0;
 
     /**
      * 7天后留存
      */
-    private Integer seven;
+    private Integer seven = 0;
 
     /**
      * 14天后留存
      */
-    private Integer fourteen;
+    private Integer fourteen = 0;
 
     /**
      * 30天后留存
      */
-    private Integer thirty;
+    private Integer thirty = 0;
 
     /**
      * 统计执行日期

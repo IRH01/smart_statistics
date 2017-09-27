@@ -8,15 +8,15 @@ import java.util.List;
 @Repository
 public interface MenuMapper{
 
-    int delete(Menu condition);
+    int delete(Menu condition) throws Exception;
 
-    int delById(Integer id);
+    int delById(Integer id) throws Exception;
 
-    List<Menu> getMenuByPerms(List<String> permIds);
+    List<Menu> getMenuByPerms(List<String> permIds) throws Exception;
 
-    int insert(Menu record);
+    int insert(Menu record) throws Exception;
 
-    List<Menu> searchMenu(Menu condition);
+    List<Menu> searchMenu(Menu condition) throws Exception;
 
-    int update(Menu record);
+    int update(Menu record) throws Exception;
 }

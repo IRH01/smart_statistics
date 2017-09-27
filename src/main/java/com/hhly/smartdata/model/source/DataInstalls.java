@@ -1,6 +1,5 @@
 package com.hhly.smartdata.model.source;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class DataInstalls{
@@ -12,32 +11,32 @@ public class DataInstalls{
     /**
      * 手机唯一号（MAC地址/imei）
      */
-    private String uniqueNo;
+    private String uniqueNo = "";
 
     /**
      * 终端:2.安卓 3.ios
      */
-    private Integer platformTerminal;
+    private Integer platformTerminal = 0;
 
     /**
      * 国家:0中国 1美国 2泰国 3越南 4韩国 5印尼6繁体7新加坡8马来西亚
      */
-    private Integer country;
+    private Integer country = 0;
 
     /**
      * 经度
      */
-    private BigDecimal longitude;
+    private Double longitude = 0D;
 
     /**
      * 纬度
      */
-    private BigDecimal latitude;
+    private Double latitude = 0D;
 
     /**
      * IP地址
      */
-    private String ip;
+    private String ip = "";
 
     /**
      * 创建日期
@@ -76,19 +75,19 @@ public class DataInstalls{
         this.country = country;
     }
 
-    public BigDecimal getLongitude(){
+    public Double getLongitude(){
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude){
+    public void setLongitude(Double longitude){
         this.longitude = longitude;
     }
 
-    public BigDecimal getLatitude(){
+    public Double getLatitude(){
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude){
+    public void setLatitude(Double latitude){
         this.latitude = latitude;
     }
 

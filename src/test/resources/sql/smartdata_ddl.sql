@@ -1,12 +1,3 @@
-DROP TABLE IF EXISTS auth_admin;
-DROP TABLE IF EXISTS auth_function;
-DROP TABLE IF EXISTS auth_menu;
-DROP TABLE IF EXISTS auth_permission;
-DROP TABLE IF EXISTS auth_role;
-DROP TABLE IF EXISTS auth_role_permission;
-DROP TABLE IF EXISTS auth_user;
-DROP TABLE IF EXISTS auth_user_role;
-
 DROP TABLE IF EXISTS interval_game_launch_report;
 DROP TABLE IF EXISTS interval_interface_report;
 DROP TABLE IF EXISTS interval_source_report;
@@ -14,90 +5,11 @@ DROP TABLE IF EXISTS daily_composite_report;
 DROP TABLE IF EXISTS daily_register_report;
 DROP TABLE IF EXISTS daily_recharge_report;
 DROP TABLE IF EXISTS daily_login_report;
-DROP TABLE IF EXISTS daily_Keep_record_report;
+DROP TABLE IF EXISTS daily_keep_record_report;
 DROP TABLE IF EXISTS month_composite_report;
 DROP TABLE IF EXISTS month_register_report;
 DROP TABLE IF EXISTS month_recharge_report;
 DROP TABLE IF EXISTS month_login_report;
-
-CREATE TABLE `auth_admin` (
-   `ID` DOUBLE NOT NULL AUTO_INCREMENT COMMENT '主键',
-   `USER_ID` DOUBLE DEFAULT NULL COMMENT '用户ID',
-   `NAME` VARCHAR(80) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '名称',
-   `EMAIL` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '邮箱',
-   `TEL` VARCHAR(60) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '电话',
-   `DEPART_ID` DOUBLE DEFAULT NULL COMMENT '部门ID(废弃)',
-   `JOB_NO` VARCHAR(60) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '工号',
-   `TYPE` DOUBLE DEFAULT NULL COMMENT '类型',
-   PRIMARY KEY (`ID`),
-   UNIQUE KEY `auth_admin_pk` (`ID`)
-) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ;
-
-
-CREATE TABLE `auth_function` (
-   `ID` DOUBLE NOT NULL AUTO_INCREMENT COMMENT '主键',
-   `PARENT_ID` DOUBLE DEFAULT NULL COMMENT '父功能点ID',
-   `NAME` VARCHAR(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '功能名称',
-   `FUNCTION_INDEX` DOUBLE DEFAULT NULL COMMENT '排序索引',
-   PRIMARY KEY (`ID`),
-   UNIQUE KEY `auth_function_pk` (`ID`)
-) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='功能点表';
-
-CREATE TABLE `auth_menu` (
-   `ID` DOUBLE NOT NULL AUTO_INCREMENT COMMENT '主键',
-   `PERMISSION` VARCHAR(400) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '权限ID',
-   `PARENT_ID` DOUBLE DEFAULT NULL COMMENT '父菜单ID',
-   `NAME` VARCHAR(400) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '菜单名称',
-   `URL` VARCHAR(800) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '菜单URL',
-   `MENU_INDEX` DOUBLE DEFAULT NULL COMMENT '排序索引',
-   `CREATE_TIME` DATETIME DEFAULT NULL COMMENT '创建时间',
-   PRIMARY KEY (`ID`),
-   UNIQUE KEY `auth_menu_pk` (`ID`)
-) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='菜单表';
-
-CREATE TABLE `auth_permission` (
-   `PERMISSION` VARCHAR(400) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '权限',
-   `NAME` VARCHAR(400) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '权限名称',
-   `FUNCTION_ID` DOUBLE DEFAULT NULL COMMENT '功能ID',
-   `CREATE_TIME` DATETIME DEFAULT NULL COMMENT '创建时间'
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='权限表';
-
-CREATE TABLE `auth_role` (
-   `ID` DOUBLE NOT NULL AUTO_INCREMENT COMMENT '主键',
-   `NAME` VARCHAR(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '角色名称',
-   `CREATE_TIME` DATETIME DEFAULT NULL COMMENT '创建时间',
-   PRIMARY KEY (`ID`),
-   UNIQUE KEY `auth_role_pk` (`ID`)
-) ENGINE=INNODB AUTO_INCREMENT=206 DEFAULT CHARSET=utf8 COMMENT='角色表';
-
-CREATE TABLE `auth_role_permission` (
-   `ID` DOUBLE NOT NULL AUTO_INCREMENT COMMENT '主键',
-   `ROLE_ID` DOUBLE DEFAULT NULL COMMENT '角色ID',
-   `PERMISSION` VARCHAR(400) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '权限ID',
-   PRIMARY KEY (`ID`),
-   UNIQUE KEY `auth_role_permission_pk` (`ID`)
-) ENGINE=INNODB AUTO_INCREMENT=1953 DEFAULT CHARSET=utf8 COMMENT='角色权限关系表';
-
-CREATE TABLE `auth_user` (
-   `USER_ID` DOUBLE NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-   `USERNAME` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '用户名称',
-   `PASSWORD` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '密码',
-   `USER_STATUS` VARCHAR(8) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '用户状态',
-   `USER_TYPE` VARCHAR(8) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '用户类型',
-   `CREATE_TIME` DATETIME DEFAULT NULL COMMENT '创建时间',
-   `LOCALE` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '语言（废弃）',
-   PRIMARY KEY (`USER_ID`),
-   UNIQUE KEY `auth_user_pk` (`USER_ID`),
-   UNIQUE KEY `auth_user_uk1` (`USERNAME`)
-) ENGINE=INNODB AUTO_INCREMENT=302 DEFAULT CHARSET=utf8 COMMENT='用户基本信息表';
-
-CREATE TABLE `auth_user_role` (
-   `ID` DOUBLE NOT NULL AUTO_INCREMENT COMMENT '主键',
-   `USER_ID` DOUBLE DEFAULT NULL COMMENT '用户ID',
-   `ROLE_ID` DOUBLE DEFAULT NULL COMMENT '角色ID',
-   PRIMARY KEY (`ID`),
-   UNIQUE KEY `auth_user_role_pk` (`ID`)
-) ENGINE=INNODB AUTO_INCREMENT=422 DEFAULT CHARSET=utf8 COMMENT='用户角色关系表';
 
 /*==============================================================*/
 /* Table: game_launch_statistic                                 */
@@ -106,7 +18,7 @@ CREATE TABLE `interval_game_launch_report` (
    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '平台实时统计，游戏启动统计',
    `statistics_time` varchar(20) NOT NULL DEFAULT '' COMMENT '统计时间(半小时)yyyy-MM-dd HH:30:00',
    `interval_time` int(5) NOT NULL DEFAULT '30' COMMENT '统计间隔时间。单位分钟',
-   `platform_id` int(64) NOT NULL DEFAULT '0' COMMENT '平台id或游戏id',
+   `platform_id` int(10) NOT NULL DEFAULT '0' COMMENT '平台id或游戏id',
    `platform_name` varchar(50) NOT NULL DEFAULT '' COMMENT '平台名称或游戏名称',
    `launch_count` int(10) NOT NULL DEFAULT '0' COMMENT '老用户充值次数',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
@@ -144,8 +56,6 @@ CREATE TABLE `interval_source_report` (
    `recharge_count` int(10) NOT NULL DEFAULT '0' COMMENT '充值次数',
    `recharge_amount` decimal(14,4) NOT NULL DEFAULT '0.0000' COMMENT '充值金额',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
-   `country_code` varchar(5) NOT NULL DEFAULT '' COMMENT '国家简码',
-   `currency_unit` varchar(10) NOT NULL DEFAULT '' COMMENT '货币单位',
    PRIMARY KEY (`id`),
    UNIQUE KEY `idx_statistics_time` (`statistics_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='平台实时统计，各端实时统计';
@@ -172,8 +82,6 @@ CREATE TABLE `daily_composite_report` (
    `old_user_play_count` int(10) NOT NULL DEFAULT '0' COMMENT '老用户玩游戏数',
    `next_day_stay_count` int(10) NOT NULL DEFAULT '0' COMMENT '次日留存',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
-   `country_code` varchar(5) NOT NULL DEFAULT '' COMMENT '国家简码',
-   `currency_unit` varchar(10) NOT NULL DEFAULT '' COMMENT '货币单位。',
    PRIMARY KEY (`id`),
    UNIQUE KEY `idx_statistics_day` (`statistics_day`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日报表，综合报表';
@@ -211,8 +119,6 @@ CREATE TABLE `daily_recharge_report` (
    `new_recharge_population` int(10) NOT NULL DEFAULT '0' COMMENT '新用户充值人数',
    `old_recharge_population` int(10) NOT NULL DEFAULT '0' COMMENT '老用户充值人数',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
-   `country_code` varchar(5) NOT NULL DEFAULT '' COMMENT '国家简码',
-   `currency_unit` varchar(10) NOT NULL DEFAULT '' COMMENT '货币单位',
    PRIMARY KEY (`id`),
    UNIQUE KEY `idx_day_source` (`statistics_day`,`source_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日报表，充值来源统计报表';
@@ -224,7 +130,7 @@ CREATE TABLE `daily_login_report` (
    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，游戏登录统计报表',
    `statistics_day` varchar(10) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
    `platform_id` int(10) NOT NULL DEFAULT '0' COMMENT '游戏编码',
-   `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.H5 3.IOS 4.android',
+   `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.android 3.IOS 4.H5',
    `platform_name` varchar(10) NOT NULL DEFAULT '' COMMENT '游戏名称',
    `login_population` int(10) NOT NULL DEFAULT '0' COMMENT '登录人数',
    `play_population` int(10) NOT NULL DEFAULT '0' COMMENT '玩游戏人数',
@@ -277,8 +183,6 @@ CREATE TABLE `month_composite_report` (
    `old_user_play_count` int(10) NOT NULL DEFAULT '0' COMMENT '老用户玩游戏数',
    `next_day_stay_count` int(10) NOT NULL DEFAULT '0' COMMENT '次日留存',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
-   `country_code` varchar(5) NOT NULL DEFAULT '' COMMENT '国家简码',
-   `currency_unit` varchar(10) NOT NULL DEFAULT '' COMMENT '货币单位',
    PRIMARY KEY (`id`),
    UNIQUE KEY `idx_statistics_month` (`statistics_month`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='月报表，综合报表';
@@ -316,8 +220,6 @@ CREATE TABLE `month_recharge_report` (
    `new_recharge_population` int(10) NOT NULL DEFAULT '0' COMMENT 'PC-新用户充值人数',
    `old_recharge_population` int(10) NOT NULL DEFAULT '0' COMMENT 'PC-老用户充值人数',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
-   `country_code` varchar(5) NOT NULL DEFAULT '' COMMENT '国家简码',
-   `currency_unit` varchar(10) NOT NULL DEFAULT '' COMMENT '货币单位',
    PRIMARY KEY (`id`),
    UNIQUE KEY `idx_month_source` (`statistics_month`,`source_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='月报表，充值来源统计报表';
@@ -328,9 +230,9 @@ CREATE TABLE `month_recharge_report` (
 CREATE TABLE `month_login_report` (
    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，游戏登录统计报表',
    `statistics_month` varchar(10) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM',
-   `platform_id` varchar(10) NOT NULL DEFAULT '' COMMENT '平台id或者游戏id',
+   `platform_id` int(10) NOT NULL DEFAULT '0' COMMENT '平台id或者游戏id',
    `platform_name` varchar(10) NOT NULL DEFAULT '' COMMENT '平台或游戏名称',
-   `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC  2.H5 3.IOS 4.android',
+   `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.android 3.IOS 4.H5',
    `login_population` int(10) NOT NULL DEFAULT '0' COMMENT '登录人数',
    `play_population` int(10) NOT NULL DEFAULT '0' COMMENT '玩游戏人数',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',

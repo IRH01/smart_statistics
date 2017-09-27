@@ -32,14 +32,22 @@ public class UserControllerApi extends BaseController{
     @ResponseBody
     public String initPwd(@ModelAttribute User user){
         user.setPassword(new Md5Hash("123456").toString());
-        userService.update(user);
+        try{
+            userService.update(user);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "SUCCESS";
     }
 
     @RequestMapping("/modifyPasswd")
     public String modifyPasswd(@ModelAttribute User user, Model model){
         user.setPassword(new Md5Hash(user.getNewPassword()).toString());
-        userService.update(user);
+        try{
+            userService.update(user);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         model.addAttribute("redirectUrl", "/welcome.do");
         model.addAttribute("msg", "密码修改成功！");
         return "success";
@@ -48,7 +56,12 @@ public class UserControllerApi extends BaseController{
     @RequestMapping("/verifyPasswd")
     @ResponseBody
     public boolean verifyPasswd(@ModelAttribute User user){
-        User oldUser = userService.getUser(user.getUserId());
+        User oldUser = null;
+        try{
+            oldUser = userService.getUser(user.getUserId());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return oldUser.getPassword().equals(new Md5Hash(user.getPassword()).toString());
     }
 
@@ -60,8 +73,13 @@ public class UserControllerApi extends BaseController{
     @RequestMapping("/{random}/valid.do")
     public ModelAndView valid(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
         Boolean b = true;
-        String username = new String(request.getParameter("db.username").getBytes("iso8859_1"), "UTF-8");
-        User user = userService.getUserByUsername(username);
+        String username = new String(request.getParameter("smart.username").getBytes("iso8859_1"), "UTF-8");
+        User user = null;
+        try{
+            user = userService.getUserByUsername(username);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         if(user != null){
             b = false;
         }

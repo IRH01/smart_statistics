@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hhly.smartdata.mapper.member.LoginTrackMapper">
+    <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.member.LoginTrack">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="login_result" property="loginResult" jdbcType="INTEGER"/>
+        <result column="login_time" property="loginTime" jdbcType="TIMESTAMP"/>
+        <result column="login_ip" property="loginIp" jdbcType="VARCHAR"/>
+        <result column="os_type" property="osType" jdbcType="INTEGER"/>
+        <result column="version_code" property="versionCode" jdbcType="INTEGER"/>
+        <result column="version_name" property="versionName" jdbcType="VARCHAR"/>
+        <result column="platformid" property="platformid" jdbcType="INTEGER"/>
+        <result column="gamearea_id" property="gameareaId" jdbcType="INTEGER"/>
+        <result column="service_id" property="serviceId" jdbcType="DECIMAL"/>
+        <result column="login_ip_area" property="loginIpArea" jdbcType="VARCHAR"/>
+        <result column="is_third" property="isThird" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_name, login_result, login_time, login_ip, os_type, version_code, version_name,
+        platformid, gamearea_id, service_id, login_ip_area, is_third
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_login_track
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectYesterdayLoginUser" resultType="java.util.Map">
+        SELECT
+        platformid AS platformId,
+        os_type AS sourceType,
+        user_name AS userId
+        FROM
+        tbl_login_track
+        WHERE TO_DAYS(NOW()) - TO_DAYS(login_time) &lt;= 1
+        AND TO_DAYS(NOW()) - TO_DAYS(login_time) &gt; 0
+        GROUP BY platformid, os_type, user_name;
+    </select>
+
+    <select id="findIntervalSourceReportByTime" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
+        select
+        a.id as source_type,
+        ifnull(b.register_population,0) as register_population,
+        ifnull(c.login_population,0) as login_population,
+        ifnull(d.recharge_population,0) as recharge_population,
+        ifnull(d.recharge_count,0) as recharge_count,
+        ifnull(d.recharge_amount,0) as recharge_amount
+        from tbl_plat_terminal_info a
+        left join (select os_type, count(DISTINCT(user_id)) as register_population from gp_tbl_user_info where
+        <![CDATA[
+              create_time > DATE_FORMAT('#{startDate}','%Y-%m-%d %H:%i:%S')
+  		]]>
+        and
+        <![CDATA[
+  		      create_time <= DATE_FORMAT('#{endDate}','%Y-%m-%d %H:%i:%S')
+  		]]>
+        group by os_type) b on  a.id = b.os_type
+        left join (select os_type,count(user_name) as login_population from gp_tbl_login_track  where
+        <![CDATA[
+              login_time > DATE_FORMAT('#{startDate}','%Y-%m-%d %H:%i:%S')
+  		]]>
+        and
+        <![CDATA[
+  		      login_time <= DATE_FORMAT('#{endDate}','%Y-%m-%d %H:%i:%S')
+  		]]>
+        group by os_type) c on  a.id = c.os_type
+        left join (select source,count(DISTINCT(user_id)) as recharge_population ,sum(apply_amount) as recharge_amount,count(orderno) as recharge_count from gp_tbl_recharge_record where
+        and status=1 and
+        <![CDATA[
+              apply_time > DATE_FORMAT('#{startDate}','%Y-%m-%d %H:%i:%S')
+  		]]>
+        and
+        <![CDATA[
+  		      apply_time <= DATE_FORMAT('#{endDate}','%Y-%m-%d %H:%i:%S')
+  		]]>
+        group by source) d on a.id = d.source
+
+    </select>
+
+</mapper>

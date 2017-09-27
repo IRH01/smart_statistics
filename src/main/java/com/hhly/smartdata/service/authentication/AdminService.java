@@ -18,28 +18,28 @@ public class AdminService{
     @Autowired
     private UserMapper userMapper;
 
-    public List<Admin> searchAdmins(Admin condition, Page page){
+    public List<Admin> searchAdmins(Admin condition, Page page) throws Exception{
         return adminMapper.searchAdmins(condition, page);
     }
 
     @Transactional
-    public void save(Admin admin){
+    public void save(Admin admin) throws Exception{
         userMapper.insert(admin);
         adminMapper.insert(admin);
     }
 
     @Transactional
-    public void update(Admin admin){
+    public void update(Admin admin) throws Exception{
         userMapper.update(admin);
         adminMapper.update(admin);
     }
 
-    public Admin get(Integer id){
+    public Admin get(Integer id) throws Exception{
         return adminMapper.get(id);
     }
 
     @Transactional
-    public int deleteByUserId(int userId){
+    public int deleteByUserId(int userId) throws Exception{
         int result = userMapper.delete(userId);
         return result;
     }

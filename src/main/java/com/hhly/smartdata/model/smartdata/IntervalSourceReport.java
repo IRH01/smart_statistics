@@ -1,9 +1,11 @@
 package com.hhly.smartdata.model.smartdata;
 
+import com.hhly.smartdata.model.BaseModel;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class IntervalSourceReport{
+public class IntervalSourceReport extends BaseModel{
     /**
      * 平台实时统计，各端实时统计
      */
@@ -12,57 +14,48 @@ public class IntervalSourceReport{
     /**
      * 统计日期(半小时)yyyy-MM-dd HH:30:00
      */
-    private String statisticsTime;
+    private String statisticsTime = "";
 
     /**
      * 统计间隔时间，单位分钟
      */
-    private Integer intervalTime;
+    private Integer intervalTime = 0;
 
     /**
      * 源端类型：1、PC 2.android 3.IOS 4.H5
      */
-    private Byte sourceType;
+    private Byte sourceType = 0;
 
     /**
      * 注册人数
      */
-    private Integer registerPopulation;
+    private Integer registerPopulation = 0;
 
     /**
      * 登录人数
      */
-    private Integer loginPopulation;
+    private Integer loginPopulation = 0;
 
     /**
      * 充值人数
      */
-    private Integer rechargePopulation;
+    private Integer rechargePopulation = 0;
 
     /**
      * 充值次数
      */
-    private Integer rechargeCount;
+    private Integer rechargeCount = 0;
 
     /**
      * 充值金额
      */
-    private BigDecimal rechargeAmount;
+    private BigDecimal rechargeAmount = new BigDecimal(0);
 
     /**
      * 统计执行日期
      */
     private Date executeTime;
 
-    /**
-     * 国家简码
-     */
-    private String countryCode;
-
-    /**
-     * 货币单位
-     */
-    private String currencyUnit;
 
     public Long getId(){
         return id;
@@ -144,19 +137,5 @@ public class IntervalSourceReport{
         this.executeTime = executeTime;
     }
 
-    public String getCountryCode(){
-        return countryCode;
-    }
 
-    public void setCountryCode(String countryCode){
-        this.countryCode = countryCode;
-    }
-
-    public String getCurrencyUnit(){
-        return currencyUnit;
-    }
-
-    public void setCurrencyUnit(String currencyUnit){
-        this.currencyUnit = currencyUnit;
-    }
 }

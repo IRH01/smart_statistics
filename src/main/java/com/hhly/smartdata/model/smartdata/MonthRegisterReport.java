@@ -11,52 +11,52 @@ public class MonthRegisterReport{
     /**
      * 统计日期(月)yyyy-MM
      */
-    private String statisticsMonth;
+    private String statisticsMonth = "";
 
     /**
      * pc页面浏览数pv
      */
-    private Long pcPageView;
+    private Long pcPageView = 0L;
 
     /**
      * pc用户访问数uv
      */
-    private Integer pcUserView;
+    private Integer pcUserView = 0;
 
     /**
      * h5用户数
      */
-    private Integer h5Population;
+    private Integer h5Population = 0;
 
     /**
      * h5 pv
      */
-    private Long h5PageView;
+    private Long h5PageView = 0L;
 
     /**
      * h5 uv
      */
-    private Integer h5UserView;
+    private Integer h5UserView = 0;
 
     /**
      * ios访问量
      */
-    private Integer iosPopulation;
+    private Integer iosPopulation = 0;
 
     /**
      * ios安装量
      */
-    private Integer iosInstallCount;
+    private Integer iosInstallCount = 0;
 
     /**
      * android访问量
      */
-    private Integer androidPopulation;
+    private Integer androidPopulation = 0;
 
     /**
      * android安装量
      */
-    private Integer androidInstallCount;
+    private Integer androidInstallCount = 0;
 
     /**
      * 统计执行日期

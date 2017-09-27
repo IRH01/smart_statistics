@@ -41,7 +41,12 @@ public class RoleControllerApi extends BaseController{
     @RequiresPermissions("sys_role_list")
     public ModelAndView list(@ModelAttribute Role role, @ModelAttribute Page page){
         PageUtil.startPage(page);
-        List<Role> roleList = roleService.search(role, page);
+        List<Role> roleList = null;
+        try{
+            roleList = roleService.search(role, page);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         Map<String, Object> model = Maps.newHashMap();
         model.put("roleList", roleList);
         model.put("role", role);
@@ -51,7 +56,11 @@ public class RoleControllerApi extends BaseController{
     @RequestMapping("/{roleID}/delete")
     @RequiresPermissions("sys_role_delete")
     public String delete(@PathVariable("roleID") Integer roleId){
-        roleService.delete(roleId);
+        try{
+            roleService.delete(roleId);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "redirect:../list.do";
     }
 
@@ -66,14 +75,24 @@ public class RoleControllerApi extends BaseController{
     @RequiresPermissions("sys_role_update")
     public ModelAndView preUpdate(@PathVariable("roleID") Integer roleId, HttpServletRequest request){
         Map<String, Object> model = Maps.newHashMap();
-        Role role = roleService.get(roleId);
+        Role role = null;
+        try{
+            role = roleService.get(roleId);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         String permissions = "";
         String permissionIds = "";
 
         List<Integer> roleIdList = Lists.newArrayList();
         roleIdList.add(role.getId());
        /*拼接获取用户对应的权限*/
-        List<Permission> permissionList = permissionService.queryByRole(roleIdList);
+        List<Permission> permissionList = null;
+        try{
+            permissionList = permissionService.queryByRole(roleIdList);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         for(Permission permission : permissionList){
             permissions += permission.getName() + ",";
             permissionIds += permission.getPermission() + ",";
@@ -100,11 +119,19 @@ public class RoleControllerApi extends BaseController{
     @RequiresPermissions("sys_role_add")
     public String save(@ModelAttribute Role role){
         if(role.getId() != null && role.getId().intValue() > 0){
-            roleService.update(role);
+            try{
+                roleService.update(role);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             return "redirect:list.do";
         }else{
             role.setCreateTime(new Date());
-            roleService.insert(role);
+            try{
+                roleService.insert(role);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             return "redirect:list.do";
         }
     }
@@ -120,10 +147,15 @@ public class RoleControllerApi extends BaseController{
 
     /*获取系统的功能权限树*/
     private List<Node> nodeList(int userId){
-        List<Role> roleList = roleService.getRolesByUserId(userId);
+        List<Role> roleList = null;
+        try{
+            roleList = roleService.getRolesByUserId(userId);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         List<Integer> idList = Lists.newArrayList();
-        List<Permission> permissionList;
-        List<Function> functionList;
+        List<Permission> permissionList = null;
+        List<Function> functionList = null;
         List<Node> nodeList = Lists.newArrayList();
 
         for(Role role : roleList){
@@ -131,8 +163,16 @@ public class RoleControllerApi extends BaseController{
         }
 
         if(idList.size() > 0){
-            permissionList = permissionService.getAll();
-            functionList = functionService.getAll();
+            try{
+                permissionList = permissionService.getAll();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            try{
+                functionList = functionService.getAll();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
 
             if(functionList.size() > 0){
                 for(Function function : functionList){

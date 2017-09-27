@@ -12,32 +12,32 @@ import java.util.Map;
 @Repository
 public interface RoleMapper{
 
-    List<Role> search(@Param("filter") Role role, @Param("page") Page page);
+    List<Role> search(@Param("filter") Role role, @Param("page") Page page) throws Exception;
 
-    int delete(Integer id);
+    int delete(Integer id) throws Exception;
 
-    int insert(Role record);
+    int insert(Role record) throws Exception;
 
-    Role get(Integer id);
+    Role get(Integer id) throws Exception;
 
-    List<Role> getRolesByUserId(Integer userId);
+    List<Role> getRolesByUserId(Integer userId) throws Exception;
 
-    int update(Role record);
+    int update(Role record) throws Exception;
 
-    List<String> getPerms(List<Integer> roleIds);
+    List<String> getPerms(List<Integer> roleIds) throws Exception;
 
-    int delPermsByRole(List<Integer> roleIds);
+    int delPermsByRole(List<Integer> roleIds) throws Exception;
 
-    int delPerm(String perm);
+    int delPerm(String perm) throws Exception;
 
-    void insertRolePermission(RolePermission rolePermission);
+    void insertRolePermission(RolePermission rolePermission) throws Exception;
 
-    void delUsersByRole(List<Integer> roleIds);
+    void delUsersByRole(List<Integer> roleIds) throws Exception;
 
-    void insertUserRole(Map<String, Object> params);
+    void insertUserRole(Map<String, Object> params) throws Exception;
 
-    void deleteUserRoles(int userId);
+    void deleteUserRoles(int userId) throws Exception;
 
-    Role getChannelRole(String roleName);
+    Role getChannelRole(String roleName) throws Exception;
 
 }

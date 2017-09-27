@@ -29,12 +29,12 @@ public class FunctionService{
     @Autowired
     private RoleMapper roleMapper;
 
-    public List<Function> getAll(){
+    public List<Function> getAll() throws Exception{
         //查询条件为null，即查询全部
         return functionMapper.search(null);
     }
 
-    public void save(Function function){
+    public void save(Function function) throws Exception{
         functionMapper.insert(function);
     }
 
@@ -45,7 +45,7 @@ public class FunctionService{
      * @param parentId 父节点id
      * @return Map {key:ztreeId,value:id} 用户更新页面ztree
      */
-    public Map<String, Integer> updateFuncTree(JSONArray funcTree, Integer parentId){
+    public Map<String, Integer> updateFuncTree(JSONArray funcTree, Integer parentId) throws Exception{
         Map<String, Integer> ids = Maps.newHashMap();
         for(int i = 0; i < funcTree.size(); i++){
             JSONObject funcJson = funcTree.getJSONObject(i);
@@ -68,7 +68,7 @@ public class FunctionService{
         return ids;
     }
 
-    public Map<String, Integer> batchUpdateFuncs(JSONArray funcTree, Integer parentId){
+    public Map<String, Integer> batchUpdateFuncs(JSONArray funcTree, Integer parentId) throws Exception{
         //1:更新功能树--树结构的function
         Map<String, Integer> result = updateFuncTree(funcTree, parentId);
 
@@ -85,11 +85,11 @@ public class FunctionService{
         return result;
     }
 
-    public void update(Function function){
+    public void update(Function function) throws Exception{
         functionMapper.update(function);
     }
 
-    public void delete(Integer id){
+    public void delete(Integer id) throws Exception{
         Permission permCondition = new Permission();
         permCondition.setFunctionId(id);
         //删除功能下的权限--同时删除关联资源
@@ -107,7 +107,7 @@ public class FunctionService{
         functionMapper.delete(id);
     }
 
-    public List<Function> queryByRole(List<Integer> roleIds){
+    public List<Function> queryByRole(List<Integer> roleIds) throws Exception{
         return functionMapper.queryByRole(roleIds);
     }
 

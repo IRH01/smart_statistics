@@ -21,6 +21,7 @@
         <result column="next_day_stay_count" property="nextDayStayCount" jdbcType="INTEGER"/>
         <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
     <sql id="Base_Column_List">
         id, statistics_day, register_population, register_exp_count, real_exp_count, virtual_exp_count,
         new_user_recharge_population, new_user_recharge_count, new_user_recharge_amount,
@@ -28,15 +29,38 @@
         old_user_recharge_amount, old_user_login_count, old_user_play_count, next_day_stay_count,
         execute_time
     </sql>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from daily_composite_report
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyCompositeReport" useGeneratedKeys="true"
-            keyProperty="id">
-        insert into daily_composite_report (statistics_day, register_population,
+
+    <select id="selectLastMonthComposite" resultType="java.util.Map">
+        SELECT
+        SUM(register_population) AS register_population_sum,
+        SUM(register_exp_count) AS register_exp_count_sum,
+        SUM(real_exp_count) AS real_exp_count_sum,
+        SUM(virtual_exp_count) AS virtual_exp_count_sum,
+        SUM(new_user_recharge_population) AS new_user_recharge_population_sum,
+        SUM(new_user_recharge_count) AS new_user_recharge_count_sum,
+        SUM(new_user_recharge_amount) AS new_user_recharge_amount_sum,
+        SUM(new_user_login_count) AS new_user_login_count_sum,
+        SUM(new_user_play_count) AS new_user_play_count_sum,
+        SUM(old_user_recharge_population) AS old_user_recharge_population_sum,
+        SUM(old_user_recharge_count) AS old_user_recharge_count_sum,
+        SUM(old_user_recharge_amount) AS old_user_recharge_amount_sum,
+        SUM(old_user_login_count) AS old_user_login_count_sum,
+        SUM(old_user_play_count) AS old_user_play_count_sum,
+        SUM(next_day_stay_count) AS next_day_stay_count_sum
+        FROM
+        daily_composite_report
+        WHERE statistics_day = '2017-09-26'
+    </select>
+
+    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyCompositeReport">
+        insert into daily_composite_report (id, statistics_day, register_population,
         register_exp_count, real_exp_count, virtual_exp_count,
         new_user_recharge_population, new_user_recharge_count,
         new_user_recharge_amount, new_user_login_count,
@@ -44,7 +68,7 @@
         old_user_recharge_count, old_user_recharge_amount,
         old_user_login_count, old_user_play_count, next_day_stay_count,
         execute_time)
-        values (#{statisticsDay,jdbcType=VARCHAR}, #{registerPopulation,jdbcType=INTEGER},
+        values (#{id,jdbcType=BIGINT}, #{statisticsDay,jdbcType=VARCHAR}, #{registerPopulation,jdbcType=INTEGER},
         #{registerExpCount,jdbcType=INTEGER}, #{realExpCount,jdbcType=INTEGER}, #{virtualExpCount,jdbcType=INTEGER},
         #{newUserRechargePopulation,jdbcType=INTEGER}, #{newUserRechargeCount,jdbcType=INTEGER},
         #{newUserRechargeAmount,jdbcType=DECIMAL}, #{newUserLoginCount,jdbcType=INTEGER},
@@ -54,6 +78,7 @@
         #{nextDayStayCount,jdbcType=INTEGER},
         #{executeTime,jdbcType=TIMESTAMP})
     </insert>
+
     <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.DailyCompositeReport">
         insert into daily_composite_report
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -169,6 +194,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.DailyCompositeReport">
         update daily_composite_report
         <set>
@@ -226,6 +252,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.DailyCompositeReport">
         update daily_composite_report
         set statistics_day = #{statisticsDay,jdbcType=VARCHAR},
@@ -247,4 +274,5 @@
         execute_time = #{executeTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
 </mapper>

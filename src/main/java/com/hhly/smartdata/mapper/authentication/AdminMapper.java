@@ -9,15 +9,15 @@ import java.util.List;
 
 @Repository
 public interface AdminMapper{
-    int delete(Integer id);
+    int delete(Integer id) throws Exception;
 
-    int deleteByUserId(Integer userId);
+    int deleteByUserId(Integer userId) throws Exception;
 
-    int insert(Admin record);
+    int insert(Admin record) throws Exception;
 
-    Admin get(Integer id);
+    Admin get(Integer id) throws Exception;
 
-    int update(Admin record);
+    int update(Admin record) throws Exception;
 
-    List<Admin> searchAdmins(@Param("filter") Admin condition, @Param("page") Page page);
+    List<Admin> searchAdmins(@Param("filter") Admin condition, @Param("page") Page page) throws Exception;
 }

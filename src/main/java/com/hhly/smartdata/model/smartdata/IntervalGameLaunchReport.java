@@ -11,27 +11,27 @@ public class IntervalGameLaunchReport{
     /**
      * 统计时间(半小时)yyyy-MM-dd HH:30:00
      */
-    private String statisticsTime;
+    private String statisticsTime = "";
 
     /**
      * 统计间隔时间。单位分钟
      */
-    private Integer intervalTime;
+    private Integer intervalTime = 0;
 
     /**
      * 平台id或游戏id
      */
-    private Integer platformId;
+    private Integer platformId = 0;
 
     /**
      * 平台名称或游戏名称
      */
-    private String platformName;
+    private String platformName = "";
 
     /**
      * 老用户充值次数
      */
-    private Integer launchCount;
+    private Integer launchCount = 0;
 
     /**
      * 统计执行日期

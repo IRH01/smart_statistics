@@ -18,7 +18,7 @@
         <javaClientGenerator targetPackage="com.hhly.generator.dao"
                              targetProject="${generator.dir}"
                              type="XMLMAPPER"/>
-        <table tableName="%"
+        <table tableName="tbl_user_info" domainObjectName="UserInfo"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
@@ -28,7 +28,30 @@
                enableInsert="true"
                enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
-        >
-        </table>
+        />
+
+        <table tableName="tbl_login_track" domainObjectName="LoginTrack"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"
+               enableDeleteByPrimaryKey="false"
+               enableInsert="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+        />
+
+        <table tableName="tbl_recharge_record" domainObjectName="RechargeRecord"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"
+               enableDeleteByPrimaryKey="false"
+               enableInsert="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+        />
     </context>
 </generatorConfiguration>

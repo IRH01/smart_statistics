@@ -11,37 +11,37 @@ public class DataPlatformStart{
     /**
      * 国家:0中国 1美国 2泰国 3越南 4韩国 5印尼6繁体7新加坡8马来西亚
      */
-    private Integer country;
+    private Integer country = 0;
 
     /**
      * 手机唯一号（MAC地址/imei）
      */
-    private String uniqueNo;
+    private String uniqueNo = "";
 
     /**
      * 账户(userId)
      */
-    private String userId;
+    private String userId = "";
 
     /**
      * 终端:2.安卓 3.ios
      */
-    private Integer platformTerminal;
+    private Integer platformTerminal = 0;
 
     /**
      * 经度
      */
-    private Double longitude;
+    private Double longitude = 0D;
 
     /**
      * 纬度
      */
-    private Double latitude;
+    private Double latitude = 0D;
 
     /**
      * Ip地址
      */
-    private String ip;
+    private String ip="";
 
     /**
      * 创建日期

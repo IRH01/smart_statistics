@@ -96,4 +96,58 @@ public class DateUtil{
         return calendar.getTime();
     }
 
+    /**
+     * 获取前一天的日期字符串
+     *
+     * @param date
+     * @return String ,"yyyy-MM-dd"
+     */
+    public static String getYesterdayStr(Date date){
+        if(date == null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);//日期加-1天
+        return sdf.format(calendar.getTime());
+    }
+
+    /**
+     * 获取前一月的日期字符串
+     *
+     * @param date
+     * @return String ,"yyyy-MM"
+     */
+    public static String getLastMonthStr(Date date){
+        if(date == null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, -1);//日期加-1月
+        return sdf.format(calendar.getTime());
+    }
+
+    /**
+     * 获取前30分钟的日期
+     *
+     * @param date
+     * @return String ,"yyyy-MM-dd HH:mm:ss"
+     */
+    public static String getCurrentTimeStr(Date date){
+        if(date == null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar beforeTime = Calendar.getInstance();
+        beforeTime.add(Calendar.MINUTE, -30);// 时间差值
+        Date beforeD = beforeTime.getTime();
+        return sdf.format(beforeD);
+    }
+
 }
+
+
+

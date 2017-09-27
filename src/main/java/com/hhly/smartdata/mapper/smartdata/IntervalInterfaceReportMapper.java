@@ -6,13 +6,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IntervalInterfaceReportMapper{
-    int insert(IntervalInterfaceReport record);
+    int insert(IntervalInterfaceReport record) throws Exception;
 
-    int insertSelective(IntervalInterfaceReport record);
+    int insertSelective(IntervalInterfaceReport record) throws Exception;
 
-    IntervalInterfaceReport selectByPrimaryKey(Long id);
+    IntervalInterfaceReport selectByPrimaryKey(Long id) throws Exception;
 
-    int updateByPrimaryKeySelective(IntervalInterfaceReport record);
+    int updateByPrimaryKeySelective(IntervalInterfaceReport record) throws Exception;
 
-    int updateByPrimaryKey(IntervalInterfaceReport record);
+    int updateByPrimaryKey(IntervalInterfaceReport record) throws Exception;
 }

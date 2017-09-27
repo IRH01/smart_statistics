@@ -2,25 +2,21 @@ package com.hhly.smartdata.controller.authentication.api;
 
 import com.google.code.kaptcha.Producer;
 import com.hhly.smartdata.controller.BaseController;
-import com.hhly.smartdata.util.SysConstant;
-import com.hhly.smartdata.util.exception.IncorrectCaptchaException;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.UserService;
-import com.hhly.smartdata.util.DateUtil;
-import com.hhly.smartdata.util.SecurityUtil;
 import com.hhly.smartdata.util.SessionUtil;
+import com.hhly.smartdata.util.SysConstant;
+import com.hhly.smartdata.util.exception.IncorrectCaptchaException;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,7 +26,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
-import java.util.Date;
 
 @Controller
 public class LoginControllerApi extends BaseController{
@@ -77,8 +72,13 @@ public class LoginControllerApi extends BaseController{
     @RequestMapping("/validateUserName")
     @ResponseBody
     public boolean ValidateUserName(HttpServletRequest req){
-        String usrName = req.getParameter("db.username");
-        User usr = userService.getUserByUsername(usrName);
+        String usrName = req.getParameter("smart.username");
+        User usr = null;
+        try{
+            usr = userService.getUserByUsername(usrName);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         if(usr == null){
             return true;
         }
@@ -91,8 +91,13 @@ public class LoginControllerApi extends BaseController{
     @RequestMapping("/validateUserNameEx")
     @ResponseBody
     public boolean validateUserName(HttpServletRequest req){
-        String usrName = req.getParameter("db.username");
-        User usr = userService.getUserByUsername(usrName);
+        String usrName = req.getParameter("smart.username");
+        User usr = null;
+        try{
+            usr = userService.getUserByUsername(usrName);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         if(usr == null){
             return false;
         }

@@ -20,30 +20,30 @@ public class MenuService{
     @Autowired
     private RoleMapper roleMapper;
 
-    public List<Menu> getMenuByPerms(List<String> perms){
+    public List<Menu> getMenuByPerms(List<String> perms) throws Exception{
         return menuMapper.getMenuByPerms(perms);
     }
 
-    public List<Menu> getAll(){
+    public List<Menu> getAll() throws Exception{
         return searchMenus(null);
     }
 
-    public List<Menu> searchMenus(Menu menu){
+    public List<Menu> searchMenus(Menu menu) throws Exception{
         return menuMapper.searchMenu(menu);
     }
 
-    public Menu get(Integer id){
+    public Menu get(Integer id) throws Exception{
         Menu condition = new Menu();
         condition.setId(id);
         List<Menu> menus = menuMapper.searchMenu(condition);
         return menus.isEmpty() ? null : menus.get(0);
     }
 
-    public void update(Menu menu){
+    public void update(Menu menu) throws Exception{
         menuMapper.update(menu);
     }
 
-    public Map<String, Integer> updateMenuTree(JSONArray menuTree, Integer parentId){
+    public Map<String, Integer> updateMenuTree(JSONArray menuTree, Integer parentId) throws Exception{
         Map<String, Integer> ids = Maps.newHashMap();
         for(int i = 0; i < menuTree.size(); i++){
             JSONObject menuJSON = menuTree.getJSONObject(i);
@@ -66,7 +66,7 @@ public class MenuService{
         return ids;
     }
 
-    public Map<String, Integer> sortAndUpdateMenus(JSONArray menuTree, Integer parentId){
+    public Map<String, Integer> sortAndUpdateMenus(JSONArray menuTree, Integer parentId) throws Exception{
         //1:更新菜单树--树结构的menu
         Map<String, Integer> result = updateMenuTree(menuTree, parentId);
 
@@ -83,7 +83,7 @@ public class MenuService{
         return result;
     }
 
-    public List<Menu> getMenuListByRole(List<Integer> roleIds){
+    public List<Menu> getMenuListByRole(List<Integer> roleIds) throws Exception{
         List<String> perms = roleMapper.getPerms(roleIds);
         System.out.println(perms.size());
         List<Menu> menus = this.getMenuByPerms(perms);

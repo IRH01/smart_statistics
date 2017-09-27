@@ -4,41 +4,61 @@
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="statistics_day" property="statisticsDay" jdbcType="VARCHAR"/>
-        <result column="pc_page_view" property="pcPageView" jdbcType="INTEGER"/>
+        <result column="pc_population" property="pcPopulation" jdbcType="INTEGER"/>
+        <result column="pc_page_view" property="pcPageView" jdbcType="BIGINT"/>
         <result column="pc_user_view" property="pcUserView" jdbcType="INTEGER"/>
-        <result column="hfive_population" property="hfivePopulation" jdbcType="INTEGER"/>
-        <result column="hfive_page_view" property="hfivePageView" jdbcType="INTEGER"/>
-        <result column="hfive_user_view" property="hfiveUserView" jdbcType="INTEGER"/>
+        <result column="h5_population" property="h5Population" jdbcType="INTEGER"/>
+        <result column="h5_page_view" property="h5PageView" jdbcType="BIGINT"/>
+        <result column="h5_user_view" property="h5UserView" jdbcType="INTEGER"/>
         <result column="ios_population" property="iosPopulation" jdbcType="INTEGER"/>
         <result column="ios_install_count" property="iosInstallCount" jdbcType="INTEGER"/>
         <result column="android_population" property="androidPopulation" jdbcType="INTEGER"/>
         <result column="android_install_count" property="androidInstallCount" jdbcType="INTEGER"/>
         <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
     <sql id="Base_Column_List">
-        id, statistics_day, pc_page_view, pc_user_view, hfive_population, hfive_page_view,
-        hfive_user_view, ios_population, ios_install_count, android_population, android_install_count,
-        execute_time
+        id, statistics_day, pc_population,pc_page_view, pc_user_view, h5_population, h5_page_view, h5_user_view,
+        ios_population, ios_install_count, android_population, android_install_count, execute_time
     </sql>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from daily_register_report
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyRegisterReport" useGeneratedKeys="true"
-            keyProperty="id">
-        insert into daily_register_report (statistics_day, pc_page_view,
-        pc_user_view, hfive_population, hfive_page_view,
-        hfive_user_view, ios_population, ios_install_count,
+
+    <select id="selectLastMonthRegister" resultType="java.util.Map">
+        SELECT
+        SUM(pc_page_view) AS pc_page_view_sum,
+        SUM(pc_user_view) AS pc_user_view_sum,
+        SUM(h5_population) AS h5_population_sum,
+        SUM(h5_page_view) AS h5_page_view_sum,
+        SUM(h5_user_view) AS h5_user_view_sum,
+        SUM(ios_population) AS ios_population_sum,
+        SUM(ios_install_count) AS ios_install_count_sum,
+        SUM(android_population) AS android_population_sum,
+        SUM(android_install_count) AS android_install_count_sum
+        FROM
+        daily_register_report
+        WHERE statistics_day = '2017-09-26'
+    </select>
+
+    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
+        insert into daily_register_report (id, statistics_day, pc_population,pc_page_view,
+        pc_user_view, h5_population, h5_page_view,
+        h5_user_view, ios_population, ios_install_count,
         android_population, android_install_count,
         execute_time)
-        values (#{statisticsDay,jdbcType=VARCHAR}, #{pcPageView,jdbcType=INTEGER},
-        #{pcUserView,jdbcType=INTEGER}, #{hfivePopulation,jdbcType=INTEGER}, #{hfivePageView,jdbcType=INTEGER},
-        #{hfiveUserView,jdbcType=INTEGER}, #{iosPopulation,jdbcType=INTEGER}, #{iosInstallCount,jdbcType=INTEGER},
+        values (#{id,jdbcType=BIGINT}, #{statisticsDay,jdbcType=VARCHAR},#{pcPopulation,jdbcType=INTEGER},
+        #{pcPageView,jdbcType=BIGINT},
+        #{pcUserView,jdbcType=INTEGER}, #{h5Population,jdbcType=INTEGER}, #{h5PageView,jdbcType=BIGINT},
+        #{h5UserView,jdbcType=INTEGER}, #{iosPopulation,jdbcType=INTEGER}, #{iosInstallCount,jdbcType=INTEGER},
         #{androidPopulation,jdbcType=INTEGER}, #{androidInstallCount,jdbcType=INTEGER},
         #{executeTime,jdbcType=TIMESTAMP})
     </insert>
+
     <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         insert into daily_register_report
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -48,20 +68,23 @@
             <if test="statisticsDay != null">
                 statistics_day,
             </if>
+            <if test="pcPopulation != null">
+                pc_population,
+            </if>
             <if test="pcPageView != null">
                 pc_page_view,
             </if>
             <if test="pcUserView != null">
                 pc_user_view,
             </if>
-            <if test="hfivePopulation != null">
-                hfive_population,
+            <if test="h5Population != null">
+                h5_population,
             </if>
-            <if test="hfivePageView != null">
-                hfive_page_view,
+            <if test="h5PageView != null">
+                h5_page_view,
             </if>
-            <if test="hfiveUserView != null">
-                hfive_user_view,
+            <if test="h5UserView != null">
+                h5_user_view,
             </if>
             <if test="iosPopulation != null">
                 ios_population,
@@ -86,20 +109,23 @@
             <if test="statisticsDay != null">
                 #{statisticsDay,jdbcType=VARCHAR},
             </if>
+            <if test="pcPopulation != null">
+                #{pcpopulation,jdbcType=BIGINT},
+            </if>
             <if test="pcPageView != null">
-                #{pcPageView,jdbcType=INTEGER},
+                #{pcPageView,jdbcType=BIGINT},
             </if>
             <if test="pcUserView != null">
                 #{pcUserView,jdbcType=INTEGER},
             </if>
-            <if test="hfivePopulation != null">
-                #{hfivePopulation,jdbcType=INTEGER},
+            <if test="h5Population != null">
+                #{h5Population,jdbcType=INTEGER},
             </if>
-            <if test="hfivePageView != null">
-                #{hfivePageView,jdbcType=INTEGER},
+            <if test="h5PageView != null">
+                #{h5PageView,jdbcType=BIGINT},
             </if>
-            <if test="hfiveUserView != null">
-                #{hfiveUserView,jdbcType=INTEGER},
+            <if test="h5UserView != null">
+                #{h5UserView,jdbcType=INTEGER},
             </if>
             <if test="iosPopulation != null">
                 #{iosPopulation,jdbcType=INTEGER},
@@ -118,26 +144,30 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         update daily_register_report
         <set>
             <if test="statisticsDay != null">
                 statistics_day = #{statisticsDay,jdbcType=VARCHAR},
             </if>
+            <if test="pcPopulation != null">
+                pc_population = #{pcPopulation,jdbcType=BIGINT},
+            </if>
             <if test="pcPageView != null">
-                pc_page_view = #{pcPageView,jdbcType=INTEGER},
+                pc_page_view = #{pcPageView,jdbcType=BIGINT},
             </if>
             <if test="pcUserView != null">
                 pc_user_view = #{pcUserView,jdbcType=INTEGER},
             </if>
-            <if test="hfivePopulation != null">
-                hfive_population = #{hfivePopulation,jdbcType=INTEGER},
+            <if test="h5Population != null">
+                h5_population = #{h5Population,jdbcType=INTEGER},
             </if>
-            <if test="hfivePageView != null">
-                hfive_page_view = #{hfivePageView,jdbcType=INTEGER},
+            <if test="h5PageView != null">
+                h5_page_view = #{h5PageView,jdbcType=BIGINT},
             </if>
-            <if test="hfiveUserView != null">
-                hfive_user_view = #{hfiveUserView,jdbcType=INTEGER},
+            <if test="h5UserView != null">
+                h5_user_view = #{h5UserView,jdbcType=INTEGER},
             </if>
             <if test="iosPopulation != null">
                 ios_population = #{iosPopulation,jdbcType=INTEGER},
@@ -157,14 +187,16 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         update daily_register_report
         set statistics_day = #{statisticsDay,jdbcType=VARCHAR},
-        pc_page_view = #{pcPageView,jdbcType=INTEGER},
+        pc_population = #{pcPopulation,jdbcType=BIGINT},
+        pc_page_view = #{pcPageView,jdbcType=BIGINT},
         pc_user_view = #{pcUserView,jdbcType=INTEGER},
-        hfive_population = #{hfivePopulation,jdbcType=INTEGER},
-        hfive_page_view = #{hfivePageView,jdbcType=INTEGER},
-        hfive_user_view = #{hfiveUserView,jdbcType=INTEGER},
+        h5_population = #{h5Population,jdbcType=INTEGER},
+        h5_page_view = #{h5PageView,jdbcType=BIGINT},
+        h5_user_view = #{h5UserView,jdbcType=INTEGER},
         ios_population = #{iosPopulation,jdbcType=INTEGER},
         ios_install_count = #{iosInstallCount,jdbcType=INTEGER},
         android_population = #{androidPopulation,jdbcType=INTEGER},
@@ -172,4 +204,5 @@
         execute_time = #{executeTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
 </mapper>

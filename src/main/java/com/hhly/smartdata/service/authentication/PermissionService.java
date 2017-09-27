@@ -21,11 +21,11 @@ public class PermissionService{
     @Autowired
     private RoleMapper roleMapper;
 
-    public List<Permission> searchPerms(Permission perm){
+    public List<Permission> searchPerms(Permission perm) throws Exception{
         return permissionMapper.searchPerms(perm);
     }
 
-    public void delete(Permission condition){
+    public void delete(Permission condition) throws Exception{
         for(Permission perm : searchPerms(condition)){
             //删除对应菜单
             Menu menuCondition = new Menu();
@@ -38,7 +38,7 @@ public class PermissionService{
         }
     }
 
-    public void batchUpdatePerms(Integer funcId, List<Permission> perms){
+    public void batchUpdatePerms(Integer funcId, List<Permission> perms) throws Exception{
         Set<String> existPerms = Sets.newHashSet();
         for(Permission perm : perms){
             existPerms.add(perm.getPermission());
@@ -62,16 +62,16 @@ public class PermissionService{
         }
     }
 
-    public void save(Permission permission){
+    public void save(Permission permission) throws Exception{
         permissionMapper.insert(permission);
     }
 
-    public List<Permission> queryByRole(List<Integer> roleIds){
+    public List<Permission> queryByRole(List<Integer> roleIds) throws Exception{
         return permissionMapper.queryByRole(roleIds);
     }
 
 
-    public List<Permission> getAll(){
+    public List<Permission> getAll() throws Exception{
         return permissionMapper.getAll();
     }
 }

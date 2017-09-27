@@ -11,32 +11,32 @@ public class IntervalInterfaceReport{
     /**
      * 统计日期(半小时)yyyy-MM-dd HH:30:00
      */
-    private String statisticsTime;
+    private String statisticsTime = "";
 
     /**
      * 统计时间间隔。单位分钟。
      */
-    private Integer intervalTime;
+    private Integer intervalTime = 0;
 
     /**
      * 接口编号，1.注册，2充值
      */
-    private Integer interfaceCode;
+    private Integer interfaceCode = 0;
 
     /**
      * 接口名称
      */
-    private String interfaceName;
+    private String interfaceName = "";
 
     /**
      * 操作类型类型：1、请求，2、执行完成
      */
-    private Byte operateType;
+    private Byte operateType = 0;
 
     /**
      * 操作次数
      */
-    private Integer operateCount;
+    private Integer operateCount = 0;
 
     /**
      * 统计执行日期

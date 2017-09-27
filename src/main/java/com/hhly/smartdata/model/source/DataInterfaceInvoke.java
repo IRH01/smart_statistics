@@ -11,37 +11,37 @@ public class DataInterfaceInvoke{
     /**
      * 国家:0中国 1美国 2泰国 3越南 4韩国 5印尼6繁体7新加坡8马来西亚
      */
-    private Integer country;
+    private Integer country = 0;
 
     /**
      * 账户（userId）
      */
-    private String userId;
+    private String userId = "";
 
     /**
      * 平台Id:默认为玩一下平台;PC=1,移动端为31111
      */
-    private Integer platformId;
+    private Integer platformId = 0;
 
     /**
      * 终端:1.pc 2.安卓 3ios 4.h5 5.其他
      */
-    private Integer platformTerminal;
+    private Integer platformTerminal = 0;
 
     /**
      * 接口类型:1.注册接口 2.充值接口
      */
-    private Integer interfaceType;
+    private Integer interfaceType = 0;
 
     /**
      * 域名
      */
-    private String websiteDomain;
+    private String websiteDomain = "";
 
     /**
      * 网站路径，不带参数,不计域名
      */
-    private String urlPath;
+    private String urlPath = "";
 
     /**
      * 创建日期
