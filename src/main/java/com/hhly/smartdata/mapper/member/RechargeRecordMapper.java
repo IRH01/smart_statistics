@@ -32,4 +32,6 @@ public interface RechargeRecordMapper{
 
     List<Map<String, Object>> selectYesterdayRechargeUser() throws Exception;
 
+    List<Map<String, Object>> selectFirstThirtyMinRechargeUser() throws Exception;
+
 }

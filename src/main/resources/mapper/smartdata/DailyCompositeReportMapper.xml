@@ -56,7 +56,8 @@
         SUM(next_day_stay_count) AS next_day_stay_count_sum
         FROM
         daily_composite_report
-        WHERE statistics_day = '2017-09-26'
+        WHERE statistics_day &gt;= #{lastMonthFirstDayStr}
+        AND statistics_day &lt;= #{lastMonthEndDayStr}
     </select>
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyCompositeReport">

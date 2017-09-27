@@ -103,5 +103,15 @@
         AND TO_DAYS(NOW()) - TO_DAYS(apply_time) &gt; 0
         GROUP BY plateform_id,source,user_id
     </select>
-
+    <select id="selectFirstThirtyMinRechargeUser" resultType="java.util.Map">
+        select source as osType,count(DISTINCT(user_id)) as rechargePopulation ,sum(apply_amount) as rechargeAmount,count(orderno) as rechargeCount from tbl_recharge_record where
+        status=1
+        <![CDATA[
+                  and apply_time> date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
+  	     ]]>
+       <![CDATA[
+                 and apply_time<=DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
+         ]]>
+        group by source
+    </select>
 </mapper>

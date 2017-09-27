@@ -35,7 +35,8 @@
         SUM(old_recharge_population) AS old_recharge_population_sum
         FROM
         daily_recharge_report
-        WHERE statistics_day = '2017-09-25'
+        WHERE statistics_day &gt;= #{lastMonthFirstDayStr}
+        AND statistics_day &lt;= #{lastMonthEndDayStr}
         GROUP BY source_type ;
     </select>
 

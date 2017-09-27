@@ -11,6 +11,7 @@ CREATE TABLE `data_game_start` (
   `user_id` varchar(50) NOT NULL DEFAULT '' COMMENT '账户（userId）',
   `platform_terminal` int(11) NOT NULL DEFAULT '0' COMMENT '终端:1.pc 2.安卓 3ios 4.h5 5.其他',
   `platform_id` int(11) NOT NULL DEFAULT '0' COMMENT '平台Id:默认为玩一下平台;PC=1,移动端为31111',
+  `platform_name`  varchar(100) NOT NULL DEFAULT '' COMMENT '平台名称',
   `website_domain` varchar(50) NOT NULL DEFAULT '' COMMENT '域名',
   `url_path` varchar(300) NOT NULL DEFAULT '' COMMENT '网站路径，不带参数,不计域名',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',

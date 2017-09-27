@@ -29,6 +29,11 @@ public class DataGameStart{
     private Integer platformTerminal = 0;
 
     /**
+     * 平台名称
+     */
+    private Integer platformName = 0;
+
+    /**
      * 平台Id:默认为玩一下平台;PC=1,移动端为31111
      */
     private Integer platformId = 0;
@@ -116,7 +121,17 @@ public class DataGameStart{
         return createTime;
     }
 
+    public Integer getPlatformName(){
+        return platformName;
+    }
+
+    public void setPlatformName(Integer platformName){
+        this.platformName = platformName;
+    }
+
     public void setCreateTime(Date createTime){
         this.createTime = createTime;
+
     }
+
 }

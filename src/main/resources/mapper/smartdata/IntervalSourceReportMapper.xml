@@ -34,41 +34,4 @@
         #{executeTime,jdbcType=TIMESTAMP})
     </insert>
 
-    <!--启动表-->
-    <select id="findDataPlatformStartBySourceTypeAndTime" resultMap="BaseResultMap"
-            parameterType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
-        select platform_terminal as sourceType,count(DISTINCT(user_id)) as login_population from data_platform_start
-        where
-        <![CDATA[
-              create_time > DATE_FORMAT('#{startDate}','%Y-%m-%d %H:%i:%S')
-        ]]>
-        and
-        <![CDATA[
-              create_time <= DATE_FORMAT('#{endDate}','%Y-%m-%d %H:%i:%S')
-  		]]>
-        and user_id is not null
-        <if test="null != sourceType and sourceType != ''">
-            and platform_terminal = #{sourceType}
-        </if>
-        group by platform_terminal
-    </select>
-
-    <!--UV-->
-    <select id="findDataViewBySourceTypeAndTime" resultMap="BaseResultMap"
-            parameterType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
-        select platform_terminal as sourceType,count(DISTINCT(user_id)) as login_population from data_view where
-        <![CDATA[
-              create_time > DATE_FORMAT('#{startDate}','%Y-%m-%d %H:%i:%S')
-        ]]>
-        and
-        <![CDATA[
-              create_time <= DATE_FORMAT('#{endDate}','%Y-%m-%d %H:%i:%S')
-  		]]>
-        and user_id is not null
-        <if test="null != sourceType and sourceType != ''">
-            and platform_terminal = #{sourceType}
-        </if>
-        group by platform_terminal
-    </select>
-
 </mapper>

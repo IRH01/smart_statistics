@@ -39,44 +39,16 @@
         GROUP BY platformid, os_type, user_name;
     </select>
 
-    <select id="findIntervalSourceReportByTime" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
-        select
-        a.id as source_type,
-        ifnull(b.register_population,0) as register_population,
-        ifnull(c.login_population,0) as login_population,
-        ifnull(d.recharge_population,0) as recharge_population,
-        ifnull(d.recharge_count,0) as recharge_count,
-        ifnull(d.recharge_amount,0) as recharge_amount
-        from tbl_plat_terminal_info a
-        left join (select os_type, count(DISTINCT(user_id)) as register_population from gp_tbl_user_info where
+    <select id="selectFirstThirtyMinLoginUser" resultType="java.util.Map">
+        select os_type as osType,count(user_name) as loginPopulation from gp_tbl_login_track  where
         <![CDATA[
-              create_time > DATE_FORMAT('#{startDate}','%Y-%m-%d %H:%i:%S')
+              login_time > date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
   		]]>
         and
         <![CDATA[
-  		      create_time <= DATE_FORMAT('#{endDate}','%Y-%m-%d %H:%i:%S')
+  		      login_time <= DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
   		]]>
-        group by os_type) b on  a.id = b.os_type
-        left join (select os_type,count(user_name) as login_population from gp_tbl_login_track  where
-        <![CDATA[
-              login_time > DATE_FORMAT('#{startDate}','%Y-%m-%d %H:%i:%S')
-  		]]>
-        and
-        <![CDATA[
-  		      login_time <= DATE_FORMAT('#{endDate}','%Y-%m-%d %H:%i:%S')
-  		]]>
-        group by os_type) c on  a.id = c.os_type
-        left join (select source,count(DISTINCT(user_id)) as recharge_population ,sum(apply_amount) as recharge_amount,count(orderno) as recharge_count from gp_tbl_recharge_record where
-        and status=1 and
-        <![CDATA[
-              apply_time > DATE_FORMAT('#{startDate}','%Y-%m-%d %H:%i:%S')
-  		]]>
-        and
-        <![CDATA[
-  		      apply_time <= DATE_FORMAT('#{endDate}','%Y-%m-%d %H:%i:%S')
-  		]]>
-        group by source) d on a.id = d.source
-
+        group by os_type
     </select>
 
 </mapper>

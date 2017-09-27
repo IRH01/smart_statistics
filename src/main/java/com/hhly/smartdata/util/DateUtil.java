@@ -130,13 +130,37 @@ public class DateUtil{
         return sdf.format(calendar.getTime());
     }
 
+    public static String getLastMonthFirstDayStr(Date date){
+        if(date == null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, -1);//日期加-1月
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        return sdf.format(calendar.getTime());
+    }
+
+    public static String getLastMonthEndDayStr(Date date){
+        if(date == null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, -1);//日期加-1月
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        return sdf.format(calendar.getTime());
+    }
+
     /**
      * 获取前30分钟的日期
      *
      * @param date
      * @return String ,"yyyy-MM-dd HH:mm:ss"
      */
-    public static String getCurrentTimeStr(Date date){
+    public static String getFirstThirtyMinStr(Date date){
         if(date == null){
             return "";
         }
@@ -146,6 +170,7 @@ public class DateUtil{
         Date beforeD = beforeTime.getTime();
         return sdf.format(beforeD);
     }
+
 
 }
 

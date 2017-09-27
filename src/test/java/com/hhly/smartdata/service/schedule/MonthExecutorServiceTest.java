@@ -28,7 +28,6 @@ public class MonthExecutorServiceTest extends BaseTest{
         this.monthExecutorService.compositeReport();
     }
 
-
     /**
      * Method: registerReport()
      */

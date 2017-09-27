@@ -33,7 +33,8 @@
         SUM(play_population) AS play_population_sum
         FROM
         daily_login_report
-        WHERE statistics_day = '2017-09-26'
+        WHERE statistics_day &gt;= #{lastMonthFirstDayStr}
+        AND statistics_day &lt;= #{lastMonthEndDayStr}
         GROUP BY platform_id, source_type
     </select>
 

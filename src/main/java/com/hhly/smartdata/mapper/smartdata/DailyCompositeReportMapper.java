@@ -2,6 +2,7 @@ package com.hhly.smartdata.mapper.smartdata;
 
 
 import com.hhly.smartdata.model.smartdata.DailyCompositeReport;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -18,5 +19,5 @@ public interface DailyCompositeReportMapper{
 
     int updateByPrimaryKey(DailyCompositeReport record) throws Exception;
 
-    Map<String, Object> selectLastMonthComposite() throws Exception;
+    Map<String, Object> selectLastMonthComposite(@Param("lastMonthFirstDayStr") String lastMonthFirstDayStr, @Param("lastMonthEndDayStr") String lastMonthEndDayStr) throws Exception;
 }

@@ -32,4 +32,30 @@ public enum OperatorTypeEnum{
         }
         throw new IllegalArgumentException("枚举参数错误！");
     }
+
+
+    public static Byte getIndex(String name)
+    {
+        for (OperatorTypeEnum c : OperatorTypeEnum.values())
+        {
+            if (name.equals(c.getDesc()))
+            {
+                return c.code;
+            }
+        }
+        return null;
+    }
+
+
+    public static String getName(String index){
+        if(null != index){
+            return null;
+        }
+        for (OperatorTypeEnum c : OperatorTypeEnum.values()){
+            if (c.getCode()== Integer.parseInt(index)){
+                return c.desc;
+            }
+        }
+        return null;
+    }
 }

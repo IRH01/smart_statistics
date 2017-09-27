@@ -4,6 +4,7 @@ package com.hhly.smartdata.mapper.source;
 import com.hhly.smartdata.model.source.DataInterfaceInvoke;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DataInterfaceInvokeMapper{
     int insert(DataInterfaceInvoke record) throws Exception;
@@ -16,7 +17,6 @@ public interface DataInterfaceInvokeMapper{
 
     int updateByPrimaryKey(DataInterfaceInvoke record) throws Exception;
 
-    // 查询统计接口数据
-    List<DataInterfaceInvoke> findDataInfaceInvokeList();
+    List<Map<String,Object>> findDataInterfaceInvokeList()throws Exception;
 
 }

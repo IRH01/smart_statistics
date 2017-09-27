@@ -7,13 +7,14 @@
         <result column="client_identity" property="clientIdentity" jdbcType="VARCHAR"/>
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="platform_terminal" property="platformTerminal" jdbcType="INTEGER"/>
+        <result column="platform_name" property="platformName" jdbcType="VARCHAR"/>
         <result column="platform_id" property="platformId" jdbcType="INTEGER"/>
         <result column="website_domain" property="websiteDomain" jdbcType="VARCHAR"/>
         <result column="url_path" property="urlPath" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, country, client_identity, user_id, platform_terminal, platform_id, website_domain,
+        id, country, client_identity, user_id, platform_terminal, platform_id,platform_Name, website_domain,
         url_path, create_time
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -35,12 +36,13 @@
     </select>
     <insert id="insert" parameterType="com.hhly.smartdata.model.source.DataGameStart">
         insert into data_game_start (id, country, client_identity,
-        user_id, platform_terminal, platform_id,
+        user_id, platform_terminal, platform_id,platform_Name,
         website_domain, url_path, create_time
         )
         values (#{id,jdbcType=BIGINT}, #{country,jdbcType=INTEGER}, #{clientIdentity,jdbcType=VARCHAR},
         #{userId,jdbcType=VARCHAR}, #{platformTerminal,jdbcType=INTEGER}, #{platformId,jdbcType=INTEGER},
-        #{websiteDomain,jdbcType=VARCHAR}, #{urlPath,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+        #{platformName,jdbcType=VARCHAR},#{websiteDomain,jdbcType=VARCHAR}, #{urlPath,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}
         )
     </insert>
     <insert id="insertSelective" parameterType="com.hhly.smartdata.model.source.DataGameStart">
@@ -63,6 +65,9 @@
             </if>
             <if test="platformId != null">
                 platform_id,
+            </if>
+            <if test="platformName != null">
+                platform_name,
             </if>
             <if test="websiteDomain != null">
                 website_domain,
@@ -93,6 +98,9 @@
             <if test="platformId != null">
                 #{platformId,jdbcType=INTEGER},
             </if>
+            <if test="platformName != null">
+                #{platformName,jdbcType=VARCHAR},
+            </if>
             <if test="websiteDomain != null">
                 #{websiteDomain,jdbcType=VARCHAR},
             </if>
@@ -119,6 +127,9 @@
             <if test="platformTerminal != null">
                 platform_terminal = #{platformTerminal,jdbcType=INTEGER},
             </if>
+            <if test="platformName != null">
+                platform_Name = #{platformId,jdbcType=VARCHAR},
+            </if>
             <if test="platformId != null">
                 platform_id = #{platformId,jdbcType=INTEGER},
             </if>
@@ -141,9 +152,38 @@
         user_id = #{userId,jdbcType=VARCHAR},
         platform_terminal = #{platformTerminal,jdbcType=INTEGER},
         platform_id = #{platformId,jdbcType=INTEGER},
+        platform_name = #{platformName,jdbcType=VARCHAR},
         website_domain = #{websiteDomain,jdbcType=VARCHAR},
         url_path = #{urlPath,jdbcType=VARCHAR},
         create_time = #{createTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
+    <select id="selectPlatformAllGameStartCount"  resultType="java.util.Map">
+        select platform_terminal as platformTerminal,platform_id as platformId,platform_name as platformName,count(id) as gameStartCount fm data_game_start
+        where country = 0
+        <![CDATA[
+             and create_time> date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
+  	    ]]>
+       <![CDATA[
+                 and create_time> DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
+         ]]>
+        group by platform_terminal,platform_id,platform_name
+    </select>
+
+    <select id="selectFirstThirtyMinGameStartCount" resultType="java.util.Map">
+        select platform_terminal as osType,count(DISTINCT(user_id)) as loginPopulation from data_platform_start
+        where country = 0
+        <![CDATA[
+             and create_time> date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
+        ]]>
+        <![CDATA[
+            and create_time <= DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
+  		]]>
+        and user_id is not null
+        <if test="null != sourceType and sourceType != ''">
+            and platform_terminal = #{sourceType}
+        </if>
+        group by platform_terminal
+    </select>
+
 </mapper>

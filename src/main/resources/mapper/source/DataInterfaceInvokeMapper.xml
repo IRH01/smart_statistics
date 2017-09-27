@@ -136,8 +136,8 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="findDataInfaceInvokeList" resultType="com.hhly.smartdata.model.source.DataInterfaceInvoke" >
-   select interface_type, count(user_id) from data_interface_invoke
+  <select id="findDataInterfaceInvokeList" resultType="java.util.Map" >
+   select interface_type as interfaceType, count(user_id) as invokeCount from data_interface_invoke
    where country = 0
     <![CDATA[
              and create_time> date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)

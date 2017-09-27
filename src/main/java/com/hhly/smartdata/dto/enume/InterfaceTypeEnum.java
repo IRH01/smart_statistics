@@ -32,4 +32,28 @@ public enum InterfaceTypeEnum{
         }
         throw new IllegalArgumentException("枚举参数错误！");
     }
+
+    public static Byte getIndex(String name)
+    {
+        for (InterfaceTypeEnum c : InterfaceTypeEnum.values())
+        {
+            if (name.equals(c.getDesc()))
+            {
+            }
+        }
+        return null;
+    }
+
+
+    public static String getName(String index){
+        if(null != index){
+            return null;
+        }
+        for (InterfaceTypeEnum c : InterfaceTypeEnum.values()){
+            if (c.getCode()== Integer.parseInt(index)){
+                return c.desc;
+            }
+        }
+        return null;
+    }
 }

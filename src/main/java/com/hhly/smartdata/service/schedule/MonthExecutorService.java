@@ -49,7 +49,7 @@ public class MonthExecutorService{
 
     public Result compositeReport() throws Exception{
         Date now = new Date();
-        Map<String, Object> lastMonthCompositeMap = this.dailyCompositeReportMapper.selectLastMonthComposite();
+        Map<String, Object> lastMonthCompositeMap = this.dailyCompositeReportMapper.selectLastMonthComposite(DateUtil.getLastMonthFirstDayStr(now), DateUtil.getLastMonthEndDayStr(now));
         if(lastMonthCompositeMap == null){
             return Result.fail("没有需要统计的数据");
         }
@@ -78,12 +78,12 @@ public class MonthExecutorService{
     }
 
     public Result registerReport() throws Exception{
-        Map<String, Object> lastMonthRegisterMap = this.dailyRegisterReportMapper.selectLastMonthRegister();
+        Date now = new Date();
+        Map<String, Object> lastMonthRegisterMap = this.dailyRegisterReportMapper.selectLastMonthRegister(DateUtil.getLastMonthFirstDayStr(now), DateUtil.getLastMonthEndDayStr(now));
         if(lastMonthRegisterMap == null){
             return Result.fail("没有需要统计的数据");
         }
 
-        Date now = new Date();
         MonthRegisterReport monthRegisterReport = new MonthRegisterReport();
         monthRegisterReport.setExecuteTime(now);
         monthRegisterReport.setStatisticsMonth(DateUtil.getLastMonthStr(now));
@@ -101,12 +101,12 @@ public class MonthExecutorService{
     }
 
     public Result rechargeReport() throws Exception{
-        List<Map<String, Object>> lastMonthRechargeList = this.dailyRechargeReportMapper.selectLastMonthRecharge();
+        Date now = new Date();
+        List<Map<String, Object>> lastMonthRechargeList = this.dailyRechargeReportMapper.selectLastMonthRecharge(DateUtil.getLastMonthFirstDayStr(now), DateUtil.getLastMonthEndDayStr(now));
         if(CollectionUtils.isEmpty(lastMonthRechargeList)){
             return Result.fail("没有需要统计的数据");
         }
 
-        Date now = new Date();
         String monthStr = DateUtil.getLastMonthStr(now);
         List<MonthRechargeReport> monthRechargeReportList = Lists.newArrayList();
         for(Map<String, Object> map : lastMonthRechargeList){
@@ -127,12 +127,12 @@ public class MonthExecutorService{
     }
 
     public Result loginSourceReport() throws Exception{
-        List<Map<String, Object>> lastMonthLoginList = this.dailyLoginReportMapper.selectLastMonthLogin();
+        Date now = new Date();
+        List<Map<String, Object>> lastMonthLoginList = this.dailyLoginReportMapper.selectLastMonthLogin(DateUtil.getLastMonthFirstDayStr(now), DateUtil.getLastMonthEndDayStr(now));
         if(CollectionUtils.isEmpty(lastMonthLoginList)){
             return Result.fail("没有需要统计的数据");
         }
 
-        Date now = new Date();
         String monthStr = DateUtil.getLastMonthStr(now);
         List<MonthLoginReport> monthRechargeReportList = Lists.newArrayList();
         for(Map<String, Object> map : lastMonthLoginList){

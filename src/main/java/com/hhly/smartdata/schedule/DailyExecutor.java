@@ -35,7 +35,10 @@ public class DailyExecutor{
      */
     @Scheduled(cron = "* * 1 * * MON-FRI")
     public void dailyRegisterSchedule(){
-        // @TODO
+        try{
+            dailyExecutorService.registerStatistic();
+        }catch(Exception ex){
+        }
     }
 
     /**

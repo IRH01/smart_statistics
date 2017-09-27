@@ -12,21 +12,22 @@ import com.hhly.smartdata.mapper.smartdata.DailyCompositeReportMapper;
 import com.hhly.smartdata.mapper.smartdata.DailyKeepRecordReportMapper;
 import com.hhly.smartdata.mapper.smartdata.DailyLoginReportMapper;
 import com.hhly.smartdata.mapper.smartdata.DailyRechargeReportMapper;
+import com.hhly.smartdata.mapper.smartdata.DailyRegisterReportMapper;
 import com.hhly.smartdata.mapper.source.DataGameStartMapper;
+import com.hhly.smartdata.mapper.source.DataInstallsMapper;
+import com.hhly.smartdata.mapper.source.DataViewMapper;
 import com.hhly.smartdata.model.smartdata.DailyCompositeReport;
 import com.hhly.smartdata.model.smartdata.DailyKeepRecordReport;
 import com.hhly.smartdata.model.smartdata.DailyLoginReport;
 import com.hhly.smartdata.model.smartdata.DailyRechargeReport;
+import com.hhly.smartdata.model.smartdata.DailyRegisterReport;
 import com.hhly.smartdata.util.DateUtil;
 import com.hhly.smartdata.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Iritchie.ren on 2017/9/25.
@@ -54,6 +55,16 @@ public class DailyExecutorService{
 
     @Autowired
     private DailyCompositeReportMapper dailyCompositeReportMapper;
+
+    @Autowired
+    private DataViewMapper dataViewMapper;
+
+    @Autowired
+    private DataInstallsMapper dataInstallsMapper;
+
+    @Autowired
+    private DailyRegisterReportMapper dailyRegisterReportMapper;
+
 
     @Autowired
     private DailyKeepRecordReportMapper dailyKeepRecordReportMapper;
@@ -260,6 +271,69 @@ public class DailyExecutorService{
         }
 
         return Result.success(dailyLoginReportList);
+    }
+
+    public Result registerStatistic() throws Exception{
+        // 前一日各端注册用户数
+        List<Map<String, Object>> yesterdayRegisterUserIdAndTerminalList = userInfoMapper.selectYesterdayRegisterUserIdAndTerminal();
+        // 前一日pv和uv
+        List<Map<String, Object>> yesterdayUserViewAndPageViewList = dataViewMapper.selectYesterdayUserViewAndPageView();
+        // 前一日app安装量
+        List<Map<String, Object>> yesterdayInstallsList = dataInstallsMapper.selectYesterdayInstalls();
+
+        Date now = new Date();
+        List<DailyRegisterReport> dailyRegisterReportList = new ArrayList();
+        String statisticsDayStr = DateUtil.getYesterdayStr(now);
+
+        for(Map<String, Object> registerMap : yesterdayRegisterUserIdAndTerminalList){
+            DailyRegisterReport dailyRegisterReport = new DailyRegisterReport();
+            switch(Integer.valueOf(registerMap.get("osType") + "")){
+                case 1:
+                    dailyRegisterReport.setPcPopulation(registerMap.get("UserCount")==null?0:Integer.valueOf(registerMap.get("UserCount")+""));
+                    break;
+                case 2:
+                    dailyRegisterReport.setAndroidPopulation(registerMap.get("UserCount")==null?0:Integer.valueOf(registerMap.get("UserCount")+""));
+                    break;
+                case 3:
+                    dailyRegisterReport.setIosPopulation(registerMap.get("UserCount")==null?0:Integer.valueOf(registerMap.get("UserCount")+""));
+                    break;
+                case 4:
+                    dailyRegisterReport.setH5Population(registerMap.get("UserCount")==null?0:Integer.valueOf(registerMap.get("UserCount")+""));
+                    break;
+            }
+
+            for(Map<String, Object> userViewMap : yesterdayUserViewAndPageViewList){
+
+                switch(Integer.valueOf(userViewMap.get("platformTerminal") + "")){
+                    case 1:
+                        dailyRegisterReport.setPcPageView(userViewMap.get("pageCount")==null?0:Long.valueOf(userViewMap.get("pageCount")+ ""));
+                        dailyRegisterReport.setPcUserView(userViewMap.get("userCount")==null?0:Integer.valueOf(userViewMap.get("userCount") + ""));
+                        break;
+                    case 4:
+                        dailyRegisterReport.setH5Population(userViewMap.get("pageCount")==null?0:Integer.valueOf(userViewMap.get("pageCount") + ""));
+                        dailyRegisterReport.setH5UserView(userViewMap.get("pageCount")==null?0:Integer.valueOf(userViewMap.get("pageCount") + ""));
+                        break;
+                }
+
+            }
+
+            for(Map<String, Object> installsMap : yesterdayInstallsList){
+                switch(Integer.valueOf(installsMap.get("platformTerminal") + "")){
+                    case 2:
+                        dailyRegisterReport.setAndroidInstallCount(Integer.valueOf(installsMap.get("uniqueCount") + ""));
+                        break;
+                    case 3:
+                        dailyRegisterReport.setIosInstallCount(Integer.valueOf(installsMap.get("uniqueCount") + ""));
+                        break;
+                }
+
+            }
+            dailyRegisterReport.setExecuteTime(now);
+            dailyRegisterReport.setStatisticsDay(statisticsDayStr);
+            dailyRegisterReportMapper.insert(dailyRegisterReport);
+            dailyRegisterReportList.add(dailyRegisterReport);
+        }
+        return Result.success(dailyRegisterReportList);
     }
 
     public Result keepRecordAnalyzeReport() throws Exception{

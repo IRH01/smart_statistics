@@ -134,4 +134,18 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id ="selectIntervalGamelaunch" resultType="java.util.Map">
+  select platform_terminal, platform_id,
+     (select nam)
+  gameNamecount(user_id) from data_game_start
+  where country = 0
+  <![CDATA[
+             and create_time> date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
+  	    ]]>
+  <![CDATA[
+             and create_time<=DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
+  	 ]]>
+  group by platform_terminal,platform_id
+  </select>
 </mapper>

@@ -18,4 +18,9 @@ public interface DataGameStartMapper{
     int updateByPrimaryKey(DataGameStart record) throws Exception;
 
     List<Map<String, Object>> selectYesterdayLaunchGameUser() throws Exception;
+
+    List<Map<String,Object>> selectPlatformAllGameStartCount() throws Exception;
+
+    List<Map<String,Object>> selectFirstThirtyMinGameStartCount() throws Exception;
+
 }

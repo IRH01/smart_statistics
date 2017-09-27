@@ -14,6 +14,7 @@ public interface LoginTrackMapper{
 
     List<Map<String, Object>> selectYesterdayLoginUser() throws Exception;
 
-    // 查询 各端 注册人数、充值人数、充值金额、充值次数
-    List<IntervalSourceReport> findIntervalSourceReportByTime(IntervalSourceReport record);
+    List<Map<String, Object>> selectFirstThirtyMinLoginUser() throws Exception;
+
+
 }

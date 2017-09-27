@@ -2,6 +2,7 @@ package com.hhly.smartdata.mapper.smartdata;
 
 
 import com.hhly.smartdata.model.smartdata.DailyRechargeReport;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +20,5 @@ public interface DailyRechargeReportMapper{
 
     int updateByPrimaryKey(DailyRechargeReport record) throws Exception;
 
-    List<Map<String, Object>> selectLastMonthRecharge() throws Exception;
+    List<Map<String, Object>> selectLastMonthRecharge(@Param("lastMonthFirstDayStr") String lastMonthFirstDayStr, @Param("lastMonthEndDayStr") String lastMonthEndDayStr) throws Exception;
 }
