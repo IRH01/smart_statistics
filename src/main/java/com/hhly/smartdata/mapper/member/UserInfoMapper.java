@@ -13,9 +13,7 @@ public interface UserInfoMapper{
 
     Integer findUserInfoByTime() throws Exception;
 
-    List<String> selectYesterdayRegisterUser() throws Exception;
-
     List<String> selectOldRegisterUser() throws Exception;
 
-    List<String> selectBeforeYesterdayRegisterUser() throws Exception;
+    List<String> selectBeforeHowManyDayRegisterUser(int days);
 }

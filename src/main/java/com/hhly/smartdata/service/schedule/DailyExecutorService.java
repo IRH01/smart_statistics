@@ -9,10 +9,12 @@ import com.hhly.smartdata.mapper.member.LoginTrackMapper;
 import com.hhly.smartdata.mapper.member.RechargeRecordMapper;
 import com.hhly.smartdata.mapper.member.UserInfoMapper;
 import com.hhly.smartdata.mapper.smartdata.DailyCompositeReportMapper;
+import com.hhly.smartdata.mapper.smartdata.DailyKeepRecordReportMapper;
 import com.hhly.smartdata.mapper.smartdata.DailyLoginReportMapper;
 import com.hhly.smartdata.mapper.smartdata.DailyRechargeReportMapper;
 import com.hhly.smartdata.mapper.source.DataGameStartMapper;
 import com.hhly.smartdata.model.smartdata.DailyCompositeReport;
+import com.hhly.smartdata.model.smartdata.DailyKeepRecordReport;
 import com.hhly.smartdata.model.smartdata.DailyLoginReport;
 import com.hhly.smartdata.model.smartdata.DailyRechargeReport;
 import com.hhly.smartdata.util.DateUtil;
@@ -53,9 +55,12 @@ public class DailyExecutorService{
     @Autowired
     private DailyCompositeReportMapper dailyCompositeReportMapper;
 
+    @Autowired
+    private DailyKeepRecordReportMapper dailyKeepRecordReportMapper;
+
     public Result compositeReport() throws Exception{
         // 昨日注册用户列表
-        List<String> yesterdayRegisterUserList = this.userInfoMapper.selectYesterdayRegisterUser();
+        List<String> yesterdayRegisterUserList = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(1);
         // 昨日游戏启动用户列表,并转换成Set集合。
         List<Map<String, Object>> yesterdayLaunchGameUserList = this.dataGameStartMapper.selectYesterdayLaunchGameUser();
         Set<String> yesterdayLaunchGameUserSet = Sets.newHashSet();
@@ -77,7 +82,7 @@ public class DailyExecutorService{
         // 当天以前的老用户注册列表
         List<String> oldRegisterUserList = this.userInfoMapper.selectOldRegisterUser();
         // 前日注册用户列表
-        List<String> beforeYesterdayRegisterUserList = this.userInfoMapper.selectBeforeYesterdayRegisterUser();
+        List<String> beforeYesterdayRegisterUserList = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(2);
 
         Date now = new Date();
         DailyCompositeReport dailyCompositeReport = new DailyCompositeReport();
@@ -206,7 +211,7 @@ public class DailyExecutorService{
 
     public Result loginStatistic() throws Exception{
         // 昨天注册的账号列表
-        List<String> yesterdayRegisterUserList = this.userInfoMapper.selectYesterdayRegisterUser();
+        List<String> yesterdayRegisterUserList = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(1);
         //昨天登录的账号列表,并转换成Set集合。
         List<Map<String, Object>> yesterdayLoginUserList = this.loginTrackMapper.selectYesterdayLoginUser();
         Set<String> yesterdayLoginUserSet = Sets.newHashSet();
@@ -257,8 +262,104 @@ public class DailyExecutorService{
         return Result.success(dailyLoginReportList);
     }
 
-    public Result keepRecordAnalyze(){
+    public Result keepRecordAnalyzeReport() throws Exception{
+        Date now = new Date();
+        // 昨日登录用户列表
+        List<Map<String, Object>> yesterdayLoginUserList = this.loginTrackMapper.selectYesterdayLoginUser();
+        Set<String> yesterdayLoginUserSet = Sets.newHashSet();
+        for(Map<String, Object> map : yesterdayLoginUserList){
+            yesterdayLoginUserSet.add((String) map.get("userId"));
+        }
+        // 1天前注册用户列表，为了计算当日注册数
+        List<String> beforeDayRegisterUserList_0 = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(1);
+        // 2天前注册用户列表，前日注册用户列表,为了计算1日留存（次留）
+        List<String> beforeDayRegisterUserList_1 = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(2);
+        // 3天前注册用户列表，为了计算2日留存（次留）
+        List<String> beforeDayRegisterUserList_2 = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(4);
+        // 4天前注册用户列表，为了计算3日留存（次留）
+        List<String> beforeDayRegisterUserList_3 = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(4);
+        // 5天前注册用户列表，为了计算4日留存（次留）
+        List<String> beforeDayRegisterUserList_4 = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(4);
+        // 6天前注册用户列表，为了计算5日留存（次留）
+        List<String> beforeDayRegisterUserList_5 = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(4);
+        // 7天前注册用户列表，为了计算6日留存（次留）
+        List<String> beforeDayRegisterUserList_6 = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(4);
+        // 8天前注册用户列表，为了计算7日留存（次留）
+        List<String> beforeDayRegisterUserList_7 = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(7);
+        // 15天前注册用户列表，为了计算14日留存（次留）
+        List<String> beforeDayRegisterUserList_14 = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(7);
+        // 31天前注册用户列表，为了计算30日留存（次留）
+        List<String> beforeDayRegisterUserList_30 = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(31);
 
-        return null;
+        DailyKeepRecordReport dailyKeepRecordReport = new DailyKeepRecordReport();
+        dailyKeepRecordReport.setExecuteTime(now);
+        dailyKeepRecordReport.setStatisticsDay(DateUtil.getYesterdayStr(now));
+        dailyKeepRecordReport.setRegisterCount(beforeDayRegisterUserList_0.size());
+
+        Integer one = 0;
+        Integer two = 0;
+        Integer three = 0;
+        Integer four = 0;
+        Integer five = 0;
+        Integer six = 0;
+        Integer seven = 0;
+        Integer fourteen = 0;
+        Integer thirty = 0;
+        for(String item : beforeDayRegisterUserList_1){
+            if(yesterdayLoginUserSet.contains(item)){
+                one++;
+            }
+        }
+        for(String item : beforeDayRegisterUserList_2){
+            if(yesterdayLoginUserSet.contains(item)){
+                two++;
+            }
+        }
+        for(String item : beforeDayRegisterUserList_3){
+            if(yesterdayLoginUserSet.contains(item)){
+                three++;
+            }
+        }
+        for(String item : beforeDayRegisterUserList_4){
+            if(yesterdayLoginUserSet.contains(item)){
+                four++;
+            }
+        }
+        for(String item : beforeDayRegisterUserList_5){
+            if(yesterdayLoginUserSet.contains(item)){
+                five++;
+            }
+        }
+        for(String item : beforeDayRegisterUserList_6){
+            if(yesterdayLoginUserSet.contains(item)){
+                six++;
+            }
+        }
+        for(String item : beforeDayRegisterUserList_7){
+            if(yesterdayLoginUserSet.contains(item)){
+                seven++;
+            }
+        }
+        for(String item : beforeDayRegisterUserList_14){
+            if(yesterdayLoginUserSet.contains(item)){
+                fourteen++;
+            }
+        }
+        for(String item : beforeDayRegisterUserList_30){
+            if(yesterdayLoginUserSet.contains(item)){
+                thirty++;
+            }
+        }
+        dailyKeepRecordReport.setOne(one);
+        dailyKeepRecordReport.setTwo(two);
+        dailyKeepRecordReport.setThree(three);
+        dailyKeepRecordReport.setFour(four);
+        dailyKeepRecordReport.setFive(five);
+        dailyKeepRecordReport.setSix(six);
+        dailyKeepRecordReport.setSeven(seven);
+        dailyKeepRecordReport.setFourteen(fourteen);
+        dailyKeepRecordReport.setThirty(thirty);
+        this.dailyKeepRecordReportMapper.insert(dailyKeepRecordReport);
+        return Result.success(dailyKeepRecordReport);
     }
 }

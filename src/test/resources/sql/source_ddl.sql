@@ -33,7 +33,7 @@ CREATE TABLE `data_installs` (
 CREATE TABLE `data_interface_invoke` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '接口调用',
   `country` int(11) NOT NULL DEFAULT '0' COMMENT '国家:0中国 1美国 2泰国 3越南 4韩国 5印尼6繁体7新加坡8马来西亚',
-  `user_id` varchar(50) NOT NULL DEFAULT '' COMMENT '账户（userId）',
+  `user_id` varchar(50) NOT NULL DEFAULT '' COMMENT '账户（userId,手机号，邮箱形式）',
   `platform_id` int(11) NOT NULL DEFAULT '0' COMMENT '平台Id:默认为玩一下平台;PC=1,移动端为31111',
   `platform_terminal` int(11) NOT NULL DEFAULT '0' COMMENT '终端:1.pc 2.安卓 3ios 4.h5 5.其他',
   `interface_type` int(11) NOT NULL DEFAULT '0' COMMENT '接口类型:1.注册接口 2.充值接口',

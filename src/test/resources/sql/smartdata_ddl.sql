@@ -145,7 +145,7 @@ CREATE TABLE `daily_login_report` (
 CREATE TABLE `daily_keep_record_report` (
    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日报表，充值来源统计报表',
    `statistics_day` varchar(20) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
-   `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.android 3.IOS 4.H5',
+   `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.android 3.IOS 4.H5 0.总的，不分平台',
    `register_count` int(10) NOT NULL DEFAULT '0' COMMENT '注册人数',
    `one` int(10) NOT NULL DEFAULT '0' COMMENT '1天后留存',
    `two` int(10) NOT NULL DEFAULT '0' COMMENT '2天后留存',

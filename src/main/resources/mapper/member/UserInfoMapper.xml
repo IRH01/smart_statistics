@@ -64,15 +64,6 @@
   	    ]]>
     </select>
 
-    <select id="selectYesterdayRegisterUser" resultType="java.lang.String">
-        SELECT
-        user_id as UserId
-        FROM
-        tbl_user_info
-        WHERE TO_DAYS(NOW()) - TO_DAYS(create_time) &lt;= 1
-        AND TO_DAYS(NOW()) - TO_DAYS(create_time) &gt;= 0
-    </select>
-
     <select id="selectOldRegisterUser" resultType="java.lang.String">
         SELECT
         user_id as UserId
@@ -81,12 +72,12 @@
         WHERE TO_DAYS(NOW()) - TO_DAYS(create_time) &gt; 1
     </select>
 
-    <select id="selectBeforeYesterdayRegisterUser" resultType="java.lang.String">
+    <select id="selectBeforeHowManyDayRegisterUser" resultType="java.lang.String">
         SELECT
         user_id as UserId
         FROM
         tbl_user_info
-        WHERE TO_DAYS(NOW()) - TO_DAYS(create_time) &lt;= 2
-        AND TO_DAYS(NOW()) - TO_DAYS(create_time) &gt;= 1
+        WHERE TO_DAYS(NOW()) - TO_DAYS(create_time) &lt;= #{days}
+        AND TO_DAYS(NOW()) - TO_DAYS(create_time) &gt;= (#{days} - 1)
     </select>
 </mapper>

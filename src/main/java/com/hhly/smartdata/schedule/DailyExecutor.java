@@ -67,6 +67,10 @@ public class DailyExecutor{
      */
     @Scheduled(cron = "* * 1 * * MON-FRI")
     public void keepRecordAnalyzeExecutor(){
-        this.dailyExecutorService.keepRecordAnalyze();
+        try{
+            this.dailyExecutorService.keepRecordAnalyzeReport();
+        }catch(Exception e){
+            LOGGER.error("定时器执行失败");
+        }
     }
 }

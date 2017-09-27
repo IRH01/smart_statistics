@@ -30,7 +30,7 @@ public class DailyExecutorServiceTest extends BaseTest{
         Result result = this.dailyExecutorService.compositeReport();
         System.err.println(JSONObject.toJSONString(result.getData()));
     }
-    
+
     /**
      * Method: rechargeStatistic()
      */
@@ -45,6 +45,14 @@ public class DailyExecutorServiceTest extends BaseTest{
     @Test
     public void testLoginStatistic() throws Exception{
         this.dailyExecutorService.loginStatistic();
+    }
+
+    /**
+     * Method: keepRecordAnalyzeReport()
+     */
+    @Test
+    public void testKeepRecordAnalyzeReport() throws Exception{
+        this.dailyExecutorService.keepRecordAnalyzeReport();
     }
 
 
