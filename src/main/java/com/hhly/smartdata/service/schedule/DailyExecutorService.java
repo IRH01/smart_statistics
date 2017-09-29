@@ -274,6 +274,7 @@ public class DailyExecutorService{
     }
 
     public Result registerStatistic() throws Exception{
+
         // 前一日各端注册用户数
         List<Map<String, Object>> yesterdayRegisterUserIdAndTerminalList = userInfoMapper.selectYesterdayRegisterUserIdAndTerminal();
         // 前一日pv和uv
@@ -285,54 +286,55 @@ public class DailyExecutorService{
         List<DailyRegisterReport> dailyRegisterReportList = new ArrayList();
         String statisticsDayStr = DateUtil.getYesterdayStr(now);
 
-        for(Map<String, Object> registerMap : yesterdayRegisterUserIdAndTerminalList){
             DailyRegisterReport dailyRegisterReport = new DailyRegisterReport();
-            switch(Integer.valueOf(registerMap.get("osType") + "")){
-                case 1:
-                    dailyRegisterReport.setPcPopulation(registerMap.get("UserCount")==null?0:Integer.valueOf(registerMap.get("UserCount")+""));
-                    break;
-                case 2:
-                    dailyRegisterReport.setAndroidPopulation(registerMap.get("UserCount")==null?0:Integer.valueOf(registerMap.get("UserCount")+""));
-                    break;
-                case 3:
-                    dailyRegisterReport.setIosPopulation(registerMap.get("UserCount")==null?0:Integer.valueOf(registerMap.get("UserCount")+""));
-                    break;
-                case 4:
-                    dailyRegisterReport.setH5Population(registerMap.get("UserCount")==null?0:Integer.valueOf(registerMap.get("UserCount")+""));
-                    break;
-            }
-
-            for(Map<String, Object> userViewMap : yesterdayUserViewAndPageViewList){
-
-                switch(Integer.valueOf(userViewMap.get("platformTerminal") + "")){
+            for(Map<String, Object> registerMap : yesterdayRegisterUserIdAndTerminalList){
+                switch(Integer.valueOf(registerMap.get("osType") + "")){
                     case 1:
-                        dailyRegisterReport.setPcPageView(userViewMap.get("pageCount")==null?0:Long.valueOf(userViewMap.get("pageCount")+ ""));
-                        dailyRegisterReport.setPcUserView(userViewMap.get("userCount")==null?0:Integer.valueOf(userViewMap.get("userCount") + ""));
+                        dailyRegisterReport.setPcPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
                         break;
-                    case 4:
-                        dailyRegisterReport.setH5Population(userViewMap.get("pageCount")==null?0:Integer.valueOf(userViewMap.get("pageCount") + ""));
-                        dailyRegisterReport.setH5UserView(userViewMap.get("pageCount")==null?0:Integer.valueOf(userViewMap.get("pageCount") + ""));
-                        break;
-                }
-
-            }
-
-            for(Map<String, Object> installsMap : yesterdayInstallsList){
-                switch(Integer.valueOf(installsMap.get("platformTerminal") + "")){
                     case 2:
-                        dailyRegisterReport.setAndroidInstallCount(Integer.valueOf(installsMap.get("uniqueCount") + ""));
+                        dailyRegisterReport.setAndroidPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
                         break;
                     case 3:
-                        dailyRegisterReport.setIosInstallCount(Integer.valueOf(installsMap.get("uniqueCount") + ""));
+                        dailyRegisterReport.setIosPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
+                        break;
+                    case 4:
+                        dailyRegisterReport.setH5Population(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
                         break;
                 }
-
             }
-            dailyRegisterReport.setExecuteTime(now);
-            dailyRegisterReport.setStatisticsDay(statisticsDayStr);
-            dailyRegisterReportMapper.insert(dailyRegisterReport);
-            dailyRegisterReportList.add(dailyRegisterReport);
+
+        for(Map<String, Object> userViewMap : yesterdayUserViewAndPageViewList){
+
+            switch(Integer.valueOf(userViewMap.get("platformTerminal") + "")){
+                case 1:
+                    dailyRegisterReport.setPcPageView(userViewMap.get("pageCount")==null?0:Long.valueOf(userViewMap.get("pageCount")+ ""));
+                    dailyRegisterReport.setPcUserView(userViewMap.get("userCount")==null?0:Integer.valueOf(userViewMap.get("userCount") + ""));
+                    break;
+                case 4:
+                    dailyRegisterReport.setH5Population(userViewMap.get("pageCount")==null?0:Integer.valueOf(userViewMap.get("pageCount") + ""));
+                    dailyRegisterReport.setH5UserView(userViewMap.get("pageCount")==null?0:Integer.valueOf(userViewMap.get("pageCount") + ""));
+                    break;
+            }
+
         }
+
+        for(Map<String, Object> installsMap : yesterdayInstallsList){
+            switch(Integer.valueOf(installsMap.get("platformTerminal") + "")){
+                case 2:
+                    dailyRegisterReport.setAndroidInstallCount(Integer.valueOf(installsMap.get("uniqueCount") + ""));
+                    break;
+                case 3:
+                    dailyRegisterReport.setIosInstallCount(Integer.valueOf(installsMap.get("uniqueCount") + ""));
+                    break;
+            }
+
+        }
+        dailyRegisterReport.setExecuteTime(now);
+        dailyRegisterReport.setStatisticsDay(statisticsDayStr);
+        dailyRegisterReportMapper.insert(dailyRegisterReport);
+        dailyRegisterReportList.add(dailyRegisterReport);
+
         return Result.success(dailyRegisterReportList);
     }
 

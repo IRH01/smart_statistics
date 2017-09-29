@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,18 +77,14 @@
                                                 name="id" value="${role.id}">
                                         </div>
                                         <div class="form-group form-group-sm">
-                                            <shiro:hasPermission name="sys_role_list">
-                                                <button type="submit" class="btn btn-primary btn-sm">
-                                                    <i class="icon-search icon-white"></i>查&nbsp;&nbsp;询
-                                                </button>
-                                                &nbsp;&nbsp;
-                                            </shiro:hasPermission>
-                                            <shiro:hasPermission name="sys_role_add">
-                                                <button type="submit" class="btn btn-primary btn-sm"
-                                                        onclick="changeAction('/sys/role/add.do')">
-                                                    <i class="icon-plus icon-white"></i>创建角色
-                                                </button>
-                                            </shiro:hasPermission>
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="icon-search icon-white"></i>查&nbsp;&nbsp;询
+                                            </button>
+                                            &nbsp;&nbsp;
+                                            <button type="submit" class="btn btn-primary btn-sm"
+                                                    onclick="changeAction('/sys/role/add.do')">
+                                                <i class="icon-plus icon-white"></i>创建角色
+                                            </button>
                                         </div>
                                     </fieldset>
                                 </form>
@@ -111,18 +107,14 @@
                                                         value="${role.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                                 </td>
                                                 <td>
-                                                    <shiro:hasPermission name="sys_role_delete">
-                                                        <button type="submit" class="btn btn-primary btn-xs"
-                                                                onclick="confirmAction('/sys/role/${role.id}/delete.do')">
-                                                            <i class="icon-remove icon-white"></i>删除
-                                                        </button>
-                                                    </shiro:hasPermission>
-                                                    <shiro:hasPermission name="sys_role_update">
-                                                        <button type="submit" class="btn btn-primary btn-xs"
-                                                                onclick="changeAction('/sys/role/${role.id}/preupdate.do')">
-                                                            <i class="icon-edit icon-white"></i>分配权限
-                                                        </button>
-                                                    </shiro:hasPermission>
+                                                    <button type="submit" class="btn btn-primary btn-xs"
+                                                            onclick="confirmAction('/sys/role/${role.id}/delete.do')">
+                                                        <i class="icon-remove icon-white"></i>删除
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary btn-xs"
+                                                            onclick="changeAction('/sys/role/${role.id}/preupdate.do')">
+                                                        <i class="icon-edit icon-white"></i>分配权限
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </c:forEach>

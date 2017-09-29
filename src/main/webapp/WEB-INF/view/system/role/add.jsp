@@ -85,12 +85,10 @@
                                         <div class="form-group form-group-sm">
                                             <label class="control-label col-sm-2"></label>
                                             <div class="col-sm-3">
-                                                <shiro:hasPermission name="sys_role_add">
-                                                    <button type="submit" class="btn btn-primary"
-                                                            onclick="return checkForm();">
-                                                        <i class="icon-ok icon-white"></i>保存
-                                                    </button>
-                                                </shiro:hasPermission>
+                                                <button type="submit" class="btn btn-primary"
+                                                        onclick="return checkForm();">
+                                                    <i class="icon-ok icon-white"></i>保存
+                                                </button>
                                                 <button type="button" class="btn btn-primary"
                                                         onclick="history.go(-1)">返回
                                                 </button>

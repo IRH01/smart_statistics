@@ -80,8 +80,8 @@
     </select>
 
     <select id="findRechargeRecordByTime" resultType="java.lang.Integer">
-        select count(DISTINCT (orderno) as count from tbl_recharge_record where
-        status = 1 and country = 0
+        select count(DISTINCT (orderno)) as count from tbl_recharge_record where
+        status = 1
         <![CDATA[
              and apply_time> date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
   	    ]]>

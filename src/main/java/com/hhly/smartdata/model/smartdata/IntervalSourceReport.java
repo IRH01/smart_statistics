@@ -1,11 +1,10 @@
 package com.hhly.smartdata.model.smartdata;
 
-import com.hhly.smartdata.model.BaseModel;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class IntervalSourceReport extends BaseModel{
+public class IntervalSourceReport {
     /**
      * 平台实时统计，各端实时统计
      */

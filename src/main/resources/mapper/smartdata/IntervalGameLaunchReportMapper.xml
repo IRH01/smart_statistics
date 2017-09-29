@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="statistics_time" property="statisticsTime" jdbcType="VARCHAR" />
     <result column="interval_time" property="intervalTime" jdbcType="INTEGER" />
+    <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
     <result column="platform_id" property="platformId" jdbcType="INTEGER" />
     <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
     <result column="launch_count" property="launchCount" jdbcType="INTEGER" />
@@ -20,10 +21,11 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
   <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
-    insert into interval_game_launch_report (id, statistics_time, interval_time, 
+    insert into interval_game_launch_report (id, statistics_time, interval_time,source_type,
       platform_id, platform_name, launch_count, 
       execute_time)
-    values (#{id,jdbcType=BIGINT}, #{statisticsTime,jdbcType=VARCHAR}, #{intervalTime,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=BIGINT}, #{statisticsTime,jdbcType=VARCHAR}, #{intervalTime,jdbcType=INTEGER},
+      #{sourceType,jdbcType=TINYINT},
       #{platformId,jdbcType=INTEGER}, #{platformName,jdbcType=VARCHAR}, #{launchCount,jdbcType=INTEGER}, 
       #{executeTime,jdbcType=TIMESTAMP})
   </insert>
@@ -38,6 +40,9 @@
       </if>
       <if test="intervalTime != null" >
         interval_time,
+      </if>
+      <if test="sourceType != null" >
+        source_type,
       </if>
       <if test="platformId != null" >
         platform_id,
@@ -62,6 +67,9 @@
       <if test="intervalTime != null" >
         #{intervalTime,jdbcType=INTEGER},
       </if>
+      <if test="sourceType != null" >
+        #{sourceType,jdbcType=TINYINT},
+      </if>
       <if test="platformId != null" >
         #{platformId,jdbcType=INTEGER},
       </if>
@@ -85,6 +93,9 @@
       <if test="intervalTime != null" >
         interval_time = #{intervalTime,jdbcType=INTEGER},
       </if>
+      <if test="sourceType != null" >
+        source_type = #{sourceType,jdbcType=TINYINT},
+      </if>
       <if test="platformId != null" >
         platform_id = #{platformId,jdbcType=INTEGER},
       </if>
@@ -104,6 +115,7 @@
     update interval_game_launch_report
     set statistics_time = #{statisticsTime,jdbcType=VARCHAR},
       interval_time = #{intervalTime,jdbcType=INTEGER},
+      source_type = #{sourceType,jdbcType=TINYINT},
       platform_id = #{platformId,jdbcType=INTEGER},
       platform_name = #{platformName,jdbcType=VARCHAR},
       launch_count = #{launchCount,jdbcType=INTEGER},

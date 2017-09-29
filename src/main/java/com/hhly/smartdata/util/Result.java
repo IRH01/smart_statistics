@@ -109,4 +109,7 @@ public class Result implements Serializable{
         }
         return ip;
     }
+
+    public static void send(){
+    }
 }

@@ -50,6 +50,7 @@
                 /validateResetPassWord.do*=anon
                 /resetPassWord.do*=anon
                 /admin/cp/cpregister.do*=anon
+                /druid/*=anon
                 /fonts/**=anon
                 /css/**=anon
                 /js/**=anon

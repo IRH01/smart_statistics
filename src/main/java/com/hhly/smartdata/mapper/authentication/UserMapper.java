@@ -2,6 +2,7 @@ package com.hhly.smartdata.mapper.authentication;
 
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.util.page.Page;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +20,5 @@ public interface UserMapper{
 
     int update(User record) throws Exception;
 
-    List<User> searchUsers(User condition, Page page) throws Exception;
+    List<User> searchUsers(@Param("filter") User condition, @Param("page") Page page) throws Exception;
 }

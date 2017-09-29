@@ -19,6 +19,11 @@ public class IntervalGameLaunchReport{
     private Integer intervalTime = 0;
 
     /**
+     * 源端类型：1、PC 2.android 3.IOS 4.H5
+     */
+    private Byte sourceType = 0;
+
+    /**
      * 平台id或游戏id
      */
     private Integer platformId = 0;
@@ -92,5 +97,13 @@ public class IntervalGameLaunchReport{
 
     public void setExecuteTime(Date executeTime){
         this.executeTime = executeTime;
+    }
+
+    public Byte getSourceType(){
+        return sourceType;
+    }
+
+    public void setSourceType(Byte sourceType){
+        this.sourceType = sourceType;
     }
 }

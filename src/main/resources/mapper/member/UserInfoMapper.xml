@@ -74,13 +74,13 @@
     </select>
 
     <select id="selectFirstThirtyMinRegister" resultType="java.util.Map">
-        select os_type, count(DISTINCT(user_id)) as register_population from gp_tbl_user_info where
+        select os_type, count(DISTINCT(user_id)) as register_population from tbl_user_info where
         <![CDATA[
-              create_time > DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute
+              create_time > date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
   		]]>
         and
         <![CDATA[
-  		      create_time <= DATE_FORMAT('#{endDate}','%Y-%m-%d %H:%i:%S')
+  		      create_time <= DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
   		]]>
         group by os_type
     </select>

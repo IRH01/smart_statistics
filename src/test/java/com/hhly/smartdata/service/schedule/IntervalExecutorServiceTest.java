@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/spring/spring-context.xml"})
-@Transactional
 public class IntervalExecutorServiceTest extends BaseTest{
     @Autowired
     private IntervalExecutorService intervalExecutorService;

@@ -2,7 +2,6 @@
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,12 +64,10 @@
                                         <div class="main-menu">
                                             <ul id="menuTree" class="ztree">
                                             </ul>
-                                            <shiro:hasPermission name="sys_menu_sort">
-                                                <div style="margin: 10px 0 15px 10px">
-                                                    <input type="button" value="保存" class='btn btn-primary'
-                                                           onclick="sortMenu()"/>
-                                                </div>
-                                            </shiro:hasPermission>
+                                            <div style="margin: 10px 0 15px 10px">
+                                                <input type="button" value="保存" class='btn btn-primary'
+                                                       onclick="sortMenu()"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -107,10 +104,8 @@
                                         <div class="form-group form-group-sm">
                                             <div class="col-sm-2"></div>
                                             <div class="col-sm-6">
-                                                <shiro:hasPermission name="!sys_menu_update">
-                                                    <input type="button" value="保存" class='btn btn-primary'
-                                                           onclick="updateMenu()"/>
-                                                </shiro:hasPermission>
+                                                <input type="button" value="保存" class='btn btn-primary'
+                                                       onclick="updateMenu()"/>
                                             </div>
                                         </div>
                                     </form>
@@ -122,12 +117,8 @@
             </div>
             <div id="rMenu">
                 <ul>
-                    <shiro:hasPermission name="!sys_menu_add">
-                        <li id="m_add" onclick="addTreeNode();">增加节点</li>
-                    </shiro:hasPermission>
-                    <shiro:hasPermission name="!sys_menu_delete">
-                        <li id="m_del" onclick="removeTreeNode();">删除节点</li>
-                    </shiro:hasPermission>
+                    <li id="m_add" onclick="addTreeNode();">增加节点</li>
+                    <li id="m_del" onclick="removeTreeNode();">删除节点</li>
                 </ul>
             </div>
             <!--body end-->
@@ -187,8 +178,8 @@
         }
         $("#menuId").val(menuId);
         var url = "/sys/menu/update.do"
-        $.post(url, $("#form").serialize(), function (text) {
-            if (text == "SUCCESS") {
+        $.post(url, $("#form").serialize(), function (result) {
+            if (result.code == 1200) {
                 selectedNode.name = $("#form").find("input[name='name']").val();
                 layer.alert("保存成功", {
                     icon: 6
@@ -209,7 +200,8 @@
         if (menuId) {
             $("#menuId").val(menuId);
             var url = "/sys/menu/menuDetail.do"
-            $.post(url, {id: menuId}, function (json) {
+            $.post(url, {id: menuId}, function (result) {
+                var json = result.data;
                 $("#form").find("input[name='name']").val(json.name);
                 $("#form").find("input[name='permission']").val(json.permission);
                 $("#form").find("input[name='url']").val(json.url);
@@ -284,10 +276,8 @@
     function sortMenu() {
         var url = "/sys/menu/sort.do"
         var data = {menuTree: JSON.stringify(menuTree.getNodes())};
-        $.post(url,
-            data,
-            function (json) {
-                $.each(json, function (tId, id) {
+        $.post(url, data, function (result) {
+                $.each(result.data, function (tId, id) {
                     menuTree.getNodeByTId(tId).id = id;
                 })
                 layer.alert("保存成功", {
@@ -315,12 +305,8 @@
             function (result) {
                 $.fn.zTree.init($("#menuTree"), list_setting, result.data);
                 menuTree = $.fn.zTree.getZTreeObj("menuTree");
-                <shiro:hasPermission name="!sys_menu_update">
                 menuTree.setting.edit.showRenameBtn = true;
-                </shiro:hasPermission>
-                <shiro:hasPermission name="!sys_menu_delete">
                 menuTree.setting.edit.showRemoveBtn = true;
-                </shiro:hasPermission>
                 rMenu = $("#rMenu");
             },
             "json");

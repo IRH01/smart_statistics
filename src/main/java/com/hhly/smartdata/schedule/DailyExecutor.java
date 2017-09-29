@@ -38,6 +38,7 @@ public class DailyExecutor{
         try{
             dailyExecutorService.registerStatistic();
         }catch(Exception ex){
+            LOGGER.error("定时器执行失败");
         }
     }
 

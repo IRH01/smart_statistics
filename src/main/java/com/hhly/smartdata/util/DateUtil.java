@@ -164,7 +164,7 @@ public class DateUtil{
         if(date == null){
             return "";
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Calendar beforeTime = Calendar.getInstance();
         beforeTime.add(Calendar.MINUTE, -30);// 时间差值
         Date beforeD = beforeTime.getTime();

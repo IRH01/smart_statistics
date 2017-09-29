@@ -2,7 +2,6 @@
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,11 +73,9 @@
                                             </c:forEach>
                                         </div>
                                     </div>
-                                    <shiro:hasPermission name="admin_admin_allocRole">
-                                        <button type="submit" class="btn btn-primary top20">
-                                            <i class="icon-search icon-white"></i>保存
-                                        </button>
-                                    </shiro:hasPermission>
+                                    <button type="submit" class="btn btn-primary top20">
+                                        <i class="icon-search icon-white"></i>保存
+                                    </button>
                                     <button type="button" class="btn btn-primary top20" onclick="history.go(-1)"><i
                                             class="icon-search icon-white"></i>返回
                                     </button>
@@ -137,7 +134,8 @@
         if (menuId) {
             $("#menuId").val(menuId);
             var url = "/sys/menu/menuDetail.do";
-            $.post(url, {id: menuId}, function (json) {
+            $.post(url, {id: menuId}, function (result) {
+                var json = result.data;
                 $("#form").find("input[name='name']").val(json.name);
                 $("#form").find("input[name='permission']").val(json.permission);
                 $("#form").find("input[name='url']").val(json.url);

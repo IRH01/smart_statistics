@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,9 +147,7 @@
                                         <div class="form-group form-group-sm">
                                             <label class="control-label col-sm-2"></label>
                                             <div class="col-sm-3">
-                                                <shiro:hasPermission name="admin_admin_add">
-                                                    <button type="submit" class="btn btn-primary">保存</button>
-                                                </shiro:hasPermission>
+                                                <button type="submit" class="btn btn-primary">保存</button>
                                                 <button type="button" class="btn btn-primary" onclick="history.go(-1)">
                                                     返回
                                                 </button>

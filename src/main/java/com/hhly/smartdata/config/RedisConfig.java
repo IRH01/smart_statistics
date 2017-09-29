@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Iritchie.ren on 2017/9/21.
  */
 @Configuration
-@Profile("default")
+@Profile("dev")
 public class RedisConfig{
 
     @Value("#{configProperties['redis.maxIdle']}")

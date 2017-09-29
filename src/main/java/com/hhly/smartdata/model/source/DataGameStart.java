@@ -31,7 +31,7 @@ public class DataGameStart{
     /**
      * 平台名称
      */
-    private Integer platformName = 0;
+    private String platformName = "";
 
     /**
      * 平台Id:默认为玩一下平台;PC=1,移动端为31111
@@ -121,11 +121,11 @@ public class DataGameStart{
         return createTime;
     }
 
-    public Integer getPlatformName(){
+    public String getPlatformName(){
         return platformName;
     }
 
-    public void setPlatformName(Integer platformName){
+    public void setPlatformName(String platformName){
         this.platformName = platformName;
     }
 

@@ -83,6 +83,7 @@ public class IntervalExecutorService{
         List<IntervalSourceReport> list = new ArrayList();
         for (SourceTypeEnum sourceTypeEnum:SourceTypeEnum.values()) {
             IntervalSourceReport report = new IntervalSourceReport();
+            report.setIntervalTime(INTERVALTIME);
             report.setSourceType(sourceTypeEnum.getCode());
             report.setStatisticsTime(startDate);
             report.setExecuteTime(now);
@@ -147,41 +148,37 @@ public class IntervalExecutorService{
 
         List<IntervalInterfaceReport> list = new ArrayList();
         Date now = new Date();
-        for (Map<String,Object> invokeMap:dataInterfaceInvokeList) {
-            IntervalInterfaceReport intervalInterfaceReport = new IntervalInterfaceReport();
-            Integer type = invokeMap.get("interfaceType") == null?0:Integer.valueOf(invokeMap.get("interfaceType")+"");
-            for (InterfaceTypeEnum interfaceTypeEnum:InterfaceTypeEnum.values()) {
-                if (type == 1 && interfaceTypeEnum.getCode() == 1) {
-                    intervalInterfaceReport.setOperateType(interfaceTypeEnum.getCode());
-                    intervalInterfaceReport.setInterfaceName(interfaceTypeEnum.getDesc());
-                } else if (type == 2 && interfaceTypeEnum.getCode() == 2) {
-                    intervalInterfaceReport.setOperateType(interfaceTypeEnum.getCode());
-                    intervalInterfaceReport.setInterfaceName(interfaceTypeEnum.getDesc());
-                }
 
-            }
-
-            for (OperatorTypeEnum operatorTypeEnum:OperatorTypeEnum.values()) {
-                intervalInterfaceReport.setOperateType(operatorTypeEnum.getCode());
-                if (type == 1) { // 注册
-                    if(operatorTypeEnum.getCode() == 1) {//请求数
-                        intervalInterfaceReport.setOperateCount(invokeMap.get("invokeCount") == null ?0:Integer.valueOf(invokeMap.get("invokeCount")+""));
-                    } else { // 完成数
-                        intervalInterfaceReport.setOperateCount(userCount);
-                    }
-                } else if (type == 2) { //充值
-                    if(operatorTypeEnum.getCode() == 1) {//请求数
-                        intervalInterfaceReport.setOperateCount(invokeMap.get("invokeCount") == null ?0:Integer.valueOf(invokeMap.get("invokeCount")+""));
-                    } else { // 完成数
-                        intervalInterfaceReport.setOperateCount(rechargeCount);
-                    }
-                }
+        for (InterfaceTypeEnum interfaceTypeEnum:InterfaceTypeEnum.values()) { // 注册 充值
+            for (OperatorTypeEnum operatorTypeEnum:OperatorTypeEnum.values()) { // 请求 完成
+                IntervalInterfaceReport intervalInterfaceReport = new IntervalInterfaceReport();
                 intervalInterfaceReport.setStatisticsTime(DateUtil.getFirstThirtyMinStr(now));
+                intervalInterfaceReport.setOperateType(operatorTypeEnum.getCode());
+                intervalInterfaceReport.setInterfaceName(interfaceTypeEnum.getDesc());
+                intervalInterfaceReport.setInterfaceCode(interfaceTypeEnum.getCode().intValue());
                 intervalInterfaceReport.setIntervalTime(INTERVALTIME);
                 intervalInterfaceReport.setExecuteTime(now);
+                // 请求
+                if (operatorTypeEnum.getCode() == 1) {
+                    for (Map<String,Object> invokeMap:dataInterfaceInvokeList) {
+                        int type = invokeMap.get("interfaceType") == null?0:Integer.valueOf(invokeMap.get("interfaceType")+"");
+                        if (interfaceTypeEnum.getCode() == type) {
+                            intervalInterfaceReport.setOperateCount(invokeMap.get("invokeCount") == null ? 0 : Integer.valueOf(invokeMap.get("invokeCount") + ""));
+                        }
+                    }
+                }
+                // 完成
+                if (operatorTypeEnum.getCode() == 2) {
+                    if(interfaceTypeEnum.getCode() == 1){ // 注册
+                            intervalInterfaceReport.setOperateCount(userCount);
+                    } else if (interfaceTypeEnum.getCode() == 2) {
+                            intervalInterfaceReport.setOperateCount(rechargeCount);
+                    }
+                }
                 intervalInterfaceReportMapper.insert(intervalInterfaceReport);
                 list.add(intervalInterfaceReport);
-            }
+        }
+
         }
         return Result.success(list);
  }
@@ -194,19 +191,26 @@ public class IntervalExecutorService{
         Date now = new Date();
         String startDate = DateUtil.getFirstThirtyMinStr(now);
         List<IntervalGameLaunchReport> list = new ArrayList();
-        for (Map<String,Object> gameStartMap:platformAllGameStartCount) {
-            IntervalGameLaunchReport intervalGameLaunchReport = new IntervalGameLaunchReport();
-            intervalGameLaunchReport.setStatisticsTime(startDate);
-            intervalGameLaunchReport.setIntervalTime(INTERVALTIME);
-            intervalGameLaunchReport.setPlatformId(gameStartMap.get("platformId")== null ?0:Integer.valueOf(gameStartMap.get("platformId")+""));
-            intervalGameLaunchReport.setPlatformName(gameStartMap.get("platformName") == null ?"" :gameStartMap.get("platformName")+"");
-            intervalGameLaunchReport.setLaunchCount(gameStartMap.get("gameStartCount")==null?0:Integer.valueOf(gameStartMap.get("gameStartCount")+""));
-            intervalGameLaunchReport.setExecuteTime(now);
-            // 入库接口统计结果表
-            intervalGameLaunchReportMapper.insert(intervalGameLaunchReport);
-            list.add(intervalGameLaunchReport);
+        for(SourceTypeEnum sourceTypeEnum:SourceTypeEnum.values()) {
+            for(PlatformIdEnum platformIdEnum:PlatformIdEnum.values()) {
+                IntervalGameLaunchReport intervalGameLaunchReport = new IntervalGameLaunchReport();
+                intervalGameLaunchReport.setExecuteTime(now);
+                intervalGameLaunchReport.setStatisticsTime(startDate);
+                intervalGameLaunchReport.setIntervalTime(INTERVALTIME);
+                intervalGameLaunchReport.setPlatformName(platformIdEnum.getDesc());
+                intervalGameLaunchReport.setSourceType(sourceTypeEnum.getCode());
+                for (Map<String,Object> gameStartMap:platformAllGameStartCount) {
+                    if (sourceTypeEnum.getCode() == gameStartMap.get("platform_terminal")
+                            && platformIdEnum.getDesc().indexOf(gameStartMap.get("platformName") == null ?"" :gameStartMap.get("platformName")+"")>0) {
+                        intervalGameLaunchReport.setPlatformId(gameStartMap.get("platformId")== null ?0:Integer.valueOf(gameStartMap.get("platformId")+""));
+                        intervalGameLaunchReport.setLaunchCount(gameStartMap.get("gameStartCount")==null?0:Integer.valueOf(gameStartMap.get("gameStartCount")+""));
+                    }
+                }
+                // 入库接口统计结果表
+                intervalGameLaunchReportMapper.insert(intervalGameLaunchReport);
+                list.add(intervalGameLaunchReport);
+            }
         }
-
         return Result.success(list);
     }
 }

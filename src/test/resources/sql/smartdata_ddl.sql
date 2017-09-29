@@ -18,15 +18,16 @@ CREATE TABLE `interval_game_launch_report` (
    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '平台实时统计，游戏启动统计',
    `statistics_time` varchar(20) NOT NULL DEFAULT '' COMMENT '统计时间(半小时)yyyy-MM-dd HH:30:00',
    `interval_time` int(5) NOT NULL DEFAULT '30' COMMENT '统计间隔时间。单位分钟',
+   `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.android 3.IOS 4.H5',
    `platform_id` int(10) NOT NULL DEFAULT '0' COMMENT '平台id或游戏id',
    `platform_name` varchar(50) NOT NULL DEFAULT '' COMMENT '平台名称或游戏名称',
-   `launch_count` int(10) NOT NULL DEFAULT '0' COMMENT '老用户充值次数',
+   `launch_count` int(10) NOT NULL DEFAULT '0' COMMENT '游戏启动次数',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`),
-   UNIQUE KEY `idx_stat_time_plat_id` (`statistics_time`,`platform_id`)
+   UNIQUE KEY `idx_stat_time_se_type_pl_name` (`statistics_time`,`source_type`,`platform_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='平台实时统计，游戏启动统计';;
 
-/*==============================================================*/
+/*=================================.=============================*/
 /* Table: interface_statistic                                   */
 /*==============================================================*/
 CREATE TABLE `interval_interface_report` (
@@ -39,7 +40,7 @@ CREATE TABLE `interval_interface_report` (
    `operate_count` int(10) NOT NULL DEFAULT '0' COMMENT '操作次数',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`),
-   KEY `idx_statistics_time` (`statistics_time`)
+   KEY `idx_statistics_time_inter_code_op_type` (`statistics_time`,`operate_type`,`interface_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='平台实时统计，接口统计';
 
 /*==============================================================*/
@@ -57,7 +58,7 @@ CREATE TABLE `interval_source_report` (
    `recharge_amount` decimal(14,4) NOT NULL DEFAULT '0.0000' COMMENT '充值金额',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`),
-   UNIQUE KEY `idx_statistics_time` (`statistics_time`)
+   UNIQUE KEY `idx_statistics_time_source_type` (`statistics_time`,`source_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='平台实时统计，各端实时统计';
 
 /*==============================================================*/

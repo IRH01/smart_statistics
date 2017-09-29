@@ -2,7 +2,6 @@
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,23 +87,19 @@
                                         </select>
                                         </div>
                                         <div class="form-group right20">
-                                            <shiro:hasPermission name="admin_admin_list">
-                                                <c:if test="${not empty condition.username||not empty condition.userStatus||not empty condition.type}"><input
-                                                        type="button" class="btn btn-primary btn-sm"
-                                                        onclick="clearSearch()" value='&nbsp;清&nbsp;&nbsp;空&nbsp;'>
-                                                    <i class="icon-search icon-white"></i>
-                                                    </input>&nbsp;&nbsp;</c:if>
-                                                <button type="submit" class="btn btn-primary btn-sm">
-                                                    <i class="icon-search icon-white"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
-                                                </button>
-                                                &nbsp;&nbsp;
-                                            </shiro:hasPermission>
-                                            <shiro:hasPermission name="admin_admin_add">
-                                                <button type="submit" class="btn btn-primary btn-sm"
-                                                        onclick="tijiao('add.do')">
-                                                    <i class="icon-plus icon-white"></i>创建用户
-                                                </button>
-                                            </shiro:hasPermission>
+                                            <c:if test="${not empty condition.username||not empty condition.userStatus||not empty condition.type}"><input
+                                                    type="button" class="btn btn-primary btn-sm"
+                                                    onclick="clearSearch()" value='&nbsp;清&nbsp;&nbsp;空&nbsp;'>
+                                                <i class="icon-search icon-white"></i>
+                                                </input>&nbsp;&nbsp;</c:if>
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="icon-search icon-white"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
+                                            </button>
+                                            &nbsp;&nbsp;
+                                            <button type="submit" class="btn btn-primary btn-sm"
+                                                    onclick="tijiao('add.do')">
+                                                <i class="icon-plus icon-white"></i>创建用户
+                                            </button>
                                         </div>
                                     </fieldset>
                                 </form>
@@ -127,60 +122,51 @@
                                                 <td class="center">${item.id}</td>
                                                 <td class="center">${item.username}</td>
                                                 <td class="center">${item.name}</td>
-                                                    <%-- <td class="center">${typeMap[item.type]}</td> --%>
                                                 <td class="center">${typeMap[item.type]}</td>
                                                 <td class="center">${statusMap[item.userStatus]}</td>
-                                                <td class="center"><fmt:formatDate
-                                                        value="${item.createTime}"
-                                                        pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                                <td><shiro:hasPermission name="admin_admin_edit">
+                                                <td class="center">
+                                                    <fmt:formatDate value="${item.createTime}"
+                                                                    pattern="yyyy-MM-dd HH:mm:ss"/>
+                                                </td>
+                                                <td>
                                                     <button type="submit" class="btn btn-primary btn-xs"
                                                             onclick="tijiao('edit.do?id=${item.id}')">
                                                         <i class="icon-edit icon-white"></i>编辑
                                                     </button>
-                                                </shiro:hasPermission> <shiro:hasPermission
-                                                        name="admin_admin_allocRole">
                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <button type="submit"
                                                             class="btn btn-primary btn-xs"
                                                             onclick="tijiao('showRoles.do?userId=${item.userId}')">
                                                         <i class="icon-edit icon-white"></i>分配角色
                                                     </button>
-                                                </shiro:hasPermission> <shiro:hasPermission
-                                                        name="admin_admin_initPwd">
                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <button type="submit"
                                                             class="btn btn-danger btn-xs"
                                                             onclick="initPwd(${item.userId})">
                                                         <i class="icon-warning-sign icon-white"></i>重置密码
                                                     </button>
-                                                </shiro:hasPermission> <c:if test="${item.userStatus == '1'}">
-                                                    <shiro:hasPermission name="admin_admin_on">
+                                                    <c:if test="${item.userStatus == '1'}">
                                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                                         <button type="submit"
                                                                 class="btn btn-success btn-xs"
                                                                 onclick="tijiao('on.do?userId=${item.userId}')">
                                                             <i class="icon-off icon-white"></i>启用用户
                                                         </button>
-                                                    </shiro:hasPermission>
-                                                </c:if> <c:if test="${item.userStatus == '0'}">
-                                                    <shiro:hasPermission name="admin_admin_off">
+                                                    </c:if>
+                                                    <c:if test="${item.userStatus == '0'}">
                                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                                         <button type="submit"
                                                                 class="btn btn-danger btn-xs"
                                                                 onclick="disable('off.do?userId=${item.userId}')">
                                                             <i class="icon-off icon-white"></i>禁用用户
                                                         </button>
-                                                    </shiro:hasPermission>
-                                                </c:if>
-                                                    <shiro:hasPermission name="admin_admin_delete">
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <button type="submit"
-                                                                class="btn btn-danger btn-xs"
-                                                                onclick="del(${item.userId})">
-                                                            <i class="icon-off icon-white"></i>刪除
-                                                        </button>
-                                                    </shiro:hasPermission>
+                                                    </c:if>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <button type="submit"
+                                                            class="btn btn-danger btn-xs"
+                                                            onclick="del(${item.userId})">
+                                                        <i class="icon-off icon-white"></i>刪除
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -212,12 +198,11 @@
         layer.confirm("确认要将密码重置为密码“123456”吗？", {
             btn: ["确认", "取消"] //可以无限个按钮
         }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/initPwd.do"/>", {userId: id},
-                function (result) {
-                    if (result.status == 1200) {
-                        layer.alert("设置成功", {icon: 6});
-                    }
-                });
+            $.post("<c:url value="/admin/admin/initPwd.do"/>", {userId: id}, function (result) {
+                if (result.status == 1200) {
+                    layer.alert("设置成功", {icon: 6});
+                }
+            });
         });
     }
 

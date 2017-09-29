@@ -2,7 +2,6 @@
 <%@include file="/WEB-INF/view/template/taglib.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -185,8 +184,8 @@
         var data = {funcId: funcId, permsJson: JSON.stringify(perms)};
 
         var url = "/sys/perm/updatePerms.do"
-        $.post(url, data, function (text) {
-            if (text == "SUCCESS") {
+        $.post(url, data, function (result) {
+            if (result.code == 1200) {
                 layer.alert("保存成功", {
                     icon: 6
                 });
@@ -206,7 +205,8 @@
         if (funcId) {
             $("#funcId").val(funcId);
             var url = "/sys/perm/searchPerms.do"
-            $.post(url, {functionId: funcId}, function (json) {
+            $.post(url, {functionId: funcId}, function (result) {
+                var json = result.data;
                 $.each(json, function (i, perm) {
                     var tr = "";
                     tr += "<tr group='" + perm.functionId + "'>";
