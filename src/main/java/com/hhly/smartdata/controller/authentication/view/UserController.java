@@ -36,16 +36,15 @@ public class UserController{
         }
         model.addAttribute("redirectUrl", "/welcome.do");
         model.addAttribute("msg", "密码修改成功！");
-        return "success";
+        return "redirect:/welcome.do";
     }
-
 
     @RequestMapping("/editPasswd")
     public String editPasswd(){
-        return "sys/user/edit_passwd.main";
+        return "system/admin/edit_passwd";
     }
 
-    @RequestMapping("/{random}/valid.do")
+    @RequestMapping("/{random}/valid")
     public ModelAndView valid(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
         Boolean b = true;
         String username = new String(request.getParameter("smart.username").getBytes("iso8859_1"), "UTF-8");
