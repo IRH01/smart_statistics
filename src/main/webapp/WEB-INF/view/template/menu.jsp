@@ -2,14 +2,13 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.hhly.smartdata.model.authentication.Menu" %>
-<%@ page import="com.hhly.smartdata.util.SysConstant" %>
 <%@ page import="java.util.Map" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%
     String menuId = request.getParameter("menuId");
     if(menuId != null){
-        Map<Integer, Menu> menuMap = (Map) session.getAttribute(SysConstant.SESSION_MENU_MAP);
+        Map<Integer, Menu> menuMap = (Map) session.getAttribute("session_user_menu_map");
         if(menuMap.keySet().contains(Integer.valueOf(menuId))){
             session.setAttribute("menuId", menuId);
         }else{
@@ -98,9 +97,7 @@
 
 <%--其他用户使用不同的菜单--%>
 <c:if test="${sessionScope.session_user.userType!=1}">
-    <!-- left menu starts -->
-    <ul id="menu" class="ztree" style="display: none">
-    </ul>
+    <ul class="ztree" style="display: none"></ul>
     <div class="col-lg-2 col-md-3  sider-box">
         <!-- 侧边栏 -->
         <div class="sider-bar">
