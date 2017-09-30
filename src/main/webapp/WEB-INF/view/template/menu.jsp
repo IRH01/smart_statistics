@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.hhly.smartdata.model.authentication.Menu" %>
 <%@ page import="com.hhly.smartdata.util.SysConstant" %>
 <%@ page import="java.util.Map" %>
-<%@include file="/WEB-INF/view/template/taglib.jsp" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%
     String menuId = request.getParameter("menuId");
     if(menuId != null){
@@ -15,7 +18,6 @@
     }
 %>
 <script type="text/javascript">
-    <!--
     var curMenu = null, menuId = null, zTree_Menu = null;
     <c:if test="${null != sessionScope.menuId}">
     menuId = "${sessionScope.menuId}";
@@ -50,7 +52,6 @@
         </c:if>
         </c:forEach>
     ];
-    //-->
 </script>
 <%--1为管理员--%>
 <c:if test="${sessionScope.session_user.userType==1}">

@@ -57,7 +57,7 @@ public class LoginController extends BaseController{
         }else if(errorClassName != null){
             req.setAttribute("msg", "系统异常,暂时无法登陆!");
         }
-        return "/login/login";
+        return "system/login";
     }
 
     @RequestMapping("/kaptchaImage")

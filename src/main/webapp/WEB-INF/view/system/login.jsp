@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@include file="/WEB-INF/view/template/taglib.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +11,12 @@
     <title>产品运营数据统计后台</title>
 
     <!-- Bootstrap -->
-    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/dialogsdk.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/zTreeStyle.css"/>">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dialogsdk.css">
+    <link rel="stylesheet" href="/css/zTreeStyle.css">
     <!-- The fav icon -->
-    <link rel="shortcut icon" href="<c:url value="/img/favicon.ico"/>">
+    <link rel="shortcut icon" href="/img/favicon.ico">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -23,14 +25,14 @@
     <![endif]-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-    <script src="<c:url value="/lib/jquery-1.11.2.min.js"/>"></script>
-    <script src="<c:url value="/lib/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/lib/jquery.ztree.all-3.5.min.js"/>"></script>
-    <script src="<c:url value="/lib/jquery.validate.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/additional-methods.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/jquery-validate.bootstrap-tooltip.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/jquery.validate.custom.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/dialogsdk.js"/>"></script>
+    <script src="/lib/jquery-1.11.2.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+    <script src="/lib/jquery.ztree.all-3.5.min.js"></script>
+    <script src="/lib/jquery.validate.js" type="text/javascript"></script>
+    <script src="/lib/additional-methods.min.js" type="text/javascript"></script>
+    <script src="/lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
+    <script src="/lib/jquery.validate.custom.js" type="text/javascript"></script>
+    <script src="/lib/dialogsdk.js"></script>
 </head>
 
 <body>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@include file="/WEB-INF/view/template/taglib.jsp" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,27 +10,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>产品运营数据统计后台</title>
-    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/zTreeStyle.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/dialogsdk.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/jquery-ui.css"/>">
-    <link rel="shortcut icon" href="<c:url value="/img/favicon.ico"/>">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/zTreeStyle.css">
+    <link rel="stylesheet" href="/css/dialogsdk.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="shortcut icon" href="/img/favicon.ico">
     <!--[if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="<c:url value="/lib/jquery-1.11.2.min.js"/>"></script>
-    <script src="<c:url value="/lib/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/lib/jquery.ztree.all-3.5.min.js"/>"></script>
-    <script src="<c:url value="/lib/jquery.validate.js"/>"></script>
-    <script src="<c:url value="/lib/additional-methods.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/jquery-validate.bootstrap-tooltip.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/jquery.validate.custom.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"/>"></script>
-    <script src="<c:url value="/lib/dialogsdk.js"/>"></script>
-    <script src="<c:url value="/lib/tools/tools.js"/>"></script>
-    <script src="<c:url value="/lib/layer/layer.js"/>"></script>
+    <script src="/lib/jquery-1.11.2.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+    <script src="/lib/jquery.ztree.all-3.5.min.js"></script>
+    <script src="/lib/jquery.validate.js"></script>
+    <script src="/lib/additional-methods.min.js" type="text/javascript"></script>
+    <script src="/lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
+    <script src="/lib/jquery.validate.custom.js" type="text/javascript"></script>
+    <script src="/lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
+    <script src="/lib/dialogsdk.js"></script>
+    <script src="/lib/tools/tools.js"></script>
+    <script src="/lib/layer/layer.js"></script>
 <body>
 <div class="wrap">
     <jsp:include page="../../template/header.jsp"/>
@@ -60,7 +61,7 @@
                              role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
                             <div class="panel-body">
                                 <form id="form" name="form" class="form-horizontal"
-                                      action="<c:url value="/admin/admin/modify.do"/> " method="post">
+                                      action="/admin/admin/modify.do" method="post">
                                     <fieldset>
                                         <input type="hidden" name="id" value="${admin.id}">
                                         <input type="hidden" name="userId" value="${admin.userId}">
