@@ -206,4 +206,33 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
+    <select id="selectRegisterDataListByTime" parameterType="java.util.Map" resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
+        select
+        <include refid="Base_Column_List"/>
+        from daily_register_report
+        where 1=1
+        <if test="startDate != null and startDate  != ''">
+            <![CDATA[
+  		     and  statistics_day > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+  		    ]]>
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            <![CDATA[
+  		     and statistics_day <= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+  		    ]]>
+        </if>
+        order by statistics_day desc
+    </select>
+
+    <select id="selectYesterdayRegisterData" parameterType="java.util.Map" resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
+        select
+        <include refid="Base_Column_List"/>
+        from daily_register_report
+        where 1=1
+        AND TO_DAYS(NOW()) - TO_DAYS(statistics_day &lt;= 1
+        AND TO_DAYS(NOW()) - TO_DAYS(statistics_day) &gt;= 0
+        limit 1
+    </select>
+
+
 </mapper>

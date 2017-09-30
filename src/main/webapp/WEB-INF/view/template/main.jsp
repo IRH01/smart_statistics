@@ -54,6 +54,7 @@
             </div>
             <!--/#content.span10-->
         </div>
+        <tiles:insertAttribute name="footer" />
         <!--/fluid-row-->
         <hr>
     </div>

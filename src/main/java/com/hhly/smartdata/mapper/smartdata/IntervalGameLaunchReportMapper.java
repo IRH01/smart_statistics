@@ -15,4 +15,6 @@ public interface IntervalGameLaunchReportMapper{
     int updateByPrimaryKeySelective(IntervalGameLaunchReport record) throws Exception;
 
     int updateByPrimaryKey(IntervalGameLaunchReport record) throws Exception;
+
+
 }

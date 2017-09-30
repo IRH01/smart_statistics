@@ -33,5 +33,74 @@
         #{rechargePopulation,jdbcType=INTEGER}, #{rechargeCount,jdbcType=INTEGER}, #{rechargeAmount,jdbcType=DECIMAL},
         #{executeTime,jdbcType=TIMESTAMP})
     </insert>
+    <select id="selectIntervalSourceToltalData" resultType="java.util.Map">
+        select sum(register_population) as registerPopulation,sum(login_population) as loginPopulation ,sum(recharge_population) as rechargePopulation ,
+         sum(recharge_count) as rechargeCount,sum(recharge_amount) as rechargeAmount
+         from interval_source_report where statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%')
+        <if test="startDate != null and startDate  != ''">
+            <![CDATA[
+             and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            <![CDATA[
+  		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+        </if>
+    </select>
+    <select id="selectIntervalSourceListData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="java.util.Map">
+        select
+        statistics_time,
+        sum(register_population) as register_population,
+        sum(login_population) as loginPopulation,
+        sum(recharge_population) as rechargePopulation,
+        sum(recharge_count) as rechargeCount,
+        sum(recharge_amount) as rechargeAmount
+        from interval_source_report
+        where 1=1
+        and statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%')
+        <if test="startDate != null and startDate  != ''">
+            <![CDATA[
+             and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            <![CDATA[
+  		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+        </if>
+        group by statistics_time
+    </select>
+
+    <select id="selectIntervalSourceChartData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="java.util.Map">
+        select
+        DATE_FORMAT(statistics_time,'%H:%i'),
+        sum(register_population) as register_population,
+        sum(login_population) as loginPopulation,
+        sum(recharge_population) as rechargePopulation,
+        sum(recharge_count) as rechargeCount,
+        sum(recharge_amount) as rechargeAmount
+        from interval_source_report
+        where 1=1
+        and statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%')
+        <if test="startDate != null and startDate  != ''">
+            <![CDATA[
+             and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            <![CDATA[
+  		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+        </if>
+        <if test="deviceTypes">
+            and sourceType in
+            <foreach item="item" index="index" collection="deviceTypes"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by statistics_time
+    </select>
 
 </mapper>

@@ -5,6 +5,7 @@ import com.hhly.smartdata.model.smartdata.DailyRegisterReport;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -20,4 +21,9 @@ public interface DailyRegisterReportMapper{
     int updateByPrimaryKey(DailyRegisterReport record) throws Exception;
 
     Map<String, Object> selectLastMonthRegister(@Param("lastMonthFirstDayStr") String lastMonthFirstDayStr, @Param("lastMonthEndDayStr") String lastMonthEndDayStr) throws Exception;
+
+    List<DailyRegisterReport> selectRegisterDataListByTime(Map<String,Object> map) throws Exception;
+
+    DailyRegisterReport selectYesterdayRegisterData() throws Exception;
+
 }
