@@ -192,9 +192,10 @@ CREATE TABLE `month_composite_report` (
 /*==============================================================*/
 /* Table: month_register_source_report                          */
 /*==============================================================*/
-CREATE TABLE `month_register_report` (
+CREATE TABLE `month_register_report` ( 
    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '月报表，注册来源统计报表',
    `statistics_month` varchar(20) NOT NULL DEFAULT '' COMMENT '统计日期(月)yyyy-MM',
+   `pc_population` int(10) NOT NULL DEFAULT '0' COMMENT 'pc用户数',
    `pc_page_view` bigint(20) NOT NULL DEFAULT '0' COMMENT 'pc页面浏览数pv',
    `pc_user_view` int(10) NOT NULL DEFAULT '0' COMMENT 'pc用户访问数uv',
    `h5_population` int(10) NOT NULL DEFAULT '0' COMMENT 'h5用户数',

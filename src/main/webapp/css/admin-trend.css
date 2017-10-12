@@ -26,7 +26,7 @@ table{ width: 100%; border-collapse: collapse; border-spacing: 0;}
 .titleDiv h2{ float: left; font-size: 18px;}
 .titleDiv .date-pos{ float:right; color: #666;}
 .a{ padding: 9px; border: 0px solid #dbe0e5; background:transparent;}
-.laydate-icon{ width: 120px;color: #333;height: 25px;}
+.laydate-icon{ width: 120px;color: #333;height: 35px;}
 .leftDiv{ width: 500px; float: left; margin-top: 0px; position: relative;width:50%;}
 .rightDiv{ width: 500px; float: left;margin-top: 0px;width:50%}
 .barDiv{min-width: 150px; min-height: 250px;width:100%;height:100%;}
@@ -72,6 +72,7 @@ table{ width: 100%; border-collapse: collapse; border-spacing: 0;}
 .selectDiv .dropdown li:hover{ background-color:#f5f5f5;}
 .selectDiv.active .dropdown {opacity: 1;pointer-events: auto;display: inline-block;max-height:183px;overflow-x: hidden;overflow-y: auto ;}
 .teamselect{_width:130px;min-width:130px;}
+.notice-div{float: left; width: 180px; height: 30px; padding:5px 10px;font-size:12px;line-height:1.5;border-radius:3px;background-color: #5a85ba;margin-left: 25px;color:#f0f0f0}
 
 
 .titslt{float: left;margin:6px 0 6px 20px;}
@@ -130,7 +131,7 @@ td.time{ color: #999; font-size: 12px;}
 .tablePageTd{}
 .spanPageSize{color:#004276;}
 .divPage{float:left;margin-left:20px;}
-.tablePanel{height:90%;width:100%;overflow-x:hidden;overflow-y:auto;background:white;}
+.tablePanel{height:90%;width:100%;overflow-x:scroll;overflow-y:auto;background:white;}
 .pagePanel{height:5%;}
 .trendlinePanel{ margin: 0px 0;width:100%;background:white;}
 .barPanel{width:50%;height:100%;float:left;}

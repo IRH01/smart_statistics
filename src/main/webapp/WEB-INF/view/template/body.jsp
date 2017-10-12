@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="panel-group" id="accordion" role="tablist"
      aria-multiselectable="true">
     <div class="panel panel-default">
@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div class="clm-box">
                     <h4 class="clm-title">
-                        <img src="img/ico-clm.png" alt=""/>选择您需要的栏目：
+                        <img src="../../../img/ico-clm.png" alt=""/>选择您需要的栏目：
                     </h4>
                     <hr style="border-top: 1px solid #ddd"/>
                     <dl class="clm-ctn" id="clm">
@@ -47,7 +47,7 @@
                 $("#clm").append(content);
             } else {
                 if (item.url) {
-                    var content = "";
+                    content = "";
                     content += "<dt>" + item.name + "</dt>";
                     content += "<dd>";
                     content += ("<a href='" + item.url + "'>" + item.name + "</a>");

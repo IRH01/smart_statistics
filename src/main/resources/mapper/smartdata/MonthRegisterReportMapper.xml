@@ -1,173 +1,219 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hhly.smartdata.mapper.smartdata.MonthRegisterReportMapper" >
-  <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.MonthRegisterReport" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="statistics_month" property="statisticsMonth" jdbcType="VARCHAR" />
-    <result column="pc_page_view" property="pcPageView" jdbcType="BIGINT" />
-    <result column="pc_user_view" property="pcUserView" jdbcType="INTEGER" />
-    <result column="h5_population" property="h5Population" jdbcType="INTEGER" />
-    <result column="h5_page_view" property="h5PageView" jdbcType="BIGINT" />
-    <result column="h5_user_view" property="h5UserView" jdbcType="INTEGER" />
-    <result column="ios_population" property="iosPopulation" jdbcType="INTEGER" />
-    <result column="ios_install_count" property="iosInstallCount" jdbcType="INTEGER" />
-    <result column="android_population" property="androidPopulation" jdbcType="INTEGER" />
-    <result column="android_install_count" property="androidInstallCount" jdbcType="INTEGER" />
-    <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, statistics_month, pc_page_view, pc_user_view, h5_population, h5_page_view, h5_user_view, 
-    ios_population, ios_install_count, android_population, android_install_count, execute_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from month_register_report
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.MonthRegisterReport" >
-    insert into month_register_report (id, statistics_month, pc_page_view, 
-      pc_user_view, h5_population, h5_page_view, 
-      h5_user_view, ios_population, ios_install_count, 
-      android_population, android_install_count, 
-      execute_time)
-    values (#{id,jdbcType=BIGINT}, #{statisticsMonth,jdbcType=VARCHAR}, #{pcPageView,jdbcType=BIGINT}, 
-      #{pcUserView,jdbcType=INTEGER}, #{h5Population,jdbcType=INTEGER}, #{h5PageView,jdbcType=BIGINT}, 
-      #{h5UserView,jdbcType=INTEGER}, #{iosPopulation,jdbcType=INTEGER}, #{iosInstallCount,jdbcType=INTEGER}, 
-      #{androidPopulation,jdbcType=INTEGER}, #{androidInstallCount,jdbcType=INTEGER}, 
-      #{executeTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.MonthRegisterReport" >
-    insert into month_register_report
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="statisticsMonth != null" >
-        statistics_month,
-      </if>
-      <if test="pcPageView != null" >
-        pc_page_view,
-      </if>
-      <if test="pcUserView != null" >
-        pc_user_view,
-      </if>
-      <if test="h5Population != null" >
-        h5_population,
-      </if>
-      <if test="h5PageView != null" >
-        h5_page_view,
-      </if>
-      <if test="h5UserView != null" >
-        h5_user_view,
-      </if>
-      <if test="iosPopulation != null" >
-        ios_population,
-      </if>
-      <if test="iosInstallCount != null" >
-        ios_install_count,
-      </if>
-      <if test="androidPopulation != null" >
-        android_population,
-      </if>
-      <if test="androidInstallCount != null" >
-        android_install_count,
-      </if>
-      <if test="executeTime != null" >
-        execute_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="statisticsMonth != null" >
-        #{statisticsMonth,jdbcType=VARCHAR},
-      </if>
-      <if test="pcPageView != null" >
-        #{pcPageView,jdbcType=BIGINT},
-      </if>
-      <if test="pcUserView != null" >
-        #{pcUserView,jdbcType=INTEGER},
-      </if>
-      <if test="h5Population != null" >
-        #{h5Population,jdbcType=INTEGER},
-      </if>
-      <if test="h5PageView != null" >
-        #{h5PageView,jdbcType=BIGINT},
-      </if>
-      <if test="h5UserView != null" >
-        #{h5UserView,jdbcType=INTEGER},
-      </if>
-      <if test="iosPopulation != null" >
-        #{iosPopulation,jdbcType=INTEGER},
-      </if>
-      <if test="iosInstallCount != null" >
-        #{iosInstallCount,jdbcType=INTEGER},
-      </if>
-      <if test="androidPopulation != null" >
-        #{androidPopulation,jdbcType=INTEGER},
-      </if>
-      <if test="androidInstallCount != null" >
-        #{androidInstallCount,jdbcType=INTEGER},
-      </if>
-      <if test="executeTime != null" >
-        #{executeTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.MonthRegisterReport" >
-    update month_register_report
-    <set >
-      <if test="statisticsMonth != null" >
-        statistics_month = #{statisticsMonth,jdbcType=VARCHAR},
-      </if>
-      <if test="pcPageView != null" >
+<mapper namespace="com.hhly.smartdata.mapper.smartdata.MonthRegisterReportMapper">
+    <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.MonthRegisterReport">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="statistics_month" property="statisticsMonth" jdbcType="VARCHAR"/>
+        <result column="pc_page_view" property="pcPageView" jdbcType="BIGINT"/>
+        <result column="pc_user_view" property="pcUserView" jdbcType="INTEGER"/>
+        <result column="h5_population" property="h5Population" jdbcType="INTEGER"/>
+        <result column="h5_page_view" property="h5PageView" jdbcType="BIGINT"/>
+        <result column="h5_user_view" property="h5UserView" jdbcType="INTEGER"/>
+        <result column="ios_population" property="iosPopulation" jdbcType="INTEGER"/>
+        <result column="ios_install_count" property="iosInstallCount" jdbcType="INTEGER"/>
+        <result column="android_population" property="androidPopulation" jdbcType="INTEGER"/>
+        <result column="android_install_count" property="androidInstallCount" jdbcType="INTEGER"/>
+        <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, statistics_month, pc_page_view, pc_user_view, h5_population, h5_page_view, h5_user_view,
+        ios_population, ios_install_count, android_population, android_install_count, execute_time
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from month_register_report
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="searchByTime" resultType="com.hhly.smartdata.model.smartdata.MonthRegisterReport">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM month_register_report
+        <where>
+            <if test="monthStart != null and monthStart != ''">
+                statistics_month &gt;= #{monthStart}
+            </if>
+            <if test="monthEnd != null and monthEnd != ''">
+                AND statistics_month &lt;= #{monthEnd}
+            </if>
+        </where>
+        ORDER BY statistics_month DESC
+        <if test="pageNo != null">
+            <bind name="offset" value="(pageNo-1) * pageSize"/>
+            LIMIT #{offset}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="searchByTimeCount" resultType="java.lang.Long">
+        SELECT
+        COUNT(1)
+        FROM month_register_report
+        <where>
+            <if test="monthStart != null and monthStart != ''">
+                statistics_month &gt;= #{monthStart}
+            </if>
+            <if test="monthEnd != null and monthEnd != ''">
+                AND statistics_month &lt;= #{monthEnd}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByMonth" resultType="com.hhly.smartdata.model.smartdata.MonthRegisterReport">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM month_register_report
+        WHERE statistics_month = #{month}
+    </select>
+
+    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.MonthRegisterReport">
+        insert into month_register_report (id, statistics_month, pc_page_view,
+        pc_user_view, h5_population, h5_page_view,
+        h5_user_view, ios_population, ios_install_count,
+        android_population, android_install_count,
+        execute_time)
+        values (#{id,jdbcType=BIGINT}, #{statisticsMonth,jdbcType=VARCHAR}, #{pcPageView,jdbcType=BIGINT},
+        #{pcUserView,jdbcType=INTEGER}, #{h5Population,jdbcType=INTEGER}, #{h5PageView,jdbcType=BIGINT},
+        #{h5UserView,jdbcType=INTEGER}, #{iosPopulation,jdbcType=INTEGER}, #{iosInstallCount,jdbcType=INTEGER},
+        #{androidPopulation,jdbcType=INTEGER}, #{androidInstallCount,jdbcType=INTEGER},
+        #{executeTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.MonthRegisterReport">
+        insert into month_register_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="statisticsMonth != null">
+                statistics_month,
+            </if>
+            <if test="pcPageView != null">
+                pc_page_view,
+            </if>
+            <if test="pcUserView != null">
+                pc_user_view,
+            </if>
+            <if test="h5Population != null">
+                h5_population,
+            </if>
+            <if test="h5PageView != null">
+                h5_page_view,
+            </if>
+            <if test="h5UserView != null">
+                h5_user_view,
+            </if>
+            <if test="iosPopulation != null">
+                ios_population,
+            </if>
+            <if test="iosInstallCount != null">
+                ios_install_count,
+            </if>
+            <if test="androidPopulation != null">
+                android_population,
+            </if>
+            <if test="androidInstallCount != null">
+                android_install_count,
+            </if>
+            <if test="executeTime != null">
+                execute_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="statisticsMonth != null">
+                #{statisticsMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="pcPageView != null">
+                #{pcPageView,jdbcType=BIGINT},
+            </if>
+            <if test="pcUserView != null">
+                #{pcUserView,jdbcType=INTEGER},
+            </if>
+            <if test="h5Population != null">
+                #{h5Population,jdbcType=INTEGER},
+            </if>
+            <if test="h5PageView != null">
+                #{h5PageView,jdbcType=BIGINT},
+            </if>
+            <if test="h5UserView != null">
+                #{h5UserView,jdbcType=INTEGER},
+            </if>
+            <if test="iosPopulation != null">
+                #{iosPopulation,jdbcType=INTEGER},
+            </if>
+            <if test="iosInstallCount != null">
+                #{iosInstallCount,jdbcType=INTEGER},
+            </if>
+            <if test="androidPopulation != null">
+                #{androidPopulation,jdbcType=INTEGER},
+            </if>
+            <if test="androidInstallCount != null">
+                #{androidInstallCount,jdbcType=INTEGER},
+            </if>
+            <if test="executeTime != null">
+                #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.MonthRegisterReport">
+        update month_register_report
+        <set>
+            <if test="statisticsMonth != null">
+                statistics_month = #{statisticsMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="pcPageView != null">
+                pc_page_view = #{pcPageView,jdbcType=BIGINT},
+            </if>
+            <if test="pcUserView != null">
+                pc_user_view = #{pcUserView,jdbcType=INTEGER},
+            </if>
+            <if test="h5Population != null">
+                h5_population = #{h5Population,jdbcType=INTEGER},
+            </if>
+            <if test="h5PageView != null">
+                h5_page_view = #{h5PageView,jdbcType=BIGINT},
+            </if>
+            <if test="h5UserView != null">
+                h5_user_view = #{h5UserView,jdbcType=INTEGER},
+            </if>
+            <if test="iosPopulation != null">
+                ios_population = #{iosPopulation,jdbcType=INTEGER},
+            </if>
+            <if test="iosInstallCount != null">
+                ios_install_count = #{iosInstallCount,jdbcType=INTEGER},
+            </if>
+            <if test="androidPopulation != null">
+                android_population = #{androidPopulation,jdbcType=INTEGER},
+            </if>
+            <if test="androidInstallCount != null">
+                android_install_count = #{androidInstallCount,jdbcType=INTEGER},
+            </if>
+            <if test="executeTime != null">
+                execute_time = #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.MonthRegisterReport">
+        update month_register_report
+        set statistics_month = #{statisticsMonth,jdbcType=VARCHAR},
         pc_page_view = #{pcPageView,jdbcType=BIGINT},
-      </if>
-      <if test="pcUserView != null" >
         pc_user_view = #{pcUserView,jdbcType=INTEGER},
-      </if>
-      <if test="h5Population != null" >
         h5_population = #{h5Population,jdbcType=INTEGER},
-      </if>
-      <if test="h5PageView != null" >
         h5_page_view = #{h5PageView,jdbcType=BIGINT},
-      </if>
-      <if test="h5UserView != null" >
         h5_user_view = #{h5UserView,jdbcType=INTEGER},
-      </if>
-      <if test="iosPopulation != null" >
         ios_population = #{iosPopulation,jdbcType=INTEGER},
-      </if>
-      <if test="iosInstallCount != null" >
         ios_install_count = #{iosInstallCount,jdbcType=INTEGER},
-      </if>
-      <if test="androidPopulation != null" >
         android_population = #{androidPopulation,jdbcType=INTEGER},
-      </if>
-      <if test="androidInstallCount != null" >
         android_install_count = #{androidInstallCount,jdbcType=INTEGER},
-      </if>
-      <if test="executeTime != null" >
-        execute_time = #{executeTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.MonthRegisterReport" >
-    update month_register_report
-    set statistics_month = #{statisticsMonth,jdbcType=VARCHAR},
-      pc_page_view = #{pcPageView,jdbcType=BIGINT},
-      pc_user_view = #{pcUserView,jdbcType=INTEGER},
-      h5_population = #{h5Population,jdbcType=INTEGER},
-      h5_page_view = #{h5PageView,jdbcType=BIGINT},
-      h5_user_view = #{h5UserView,jdbcType=INTEGER},
-      ios_population = #{iosPopulation,jdbcType=INTEGER},
-      ios_install_count = #{iosInstallCount,jdbcType=INTEGER},
-      android_population = #{androidPopulation,jdbcType=INTEGER},
-      android_install_count = #{androidInstallCount,jdbcType=INTEGER},
-      execute_time = #{executeTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        execute_time = #{executeTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

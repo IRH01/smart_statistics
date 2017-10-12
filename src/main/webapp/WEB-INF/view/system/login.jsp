@@ -11,10 +11,10 @@
     <title>产品运营数据统计后台</title>
 
     <!-- Bootstrap -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/dialogsdk.css">
-    <link rel="stylesheet" href="/css/zTreeStyle.css">
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/dialogsdk.css">
+    <link rel="stylesheet" href="../../../css/zTreeStyle.css">
     <!-- The fav icon -->
     <link rel="shortcut icon" href="/img/favicon.ico">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -25,14 +25,14 @@
     <![endif]-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-    <script src="/lib/jquery-1.11.2.min.js"></script>
-    <script src="/lib/bootstrap.min.js"></script>
-    <script src="/lib/jquery.ztree.all-3.5.min.js"></script>
-    <script src="/lib/jquery.validate.js" type="text/javascript"></script>
-    <script src="/lib/additional-methods.min.js" type="text/javascript"></script>
-    <script src="/lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
-    <script src="/lib/jquery.validate.custom.js" type="text/javascript"></script>
-    <script src="/lib/dialogsdk.js"></script>
+    <script src="../../../lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../lib/bootstrap.min.js"></script>
+    <script src="../../../lib/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../../../lib/jquery.validate.js" type="text/javascript"></script>
+    <script src="../../../lib/additional-methods.min.js" type="text/javascript"></script>
+    <script src="../../../lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
+    <script src="../../../lib/jquery.validate.custom.js" type="text/javascript"></script>
+    <script src="../../../lib/dialogsdk.js"></script>
 </head>
 
 <body>

@@ -41,6 +41,8 @@
     <script src="/lib/jquery-ui.js"></script>
     <script src="/lib/datecontrol.js"></script>
     <script src="/lib/echart/dist/echarts.js"></script>
+    <script src="/lib/tool.js"></script>
+
 
 
 <body>
@@ -64,7 +66,8 @@
                         <h4 class="panel-title" id="-collapsible-group-item-#1-">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" aria-expanded="true"
-                               aria-controls="collapseOne" class="">统计图</a>
+                               aria-controls="collapseOne" class="">平台数据实时统计</a>
+                            <a title="内容来自 title 属性">?</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
@@ -73,29 +76,67 @@
                                 <div class="section-box">
                                     <div class="titleDiv">
                                         <div style="margin-left:8px;">
-                                            <span class="laydateBox"> 日期：<input value="选择日期"
-                                                                                class="laydate-icon"
-                                                                                id="dateStart"> 至 <input
-                                                    class="laydate-icon" id="dateEnd" value="选择日期">
+                                            <span > 日期：
+                                                <select id="dateStarts" onchange="dateChange()" >
+                                                    <option value="" selected>请选择</option>
+                                                </select>
+                                                至
+                                                <select id="dateEnds" onchange = "dateChange()">
+                                                     <option value="" selected>请选择</option>
+                                                </select>
+                                                <%--<input value="选择日期"--%>
+                                                                                <%--class="laydate-icon"--%>
+                                                                                <%--id="dateStart"> 至 <input--%>
+                                                    <%--class="laydate-icon" id="dateEnd" value="选择日期">--%>
 											</span>
-                                            <span id="type">
-	                                            <select id="dateType" onchange="dateTypeChange();" style="width:auto;"
-                                                        class="select">
-	                                                 <option value="1">今日</option>
-	                                                 <option value="2">昨日</option>
-	                                                 <option value="3">近7日</option>
-	                                                 <option value="4">近30日</option>
-	                                                 <option value="5">近90日</option>
-	                                                 <option value="0">自定义</option>
-	                                            </select>
-                                            </span>
                                         </div>
                                     </div>
                                     <div class="whiteDiv tab-content">
                                         <ul id="sortable" class="ui-widget-content sortable">
                                             <li class="ui-state-default">
                                                 <div class="ui-widget-content resize" style="height:300px;">
-                                                    <div class="sortHandle">趋势图</div>
+                                                    <div class="sortHandle">截止目前实时数据</div>
+                                                    <div style="width:100%;height:5%;text-align: center;margin:0 auto;">
+                                                        <table class="tableList1">
+                                                            <colgroup>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                            </colgroup>
+                                                            <thead>
+                                                            <tr >
+                                                                <th style="border:1px solid black">
+                                                                    注册人数<br/>
+                                                                    <lable id="registerPopulationNum"></lable>
+                                                                </th>
+
+                                                                <th style="border:1px solid black">
+                                                                    登陆人数<br/>
+                                                                    <label id="loginPopulationNum"></label>
+                                                                </th>
+                                                                <th style="border:1px solid black">
+                                                                    充值人数<br/>
+                                                                    <label id="rechargePopulationNum"></label>
+                                                                </th >
+                                                                <th style="border:1px solid black">
+                                                                    充值次数<br/>
+                                                                    <label id="rechargeCountNum"></label>
+                                                                </th>
+                                                                <th style="border:1px solid black">
+                                                                    充值金额<br/>
+                                                                    <label id="rechargeAmountNum"></label>
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="ui-state-default">
+                                                <div class="ui-widget-content resize" style="height:300px;">
+                                                    <div class="sortHandle">分时段曲线图</div>
                                                     <div style="width:100%;height:95%;">
                                                         <div style="margin-left: -10px;">
                                                             <span>客户端类型：</span>
@@ -117,7 +158,7 @@
                                             <li class="ui-state-default">
                                                 <div style="padding-bottom:60px;"
                                                      class="ui-widget-content resize resizePanel">
-                                                    <div class="sortHandle">列表</div>
+                                                    <div class="sortHandle">分时段列表</div>
                                                     <div class="tablePanel">
                                                         <table class="tableList1">
                                                             <colgroup>
@@ -141,44 +182,23 @@
                                                             <tbody id="newUserData"></tbody>
                                                         </table>
                                                     </div>
-                                                    <div id="page"></div>
+                                                    <%--<div id="page"></div>--%>
+                                                    <table class="tablePage">
+                                                        <tr>
+                                                            <td><div class="divPage"><span class="spanPageSize">每页个数：</span><input id="pageSize" value="10" class="inputPageSize" onKeypress="return intInput(event);" onKeyup="value=pageSizeLimit(value);" onblur="value=pageSizeNotEmpty(value);"/></div></td>
+                                                            <td><span class="spanPageSize">总记录数：</span><span id="totalCount" class="spanPageSize"></span></td>
+                                                            <td><span class="spanPageSize">总页数：</span><span id="totalPage" class="spanPageSize"></span></td>
+                                                            <td class="tablePageTd"><div id="page"></div></td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
-                                    <!--新增玩家详情
-                                    <div class="xq-box" style="width:auto;">
-                                        <table class="xq-table" style="width:990px;">
-                                            <caption>&nbsp;&nbsp;&nbsp;<span class="close" style="color: #fff;opacity: inherit;margin-top:-3px;"></span></caption>
-                                            <colgroup>
-                                                <col width="50" />
-                                                <col width="50" />
-                                                <col width="50" />
-                                                <col width="50" />
-                                                <col width="50" />
-                                            </colgroup>
-                                            <thead>
-                                            <tr>
-                                                <th>类型</th>
-                                                <th>新增玩家</th>
-                                                <th>注册玩家转化率</th>
-                                                <th>活跃玩家</th>
-                                                <th>注册充值转化率</th>
-                                                <th>付费人数</th>
-                                                <th>付费次数</th>
-                                                <th>付费金额（￥）</th>
-                                                <th>ARPU</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="detailData" style="overflow:auto;">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                -->
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <!--body end-->
                 </div>
@@ -188,71 +208,63 @@
 </body>
 </html>
 <script type="text/javascript">
-    function tijiao(url) {
-        document.form.action = url;
-        document.form.submit();
-    }
+   var initSearchDate = [ "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30","07:00", "07:30",
+        "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30","12:00", "12:30","13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
+        "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30","24:00" ];
 
-    function initPwd(id) {
-        layer.confirm("确认要将密码重置为密码“123456”吗？", {
-            btn: ["确认", "取消"] //可以无限个按钮
-        }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/initPwd.do"/>", {userId: id}, function (result) {
-                if (result.status == 1200) {
-                    layer.alert("设置成功", {icon: 6});
-                }
-            });
-        });
+    var date = new Date();
+    var seperator1 = "-";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
     }
-
-    function del(id) {
-        layer.confirm("是否要刪除该用户？", {
-            btn: ["确认", "取消"] //可以无限个按钮
-        }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/del.do"/>", {
-                userId: id
-            }, function (result) {
-                if (result.status == 1200) {
-                    layer.alert("删除成功", {
-                        icon: 6
-                    });
-                    tijiao("<%=request.getContextPath()%>/admin/admin/list.do");
-                } else {
-                    layer.alert("删除失败", {
-                        icon: 5
-                    });
-                }
-            });
-        });
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
     }
-
-    function disable(url) {
-        layer.confirm("是否要禁用该用户？禁用后，该用户将无法登陆", {
-            btn: ["确认", "取消"]
-        }, function (index, layero) {
-            document.form.action = url;
-            document.form.submit();
-        });
-    }
-
-    function clearSearch() {
-        jQuery("#username").attr("value", "");
-        jQuery("#userStatus").attr("value", "");
-        jQuery("#type").attr("value", "");
-        document.form.action = 'list.do';
-        document.form.submit();
-    }
-
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+        + " " ;
 
     // 统计
     var dateChange = function () {
         $("#dateType").val(0);
         search();
     }
-    var dateValue = setDateRangeConfig("dateStart", "dateEnd", dateChange);
-    var dateTypeChange = function () {
-        setDateTypeChange("dateType", "dateStart", "dateEnd", dateValue.dateStart, dateValue.dateEnd, search);
-    }
+//    var dateValue = setDateRangeConfig("dateStart", "dateEnd", dateChange);
+//    var dateTypeChange = function () {
+//        setDateTypeChange("dateType", "dateStart", "dateEnd", dateValue.dateStart, dateValue.dateEnd, search);
+//    }
+
+    var intervalNum = function () {
+        for(var i=0;i<initSearchDate.length;i++){
+            $("#dateStarts").append("<option value='"+currentdate+initSearchDate[i]+"'>"+initSearchDate[i]+"</option>");
+            $("#dateEnds").append("<option value='"+currentdate+initSearchDate[i]+"'>"+initSearchDate[i]+"</option>");
+        }
+        $("#registerPopulationNum").empty();
+        $("#loginPopulationNum").empty();
+        $("#rechargePopulationNum").empty();
+        $("#rechargeCountNum").empty();
+        $("#rechargeAmountNum").empty();
+        $.post("/interval/realTimeInterval/intervalNum.do", {
+            startDate: $('#dateStarts').val(),
+            endDate: $('#dateEnds').val()
+        }, function (data) {
+            var json = JSON.parse(data);
+            if (null != json && undefined != json) {
+                $("#registerPopulationNum").html(json.registerPopulation);
+                $("#loginPopulationNum").html(json.loginPopulation);
+                $("#rechargePopulationNum").html(json.rechargePopulation);
+                $("#rechargeCountNum").html(json.rechargeCount);
+                $("#rechargeAmountNum").html(json.rechargeAmount.toFixed(2));
+            } else {
+                $("#registerPopulationNum").empty();
+                $("#loginPopulationNum").empty();
+                $("#rechargePopulationNum").empty();
+                $("#rechargeCountNum").empty();
+                $("#rechargeAmountNum").empty();
+            }
+        });
+    };
 
     $(function () {
         $("#sortable").sortable({cursor: "move", handle: ".sortHandle"});
@@ -300,59 +312,11 @@
         return deviceTypes;
     }
 
-    var addDetailDataTbRow = function (data) {
-        if (null != data && undefined != data && "" != data) {
-            var ele = "<tr><td>deviceName</td><td>registerCount</td><td>regConversionPercent</td><td>activeCount</td><td>regAndRechargeCvsPercent</td><td>payCount</td><td>payTimes</td><td>payAmount</td><td>ARPU</td></tr>";
-            ele = ele.replace("deviceName", data.deviceName).replace("registerCount", data.registerCount).replace("regConversionPercent", data.regConversionPercent).replace("activeCount", data.activeCount).replace("regAndRechargeCvsPercent", data.regAndRechargeCvsPercent).replace("payCount", data.payCount).replace("payTimes", data.payTimes).replace("payAmount", data.payAmount).replace("ARPU", data.arpu);
-            $("#detailData").append(ele);
-        }
-    }
-
-    var showDetailData = function (date) {
-        $("#detailData").empty();
-        $.post("${path}/game/newuserals/detail.do", {
-            date: date,
-        }, function (data) {
-            var json = JSON.parse(data);
-            if (null == json || undefined == json || 0 >= json.length) {
-                $("#detailData").append("<tr><td colspan=\"9\">没有数据</td></tr>");
-            } else {
-                for (var i = 0; i < json.length; i++) {
-                    var ele = {
-                        deviceName: json[i].deviceName,
-                        registerCount: json[i].registerCount,
-                        regConversionPercent: (json[i].regConversionPercent * 100).toFixed(2) + "%",
-                        activeCount: json[i].activeCount,
-                        regAndRechargeCvsPercent: (json[i].regAndRechargeCvsPercent * 100).toFixed(2) + "%",
-                        payCount: json[i].payCount,
-                        payTimes: json[i].payTimes,
-                        payAmount: json[i].payAmount,
-                        arpu: json[i].arpu.toFixed(2)
-                    }
-                    addDetailDataTbRow(ele);
-                }
-            }
-        });
-    }
-
-    var onDetailClick = function (ele) {
-        $(".xq-box").css('left', $(ele).offset().left - 1269).css('top', $(ele).offset().top - 55).show();
-        var parentObj = $(ele).parent().parent();
-        var infoIdEle = $(parentObj).children(".date")[0];
-        showDetailData($(infoIdEle).text());
-    }
-
-    var hideDetailTableClick = function () {
-        $(".close").bind("mousedown", function (event) {
-            $(".xq-box").hide();
-        });
-    }
-
 
     var addTbRow = function (data) {
         if (null != data && undefined != data && "" != data) {
-            var ele = "<tr><td class=\"date\">statDate</td><td>registerCount</td><td>regConversionPercent</td><td>activeCount</td><td>regAndRechargeCvsPercent</td><td>payCount</td><td>payTimes</td><td >payAmount</td><td>ARPU</td><td><a class=\"xiangqing\" onclick=\"onDetailClick(this);\"></a></td></tr>";
-            ele = ele.replace("statDate", data.statDate).replace("registerCount", data.registerCount).replace("regConversionPercent", data.regConversionPercent).replace("activeCount", data.activeCount).replace("regAndRechargeCvsPercent", data.regAndRechargeCvsPercent).replace("payCount", data.payCount).replace("payTimes", data.payTimes).replace("payAmount", data.payAmount).replace("ARPU", data.arpu);
+            var ele = "<tr><td class=\"date\">statisticsTime</td><td>registerPopulation</td><td>loginPopulation</td><td>rechargePopulation</td><td>rechargeCount</td><td>rechargeAmount</td></tr>";
+            ele = ele.replace("statisticsTime", data.statisticsTime).replace("registerPopulation", data.registerPopulation).replace("loginPopulation", data.loginPopulation).replace("rechargePopulation", data.rechargePopulation).replace("rechargeCount", data.rechargeCount).replace("rechargeAmount", data.rechargeAmount);
             $("#newUserData").append(ele);
         }
     }
@@ -361,13 +325,15 @@
     var showNewUserData = function (pageNumber, pageSize) {
         $("#newUserData").empty();
         $.post("/interval/realTimeInterval/list.do", {
-            startDate: $('#dateStart').val(),
-            endDate: $('#dateEnd').val(),
+            startDate: $('#dateStarts').val(),
+            endDate: $('#dateEnds').val(),
             pageNumber: pageNumber,
             pageSize: pageSize
         }, function (data) {
             var json = JSON.parse(data);
             if (null != json && undefined != json) {
+                $("#totalCount").html(json.total);
+                $("#totalPage").html(json.pages);
                 $("#page").myPagination({
                     currPage: pageNumber,
                     pageCount: json.pages,
@@ -380,9 +346,21 @@
                 });
                 var infoData = json.list;
                 if (null == infoData || undefined == infoData || 0 >= infoData.length) {
+                    $("#totalCount").html(0);
+                    $("#totalPage").html(0);
                     $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
                 } else {
+                    var sumRechargeAmount=0;
+                    var sumRegisterPopulation=0;
+                    var sumLoginPopulation=0;
+                    var sumRechargePopulation=0;
+                    var sumRechargeCount=0;
                     for (var i = 0; i < infoData.length; i++) {
+                        sumRegisterPopulation = accAdd(sumRegisterPopulation,infoData[i].registerPopulation);
+                        sumLoginPopulation = accAdd(sumLoginPopulation,infoData[i].loginPopulation);
+                        sumRechargePopulation = accAdd(sumRechargePopulation,infoData[i].rechargePopulation);
+                        sumRechargeCount = accAdd(sumRechargeCount,infoData[i].rechargeCount);
+                        sumRechargeAmount = accAdd(sumRechargeAmount,infoData[i].rechargeAmount);
                         var ele = {
                             statisticsTime: infoData[i].statisticsTime,
                             registerPopulation: infoData[i].registerPopulation,
@@ -393,9 +371,18 @@
                         }
                         addTbRow(ele);
                     }
+                    var ele1 = {
+                        statisticsTime:"总计",
+                        registerPopulation:sumRegisterPopulation,
+                        loginPopulation:sumLoginPopulation,
+                        rechargePopulation:sumRechargePopulation,
+                        rechargeCount:sumRechargeCount,
+                        rechargeAmount:sumRechargeAmount.toFixed(2)
+                    }
+                    addTbRow(ele1);
                 }
             } else {
-                $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
+               // $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
             }
         });
     }
@@ -404,14 +391,14 @@
     var search = function () {
         showNewUserData(1, pageSize);
         loadNewUserDataTrendLine(echartsCopy);
-        $(".xq-box").hide();//隐藏详情框
+        intervalNum();
     }
 
     var trendline;
 
     function loadNewUserDataTrendLine(echarts) {
-        var startDate = $("#dateStart").val();
-        var endDate = $("#dateEnd").val();
+        var startDate = $("#dateStarts").val();
+        var endDate = $("#dateEnds").val();
 
         $.ajax({
             url: "/interval/realTimeInterval/chart.do",
@@ -443,35 +430,35 @@
                         show: true,
                         orient: 'horizontal',
                         data: [{
-                            name: '新增玩家',
+                            name: '注册人数',
                             textStyle: {
                                 fontSize: 12,
                                 color: '#666'
                             },
                             icon: 'roundRect'
                         }, {
-                            name: '活跃玩家',
+                            name: '登录人数',
                             textStyle: {
                                 fontSize: 12,
                                 color: '#666'
                             },
                             icon: 'roundRect'
                         }, {
-                            name: '付费人数',
+                            name: '充值人数',
                             textStyle: {
                                 fontSize: 12,
                                 color: '#666'
                             },
                             icon: 'roundRect'
                         }, {
-                            name: '付费次数',
+                            name: '充值次数',
                             textStyle: {
                                 fontSize: 12,
                                 color: '#666'
                             },
                             icon: 'roundRect'
                         }, {
-                            name: '付费金额（￥）',
+                            name: '充值金额（￥）',
                             textStyle: {
                                 fontSize: 12,
                                 color: '#666'
@@ -550,29 +537,29 @@
 
                     series: [
                         {
-                            name: '新增玩家',
+                            name: '注册人数',
                             type: 'line',
-                            data: json.registerCountList
+                            data: json.registerPopulationList
                         },
                         {
-                            name: '活跃玩家',
+                            name: '登录人数',
                             type: 'line',
-                            data: json.activeCountList
+                            data: json.loginCountList
                         },
                         {
-                            name: '付费人数',
+                            name: '充值人数',
                             type: 'line',
-                            data: json.payCountList
+                            data: json.rechargePopulationList
                         },
                         {
-                            name: '付费次数',
+                            name: '充值次数',
                             type: 'line',
-                            data: json.payTimesList
+                            data: json.rechargeCountList
                         },
                         {
-                            name: '付费金额（￥）',
+                            name: '充值金额（￥）',
                             type: 'line',
-                            data: json.payAmountList
+                            data: json.rechargeAmountList
                         }
                     ]
                 });
@@ -580,6 +567,7 @@
             }
         })
     }
+
 
     var echartsCopy;
     // 路径配置
@@ -594,6 +582,5 @@
         function (ec) {
             echartsCopy = ec;
             search();
-            hideDetailTableClick();
         });
 </script>

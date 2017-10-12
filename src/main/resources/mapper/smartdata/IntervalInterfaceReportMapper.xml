@@ -122,4 +122,46 @@
       execute_time = #{executeTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectIntervalInterfaceToltalData" resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" parameterType="java.util.Map">
+    select interface_code as interfaceCode,operate_type as operateType,sum(operate_count) as operateCount
+    from interval_interface_report where statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
+    <if test="startDate != null and startDate  != ''">
+      <![CDATA[
+             and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+    </if>
+    <if test="endDate != null and endDate  != ''">
+      <![CDATA[
+  		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+    </if>
+    group by interface_code,operate_type
+  </select>
+
+
+  <select id="selectIntervalIntefaceChartData" resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" parameterType="java.util.Map">
+    select
+    DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,
+    operate_type as operateType,
+    sum(operate_count) as operateCount
+    from interval_interface_report
+    where 1=1
+    and statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
+    <if test="startDate != null and startDate  != ''">
+      <![CDATA[
+             and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+    </if>
+    <if test="endDate != null and endDate  != ''">
+      <![CDATA[
+  		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+    </if>
+    <if test="interfaceCode != null and interfaceCode  != ''">
+  		     and  interface_code = #{interfaceCode}
+    </if>
+    group by statistics_time,operate_type
+  </select>
+
 </mapper>

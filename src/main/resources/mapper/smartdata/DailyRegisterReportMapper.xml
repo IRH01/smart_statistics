@@ -31,6 +31,7 @@
 
     <select id="selectLastMonthRegister" resultType="java.util.Map">
         SELECT
+        SUM(pc_population) AS pc_population_sum,
         SUM(pc_page_view) AS pc_page_view_sum,
         SUM(pc_user_view) AS pc_user_view_sum,
         SUM(h5_population) AS h5_population_sum,

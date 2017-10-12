@@ -122,4 +122,48 @@
       execute_time = #{executeTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectIntervalGameLaunchListData" resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchListReport" parameterType="java.util.Map">
+    select a.statistics_time as statisticsTime,a.ybflaunchCount,c.lydjlaunchCount,b.lmdzlaunchCount
+    from (select statistics_time,sum(launch_count) as ybflaunchCount from interval_game_launch_report where platform_name="一比分"  group by statistics_time  order by statistics_time desc) a
+    inner join
+    (select statistics_time,sum(launch_count) as lmdzlaunchCount from interval_game_launch_report where platform_name="撩妹德州"  group by statistics_time order by statistics_time desc) b
+    inner join
+    (select statistics_time,sum(launch_count) as lydjlaunchCount from interval_game_launch_report where platform_name="乐盈电竞"  group by statistics_time order by statistics_time desc) c
+    on a.statistics_time = b.statistics_time
+    and a.statistics_time = c.statistics_time
+    where  a.statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
+    <if test="startDate != null and startDate  != ''">
+      <![CDATA[
+             and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+    </if>
+    <if test="endDate != null and endDate  != ''">
+      <![CDATA[
+  		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+    </if>
+  </select>
+
+  <select id="selectIntervalGameLaunchChatData" resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" parameterType="java.util.Map">
+    select
+    DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,
+    platform_name as platformName,sum(launch_count) as launchCount
+    from interval_game_launch_report
+    where 1=1
+    and statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
+    <if test="startDate != null and startDate  != ''">
+      <![CDATA[
+             and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+    </if>
+    <if test="endDate != null and endDate  != ''">
+      <![CDATA[
+  		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+  		]]>
+    </if>
+    group by statistics_time,platform_name
+    order by statistics_time desc
+  </select>
+
 </mapper>

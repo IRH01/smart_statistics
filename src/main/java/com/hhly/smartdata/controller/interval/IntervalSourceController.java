@@ -53,7 +53,7 @@ public class IntervalSourceController extends BaseController{
             result =  intervalSourceService.selectIntervalSourceListData(startDate,endDate,pageNumber,pageSize).toString();
         }catch(Exception e){
             e.printStackTrace();
-            LOGGER.error("获取平台实时曲线图数据异常");
+            LOGGER.error("获取平台实时数据异常");
         }
         return result;
     }

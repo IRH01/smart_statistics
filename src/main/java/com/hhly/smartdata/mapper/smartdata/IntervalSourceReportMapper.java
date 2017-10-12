@@ -19,5 +19,8 @@ public interface IntervalSourceReportMapper{
 
     List<IntervalSourceReport> selectIntervalSourceChartData(Map<String,Object> map)throws Exception;
 
+    List<IntervalSourceReport> selectIntervalTerminalsSourceListData(Map<String,Object> map)throws Exception;
+
+    List<IntervalSourceReport> selectIntervalTimeTerminalsSourceListData(Map<String,Object> map)throws Exception;
 
 }

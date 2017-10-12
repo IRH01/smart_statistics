@@ -11,46 +11,54 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-@RunWith(SpringJUnit4ClassRunner.class)
+import java.util.List;@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/spring/spring-context.xml"})
-@Transactional
 public class RedisTest{
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
     @Test
-    public void testList(){
-        this.redisTemplate.opsForList().leftPush("list", "1");
+    public void testValueOps(){
+        for(int i = 0; i < 2100000000; i++){
+            this.redisTemplate.opsForValue().set("value" + 1, i + "");
+        }
     }
 
     @Test
-    public void testValueOps(){
-        this.redisTemplate.opsForValue().set("value", "1");
+    public void testList(){
+        for(int i = 0; i < 2100000000; i++){
+            this.redisTemplate.opsForList().leftPush("list", i + "");
+        }
     }
 
     @Test
     public void testHash(){
-        this.redisTemplate.opsForHash().put("hash", "互娱", "平台");
+        for(int i = 0; i < 2100000000; i++){
+            this.redisTemplate.opsForHash().put("hash" + (i % 5), "互娱" + i, "平台" + i);
+        }
     }
 
     @Test
     public void testSet(){
-        this.redisTemplate.opsForSet().add("set", "互娱");
+        for(int i = 0; i < 2100000000; i++){
+            this.redisTemplate.opsForSet().add("set", "互娱" + i);
+        }
     }
 
     @Test
     public void testZSet(){
-        this.redisTemplate.opsForZSet().add("zset", "平台", 1.2);
+        for(int i = 0; i < 2100000000; i++){
+            this.redisTemplate.opsForZSet().add("zset" + i, "平台", 1.2 + i);
+        }
     }
 
     @Test
     public void testGeo(){
-        this.redisTemplate.opsForGeo().geoAdd("geo", new Point(123.1, 30.0), "member");
+        for(int i = 0; i < 2100000000; i++){
+            this.redisTemplate.opsForGeo().geoAdd("geo" + i, new Point(123.1, 30.0), "member");
+        }
     }
 
     /**
@@ -69,9 +77,6 @@ public class RedisTest{
         System.err.println("Number of items added to set: " + txResults.get(0));
     }
 
-    @Test
-    public void testCache(){
-    }
 
 
 }

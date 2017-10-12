@@ -58,21 +58,21 @@ public class MonthExecutorService{
         monthCompositeReport.setExecuteTime(now);
         monthCompositeReport.setStatisticsMonth(DateUtil.getLastMonthStr(now));
 
-        monthCompositeReport.setNewUserLoginCount(((BigDecimal) lastMonthCompositeMap.get("new_user_login_count_sum")).intValue());
-        monthCompositeReport.setNewUserPlayCount(((BigDecimal) lastMonthCompositeMap.get("new_user_play_count_sum")).intValue());
         monthCompositeReport.setVirtualExpCount(((BigDecimal) lastMonthCompositeMap.get("virtual_exp_count_sum")).intValue());
         monthCompositeReport.setRegisterPopulation(((BigDecimal) lastMonthCompositeMap.get("register_population_sum")).intValue());
         monthCompositeReport.setRegisterExpCount(((BigDecimal) lastMonthCompositeMap.get("register_exp_count_sum")).intValue());
         monthCompositeReport.setRealExpCount(((BigDecimal) lastMonthCompositeMap.get("real_exp_count_sum")).intValue());
+        monthCompositeReport.setNewUserLoginCount(((BigDecimal) lastMonthCompositeMap.get("new_user_login_count_sum")).intValue());
+        monthCompositeReport.setNewUserPlayCount(((BigDecimal) lastMonthCompositeMap.get("new_user_play_count_sum")).intValue());
+        monthCompositeReport.setNewUserRechargePopulation(((BigDecimal) lastMonthCompositeMap.get("new_user_recharge_population_sum")).intValue());
+        monthCompositeReport.setNewUserRechargeCount(((BigDecimal) lastMonthCompositeMap.get("new_user_recharge_count_sum")).intValue());
+        monthCompositeReport.setNewUserRechargeAmount((BigDecimal) lastMonthCompositeMap.get("new_user_recharge_amount_sum"));
         monthCompositeReport.setOldUserRechargePopulation(((BigDecimal) lastMonthCompositeMap.get("old_user_recharge_population_sum")).intValue());
         monthCompositeReport.setOldUserRechargeAmount((BigDecimal) lastMonthCompositeMap.get("old_user_recharge_amount_sum"));
         monthCompositeReport.setOldUserRechargeCount(((BigDecimal) lastMonthCompositeMap.get("old_user_recharge_count_sum")).intValue());
         monthCompositeReport.setOldUserPlayCount(((BigDecimal) lastMonthCompositeMap.get("old_user_play_count_sum")).intValue());
         monthCompositeReport.setOldUserLoginCount(((BigDecimal) lastMonthCompositeMap.get("old_user_login_count_sum")).intValue());
         monthCompositeReport.setNextDayStayCount(((BigDecimal) lastMonthCompositeMap.get("next_day_stay_count_sum")).intValue());
-        monthCompositeReport.setNewUserRechargePopulation(((BigDecimal) lastMonthCompositeMap.get("new_user_recharge_population_sum")).intValue());
-        monthCompositeReport.setNewUserRechargeCount(((BigDecimal) lastMonthCompositeMap.get("new_user_recharge_count_sum")).intValue());
-        monthCompositeReport.setNewUserRechargeAmount((BigDecimal) lastMonthCompositeMap.get("new_user_recharge_amount"));
         this.monthCompositeReportMapper.insert(monthCompositeReport);
         return Result.success(monthCompositeReport);
     }
@@ -87,14 +87,16 @@ public class MonthExecutorService{
         MonthRegisterReport monthRegisterReport = new MonthRegisterReport();
         monthRegisterReport.setExecuteTime(now);
         monthRegisterReport.setStatisticsMonth(DateUtil.getLastMonthStr(now));
-        monthRegisterReport.setAndroidInstallCount(((BigDecimal) lastMonthRegisterMap.get("android_install_count_sum")).intValue());
+        monthRegisterReport.setPcPopulation(((BigDecimal) lastMonthRegisterMap.get("pc_population_sum")).intValue());
+        monthRegisterReport.setPcPageView(((BigDecimal) lastMonthRegisterMap.get("pc_page_view_sum")).longValue());
         monthRegisterReport.setPcUserView(((BigDecimal) lastMonthRegisterMap.get("pc_user_view_sum")).intValue());
-        monthRegisterReport.setIosPopulation(((BigDecimal) lastMonthRegisterMap.get("ios_population_sum")).intValue());
-        monthRegisterReport.setIosInstallCount(((BigDecimal) lastMonthRegisterMap.get("ios_install_count_sum")).intValue());
         monthRegisterReport.setH5UserView(((BigDecimal) lastMonthRegisterMap.get("h5_user_view_sum")).intValue());
         monthRegisterReport.setH5Population(((BigDecimal) lastMonthRegisterMap.get("h5_population_sum")).intValue());
         monthRegisterReport.setH5PageView(((BigDecimal) lastMonthRegisterMap.get("h5_page_view_sum")).longValue());
+        monthRegisterReport.setIosPopulation(((BigDecimal) lastMonthRegisterMap.get("ios_population_sum")).intValue());
+        monthRegisterReport.setIosInstallCount(((BigDecimal) lastMonthRegisterMap.get("ios_install_count_sum")).intValue());
         monthRegisterReport.setAndroidPopulation(((BigDecimal) lastMonthRegisterMap.get("android_population_sum")).intValue());
+        monthRegisterReport.setAndroidInstallCount(((BigDecimal) lastMonthRegisterMap.get("android_install_count_sum")).intValue());
 
         this.monthRegisterReportMapper.insert(monthRegisterReport);
         return Result.success(monthRegisterReport);

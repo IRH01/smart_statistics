@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
@@ -11,11 +10,11 @@
     <title>产品运营数据统计后台</title>
 
     <!-- Bootstrap -->
-    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/zTreeStyle.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/dialogsdk.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/jquery-ui.css"/>">
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/zTreeStyle.css">
+    <link rel="stylesheet" href="../../../css/dialogsdk.css">
+    <link rel="stylesheet" href="../../../css/jquery-ui.css">
     <!-- The fav icon -->
     <link rel="shortcut icon" href="<c:url value="/img/favicon.ico"/>">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -26,16 +25,16 @@
     <![endif]-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="<c:url value="/lib/jquery-1.11.2.min.js"/>"></script>
-    <script src="<c:url value="/lib/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/lib/jquery.ztree.all-3.5.min.js"/>"></script>
-    <script src="<c:url value="/lib/jquery.validate.js"/>"></script>
-    <script src="<c:url value="/lib/additional-methods.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/jquery-validate.bootstrap-tooltip.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/jquery.validate.custom.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"/>"></script>
-    <script src="<c:url value="/lib/dialogsdk.js"/>"></script>
-    <script src="<c:url value="/lib/tools/tools.js"/>"></script>
+    <script src="../../../lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../lib/bootstrap.min.js"></script>
+    <script src="../../../lib/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../../../lib/jquery.validate.js"></script>
+    <script src="../../../lib/additional-methods.min.js" type="text/javascript"></script>
+    <script src="../../../lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
+    <script src="../../../lib/jquery.validate.custom.js" type="text/javascript"></script>
+    <script src="../../../lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
+    <script src="../../../lib/dialogsdk.js"></script>
+    <script src="../../../lib/tools/tools.js"></script>
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -51,7 +50,7 @@
                             <div class="panel-body">
                                 <div class="clm-box">
                                     <h4 class="clm-title">
-                                        <img src="img/ico-clm.png" alt=""/>选择您需要的栏目：
+                                        <img src="../../../img/ico-clm.png" alt=""/>选择您需要的栏目：
                                     </h4>
                                     <hr style="border-top: 1px solid #ddd"/>
                                     <dl class="clm-ctn" id="clm">

@@ -14,6 +14,10 @@ public class MonthRegisterReport{
     private String statisticsMonth = "";
 
     /**
+     * pc用户数
+     */
+    private Integer pcPopulation = 0;
+    /**
      * pc页面浏览数pv
      */
     private Long pcPageView = 0L;
@@ -77,6 +81,14 @@ public class MonthRegisterReport{
 
     public void setStatisticsMonth(String statisticsMonth){
         this.statisticsMonth = statisticsMonth;
+    }
+
+    public Integer getPcPopulation(){
+        return pcPopulation;
+    }
+
+    public void setPcPopulation(Integer pcPopulation){
+        this.pcPopulation = pcPopulation;
     }
 
     public Long getPcPageView(){

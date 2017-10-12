@@ -5,7 +5,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hhly.smartdata.mapper.smartdata.IntervalSourceReportMapper;
 import com.hhly.smartdata.model.smartdata.IntervalSourceReport;
-import com.hhly.smartdata.util.Result;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

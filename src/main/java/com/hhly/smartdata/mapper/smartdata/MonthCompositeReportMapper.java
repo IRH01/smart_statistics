@@ -1,7 +1,11 @@
 package com.hhly.smartdata.mapper.smartdata;
 
+import com.hhly.smartdata.dto.mouth.MonthCompositeReportResult;
+import com.hhly.smartdata.dto.mouth.TimeFilter;
 import com.hhly.smartdata.model.smartdata.MonthCompositeReport;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface MonthCompositeReportMapper{
@@ -14,4 +18,8 @@ public interface MonthCompositeReportMapper{
     int updateByPrimaryKeySelective(MonthCompositeReport record) throws Exception;
 
     int updateByPrimaryKey(MonthCompositeReport record) throws Exception;
+
+    List<MonthCompositeReportResult> searchByTime(TimeFilter filter) throws Exception;
+
+    long searchByTimeCount(TimeFilter filter) throws Exception;
 }

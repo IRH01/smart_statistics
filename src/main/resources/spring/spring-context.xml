@@ -21,6 +21,4 @@
     <import resource="spring-member-dao.xml"/>
     <import resource="spring-smart-dao.xml"/>
     <import resource="spring-schedule.xml"/>
-    <!--<import resource="spring-redis-cluster.xml"/>-->
-    <!--<import resource="spring-redis-standalone.xml"/>-->
 </beans>
