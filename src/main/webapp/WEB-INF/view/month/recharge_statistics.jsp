@@ -203,44 +203,50 @@
                 "<td>pc_rechargeCount</td>" +
                 "<td>pc_newRechargePopulation</td>" +
                 "<td>pc_oldRechargePopulation</td>" +
+                "<td>pc_ARPU</td>" +
                 "<td>h5_rechargePopulation</td>" +
                 "<td>h5_rechargeAmount</td>" +
                 "<td>h5_rechargeCount</td>" +
                 "<td>h5_newRechargePopulation</td>" +
                 "<td>h5_oldRechargePopulation</td>" +
+                "<td>h5_ARPU</td>" +
                 "<td>ios_rechargePopulation</td>" +
                 "<td>ios_rechargeAmount</td>" +
                 "<td>ios_rechargeCount</td>" +
                 "<td>ios_newRechargePopulation</td>" +
                 "<td>ios_oldRechargePopulation</td>" +
+                "<td>ios_ARPU</td>" +
                 "<td>android_rechargePopulation</td>" +
                 "<td>android_rechargeAmount</td>" +
                 "<td>android_rechargeCount</td>" +
                 "<td>android_newRechargePopulation</td>" +
-                "<td>android_oldRechargePopulation</td>";
+                "<td>android_oldRechargePopulation</td>" +
+                "<td>android_ARPU</td>";
             ele = ele.replace("statisticsMonth", data.statisticsMonth)
-                .replace("pc_rechargePopulation", data.registerPopulation)
-                .replace("pc_rechargeAmount", data.registerExpCount)
-                .replace("pc_rechargeCount", data.registerExpRate)
-                .replace("pc_newRechargePopulation", data.realExpCount)
-                .replace("pc_oldRechargePopulation", data.virtualExpCount)
-                .replace("newUserRechargePopulation", data.newUserRechargePopulation)
-                .replace("newUserRechargeCount", data.newUserRechargeCount)
-                .replace("newUserRechargeAmount", data.newUserRechargeAmount)
-                .replace("newUserRechargeRate", data.newUserRechargeRate)
-                .replace("newUserARPU", data.newUserARPU)
-                .replace("newUserLoginCount", data.newUserLoginCount)
-                .replace("newUserPlayCount", data.newUserPlayCount)
-                .replace("newUserLoginTransformRate", data.newUserLoginTransformRate)
-                .replace("oldUserRechargeCount", data.oldUserRechargeCount)
-                .replace("oldUserRechargePopulation", data.oldUserRechargePopulation)
-                .replace("oldUserRechargeAmount", data.oldUserRechargeAmount)
-                .replace("oldUserRechargeRate", data.oldUserRechargeRate)
-                .replace("oldUserARPU", data.oldUserARPU)
-                .replace("oldUserLoginCount", data.oldUserLoginCount)
-                .replace("oldUserPlayCount", data.oldUserPlayCount)
-                .replace("oldUserPlayRate", data.oldUserPlayRate)
-                .replace("nextDayKeepRate", data.nextDayKeepRate);
+                .replace("pc_rechargePopulation", data.pc_rechargePopulation)
+                .replace("pc_rechargeAmount", data.pc_rechargeAmount)
+                .replace("pc_rechargeCount", data.pc_rechargeCount)
+                .replace("pc_newRechargePopulation", data.pc_newRechargePopulation)
+                .replace("pc_oldRechargePopulation", data.pc_oldRechargePopulation)
+                .replace("pc_ARPU", data.pc_ARPU)
+                .replace("h5_rechargePopulation", data.h5_rechargePopulation)
+                .replace("h5_rechargeAmount", data.h5_rechargeAmount)
+                .replace("h5_rechargeCount", data.h5_rechargeCount)
+                .replace("h5_newRechargePopulation", data.h5_newRechargePopulation)
+                .replace("h5_oldRechargePopulation", data.h5_oldRechargePopulation)
+                .replace("h5_ARPU", data.h5_ARPU)
+                .replace("ios_rechargePopulation", data.ios_rechargePopulation)
+                .replace("ios_rechargeAmount", data.ios_rechargeAmount)
+                .replace("ios_rechargeCount", data.ios_rechargeCount)
+                .replace("ios_newRechargePopulation", data.ios_newRechargePopulation)
+                .replace("ios_oldRechargePopulation", data.ios_oldRechargePopulation)
+                .replace("ios_ARPU", data.ios_ARPU)
+                .replace("android_rechargePopulation", data.android_rechargePopulation)
+                .replace("android_rechargeAmount", data.android_rechargeAmount)
+                .replace("android_rechargeCount", data.android_rechargeCount)
+                .replace("android_newRechargePopulation", data.android_newRechargePopulation)
+                .replace("android_oldRechargePopulation", data.android_oldRechargePopulation)
+                .replace("android_ARPU", data.android_ARPU);
             $("#data").append(ele);
         }
     };
@@ -248,7 +254,7 @@
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
         $("#data").empty();
-        $.post("/month/composite/list.do", {
+        $.post("/month/recharge/statistics/list.do", {
             monthStart: $('#monthStart').val(),
             monthEnd: $('#monthEnd').val(),
             pageNo: pageNumber,
@@ -274,9 +280,46 @@
                     $("#totalPage").html(0);
                     $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");
                 } else {
-                    var list = [];
+                    var info = {};
+                    //1、PC 2.android 3.IOS 4.H5
                     for (var i = 0; i < infoData.length; i++) {
-                        addTbRow(infoData[i]);
+                        if (infoData[i].sourceType == 1) {
+                            info.pc_rechargePopulation = infoData[i].rechargePopulation;
+                            info.pc_rechargeAmount = infoData[i].rechargeAmount;
+                            info.pc_rechargeCount = infoData[i].rechargeCount;
+                            info.pc_newRechargePopulation = infoData[i].newRechargePopulation;
+                            info.pc_oldRechargePopulation = infoData[i].oldRechargePopulation;
+                            info.pc_ARPU = infoData[i].arpu;
+                        }
+                        if (infoData[i].sourceType == 2) {
+                            info.h5_rechargePopulation = infoData[i].rechargePopulation;
+                            info.h5_rechargeAmount = infoData[i].rechargeAmount;
+                            info.h5_rechargeCount = infoData[i].rechargeCount;
+                            info.h5_newRechargePopulation = infoData[i].newRechargePopulation;
+                            info.h5_oldRechargePopulation = infoData[i].oldRechargePopulation;
+                            info.h5_ARPU = infoData[i].arpu;
+                        }
+                        if (infoData[i].sourceType == 3) {
+                            info.ios_rechargePopulation = infoData[i].rechargePopulation;
+                            info.ios_rechargeAmount = infoData[i].rechargeAmount;
+                            info.ios_rechargeCount = infoData[i].rechargeCount;
+                            info.ios_newRechargePopulation = infoData[i].newRechargePopulation;
+                            info.ios_oldRechargePopulation = infoData[i].oldRechargePopulation;
+                            info.ios_ARPU = infoData[i].arpu;
+                        }
+                        if (infoData[i].sourceType == 4) {
+                            info.android_rechargePopulation = infoData[i].rechargePopulation;
+                            info.android_rechargeAmount = infoData[i].rechargeAmount;
+                            info.android_rechargeCount = infoData[i].rechargeCount;
+                            info.android_newRechargePopulation = infoData[i].newRechargePopulation;
+                            info.android_oldRechargePopulation = infoData[i].oldRechargePopulation;
+                            info.android_ARPU = infoData[i].arpu;
+                        }
+                        if ((i % 4) == 3) {
+                            info.statisticsMonth = infoData[i].statisticsMonth
+                            addTbRow(info);
+                            info = {};
+                        }
                     }
                 }
             } else {

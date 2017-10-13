@@ -72,6 +72,12 @@
                             <div class="admin-content" style="overflow-x:auto;overflow-y:hidden;">
                                 <div class="section-box">
                                     <div class="titleDiv">
+                                        <div class="notice-div">
+                                            月登录总数：<span id="last_month_login">*</span>
+                                        </div>
+                                        <div class="notice-div">
+                                            月玩游戏总数：<span id="last_month_play">*</span>
+                                        </div>
                                         <div class="select-fr" style="padding-right: 30px;">
 											<span class="laydateBox">
                                                 月份区间：<input type="text" id="monthStart" class="laydate-icon"
@@ -82,6 +88,15 @@
                                             <button type="button" id="search" class="btn btn-primary btn-sm">
                                                 查询
                                             </button>
+                                        </div>
+                                        <div class="select-fr" style="padding-right: 30px;">
+                                            指标筛选：
+                                            <select id="dateType" style="width:60px;" class="select">
+                                                <option value="1">PC</option>
+                                                <option value="2">android</option>
+                                                <option value="3">IOS</option>
+                                                <option value="4">H5</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="whiteDiv">
@@ -95,28 +110,26 @@
                                                             <thead>
                                                             <tr>
                                                                 <th style="min-width:70px;">月份</th>
-                                                                <th style="min-width:90px;">注册用户数</th>
-                                                                <th style="min-width:90px;">注册体验量</th>
-                                                                <th style="min-width:100px;">注册体验率(%)</th>
-                                                                <th style="min-width:80px;">真体验</th>
-                                                                <th style="min-width:80px;">假体验</th>
-                                                                <th style="min-width:70px;">新用户充值人数</th>
-                                                                <th style="min-width:70px;">新用户充值次数</th>
-                                                                <th style="min-width:70px;">新用户充值金额</th>
-                                                                <th style="min-width:115px;">新用户充值率(%)</th>
-                                                                <th style="min-width:90px;">新用户ARPU</th>
-                                                                <th style="min-width:75px;">新用户登录人数</th>
-                                                                <th style="min-width:75px;">新用户玩游戏数</th>
-                                                                <th style="min-width:80px;">新用户登录转化比(%)</th>
-                                                                <th style="min-width:70px;">老用户充值次数</th>
-                                                                <th style="min-width:70px;">老用户充值人数</th>
-                                                                <th style="min-width:70px;">老用户充值金额</th>
-                                                                <th style="min-width:70px;">老用户充值率(%)</th>
-                                                                <th style="min-width:90px;">老用户ARPU</th>
-                                                                <th style="min-width:70px;">老用户登录人数</th>
-                                                                <th style="min-width:70px;">老用户玩游戏数</th>
-                                                                <th style="min-width:80px;">老用户登录转化比(%)</th>
-                                                                <th style="min-width:70px;">平均次日留存率(%)</th>
+                                                                <th style="min-width:70px;">PC-登录人数</th>
+                                                                <th style="min-width:70px;">PC-玩游戏人数</th>
+                                                                <th style="min-width:70px;">PC-撩妹德州</th>
+                                                                <th style="min-width:70px;">PC-乐盈电竞</th>
+                                                                <th style="min-width:70px;">PC-一比分</th>
+                                                                <th style="min-width:90px;">H5-登录人数</th>
+                                                                <th style="min-width:90px;">H5-玩游戏人数</th>
+                                                                <th style="min-width:100px;">H5-撩妹德州</th>
+                                                                <th style="min-width:80px;">H5-乐盈电竞</th>
+                                                                <th style="min-width:80px;">H5-一比分</th>
+                                                                <th style="min-width:90px;">ios-登录人数</th>
+                                                                <th style="min-width:90px;">ios-玩游戏人数</th>
+                                                                <th style="min-width:100px;">ios-撩妹德州</th>
+                                                                <th style="min-width:80px;">ios-乐盈电竞</th>
+                                                                <th style="min-width:80px;">ios-一比分</th>
+                                                                <th style="min-width:90px;">android-登录人数</th>
+                                                                <th style="min-width:90px;">android-玩游戏人数</th>
+                                                                <th style="min-width:100px;">android-撩妹德州</th>
+                                                                <th style="min-width:80px;">android-乐盈电竞</th>
+                                                                <th style="min-width:80px;">android-一比分</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody id="data">
@@ -188,56 +201,52 @@
             onMonthSelect: function (m, y) {
             }
         });
-    }
+    };
 
     var addTbRow = function (data) {
         if (null !== data && undefined !== data && "" !== data) {
             var ele = "<tr><td>statisticsMonth</td>" +
-                "<td>registerPopulation</td>" +
-                "<td>registerExpCount</td>" +
-                "<td>registerExpRate</td>" +
-                "<td>realExpCount</td>" +
-                "<td>virtualExpCount</td>" +
-                "<td>newUserRechargePopulation</td>" +
-                "<td>newUserRechargeCount</td>" +
-                "<td>newUserRechargeAmount</td>" +
-                "<td>newUserRechargeRate</td>" +
-                "<td>newUserARPU</td>" +
-                "<td>newUserLoginCount</td>" +
-                "<td>newUserPlayCount</td>" +
-                "<td>newUserLoginTransformRate</td>" +
-                "<td>oldUserRechargeCount</td>" +
-                "<td>oldUserRechargePopulation</td>" +
-                "<td>oldUserRechargeAmount</td>" +
-                "<td>oldUserRechargeRate</td>" +
-                "<td>oldUserARPU</td>" +
-                "<td>oldUserLoginCount</td>" +
-                "<td>oldUserPlayCount</td>" +
-                "<td>oldUserPlayRate</td>" +
-                "<td>nextDayKeepRate</td>";
+                "<td>PC_loginPopulation</td>" +
+                "<td>PC_playPopulation</td>" +
+                "<td>PC_liaoMeiDeZhou_loginPopulation</td>" +
+                "<td>PC_leYinDianJing_loginPopulation</td>" +
+                "<td>PC_yiBiFen_loginPopulation</td>" +
+                "<td>H5_loginPopulation</td>" +
+                "<td>H5_playPopulation</td>" +
+                "<td>H5_liaoMeiDeZhou_loginPopulation</td>" +
+                "<td>H5_leYinDianJing_loginPopulation</td>" +
+                "<td>H5_yiBiFen_loginPopulation</td>" +
+                "<td>ios_loginPopulation</td>" +
+                "<td>ios_playPopulation</td>" +
+                "<td>ios_liaoMeiDeZhou_loginPopulation</td>" +
+                "<td>ios_leYinDianJing_loginPopulation</td>" +
+                "<td>ios_yiBiFen_loginPopulation</td>" +
+                "<td>android_loginPopulation</td>" +
+                "<td>android_playPopulation</td>" +
+                "<td>android_liaoMeiDeZhou_loginPopulation</td>" +
+                "<td>android_leYinDianJing_loginPopulation</td>" +
+                "<td>android_yiBiFen_loginPopulation</td>";
             ele = ele.replace("statisticsMonth", data.statisticsMonth)
-                .replace("registerPopulation", data.registerPopulation)
-                .replace("registerExpCount", data.registerExpCount)
-                .replace("registerExpRate", data.registerExpRate)
-                .replace("realExpCount", data.realExpCount)
-                .replace("virtualExpCount", data.virtualExpCount)
-                .replace("newUserRechargePopulation", data.newUserRechargePopulation)
-                .replace("newUserRechargeCount", data.newUserRechargeCount)
-                .replace("newUserRechargeAmount", data.newUserRechargeAmount)
-                .replace("newUserRechargeRate", data.newUserRechargeRate)
-                .replace("newUserARPU", data.newUserARPU)
-                .replace("newUserLoginCount", data.newUserLoginCount)
-                .replace("newUserPlayCount", data.newUserPlayCount)
-                .replace("newUserLoginTransformRate", data.newUserLoginTransformRate)
-                .replace("oldUserRechargeCount", data.oldUserRechargeCount)
-                .replace("oldUserRechargePopulation", data.oldUserRechargePopulation)
-                .replace("oldUserRechargeAmount", data.oldUserRechargeAmount)
-                .replace("oldUserRechargeRate", data.oldUserRechargeRate)
-                .replace("oldUserARPU", data.oldUserARPU)
-                .replace("oldUserLoginCount", data.oldUserLoginCount)
-                .replace("oldUserPlayCount", data.oldUserPlayCount)
-                .replace("oldUserPlayRate", data.oldUserPlayRate)
-                .replace("nextDayKeepRate", data.nextDayKeepRate);
+                .replace("PC_loginPopulation", data.PC_loginPopulation)
+                .replace("PC_playPopulation", data.PC_playPopulation)
+                .replace("PC_liaoMeiDeZhou_loginPopulation", data.PC_liaoMeiDeZhou_loginPopulation)
+                .replace("PC_leYinDianJing_loginPopulation", data.PC_leYinDianJing_loginPopulation)
+                .replace("PC_yiBiFen_loginPopulation", data.PC_yiBiFen_loginPopulation)
+                .replace("H5_loginPopulation", data.H5_loginPopulation)
+                .replace("H5_playPopulation", data.H5_playPopulation)
+                .replace("H5_liaoMeiDeZhou_loginPopulation", data.H5_liaoMeiDeZhou_loginPopulation)
+                .replace("H5_leYinDianJing_loginPopulation", data.H5_leYinDianJing_loginPopulation)
+                .replace("H5_yiBiFen_loginPopulation", data.H5_yiBiFen_loginPopulation)
+                .replace("ios_loginPopulation", data.ios_loginPopulation)
+                .replace("ios_playPopulation", data.ios_playPopulation)
+                .replace("ios_liaoMeiDeZhou_loginPopulation", data.ios_liaoMeiDeZhou_loginPopulation)
+                .replace("ios_leYinDianJing_loginPopulation", data.ios_leYinDianJing_loginPopulation)
+                .replace("ios_yiBiFen_loginPopulation", data.ios_yiBiFen_loginPopulation)
+                .replace("android_loginPopulation", data.android_loginPopulation)
+                .replace("android_playPopulation", data.android_playPopulation)
+                .replace("android_liaoMeiDeZhou_loginPopulation", data.android_liaoMeiDeZhou_loginPopulation)
+                .replace("android_leYinDianJing_loginPopulation", data.android_leYinDianJing_loginPopulation)
+                .replace("android_yiBiFen_loginPopulation", data.android_yiBiFen_loginPopulation);
             $("#data").append(ele);
         }
     };
@@ -245,7 +254,7 @@
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
         $("#data").empty();
-        $.post("/month/composite/list.do", {
+        $.post("/month/login/statistics/list.do", {
             monthStart: $('#monthStart').val(),
             monthEnd: $('#monthEnd').val(),
             pageNo: pageNumber,
@@ -271,9 +280,27 @@
                     $("#totalPage").html(0);
                     $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");
                 } else {
-                    var list = [];
+                    var info = {};
                     for (var i = 0; i < infoData.length; i++) {
-                        addTbRow(infoData[i]);
+                        for (var i = 0; i < infoData.length; i++) {
+                            if (infoData[i].sourceType == 1) {
+
+                            }
+                            if (infoData[i].sourceType == 2) {
+
+                            }
+                            if (infoData[i].sourceType == 3) {
+
+                            }
+                            if (infoData[i].sourceType == 4) {
+
+                            }
+                            if ((i % 4) == 3) {
+                                info.statisticsMonth = infoData[i].statisticsMonth
+                                addTbRow(info);
+                                info = {};
+                            }
+                        }
                     }
                 }
             } else {

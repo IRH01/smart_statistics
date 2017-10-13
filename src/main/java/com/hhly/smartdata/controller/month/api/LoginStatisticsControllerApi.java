@@ -1,6 +1,7 @@
 package com.hhly.smartdata.controller.month.api;
 
 import com.hhly.smartdata.controller.BaseController;
+import com.hhly.smartdata.dto.mouth.LoginStatisticsFilter;
 import com.hhly.smartdata.dto.mouth.TimeFilter;
 import com.hhly.smartdata.service.month.LoginStatisticsService;
 import com.hhly.smartdata.util.Result;
@@ -20,7 +21,7 @@ public class LoginStatisticsControllerApi extends BaseController{
     private LoginStatisticsService loginStatisticsService;
 
     @RequestMapping("list")
-    public Result search(TimeFilter filter){
+    public Result search(LoginStatisticsFilter filter){
         Pagination pagination = null;
         try{
             pagination = this.loginStatisticsService.search(filter);

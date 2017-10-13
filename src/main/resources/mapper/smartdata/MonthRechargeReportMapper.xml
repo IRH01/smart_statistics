@@ -23,7 +23,7 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
 
-    <select id="searchByTime" resultType="com.hhly.smartdata.dto.mouth.MonthCompositeReportResult">
+    <select id="searchByTime" resultType="com.hhly.smartdata.dto.mouth.MonthRechargeReportResult">
         SELECT
         <include refid="Base_Column_List"/>
         FROM month_recharge_report
@@ -37,8 +37,9 @@
         </where>
         ORDER BY statistics_month DESC, source_type ASC
         <if test="pageNo != null">
-            <bind name="offset" value="(pageNo-1) * pageSize"/>
-            LIMIT #{offset}, #{pageSize}
+            <bind name="offset" value="(pageNo-1) * pageSize * 4"/>
+            <bind name="pageSize4" value="pageSize * 4"/>
+            LIMIT #{offset}, #{pageSize4}
         </if>
     </select>
 

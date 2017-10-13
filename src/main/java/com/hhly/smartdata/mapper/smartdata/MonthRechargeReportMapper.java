@@ -1,6 +1,7 @@
 package com.hhly.smartdata.mapper.smartdata;
 
 
+import com.hhly.smartdata.dto.mouth.MonthRechargeReportResult;
 import com.hhly.smartdata.dto.mouth.TimeFilter;
 import com.hhly.smartdata.model.smartdata.MonthRechargeReport;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,7 @@ public interface MonthRechargeReportMapper{
 
     int updateByPrimaryKey(MonthRechargeReport record) throws Exception;
 
-    List<MonthRechargeReport> searchByTime(TimeFilter filter) throws Exception;
+    List<MonthRechargeReportResult> searchByTime(TimeFilter filter) throws Exception;
 
     long searchByTimeCount(TimeFilter filter) throws Exception;
 }
