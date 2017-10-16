@@ -23,4 +23,6 @@ public interface MonthRechargeReportMapper{
     List<MonthRechargeReportResult> searchByTime(TimeFilter filter) throws Exception;
 
     long searchByTimeCount(TimeFilter filter) throws Exception;
+
+    List<MonthRechargeReport> selectByMonth(String month) throws Exception;
 }

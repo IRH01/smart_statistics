@@ -56,7 +56,12 @@
             </if>
         </where>
     </select>
-
+    <select id="selectByMonth" resultType="com.hhly.smartdata.model.smartdata.MonthRechargeReport">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM month_recharge_report
+        WHERE statistics_month = #{month}
+    </select>
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.MonthRechargeReport">
         insert into month_recharge_report (id, statistics_month, source_type,
         recharge_population, recharge_amount, recharge_count,

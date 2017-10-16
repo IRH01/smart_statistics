@@ -78,7 +78,7 @@ public class DailyExecutorService{
         for(Map<String, Object> map : yesterdayLaunchGameUserList){
             yesterdayLaunchGameUserSet.add((String) map.get("userId"));
         }
-        // 昨日产生消费记录的用户列表,并转换成Set集合。
+        // 昨日产生消费记录的用户列表,并转换成Set集合。(匹配消费记录;下述查询有误)
         List<Map<String, Object>> yesterdayRechargeUserList = this.rechargeRecordMapper.selectYesterdayRechargeUser();
         Map<String, Map<String, Object>> yesterdayRechargeUserMap = Maps.newHashMap();
         for(Map<String, Object> map : yesterdayRechargeUserList){

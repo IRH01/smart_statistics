@@ -75,18 +75,20 @@
                                 <div class="section-box">
                                     <div class="titleDiv">
                                         <div style="margin-left:8px;">
-                                            <span > 日期：
+                                             <span > 日期：
                                                 <select id="dateStarts" onchange="dateChange()" >
-                                                    <option value="" selected>请选择</option>
+                                                    <option value="-999" selected>请选择</option>
                                                 </select>
                                                 至
                                                 <select id="dateEnds" onchange = "dateChange()">
-                                                     <option value="" selected>请选择</option>
+                                                     <option value="-999" selected>请选择</option>
                                                 </select>
-                                                <%--<input value="选择日期"--%>
-                                                                                <%--class="laydate-icon"--%>
-                                                                                <%--id="dateStart"> 至 <input--%>
-                                                    <%--class="laydate-icon" id="dateEnd" value="选择日期">--%>
+                                                <button type="button" id="search" class="btn btn-primary btn-sm" onclick="search();">
+                                                    <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
+                                                </button>
+                                                <button type="button" id="reset" class="btn btn-primary btn-sm" onclick="reset();">
+                                                    <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
+                                                </button>
 											</span>
                                         </div>
                                     </div>
@@ -121,7 +123,7 @@
                                                     </div>
                                                     <table class="tablePage">
                                                         <tr>
-                                                            <td><div class="divPage"><span class="spanPageSize">每页个数：</span><input id="pageSize" value="10" class="inputPageSize" onKeypress="return intInput(event);" onKeyup="value=pageSizeLimit(value);" onblur="value=pageSizeNotEmpty(value);"/></div></td>
+                                                            <td><div class="divPage"><span class="spanPageSize">每页个数：</span><input id="pageSizes" value="10" class="inputPageSize" onKeypress="return intInput(event);" onKeyup="value=pageSizeLimit(value);" onblur="value=pageSizeNotEmpty(value);"/></div></td>
                                                             <td><span class="spanPageSize">总记录数：</span><span id="totalCounts" class="spanPageSize"></span></td>
                                                             <td><span class="spanPageSize">总页数：</span><span id="totalPages" class="spanPageSize"></span></td>
                                                             <td class="tablePageTd"><div id="pages"></div></td>
@@ -289,18 +291,27 @@
 
     // 统计
     var dateChange = function () {
-        $("#dateType").val(0);
-        search();
+        if("-999" != $("#dateStarts").val() && "-999" != $("#dateEnds").val()){
+            var dateEnds = new Date($("#dateEnds").val()).getTime();
+            var dateStarts = new Date($("#dateStarts").val()).getTime();
+            if(dateEnds < dateStarts){
+                layer.alert("起始时间必须小于等于结束时间", {
+                    icon : 5
+                });
+                $("#dateStarts").val("-999");
+                $("#dateEnds").val("-999");
+            }
+        }
+//        $("#dateType").val(0);
+//        search();
     }
 
-    var dateChange1 = function () {
-        $("#dateType").val(0);
-        showNewUserData(1, pageSize);
+    var reset = function () {
+        $("#dateStarts").val("-999");
+        $("#dateEnds").val("-999");
     }
-//    var dateValue = setDateRangeConfig("dateStart", "dateEnd", dateChange);
-//    var dateTypeChange = function () {
-//        setDateTypeChange("dateType", "dateStart", "dateEnd", dateValue.dateStart, dateValue.dateEnd, search);
-//    }
+
+
 
     $(function () {
         $("#sortable").sortable({cursor: "move", handle: ".sortHandle"});
@@ -323,6 +334,7 @@
 
 
     var pageSize = 10;
+    var pageSizes = 10;
     var deviceTypeChange = function (ele) {
         if (ele.id == "cltTypeAll") {
             $(".deviceType").prop("checked", ele.checked);
@@ -364,8 +376,8 @@
         }
         $("#terminalsIntervalData").empty();
         $.post("/interval/realTimeTerminalsInterval/terminalsList.do", {
-            startDate: $('#dateStarts').val(),
-            endDate: $('#dateEnds').val(),
+            startDate: $("#dateStarts").val() != -999 ? $("#dateStarts").val() : null,
+            endDate: $("#dateEnds").val() != -999 ? $("#dateEnds").val() : null,
             pageNumber: pageNumber,
             pageSize: pageSize
         }, function (data) {
@@ -452,8 +464,8 @@
     var showNewUserData = function (pageNumber, pageSize) {
         $("#newUserData").empty();
         $.post("/interval/realTimeTerminalsInterval/list.do", {
-            startDate: $('#dateStarts').val(),
-            endDate: $('#dateEnds').val(),
+            startDate: $("#dateStarts").val() != -999 ? $("#dateStarts").val() : null,
+            endDate: $("#dateEnds").val() != -999 ? $("#dateEnds").val() : null,
             deviceType:$('#searchSourceType').val(),
             pageNumber: pageNumber,
             pageSize: pageSize,
@@ -518,16 +530,18 @@
 
     //查询显示
     var search = function () {
+        pageSize = $("#pageSize").val();
+        pageSizes = $("#pageSizes").val();
         showNewUserData(1, pageSize);
         loadNewUserDataTrendLine(echartsCopy);
-        showTerminalsIntervalData(1, pageSize);
+        showTerminalsIntervalData(1, pageSizes);
     }
 
     var trendline;
 
     function loadNewUserDataTrendLine(echarts) {
-        var startDate = $("#dateStarts").val();
-        var endDate = $("#dateEnds").val();
+        var startDate = $("#dateStarts").val() != -999 ? $("#dateStarts").val() : null;
+        var endDate=$("#dateEnds").val() != -999 ? $("#dateEnds").val() : null;
 
         $.ajax({
             url: "/interval/realTimeInterval/chart.do",

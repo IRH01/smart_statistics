@@ -212,7 +212,7 @@
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
         $("#data").empty();
-        $.post("/month/register/statistics/list.do", {
+        $.get("/month/register/statistics/list.do", {
             monthStart: $('#monthStart').val(),
             monthEnd: $('#monthEnd').val(),
             pageNo: pageNumber,

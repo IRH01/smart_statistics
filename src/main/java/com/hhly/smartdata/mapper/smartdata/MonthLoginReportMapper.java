@@ -7,6 +7,7 @@ import com.hhly.smartdata.model.smartdata.MonthLoginReport;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface MonthLoginReportMapper{
@@ -20,7 +21,9 @@ public interface MonthLoginReportMapper{
 
     int updateByPrimaryKey(MonthLoginReport record) throws Exception;
 
-    List<MonthLoginReport> searchByTime(LoginStatisticsFilter filter) throws Exception;
+    List<MonthLoginReport> searchByTime(TimeFilter filter) throws Exception;
 
-    long searchByTimeCount(LoginStatisticsFilter filter) throws Exception;
+    long searchByTimeCount(TimeFilter filter) throws Exception;
+
+    Map<String,Object> selectByMonth(String month) throws Exception;
 }

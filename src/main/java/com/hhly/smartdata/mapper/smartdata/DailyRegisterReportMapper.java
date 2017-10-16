@@ -24,6 +24,6 @@ public interface DailyRegisterReportMapper{
 
     List<DailyRegisterReport> selectRegisterDataListByTime(Map<String,Object> map) throws Exception;
 
-    DailyRegisterReport selectYesterdayRegisterData() throws Exception;
+    DailyRegisterReport selectYesterdayRegisterData(Map<String,Object> map) throws Exception;
 
 }

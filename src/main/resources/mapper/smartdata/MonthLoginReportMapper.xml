@@ -32,14 +32,12 @@
             <if test="monthEnd != null and monthEnd != ''">
                 AND statistics_month &lt;= #{monthEnd}
             </if>
-            <if test="sourceType != null and sourceType != ''">
-                AND source_type = #{sourceType}
-            </if>
         </where>
         ORDER BY statistics_month DESC, source_type ASC
         <if test="pageNo != null">
-            <bind name="offset" value="(pageNo-1) * pageSize"/>
-            LIMIT #{offset}, #{pageSize}
+            <bind name="offset" value="(pageNo-1) * pageSize * 12"/>
+            <bind name="pageSize12" value="pageSize * 12"/>
+            LIMIT #{offset}, #{pageSize12}
         </if>
     </select>
     <select id="searchByTimeCount" resultType="java.lang.Long">
@@ -54,6 +52,13 @@
                 AND statistics_month &lt;= #{monthEnd}
             </if>
         </where>
+    </select>
+    <select id="selectByMonth" resultType="java.util.Map">
+        SELECT
+        SUM(login_population) AS loginPopulationSum,
+        SUM(play_population) AS playPopulationSum
+        FROM month_login_report
+        WHERE statistics_month = #{month}
     </select>
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
         insert into month_login_report (id, statistics_month, platform_id,

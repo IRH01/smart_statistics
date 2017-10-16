@@ -31,6 +31,20 @@
     <script src="/lib/dialogsdk.js"></script>
     <script src="/lib/tools/tools.js"></script>
     <script src="/lib/layer/layer.js"></script>
+
+    <link rel="stylesheet" href="/css/admin-trend.css"/>
+    <script src="/lib/laydate/laydate.js"></script>
+    <link rel="stylesheet" href="/lib/myPagination/css/style.css"/>
+    <link rel="stylesheet" href="/lib/myPagination/js/myPagination/page.css"/>
+    <link rel="stylesheet" href="/css/jquery-ui.css"/>
+    <script src="/lib/myPagination/js/myPagination/jquery.myPagination6.0.js"></script>
+    <script src="/lib/jquery-ui.js"></script>
+    <script src="/lib/datecontrol.js"></script>
+    <script src="/lib/echart/dist/echarts.js"></script>
+    <script src="/lib/tool.js"></script>
+
+
+
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -43,72 +57,322 @@
                     <ul class="breadcrumb">
                         <li>您当前的位置：</li>
                         <tags:breadcrumb/>
-                        <li>平台综合时段数据统计</li>
+                        <li>平台日报表</li>
                     </ul>
                 </div>
                 <!--body start-->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title" id="-collapsible-group-item-#1-">
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseOne" aria-expanded="true"
+                               aria-controls="collapseOne" class="">注册来源统计</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
+                        <div class="panel-body">
+                            <div class="admin-content">
+                                <div class="section-box">
+                                    <div class="whiteDiv tab-content">
+                                        <ul id="sortable" class="ui-widget-content sortable">
+                                            <li class="ui-state-default">
+                                                <div style="padding-bottom:60px;"
+                                                     class="ui-widget-content resize resizePanel">
+                                                    <div style="width:18%;height:5%;float:left;">
+                                                        <table class="tableList1">
+                                                            <colgroup>
+                                                                <col width="100"/>
+                                                            </colgroup>
+                                                            <thead>
+                                                            <tr >
+                                                                <th style="border:1px solid black;width:20px;">
+                                                                    昨日新增注册用户<br/>
+                                                                    <lable id="yesterdayRegisterPopulationNum"></lable>
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                    <div class="titleDiv" style="height:65px;">
+                                                        <div style="display: inline;width:500px;text-align: center;"></div>
+                                                        <div class="select-fr" style="padding-right: 30px;float:right;">
+                                                            <table style="margin-left:5px;">
 
-                <!--body end-->
+                                                                <tr>
+                                                                    <td class="tb1Td">
+                                                                        <span class="span">统计时间：</span>
+                                                                    </td>
+                                                                    <td><input placeholder="请选择日期" class="laydate-icon" style="height:25px;" id="dateStart" readonly> </td>
+                                                                    <td>
+                                                                        <span class="span">&nbsp;至&nbsp;</span>
+                                                                    </td>
+                                                                    <td><input class="laydate-icon" id="dateEnd" style="height:25px;" placeholder="请选择日期" readonly></td>
+                                                                    <td style="line-height:1;">
+                                                                        <button type="button" id="search" class="btn btn-primary btn-sm" onclick="search();">
+                                                                            <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
+                                                                        </button>
+                                                                    </td>
+                                                                    <td style="line-height:1;">
+                                                                        <button type="button" id="reset" class="btn btn-primary btn-sm" onclick="reset();">
+                                                                            <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tablePanel">
+                                                        <table class="tableList1">
+                                                            <colgroup>
+                                                                <col width="120"/>
+                                                                <col width="90"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                                <col width="100"/>
+                                                            </colgroup>
+                                                            <thead>
+                                                            <tr>
+                                                                <th>日期</th>
+                                                                <th>PC(/注册人数)</th>
+                                                                <th>PC(/PV)</th>
+                                                                <th>PC(/UV)</th>
+                                                                <th>H5(/注册人数)</th>
+                                                                <th>H5(/PV)</th>
+                                                                <th>H5(/UV)</th>
+                                                                <th>IOS(/注册人数)</th>
+                                                                <th>IOS(/安装量)</th>
+                                                                <th>ANDROID(/注册人数)</th>
+                                                                <th>ANDROID(/安装量)</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="newUserData"></tbody>
+                                                        </table>
+                                                    </div>
+                                                    <table class="tablePage">
+                                                        <tr>
+                                                            <td><div class="divPage"><span class="spanPageSize">每页个数：</span><input id="pageSize" value="10" class="inputPageSize" onKeypress="return intInput(event);" onKeyup="value=pageSizeLimit(value);" onblur="value=pageSizeNotEmpty(value);"/></div></td>
+                                                            <td><span class="spanPageSize">总记录数：</span><span id="totalCount" class="spanPageSize"></span></td>
+                                                            <td><span class="spanPageSize">总页数：</span><span id="totalPage" class="spanPageSize"></span></td>
+                                                            <td class="tablePageTd"><div id="page"></div></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--body end-->
+                </div>
             </div>
         </div>
-        <hr>
     </div>
 </body>
 </html>
 <script type="text/javascript">
-    function tijiao(url) {
-        document.form.action = url;
-        document.form.submit();
+    var date = new Date();
+    var seperator1 = "-";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+        + " " ;
+
+    // 统计
+    var dateChange = function () {
+        $("#dateType").val(0);
+        search();
     }
 
-    function initPwd(id) {
-        layer.confirm("确认要将密码重置为密码“123456”吗？", {
-            btn: ["确认", "取消"] //可以无限个按钮
-        }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/initPwd.do"/>", {userId: id}, function (result) {
-                if (result.status == 1200) {
-                    layer.alert("设置成功", {icon: 6});
+    var intervalNum = function () {
+        $("#yesterdayRegisterPopulationNum").empty();
+        $.post("/daily/dailyRegister/intervalNum.do", {
+            startDate: $('#dateStarts').val(),
+            endDate: $('#dateEnds').val()
+        }, function (data) {
+            var json = JSON.parse(data);
+            if (null != json && undefined != json) {
+                var totalNum = json.pcPopulation+json.h5Population+json.iosPopulation+json.androidPopulation;
+                if (totalNum > 0) {
+                    $("#yesterdayRegisterPopulationNum").html(json.pcPopulation+json.h5Population+json.iosPopulation+json.androidPopulation);
+                 } else {
+                    $("#yesterdayRegisterPopulationNum").html("0");
                 }
-            });
+            } else {
+                $("#yesterdayRegisterPopulationNum").empty();
+                $("#yesterdayRegisterPopulationNum").html("0");
+            }
         });
+    };
+
+    $(function () {
+        $("#sortable").sortable({cursor: "move", handle: ".sortHandle"});
+        $(".resize").resizable({minHeight: 200, minWidth: 300});
+    });
+
+
+    var pageSize = 10;
+    var deviceTypeChange = function (ele) {
+        if (ele.id == "cltTypeAll") {
+            $(".deviceType").prop("checked", ele.checked);
+        } else {
+            if (!ele.checked) {
+                $("#cltTypeAll").prop("checked", false);
+            }
+        }
+        loadNewUserDataTrendLine(echartsCopy);
     }
 
-    function del(id) {
-        layer.confirm("是否要刪除该用户？", {
-            btn: ["确认", "取消"] //可以无限个按钮
-        }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/del.do"/>", {
-                userId: id
-            }, function (result) {
-                if (result.status == 1200) {
-                    layer.alert("删除成功", {
-                        icon: 6
-                    });
-                    tijiao("<%=request.getContextPath()%>/admin/admin/list.do");
+    var getDeviceType = function () {
+        var devices = $(".deviceType");
+        var deviceTypes = "";
+        for (i = 0; i < devices.length; i++) {
+            if (devices[i].checked) {
+                if ("" != deviceTypes) {
+                    deviceTypes += ",";
+                }
+                deviceTypes += devices.eq(i).val();
+            }
+        }
+        return deviceTypes;
+    }
+    setDateRangeConfig("dateStart","dateEnd",null,true);
+    //    var dateValue = setDateRangeConfig("dateStart", "dateEnd", dateChange);
+    var dateTypeChange = function () {
+        setDateTypeChange("dateType", "dateStart", "dateEnd", dateValue.dateStart, dateValue.dateEnd, search);
+    }
+    var addTbRow = function (data) {
+        if (null != data && undefined != data && "" != data) {
+            var ele = "<tr><td class=\"date\">statisticsDay</td><td>pcPopulation</td><td>pcPageView</td><td>pcUserView</td><td>h5Population</td><td>h5PageView</td><td>h5UserView</td><td>iosPopulation</td><td>iosInstallCount</td><td>androidPopulation</td><td>androidInstallCount</td></tr>";
+            ele = ele.replace("statisticsDay", data.statisticsDay).replace("pcPopulation", data.pcPopulation).replace("pcPageView", data.pcPageView).replace("pcUserView", data.pcUserView).replace("h5Population", data.h5Population).replace("h5PageView", data.h5PageView).replace("h5UserView", data.h5UserView)
+                .replace("iosPopulation", data.iosPopulation).replace("iosInstallCount", data.iosInstallCount).replace("androidPopulation", data.androidPopulation).replace("androidInstallCount", data.androidInstallCount);
+            $("#newUserData").append(ele);
+        }
+    }
+
+    //显示统计列表
+    var showNewUserData = function (pageNumber, pageSize) {
+        $("#newUserData").empty();
+        $.post("/daily/dailyRegister/list.do", {
+            startDate: $('#dateStart').val(),
+            endDate: $('#dateEnd').val(),
+            pageNumber: pageNumber,
+            pageSize: pageSize
+        }, function (data) {
+            var json = JSON.parse(data);
+            if (null != json && undefined != json) {
+                $("#totalCount").html(json.total);
+                $("#totalPage").html(json.pages);
+                $("#page").myPagination({
+                    currPage: pageNumber,
+                    pageCount: json.pages,
+                    ajax: {
+                        on: false,
+                        onClick: function (page) {
+                            showNewUserData(page, pageSize);
+                        }
+                    }
+                });
+                var infoData = json.list;
+                if (null == infoData || undefined == infoData || 0 >= infoData.length) {
+                    $("#totalCount").html(0);
+                    $("#totalPage").html(0);
+                    $("#newUserData").append("<tr><td colspan=\"11\">没有数据</td></tr>");
                 } else {
-                    layer.alert("删除失败", {
-                        icon: 5
-                    });
+                    var pcPopulationNum=0;
+                    var pcPageViewNum=0;
+                    var pcUserViewNum=0;
+                    var h5PopulationNum=0;
+                    var h5PageViewNum=0;
+                    var h5UserViewNum=0;
+                    var iosPopulationNum=0;
+                    var iosInstallCountNum=0;
+                    var androidPopulationNum=0;
+                    var androidInstallCountNum=0;
+                    for (var i = 0; i < infoData.length; i++) {
+                         pcPopulationNum=accAdd(pcPopulationNum,infoData[i].pcPopulation);
+                         pcPageViewNum=accAdd(pcPageViewNum,infoData[i].pcPageView);
+                         pcUserViewNum=accAdd(pcUserViewNum,infoData[i].pcUserView);
+                         h5PopulationNum=accAdd(h5PopulationNum,infoData[i].h5Population);
+                         h5PageViewNum=accAdd(h5PageViewNum,infoData[i].h5PageView);
+                         h5UserViewNum=accAdd(h5UserViewNum,infoData[i].h5UserView);
+                         iosPopulationNum=accAdd(iosPopulationNum,infoData[i].iosPopulation);
+                         iosInstallCountNum=accAdd(iosInstallCountNum,infoData[i].iosInstallCount);
+                         androidPopulationNum=accAdd(androidPopulationNum,infoData[i].androidPopulation);
+                         androidInstallCountNum=accAdd(androidInstallCountNum,infoData[i].androidInstallCount);
+                        var ele = {
+                            statisticsDay: infoData[i].statisticsDay,
+                            pcPopulation: infoData[i].pcPopulation,
+                            pcPageView: infoData[i].pcPageView,
+                            pcUserView: infoData[i].pcUserView,
+                            h5Population: infoData[i].h5Population,
+                            h5PageView: infoData[i].h5PageView,
+                            h5UserView: infoData[i].h5UserView,
+                            iosPopulation: infoData[i].iosPopulation,
+                            iosInstallCount: infoData[i].iosInstallCount,
+                            androidPopulation: infoData[i].androidPopulation,
+                            androidInstallCount: infoData[i].androidInstallCount
+                        }
+                        addTbRow(ele);
+                    }
+                    var ele1 = {
+                        statisticsDay:"总计",
+                        pcPopulation: pcPopulationNum,
+                        pcPageView: pcPageViewNum,
+                        pcUserView: pcUserViewNum,
+                        h5Population: h5PopulationNum,
+                        h5PageView: h5PageViewNum,
+                        h5UserView: h5UserViewNum,
+                        iosPopulation: iosPopulationNum,
+                        iosInstallCount: iosInstallCountNum,
+                        androidPopulation: androidPopulationNum,
+                        androidInstallCount: androidInstallCountNum
+                    }
+                    addTbRow(ele1);
                 }
-            });
+            } else {
+                // $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
+            }
         });
     }
 
-    function disable(url) {
-        layer.confirm("是否要禁用该用户？禁用后，该用户将无法登陆", {
-            btn: ["确认", "取消"]
-        }, function (index, layero) {
-            document.form.action = url;
-            document.form.submit();
+    //查询显示
+    var search = function () {
+        pageSize = $("#pageSize").val();
+        showNewUserData(1, pageSize);
+        intervalNum();
+    }
+    var reset = function() {
+        $("#dateStart").val("");
+        $("#dateEnd").val("");
+    }
+
+    var echartsCopy;
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: '/lib/echart/dist'
+        }
+    });
+
+    // 使用
+    require(['echarts', 'echarts/chart/line'],
+        function (ec) {
+            echartsCopy = ec;
+            search();
         });
-    }
-
-    function clearSearch() {
-        jQuery("#username").attr("value", "");
-        jQuery("#userStatus").attr("value", "");
-        jQuery("#type").attr("value", "");
-        document.form.action = 'list.do';
-        document.form.submit();
-    }
-
 </script>

@@ -89,15 +89,6 @@
                                                 查询
                                             </button>
                                         </div>
-                                        <div class="select-fr" style="padding-right: 30px;">
-                                            指标筛选：
-                                            <select id="dateType" style="width:60px;" class="select">
-                                                <option value="1">PC</option>
-                                                <option value="2">android</option>
-                                                <option value="3">IOS</option>
-                                                <option value="4">H5</option>
-                                            </select>
-                                        </div>
                                     </div>
                                     <div class="whiteDiv">
                                         <ul id="sortable" class="ui-widget-content sortable">
@@ -232,11 +223,11 @@
                 .replace("PC_liaoMeiDeZhou_loginPopulation", data.PC_liaoMeiDeZhou_loginPopulation)
                 .replace("PC_leYinDianJing_loginPopulation", data.PC_leYinDianJing_loginPopulation)
                 .replace("PC_yiBiFen_loginPopulation", data.PC_yiBiFen_loginPopulation)
-                .replace("H5_loginPopulation", data.H5_loginPopulation)
-                .replace("H5_playPopulation", data.H5_playPopulation)
-                .replace("H5_liaoMeiDeZhou_loginPopulation", data.H5_liaoMeiDeZhou_loginPopulation)
-                .replace("H5_leYinDianJing_loginPopulation", data.H5_leYinDianJing_loginPopulation)
-                .replace("H5_yiBiFen_loginPopulation", data.H5_yiBiFen_loginPopulation)
+                .replace("H5_loginPopulation", data.h5_loginPopulation)
+                .replace("H5_playPopulation", data.h5_playPopulation)
+                .replace("H5_liaoMeiDeZhou_loginPopulation", data.h5_liaoMeiDeZhou_loginPopulation)
+                .replace("H5_leYinDianJing_loginPopulation", data.h5_leYinDianJing_loginPopulation)
+                .replace("H5_yiBiFen_loginPopulation", data.h5_yiBiFen_loginPopulation)
                 .replace("ios_loginPopulation", data.ios_loginPopulation)
                 .replace("ios_playPopulation", data.ios_playPopulation)
                 .replace("ios_liaoMeiDeZhou_loginPopulation", data.ios_liaoMeiDeZhou_loginPopulation)
@@ -254,7 +245,7 @@
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
         $("#data").empty();
-        $.post("/month/login/statistics/list.do", {
+        $.get("/month/login/statistics/list.do", {
             monthStart: $('#monthStart').val(),
             monthEnd: $('#monthEnd').val(),
             pageNo: pageNumber,
@@ -281,25 +272,88 @@
                     $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");
                 } else {
                     var info = {};
+                    var pc_login = 0;
+                    var pc_play = 0;
+                    var h5_login = 0;
+                    var h5_play = 0;
+                    var ios_login = 0;
+                    var ios_play = 0;
+                    var android_login = 0;
+                    var android_play = 0;
+                    //1、PC 2.android 3.IOS 4.H5
                     for (var i = 0; i < infoData.length; i++) {
-                        for (var i = 0; i < infoData.length; i++) {
-                            if (infoData[i].sourceType == 1) {
-
+                        if (infoData[i].sourceType == 1) {
+                            if (infoData[i].platformId == 1) {
+                                info.PC_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
                             }
-                            if (infoData[i].sourceType == 2) {
-
+                            if (infoData[i].platformId == 2) {
+                                info.PC_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
                             }
-                            if (infoData[i].sourceType == 3) {
-
+                            if (infoData[i].platformId == 3) {
+                                info.PC_yiBiFen_loginPopulation = infoData[i].loginPopulation;
                             }
-                            if (infoData[i].sourceType == 4) {
-
+                            pc_login += infoData[i].loginPopulation;
+                            pc_play += infoData[i].playPopulation;
+                        }
+                        if (infoData[i].sourceType == 2) {
+                            if (infoData[i].platformId == 1) {
+                                info.android_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
                             }
-                            if ((i % 4) == 3) {
-                                info.statisticsMonth = infoData[i].statisticsMonth
-                                addTbRow(info);
-                                info = {};
+                            if (infoData[i].platformId == 2) {
+                                info.android_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
                             }
+                            if (infoData[i].platformId == 3) {
+                                info.android_yiBiFen_loginPopulation = infoData[i].loginPopulation;
+                            }
+                            android_login += infoData[i].loginPopulation;
+                            android_play += infoData[i].playPopulation;
+                        }
+                        if (infoData[i].sourceType == 3) {
+                            if (infoData[i].platformId == 1) {
+                                info.ios_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
+                            }
+                            if (infoData[i].platformId == 2) {
+                                info.ios_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
+                            }
+                            if (infoData[i].platformId == 3) {
+                                info.ios_yiBiFen_loginPopulation = infoData[i].loginPopulation;
+                            }
+                            ios_login += infoData[i].loginPopulation;
+                            ios_play += infoData[i].playPopulation;
+                        }
+                        if (infoData[i].sourceType == 4) {
+                            if (infoData[i].platformId == 1) {
+                                info.h5_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
+                            }
+                            if (infoData[i].platformId == 2) {
+                                info.h5_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
+                            }
+                            if (infoData[i].platformId == 3) {
+                                info.h5_yiBiFen_loginPopulation = infoData[i].loginPopulation;
+                            }
+                            h5_login += infoData[i].loginPopulation;
+                            h5_play += infoData[i].playPopulation;
+                        }
+                        if ((i % 12) == 11) {
+                            info.statisticsMonth = infoData[i].statisticsMonth;
+                            info.PC_loginPopulation = pc_login;
+                            info.PC_playPopulation = pc_play;
+                            info.h5_loginPopulation = h5_login;
+                            info.h5_playPopulation = h5_play;
+                            info.ios_loginPopulation = ios_login;
+                            info.ios_playPopulation = ios_play;
+                            info.android_loginPopulation = android_login;
+                            info.android_playPopulation = android_play;
+                            addTbRow(info);
+                            info = {};
+                            pc_login = 0;
+                            pc_play = 0;
+                            h5_login = 0;
+                            h5_play = 0;
+                            ios_login = 0;
+                            ios_play = 0;
+                            android_login = 0;
+                            android_play = 0;
                         }
                     }
                 }
@@ -309,11 +363,19 @@
         });
     };
 
+    var getLastMonthTotal = function () {
+        $.get("/month/login/statistics/last/total.do", {}, function (result) {
+            $("#last_month_login").html(result.data.loginPopulationSum);
+            $("#last_month_play").html(result.data.playPopulationSum);
+        });
+    };
+
     //查询显示
     var search = function () {
         showNewUserData(1, pageSize);
     };
 
+    getLastMonthTotal();
     search();
     setMonthConfig();
 

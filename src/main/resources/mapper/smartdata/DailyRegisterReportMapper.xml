@@ -209,17 +209,27 @@
 
     <select id="selectRegisterDataListByTime" parameterType="java.util.Map" resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         select
-        <include refid="Base_Column_List"/>
+        DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
+        pc_population as pcPopulation,
+        pc_page_view as pcPageView,
+        pc_user_view as pcUserView,
+        h5_population as h5Population,
+        h5_page_view as h5PageView,
+        h5_user_view as h5UserView,
+        ios_population as iosPopulation,
+        ios_install_count as iosInstallCount,
+        android_population as androidPopulation,
+        android_install_count as androidInstallCount
         from daily_register_report
         where 1=1
         <if test="startDate != null and startDate  != ''">
             <![CDATA[
-  		     and  statistics_day > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+  		     and  statistics_day > DATE_FORMAT(#{startDate},'%Y-%m-%d')
   		    ]]>
         </if>
         <if test="endDate != null and endDate  != ''">
             <![CDATA[
-  		     and statistics_day <= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+  		     and statistics_day <= DATE_FORMAT(#{endDate},'%Y-%m-%d')
   		    ]]>
         </if>
         order by statistics_day desc
@@ -227,13 +237,22 @@
 
     <select id="selectYesterdayRegisterData" parameterType="java.util.Map" resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         select
-        <include refid="Base_Column_List"/>
+        DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
+        pc_population as pcPopulation,
+        pc_page_view as pcPageView,
+        pc_user_view as pcUserView,
+        h5_population as h5Population,
+        h5_page_view as h5PageView,
+        h5_user_view as h5UserView,
+        ios_population as iosPopulation,
+        ios_install_count as iosInstallCount,
+        android_population as androidPopulation,
+        android_install_count as androidInstallCount
         from daily_register_report
         where 1=1
-        AND TO_DAYS(NOW()) - TO_DAYS(statistics_day &lt;= 1
+        AND TO_DAYS(NOW()) - TO_DAYS(statistics_day) &lt;= 1
         AND TO_DAYS(NOW()) - TO_DAYS(statistics_day) &gt;= 0
         limit 1
     </select>
-
 
 </mapper>

@@ -341,6 +341,7 @@
 
     //查询显示
     var search = function () {
+        pageSize = $("#pageSize").val();
         loadNewUserDataTrendLine(echartsCopy);
         showTerminalsIntervalData(1, pageSize);
     }

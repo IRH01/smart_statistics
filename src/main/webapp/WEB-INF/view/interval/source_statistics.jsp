@@ -78,16 +78,18 @@
                                         <div style="margin-left:8px;">
                                             <span > 日期：
                                                 <select id="dateStarts" onchange="dateChange()" >
-                                                    <option value="" selected>请选择</option>
+                                                    <option value="-999" selected>请选择</option>
                                                 </select>
                                                 至
                                                 <select id="dateEnds" onchange = "dateChange()">
-                                                     <option value="" selected>请选择</option>
+                                                     <option value="-999" selected>请选择</option>
                                                 </select>
-                                                <%--<input value="选择日期"--%>
-                                                                                <%--class="laydate-icon"--%>
-                                                                                <%--id="dateStart"> 至 <input--%>
-                                                    <%--class="laydate-icon" id="dateEnd" value="选择日期">--%>
+                                                <button type="button" id="search" class="btn btn-primary btn-sm" onclick="search();">
+                                                    <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
+                                                </button>
+                                                <button type="button" id="reset" class="btn btn-primary btn-sm" onclick="reset();">
+                                                    <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
+                                                </button>
 											</span>
                                         </div>
                                     </div>
@@ -109,9 +111,8 @@
                                                             <tr >
                                                                 <th style="border:1px solid black">
                                                                     注册人数<br/>
-                                                                    <lable id="registerPopulationNum"></lable>
+                                                                    <label id="registerPopulationNum"></label>
                                                                 </th>
-
                                                                 <th style="border:1px solid black">
                                                                     登陆人数<br/>
                                                                     <label id="loginPopulationNum"></label>
@@ -225,15 +226,31 @@
     var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
         + " " ;
 
-    // 统计
+   // js定时器
+   window.setInterval("search()",30*60*1000);
+
+   // 统计
     var dateChange = function () {
-        $("#dateType").val(0);
-        search();
+        if("-999" != $("#dateStarts").val() && "-999" != $("#dateEnds").val()){
+            var dateEnds = new Date($("#dateEnds").val()).getTime();
+            var dateStarts = new Date($("#dateStarts").val()).getTime();
+            if(dateEnds < dateStarts){
+                layer.alert("起始时间必须小于等于结束时间", {
+                    icon : 5
+                });
+                $("#dateStarts").val("-999");
+                $("#dateEnds").val("-999");
+            }
+        }
+//        $("#dateType").val(0);
+//        search();
     }
-//    var dateValue = setDateRangeConfig("dateStart", "dateEnd", dateChange);
-//    var dateTypeChange = function () {
-//        setDateTypeChange("dateType", "dateStart", "dateEnd", dateValue.dateStart, dateValue.dateEnd, search);
-//    }
+
+    var reset = function () {
+        $("#dateStarts").val("-999");
+        $("#dateEnds").val("-999");
+    }
+
 
     var intervalNum = function () {
         for(var i=0;i<initSearchDate.length;i++){
@@ -246,8 +263,8 @@
         $("#rechargeCountNum").empty();
         $("#rechargeAmountNum").empty();
         $.post("/interval/realTimeInterval/intervalNum.do", {
-            startDate: $('#dateStarts').val(),
-            endDate: $('#dateEnds').val()
+            startDate: $("#dateStarts").val() != -999 ? $("#dateStarts").val() : null,
+            endDate: $("#dateEnds").val() != -999 ? $("#dateEnds").val() : null
         }, function (data) {
             var json = JSON.parse(data);
             if (null != json && undefined != json) {
@@ -284,6 +301,27 @@
             }
         );
     });
+
+
+
+   var pageSizeLimit = function(value){
+       if("" != value && value * 1 > 200){
+           layer.alert("每页个数最多只能为50", {
+               icon : 5
+           });
+       }
+       return value;
+   }
+   var pageSizeNotEmpty = function(value){
+       if("" == value){
+           layer.alert("每页个数不能为空", {
+               icon : 5
+           });
+           value = 10;
+       }
+       return value;
+   }
+
 
 
     var pageSize = 10;
@@ -325,8 +363,8 @@
     var showNewUserData = function (pageNumber, pageSize) {
         $("#newUserData").empty();
         $.post("/interval/realTimeInterval/list.do", {
-            startDate: $('#dateStarts').val(),
-            endDate: $('#dateEnds').val(),
+            startDate: $("#dateStarts").val() != -999 ? $("#dateStarts").val() : null,
+            endDate: $("#dateEnds").val() != -999 ? $("#dateEnds").val() : null,
             pageNumber: pageNumber,
             pageSize: pageSize
         }, function (data) {
@@ -389,6 +427,7 @@
 
     //查询显示
     var search = function () {
+        pageSize = $("#pageSize").val();
         showNewUserData(1, pageSize);
         loadNewUserDataTrendLine(echartsCopy);
         intervalNum();
@@ -397,8 +436,8 @@
     var trendline;
 
     function loadNewUserDataTrendLine(echarts) {
-        var startDate = $("#dateStarts").val();
-        var endDate = $("#dateEnds").val();
+        var startDate = $("#dateStarts").val() != -999 ? $("#dateStarts").val() : null;
+        var endDate = $("#dateEnds").val() != -999 ? $("#dateEnds").val() : null;
 
         $.ajax({
             url: "/interval/realTimeInterval/chart.do",

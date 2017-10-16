@@ -254,7 +254,7 @@
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
         $("#data").empty();
-        $.post("/month/recharge/statistics/list.do", {
+        $.get("/month/recharge/statistics/list.do", {
             monthStart: $('#monthStart').val(),
             monthEnd: $('#monthEnd').val(),
             pageNo: pageNumber,
@@ -329,7 +329,7 @@
     };
 
     var getLastMonthAmount = function () {
-        $.get("/month/register/statistics/last/recharge/total.do", {}, function (result) {
+        $.get("/month/recharge/statistics/last/recharge/total.do", {}, function (result) {
             $("#last_month_amount").html(result.data);
         });
     };

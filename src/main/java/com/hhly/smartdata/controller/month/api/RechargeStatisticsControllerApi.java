@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Iritchie.ren on 2017/10/10.
  */
@@ -30,5 +32,14 @@ public class RechargeStatisticsControllerApi extends BaseController{
         return Result.success(pagination);
     }
 
-
+    @RequestMapping("last/recharge/total")
+    public Result getLastTotalRecharge(){
+        BigDecimal total = new BigDecimal(0.00);
+        try{
+            total = this.rechargeStatisticsService.getLastTotalRecharge();
+        }catch(Exception e){
+            LOGGER.error("获取最近一个月充值统计报错：" + e.getMessage());
+        }
+        return Result.success(total);
+    }
 }

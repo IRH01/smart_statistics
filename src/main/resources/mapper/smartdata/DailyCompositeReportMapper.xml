@@ -276,4 +276,39 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
+
+
+    <select id="selectDailyCompositeListData" parameterType="java.util.Map" resultType="com.hhly.smartdata.model.smartdata.DailyCompositeReport">
+        select
+        DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
+        register_population as registerPopulation,
+        register_exp_count as registerExpCount,
+        real_exp_count as realExpCount,
+        virtual_exp_count as virtualExpCount,
+        new_user_recharge_population as newUserRechargePopulation,
+        new_user_recharge_count as newUserRechargeCount,
+        new_user_recharge_amount  as new_user_recharge_amount,
+        new_user_login_count as newUserLoginCount,
+        new_user_play_count as newUserPlayCount,
+        old_user_recharge_population as oldUserRechargePopulation,
+        old_user_recharge_count as oldUserRechargeCount,
+        old_user_recharge_amount as oldUserRechargeAmount,
+        old_user_login_count as oldUserLoginCount,
+        old_user_play_count as oldUserPlayCount,
+        next_day_stay_count as nextDayStayCount
+        from daily_composite_report
+        where 1=1
+        <if test="startDate != null and startDate  != ''">
+            <![CDATA[
+  		     and  statistics_day > DATE_FORMAT(#{startDate},'%Y-%m-%d')
+  		    ]]>
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            <![CDATA[
+  		     and statistics_day <= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+  		    ]]>
+        </if>
+        order by statistics_day desc
+    </select>
+
 </mapper>
