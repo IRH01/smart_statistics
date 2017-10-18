@@ -27,4 +27,6 @@ public interface DailyLoginReportMapper{
     long searchByTimeCount(TimeFilter filter) throws Exception;
 
     Map<String, Object> selectByMonth(String daily) throws Exception;
+
+    void deleteByTimeAndPlatformIdAndSourceType(@Param("statisticsDay") String statisticsDay, @Param("platformId") Integer platformId, @Param("sourceType") Byte sourceType) throws Exception;
 }

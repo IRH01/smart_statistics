@@ -24,7 +24,7 @@ CREATE TABLE `interval_game_launch_report` (
    `launch_count` int(10) NOT NULL DEFAULT '0' COMMENT '游戏启动次数',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
    PRIMARY KEY (`id`),
-   UNIQUE KEY `idx_stat_time_se_type_pl_name` (`statistics_time`,`source_type`,`platform_name`)
+   UNIQUE KEY `idx_stat_time_se_type_pl_id` (`statistics_time`,`source_type`,`platform_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='平台实时统计，游戏启动统计';;
 
 /*=================================.=============================*/
@@ -193,7 +193,7 @@ CREATE TABLE `month_composite_report` (
 /*==============================================================*/
 /* Table: month_register_source_report                          */
 /*==============================================================*/
-CREATE TABLE `month_register_report` ( 
+CREATE TABLE `month_register_report` (
    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '月报表，注册来源统计报表',
    `statistics_month` varchar(20) NOT NULL DEFAULT '' COMMENT '统计日期(月)yyyy-MM',
    `pc_population` int(10) NOT NULL DEFAULT '0' COMMENT 'pc用户数',

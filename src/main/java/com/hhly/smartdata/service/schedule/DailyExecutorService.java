@@ -6,21 +6,14 @@ import com.google.common.collect.Sets;
 import com.hhly.smartdata.dto.enume.PlatformIdEnum;
 import com.hhly.smartdata.dto.enume.SourceTypeEnum;
 import com.hhly.smartdata.mapper.member.LoginTrackMapper;
+import com.hhly.smartdata.mapper.member.PlatformGoldConsumeMapper;
 import com.hhly.smartdata.mapper.member.RechargeRecordMapper;
 import com.hhly.smartdata.mapper.member.UserInfoMapper;
-import com.hhly.smartdata.mapper.smartdata.DailyCompositeReportMapper;
-import com.hhly.smartdata.mapper.smartdata.DailyKeepRecordReportMapper;
-import com.hhly.smartdata.mapper.smartdata.DailyLoginReportMapper;
-import com.hhly.smartdata.mapper.smartdata.DailyRechargeReportMapper;
-import com.hhly.smartdata.mapper.smartdata.DailyRegisterReportMapper;
+import com.hhly.smartdata.mapper.smartdata.*;
 import com.hhly.smartdata.mapper.source.DataGameStartMapper;
 import com.hhly.smartdata.mapper.source.DataInstallsMapper;
 import com.hhly.smartdata.mapper.source.DataViewMapper;
-import com.hhly.smartdata.model.smartdata.DailyCompositeReport;
-import com.hhly.smartdata.model.smartdata.DailyKeepRecordReport;
-import com.hhly.smartdata.model.smartdata.DailyLoginReport;
-import com.hhly.smartdata.model.smartdata.DailyRechargeReport;
-import com.hhly.smartdata.model.smartdata.DailyRegisterReport;
+import com.hhly.smartdata.model.smartdata.*;
 import com.hhly.smartdata.util.DateUtil;
 import com.hhly.smartdata.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +60,9 @@ public class DailyExecutorService{
 
 
     @Autowired
+    private PlatformGoldConsumeMapper platformGoldConsumeMapper;
+
+    @Autowired
     private DailyKeepRecordReportMapper dailyKeepRecordReportMapper;
 
     public Result compositeReport() throws Exception{
@@ -78,8 +74,8 @@ public class DailyExecutorService{
         for(Map<String, Object> map : yesterdayLaunchGameUserList){
             yesterdayLaunchGameUserSet.add((String) map.get("userId"));
         }
-        // 昨日产生消费记录的用户列表,并转换成Set集合。(匹配消费记录;下述查询有误)
-        List<Map<String, Object>> yesterdayRechargeUserList = this.rechargeRecordMapper.selectYesterdayRechargeUser();
+        // 昨日产生消费记录的用户列表,并转换成Set集合。
+        List<Map<String, Object>> yesterdayRechargeUserList = this.platformGoldConsumeMapper.selectYesterdayConsumeUser();
         Map<String, Map<String, Object>> yesterdayRechargeUserMap = Maps.newHashMap();
         for(Map<String, Object> map : yesterdayRechargeUserList){
             yesterdayRechargeUserMap.put((String) map.get("userId"), map);
@@ -96,8 +92,10 @@ public class DailyExecutorService{
         List<String> beforeYesterdayRegisterUserList = this.userInfoMapper.selectBeforeHowManyDayRegisterUser(2);
 
         Date now = new Date();
+        String yesterdayStr = DateUtil.getYesterdayStr(now);
+
         DailyCompositeReport dailyCompositeReport = new DailyCompositeReport();
-        dailyCompositeReport.setStatisticsDay(DateUtil.getYesterdayStr(now));
+        dailyCompositeReport.setStatisticsDay(yesterdayStr);
         dailyCompositeReport.setExecuteTime(now);
 
         //注册人数
@@ -182,6 +180,8 @@ public class DailyExecutorService{
         }
         dailyCompositeReport.setNextDayStayCount(nextDayStayCount);
 
+        //先删除，防止重复记录
+        this.dailyCompositeReportMapper.deleteByDaily(yesterdayStr);
         this.dailyCompositeReportMapper.insert(dailyCompositeReport);
         return Result.success(dailyCompositeReport);
     }
@@ -193,12 +193,12 @@ public class DailyExecutorService{
         List<DailyRechargeReport> dailyRechargeReportList = Lists.newArrayList();
         Date now = new Date();
         //根据当天日期计算昨天的日期
-        String statisticsDay = DateUtil.getYesterdayStr(now);
+        String yesterdayStr = DateUtil.getYesterdayStr(now);
 
         for(SourceTypeEnum item : SourceTypeEnum.values()){
             DailyRechargeReport dailyRechargeReport = new DailyRechargeReport();
             dailyRechargeReport.setSourceType(item.getCode());
-            dailyRechargeReport.setStatisticsDay(statisticsDay);
+            dailyRechargeReport.setStatisticsDay(yesterdayStr);
             dailyRechargeReport.setExecuteTime(now);
             for(Map<String, Object> map : yesterdayList){
                 dailyRechargeReport.setRechargePopulation((map.get("userCount") == null ? 0 : ((Long) map.get("userCount")).intValue()));
@@ -213,6 +213,9 @@ public class DailyExecutorService{
             for(Map<String, Object> map : yesterdayOldUserList){
                 dailyRechargeReport.setOldRechargePopulation((map.get("userCount") == null ? 0 : ((Long) map.get("userCount")).intValue()));
             }
+
+            //先删除记录，再执行插入
+            this.dailyRechargeReportMapper.deleteByTimeAndSourceType(dailyRechargeReport.getStatisticsDay(), dailyRechargeReport.getSourceType());
             this.dailyRechargeReportMapper.insert(dailyRechargeReport);
             dailyRechargeReportList.add(dailyRechargeReport);
         }
@@ -265,6 +268,9 @@ public class DailyExecutorService{
                 }
                 dailyLoginReport.setLoginPopulation(loginPopulation);
                 dailyLoginReport.setPlayPopulation(playPopulation);
+
+                //先删除，再插入
+                this.dailyLoginReportMapper.deleteByTimeAndPlatformIdAndSourceType(dailyLoginReport.getStatisticsDay(), dailyLoginReport.getPlatformId(), dailyLoginReport.getSourceType());
                 this.dailyLoginReportMapper.insert(dailyLoginReport);
                 dailyLoginReportList.add(dailyLoginReport);
             }
@@ -286,34 +292,34 @@ public class DailyExecutorService{
         List<DailyRegisterReport> dailyRegisterReportList = new ArrayList();
         String statisticsDayStr = DateUtil.getYesterdayStr(now);
 
-            DailyRegisterReport dailyRegisterReport = new DailyRegisterReport();
-            for(Map<String, Object> registerMap : yesterdayRegisterUserIdAndTerminalList){
-                switch(Integer.valueOf(registerMap.get("osType") + "")){
-                    case 1:
-                        dailyRegisterReport.setPcPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
-                        break;
-                    case 2:
-                        dailyRegisterReport.setAndroidPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
-                        break;
-                    case 3:
-                        dailyRegisterReport.setIosPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
-                        break;
-                    case 4:
-                        dailyRegisterReport.setH5Population(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
-                        break;
-                }
+        DailyRegisterReport dailyRegisterReport = new DailyRegisterReport();
+        for(Map<String, Object> registerMap : yesterdayRegisterUserIdAndTerminalList){
+            switch(Integer.valueOf(registerMap.get("osType") + "")){
+                case 1:
+                    dailyRegisterReport.setPcPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
+                    break;
+                case 2:
+                    dailyRegisterReport.setAndroidPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
+                    break;
+                case 3:
+                    dailyRegisterReport.setIosPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
+                    break;
+                case 4:
+                    dailyRegisterReport.setH5Population(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
+                    break;
             }
+        }
 
         for(Map<String, Object> userViewMap : yesterdayUserViewAndPageViewList){
 
             switch(Integer.valueOf(userViewMap.get("platformTerminal") + "")){
                 case 1:
-                    dailyRegisterReport.setPcPageView(userViewMap.get("pageCount")==null?0:Long.valueOf(userViewMap.get("pageCount")+ ""));
-                    dailyRegisterReport.setPcUserView(userViewMap.get("userCount")==null?0:Integer.valueOf(userViewMap.get("userCount") + ""));
+                    dailyRegisterReport.setPcPageView(userViewMap.get("pageCount") == null ? 0 : Long.valueOf(userViewMap.get("pageCount") + ""));
+                    dailyRegisterReport.setPcUserView(userViewMap.get("userCount") == null ? 0 : Integer.valueOf(userViewMap.get("userCount") + ""));
                     break;
                 case 4:
-                    dailyRegisterReport.setH5Population(userViewMap.get("pageCount")==null?0:Integer.valueOf(userViewMap.get("pageCount") + ""));
-                    dailyRegisterReport.setH5UserView(userViewMap.get("pageCount")==null?0:Integer.valueOf(userViewMap.get("pageCount") + ""));
+                    dailyRegisterReport.setH5Population(userViewMap.get("pageCount") == null ? 0 : Integer.valueOf(userViewMap.get("pageCount") + ""));
+                    dailyRegisterReport.setH5UserView(userViewMap.get("pageCount") == null ? 0 : Integer.valueOf(userViewMap.get("pageCount") + ""));
                     break;
             }
 
@@ -332,6 +338,9 @@ public class DailyExecutorService{
         }
         dailyRegisterReport.setExecuteTime(now);
         dailyRegisterReport.setStatisticsDay(statisticsDayStr);
+
+        //先删除，再插入
+        dailyRegisterReportMapper.deleteByTime(dailyRegisterReport.getStatisticsDay());
         dailyRegisterReportMapper.insert(dailyRegisterReport);
         dailyRegisterReportList.add(dailyRegisterReport);
 
@@ -435,6 +444,9 @@ public class DailyExecutorService{
         dailyKeepRecordReport.setSeven(seven);
         dailyKeepRecordReport.setFourteen(fourteen);
         dailyKeepRecordReport.setThirty(thirty);
+
+        //先删除，再插入
+        this.dailyKeepRecordReportMapper.deleteByTime(dailyKeepRecordReport.getStatisticsDay());
         this.dailyKeepRecordReportMapper.insert(dailyKeepRecordReport);
         return Result.success(dailyKeepRecordReport);
     }

@@ -208,6 +208,29 @@ public class DateUtil{
     }
 
     /**
+     * 获取离当前时间最近的整点30分钟的日期
+     *
+     * @param date
+     * @return String ,"yyyy-MM-dd HH:mm:ss"
+     */
+    public static Date getPointByThirtyMinute(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.MINUTE, calendar.getActualMinimum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMinimum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getActualMinimum(Calendar.MILLISECOND));
+        long interpolation = date.getTime() - calendar.getTime().getTime();
+        if(interpolation >= 30 * 60 * 1000 && interpolation <= 60 * 60 * 1000){
+            calendar.add(Calendar.MINUTE, -30);
+        }
+
+        if(interpolation < 0 || interpolation > 60 * 60 * 1000){
+            throw new IllegalArgumentException("时间参数异常，不能超过制定时间范围，传入时间为：" + date);
+        }
+        return calendar.getTime();
+    }
+
+    /**
      * 获取前30分钟的日期
      *
      * @param date
@@ -219,7 +242,7 @@ public class DateUtil{
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Calendar beforeTime = Calendar.getInstance();
-        beforeTime.add(Calendar.MINUTE, -32);// 时间差值
+        beforeTime.add(Calendar.MINUTE, -30);// 时间差值
         Date beforeD = beforeTime.getTime();
         return sdf.format(beforeD);
     }
@@ -236,7 +259,6 @@ public class DateUtil{
         calendar.set(Calendar.MILLISECOND, calendar.getActualMaximum(Calendar.MILLISECOND));
         return calendar.getTime();
     }
-
 }
 
 

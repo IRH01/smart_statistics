@@ -22,4 +22,6 @@ public interface MonthCompositeReportMapper{
     List<MonthCompositeReportResult> searchByTime(TimeFilter filter) throws Exception;
 
     long searchByTimeCount(TimeFilter filter) throws Exception;
+
+    void deleteByTime(String statisticsMonth) throws Exception;
 }

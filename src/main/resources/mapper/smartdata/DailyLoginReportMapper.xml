@@ -17,6 +17,11 @@
         execute_time
     </sql>
 
+    <delete id="deleteByTimeAndPlatformIdAndSourceType">D
+        delete from daily_login_report where statistics_day = #{statisticsDay} and platform_id = #{platformId} and
+        source_type = #{sourceType}
+    </delete>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>

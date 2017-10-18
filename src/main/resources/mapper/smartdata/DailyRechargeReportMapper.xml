@@ -18,6 +18,10 @@
         new_recharge_population, old_recharge_population, execute_time
     </sql>
 
+    <delete id="deleteByTimeAndSourceType">
+        delete from daily_recharge_report where statistics_day = #{statisticsDay} and source_type = #{sourceType}
+    </delete>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>

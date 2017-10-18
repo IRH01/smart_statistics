@@ -2,6 +2,7 @@ package com.hhly.smartdata.mapper.smartdata;
 
 
 import com.hhly.smartdata.model.smartdata.IntervalInterfaceReport;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,6 +23,8 @@ public interface IntervalInterfaceReportMapper{
     List<IntervalInterfaceReport> selectIntervalInterfaceToltalData(Map<String, Object> map) throws Exception;
 
     List<IntervalInterfaceReport> selectIntervalIntefaceChartData(Map<String, Object> map) throws Exception;
+
+    void deleteByTimeAndOperateTypeAndInterfaceCode(@Param("statisticsTime") String statisticsTime, @Param("operateType") Byte operateType, @Param("interfaceCode") Integer interfaceCode) throws Exception;
 }
 
 

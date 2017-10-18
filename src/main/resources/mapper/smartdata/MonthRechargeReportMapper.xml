@@ -16,6 +16,9 @@
         id, statistics_month, source_type, recharge_population, recharge_amount, recharge_count,
         new_recharge_population, old_recharge_population, execute_time
     </sql>
+    <delete id="deleteByTimeAndSourceType">
+        delete from month_recharge_report where statistics_month = #{statisticsMonth} and source_type = #{sourceType}
+    </delete>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>

@@ -22,6 +22,10 @@
         ios_population, ios_install_count, android_population, android_install_count, execute_time
     </sql>
 
+    <delete id="deleteByTime">
+        delete from daily_register_report where statistics_day = #{statisticsDay}
+    </delete>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -207,7 +211,8 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectRegisterDataListByTime" parameterType="java.util.Map" resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
+    <select id="selectRegisterDataListByTime" parameterType="java.util.Map"
+            resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         select
         DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
         pc_population as pcPopulation,
@@ -235,7 +240,8 @@
         order by statistics_day desc
     </select>
 
-    <select id="selectYesterdayRegisterData" parameterType="java.util.Map" resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
+    <select id="selectYesterdayRegisterData" parameterType="java.util.Map"
+            resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         select
         DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
         pc_population as pcPopulation,

@@ -17,6 +17,9 @@
         id, statistics_time, interval_time, source_type, register_population, login_population,
         recharge_population, recharge_count, recharge_amount, execute_time
     </sql>
+    <delete id="deleteByTimeSourceType">
+        delete from interval_source_report where statistics_time = #{statisticsTime} and source_type = #{sourceType}
+    </delete>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -34,9 +37,10 @@
         #{executeTime,jdbcType=TIMESTAMP})
     </insert>
     <select id="selectIntervalSourceToltalData" resultType="java.util.Map" parameterType="java.util.Map">
-        select sum(register_population) as registerPopulation,sum(login_population) as loginPopulation ,sum(recharge_population) as rechargePopulation ,
-         sum(recharge_count) as rechargeCount,sum(recharge_amount) as rechargeAmount
-         from interval_source_report where statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
+        select sum(register_population) as registerPopulation,sum(login_population) as loginPopulation
+        ,sum(recharge_population) as rechargePopulation ,
+        sum(recharge_count) as rechargeCount,sum(recharge_amount) as rechargeAmount
+        from interval_source_report where statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
         <if test="startDate != null and startDate  != ''">
             <![CDATA[
              and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
@@ -48,7 +52,8 @@
   		]]>
         </if>
     </select>
-    <select id="selectIntervalSourceListData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="java.util.Map">
+    <select id="selectIntervalSourceListData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport"
+            parameterType="java.util.Map">
         select
         statistics_time,
         sum(register_population) as register_population,
@@ -73,7 +78,8 @@
         order by statistics_time desc
     </select>
 
-    <select id="selectIntervalSourceChartData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="java.util.Map">
+    <select id="selectIntervalSourceChartData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport"
+            parameterType="java.util.Map">
         select
         DATE_FORMAT(statistics_time,'%H:%i') as statistics_time,
         sum(register_population) as register_population,
@@ -104,7 +110,8 @@
         group by statistics_time
     </select>
 
-    <select id="selectIntervalTerminalsSourceListData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="java.util.Map">
+    <select id="selectIntervalTerminalsSourceListData"
+            resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="java.util.Map">
         select
         source_type as sourceType,
         sum(register_population) as register_population,
@@ -129,7 +136,8 @@
         order by source_type asc
     </select>
 
-    <select id="selectIntervalTimeTerminalsSourceListData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="java.util.Map">
+    <select id="selectIntervalTimeTerminalsSourceListData"
+            resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="java.util.Map">
         select
         DATE_FORMAT(statistics_time,'%H:%i') as statistics_time,
         sum(register_population) as register_population,

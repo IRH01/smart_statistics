@@ -30,6 +30,10 @@
         execute_time
     </sql>
 
+    <delete id="deleteByTime">
+        delete from month_composite_report where statistics_month = #{statisticsMonth}
+    </delete>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>

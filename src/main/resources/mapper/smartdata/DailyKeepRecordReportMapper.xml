@@ -21,6 +21,9 @@
         id, statistics_day, source_type, register_count, one, two, three, four, five, six,
         seven, fourteen, thirty, execute_time
     </sql>
+    <delete id="deleteByTime">
+        delete from daily_keep_record_report where statistics_day = #{statisticsDay}
+    </delete>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>

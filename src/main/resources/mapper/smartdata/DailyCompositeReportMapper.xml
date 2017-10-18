@@ -30,6 +30,10 @@
         execute_time
     </sql>
 
+    <delete id="deleteByDaily">
+        delete from daily_composite_report where statistics_day = #{daily}
+    </delete>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -277,8 +281,8 @@
     </update>
 
 
-
-    <select id="selectDailyCompositeListData" parameterType="java.util.Map" resultType="com.hhly.smartdata.model.smartdata.DailyCompositeReport">
+    <select id="selectDailyCompositeListData" parameterType="java.util.Map"
+            resultType="com.hhly.smartdata.model.smartdata.DailyCompositeReport">
         select
         DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
         register_population as registerPopulation,
@@ -287,7 +291,7 @@
         virtual_exp_count as virtualExpCount,
         new_user_recharge_population as newUserRechargePopulation,
         new_user_recharge_count as newUserRechargeCount,
-        new_user_recharge_amount  as new_user_recharge_amount,
+        new_user_recharge_amount as new_user_recharge_amount,
         new_user_login_count as newUserLoginCount,
         new_user_play_count as newUserPlayCount,
         old_user_recharge_population as oldUserRechargePopulation,

@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +77,8 @@ public class IntervalExecutorService{
         List<Map<String, Object>> firstThirtyMinUserViewAndPageView = dataViewMapper.selectFirstThirtyMinUserViewAndPageView();
 
         Date now = new Date();
-        String startDate = DateUtil.getFirstThirtyMinStr(now);
+        Date nowPointByThirtyMinute = DateUtil.getPointByThirtyMinute(now);
+        String startDate = DateUtil.getFirstThirtyMinStr(nowPointByThirtyMinute);
         List<IntervalSourceReport> list = Lists.newArrayList();
         for(SourceTypeEnum sourceTypeEnum : SourceTypeEnum.values()){
             IntervalSourceReport report = new IntervalSourceReport();
@@ -127,12 +127,12 @@ public class IntervalExecutorService{
                 }
             }
 
-            intervalSourceReportMapper.insert(report);
+            //先删除，再插入
+            this.intervalSourceReportMapper.deleteByTimeSourceType(report.getStatisticsTime(), report.getSourceType());
+            this.intervalSourceReportMapper.insert(report);
             list.add(report);
         }
         return Result.success(list);
-
-
     }
 
     public Result intervalInterfaceStatistics() throws Exception{
@@ -147,11 +147,12 @@ public class IntervalExecutorService{
 
         List<IntervalInterfaceReport> list = Lists.newArrayList();
         Date now = new Date();
-
+        Date nowPointByThirtyMinute = DateUtil.getPointByThirtyMinute(now);
+        String startDate = DateUtil.getFirstThirtyMinStr(nowPointByThirtyMinute);
         for(InterfaceTypeEnum interfaceTypeEnum : InterfaceTypeEnum.values()){ // 注册 充值
             for(OperatorTypeEnum operatorTypeEnum : OperatorTypeEnum.values()){ // 请求 完成
                 IntervalInterfaceReport intervalInterfaceReport = new IntervalInterfaceReport();
-                intervalInterfaceReport.setStatisticsTime(DateUtil.getFirstThirtyMinStr(now));
+                intervalInterfaceReport.setStatisticsTime(startDate);
                 intervalInterfaceReport.setOperateType(operatorTypeEnum.getCode());
                 intervalInterfaceReport.setInterfaceName(interfaceTypeEnum.getDesc());
                 intervalInterfaceReport.setInterfaceCode(interfaceTypeEnum.getCode().intValue());
@@ -174,7 +175,9 @@ public class IntervalExecutorService{
                         intervalInterfaceReport.setOperateCount(rechargeCount);
                     }
                 }
-                intervalInterfaceReportMapper.insert(intervalInterfaceReport);
+                //先删除，再插入
+                this.intervalInterfaceReportMapper.deleteByTimeAndOperateTypeAndInterfaceCode(intervalInterfaceReport.getStatisticsTime(), intervalInterfaceReport.getOperateType(), intervalInterfaceReport.getInterfaceCode());
+                this.intervalInterfaceReportMapper.insert(intervalInterfaceReport);
                 list.add(intervalInterfaceReport);
             }
 
@@ -182,12 +185,12 @@ public class IntervalExecutorService{
         return Result.success(list);
     }
 
-
     public Result intervalGameLaunch() throws Exception{
         // 游戏启动数据
         List<Map<String, Object>> platformAllGameStartCount = dataGameStartMapper.selectPlatformAllGameStartCount();
         Date now = new Date();
-        String startDate = DateUtil.getFirstThirtyMinStr(now);
+        Date nowPointByThirtyMinute = DateUtil.getPointByThirtyMinute(now);
+        String startDate = DateUtil.getFirstThirtyMinStr(nowPointByThirtyMinute);
         List<IntervalGameLaunchReport> list = Lists.newArrayList();
         for(SourceTypeEnum sourceTypeEnum : SourceTypeEnum.values()){
             for(PlatformIdEnum platformIdEnum : PlatformIdEnum.values()){
@@ -205,7 +208,8 @@ public class IntervalExecutorService{
                     }
                 }
                 // 入库接口统计结果表
-                intervalGameLaunchReportMapper.insert(intervalGameLaunchReport);
+                this.intervalGameLaunchReportMapper.deleteByTimeAndSourceTypeAndPlatformId(intervalGameLaunchReport.getStatisticsTime(), intervalGameLaunchReport.getSourceType(), intervalGameLaunchReport.getPlatformId());
+                this.intervalGameLaunchReportMapper.insert(intervalGameLaunchReport);
                 list.add(intervalGameLaunchReport);
             }
         }

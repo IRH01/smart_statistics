@@ -1,167 +1,173 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hhly.smartdata.mapper.smartdata.IntervalInterfaceReportMapper" >
-  <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="statistics_time" property="statisticsTime" jdbcType="VARCHAR" />
-    <result column="interval_time" property="intervalTime" jdbcType="INTEGER" />
-    <result column="interface_code" property="interfaceCode" jdbcType="INTEGER" />
-    <result column="interface_name" property="interfaceName" jdbcType="VARCHAR" />
-    <result column="operate_type" property="operateType" jdbcType="TINYINT" />
-    <result column="operate_count" property="operateCount" jdbcType="INTEGER" />
-    <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, statistics_time, interval_time, interface_code, interface_name, operate_type, 
-    operate_count, execute_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from interval_interface_report
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" >
-    insert into interval_interface_report (id, statistics_time, interval_time, 
-      interface_code, interface_name, operate_type, 
-      operate_count, execute_time)
-    values (#{id,jdbcType=BIGINT}, #{statisticsTime,jdbcType=VARCHAR}, #{intervalTime,jdbcType=INTEGER}, 
-      #{interfaceCode,jdbcType=INTEGER}, #{interfaceName,jdbcType=VARCHAR}, #{operateType,jdbcType=TINYINT}, 
-      #{operateCount,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" >
-    insert into interval_interface_report
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="statisticsTime != null" >
-        statistics_time,
-      </if>
-      <if test="intervalTime != null" >
-        interval_time,
-      </if>
-      <if test="interfaceCode != null" >
-        interface_code,
-      </if>
-      <if test="interfaceName != null" >
-        interface_name,
-      </if>
-      <if test="operateType != null" >
-        operate_type,
-      </if>
-      <if test="operateCount != null" >
-        operate_count,
-      </if>
-      <if test="executeTime != null" >
-        execute_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="statisticsTime != null" >
-        #{statisticsTime,jdbcType=VARCHAR},
-      </if>
-      <if test="intervalTime != null" >
-        #{intervalTime,jdbcType=INTEGER},
-      </if>
-      <if test="interfaceCode != null" >
-        #{interfaceCode,jdbcType=INTEGER},
-      </if>
-      <if test="interfaceName != null" >
-        #{interfaceName,jdbcType=VARCHAR},
-      </if>
-      <if test="operateType != null" >
-        #{operateType,jdbcType=TINYINT},
-      </if>
-      <if test="operateCount != null" >
-        #{operateCount,jdbcType=INTEGER},
-      </if>
-      <if test="executeTime != null" >
-        #{executeTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" >
-    update interval_interface_report
-    <set >
-      <if test="statisticsTime != null" >
-        statistics_time = #{statisticsTime,jdbcType=VARCHAR},
-      </if>
-      <if test="intervalTime != null" >
+<mapper namespace="com.hhly.smartdata.mapper.smartdata.IntervalInterfaceReportMapper">
+    <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="statistics_time" property="statisticsTime" jdbcType="VARCHAR"/>
+        <result column="interval_time" property="intervalTime" jdbcType="INTEGER"/>
+        <result column="interface_code" property="interfaceCode" jdbcType="INTEGER"/>
+        <result column="interface_name" property="interfaceName" jdbcType="VARCHAR"/>
+        <result column="operate_type" property="operateType" jdbcType="TINYINT"/>
+        <result column="operate_count" property="operateCount" jdbcType="INTEGER"/>
+        <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, statistics_time, interval_time, interface_code, interface_name, operate_type,
+        operate_count, execute_time
+    </sql>
+    <delete id="deleteByTimeAndOperateTypeAndInterfaceCode">
+        delete from interval_interface_report where statistics_time = #{statisticsTime} and operate_type =
+        #{operateType} and interface_code = #{interfaceCode}
+    </delete>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from interval_interface_report
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport">
+        insert into interval_interface_report (id, statistics_time, interval_time,
+        interface_code, interface_name, operate_type,
+        operate_count, execute_time)
+        values (#{id,jdbcType=BIGINT}, #{statisticsTime,jdbcType=VARCHAR}, #{intervalTime,jdbcType=INTEGER},
+        #{interfaceCode,jdbcType=INTEGER}, #{interfaceName,jdbcType=VARCHAR}, #{operateType,jdbcType=TINYINT},
+        #{operateCount,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport">
+        insert into interval_interface_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="statisticsTime != null">
+                statistics_time,
+            </if>
+            <if test="intervalTime != null">
+                interval_time,
+            </if>
+            <if test="interfaceCode != null">
+                interface_code,
+            </if>
+            <if test="interfaceName != null">
+                interface_name,
+            </if>
+            <if test="operateType != null">
+                operate_type,
+            </if>
+            <if test="operateCount != null">
+                operate_count,
+            </if>
+            <if test="executeTime != null">
+                execute_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="statisticsTime != null">
+                #{statisticsTime,jdbcType=VARCHAR},
+            </if>
+            <if test="intervalTime != null">
+                #{intervalTime,jdbcType=INTEGER},
+            </if>
+            <if test="interfaceCode != null">
+                #{interfaceCode,jdbcType=INTEGER},
+            </if>
+            <if test="interfaceName != null">
+                #{interfaceName,jdbcType=VARCHAR},
+            </if>
+            <if test="operateType != null">
+                #{operateType,jdbcType=TINYINT},
+            </if>
+            <if test="operateCount != null">
+                #{operateCount,jdbcType=INTEGER},
+            </if>
+            <if test="executeTime != null">
+                #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport">
+        update interval_interface_report
+        <set>
+            <if test="statisticsTime != null">
+                statistics_time = #{statisticsTime,jdbcType=VARCHAR},
+            </if>
+            <if test="intervalTime != null">
+                interval_time = #{intervalTime,jdbcType=INTEGER},
+            </if>
+            <if test="interfaceCode != null">
+                interface_code = #{interfaceCode,jdbcType=INTEGER},
+            </if>
+            <if test="interfaceName != null">
+                interface_name = #{interfaceName,jdbcType=VARCHAR},
+            </if>
+            <if test="operateType != null">
+                operate_type = #{operateType,jdbcType=TINYINT},
+            </if>
+            <if test="operateCount != null">
+                operate_count = #{operateCount,jdbcType=INTEGER},
+            </if>
+            <if test="executeTime != null">
+                execute_time = #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport">
+        update interval_interface_report
+        set statistics_time = #{statisticsTime,jdbcType=VARCHAR},
         interval_time = #{intervalTime,jdbcType=INTEGER},
-      </if>
-      <if test="interfaceCode != null" >
         interface_code = #{interfaceCode,jdbcType=INTEGER},
-      </if>
-      <if test="interfaceName != null" >
         interface_name = #{interfaceName,jdbcType=VARCHAR},
-      </if>
-      <if test="operateType != null" >
         operate_type = #{operateType,jdbcType=TINYINT},
-      </if>
-      <if test="operateCount != null" >
         operate_count = #{operateCount,jdbcType=INTEGER},
-      </if>
-      <if test="executeTime != null" >
-        execute_time = #{executeTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" >
-    update interval_interface_report
-    set statistics_time = #{statisticsTime,jdbcType=VARCHAR},
-      interval_time = #{intervalTime,jdbcType=INTEGER},
-      interface_code = #{interfaceCode,jdbcType=INTEGER},
-      interface_name = #{interfaceName,jdbcType=VARCHAR},
-      operate_type = #{operateType,jdbcType=TINYINT},
-      operate_count = #{operateCount,jdbcType=INTEGER},
-      execute_time = #{executeTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        execute_time = #{executeTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
-  <select id="selectIntervalInterfaceToltalData" resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" parameterType="java.util.Map">
-    select interface_code as interfaceCode,operate_type as operateType,sum(operate_count) as operateCount
-    from interval_interface_report where statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
-    <if test="startDate != null and startDate  != ''">
-      <![CDATA[
+    <select id="selectIntervalInterfaceToltalData"
+            resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" parameterType="java.util.Map">
+        select interface_code as interfaceCode,operate_type as operateType,sum(operate_count) as operateCount
+        from interval_interface_report where statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
+        <if test="startDate != null and startDate  != ''">
+            <![CDATA[
              and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-    </if>
-    <if test="endDate != null and endDate  != ''">
-      <![CDATA[
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            <![CDATA[
   		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-    </if>
-    group by interface_code,operate_type
-  </select>
+        </if>
+        group by interface_code,operate_type
+    </select>
 
 
-  <select id="selectIntervalIntefaceChartData" resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" parameterType="java.util.Map">
-    select
-    DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,
-    operate_type as operateType,
-    sum(operate_count) as operateCount
-    from interval_interface_report
-    where 1=1
-    and statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
-    <if test="startDate != null and startDate  != ''">
-      <![CDATA[
+    <select id="selectIntervalIntefaceChartData" resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport"
+            parameterType="java.util.Map">
+        select
+        DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,
+        operate_type as operateType,
+        sum(operate_count) as operateCount
+        from interval_interface_report
+        where 1=1
+        and statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
+        <if test="startDate != null and startDate  != ''">
+            <![CDATA[
              and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-    </if>
-    <if test="endDate != null and endDate  != ''">
-      <![CDATA[
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            <![CDATA[
   		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-    </if>
-    <if test="interfaceCode != null and interfaceCode  != ''">
-  		     and  interface_code = #{interfaceCode}
-    </if>
-    group by statistics_time,operate_type
-  </select>
+        </if>
+        <if test="interfaceCode != null and interfaceCode  != ''">
+            and interface_code = #{interfaceCode}
+        </if>
+        group by statistics_time,operate_type
+    </select>
 
 </mapper>

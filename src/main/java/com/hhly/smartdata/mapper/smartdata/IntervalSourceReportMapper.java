@@ -2,6 +2,7 @@ package com.hhly.smartdata.mapper.smartdata;
 
 
 import com.hhly.smartdata.model.smartdata.IntervalSourceReport;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,14 +14,15 @@ public interface IntervalSourceReportMapper{
 
     IntervalSourceReport selectByPrimaryKey(Long id) throws Exception;
 
-    Map<String,Object> selectIntervalSourceToltalData(Map<String,Object> map)throws Exception;
+    Map<String, Object> selectIntervalSourceToltalData(Map<String, Object> map) throws Exception;
 
-    List<IntervalSourceReport> selectIntervalSourceListData(Map<String,Object> map)throws Exception;
+    List<IntervalSourceReport> selectIntervalSourceListData(Map<String, Object> map) throws Exception;
 
-    List<IntervalSourceReport> selectIntervalSourceChartData(Map<String,Object> map)throws Exception;
+    List<IntervalSourceReport> selectIntervalSourceChartData(Map<String, Object> map) throws Exception;
 
-    List<IntervalSourceReport> selectIntervalTerminalsSourceListData(Map<String,Object> map)throws Exception;
+    List<IntervalSourceReport> selectIntervalTerminalsSourceListData(Map<String, Object> map) throws Exception;
 
-    List<IntervalSourceReport> selectIntervalTimeTerminalsSourceListData(Map<String,Object> map)throws Exception;
+    List<IntervalSourceReport> selectIntervalTimeTerminalsSourceListData(Map<String, Object> map) throws Exception;
 
+    void deleteByTimeSourceType(@Param("statisticsTime") String statisticsTime, @Param("sourceType") Byte sourceType) throws Exception;
 }

@@ -15,6 +15,9 @@
         id, statistics_month, platform_id, platform_name, source_type, login_population,
         play_population, execute_time
     </sql>
+    <delete id="deleteByTime">
+        delete from month_login_report where statistics_month = #{statisticsMonth}
+    </delete>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>

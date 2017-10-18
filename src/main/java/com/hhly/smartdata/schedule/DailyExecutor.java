@@ -21,7 +21,8 @@ public class DailyExecutor{
     /**
      * 平台综合报表
      */
-    @Scheduled(cron = "* * 1 * * MON-FRI")
+    //@Scheduled(cron = "* * 1 * * MON-FRI")
+    @Scheduled(cron = "0 2/2 * * * ?")
     public void dailyCompositeExecutor(){
         try{
             this.dailyExecutorService.compositeReport();
@@ -72,7 +73,7 @@ public class DailyExecutor{
     @Scheduled(cron = "* * 1 * * MON-FRI")
     public void keepRecordAnalyzeExecutor(){
         try{
-            this.dailyExecutorService.keepRecordAnalyzeReport();
+            dailyExecutorService.keepRecordAnalyzeReport();
         }catch(Exception e){
             LOGGER.error("定时器执行失败");
         }

@@ -78,6 +78,9 @@ public class MonthExecutorService{
         monthCompositeReport.setOldUserPlayCount(((BigDecimal) lastMonthCompositeMap.get("old_user_play_count_sum")).intValue());
         monthCompositeReport.setOldUserLoginCount(((BigDecimal) lastMonthCompositeMap.get("old_user_login_count_sum")).intValue());
         monthCompositeReport.setNextDayStayCount(((BigDecimal) lastMonthCompositeMap.get("next_day_stay_count_sum")).intValue());
+
+        //先删除，再插入
+        this.monthCompositeReportMapper.deleteByTime(monthCompositeReport.getStatisticsMonth());
         this.monthCompositeReportMapper.insert(monthCompositeReport);
         return Result.success(monthCompositeReport);
     }
@@ -103,6 +106,8 @@ public class MonthExecutorService{
         monthRegisterReport.setAndroidPopulation(((BigDecimal) lastMonthRegisterMap.get("android_population_sum")).intValue());
         monthRegisterReport.setAndroidInstallCount(((BigDecimal) lastMonthRegisterMap.get("android_install_count_sum")).intValue());
 
+        //先删除，再插入
+        this.monthRegisterReportMapper.deleteByTime(monthRegisterReport.getStatisticsMonth());
         this.monthRegisterReportMapper.insert(monthRegisterReport);
         return Result.success(monthRegisterReport);
     }
@@ -126,6 +131,9 @@ public class MonthExecutorService{
             monthRechargeReport.setRechargeCount(((BigDecimal) map.get("recharge_count_sum")).intValue());
             monthRechargeReport.setNewRechargePopulation(((BigDecimal) map.get("new_recharge_population_sum")).intValue());
             monthRechargeReport.setOldRechargePopulation(((BigDecimal) map.get("old_recharge_population_sum")).intValue());
+
+            //先删除，再插入
+            this.monthRechargeReportMapper.deleteByTimeAndSourceType(monthRechargeReport.getStatisticsMonth(),monthRechargeReport.getSourceType());
             this.monthRechargeReportMapper.insert(monthRechargeReport);
             monthRechargeReportList.add(monthRechargeReport);
         }
@@ -151,6 +159,9 @@ public class MonthExecutorService{
             monthLoginReport.setPlatformName((String) map.get("platform_name"));
             monthLoginReport.setPlayPopulation(((BigDecimal) map.get("play_population_sum")).intValue());
             monthLoginReport.setLoginPopulation(((BigDecimal) map.get("login_population_sum")).intValue());
+
+            //先删除，再插入
+            this.monthLoginReportMapper.deleteByTime(monthLoginReport.getStatisticsMonth());
             this.monthLoginReportMapper.insert(monthLoginReport);
             monthRechargeReportList.add(monthLoginReport);
         }

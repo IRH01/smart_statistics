@@ -29,4 +29,6 @@ public interface DailyRechargeReportMapper{
     long searchByTimeCount(TimeFilter filter) throws Exception;
 
     List<DailyRechargeReport> selectByMonth(String daily) throws Exception;
+
+    void deleteByTimeAndSourceType(@Param("statisticsDay") String statisticsDay, @Param("sourceType") Byte sourceType) throws Exception;
 }

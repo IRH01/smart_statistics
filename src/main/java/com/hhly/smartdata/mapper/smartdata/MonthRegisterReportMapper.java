@@ -26,4 +26,5 @@ public interface MonthRegisterReportMapper{
 
     MonthRegisterReport selectByMonth(String month) throws Exception;
 
+    void deleteByTime(String statisticsMonth) throws Exception;
 }

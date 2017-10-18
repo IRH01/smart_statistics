@@ -25,4 +25,7 @@ public interface MonthLoginReportMapper{
     long searchByTimeCount(TimeFilter filter) throws Exception;
 
     Map<String,Object> selectByMonth(String month) throws Exception;
+
+    void deleteByTime(String statisticsMonth) throws Exception;
+
 }

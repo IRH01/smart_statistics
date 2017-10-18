@@ -1,169 +1,179 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hhly.smartdata.mapper.smartdata.IntervalGameLaunchReportMapper" >
-  <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="statistics_time" property="statisticsTime" jdbcType="VARCHAR" />
-    <result column="interval_time" property="intervalTime" jdbcType="INTEGER" />
-    <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
-    <result column="platform_id" property="platformId" jdbcType="INTEGER" />
-    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
-    <result column="launch_count" property="launchCount" jdbcType="INTEGER" />
-    <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, statistics_time, interval_time, platform_id, platform_name, launch_count, execute_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from interval_game_launch_report
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
-    insert into interval_game_launch_report (id, statistics_time, interval_time,source_type,
-      platform_id, platform_name, launch_count, 
-      execute_time)
-    values (#{id,jdbcType=BIGINT}, #{statisticsTime,jdbcType=VARCHAR}, #{intervalTime,jdbcType=INTEGER},
-      #{sourceType,jdbcType=TINYINT},
-      #{platformId,jdbcType=INTEGER}, #{platformName,jdbcType=VARCHAR}, #{launchCount,jdbcType=INTEGER}, 
-      #{executeTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
-    insert into interval_game_launch_report
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="statisticsTime != null" >
-        statistics_time,
-      </if>
-      <if test="intervalTime != null" >
-        interval_time,
-      </if>
-      <if test="sourceType != null" >
-        source_type,
-      </if>
-      <if test="platformId != null" >
-        platform_id,
-      </if>
-      <if test="platformName != null" >
-        platform_name,
-      </if>
-      <if test="launchCount != null" >
-        launch_count,
-      </if>
-      <if test="executeTime != null" >
-        execute_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="statisticsTime != null" >
-        #{statisticsTime,jdbcType=VARCHAR},
-      </if>
-      <if test="intervalTime != null" >
-        #{intervalTime,jdbcType=INTEGER},
-      </if>
-      <if test="sourceType != null" >
+<mapper namespace="com.hhly.smartdata.mapper.smartdata.IntervalGameLaunchReportMapper">
+    <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="statistics_time" property="statisticsTime" jdbcType="VARCHAR"/>
+        <result column="interval_time" property="intervalTime" jdbcType="INTEGER"/>
+        <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
+        <result column="platform_id" property="platformId" jdbcType="INTEGER"/>
+        <result column="platform_name" property="platformName" jdbcType="VARCHAR"/>
+        <result column="launch_count" property="launchCount" jdbcType="INTEGER"/>
+        <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, statistics_time, interval_time, platform_id, platform_name, launch_count, execute_time ,source_type
+    </sql>
+    <delete id="deleteByTimeAndSourceTypeAndPlatformId">
+        delete from interval_game_launch_report where statistics_time = #{statisticsTime} and platform_id =#{platformId}
+        and source_type =#{sourceType}
+    </delete>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from interval_game_launch_report
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport">
+        insert into interval_game_launch_report (id, statistics_time, interval_time,source_type,
+        platform_id, platform_name, launch_count,
+        execute_time)
+        values (#{id,jdbcType=BIGINT}, #{statisticsTime,jdbcType=VARCHAR}, #{intervalTime,jdbcType=INTEGER},
         #{sourceType,jdbcType=TINYINT},
-      </if>
-      <if test="platformId != null" >
-        #{platformId,jdbcType=INTEGER},
-      </if>
-      <if test="platformName != null" >
-        #{platformName,jdbcType=VARCHAR},
-      </if>
-      <if test="launchCount != null" >
-        #{launchCount,jdbcType=INTEGER},
-      </if>
-      <if test="executeTime != null" >
-        #{executeTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
-    update interval_game_launch_report
-    <set >
-      <if test="statisticsTime != null" >
-        statistics_time = #{statisticsTime,jdbcType=VARCHAR},
-      </if>
-      <if test="intervalTime != null" >
+        #{platformId,jdbcType=INTEGER}, #{platformName,jdbcType=VARCHAR}, #{launchCount,jdbcType=INTEGER},
+        #{executeTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport">
+        insert into interval_game_launch_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="statisticsTime != null">
+                statistics_time,
+            </if>
+            <if test="intervalTime != null">
+                interval_time,
+            </if>
+            <if test="sourceType != null">
+                source_type,
+            </if>
+            <if test="platformId != null">
+                platform_id,
+            </if>
+            <if test="platformName != null">
+                platform_name,
+            </if>
+            <if test="launchCount != null">
+                launch_count,
+            </if>
+            <if test="executeTime != null">
+                execute_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="statisticsTime != null">
+                #{statisticsTime,jdbcType=VARCHAR},
+            </if>
+            <if test="intervalTime != null">
+                #{intervalTime,jdbcType=INTEGER},
+            </if>
+            <if test="sourceType != null">
+                #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="platformId != null">
+                #{platformId,jdbcType=INTEGER},
+            </if>
+            <if test="platformName != null">
+                #{platformName,jdbcType=VARCHAR},
+            </if>
+            <if test="launchCount != null">
+                #{launchCount,jdbcType=INTEGER},
+            </if>
+            <if test="executeTime != null">
+                #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport">
+        update interval_game_launch_report
+        <set>
+            <if test="statisticsTime != null">
+                statistics_time = #{statisticsTime,jdbcType=VARCHAR},
+            </if>
+            <if test="intervalTime != null">
+                interval_time = #{intervalTime,jdbcType=INTEGER},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="platformId != null">
+                platform_id = #{platformId,jdbcType=INTEGER},
+            </if>
+            <if test="platformName != null">
+                platform_name = #{platformName,jdbcType=VARCHAR},
+            </if>
+            <if test="launchCount != null">
+                launch_count = #{launchCount,jdbcType=INTEGER},
+            </if>
+            <if test="executeTime != null">
+                execute_time = #{executeTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport">
+        update interval_game_launch_report
+        set statistics_time = #{statisticsTime,jdbcType=VARCHAR},
         interval_time = #{intervalTime,jdbcType=INTEGER},
-      </if>
-      <if test="sourceType != null" >
         source_type = #{sourceType,jdbcType=TINYINT},
-      </if>
-      <if test="platformId != null" >
         platform_id = #{platformId,jdbcType=INTEGER},
-      </if>
-      <if test="platformName != null" >
         platform_name = #{platformName,jdbcType=VARCHAR},
-      </if>
-      <if test="launchCount != null" >
         launch_count = #{launchCount,jdbcType=INTEGER},
-      </if>
-      <if test="executeTime != null" >
-        execute_time = #{executeTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" >
-    update interval_game_launch_report
-    set statistics_time = #{statisticsTime,jdbcType=VARCHAR},
-      interval_time = #{intervalTime,jdbcType=INTEGER},
-      source_type = #{sourceType,jdbcType=TINYINT},
-      platform_id = #{platformId,jdbcType=INTEGER},
-      platform_name = #{platformName,jdbcType=VARCHAR},
-      launch_count = #{launchCount,jdbcType=INTEGER},
-      execute_time = #{executeTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        execute_time = #{executeTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
-  <select id="selectIntervalGameLaunchListData" resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchListReport" parameterType="java.util.Map">
-    select a.statistics_time as statisticsTime,a.ybflaunchCount,c.lydjlaunchCount,b.lmdzlaunchCount
-    from (select statistics_time,sum(launch_count) as ybflaunchCount from interval_game_launch_report where platform_name="一比分"  group by statistics_time  order by statistics_time desc) a
-    inner join
-    (select statistics_time,sum(launch_count) as lmdzlaunchCount from interval_game_launch_report where platform_name="撩妹德州"  group by statistics_time order by statistics_time desc) b
-    inner join
-    (select statistics_time,sum(launch_count) as lydjlaunchCount from interval_game_launch_report where platform_name="乐盈电竞"  group by statistics_time order by statistics_time desc) c
-    on a.statistics_time = b.statistics_time
-    and a.statistics_time = c.statistics_time
-    where  a.statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
-    <if test="startDate != null and startDate  != ''">
-      <![CDATA[
+    <select id="selectIntervalGameLaunchListData"
+            resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchListReport" parameterType="java.util.Map">
+        select a.statistics_time as statisticsTime,a.ybflaunchCount,c.lydjlaunchCount,b.lmdzlaunchCount
+        from (select statistics_time,sum(launch_count) as ybflaunchCount from interval_game_launch_report where
+        platform_name="一比分" group by statistics_time order by statistics_time desc) a
+        inner join
+        (select statistics_time,sum(launch_count) as lmdzlaunchCount from interval_game_launch_report where
+        platform_name="撩妹德州" group by statistics_time order by statistics_time desc) b
+        inner join
+        (select statistics_time,sum(launch_count) as lydjlaunchCount from interval_game_launch_report where
+        platform_name="乐盈电竞" group by statistics_time order by statistics_time desc) c
+        on a.statistics_time = b.statistics_time
+        and a.statistics_time = c.statistics_time
+        where a.statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
+        <if test="startDate != null and startDate  != ''">
+            <![CDATA[
              and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-    </if>
-    <if test="endDate != null and endDate  != ''">
-      <![CDATA[
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            <![CDATA[
   		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-    </if>
-  </select>
+        </if>
+    </select>
 
-  <select id="selectIntervalGameLaunchChatData" resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" parameterType="java.util.Map">
-    select
-    DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,
-    platform_name as platformName,sum(launch_count) as launchCount
-    from interval_game_launch_report
-    where 1=1
-    and statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
-    <if test="startDate != null and startDate  != ''">
-      <![CDATA[
+    <select id="selectIntervalGameLaunchChatData"
+            resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" parameterType="java.util.Map">
+        select
+        DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,
+        platform_name as platformName,sum(launch_count) as launchCount
+        from interval_game_launch_report
+        where 1=1
+        and statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
+        <if test="startDate != null and startDate  != ''">
+            <![CDATA[
              and  statistics_time > DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-    </if>
-    <if test="endDate != null and endDate  != ''">
-      <![CDATA[
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            <![CDATA[
   		     and  statistics_time <=  DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-    </if>
-    group by statistics_time,platform_name
-    order by statistics_time desc
-  </select>
+        </if>
+        group by statistics_time,platform_name
+        order by statistics_time desc
+    </select>
 
 </mapper>
