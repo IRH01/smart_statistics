@@ -1,5 +1,6 @@
 package com.hhly.smartdata.mapper.smartdata;
 
+import com.hhly.smartdata.dto.share.TimeFilter;
 import com.hhly.smartdata.model.smartdata.DailyLoginReport;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,10 @@ public interface DailyLoginReportMapper{
     int updateByPrimaryKey(DailyLoginReport record) throws Exception;
 
     List<Map<String, Object>> selectLastMonthLogin(@Param("lastMonthFirstDayStr") String lastMonthFirstDayStr, @Param("lastMonthEndDayStr") String lastMonthEndDayStr) throws Exception;
+
+    List<DailyLoginReport> searchByTime(TimeFilter filter) throws Exception;
+
+    long searchByTimeCount(TimeFilter filter) throws Exception;
+
+    Map<String, Object> selectByMonth(String daily) throws Exception;
 }

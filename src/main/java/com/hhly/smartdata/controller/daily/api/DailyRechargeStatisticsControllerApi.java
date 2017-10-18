@@ -1,8 +1,8 @@
-package com.hhly.smartdata.controller.month.api;
+package com.hhly.smartdata.controller.daily.api;
 
 import com.hhly.smartdata.controller.BaseController;
-import com.hhly.smartdata.dto.mouth.TimeFilter;
-import com.hhly.smartdata.service.month.RechargeStatisticsService;
+import com.hhly.smartdata.dto.share.TimeFilter;
+import com.hhly.smartdata.service.daily.DailyRechargeStatisticsService;
 import com.hhly.smartdata.util.Result;
 import com.hhly.smartdata.util.page.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +15,17 @@ import java.math.BigDecimal;
  * Created by Iritchie.ren on 2017/10/10.
  */
 @RestController
-@RequestMapping("/month/recharge/statistics")
-public class RechargeStatisticsControllerApi extends BaseController{
+@RequestMapping("/daily/recharge/statistics")
+public class DailyRechargeStatisticsControllerApi extends BaseController{
 
     @Autowired
-    private RechargeStatisticsService rechargeStatisticsService;
+    private DailyRechargeStatisticsService dailyRechargeStatisticsService;
 
     @RequestMapping("list")
     public Result search(TimeFilter filter){
         Pagination pagination = null;
         try{
-            pagination = this.rechargeStatisticsService.search(filter);
+            pagination = this.dailyRechargeStatisticsService.search(filter);
         }catch(Exception e){
             LOGGER.error("查询月充值报表报错：" + e.getMessage());
         }
@@ -36,7 +36,7 @@ public class RechargeStatisticsControllerApi extends BaseController{
     public Result getLastTotalRecharge(){
         BigDecimal total = new BigDecimal(0.00);
         try{
-            total = this.rechargeStatisticsService.getLastTotalRecharge();
+            total = this.dailyRechargeStatisticsService.getLastTotalRecharge();
         }catch(Exception e){
             LOGGER.error("获取最近一个月充值统计报错：" + e.getMessage());
         }

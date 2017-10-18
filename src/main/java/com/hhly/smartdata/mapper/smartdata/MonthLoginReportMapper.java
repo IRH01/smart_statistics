@@ -1,8 +1,7 @@
 package com.hhly.smartdata.mapper.smartdata;
 
 
-import com.hhly.smartdata.dto.mouth.LoginStatisticsFilter;
-import com.hhly.smartdata.dto.mouth.TimeFilter;
+import com.hhly.smartdata.dto.share.TimeFilter;
 import com.hhly.smartdata.model.smartdata.MonthLoginReport;
 import org.springframework.stereotype.Repository;
 

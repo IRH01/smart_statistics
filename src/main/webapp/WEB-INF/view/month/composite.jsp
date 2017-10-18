@@ -164,7 +164,9 @@
 </body>
 </html>
 <script type="text/javascript">
-    var pageSize = 12;
+    var pageSize = 10;
+
+    $("#pageSize").val(pageSize);
 
     var setMonthConfig = function () {
         var date = new Date();
@@ -246,8 +248,8 @@
     var showNewUserData = function (pageNumber, pageSize) {
         $("#data").empty();
         $.post("/month/composite/list.do", {
-            monthStart: $('#monthStart').val(),
-            monthEnd: $('#monthEnd').val(),
+            timeStart: $('#monthStart').val(),
+            timeEnd: $('#monthEnd').val(),
             pageNo: pageNumber,
             pageSize: pageSize
         }, function (result) {
@@ -271,10 +273,48 @@
                     $("#totalPage").html(0);
                     $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");
                 } else {
-                    var list = [];
+                    var totalInfo = {};
+                    totalInfo.statisticsMonth = "总计";
+                    totalInfo.registerPopulation = 0;
+                    totalInfo.registerExpCount = 0;
+                    totalInfo.registerExpRate = "-";
+                    totalInfo.realExpCount = 0;
+                    totalInfo.virtualExpCount = 0;
+                    totalInfo.newUserRechargePopulation = 0;
+                    totalInfo.newUserRechargeCount = 0;
+                    totalInfo.newUserRechargeAmount = 0;
+                    totalInfo.newUserRechargeRate = "-";
+                    totalInfo.newUserARPU = "-";
+                    totalInfo.newUserLoginCount = 0;
+                    totalInfo.newUserPlayCount = 0;
+                    totalInfo.newUserLoginTransformRate = "-";
+                    totalInfo.oldUserRechargeCount = 0;
+                    totalInfo.oldUserRechargePopulation = 0;
+                    totalInfo.oldUserRechargeAmount = 0;
+                    totalInfo.oldUserRechargeRate = "-";
+                    totalInfo.oldUserARPU = "-";
+                    totalInfo.oldUserLoginCount = 0;
+                    totalInfo.oldUserPlayCount = 0;
+                    totalInfo.oldUserPlayRate = "-";
+                    totalInfo.nextDayKeepRate = "-";
                     for (var i = 0; i < infoData.length; i++) {
                         addTbRow(infoData[i]);
+                        totalInfo.registerPopulation = accAdd(totalInfo.registerPopulation, parseFloat(infoData[i].registerPopulation));
+                        totalInfo.registerExpCount = accAdd(totalInfo.registerExpCount, parseFloat(infoData[i].registerExpCount));
+                        totalInfo.realExpCount = accAdd(totalInfo.realExpCount, parseFloat(infoData[i].realExpCount));
+                        totalInfo.virtualExpCount = accAdd(totalInfo.virtualExpCount, parseFloat(infoData[i].virtualExpCount));
+                        totalInfo.newUserRechargePopulation = accAdd(totalInfo.newUserRechargePopulation, parseFloat(infoData[i].newUserRechargePopulation));
+                        totalInfo.newUserRechargeCount = accAdd(totalInfo.newUserRechargeCount, parseFloat(infoData[i].newUserRechargeCount));
+                        totalInfo.newUserRechargeAmount = accAdd(totalInfo.newUserRechargeAmount, parseFloat(infoData[i].newUserRechargeAmount));
+                        totalInfo.newUserLoginCount = accAdd(totalInfo.newUserLoginCount, parseFloat(infoData[i].newUserLoginCount));
+                        totalInfo.newUserPlayCount = accAdd(totalInfo.newUserPlayCount, parseFloat(infoData[i].newUserPlayCount));
+                        totalInfo.oldUserRechargeCount = accAdd(totalInfo.oldUserRechargeCount, parseFloat(infoData[i].oldUserRechargeCount));
+                        totalInfo.oldUserRechargePopulation = accAdd(totalInfo.oldUserRechargePopulation, parseFloat(infoData[i].oldUserRechargePopulation));
+                        totalInfo.oldUserRechargeAmount = accAdd(totalInfo.oldUserRechargeAmount, parseFloat(infoData[i].oldUserRechargeAmount));
+                        totalInfo.oldUserLoginCount = accAdd(totalInfo.oldUserLoginCount, parseFloat(infoData[i].oldUserLoginCount));
+                        totalInfo.oldUserPlayCount = accAdd(totalInfo.oldUserPlayCount, parseFloat(infoData[i].oldUserPlayCount));
                     }
+                    addTbRow(totalInfo);
                 }
             } else {
                 $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");

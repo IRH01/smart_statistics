@@ -16,9 +16,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/spring/spring-context.xml"})
-public class RegisterStatisticsServiceTest extends BaseTest{
+public class MonthRegisterStatisticsServiceTest extends BaseTest{
     @Autowired
-    private RegisterStatisticsService registerStatisticsService;
+    private MonthRegisterStatisticsService monthRegisterStatisticsService;
 
     /**
      * Method: search(TimeFilter filter)
@@ -33,7 +33,7 @@ public class RegisterStatisticsServiceTest extends BaseTest{
      */
     @Test
     public void testGetLastTotalRegister() throws Exception{
-        long lastTotalRegister = registerStatisticsService.getLastTotalRegister();
+        long lastTotalRegister = monthRegisterStatisticsService.getLastTotalRegister();
         System.err.println("结果：" + lastTotalRegister);
     }
 

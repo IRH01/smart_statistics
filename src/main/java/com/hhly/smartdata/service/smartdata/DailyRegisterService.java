@@ -27,7 +27,7 @@ public class DailyRegisterService{
         Map<String,Object> paramMap = new HashMap<String, Object>();
         paramMap.put("startDate",startDate);
         paramMap.put("endDate",endDate);
-        PageHelper.startPage(1, 20);
+        PageHelper.startPage(pageNumber, pageSize);
         List<DailyRegisterReport> selectIntervalInterfaceToltalDataMap = dailyRegisterReportMapper.selectRegisterDataListByTime(paramMap);
         PageInfo<DailyRegisterReport> pageInfo = new PageInfo<DailyRegisterReport>(selectIntervalInterfaceToltalDataMap);
         return JSONObject.fromObject(pageInfo);

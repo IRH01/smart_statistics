@@ -331,7 +331,9 @@
                     addTbRow1(ele1);
                 }
             } else {
-                // $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
+                $("#totalCount").html(0);
+                $("#totalPage").html(0);
+                $("#terminalsIntervalData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
             }
         });
     };

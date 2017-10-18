@@ -1,6 +1,6 @@
 package com.hhly.smartdata.service.month;
 
-import com.hhly.smartdata.dto.mouth.TimeFilter;
+import com.hhly.smartdata.dto.share.TimeFilter;
 import com.hhly.smartdata.mapper.smartdata.MonthLoginReportMapper;
 import com.hhly.smartdata.model.smartdata.MonthLoginReport;
 import com.hhly.smartdata.util.DateUtil;
@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by Iritchie.ren on 2017/10/10.
  */
 @Service
-public class LoginStatisticsService{
+public class MonthLoginStatisticsService{
 
     @Autowired
     private MonthLoginReportMapper monthLoginReportMapper;
@@ -33,7 +33,7 @@ public class LoginStatisticsService{
     public Map<String, Object> getLastTotalRegister() throws Exception{
         Date now = new Date();
         String month = DateUtil.getLastMonthStr(now);
-        Map<String, Object> monthRechargeReportMap = this.monthLoginReportMapper.selectByMonth(month);
-        return monthRechargeReportMap;
+        Map<String, Object> monthLoginReportMap = this.monthLoginReportMapper.selectByMonth(month);
+        return monthLoginReportMap;
     }
 }

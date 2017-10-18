@@ -12,6 +12,13 @@ import java.text.NumberFormat;
 public class MonthCompositeReportResult extends MonthCompositeReport{
 
     /**
+     * 平均次日留存率=计算出月平均值
+     *
+     * @return
+     */
+    private Float NextDayKeepRate;
+
+    /**
      * 注册体验率(%)=体验人数/注册人数*100%
      *
      * @return
@@ -20,6 +27,9 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
         NumberFormat numberFormat = NumberFormat.getInstance();
         // 设置精确到小数点后2位
         numberFormat.setMaximumFractionDigits(2);
+        if(this.getRegisterPopulation() == 0){
+            return "0.00";
+        }
         return numberFormat.format(((float) this.getRegisterExpCount() / (float) this.getRegisterPopulation()) * 100);
     }
 
@@ -32,6 +42,9 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
         NumberFormat numberFormat = NumberFormat.getInstance();
         // 设置精确到小数点后2位
         numberFormat.setMaximumFractionDigits(2);
+        if(this.getRegisterPopulation() == 0){
+            return "0.00";
+        }
         return numberFormat.format(((float) this.getNewUserRechargeCount() / (float) this.getRegisterPopulation()) * 100);
     }
 
@@ -57,16 +70,10 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
         NumberFormat numberFormat = NumberFormat.getInstance();
         // 设置精确到小数点后2位
         numberFormat.setMaximumFractionDigits(2);
+        if(this.getRegisterPopulation() == 0){
+            return "0.00";
+        }
         return numberFormat.format(((float) this.getNewUserLoginCount() / (float) this.getRegisterPopulation()) * 100);
-    }
-
-    /**
-     * 老用户充值转化率(%)=老用户充值人数/当月以前注册的人数*100%
-     *
-     * @return
-     */
-    public String getOldUserRechargeRate(){
-        return null;
     }
 
     /**
@@ -83,20 +90,42 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
     }
 
     /**
+     * 老用户充值转化率(%)=老用户充值人数/当月以前注册的人数*100%
+     *
+     * @return
+     */
+    public String getOldUserRechargeRate(){
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        // 设置精确到小数点后2位
+        numberFormat.setMaximumFractionDigits(2);
+        Integer oldRegisterPopulation = this.getTotalRegisterPopulation() - this.getRegisterPopulation();
+        if(oldRegisterPopulation == 0){
+            return "0.00";
+        }
+        return numberFormat.format(((float) (this.getOldUserRechargePopulation()) / (float) oldRegisterPopulation) * 100);
+    }
+
+    /**
      * 老用户登录转化率(%)=老用户登录人数/当月以前注册的人数*100%
      *
      * @return
      */
-    public Float getOldUserPlayRate(){
-        return null;
+    public String getOldUserPlayRate(){
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        // 设置精确到小数点后2位
+        numberFormat.setMaximumFractionDigits(2);
+        Integer oldRegisterPopulation = this.getTotalRegisterPopulation() - this.getRegisterPopulation();
+        if(oldRegisterPopulation == 0){
+            return "0.00";
+        }
+        return numberFormat.format(((float) this.getOldUserLoginCount() / (float) oldRegisterPopulation) * 100);
     }
 
-    /**
-     * 平均次日留存率=计算出月平均值
-     *
-     * @return
-     */
     public Float getNextDayKeepRate(){
-        return null;
+        return NextDayKeepRate;
+    }
+
+    public void setNextDayKeepRate(Float nextDayKeepRate){
+        NextDayKeepRate = nextDayKeepRate;
     }
 }

@@ -60,6 +60,11 @@ public class MonthCompositeReport{
     private Integer newUserPlayCount = 0;
 
     /**
+     * 总注册人数
+     */
+    private Integer totalRegisterPopulation = 0;
+
+    /**
      * 老用户充值人数
      */
     private Integer oldUserRechargePopulation = 0;
@@ -181,6 +186,14 @@ public class MonthCompositeReport{
 
     public void setNewUserPlayCount(Integer newUserPlayCount){
         this.newUserPlayCount = newUserPlayCount;
+    }
+
+    public Integer getTotalRegisterPopulation(){
+        return totalRegisterPopulation;
+    }
+
+    public void setTotalRegisterPopulation(Integer totalRegisterPopulation){
+        this.totalRegisterPopulation = totalRegisterPopulation;
     }
 
     public Integer getOldUserRechargePopulation(){

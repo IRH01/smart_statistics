@@ -1,4 +1,4 @@
-package com.hhly.smartdata.dto.mouth;
+package com.hhly.smartdata.dto.share;
 
 /**
  * Created by Iritchie.ren on 2017/10/11.
@@ -15,11 +15,11 @@ public class TimeFilter{
     /**
      * 查询开始时间
      */
-    private String monthStart;
+    private String timeStart;
     /**
      * 查询结束时间
      */
-    private String monthEnd;
+    private String timeEnd;
 
     public Integer getPageNo(){
         return pageNo;
@@ -37,19 +37,19 @@ public class TimeFilter{
         this.pageSize = pageSize;
     }
 
-    public String getMonthStart(){
-        return monthStart;
+    public String getTimeStart(){
+        return timeStart;
     }
 
-    public void setMonthStart(String monthStart){
-        this.monthStart = monthStart;
+    public void setTimeStart(String timeStart){
+        this.timeStart = timeStart;
     }
 
-    public String getMonthEnd(){
-        return monthEnd;
+    public String getTimeEnd(){
+        return timeEnd;
     }
 
-    public void setMonthEnd(String monthEnd){
-        this.monthEnd = monthEnd;
+    public void setTimeEnd(String timeEnd){
+        this.timeEnd = timeEnd;
     }
 }

@@ -178,6 +178,7 @@ CREATE TABLE `month_composite_report` (
    `new_user_recharge_amount` decimal(14,4) NOT NULL DEFAULT '0.0000' COMMENT '新用户充值金额',
    `new_user_login_count` int(10) NOT NULL DEFAULT '0' COMMENT '新用户登录人数',
    `new_user_play_count` int(10) NOT NULL DEFAULT '0' COMMENT '新用户玩游戏数',
+   "total_register_population" int(10) NOT NULL DEFAULT '0' COMMENT '注册总人数。',
    `old_user_recharge_population` int(10) NOT NULL DEFAULT '0' COMMENT '老用户充值人数',
    `old_user_recharge_count` int(10) NOT NULL DEFAULT '0' COMMENT '老用户充值次数',
    `old_user_recharge_amount` decimal(14,4) NOT NULL DEFAULT '0.0000' COMMENT '老用户充值金额',

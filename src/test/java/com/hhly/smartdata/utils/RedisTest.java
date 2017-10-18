@@ -12,7 +12,9 @@ import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;@RunWith(SpringJUnit4ClassRunner.class)
+import java.util.List;
+
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/spring/spring-context.xml"})
 public class RedisTest{
 
@@ -21,44 +23,32 @@ public class RedisTest{
 
     @Test
     public void testValueOps(){
-        for(int i = 0; i < 2100000000; i++){
-            this.redisTemplate.opsForValue().set("value" + 1, i + "");
-        }
+        this.redisTemplate.opsForValue().set("value", "test");
     }
 
     @Test
     public void testList(){
-        for(int i = 0; i < 2100000000; i++){
-            this.redisTemplate.opsForList().leftPush("list", i + "");
-        }
+        this.redisTemplate.opsForList().leftPush("list", "test");
     }
 
     @Test
     public void testHash(){
-        for(int i = 0; i < 2100000000; i++){
-            this.redisTemplate.opsForHash().put("hash" + (i % 5), "互娱" + i, "平台" + i);
-        }
+        this.redisTemplate.opsForHash().put("hash", "互娱", "平台");
     }
 
     @Test
     public void testSet(){
-        for(int i = 0; i < 2100000000; i++){
-            this.redisTemplate.opsForSet().add("set", "互娱" + i);
-        }
+        this.redisTemplate.opsForSet().add("set", "互娱");
     }
 
     @Test
     public void testZSet(){
-        for(int i = 0; i < 2100000000; i++){
-            this.redisTemplate.opsForZSet().add("zset" + i, "平台", 1.2 + i);
-        }
+        this.redisTemplate.opsForZSet().add("zset", "平台", 1.2);
     }
 
     @Test
     public void testGeo(){
-        for(int i = 0; i < 2100000000; i++){
-            this.redisTemplate.opsForGeo().geoAdd("geo" + i, new Point(123.1, 30.0), "member");
-        }
+        this.redisTemplate.opsForGeo().geoAdd("geo", new Point(123.1, 30.0), "member");
     }
 
     /**
@@ -76,7 +66,6 @@ public class RedisTest{
         });
         System.err.println("Number of items added to set: " + txResults.get(0));
     }
-
 
 
 }

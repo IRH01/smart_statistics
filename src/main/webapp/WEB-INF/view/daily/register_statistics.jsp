@@ -44,7 +44,6 @@
     <script src="/lib/tool.js"></script>
 
 
-
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -84,7 +83,7 @@
                                                                 <col width="100"/>
                                                             </colgroup>
                                                             <thead>
-                                                            <tr >
+                                                            <tr>
                                                                 <th style="border:1px solid black;width:20px;">
                                                                     昨日新增注册用户<br/>
                                                                     <lable id="yesterdayRegisterPopulationNum"></lable>
@@ -102,19 +101,29 @@
                                                                     <td class="tb1Td">
                                                                         <span class="span">统计时间：</span>
                                                                     </td>
-                                                                    <td><input placeholder="请选择日期" class="laydate-icon" style="height:25px;" id="dateStart" readonly> </td>
+                                                                    <td><input placeholder="请选择日期" class="laydate-icon"
+                                                                               style="height:25px;" id="dateStart"
+                                                                               readonly></td>
                                                                     <td>
                                                                         <span class="span">&nbsp;至&nbsp;</span>
                                                                     </td>
-                                                                    <td><input class="laydate-icon" id="dateEnd" style="height:25px;" placeholder="请选择日期" readonly></td>
+                                                                    <td><input class="laydate-icon" id="dateEnd"
+                                                                               style="height:25px;" placeholder="请选择日期"
+                                                                               readonly></td>
                                                                     <td style="line-height:1;">
-                                                                        <button type="button" id="search" class="btn btn-primary btn-sm" onclick="search();">
-                                                                            <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
+                                                                        <button type="button" id="search"
+                                                                                class="btn btn-primary btn-sm"
+                                                                                onclick="search();">
+                                                                            <i class="icon-search icon-white"
+                                                                               style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
                                                                         </button>
                                                                     </td>
                                                                     <td style="line-height:1;">
-                                                                        <button type="button" id="reset" class="btn btn-primary btn-sm" onclick="reset();">
-                                                                            <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
+                                                                        <button type="button" id="reset"
+                                                                                class="btn btn-primary btn-sm"
+                                                                                onclick="reset();">
+                                                                            <i class="icon-search icon-white"
+                                                                               style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
                                                                         </button>
                                                                     </td>
                                                                 </tr>
@@ -156,10 +165,21 @@
                                                     </div>
                                                     <table class="tablePage">
                                                         <tr>
-                                                            <td><div class="divPage"><span class="spanPageSize">每页个数：</span><input id="pageSize" value="10" class="inputPageSize" onKeypress="return intInput(event);" onKeyup="value=pageSizeLimit(value);" onblur="value=pageSizeNotEmpty(value);"/></div></td>
-                                                            <td><span class="spanPageSize">总记录数：</span><span id="totalCount" class="spanPageSize"></span></td>
-                                                            <td><span class="spanPageSize">总页数：</span><span id="totalPage" class="spanPageSize"></span></td>
-                                                            <td class="tablePageTd"><div id="page"></div></td>
+                                                            <td>
+                                                                <div class="divPage"><span
+                                                                        class="spanPageSize">每页个数：</span><input
+                                                                        id="pageSize" value="10" class="inputPageSize"
+                                                                        onKeypress="return intInput(event);"
+                                                                        onKeyup="value=pageSizeLimit(value);"
+                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                            </td>
+                                                            <td><span class="spanPageSize">总记录数：</span><span
+                                                                    id="totalCount" class="spanPageSize"></span></td>
+                                                            <td><span class="spanPageSize">总页数：</span><span
+                                                                    id="totalPage" class="spanPageSize"></span></td>
+                                                            <td class="tablePageTd">
+                                                                <div id="page"></div>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -180,7 +200,6 @@
 </html>
 <script type="text/javascript">
     var date = new Date();
-    var seperator1 = "-";
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
     if (month >= 1 && month <= 9) {
@@ -188,14 +207,6 @@
     }
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-        + " " ;
-
-    // 统计
-    var dateChange = function () {
-        $("#dateType").val(0);
-        search();
     }
 
     var intervalNum = function () {
@@ -206,10 +217,10 @@
         }, function (data) {
             var json = JSON.parse(data);
             if (null != json && undefined != json) {
-                var totalNum = json.pcPopulation+json.h5Population+json.iosPopulation+json.androidPopulation;
+                var totalNum = json.pcPopulation + json.h5Population + json.iosPopulation + json.androidPopulation;
                 if (totalNum > 0) {
-                    $("#yesterdayRegisterPopulationNum").html(json.pcPopulation+json.h5Population+json.iosPopulation+json.androidPopulation);
-                 } else {
+                    $("#yesterdayRegisterPopulationNum").html(json.pcPopulation + json.h5Population + json.iosPopulation + json.androidPopulation);
+                } else {
                     $("#yesterdayRegisterPopulationNum").html("0");
                 }
             } else {
@@ -226,35 +237,9 @@
 
 
     var pageSize = 10;
-    var deviceTypeChange = function (ele) {
-        if (ele.id == "cltTypeAll") {
-            $(".deviceType").prop("checked", ele.checked);
-        } else {
-            if (!ele.checked) {
-                $("#cltTypeAll").prop("checked", false);
-            }
-        }
-        loadNewUserDataTrendLine(echartsCopy);
-    }
 
-    var getDeviceType = function () {
-        var devices = $(".deviceType");
-        var deviceTypes = "";
-        for (i = 0; i < devices.length; i++) {
-            if (devices[i].checked) {
-                if ("" != deviceTypes) {
-                    deviceTypes += ",";
-                }
-                deviceTypes += devices.eq(i).val();
-            }
-        }
-        return deviceTypes;
-    }
-    setDateRangeConfig("dateStart","dateEnd",null,true);
-    //    var dateValue = setDateRangeConfig("dateStart", "dateEnd", dateChange);
-    var dateTypeChange = function () {
-        setDateTypeChange("dateType", "dateStart", "dateEnd", dateValue.dateStart, dateValue.dateEnd, search);
-    }
+    setDateRangeConfig("dateStart", "dateEnd", null, true);
+
     var addTbRow = function (data) {
         if (null != data && undefined != data && "" != data) {
             var ele = "<tr><td class=\"date\">statisticsDay</td><td>pcPopulation</td><td>pcPageView</td><td>pcUserView</td><td>h5Population</td><td>h5PageView</td><td>h5UserView</td><td>iosPopulation</td><td>iosInstallCount</td><td>androidPopulation</td><td>androidInstallCount</td></tr>";
@@ -262,7 +247,7 @@
                 .replace("iosPopulation", data.iosPopulation).replace("iosInstallCount", data.iosInstallCount).replace("androidPopulation", data.androidPopulation).replace("androidInstallCount", data.androidInstallCount);
             $("#newUserData").append(ele);
         }
-    }
+    };
 
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
@@ -293,27 +278,27 @@
                     $("#totalPage").html(0);
                     $("#newUserData").append("<tr><td colspan=\"11\">没有数据</td></tr>");
                 } else {
-                    var pcPopulationNum=0;
-                    var pcPageViewNum=0;
-                    var pcUserViewNum=0;
-                    var h5PopulationNum=0;
-                    var h5PageViewNum=0;
-                    var h5UserViewNum=0;
-                    var iosPopulationNum=0;
-                    var iosInstallCountNum=0;
-                    var androidPopulationNum=0;
-                    var androidInstallCountNum=0;
+                    var pcPopulationNum = 0;
+                    var pcPageViewNum = 0;
+                    var pcUserViewNum = 0;
+                    var h5PopulationNum = 0;
+                    var h5PageViewNum = 0;
+                    var h5UserViewNum = 0;
+                    var iosPopulationNum = 0;
+                    var iosInstallCountNum = 0;
+                    var androidPopulationNum = 0;
+                    var androidInstallCountNum = 0;
                     for (var i = 0; i < infoData.length; i++) {
-                         pcPopulationNum=accAdd(pcPopulationNum,infoData[i].pcPopulation);
-                         pcPageViewNum=accAdd(pcPageViewNum,infoData[i].pcPageView);
-                         pcUserViewNum=accAdd(pcUserViewNum,infoData[i].pcUserView);
-                         h5PopulationNum=accAdd(h5PopulationNum,infoData[i].h5Population);
-                         h5PageViewNum=accAdd(h5PageViewNum,infoData[i].h5PageView);
-                         h5UserViewNum=accAdd(h5UserViewNum,infoData[i].h5UserView);
-                         iosPopulationNum=accAdd(iosPopulationNum,infoData[i].iosPopulation);
-                         iosInstallCountNum=accAdd(iosInstallCountNum,infoData[i].iosInstallCount);
-                         androidPopulationNum=accAdd(androidPopulationNum,infoData[i].androidPopulation);
-                         androidInstallCountNum=accAdd(androidInstallCountNum,infoData[i].androidInstallCount);
+                        pcPopulationNum = accAdd(pcPopulationNum, infoData[i].pcPopulation);
+                        pcPageViewNum = accAdd(pcPageViewNum, infoData[i].pcPageView);
+                        pcUserViewNum = accAdd(pcUserViewNum, infoData[i].pcUserView);
+                        h5PopulationNum = accAdd(h5PopulationNum, infoData[i].h5Population);
+                        h5PageViewNum = accAdd(h5PageViewNum, infoData[i].h5PageView);
+                        h5UserViewNum = accAdd(h5UserViewNum, infoData[i].h5UserView);
+                        iosPopulationNum = accAdd(iosPopulationNum, infoData[i].iosPopulation);
+                        iosInstallCountNum = accAdd(iosInstallCountNum, infoData[i].iosInstallCount);
+                        androidPopulationNum = accAdd(androidPopulationNum, infoData[i].androidPopulation);
+                        androidInstallCountNum = accAdd(androidInstallCountNum, infoData[i].androidInstallCount);
                         var ele = {
                             statisticsDay: infoData[i].statisticsDay,
                             pcPopulation: infoData[i].pcPopulation,
@@ -326,11 +311,11 @@
                             iosInstallCount: infoData[i].iosInstallCount,
                             androidPopulation: infoData[i].androidPopulation,
                             androidInstallCount: infoData[i].androidInstallCount
-                        }
+                        };
                         addTbRow(ele);
                     }
                     var ele1 = {
-                        statisticsDay:"总计",
+                        statisticsDay: "总计",
                         pcPopulation: pcPopulationNum,
                         pcPageView: pcPageViewNum,
                         pcUserView: pcUserViewNum,
@@ -341,25 +326,25 @@
                         iosInstallCount: iosInstallCountNum,
                         androidPopulation: androidPopulationNum,
                         androidInstallCount: androidInstallCountNum
-                    }
+                    };
                     addTbRow(ele1);
                 }
             } else {
                 // $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
             }
         });
-    }
+    };
 
     //查询显示
     var search = function () {
         pageSize = $("#pageSize").val();
         showNewUserData(1, pageSize);
         intervalNum();
-    }
-    var reset = function() {
+    };
+    var reset = function () {
         $("#dateStart").val("");
         $("#dateEnd").val("");
-    }
+    };
 
     var echartsCopy;
     // 路径配置

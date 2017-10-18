@@ -1,6 +1,7 @@
 package com.hhly.smartdata.service.schedule;
 
 import com.google.common.collect.Lists;
+import com.hhly.smartdata.mapper.member.UserInfoMapper;
 import com.hhly.smartdata.mapper.smartdata.*;
 import com.hhly.smartdata.model.smartdata.MonthCompositeReport;
 import com.hhly.smartdata.model.smartdata.MonthLoginReport;
@@ -47,9 +48,13 @@ public class MonthExecutorService{
     @Autowired
     private MonthLoginReportMapper monthLoginReportMapper;
 
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
     public Result compositeReport() throws Exception{
         Date now = new Date();
         Map<String, Object> lastMonthCompositeMap = this.dailyCompositeReportMapper.selectLastMonthComposite(DateUtil.getLastMonthFirstDayStr(now), DateUtil.getLastMonthEndDayStr(now));
+        Long userCount = this.userInfoMapper.selectUserCount(DateUtil.getNowZeroTime(now));
         if(lastMonthCompositeMap == null){
             return Result.fail("没有需要统计的数据");
         }
@@ -57,7 +62,6 @@ public class MonthExecutorService{
 
         monthCompositeReport.setExecuteTime(now);
         monthCompositeReport.setStatisticsMonth(DateUtil.getLastMonthStr(now));
-
         monthCompositeReport.setVirtualExpCount(((BigDecimal) lastMonthCompositeMap.get("virtual_exp_count_sum")).intValue());
         monthCompositeReport.setRegisterPopulation(((BigDecimal) lastMonthCompositeMap.get("register_population_sum")).intValue());
         monthCompositeReport.setRegisterExpCount(((BigDecimal) lastMonthCompositeMap.get("register_exp_count_sum")).intValue());
@@ -67,6 +71,7 @@ public class MonthExecutorService{
         monthCompositeReport.setNewUserRechargePopulation(((BigDecimal) lastMonthCompositeMap.get("new_user_recharge_population_sum")).intValue());
         monthCompositeReport.setNewUserRechargeCount(((BigDecimal) lastMonthCompositeMap.get("new_user_recharge_count_sum")).intValue());
         monthCompositeReport.setNewUserRechargeAmount((BigDecimal) lastMonthCompositeMap.get("new_user_recharge_amount_sum"));
+        monthCompositeReport.setTotalRegisterPopulation(userCount.intValue());
         monthCompositeReport.setOldUserRechargePopulation(((BigDecimal) lastMonthCompositeMap.get("old_user_recharge_population_sum")).intValue());
         monthCompositeReport.setOldUserRechargeAmount((BigDecimal) lastMonthCompositeMap.get("old_user_recharge_amount_sum"));
         monthCompositeReport.setOldUserRechargeCount(((BigDecimal) lastMonthCompositeMap.get("old_user_recharge_count_sum")).intValue());

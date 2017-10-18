@@ -1,5 +1,7 @@
 package com.hhly.smartdata.dto.mouth;
 
+import com.hhly.smartdata.dto.share.TimeFilter;
+
 /**
  * Created by Iritchie.ren on 2017/10/13.
  */

@@ -1,7 +1,7 @@
 package com.hhly.smartdata.service.month;
 
 import com.hhly.smartdata.dto.mouth.MonthRechargeReportResult;
-import com.hhly.smartdata.dto.mouth.TimeFilter;
+import com.hhly.smartdata.dto.share.TimeFilter;
 import com.hhly.smartdata.mapper.smartdata.MonthRechargeReportMapper;
 import com.hhly.smartdata.model.smartdata.MonthRechargeReport;
 import com.hhly.smartdata.util.DateUtil;
@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Iritchie.ren on 2017/10/10.
  */
 @Service
-public class RechargeStatisticsService{
+public class MonthRechargeStatisticsService{
 
     @Autowired
     private MonthRechargeReportMapper monthRechargeReportMapper;

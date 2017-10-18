@@ -1,6 +1,6 @@
 package com.hhly.smartdata.service.month;
 
-import com.hhly.smartdata.dto.mouth.TimeFilter;
+import com.hhly.smartdata.dto.share.TimeFilter;
 import com.hhly.smartdata.mapper.smartdata.MonthRegisterReportMapper;
 import com.hhly.smartdata.model.smartdata.MonthRegisterReport;
 import com.hhly.smartdata.util.DateUtil;
@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Iritchie.ren on 2017/10/12.
  */
 @Service
-public class RegisterStatisticsService{
+public class MonthRegisterStatisticsService{
 
     @Autowired
     private MonthRegisterReportMapper monthRegisterReportMapper;

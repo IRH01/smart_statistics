@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by Iritchie.ren on 2017/10/10.
  */
 @Controller
-@RequestMapping("/month/recharge/statistics")
-public class RechargeStatisticsController extends BaseController{
+@RequestMapping("/month/composite")
+public class MonthCompositeController extends BaseController{
 
     @RequestMapping("/show")
     public String show(){
-        return "month/recharge_statistics";
+        return "month/composite";
     }
 }

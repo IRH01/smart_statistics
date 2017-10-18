@@ -21,7 +21,7 @@ public class IntervalExecutor{
     /**
      * 平台实时统计
      */
-    @Scheduled(cron = "0 0/30 * * * ?")
+    @Scheduled(cron = "0 2/30 * * * ?")
     public void intervalSourceStatisticsSchedule(){
         try{
             intervalExecutorService.intervalSourceStatistics();
@@ -33,7 +33,7 @@ public class IntervalExecutor{
     /**
      * 接口统计
      */
-    @Scheduled(cron = "0 0/30 * * * ?")
+    @Scheduled(cron = "0 2/30 * * * ?")
     public void intervalInterfaceStatisticsExecutor(){
         try{
             intervalExecutorService.intervalInterfaceStatistics();
@@ -45,7 +45,7 @@ public class IntervalExecutor{
     /**
      * 启动统计
      */
-    @Scheduled(cron = "0 0/30 * * * ?")
+    @Scheduled(cron = "0 2/30 * * * ?")
     public void intervalGameLaunchSchedule(){
         try{
             intervalExecutorService.intervalGameLaunch();

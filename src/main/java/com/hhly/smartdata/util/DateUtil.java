@@ -1,6 +1,7 @@
 package com.hhly.smartdata.util;
 
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -130,6 +131,51 @@ public class DateUtil{
         return sdf.format(calendar.getTime());
     }
 
+    /**
+     * 获取当月月的第一天
+     *
+     * @param month
+     * @return String ,"yyyy-MM-dd"
+     */
+    public static String getMonthFirstDayStr(String month) throws ParseException{
+        if(month == null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdfMonth = new SimpleDateFormat("yyyy-MM");
+        Date date = sdfMonth.parse(month);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        return sdf.format(calendar.getTime());
+    }
+
+    /**
+     * dd
+     * 获取前当月的最后一天
+     *
+     * @param month "yyyy-MM"
+     * @return String ,"yyyy-MM-dd"
+     */
+    public static String getMonthEndDayStr(String month) throws ParseException{
+        if(month == null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdfMonth = new SimpleDateFormat("yyyy-MM");
+        Date date = sdfMonth.parse(month);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        return sdf.format(calendar.getTime());
+    }
+
+    /**
+     * 获取前一月的第一天
+     *
+     * @param date
+     * @return String ,"yyyy-MM-dd"
+     */
     public static String getLastMonthFirstDayStr(Date date){
         if(date == null){
             return "";
@@ -142,6 +188,13 @@ public class DateUtil{
         return sdf.format(calendar.getTime());
     }
 
+    /**
+     * dd
+     * 获取前一月的最后一天
+     *
+     * @param date
+     * @return String ,"yyyy-MM-dd"
+     */
     public static String getLastMonthEndDayStr(Date date){
         if(date == null){
             return "";
@@ -166,11 +219,23 @@ public class DateUtil{
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Calendar beforeTime = Calendar.getInstance();
-        beforeTime.add(Calendar.MINUTE, -30);// 时间差值
+        beforeTime.add(Calendar.MINUTE, -32);// 时间差值
         Date beforeD = beforeTime.getTime();
         return sdf.format(beforeD);
     }
 
+    /**
+     * 获取当日0点时间
+     */
+    public static Date getNowZeroTime(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getActualMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMaximum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getActualMaximum(Calendar.MILLISECOND));
+        return calendar.getTime();
+    }
 
 }
 

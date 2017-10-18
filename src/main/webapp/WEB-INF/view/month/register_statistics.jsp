@@ -155,7 +155,9 @@
 </body>
 </html>
 <script type="text/javascript">
-    var pageSize = 12;
+    var pageSize = 10;
+
+    $("#pageSize").val(pageSize);
 
     var setMonthConfig = function () {
         var date = new Date();
@@ -213,8 +215,8 @@
     var showNewUserData = function (pageNumber, pageSize) {
         $("#data").empty();
         $.get("/month/register/statistics/list.do", {
-            monthStart: $('#monthStart').val(),
-            monthEnd: $('#monthEnd').val(),
+            timeStart: $('#monthStart').val(),
+            timeEnd: $('#monthEnd').val(),
             pageNo: pageNumber,
             pageSize: pageSize
         }, function (result) {
@@ -238,9 +240,32 @@
                     $("#totalPage").html(0);
                     $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");
                 } else {
+                    var totalInfo = {};
+                    totalInfo.statisticsMonth = "总计";
+                    totalInfo.pcPopulation = 0;
+                    totalInfo.pcPageView = 0;
+                    totalInfo.pcUserView = 0;
+                    totalInfo.h5Population = 0;
+                    totalInfo.h5PageView = 0;
+                    totalInfo.h5UserView = 0;
+                    totalInfo.iosPopulation = 0;
+                    totalInfo.iosInstallCount = 0;
+                    totalInfo.androidPopulation = 0;
+                    totalInfo.androidInstallCount = 0;
                     for (var i = 0; i < infoData.length; i++) {
                         addTbRow(infoData[i]);
+                        totalInfo.pcPopulation = accAdd(totalInfo.pcPopulation, parseFloat(infoData[i].pcPopulation));
+                        totalInfo.pcPageView = accAdd(totalInfo.pcPageView, parseFloat(infoData[i].pcPageView));
+                        totalInfo.pcUserView = accAdd(totalInfo.pcUserView, parseFloat(infoData[i].pcUserView));
+                        totalInfo.h5Population = accAdd(totalInfo.h5Population, parseFloat(infoData[i].h5Population));
+                        totalInfo.h5PageView = accAdd(totalInfo.h5PageView, parseFloat(infoData[i].h5PageView));
+                        totalInfo.h5UserView = accAdd(totalInfo.h5UserView, parseFloat(infoData[i].h5UserView));
+                        totalInfo.iosPopulation = accAdd(totalInfo.iosPopulation, parseFloat(infoData[i].iosPopulation));
+                        totalInfo.iosInstallCount = accAdd(totalInfo.iosInstallCount, parseFloat(infoData[i].iosInstallCount));
+                        totalInfo.androidPopulation = accAdd(totalInfo.androidPopulation, parseFloat(infoData[i].androidPopulation));
+                        totalInfo.androidInstallCount = accAdd(totalInfo.androidInstallCount, parseFloat(infoData[i].androidInstallCount));
                     }
+                    addTbRow(totalInfo);
                 }
             } else {
                 $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");

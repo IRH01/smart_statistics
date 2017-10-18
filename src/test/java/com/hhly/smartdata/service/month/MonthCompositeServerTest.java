@@ -2,7 +2,7 @@ package com.hhly.smartdata.service.month;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hhly.smartdata.common.BaseTest;
-import com.hhly.smartdata.dto.mouth.TimeFilter;
+import com.hhly.smartdata.dto.share.TimeFilter;
 import com.hhly.smartdata.util.page.Pagination;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,9 +19,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/spring/spring-context.xml"})
-public class CompositeServerTest extends BaseTest{
+public class MonthCompositeServerTest extends BaseTest{
     @Autowired
-    private CompositeServer compositeServer;
+    private MonthCompositeServer monthCompositeServer;
 
     /**
      * Method: search(String startMonth, String endMonth)
@@ -31,9 +31,9 @@ public class CompositeServerTest extends BaseTest{
         TimeFilter filter = new TimeFilter();
         filter.setPageNo(1);
         filter.setPageSize(12);
-        filter.setMonthStart("2017-08");
-        filter.setMonthEnd("2017-09");
-        Pagination pagination = this.compositeServer.search(filter);
+        filter.setTimeEnd("2017-08");
+        filter.setTimeEnd("2017-09");
+        Pagination pagination = this.monthCompositeServer.search(filter);
         System.err.println(JSONObject.toJSONString(pagination));
     }
 

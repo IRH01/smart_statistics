@@ -21,7 +21,7 @@ public class DailyKeepRecordReport{
     /**
      * 注册人数
      */
-    private Integer registerCount = 0;
+     Integer registerCount = 0;
 
     /**
      * 1天后留存
@@ -72,6 +72,8 @@ public class DailyKeepRecordReport{
      * 统计执行日期
      */
     private Date executeTime;
+
+
 
     public Long getId(){
         return id;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/month/login/statistics")
-public class LoginStatisticsController extends BaseController{
+public class MonthLoginStatisticsController extends BaseController{
 
     @RequestMapping("/show")
     public String show(){

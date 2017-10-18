@@ -33,11 +33,11 @@
         <include refid="Base_Column_List"/>
         FROM month_register_report
         <where>
-            <if test="monthStart != null and monthStart != ''">
-                statistics_month &gt;= #{monthStart}
+            <if test="timeStart != null and timeStart != ''">
+                statistics_month &gt;= #{timeStart}
             </if>
-            <if test="monthEnd != null and monthEnd != ''">
-                AND statistics_month &lt;= #{monthEnd}
+            <if test="timeEnd != null and timeEnd != ''">
+                AND statistics_month &lt;= #{timeEnd}
             </if>
         </where>
         ORDER BY statistics_month DESC
@@ -49,14 +49,14 @@
 
     <select id="searchByTimeCount" resultType="java.lang.Long">
         SELECT
-        COUNT(1)
+        COUNT(id)
         FROM month_register_report
         <where>
-            <if test="monthStart != null and monthStart != ''">
-                statistics_month &gt;= #{monthStart}
+            <if test="timeStart != null and timeStart != ''">
+                statistics_month &gt;= #{timeStart}
             </if>
-            <if test="monthEnd != null and monthEnd != ''">
-                AND statistics_month &lt;= #{monthEnd}
+            <if test="timeEnd != null and timeEnd != ''">
+                AND statistics_month &lt;= #{timeEnd}
             </if>
         </where>
     </select>

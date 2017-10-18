@@ -137,66 +137,20 @@
 </body>
 </html>
 <script type="text/javascript">
-    var date = new Date();
-    var seperator1 = "-";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-        + " " ;
-
-    // 统计
-    var dateChange = function () {
-        $("#dateType").val(0);
-        search();
-    }
-
 
     $(function () {
         $("#sortable").sortable({cursor: "move", handle: ".sortHandle"});
         $(".resize").resizable({minHeight: 200, minWidth: 300});
     });
 
-
     var pageSize = 30;
-    var deviceTypeChange = function (ele) {
-        if (ele.id == "cltTypeAll") {
-            $(".deviceType").prop("checked", ele.checked);
-        } else {
-            if (!ele.checked) {
-                $("#cltTypeAll").prop("checked", false);
-            }
-        }
-        loadNewUserDataTrendLine(echartsCopy);
-    }
 
-    var getDeviceType = function () {
-        var devices = $(".deviceType");
-        var deviceTypes = "";
-        for (i = 0; i < devices.length; i++) {
-            if (devices[i].checked) {
-                if ("" != deviceTypes) {
-                    deviceTypes += ",";
-                }
-                deviceTypes += devices.eq(i).val();
-            }
-        }
-        return deviceTypes;
-    }
      setDateRangeConfig("dateStart","dateEnd",null,true);
-//    var dateValue = setDateRangeConfig("dateStart", "dateEnd", dateChange);
-    var dateTypeChange = function () {
-        setDateTypeChange("dateType", "dateStart", "dateEnd", dateValue.dateStart, dateValue.dateEnd, search);
-    }
+
     var showTbCl = function(){
         $("#data").append("<tr><td rowspan=\"2\">日期</td><td rowspan=\"2\">注册人数</td>\n" +
             "<td rowspan=\"2\">注册体验量</td><td rowspan=\"2\">注册体验率(%)</td><td rowspan=\"2\">真体验</td><td rowspan=\"2\">假体验</td><td colspan=\"9\">新用户</td><td colspan=\"9\">老用户</td><td rowspan=\"2\">次日留存</td><td rowspan=\"2\">次日留存率(%)</td></tr><tr><td>充值人数</td><td>充值次数</td><td>充值金额</td><td>充值转化率(%)</td><td>ARPU(%)</td><td>ARPPU(%)</td><td>登录人数</td><td>玩游戏人数</td><td>登录转化率(%)</td><td>充值人数</td><td>充值次数</td><td>充值金额</td><td>充值转化率(%)</td><td>ARPU(%)</td><td>ARPPU(%)</td><td>登录人数</td><td>玩游戏人数</td><td>登录转化率(%)</td></tr>");
-    }
+    };
 
     var addTbRow = function (data) {
         if (null != data && undefined != data && "" != data) {
@@ -211,11 +165,11 @@
                 .replace("oldUserLoginCount", data.oldUserLoginCount).replace("oldUserPlayCount", data.oldUserPlayCount).replace("oldUserPlayRate", data.oldUserPlayRate).replace("nextDayStayCount", data.nextDayStayCount).replace("nextDayStayRate", data.nextDayStayRate);
             $("#data").append(ele);
         }
-    }
+    };
 
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
-        $("#data").empty()
+        $("#data").empty();
         showTbCl();
         $.post("/daily/dailyComposite/list.do", {
             startDate: $('#dateStart').val(),
@@ -243,47 +197,7 @@
                     $("#totalPage").html(0);
                     $("#data").append("<tr><td colspan=\"26\">没有数据</td></tr>");
                 } else {
-                    var registerPopulationNum=0;
-                    var registerExpCountNum=0;
-                    var registerExpCountRateNum=0;
-                    var realExpCountNum=0;
-                    var virtualExpCountNum=0;
-
-                    var newUserRechargePopulationNum=0;
-                    var newUserRechargeCountNum=0;
-                    var newUserRechargeAmountNum=0;
-                    var newUserRechargeRateNum=0;
-                    var newUserARPUNum=0;
-                    var newUserARPPUNum=0;
-                    var newUserLoginCountNum=0;
-                    var newUserPlayCountNum=0;
-                    var newUserPlayRateNum=0;
-
-                    var newUserRechargePopulationNum=0;
-                    var newUserRechargeCountNum=0;
-                    var newUserRechargeAmountNum=0;
-                    var newUserRechargeRateNum=0;
-                    var newUserARPUNum=0;
-                    var newUserARPPUNum=0;
-                    var newUserLoginCountNum=0;
-                    var newUserPlayCountNum=0;
-                    var newUserPlayRateNum=0;
-
-                    var nextDayStayCountNum=0;
-                    var nextDayStayRateNums=0
-
                     for (var i = 0; i < infoData.length; i++) {
-//                        pcPopulationNum=accAdd(pcPopulationNum,infoData[i].pcPopulation);
-//                        pcPageViewNum=accAdd(pcPageViewNum,infoData[i].pcPageView);
-//                        pcUserViewNum=accAdd(pcUserViewNum,infoData[i].pcUserView);
-//                        h5PopulationNum=accAdd(h5PopulationNum,infoData[i].h5Population);
-//                        h5PageViewNum=accAdd(h5PageViewNum,infoData[i].h5PageView);
-//                        h5UserViewNum=accAdd(h5UserViewNum,infoData[i].h5UserView);
-//                        iosPopulationNum=accAdd(iosPopulationNum,infoData[i].iosPopulation);
-//                        iosInstallCountNum=accAdd(iosInstallCountNum,infoData[i].iosInstallCount);
-//                        androidPopulationNum=accAdd(androidPopulationNum,infoData[i].androidPopulation);
-//                        androidInstallCountNum=accAdd(androidInstallCountNum,infoData[i].androidInstallCount);
-
                         var nextDayStayRateNum = 0;
                         if ((i+1)<infoData.length) {
                             nextDayStayRateNum = accDiv(accAdd(infoData[i].oldUserLoginCount,infoData[i].newUserLoginCount),infoData[i+1].statisticsDay);
@@ -298,7 +212,6 @@
                             registerExpCountRate: convertToPercentFormat(accDiv(infoData[i].registerExpCount,infoData[i].registerPopulation)),
                             realExpCount: infoData[i].realExpCount,
                             virtualExpCount: infoData[i].virtualExpCount,
-
                             newUserRechargePopulation: infoData[i].newUserRechargePopulation,
                             newUserRechargeCount: infoData[i].newUserRechargeCount,
                             newUserRechargeAmount: infoData[i].newUserRechargeAmount,
@@ -308,7 +221,6 @@
                             newUserLoginCount:infoData[i].newUserLoginCount,
                             newUserPlayCount:infoData[i].newUserPlayCount,
                             newUserPlayRate:convertToPercentFormat(accDiv(infoData[i].newUserLoginCount,infoData[i].registerPopulation)),
-
                             oldUserRechargePopulation: infoData[i].oldUserRechargePopulation,
                             oldUserRechargeCount: infoData[i].oldUserRechargeCount,
                             oldUserRechargeAmount: infoData[i].oldUserRechargeAmount,
@@ -318,22 +230,11 @@
                             oldUserLoginCount:infoData[i].oldUserLoginCount,
                             oldUserPlayCount:infoData[i].oldUserPlayCount,
                             oldUserPlayRate:convertToPercentFormat(accDiv(infoData[i].oldUserLoginCount,infoData[i].registerPopulation)),
-
                             nextDayStayCount:infoData[i].nextDayStayCount,
                             nextDayStayRate:convertToPercentFormat(nextDayStayRateNum)
 
-                        }
+                        };
                         addTbRow(ele);
-
-//                        var ele1 = {
-//                            statisticsTime:"总计",
-//                            registerPopulation:sumRegisterPopulation,
-//                            loginPopulation:sumLoginPopulation,
-//                            rechargePopulation:sumRechargePopulation,
-//                            rechargeCount:sumRechargeCount,
-//                            rechargeAmount:sumRechargeAmount.toFixed(2)
-//                        }
-//                        addTbRow(ele1);
                     }
                 }
             } else {
@@ -342,33 +243,19 @@
                 $("#data").append("<tr><td colspan=\"26\">没有数据</td></tr>");
             }
         });
-    }
+    };
 
     //查询显示
     var search = function () {
         pageSize = $("#pageSize").val();
         showNewUserData(1, pageSize);
-    }
+    };
 
     var reset = function() {
         $("#dateStart").val("");
         $("#dateEnd").val("");
-    }
+    };
 
+    search();
 
-
-    var echartsCopy;
-    // 路径配置
-    require.config({
-        paths: {
-            echarts: '/lib/echart/dist'
-        }
-    });
-
-    // 使用
-    require(['echarts', 'echarts/chart/line'],
-        function (ec) {
-            echartsCopy = ec;
-            search();
-        });
 </script>

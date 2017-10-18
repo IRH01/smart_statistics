@@ -1,8 +1,8 @@
 package com.hhly.smartdata.controller.month.api;
 
 import com.hhly.smartdata.controller.BaseController;
-import com.hhly.smartdata.dto.mouth.TimeFilter;
-import com.hhly.smartdata.service.month.LoginStatisticsService;
+import com.hhly.smartdata.dto.share.TimeFilter;
+import com.hhly.smartdata.service.month.MonthLoginStatisticsService;
 import com.hhly.smartdata.util.Result;
 import com.hhly.smartdata.util.page.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +16,16 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/month/login/statistics")
-public class LoginStatisticsControllerApi extends BaseController{
+public class MonthLoginStatisticsControllerApi extends BaseController{
 
     @Autowired
-    private LoginStatisticsService loginStatisticsService;
+    private MonthLoginStatisticsService monthLoginStatisticsService;
 
     @RequestMapping("list")
     public Result search(TimeFilter filter){
         Pagination pagination = null;
         try{
-            pagination = this.loginStatisticsService.search(filter);
+            pagination = this.monthLoginStatisticsService.search(filter);
         }catch(Exception e){
             LOGGER.error("查询月登录报表报错：" + e.getMessage());
         }
@@ -36,7 +36,7 @@ public class LoginStatisticsControllerApi extends BaseController{
     public Result getLastTotalRegister(){
         Map<String, Object> lastTotalRegisterMap = null;
         try{
-            lastTotalRegisterMap = this.loginStatisticsService.getLastTotalRegister();
+            lastTotalRegisterMap = this.monthLoginStatisticsService.getLastTotalRegister();
         }catch(Exception e){
             LOGGER.error("统计月登录报表报错：" + e.getMessage());
         }

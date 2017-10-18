@@ -73,7 +73,7 @@
                                 <div class="section-box">
                                     <div class="titleDiv">
                                         <div class="notice-div">
-                                            月充值总金额：<span id="last_month_amount">*</span>
+                                            上月充值总金额：<span id="last_month_amount">*</span>
                                         </div>
                                         <div class="select-fr" style="padding-right: 30px;">
 											<span class="laydateBox">
@@ -169,7 +169,9 @@
 </body>
 </html>
 <script type="text/javascript">
-    var pageSize = 12;
+    var pageSize = 10;
+
+    $("#pageSize").val(pageSize);
 
     var setMonthConfig = function () {
         var date = new Date();
@@ -255,8 +257,8 @@
     var showNewUserData = function (pageNumber, pageSize) {
         $("#data").empty();
         $.get("/month/recharge/statistics/list.do", {
-            monthStart: $('#monthStart').val(),
-            monthEnd: $('#monthEnd').val(),
+            timeStart: $('#monthStart').val(),
+            timeEnd: $('#monthEnd').val(),
             pageNo: pageNumber,
             pageSize: pageSize
         }, function (result) {
@@ -278,9 +280,35 @@
                 if (null === infoData || undefined === infoData || 0 >= infoData.length) {
                     $("#totalCount").html(0);
                     $("#totalPage").html(0);
-                    $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");
+                    $("#data").append("<tr><td colspan=\"25\">没有数据</td></tr>");
                 } else {
                     var info = {};
+                    var totalInfo = {};
+                    totalInfo.statisticsMonth = "总计";
+                    totalInfo.pc_rechargePopulation = 0;
+                    totalInfo.pc_rechargeAmount = 0;
+                    totalInfo.pc_rechargeCount = 0;
+                    totalInfo.pc_newRechargePopulation = 0;
+                    totalInfo.pc_oldRechargePopulation = 0;
+                    totalInfo.pc_ARPU = "-";
+                    totalInfo.h5_rechargePopulation = 0;
+                    totalInfo.h5_rechargeAmount = 0;
+                    totalInfo.h5_rechargeCount = 0;
+                    totalInfo.h5_newRechargePopulation = 0;
+                    totalInfo.h5_oldRechargePopulation = 0;
+                    totalInfo.h5_ARPU = "-";
+                    totalInfo.ios_rechargePopulation = 0;
+                    totalInfo.ios_rechargeAmount = 0;
+                    totalInfo.ios_rechargeCount = 0;
+                    totalInfo.ios_newRechargePopulation = 0;
+                    totalInfo.ios_oldRechargePopulation = 0;
+                    totalInfo.ios_ARPU = "-";
+                    totalInfo.android_rechargePopulation = 0;
+                    totalInfo.android_rechargeAmount = 0;
+                    totalInfo.android_rechargeCount = 0;
+                    totalInfo.android_newRechargePopulation = 0;
+                    totalInfo.android_oldRechargePopulation = 0;
+                    totalInfo.android_ARPU = "-";
                     //1、PC 2.android 3.IOS 4.H5
                     for (var i = 0; i < infoData.length; i++) {
                         if (infoData[i].sourceType == 1) {
@@ -290,6 +318,11 @@
                             info.pc_newRechargePopulation = infoData[i].newRechargePopulation;
                             info.pc_oldRechargePopulation = infoData[i].oldRechargePopulation;
                             info.pc_ARPU = infoData[i].arpu;
+                            totalInfo.pc_rechargePopulation = accAdd(totalInfo.pc_rechargePopulation, parseFloat(infoData[i].rechargePopulation));
+                            totalInfo.pc_rechargeAmount = accAdd(totalInfo.pc_rechargeAmount, parseFloat(infoData[i].rechargeAmount));
+                            totalInfo.pc_rechargeCount = accAdd(totalInfo.pc_rechargeCount, parseFloat(infoData[i].rechargeCount));
+                            totalInfo.pc_newRechargePopulation = accAdd(totalInfo.pc_newRechargePopulation, parseFloat(infoData[i].newRechargePopulation));
+                            totalInfo.pc_oldRechargePopulation = accAdd(totalInfo.pc_oldRechargePopulation, parseFloat(infoData[i].oldRechargePopulation));
                         }
                         if (infoData[i].sourceType == 2) {
                             info.h5_rechargePopulation = infoData[i].rechargePopulation;
@@ -298,6 +331,11 @@
                             info.h5_newRechargePopulation = infoData[i].newRechargePopulation;
                             info.h5_oldRechargePopulation = infoData[i].oldRechargePopulation;
                             info.h5_ARPU = infoData[i].arpu;
+                            totalInfo.h5_rechargePopulation = accAdd(totalInfo.h5_rechargePopulation, parseFloat(infoData[i].rechargePopulation));
+                            totalInfo.h5_rechargeAmount = accAdd(totalInfo.h5_rechargeAmount, parseFloat(infoData[i].rechargeAmount));
+                            totalInfo.h5_rechargeCount = accAdd(totalInfo.h5_rechargeCount, parseFloat(infoData[i].rechargeCount));
+                            totalInfo.h5_newRechargePopulation = accAdd(totalInfo.h5_newRechargePopulation, parseFloat(infoData[i].newRechargePopulation));
+                            totalInfo.h5_oldRechargePopulation = accAdd(totalInfo.h5_oldRechargePopulation, parseFloat(infoData[i].oldRechargePopulation));
                         }
                         if (infoData[i].sourceType == 3) {
                             info.ios_rechargePopulation = infoData[i].rechargePopulation;
@@ -306,6 +344,11 @@
                             info.ios_newRechargePopulation = infoData[i].newRechargePopulation;
                             info.ios_oldRechargePopulation = infoData[i].oldRechargePopulation;
                             info.ios_ARPU = infoData[i].arpu;
+                            totalInfo.ios_rechargePopulation = accAdd(totalInfo.ios_rechargePopulation, parseFloat(infoData[i].rechargePopulation));
+                            totalInfo.ios_rechargeAmount = accAdd(totalInfo.ios_rechargeAmount, parseFloat(infoData[i].rechargeAmount));
+                            totalInfo.ios_rechargeCount = accAdd(totalInfo.ios_rechargeCount, parseFloat(infoData[i].rechargeCount));
+                            totalInfo.ios_newRechargePopulation = accAdd(totalInfo.ios_newRechargePopulation, parseFloat(infoData[i].newRechargePopulation));
+                            totalInfo.ios_oldRechargePopulation = accAdd(totalInfo.ios_oldRechargePopulation, parseFloat(infoData[i].oldRechargePopulation));
                         }
                         if (infoData[i].sourceType == 4) {
                             info.android_rechargePopulation = infoData[i].rechargePopulation;
@@ -314,6 +357,11 @@
                             info.android_newRechargePopulation = infoData[i].newRechargePopulation;
                             info.android_oldRechargePopulation = infoData[i].oldRechargePopulation;
                             info.android_ARPU = infoData[i].arpu;
+                            totalInfo.android_rechargePopulation = accAdd(totalInfo.android_rechargePopulation, parseFloat(infoData[i].rechargePopulation));
+                            totalInfo.android_rechargeAmount = accAdd(totalInfo.android_rechargeAmount, parseFloat(infoData[i].rechargeAmount));
+                            totalInfo.android_rechargeCount = accAdd(totalInfo.android_rechargeCount, parseFloat(infoData[i].rechargeCount));
+                            totalInfo.android_newRechargePopulation = accAdd(totalInfo.android_newRechargePopulation, parseFloat(infoData[i].newRechargePopulation));
+                            totalInfo.android_oldRechargePopulation = accAdd(totalInfo.android_oldRechargePopulation, parseFloat(infoData[i].oldRechargePopulation));
                         }
                         if ((i % 4) == 3) {
                             info.statisticsMonth = infoData[i].statisticsMonth
@@ -321,9 +369,10 @@
                             info = {};
                         }
                     }
+                    addTbRow(totalInfo);
                 }
             } else {
-                $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");
+                $("#data").append("<tr><td colspan=\"25\">没有数据</td></tr>");
             }
         });
     };

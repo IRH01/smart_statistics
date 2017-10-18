@@ -73,10 +73,10 @@
                                 <div class="section-box">
                                     <div class="titleDiv">
                                         <div class="notice-div">
-                                            月登录总数：<span id="last_month_login">*</span>
+                                            上月登录总数：<span id="last_month_login">*</span>
                                         </div>
                                         <div class="notice-div">
-                                            月玩游戏总数：<span id="last_month_play">*</span>
+                                            上月玩游戏总数：<span id="last_month_play">*</span>
                                         </div>
                                         <div class="select-fr" style="padding-right: 30px;">
 											<span class="laydateBox">
@@ -168,7 +168,9 @@
 </body>
 </html>
 <script type="text/javascript">
-    var pageSize = 12;
+    var pageSize = 10;
+
+    $("#pageSize").val(pageSize);
 
     var setMonthConfig = function () {
         var date = new Date();
@@ -246,8 +248,8 @@
     var showNewUserData = function (pageNumber, pageSize) {
         $("#data").empty();
         $.get("/month/login/statistics/list.do", {
-            monthStart: $('#monthStart').val(),
-            monthEnd: $('#monthEnd').val(),
+            timeStart: $('#monthStart').val(),
+            timeEnd: $('#monthEnd').val(),
             pageNo: pageNumber,
             pageSize: pageSize
         }, function (result) {
@@ -280,6 +282,28 @@
                     var ios_play = 0;
                     var android_login = 0;
                     var android_play = 0;
+                    var totalInfo = {};
+                    totalInfo.statisticsMonth = "总计";
+                    totalInfo.PC_loginPopulation = 0;
+                    totalInfo.PC_playPopulation = 0;
+                    totalInfo.PC_liaoMeiDeZhou_loginPopulation = 0;
+                    totalInfo.PC_leYinDianJing_loginPopulation = 0;
+                    totalInfo.PC_yiBiFen_loginPopulation = 0;
+                    totalInfo.h5_loginPopulation = 0;
+                    totalInfo.h5_playPopulation = 0;
+                    totalInfo.h5_liaoMeiDeZhou_loginPopulation = 0;
+                    totalInfo.h5_leYinDianJing_loginPopulation = 0;
+                    totalInfo.h5_yiBiFen_loginPopulation = 0;
+                    totalInfo.ios_loginPopulation = 0;
+                    totalInfo.ios_playPopulation = 0;
+                    totalInfo.ios_liaoMeiDeZhou_loginPopulation = 0;
+                    totalInfo.ios_leYinDianJing_loginPopulation = 0;
+                    totalInfo.ios_yiBiFen_loginPopulation = 0;
+                    totalInfo.android_loginPopulation = 0;
+                    totalInfo.android_playPopulation = 0;
+                    totalInfo.android_liaoMeiDeZhou_loginPopulation = 0;
+                    totalInfo.android_leYinDianJing_loginPopulation = 0;
+                    totalInfo.android_yiBiFen_loginPopulation = 0;
                     //1、PC 2.android 3.IOS 4.H5
                     for (var i = 0; i < infoData.length; i++) {
                         if (infoData[i].sourceType == 1) {
@@ -292,47 +316,56 @@
                             if (infoData[i].platformId == 3) {
                                 info.PC_yiBiFen_loginPopulation = infoData[i].loginPopulation;
                             }
-                            pc_login += infoData[i].loginPopulation;
-                            pc_play += infoData[i].playPopulation;
+                            pc_login = accAdd(pc_login, infoData[i].loginPopulation);
+                            pc_play = accAdd(pc_play, infoData[i].playPopulation);
                         }
                         if (infoData[i].sourceType == 2) {
                             if (infoData[i].platformId == 1) {
                                 info.android_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
+                                totalInfo.android_liaoMeiDeZhou_loginPopulation = accAdd(totalInfo.android_liaoMeiDeZhou_loginPopulation, parseFloat(infoData[i].loginPopulation));
                             }
                             if (infoData[i].platformId == 2) {
                                 info.android_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
+                                totalInfo.android_leYinDianJing_loginPopulation = accAdd(totalInfo.android_leYinDianJing_loginPopulation, parseFloat(infoData[i].loginPopulation));
                             }
                             if (infoData[i].platformId == 3) {
                                 info.android_yiBiFen_loginPopulation = infoData[i].loginPopulation;
+                                totalInfo.android_yiBiFen_loginPopulation = accAdd(totalInfo.android_yiBiFen_loginPopulation, parseFloat(infoData[i].loginPopulation));
                             }
-                            android_login += infoData[i].loginPopulation;
-                            android_play += infoData[i].playPopulation;
+                            android_login = accAdd(android_login, infoData[i].loginPopulation);
+                            android_play = accAdd(android_play, infoData[i].playPopulation);
                         }
                         if (infoData[i].sourceType == 3) {
                             if (infoData[i].platformId == 1) {
                                 info.ios_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
+                                totalInfo.ios_liaoMeiDeZhou_loginPopulation = accAdd(totalInfo.ios_liaoMeiDeZhou_loginPopulation, parseFloat(infoData[i].loginPopulation));
                             }
                             if (infoData[i].platformId == 2) {
                                 info.ios_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
+                                totalInfo.ios_leYinDianJing_loginPopulation = accAdd(totalInfo.ios_leYinDianJing_loginPopulation, parseFloat(infoData[i].loginPopulation));
                             }
                             if (infoData[i].platformId == 3) {
                                 info.ios_yiBiFen_loginPopulation = infoData[i].loginPopulation;
+                                totalInfo.ios_yiBiFen_loginPopulation = accAdd(totalInfo.ios_yiBiFen_loginPopulation, parseFloat(infoData[i].loginPopulation));
                             }
-                            ios_login += infoData[i].loginPopulation;
-                            ios_play += infoData[i].playPopulation;
+                            ios_login = accAdd(ios_login, infoData[i].loginPopulation);
+                            ios_play = accAdd(ios_play, infoData[i].playPopulation);
                         }
                         if (infoData[i].sourceType == 4) {
                             if (infoData[i].platformId == 1) {
                                 info.h5_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
+                                totalInfo.h5_liaoMeiDeZhou_loginPopulation = accAdd(totalInfo.h5_liaoMeiDeZhou_loginPopulation, parseFloat(infoData[i].loginPopulation));
                             }
                             if (infoData[i].platformId == 2) {
                                 info.h5_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
+                                totalInfo.h5_leYinDianJing_loginPopulation = accAdd(totalInfo.h5_leYinDianJing_loginPopulation, parseFloat(infoData[i].loginPopulation));
                             }
                             if (infoData[i].platformId == 3) {
                                 info.h5_yiBiFen_loginPopulation = infoData[i].loginPopulation;
+                                totalInfo.h5_yiBiFen_loginPopulation = accAdd(totalInfo.h5_yiBiFen_loginPopulation, parseFloat(infoData[i].loginPopulation));
                             }
-                            h5_login += infoData[i].loginPopulation;
-                            h5_play += infoData[i].playPopulation;
+                            h5_login = accAdd(h5_login, infoData[i].loginPopulation);
+                            h5_play = accAdd(h5_play, infoData[i].playPopulation);
                         }
                         if ((i % 12) == 11) {
                             info.statisticsMonth = infoData[i].statisticsMonth;
@@ -344,6 +377,14 @@
                             info.ios_playPopulation = ios_play;
                             info.android_loginPopulation = android_login;
                             info.android_playPopulation = android_play;
+                            totalInfo.PC_loginPopulation = accAdd(totalInfo.PC_loginPopulation, pc_login);
+                            totalInfo.PC_playPopulation = accAdd(totalInfo.PC_playPopulation, pc_play);
+                            totalInfo.h5_loginPopulation = accAdd(totalInfo.h5_loginPopulation, h5_login);
+                            totalInfo.h5_playPopulation = accAdd(totalInfo.h5_playPopulation, h5_play);
+                            totalInfo.ios_loginPopulation = accAdd(totalInfo.ios_loginPopulation, ios_login);
+                            totalInfo.ios_playPopulation = accAdd(totalInfo.ios_playPopulation, ios_play);
+                            totalInfo.android_loginPopulation = accAdd(totalInfo.android_loginPopulation, android_login);
+                            totalInfo.android_playPopulation = accAdd(totalInfo.android_playPopulation, android_play);
                             addTbRow(info);
                             info = {};
                             pc_login = 0;
@@ -356,6 +397,7 @@
                             android_play = 0;
                         }
                     }
+                    addTbRow(totalInfo);
                 }
             } else {
                 $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");
