@@ -17,8 +17,9 @@
         execute_time
     </sql>
 
-    <delete id="deleteByTimeAndPlatformIdAndSourceType">D
-        delete from daily_login_report where statistics_day = #{statisticsDay} and platform_id = #{platformId} and
+    <delete id="deleteByTimeAndPlatformIdAndSourceType">
+        delete from daily_login_report
+        where statistics_day = #{statisticsDay} AND platform_id = #{platformId} AND
         source_type = #{sourceType}
     </delete>
 

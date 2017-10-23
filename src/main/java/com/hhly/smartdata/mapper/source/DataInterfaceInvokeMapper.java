@@ -17,6 +17,6 @@ public interface DataInterfaceInvokeMapper{
 
     int updateByPrimaryKey(DataInterfaceInvoke record) throws Exception;
 
-    List<Map<String,Object>> findDataInterfaceInvokeList()throws Exception;
+    List<Map<String,Object>> findDataInterfaceInvokeList(Map<String,Object> map)throws Exception;
 
 }

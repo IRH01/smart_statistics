@@ -158,26 +158,26 @@
         create_time = #{createTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <select id="selectPlatformAllGameStartCount"  resultType="java.util.Map">
+    <select id="selectPlatformAllGameStartCount"  resultType="java.util.Map" parameterType="java.util.Map">
         select platform_terminal as platformTerminal,platform_id as platformId,platform_name as platformName,count(id) as gameStartCount from data_game_start
         where country = 0
          <![CDATA[
-                and create_time > date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
+                and create_time > date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
   	    ]]>
        <![CDATA[
-                 and create_time <= DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
+                 and create_time <= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
          ]]>
         group by platform_terminal,platform_id,platform_name
     </select>
 
-    <select id="selectFirstThirtyMinGameStartCount" resultType="java.util.Map">
+    <select id="selectFirstThirtyMinGameStartCount" resultType="java.util.Map" parameterType="java.util.Map">
         select platform_terminal as osType,count(DISTINCT(user_id)) as loginPopulation from data_platform_start
         where country = 0
         <![CDATA[
-             and create_time> date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
+             and create_time> date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
         ]]>
         <![CDATA[
-            and create_time <= DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
+            and create_time <= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
   		]]>
         and user_id is not null
         <if test="null != sourceType and sourceType != ''">

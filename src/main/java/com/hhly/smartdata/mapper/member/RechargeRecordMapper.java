@@ -28,10 +28,10 @@ public interface RechargeRecordMapper{
 
     List<Map<String, Object>> selectYesterdayOldUser() throws Exception;
 
-    Integer findRechargeRecordByTime() throws Exception;
+    Integer findRechargeRecordByTime(Map<String,Object> map) throws Exception;
 
     List<Map<String, Object>> selectYesterdayRechargeUser() throws Exception;
 
-    List<Map<String, Object>> selectFirstThirtyMinRechargeUser() throws Exception;
+    List<Map<String, Object>> selectFirstThirtyMinRechargeUser(Map<String,Object> map) throws Exception;
 
 }

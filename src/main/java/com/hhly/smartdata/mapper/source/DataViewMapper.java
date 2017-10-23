@@ -19,5 +19,5 @@ public interface DataViewMapper{
 
     List<Map<String,Object>> selectYesterdayUserViewAndPageView()throws Exception;
 
-    List<Map<String,Object>> selectFirstThirtyMinUserViewAndPageView()throws Exception;
+    List<Map<String,Object>> selectFirstThirtyMinUserViewAndPageView(Map<String,Object> map)throws Exception;
 }

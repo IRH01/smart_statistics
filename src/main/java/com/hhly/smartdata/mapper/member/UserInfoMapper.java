@@ -13,7 +13,7 @@ public interface UserInfoMapper{
 
     UserInfo selectByPrimaryKey(String userId) throws Exception;
 
-    Integer findUserInfoByTime() throws Exception;
+    Integer findUserInfoByTime(Map<String,Object> map) throws Exception;
 
     List<Map<String, Object>> selectYesterdayRegisterUserIdAndTerminal() throws Exception;
 
@@ -21,7 +21,7 @@ public interface UserInfoMapper{
 
     List<String> selectBeforeHowManyDayRegisterUser(int days);
 
-    List<Map<String, Object>> selectFirstThirtyMinRegister() throws Exception;
+    List<Map<String, Object>> selectFirstThirtyMinRegister(Map<String,Object> map) throws Exception;
 
     Long selectUserCount(Date time) throws Exception;
 }

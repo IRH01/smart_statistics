@@ -19,8 +19,8 @@ public interface DataGameStartMapper{
 
     List<Map<String, Object>> selectYesterdayLaunchGameUser() throws Exception;
 
-    List<Map<String,Object>> selectPlatformAllGameStartCount() throws Exception;
+    List<Map<String,Object>> selectPlatformAllGameStartCount(Map<String,Object> map) throws Exception;
 
-    List<Map<String,Object>> selectFirstThirtyMinGameStartCount() throws Exception;
+    List<Map<String,Object>> selectFirstThirtyMinGameStartCount(Map<String,Object> map) throws Exception;
 
 }

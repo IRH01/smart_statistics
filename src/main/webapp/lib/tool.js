@@ -63,7 +63,7 @@ var accAdd = function(arg1, arg2) {
 
 var bindEnterEvent = function(eleId,callBack){
 	$("#" + eleId).bind("keypress",function(event){
-         if(event.keyCode == "13")   
+         if(event.keyCode == "13")
          {
         	 if(undefined != callBack){
         		 callBack();
@@ -94,12 +94,32 @@ var getLocalhostPath = function(){
     return localhostPath;
 }
 
+//除法函数
+function accDiv(arg1, arg2) {
+    var t1 = 0, t2 = 0, r1, r2;
+    try {
+            t1 = arg1.toString().split(".")[1].length;
+          }
+	catch (e) {
+	}
+     try {
+                 t2 = arg2.toString().split(".")[1].length;
+     }
+    catch (e) {
+      }
+     with (Math) {
+      r1 = Number(arg1.toString().replace(".", ""));
+      r2 = Number(arg2.toString().replace(".", ""));
+      return (r1 / r2) * pow(10, t2 - t1);
+      }
+ }
+
 
 ///////排序相关Start
 //重置排序样式
 var resetOrder = function(clsName){
-	
-    
+
+
     //获取主机地址，如： http://localhost:8083
 	var eles = $("." + clsName);
 	for(var i = 0;i < eles.length;i++){

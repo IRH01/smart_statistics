@@ -144,14 +144,14 @@
     group by platform_terminal
   </select>
 
-  <select id="selectFirstThirtyMinUserViewAndPageView" resultType="java.util.Map">
+  <select id="selectFirstThirtyMinUserViewAndPageView" resultType="java.util.Map" parameterType="java.util.Map">
     select platform_terminal as osType,count(DISTINCT(user_id)) as loginPopulation from data_view where
     user_id is not null
     <![CDATA[
-              and create_time> date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 3000000 minute)
+              and create_time> date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
         ]]>
     <![CDATA[
-              and create_time <= DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
+              and create_time <= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
   		]]>
     <if test="null != sourceType and sourceType != ''">
       and platform_terminal = #{sourceType}

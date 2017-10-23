@@ -23,7 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,24 +63,29 @@ public class IntervalExecutorService{
 
 
     public Result intervalSourceStatistics() throws Exception{
-        //注册人数
-        List<Map<String, Object>> firstThirtyMinRegister = userInfoMapper.selectFirstThirtyMinRegister();
-
-        //登陆人数
-        List<Map<String, Object>> firstThirtyMinLoginUser = loginTrackMapper.selectFirstThirtyMinLoginUser();
-
-        // 充值人数、充值金额、充值次数
-        List<Map<String, Object>> firstThirtyMinRechargeUser = rechargeRecordMapper.selectFirstThirtyMinRechargeUser();
-
-        //启动表
-        List<Map<String, Object>> firstThirtyMinGameStartCount = dataGameStartMapper.selectFirstThirtyMinGameStartCount();
-
-        // uv
-        List<Map<String, Object>> firstThirtyMinUserViewAndPageView = dataViewMapper.selectFirstThirtyMinUserViewAndPageView();
-
         Date now = new Date();
         Date nowPointByThirtyMinute = DateUtil.getPointByThirtyMinute(now);
-        String startDate = DateUtil.getFirstThirtyMinStr(nowPointByThirtyMinute);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        String startDate = simpleDateFormat.format(nowPointByThirtyMinute);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startDate", startDate);
+        map.put("intervalTime", INTERVALTIME);
+        //注册人数
+        List<Map<String, Object>> firstThirtyMinRegister = userInfoMapper.selectFirstThirtyMinRegister(map);
+
+        //登陆人数
+        List<Map<String, Object>> firstThirtyMinLoginUser = loginTrackMapper.selectFirstThirtyMinLoginUser(map);
+
+        // 充值人数、充值金额、充值次数
+        List<Map<String, Object>> firstThirtyMinRechargeUser = rechargeRecordMapper.selectFirstThirtyMinRechargeUser(map);
+
+        //启动表
+        List<Map<String, Object>> firstThirtyMinGameStartCount = dataGameStartMapper.selectFirstThirtyMinGameStartCount(map);
+
+        // uv
+        List<Map<String, Object>> firstThirtyMinUserViewAndPageView = dataViewMapper.selectFirstThirtyMinUserViewAndPageView(map);
+
         List<IntervalSourceReport> list = Lists.newArrayList();
         for(SourceTypeEnum sourceTypeEnum : SourceTypeEnum.values()){
             IntervalSourceReport report = new IntervalSourceReport();
@@ -136,19 +143,25 @@ public class IntervalExecutorService{
     }
 
     public Result intervalInterfaceStatistics() throws Exception{
-        // 埋点接口数据
-        List<Map<String, Object>> dataInterfaceInvokeList = dataInterfaceInvokeMapper.findDataInterfaceInvokeList();
-
-        // 用户注册数据
-        Integer userCount = userInfoMapper.findUserInfoByTime();
-
-        // 充值数据
-        Integer rechargeCount = rechargeRecordMapper.findRechargeRecordByTime();
-
-        List<IntervalInterfaceReport> list = Lists.newArrayList();
         Date now = new Date();
         Date nowPointByThirtyMinute = DateUtil.getPointByThirtyMinute(now);
-        String startDate = DateUtil.getFirstThirtyMinStr(nowPointByThirtyMinute);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        String startDate = simpleDateFormat.format(nowPointByThirtyMinute);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startDate", startDate);
+        map.put("intervalTime", INTERVALTIME);
+        // 埋点接口数据
+        List<Map<String, Object>> dataInterfaceInvokeList = dataInterfaceInvokeMapper.findDataInterfaceInvokeList(map);
+
+        // 用户注册数据
+        Integer userCount = userInfoMapper.findUserInfoByTime(map);
+
+        // 充值数据
+        Integer rechargeCount = rechargeRecordMapper.findRechargeRecordByTime(map);
+
+        List<IntervalInterfaceReport> list = Lists.newArrayList();
+
         for(InterfaceTypeEnum interfaceTypeEnum : InterfaceTypeEnum.values()){ // 注册 充值
             for(OperatorTypeEnum operatorTypeEnum : OperatorTypeEnum.values()){ // 请求 完成
                 IntervalInterfaceReport intervalInterfaceReport = new IntervalInterfaceReport();
@@ -186,11 +199,16 @@ public class IntervalExecutorService{
     }
 
     public Result intervalGameLaunch() throws Exception{
-        // 游戏启动数据
-        List<Map<String, Object>> platformAllGameStartCount = dataGameStartMapper.selectPlatformAllGameStartCount();
         Date now = new Date();
         Date nowPointByThirtyMinute = DateUtil.getPointByThirtyMinute(now);
-        String startDate = DateUtil.getFirstThirtyMinStr(nowPointByThirtyMinute);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        String startDate = simpleDateFormat.format(nowPointByThirtyMinute);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startDate", startDate);
+        map.put("intervalTime", INTERVALTIME);
+        // 游戏启动数据
+        List<Map<String, Object>> platformAllGameStartCount = dataGameStartMapper.selectPlatformAllGameStartCount(map);
+
         List<IntervalGameLaunchReport> list = Lists.newArrayList();
         for(SourceTypeEnum sourceTypeEnum : SourceTypeEnum.values()){
             for(PlatformIdEnum platformIdEnum : PlatformIdEnum.values()){

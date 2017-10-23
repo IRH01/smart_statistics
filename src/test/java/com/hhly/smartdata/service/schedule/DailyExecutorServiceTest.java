@@ -31,6 +31,7 @@ public class DailyExecutorServiceTest extends BaseTest{
         System.err.println(JSONObject.toJSONString(result.getData()));
     }
 
+
     /**
      * Method: rechargeStatistic()
      */

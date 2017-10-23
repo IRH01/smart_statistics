@@ -21,8 +21,7 @@ public class DailyExecutor{
     /**
      * 平台综合报表
      */
-    //@Scheduled(cron = "* * 1 * * MON-FRI")
-    @Scheduled(cron = "0 2/2 * * * ?")
+    @Scheduled(cron = "* * 1 * * MON-FRI")
     public void dailyCompositeExecutor(){
         try{
             this.dailyExecutorService.compositeReport();

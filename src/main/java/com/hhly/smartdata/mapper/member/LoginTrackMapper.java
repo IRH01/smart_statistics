@@ -14,7 +14,7 @@ public interface LoginTrackMapper{
 
     List<Map<String, Object>> selectYesterdayLoginUser() throws Exception;
 
-    List<Map<String, Object>> selectFirstThirtyMinLoginUser() throws Exception;
+    List<Map<String, Object>> selectFirstThirtyMinLoginUser(Map<String,Object> map) throws Exception;
 
 
 }

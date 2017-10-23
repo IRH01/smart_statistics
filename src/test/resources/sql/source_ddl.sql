@@ -60,8 +60,8 @@ CREATE TABLE `data_platform_start` (
 CREATE TABLE `data_view` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'PV/UV',
   `country` int(11) NOT NULL DEFAULT '0' COMMENT '国家:0中国 1美国 2泰国 3越南 4韩国 5印尼6繁体7新加坡8马来西亚',
-  `client_identity` varchar(100) NOT NULL DEFAULT '' COMMENT '客户端标识,识别游客访问(区分PV 和UV)',
-  `user_id` varchar(50) NOT NULL DEFAULT '' COMMENT '账户（userId）',
+  `client_identity` varchar(100) NOT NULL DEFAULT '' COMMENT '客户端标识,识别游客访问(游客的用户依据字段表示。)',
+  `user_id` varchar(50) NOT NULL DEFAULT '' COMMENT '账户（userId），游客的这个字段为空。',
   `platform_terminal` int(11) NOT NULL DEFAULT '0' COMMENT '终端:1.pc 4.h5 5.其他',
   `website_domain` varchar(50) NOT NULL DEFAULT '' COMMENT '域名',
   `page_view` int(11) NOT NULL DEFAULT '0' COMMENT '浏览页面: 1.首页 2.注册 3.充值',

@@ -221,7 +221,7 @@ public class DateUtil{
         calendar.set(Calendar.MILLISECOND, calendar.getActualMinimum(Calendar.MILLISECOND));
         long interpolation = date.getTime() - calendar.getTime().getTime();
         if(interpolation >= 30 * 60 * 1000 && interpolation <= 60 * 60 * 1000){
-            calendar.add(Calendar.MINUTE, -30);
+            calendar.add(Calendar.MINUTE, 30);
         }
 
         if(interpolation < 0 || interpolation > 60 * 60 * 1000){
@@ -241,9 +241,10 @@ public class DateUtil{
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Calendar beforeTime = Calendar.getInstance();
-        beforeTime.add(Calendar.MINUTE, -30);// 时间差值
-        Date beforeD = beforeTime.getTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MINUTE, -30);// 时间差值
+        Date beforeD = calendar.getTime();
         return sdf.format(beforeD);
     }
 

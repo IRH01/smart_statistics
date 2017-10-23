@@ -53,14 +53,14 @@
     </select>
 
     <select id="findUserInfoByTime" resultType="java.lang.Integer"
-            parameterType="com.hhly.smartdata.model.member.UserInfo">
+            parameterType="java.util.Map">
         select count(user_id) from tbl_user_info
         where country = 0
         <![CDATA[
-             and create_time> date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
+             and create_time> date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
   	    ]]>
         <![CDATA[
-             and create_time<=DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
+             and create_time<=DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
 
         ]]>
     </select>
@@ -73,14 +73,14 @@
         WHERE TO_DAYS(NOW()) - TO_DAYS(create_time) &gt; 1
     </select>
 
-    <select id="selectFirstThirtyMinRegister" resultType="java.util.Map">
+    <select id="selectFirstThirtyMinRegister" resultType="java.util.Map" parameterType="java.util.Map">
         select os_type, count(DISTINCT(user_id)) as register_population from tbl_user_info where
         <![CDATA[
-              create_time > date_sub(DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S'), interval 30 minute)
+              create_time > date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
   		]]>
         and
         <![CDATA[
-  		      create_time <= DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%S')
+  		      create_time <= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
   		]]>
         group by os_type
     </select>
@@ -107,7 +107,7 @@
     </select>
     <select id="selectUserCount" resultType="java.lang.Long">
         SELECT
-        count(user_id) as UserCount,
+        count(user_id)
         FROM
         tbl_user_info
         WHERE create_time &lt;= #{time}
