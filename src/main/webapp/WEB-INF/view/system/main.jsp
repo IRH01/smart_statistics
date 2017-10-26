@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%--<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,18 +79,17 @@
         zTree_Menu = $.fn.zTree.getZTreeObj("menu");
         $("#clm").empty();
         $(zTree_Menu.getNodes()).each(function (i, item) {
-
             if (item.children) {
                 var content = "";
-                content += "<dt>" + item.name + "</dt>";
+                content += "<dt>" + item.menuName + "</dt>";
                 content += "<dd>";
                 $(item.children).each(function (j, data) {
                     if (data.isParent) {
                         $(data.children).each(function (j1, data1) {
-                            content += ("<a href='" + data1.url + "'>" + data1.name + "</a>");
+                            content += ("<a href='" + data1.url + "'>" + data1.menuName + "</a>");
                         });
                     } else {
-                        content += ("<a href='" + data.url + "'>" + data.name + "</a>");
+                        content += ("<a href='" + data.url + "'>" + data.menuName + "</a>");
                     }
                 });
                 content += "</dd>";
@@ -98,9 +97,9 @@
             } else {
                 if (item.url) {
                     var content = "";
-                    content += "<dt>" + item.name + "</dt>";
+                    content += "<dt>" + item.menuName + "</dt>";
                     content += "<dd>";
-                    content += ("<a href='" + item.url + "'>" + item.name + "</a>");
+                    content += ("<a href='" + item.url + "'>" + item.menuName + "</a>");
                     content += "</dd>";
                     $("#clm").append(content);
                 }

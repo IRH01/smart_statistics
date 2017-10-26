@@ -4,43 +4,36 @@
 
     <resultMap id="AdminMap" type="com.hhly.smartdata.model.authentication.Admin">
         <id column="id" property="id"/>
+        <result column="id" property="id"/>
         <result column="username" property="username"/>
-        <result column="password" property="password"/>
+        <result column="passwd" property="passwd"/>
         <result column="user_status" property="userStatus"/>
         <result column="user_type" property="userType"/>
         <result column="create_time" property="createTime"/>
-        <result column="user_id" property="userId"/>
-        <result column="name" property="name"/>
+        <result column="admin_name" property="adminName"/>
         <result column="email" property="email"/>
         <result column="tel" property="tel"/>
         <result column="depart_id" property="departId"/>
         <result column="job_no" property="jobNo"/>
-        <result column="type" property="type"/>
+        <result column="role_type" property="roleType"/>
         <result column="locale" property="locale"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,
-        user_id,
-        NAME,
-        email,
-        tel,
-        depart_id,
-        job_no,
-        TYPE
+       `id`,`user_id`,`admin_name`,`email`,`tel`,`depart_id`,`job_no`,`role_type`
     </sql>
 
     <sql id="with_user">
         admin.id,
         admin.user_id,
-        admin.NAME,
+        admin.admin_name,
         admin.email,
         admin.tel,
         admin.depart_id,
         admin.job_no,
-        admin.TYPE ,
+        admin.role_type ,
         u.username,
-        u.password,
+        u.passwd,
         u.user_type,
         u.user_status,
         u.create_time,
@@ -51,7 +44,7 @@
         select
         <include refid="with_user"/>
         from auth_admin admin join auth_user u on admin.user_id =
-        u.user_id
+        u.id
         where id = #{id}
     </select>
 
@@ -59,17 +52,17 @@
         select
         <include refid="with_user"/>
         from auth_admin admin inner join auth_user u on admin.user_id =
-        u.user_id
+        u.id
         <where>
-            and u.user_id != -1
+            and u.id != 1
             <if test="filter.id !=null">
                 and admin.id = #{filter.id}
             </if>
             <if test="filter.username !=null and filter.username != ''">
                 and u.username like concat(concat('%',#{filter.username}),'%')
             </if>
-            <if test="filter.type != null">
-                and admin.type = #{filter.type}
+            <if test="filter.roleType != null">
+                and admin.role_type = #{filter.roleType}
             </if>
             <if test="filter.userStatus !=null and filter.userStatus !=''">
                 and u.user_status = #{filter.userStatus}

@@ -2,7 +2,7 @@ package com.hhly.smartdata.model.smartdata;
 
 import java.util.Date;
 
-public class DailyKeepRecordReport{
+public class DailyKeepRecordReport {
     /**
      * 日报表，充值来源统计报表
      */
@@ -21,52 +21,52 @@ public class DailyKeepRecordReport{
     /**
      * 注册人数
      */
-     Integer registerCount = 0;
+    Integer registerCount = 0;
 
     /**
      * 1天后留存
      */
-    private Integer one = 0;
+    private Integer oneRemain = 0;
 
     /**
      * 2天后留存
      */
-    private Integer two = 0;
+    private Integer twoRemain = 0;
 
     /**
      * 3天后留存
      */
-    private Integer three = 0;
+    private Integer threeRemain = 0;
 
     /**
      * 4天后留存
      */
-    private Integer four = 0;
+    private Integer fourRemain = 0;
 
     /**
      * 5天后留存
      */
-    private Integer five = 0;
+    private Integer fiveRemain = 0;
 
     /**
      * 6天后留存
      */
-    private Integer six = 0;
+    private Integer sixRemain = 0;
 
     /**
      * 7天后留存
      */
-    private Integer seven = 0;
+    private Integer sevenRemain = 0;
 
     /**
      * 14天后留存
      */
-    private Integer fourteen = 0;
+    private Integer fourteenRemain = 0;
 
     /**
      * 30天后留存
      */
-    private Integer thirty = 0;
+    private Integer thirtyRemain = 0;
 
     /**
      * 统计执行日期
@@ -74,116 +74,115 @@ public class DailyKeepRecordReport{
     private Date executeTime;
 
 
-
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getStatisticsDay(){
+    public String getStatisticsDay() {
         return statisticsDay;
     }
 
-    public void setStatisticsDay(String statisticsDay){
+    public void setStatisticsDay(String statisticsDay) {
         this.statisticsDay = statisticsDay;
     }
 
-    public Byte getSourceType(){
+    public Byte getSourceType() {
         return sourceType;
     }
 
-    public void setSourceType(Byte sourceType){
+    public void setSourceType(Byte sourceType) {
         this.sourceType = sourceType;
     }
 
-    public Integer getRegisterCount(){
+    public Integer getRegisterCount() {
         return registerCount;
     }
 
-    public void setRegisterCount(Integer registerCount){
+    public void setRegisterCount(Integer registerCount) {
         this.registerCount = registerCount;
     }
 
-    public Integer getOne(){
-        return one;
+    public Integer getOneRemain() {
+        return oneRemain;
     }
 
-    public void setOne(Integer one){
-        this.one = one;
+    public void setOneRemain(Integer oneRemain) {
+        this.oneRemain = oneRemain;
     }
 
-    public Integer getTwo(){
-        return two;
+    public Integer getTwoRemain() {
+        return twoRemain;
     }
 
-    public void setTwo(Integer two){
-        this.two = two;
+    public void setTwoRemain(Integer twoRemain) {
+        this.twoRemain = twoRemain;
     }
 
-    public Integer getThree(){
-        return three;
+    public Integer getThreeRemain() {
+        return threeRemain;
     }
 
-    public void setThree(Integer three){
-        this.three = three;
+    public void setThreeRemain(Integer threeRemain) {
+        this.threeRemain = threeRemain;
     }
 
-    public Integer getFour(){
-        return four;
+    public Integer getFourRemain() {
+        return fourRemain;
     }
 
-    public void setFour(Integer four){
-        this.four = four;
+    public void setFourRemain(Integer fourRemain) {
+        this.fourRemain = fourRemain;
     }
 
-    public Integer getFive(){
-        return five;
+    public Integer getFiveRemain() {
+        return fiveRemain;
     }
 
-    public void setFive(Integer five){
-        this.five = five;
+    public void setFiveRemain(Integer fiveRemain) {
+        this.fiveRemain = fiveRemain;
     }
 
-    public Integer getSix(){
-        return six;
+    public Integer getSixRemain() {
+        return sixRemain;
     }
 
-    public void setSix(Integer six){
-        this.six = six;
+    public void setSixRemain(Integer sixRemain) {
+        this.sixRemain = sixRemain;
     }
 
-    public Integer getSeven(){
-        return seven;
+    public Integer getSevenRemain() {
+        return sevenRemain;
     }
 
-    public void setSeven(Integer seven){
-        this.seven = seven;
+    public void setSevenRemain(Integer sevenRemain) {
+        this.sevenRemain = sevenRemain;
     }
 
-    public Integer getFourteen(){
-        return fourteen;
+    public Integer getFourteenRemain() {
+        return fourteenRemain;
     }
 
-    public void setFourteen(Integer fourteen){
-        this.fourteen = fourteen;
+    public void setFourteenRemain(Integer fourteenRemain) {
+        this.fourteenRemain = fourteenRemain;
     }
 
-    public Integer getThirty(){
-        return thirty;
+    public Integer getThirtyRemain() {
+        return thirtyRemain;
     }
 
-    public void setThirty(Integer thirty){
-        this.thirty = thirty;
+    public void setThirtyRemain(Integer thirtyRemain) {
+        this.thirtyRemain = thirtyRemain;
     }
 
-    public Date getExecuteTime(){
+    public Date getExecuteTime() {
         return executeTime;
     }
 
-    public void setExecuteTime(Date executeTime){
+    public void setExecuteTime(Date executeTime) {
         this.executeTime = executeTime;
     }
 }

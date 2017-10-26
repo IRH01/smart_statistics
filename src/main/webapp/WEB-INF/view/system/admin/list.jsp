@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -63,19 +63,20 @@
                                       action="/admin/admin/list.do" method="post">
                                     <fieldset>
                                         <div class="form-group form-group-sm right20">
-                                            <label class="control-label" for="username">用户名：</label> <input
-                                                class="form-control" type="text" id="username" name="username"
-                                                value="${condition.username}">
+                                            <label class="control-label" for="username">用户名：</label>
+                                            <input class="form-control" type="text" id="username" name="username"
+                                                   value="${condition.username}"/>
                                         </div>
                                         <div class="form-group form-group-sm right20">
-                                            <label class="control-label" for="type">用户类型：</label> <select
-                                                class="form-control" id="type" name="type">
-                                            <option value="">请选择</option>
-                                            <c:forEach items="${typeMap}" var="item">
-                                                <option value="${item.key}"
-                                                        <c:if test="${item.key == condition.type}">selected="selected" </c:if>>${item.value}</option>
-                                            </c:forEach>
-                                        </select>
+                                            <label class="control-label" for="type">用户类型：</label>
+                                            <select class="form-control" id="type" name="type">
+                                                <option value="">请选择</option>
+                                                <c:forEach items="${typeMap}" var="item">
+                                                    <option value="${item.key}"
+                                                            <c:if test="${item.key == condition.roleType}">selected="selected" </c:if>
+                                                    >${item.value}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="form-group form-group-sm right20">
                                             <label class="control-label" for="userStatus">用户状态：</label> <select
@@ -88,7 +89,7 @@
                                         </select>
                                         </div>
                                         <div class="form-group right20">
-                                            <c:if test="${not empty condition.username||not empty condition.userStatus||not empty condition.type}"><input
+                                            <c:if test="${not empty condition.username||not empty condition.userStatus||not empty condition.roleType}"><input
                                                     type="button" class="btn btn-primary btn-sm"
                                                     onclick="clearSearch()" value='&nbsp;清&nbsp;&nbsp;空&nbsp;'>
                                                 <i class="icon-search icon-white"></i>
@@ -122,8 +123,8 @@
                                             <tr>
                                                 <td class="center">${item.id}</td>
                                                 <td class="center">${item.username}</td>
-                                                <td class="center">${item.name}</td>
-                                                <td class="center">${typeMap[item.type]}</td>
+                                                <td class="center">${item.adminName}</td>
+                                                <td class="center">${typeMap[item.roleType]}</td>
                                                 <td class="center">${statusMap[item.userStatus]}</td>
                                                 <td class="center">
                                                     <fmt:formatDate value="${item.createTime}"
@@ -137,20 +138,20 @@
                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <button type="submit"
                                                             class="btn btn-primary btn-xs"
-                                                            onclick="tijiao('showRoles.do?userId=${item.userId}')">
+                                                            onclick="tijiao('showRoles.do?userId=${item.id}')">
                                                         <i class="icon-edit icon-white"></i>分配角色
                                                     </button>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <button type="submit"
                                                             class="btn btn-danger btn-xs"
-                                                            onclick="initPwd(${item.userId})">
+                                                            onclick="initPwd(${item.id})">
                                                         <i class="icon-warning-sign icon-white"></i>重置密码
                                                     </button>
                                                     <c:if test="${item.userStatus == '1'}">
                                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                                         <button type="submit"
                                                                 class="btn btn-success btn-xs"
-                                                                onclick="tijiao('on.do?userId=${item.userId}')">
+                                                                onclick="tijiao('on.do?userId=${item.id}')">
                                                             <i class="icon-off icon-white"></i>启用用户
                                                         </button>
                                                     </c:if>
@@ -158,14 +159,14 @@
                                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                                         <button type="submit"
                                                                 class="btn btn-danger btn-xs"
-                                                                onclick="disable('off.do?userId=${item.userId}')">
+                                                                onclick="disable('off.do?userId=${item.id}')">
                                                             <i class="icon-off icon-white"></i>禁用用户
                                                         </button>
                                                     </c:if>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <button type="submit"
                                                             class="btn btn-danger btn-xs"
-                                                            onclick="del(${item.userId})">
+                                                            onclick="del(${item.id})">
                                                         <i class="icon-off icon-white"></i>刪除
                                                     </button>
                                                 </td>

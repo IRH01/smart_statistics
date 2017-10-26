@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -64,7 +64,7 @@
                                       action="/admin/admin/modify.do" method="post">
                                     <fieldset>
                                         <input type="hidden" name="id" value="${admin.id}">
-                                        <input type="hidden" name="userId" value="${admin.userId}">
+                                        <input type="hidden" name="userId" value="${admin.id}">
                                         <div class="form-group form-group-sm">
                                             <label class="control-label col-sm-2">用户名:</label>
                                             <div class="col-sm-3">
@@ -76,7 +76,7 @@
                                                     class="red-star">*</em>姓名:</label>
                                             <div class="col-sm-3">
                                                 <input class="form-control" name="name" type="text"
-                                                       maxlength="20" id="name" value="${admin.name}"/>
+                                                       maxlength="20" id="name" value="${admin.adminName}"/>
                                             </div>
                                         </div>
                                         <div class="form-group form-group-sm">
@@ -85,7 +85,7 @@
                                                 <select class="form-control" name="type" id="type">
                                                     <c:forEach items="${typeMap}" var="item">
                                                         <option value="${item.key}"
-                                                                <c:if test="${item.key==admin.type}">selected="selected" </c:if>>${item.value}</option>
+                                                                <c:if test="${item.key==admin.roleType}">selected="selected" </c:if>>${item.value}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>

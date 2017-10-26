@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -31,7 +31,6 @@
     <script src="/lib/dialogsdk.js"></script>
     <script src="/lib/tools/tools.js"></script>
     <script src="/lib/layer/layer.js"></script>
-
     <link rel="stylesheet" href="/css/admin-trend.css"/>
     <script src="/lib/laydate/laydate.js"></script>
     <link rel="stylesheet" href="/lib/myPagination/css/style.css"/>
@@ -42,8 +41,6 @@
     <script src="/lib/datecontrol.js"></script>
     <script src="/lib/echart/dist/echarts.js"></script>
     <script src="/lib/tool.js"></script>
-
-
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -189,7 +186,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!--body end-->
                 </div>
@@ -211,7 +207,7 @@
 
     var intervalNum = function () {
         $("#yesterdayRegisterPopulationNum").empty();
-        $.post("/daily/dailyRegister/intervalNum.do", {
+        $.post("/daily/register/intervalNum.do", {
             startDate: $('#dateStarts').val(),
             endDate: $('#dateEnds').val()
         }, function (data) {
@@ -252,7 +248,7 @@
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
         $("#newUserData").empty();
-        $.post("/daily/dailyRegister/list.do", {
+        $.post("/daily/register/list.do", {
             startDate: $('#dateStart').val(),
             endDate: $('#dateEnd').val(),
             pageNumber: pageNumber,

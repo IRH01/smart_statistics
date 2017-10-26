@@ -6,12 +6,12 @@ import java.util.Map;
 
 public class Admin extends User{
     private Integer id;
-    private String name;
+    private String adminName;
     private String email;
     private String tel;
     private Integer departId;
     private String jobNo;
-    private Integer type;
+    private Integer roleType;
     private String channelIds;
 
 
@@ -23,12 +23,12 @@ public class Admin extends User{
         this.id = id;
     }
 
-    public String getName(){
-        return name;
+    public String getAdminName(){
+        return adminName;
     }
 
-    public void setName(String name){
-        this.name = name == null ? null : name.trim();
+    public void setAdminName(String adminName){
+        this.adminName = adminName == null ? null : adminName.trim();
     }
 
     public String getEmail(){
@@ -63,12 +63,12 @@ public class Admin extends User{
         this.jobNo = jobNo == null ? null : jobNo.trim();
     }
 
-    public Integer getType(){
-        return type;
+    public Integer getRoleType(){
+        return roleType;
     }
 
-    public void setType(Integer type){
-        this.type = type;
+    public void setRoleType(Integer roleType){
+        this.roleType = roleType;
     }
 
     public String getChannelIds(){
@@ -83,12 +83,12 @@ public class Admin extends User{
     public String toString(){
         return "Admin:{" +
                 "id:" + id +
-                ", name:'" + name + '\'' +
+                ", adminName:'" + adminName + '\'' +
                 ", email:'" + email + '\'' +
                 ", tel:'" + tel + '\'' +
                 ", departId:" + departId +
                 ", jobNo:'" + jobNo + '\'' +
-                ", type:" + type +
+                ", roleType:" + roleType +
                 "}, " + super.toString();
     }
 

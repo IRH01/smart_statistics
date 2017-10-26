@@ -20,5 +20,5 @@
     request.setAttribute("menuList", menuList);
 %>
 <c:forEach items="${menuList}" var="item">
-    <li>${item.name}</li>
+    <li>${item.menuName}</li>
 </c:forEach>

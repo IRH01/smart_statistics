@@ -50,7 +50,7 @@ public class FunctionService{
         for(int i = 0; i < funcTree.size(); i++){
             JSONObject funcJson = funcTree.getJSONObject(i);
             Function func = new Function();
-            func.setName(funcJson.getString("name"));
+            func.setFunctionName(funcJson.getString("name"));
             func.setIndex(i + 1);
             func.setParentId(parentId);
             if(funcJson.getInteger("id") != null){

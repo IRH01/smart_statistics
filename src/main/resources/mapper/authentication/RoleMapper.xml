@@ -4,17 +4,17 @@
 
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Role">
         <id column="id" property="id"/>
-        <result column="name" property="name"/>
+        <result column="role_name" property="roleName"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, name, create_time
+        id, role_name, create_time
     </sql>
 
     <select id="getRolesByUserId" resultMap="BaseResultMap">
         select
-        r.id,r.name,r.create_time
+        r.id,r.role_name,r.create_time
         from auth_role r join auth_user_role u on r.id=u.role_id
         where u.user_id=#{userId}
     </select>
@@ -23,7 +23,7 @@
         select
         <include refid="Base_Column_List"/>
         from auth_role
-        where name=#{name}
+        where role_name=#{roleName}
     </select>
 
     <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -39,8 +39,8 @@
         from auth_role
         <where>
             and id!='43'
-            <if test="filter.name != null and filter.name != ''">
-                and name like CONCAT('%',#{filter.name},'%')
+            <if test="filter.roleName != null and filter.roleName != ''">
+                and role_name like CONCAT('%',#{filter.roleName},'%')
             </if>
             <if test="filter.id != null ">
                 and id = #{filter.id}
@@ -113,8 +113,8 @@
     </insert>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        insert into auth_role (name, create_time)
-        values (#{name}, #{createTime})
+        insert into auth_role (role_name, create_time)
+        values (#{roleName}, #{createTime})
     </insert>
 
     <insert id="insertUserRole" useGeneratedKeys="true" keyProperty="id">
@@ -129,8 +129,8 @@
     <update id="update">
         update auth_role
         <set>
-            <if test="name != null">
-                name = #{name},
+            <if test="roleName != null">
+                role_name = #{roleName},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},

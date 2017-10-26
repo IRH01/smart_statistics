@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,24 +20,35 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/sys/menu")
-public class MenuControllerApi extends BaseController{
+public class MenuControllerApi extends BaseController {
 
     @Autowired
     private MenuService menuService;
 
+    @RequestMapping("/menuList")
+    public Result menuList() {
+        List<Menu> menuList = null;
+        try {
+            menuList = menuService.getAll();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return Result.success(menuList);
+    }
+
     @RequestMapping("/menuListByRole")
-    public Result menuListByRole(HttpServletRequest req){
+    public Result menuListByRole(HttpServletRequest req) {
         String ids = req.getParameter("roleIds");
         String[] idList = ids.split(",");
         List<Integer> roleIds = Lists.newArrayList();
-        for(String s : idList){
+        for (String s : idList) {
             Integer roleId = Integer.parseInt(s);
             roleIds.add(roleId);
         }
         List<Menu> menuList = null;
-        try{
+        try {
             menuList = menuService.getMenuListByRole(roleIds);
-        }catch(Exception e){
+        } catch (Exception e) {
             LOGGER.error("异常！");
         }
         return Result.success(menuList);
@@ -44,11 +56,11 @@ public class MenuControllerApi extends BaseController{
 
     @RequestMapping("/sort")
     @RequiresPermissions("sys_menu_sort")
-    public Result sort(@RequestParam String menuTree){
+    public Result sort(@RequestParam String menuTree) {
         Map<String, Integer> result = null;
-        try{
+        try {
             result = menuService.sortAndUpdateMenus(JSONArray.parseArray(menuTree), 0);
-        }catch(Exception e){
+        } catch (Exception e) {
             LOGGER.error("异常！");
         }
         return Result.success(result);
@@ -56,10 +68,10 @@ public class MenuControllerApi extends BaseController{
 
     @RequestMapping("/update")
     @RequiresPermissions("!sys_menu_update")
-    public Result update(@ModelAttribute Menu menu){
-        try{
+    public Result update(@ModelAttribute Menu menu) {
+        try {
             menuService.update(menu);
-        }catch(Exception e){
+        } catch (Exception e) {
             LOGGER.error("异常！");
         }
         return Result.success();
@@ -67,10 +79,10 @@ public class MenuControllerApi extends BaseController{
 
     @RequestMapping("/menuDetail")
     @RequiresPermissions("sys_menu_list")
-    public Result menuDetail(@RequestParam Integer id){
-        try{
+    public Result menuDetail(@RequestParam Integer id) {
+        try {
             return Result.success(menuService.get(id));
-        }catch(Exception e){
+        } catch (Exception e) {
             LOGGER.error("异常！");
         }
         return Result.fail();

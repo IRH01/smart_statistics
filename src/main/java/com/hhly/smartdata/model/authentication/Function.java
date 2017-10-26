@@ -5,7 +5,7 @@ public class Function{
 
     private Integer parentId;
 
-    private String name;
+    private String functionName;
 
     private Integer index;
 
@@ -25,12 +25,12 @@ public class Function{
         this.parentId = parentId;
     }
 
-    public String getName(){
-        return name;
+    public String getFunctionName(){
+        return functionName;
     }
 
-    public void setName(String name){
-        this.name = name == null ? null : name.trim();
+    public void setFunctionName(String functionName){
+        this.functionName = functionName == null ? null : functionName.trim();
     }
 
     public Integer getIndex(){

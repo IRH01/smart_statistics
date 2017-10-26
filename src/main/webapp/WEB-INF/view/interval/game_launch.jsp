@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -44,7 +44,6 @@
     <script src="/lib/tool.js"></script>
 
 
-
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -66,7 +65,7 @@
                         <h4 class="panel-title" id="-collapsible-group-item-#1-">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" aria-expanded="true"
-                               aria-controls="collapseOne" class="" >游戏启动统计列表</a>
+                               aria-controls="collapseOne" class="">游戏启动统计列表</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
@@ -101,10 +100,21 @@
                                                     <%--<div id="page"></div>--%>
                                                     <table class="tablePage">
                                                         <tr>
-                                                            <td><div class="divPage"><span class="spanPageSize">每页个数：</span><input id="pageSize" value="10" class="inputPageSize" onKeypress="return intInput(event);" onKeyup="value=pageSizeLimit(value);" onblur="value=pageSizeNotEmpty(value);"/></div></td>
-                                                            <td><span class="spanPageSize">总记录数：</span><span id="totalCount" class="spanPageSize"></span></td>
-                                                            <td><span class="spanPageSize">总页数：</span><span id="totalPage" class="spanPageSize"></span></td>
-                                                            <td class="tablePageTd"><div id="page"></div></td>
+                                                            <td>
+                                                                <div class="divPage"><span
+                                                                        class="spanPageSize">每页个数：</span><input
+                                                                        id="pageSize" value="10" class="inputPageSize"
+                                                                        onKeypress="return intInput(event);"
+                                                                        onKeyup="value=pageSizeLimit(value);"
+                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                            </td>
+                                                            <td><span class="spanPageSize">总记录数：</span><span
+                                                                    id="totalCount" class="spanPageSize"></span></td>
+                                                            <td><span class="spanPageSize">总页数：</span><span
+                                                                    id="totalPage" class="spanPageSize"></span></td>
+                                                            <td class="tablePageTd">
+                                                                <div id="page"></div>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -132,63 +142,9 @@
 </body>
 </html>
 <script type="text/javascript">
-    function tijiao(url) {
-        document.form.action = url;
-        document.form.submit();
-    }
-
-    function initPwd(id) {
-        layer.confirm("确认要将密码重置为密码“123456”吗？", {
-            btn: ["确认", "取消"] //可以无限个按钮
-        }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/initPwd.do"/>", {userId: id}, function (result) {
-                if (result.status == 1200) {
-                    layer.alert("设置成功", {icon: 6});
-                }
-            });
-        });
-    }
-
-    function del(id) {
-        layer.confirm("是否要刪除该用户？", {
-            btn: ["确认", "取消"] //可以无限个按钮
-        }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/del.do"/>", {
-                userId: id
-            }, function (result) {
-                if (result.status == 1200) {
-                    layer.alert("删除成功", {
-                        icon: 6
-                    });
-                    tijiao("<%=request.getContextPath()%>/admin/admin/list.do");
-                } else {
-                    layer.alert("删除失败", {
-                        icon: 5
-                    });
-                }
-            });
-        });
-    }
-
-    function disable(url) {
-        layer.confirm("是否要禁用该用户？禁用后，该用户将无法登陆", {
-            btn: ["确认", "取消"]
-        }, function (index, layero) {
-            document.form.action = url;
-            document.form.submit();
-        });
-    }
-
-    function clearSearch() {
-        jQuery("#username").attr("value", "");
-        jQuery("#userStatus").attr("value", "");
-        jQuery("#type").attr("value", "");
-        document.form.action = 'list.do';
-        document.form.submit();
-    }
-    var initSearchDate = [ "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30","07:00", "07:30",
-        "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30","12:00", "12:30","13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
-        "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30","24:00" ];
+    var initSearchDate = ["00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30",
+        "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
+        "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00"];
 
     var date = new Date();
     var seperator1 = "-";
@@ -200,23 +156,8 @@
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-        + " " ;
-
-    // 统计
-    var dateChange = function () {
-        $("#dateType").val(0);
-        search();
-    }
-
-    var dateChange1 = function () {
-        $("#dateType").val(0);
-        showNewUserData(1, pageSize);
-    }
-    //    var dateValue = setDateRangeConfig("dateStart", "dateEnd", dateChange);
-    //    var dateTypeChange = function () {
-    //        setDateTypeChange("dateType", "dateStart", "dateEnd", dateValue.dateStart, dateValue.dateEnd, search);
-    //    }
+    var currentDate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+        + " ";
 
     $(function () {
         $("#sortable").sortable({cursor: "move", handle: ".sortHandle"});
@@ -239,16 +180,6 @@
 
 
     var pageSize = 10;
-    var deviceTypeChange = function (ele) {
-        if (ele.id == "cltTypeAll") {
-            $(".deviceType").prop("checked", ele.checked);
-        } else {
-            if (!ele.checked) {
-                $("#cltTypeAll").prop("checked", false);
-            }
-        }
-        loadNewUserDataTrendLine(echartsCopy);
-    }
 
     var getDeviceType = function () {
         var devices = $(".deviceType");
@@ -274,12 +205,12 @@
     }
 
     var showTerminalsIntervalData = function (pageNumber, pageSize) {
-        for(var i=0;i<initSearchDate.length;i++){
-            $("#dateStarts").append("<option value='"+currentdate+initSearchDate[i]+"'>"+initSearchDate[i]+"</option>");
-            $("#dateEnds").append("<option value='"+currentdate+initSearchDate[i]+"'>"+initSearchDate[i]+"</option>");
+        for (var i = 0; i < initSearchDate.length; i++) {
+            $("#dateStarts").append("<option value='" + currentDate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
+            $("#dateEnds").append("<option value='" + currentDate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
         }
         $("#terminalsIntervalData").empty();
-        $.post("/interval/IntervalGameLaunch/list.do", {
+        $.post("/interval/game/launch/list.do", {
             startDate: $('#dateStarts').val(),
             endDate: $('#dateEnds').val(),
             pageNumber: pageNumber,
@@ -305,13 +236,13 @@
                     $("#totalPage").html(0);
                     $("#terminalsIntervalData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
                 } else {
-                    var sumlydj=0;
-                    var sumybf=0;
-                    var sumlmdz=0;
+                    var sumlydj = 0;
+                    var sumybf = 0;
+                    var sumlmdz = 0;
                     for (var i = 0; i < infoData.length; i++) {
-                            sumlmdz = accAdd(sumlmdz,infoData[i].lmdzlaunchCount);
-                            sumybf = accAdd(sumybf,infoData[i].ybflaunchCount);
-                            sumlydj = accAdd(sumlydj,infoData[i].lydjlaunchCount);
+                        sumlmdz = accAdd(sumlmdz, infoData[i].lmdzlaunchCount);
+                        sumybf = accAdd(sumybf, infoData[i].ybflaunchCount);
+                        sumlydj = accAdd(sumlydj, infoData[i].lydjlaunchCount);
 
                         var ele = {
                             statisticsTime: infoData[i].statisticsTime,
@@ -323,10 +254,10 @@
                     }
 
                     var ele1 = {
-                        statisticsTime:"总计",
-                        ybflaunchCount:sumybf,
-                        lmdzlaunchCount:sumlmdz,
-                        lydjlaunchCount:sumlydj
+                        statisticsTime: "总计",
+                        ybflaunchCount: sumybf,
+                        lmdzlaunchCount: sumlmdz,
+                        lydjlaunchCount: sumlydj
                     }
                     addTbRow1(ele1);
                 }
@@ -337,9 +268,6 @@
             }
         });
     };
-
-
-
 
     //查询显示
     var search = function () {
@@ -355,7 +283,7 @@
         var endDate = $("#dateEnds").val();
 
         $.ajax({
-            url: "/interval/IntervalGameLaunch/chart.do",
+            url: "/interval/game/launch/chart.do",
             data: {
                 startDate: startDate,
                 endDate: endDate,
@@ -497,7 +425,6 @@
             }
         })
     }
-
 
     var echartsCopy;
     // 路径配置

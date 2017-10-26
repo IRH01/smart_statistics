@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -31,7 +31,6 @@
     <script src="/lib/dialogsdk.js"></script>
     <script src="/lib/tools/tools.js"></script>
     <script src="/lib/layer/layer.js"></script>
-
     <link rel="stylesheet" href="/css/admin-trend.css"/>
     <script src="/lib/laydate/laydate.js"></script>
     <link rel="stylesheet" href="/lib/myPagination/css/style.css"/>
@@ -42,9 +41,6 @@
     <script src="/lib/datecontrol.js"></script>
     <script src="/lib/echart/dist/echarts.js"></script>
     <script src="/lib/tool.js"></script>
-
-
-
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -147,15 +143,6 @@
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-        + " " ;
-
-    // 统计
-    var dateChange = function () {
-        $("#dateType").val(0);
-        search();
-    }
-
 
     $(function () {
         $("#sortable").sortable({cursor: "move", handle: ".sortHandle"});
@@ -164,39 +151,13 @@
 
 
     var pageSize = 30;
-    var deviceTypeChange = function (ele) {
-        if (ele.id == "cltTypeAll") {
-            $(".deviceType").prop("checked", ele.checked);
-        } else {
-            if (!ele.checked) {
-                $("#cltTypeAll").prop("checked", false);
-            }
-        }
-        loadNewUserDataTrendLine(echartsCopy);
-    }
 
-    var getDeviceType = function () {
-        var devices = $(".deviceType");
-        var deviceTypes = "";
-        for (i = 0; i < devices.length; i++) {
-            if (devices[i].checked) {
-                if ("" != deviceTypes) {
-                    deviceTypes += ",";
-                }
-                deviceTypes += devices.eq(i).val();
-            }
-        }
-        return deviceTypes;
-    }
     setDateRangeConfig("dateStart","dateEnd",null,true);
-    //    var dateValue = setDateRangeConfig("dateStart", "dateEnd", dateChange);
-    var dateTypeChange = function () {
-        setDateTypeChange("dateType", "dateStart", "dateEnd", dateValue.dateStart, dateValue.dateEnd, search);
-    }
+
     var showTbCl = function(){
         $("#data").append("<tr><td rowspan=\"2\">日期</td><td rowspan=\"2\">新增用户</td>\n" +
             "<td colspan=\"9\">留存率</td></tr><tr><td>1天后</td><td>2天后</td><td>3天后</td><td>4天后</td><td>5天后</td><td>6天后</td><td>7天后</td><td>14天后</td><td>30天后</td></tr>");
-    }
+    };
 
     var addTbRow = function (data) {
         if (null != data && undefined != data && "" != data) {
@@ -206,13 +167,13 @@
                 .replace("seven", data.seven).replace("fourteen", data.fourteen).replace("thirty", data.thirty);
             $("#data").append(ele);
         }
-    }
+    };
 
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
-        $("#data").empty()
+        $("#data").empty();
         showTbCl();
-        $.post("/daily/dailyKeepRecord/list.do", {
+        $.post("/daily/keep/record/list.do", {
             startDate: $('#dateStart').val(),
             endDate: $('#dateEnd').val(),
             pageNumber: pageNumber,
@@ -238,54 +199,28 @@
                     $("#totalPage").html(0);
                     $("#data").append("<tr><td colspan=\"26\">没有数据</td></tr>");
                 } else {
-                    var registerPopulationNum=0;
-                    var registerExpCountNum=0;
-                    var registerExpCountRateNum=0;
-                    var realExpCountNum=0;
-                    var virtualExpCountNum=0;
-
-                    var newUserRechargePopulationNum=0;
-                    var newUserRechargeCountNum=0;
-                    var newUserRechargeAmountNum=0;
-                    var newUserRechargeRateNum=0;
-                    var newUserARPUNum=0;
-                    var newUserARPPUNum=0;
-                    var newUserLoginCountNum=0;
-                    var newUserPlayCountNum=0;
-                    var newUserPlayRateNum=0;
-
-                    var newUserRechargePopulationNum=0;
-                    var newUserRechargeCountNum=0;
-                    var newUserRechargeAmountNum=0;
-                    var newUserRechargeRateNum=0;
-                    var newUserARPUNum=0;
-                    var newUserARPPUNum=0;
-                    var newUserLoginCountNum=0;
-                    var newUserPlayCountNum=0;
-                    var newUserPlayRateNum=0;
-
-                    var nextDayStayCountNum=0;
-                    var nextDayStayRateNums=0
-
+                    var registerCountNum = 0;
+                    var oneNum = 0;
+                    var twoNum = 0;
+                    var threeNum = 0;
+                    var fourNum = 0;
+                    var fiveNum = 0;
+                    var sixNum = 0;
+                    var sevenNum = 0;
+                    var fourteenNum = 0;
+                    var thirtyNum = 0;
+                    var count = infoData.length;
                     for (var i = 0; i < infoData.length; i++) {
-//                        pcPopulationNum=accAdd(pcPopulationNum,infoData[i].pcPopulation);
-//                        pcPageViewNum=accAdd(pcPageViewNum,infoData[i].pcPageView);
-//                        pcUserViewNum=accAdd(pcUserViewNum,infoData[i].pcUserView);
-//                        h5PopulationNum=accAdd(h5PopulationNum,infoData[i].h5Population);
-//                        h5PageViewNum=accAdd(h5PageViewNum,infoData[i].h5PageView);
-//                        h5UserViewNum=accAdd(h5UserViewNum,infoData[i].h5UserView);
-//                        iosPopulationNum=accAdd(iosPopulationNum,infoData[i].iosPopulation);
-//                        iosInstallCountNum=accAdd(iosInstallCountNum,infoData[i].iosInstallCount);
-//                        androidPopulationNum=accAdd(androidPopulationNum,infoData[i].androidPopulation);
-//                        androidInstallCountNum=accAdd(androidInstallCountNum,infoData[i].androidInstallCount);
-
-//                        var nextDayStayRateNum = 0;
-//                        if ((i+1)<infoData.length) {
-//                            nextDayStayRateNum = accDiv(accAdd(infoData[i].oldUserLoginCount,infoData[i].newUserLoginCount),infoData[i+1].statisticsDay);
-//                        } else {
-//                            nextDayStayRateNum = 0;
-//                        }
-
+                        registerCountNum = accAdd(registerCountNum, infoData[i].registerCount);
+                        oneNum = accDiv(accAdd(oneNum, infoData[i].onePercent),count);
+                        twoNum = accDiv(accAdd(twoNum, infoData[i].twoPercent),count);
+                        threeNum = accDiv(accAdd(threeNum, infoData[i].threePercent),count);
+                        fourNum = accDiv(accAdd(fourNum, infoData[i].fourPercent),count);
+                        fiveNum = accDiv(accAdd(fiveNum, infoData[i].fivePercent),count);
+                        sixNum = accDiv(accAdd(sixNum, infoData[i].sixPercent),count);
+                        sevenNum = accDiv(accAdd(sevenNum, infoData[i].sevenPercent),count);
+                        fourteenNum = accDiv(accAdd(fourteenNum, infoData[i].fourteenPercent),count);
+                        thirtyNum = accDiv(accAdd(thirtyNum, infoData[i].thirtyPercent),count);
                         var ele = {
                             statisticsDay: infoData[i].statisticsDay,
                             registerCount: infoData[i].registerCount,
@@ -293,7 +228,6 @@
                             two: infoData[i].two+"("+convertToPercentFormat(infoData[i].twoPercent)+")",
                             three: infoData[i].three+"("+convertToPercentFormat(infoData[i].threePercent)+")",
                             four: infoData[i].four+"("+convertToPercentFormat(infoData[i].fourPercent)+")",
-
                             five: infoData[i].five+"("+convertToPercentFormat(infoData[i].fivePercent)+")",
                             six: infoData[i].six+"("+convertToPercentFormat(infoData[i].sixPercent)+")",
                             seven: infoData[i].seven+"("+convertToPercentFormat(infoData[i].sevenPercent)+")",
@@ -301,17 +235,23 @@
                             thirty: infoData[i].thirty+"("+convertToPercentFormat(infoData[i].thirtyPercent)+")"
                         }
                         addTbRow(ele);
-
-//                        var ele1 = {
-//                            statisticsTime:"总计",
-//                            registerPopulation:sumRegisterPopulation,
-//                            loginPopulation:sumLoginPopulation,
-//                            rechargePopulation:sumRechargePopulation,
-//                            rechargeCount:sumRechargeCount,
-//                            rechargeAmount:sumRechargeAmount.toFixed(2)
-//                        }
-//                        addTbRow(ele1);
                     }
+
+                    var ele1 = {
+                        statisticsDay: "总计",
+                        registerCount: registerCountNum,
+                        one: oneNum,
+                        two: twoNum,
+                        three: threeNum,
+                        four: fourNum,
+                        five: fiveNum,
+                        six: sixNum,
+                        seven: sevenNum,
+                        fourteen: sevenNum,
+                        thirty: thirtyNum
+
+                    };
+                    addTbRow(ele1);
                 }
             } else {
                 $("#totalCount").html(0);

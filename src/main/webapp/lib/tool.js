@@ -107,6 +107,9 @@ function accDiv(arg1, arg2) {
      }
     catch (e) {
       }
+      if (t1 = t2 == 0) {
+    	return 0;
+	  }
      with (Math) {
       r1 = Number(arg1.toString().replace(".", ""));
       r2 = Number(arg2.toString().replace(".", ""));

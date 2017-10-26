@@ -5,7 +5,7 @@ import java.util.Date;
 public class Role{
     private Integer id;
 
-    private String name;
+    private String roleName;
 
     private Date createTime;
 
@@ -23,12 +23,12 @@ public class Role{
         this.id = id;
     }
 
-    public String getName(){
-        return name;
+    public String getRoleName(){
+        return roleName;
     }
 
-    public void setName(String name){
-        this.name = name == null ? null : name.trim();
+    public void setRoleName(String roleName){
+        this.roleName = roleName == null ? null : roleName.trim();
     }
 
     public Date getCreateTime(){
@@ -70,7 +70,7 @@ public class Role{
         Role role = (Role) o;
         if(createTime != null ? !createTime.equals(role.createTime) : role.createTime != null) return false;
         if(id != null ? !id.equals(role.id) : role.id != null) return false;
-        if(name != null ? !name.equals(role.name) : role.name != null) return false;
+        if(roleName != null ? !roleName.equals(role.roleName) : role.roleName != null) return false;
         if(owned != null ? !owned.equals(role.owned) : role.owned != null) return false;
         if(permission != null ? !permission.equals(role.permission) : role.permission != null) return false;
         if(permissionIds != null ? !permissionIds.equals(role.permissionIds) : role.permissionIds != null) return false;
@@ -81,7 +81,7 @@ public class Role{
     @Override
     public int hashCode(){
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
         result = 31 * result + (owned != null ? owned.hashCode() : 0);
         result = 31 * result + (permission != null ? permission.hashCode() : 0);
@@ -91,7 +91,7 @@ public class Role{
 
     @Override
     public String toString(){
-        return "Role [id=" + id + ", name=" + name + ", createTime="
+        return "Role [id=" + id + ", roleName=" + roleName + ", createTime="
                 + createTime + ", owned=" + owned + ", permission="
                 + permission + ", permissionIds=" + permissionIds + "]";
     }

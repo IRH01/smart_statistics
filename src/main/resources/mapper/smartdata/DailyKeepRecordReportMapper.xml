@@ -6,20 +6,20 @@
         <result column="statistics_day" property="statisticsDay" jdbcType="VARCHAR"/>
         <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
         <result column="register_count" property="registerCount" jdbcType="INTEGER"/>
-        <result column="one" property="one" jdbcType="INTEGER"/>
-        <result column="two" property="two" jdbcType="INTEGER"/>
-        <result column="three" property="three" jdbcType="INTEGER"/>
-        <result column="four" property="four" jdbcType="INTEGER"/>
-        <result column="five" property="five" jdbcType="INTEGER"/>
-        <result column="six" property="six" jdbcType="INTEGER"/>
-        <result column="seven" property="seven" jdbcType="INTEGER"/>
-        <result column="fourteen" property="fourteen" jdbcType="INTEGER"/>
-        <result column="thirty" property="thirty" jdbcType="INTEGER"/>
+        <result column="one_remain" property="oneRemain" jdbcType="INTEGER"/>
+        <result column="two_remain" property="twoRemain" jdbcType="INTEGER"/>
+        <result column="three_remain" property="threeRemain" jdbcType="INTEGER"/>
+        <result column="four_remain" property="fourRemain" jdbcType="INTEGER"/>
+        <result column="five_remain" property="fiveRemain" jdbcType="INTEGER"/>
+        <result column="six_remain" property="sixRemain" jdbcType="INTEGER"/>
+        <result column="seven_remain" property="sevenRemain" jdbcType="INTEGER"/>
+        <result column="fourteen_remain" property="fourteenRemain" jdbcType="INTEGER"/>
+        <result column="thirty_remain" property="thirtyRemain" jdbcType="INTEGER"/>
         <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, statistics_day, source_type, register_count, one, two, three, four, five, six,
-        seven, fourteen, thirty, execute_time
+        id, statistics_day, source_type, register_count, one_remain, two_remain, three_remain, four_remain, five_remain, six_remain,
+        seven_remain, fourteen_remain, thirty_remain, execute_time
     </sql>
     <delete id="deleteByTime">
         delete from daily_keep_record_report where statistics_day = #{statisticsDay}
@@ -32,22 +32,22 @@
     </select>
     <select id="selectAverageOneKeep" resultType="java.lang.Float">
         SELECT
-        ROUND(AVG(ONE),2)
+        ROUND(AVG(one_remain),2)
         FROM daily_keep_record_report
         WHERE statistics_day &gt;= #{startDay}
         AND statistics_day &lt;= #{endDay} ;
     </select>
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyKeepRecordReport">
         insert into daily_keep_record_report (id, statistics_day, source_type,
-        register_count, one, two,
-        three, four, five,
-        six, seven, fourteen,
-        thirty, execute_time)
+        register_count, one_remain, two_remain,
+        three_remain, four_remain, five_remain,
+        six_remain, seven_remain, fourteen_remain,
+        thirty_remain, execute_time)
         values (#{id,jdbcType=BIGINT}, #{statisticsDay,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT},
-        #{registerCount,jdbcType=INTEGER}, #{one,jdbcType=INTEGER}, #{two,jdbcType=INTEGER},
-        #{three,jdbcType=INTEGER}, #{four,jdbcType=INTEGER}, #{five,jdbcType=INTEGER},
-        #{six,jdbcType=INTEGER}, #{seven,jdbcType=INTEGER}, #{fourteen,jdbcType=INTEGER},
-        #{thirty,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP})
+        #{registerCount,jdbcType=INTEGER}, #{one_remain,jdbcType=INTEGER}, #{two_remain,jdbcType=INTEGER},
+        #{three_remain,jdbcType=INTEGER}, #{four_remain,jdbcType=INTEGER}, #{five_remain,jdbcType=INTEGER},
+        #{six_remain,jdbcType=INTEGER}, #{seven_remain,jdbcType=INTEGER}, #{fourteen_remain,jdbcType=INTEGER},
+        #{thirty_remain,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.DailyKeepRecordReport">
         insert into daily_keep_record_report
@@ -64,32 +64,32 @@
             <if test="registerCount != null">
                 register_count,
             </if>
-            <if test="one != null">
-                one,
+            <if test="oneRemain != null">
+                one_remain,
             </if>
-            <if test="two != null">
-                two,
+            <if test="twoRemain != null">
+                two_remain,
             </if>
-            <if test="three != null">
-                three,
+            <if test="threeRemain != null">
+                three_remain,
             </if>
-            <if test="four != null">
-                four,
+            <if test="fourRemain != null">
+                four_remain,
             </if>
-            <if test="five != null">
-                five,
+            <if test="fiveRemain != null">
+                five_remain,
             </if>
-            <if test="six != null">
-                six,
+            <if test="sixRemain != null">
+                six_remain,
             </if>
-            <if test="seven != null">
-                seven,
+            <if test="sevenRemain != null">
+                seven_remain,
             </if>
-            <if test="fourteen != null">
-                fourteen,
+            <if test="fourteenRemain != null">
+                fourteen_remain,
             </if>
-            <if test="thirty != null">
-                thirty,
+            <if test="thirtyRemain != null">
+                thirty_remain,
             </if>
             <if test="executeTime != null">
                 execute_time,
@@ -108,32 +108,32 @@
             <if test="registerCount != null">
                 #{registerCount,jdbcType=INTEGER},
             </if>
-            <if test="one != null">
+            <if test="oneRemain != null">
                 #{one,jdbcType=INTEGER},
             </if>
-            <if test="two != null">
-                #{two,jdbcType=INTEGER},
+            <if test="twoRemain != null">
+                #{twoRemain,jdbcType=INTEGER},
             </if>
-            <if test="three != null">
-                #{three,jdbcType=INTEGER},
+            <if test="threeRemain != null">
+                #{threeRemain,jdbcType=INTEGER},
             </if>
-            <if test="four != null">
-                #{four,jdbcType=INTEGER},
+            <if test="fourRemain != null">
+                #{fourRemain,jdbcType=INTEGER},
             </if>
-            <if test="five != null">
-                #{five,jdbcType=INTEGER},
+            <if test="fiveRemain != null">
+                #{fiveRemain,jdbcType=INTEGER},
             </if>
-            <if test="six != null">
-                #{six,jdbcType=INTEGER},
+            <if test="sixRemain != null">
+                #{sixRemain,jdbcType=INTEGER},
             </if>
-            <if test="seven != null">
-                #{seven,jdbcType=INTEGER},
+            <if test="sevenRemain != null">
+                #{sevenRemain,jdbcType=INTEGER},
             </if>
-            <if test="fourteen != null">
-                #{fourteen,jdbcType=INTEGER},
+            <if test="fourteenRemain != null">
+                #{fourteenRemain,jdbcType=INTEGER},
             </if>
-            <if test="thirty != null">
-                #{thirty,jdbcType=INTEGER},
+            <if test="thirtyRemain != null">
+                #{thirtyRemain,jdbcType=INTEGER},
             </if>
             <if test="executeTime != null">
                 #{executeTime,jdbcType=TIMESTAMP},
@@ -152,32 +152,32 @@
             <if test="registerCount != null">
                 register_count = #{registerCount,jdbcType=INTEGER},
             </if>
-            <if test="one != null">
-                one = #{one,jdbcType=INTEGER},
+            <if test="oneRemain != null">
+                one_remain = #{oneRemain,jdbcType=INTEGER},
             </if>
-            <if test="two != null">
-                two = #{two,jdbcType=INTEGER},
+            <if test="twoRemain != null">
+                two_remain = #{twoRemain,jdbcType=INTEGER},
             </if>
-            <if test="three != null">
-                three = #{three,jdbcType=INTEGER},
+            <if test="threeRemain != null">
+                three_remain = #{threRemaine,jdbcType=INTEGER},
             </if>
-            <if test="four != null">
-                four = #{four,jdbcType=INTEGER},
+            <if test="fourRemain != null">
+                four_remain = #{fourRemain,jdbcType=INTEGER},
             </if>
-            <if test="five != null">
-                five = #{five,jdbcType=INTEGER},
+            <if test="fiveRemain != null">
+                five_remain = #{fiveRemain,jdbcType=INTEGER},
             </if>
-            <if test="six != null">
-                six = #{six,jdbcType=INTEGER},
+            <if test="sixRemain != null">
+                six_remain = #{sixRemain,jdbcType=INTEGER},
             </if>
-            <if test="seven != null">
-                seven = #{seven,jdbcType=INTEGER},
+            <if test="sevenRemain != null">
+                seven_remain = #{sevenRemain,jdbcType=INTEGER},
             </if>
-            <if test="fourteen != null">
-                fourteen = #{fourteen,jdbcType=INTEGER},
+            <if test="fourteenRemain != null">
+                fourteen_remain = #{fourteenRemain,jdbcType=INTEGER},
             </if>
-            <if test="thirty != null">
-                thirty = #{thirty,jdbcType=INTEGER},
+            <if test="thirtyRemain != null">
+                thirty_remain = #{thirtyRemain,jdbcType=INTEGER},
             </if>
             <if test="executeTime != null">
                 execute_time = #{executeTime,jdbcType=TIMESTAMP},
@@ -190,15 +190,15 @@
         set statistics_day = #{statisticsDay,jdbcType=VARCHAR},
         source_type = #{sourceType,jdbcType=TINYINT},
         register_count = #{registerCount,jdbcType=INTEGER},
-        one = #{one,jdbcType=INTEGER},
-        two = #{two,jdbcType=INTEGER},
-        three = #{three,jdbcType=INTEGER},
-        four = #{four,jdbcType=INTEGER},
-        five = #{five,jdbcType=INTEGER},
-        six = #{six,jdbcType=INTEGER},
-        seven = #{seven,jdbcType=INTEGER},
-        fourteen = #{fourteen,jdbcType=INTEGER},
-        thirty = #{thirty,jdbcType=INTEGER},
+        one_remain = #{oneRemain,jdbcType=INTEGER},
+        two_remain = #{twoRemain,jdbcType=INTEGER},
+        three_remain = #{threeRemain,jdbcType=INTEGER},
+        four_remain = #{fourRemain,jdbcType=INTEGER},
+        five_remain = #{fiveRemain,jdbcType=INTEGER},
+        six_remain = #{sixRemain,jdbcType=INTEGER},
+        seven_remain = #{sevenRemain,jdbcType=INTEGER},
+        fourteen_remain = #{fourteenRemain,jdbcType=INTEGER},
+        thirty_remain = #{thirtyRemain,jdbcType=INTEGER},
         execute_time = #{executeTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -209,15 +209,15 @@
         DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
         source_type as sourceType,
         register_count as registerCount,
-        one as one,
-        two as two,
-        three as three,
-        four as four,
-        five as five,
-        six as six,
-        seven as seven,
-        fourteen as fourteen,
-        thirty as thirty,
+        one_remain as oneRemain,
+        two_remain as twoRemain,
+        three_remain as threeRemain,
+        four_remain as fourRemain,
+        five_remain as fiveRemain,
+        six_remain as sixRemain,
+        seven_remain as sevenRemain,
+        fourteen_remain as fourteenRemain,
+        thirty_remain as thirtyRemain,
         execute_time as executeTime
         from daily_keep_record_report
         where 1=1

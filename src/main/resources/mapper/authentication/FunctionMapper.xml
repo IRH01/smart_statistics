@@ -5,12 +5,12 @@
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Function">
         <id column="id" property="id"/>
         <result column="parent_id" property="parentId"/>
-        <result column="name" property="name"/>
+        <result column="function_name" property="functionName"/>
         <result column="index" property="index"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, parent_id, name, function_index
+        id, parent_id, function_name, function_index
     </sql>
 
     <sql id="where_condition">
@@ -18,8 +18,8 @@
             <if test="parentId != null">
                 and parent_id = #{parentId}
             </if>
-            <if test="name != null">
-                and name = #{name}
+            <if test="functionName != null">
+                and function_name = #{functionName}
             </if>
             <if test="index != null">
                 and function_index = #{index}
@@ -55,7 +55,7 @@
         select
         c.id ,
         c.parent_id ,
-        c.name ,
+        c.function_name ,
         c.function_index
         from auth_role_permission a , auth_permission b , auth_function c
         where a.permission=b.permission
@@ -64,7 +64,7 @@
         <foreach collection="list" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
-        GROUP BY c.id ,c.parent_id,c.NAME,c.function_index
+        GROUP BY c.id ,c.parent_id,c.function_name,c.function_index
     </select>
 
     <delete id="batchDelete" parameterType="list">
@@ -84,10 +84,10 @@
     </delete>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO auth_function (parent_id, name,function_index)
+        INSERT INTO auth_function (parent_id, function_name,function_index)
         values (
         #{parentId},
-        #{name},
+        #{functionName},
         #{index})
     </insert>
 
@@ -97,8 +97,8 @@
             <if test="parentId != null">
                 parent_id = #{parentId},
             </if>
-            <if test="name != null">
-                name = #{name},
+            <if test="functionName != null">
+                function_name = #{functionName},
             </if>
             <if test="index != null">
                 function_index = #{index},

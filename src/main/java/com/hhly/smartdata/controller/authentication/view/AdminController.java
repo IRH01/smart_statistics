@@ -27,7 +27,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin/admin")
-public class AdminController extends BaseController{
+public class AdminController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -38,13 +38,13 @@ public class AdminController extends BaseController{
 
     @RequestMapping("/list")
     @RequiresPermissions("admin_admin_list")
-    public ModelAndView list(@ModelAttribute Admin condition, @ModelAttribute Page page){
+    public ModelAndView list(@ModelAttribute Admin condition, @ModelAttribute Page page) {
         PageUtil.startPage(page);
         Map<String, Object> model = Maps.newHashMap();
         model.put("condition", condition);
-        try{
+        try {
             model.put("adminList", adminService.searchAdmins(condition, page));
-        }catch(Exception e){
+        } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
         model.put("typeMap", Admin.Type.map());
@@ -57,12 +57,12 @@ public class AdminController extends BaseController{
      */
     @RequestMapping("/on")
     @RequiresPermissions("admin_admin_on")
-    public String on(@ModelAttribute User user){
+    public String on(@ModelAttribute User user) {
         user.setUserStatus(User.ON);
-        try{
+        try {
             userService.update(user);
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
         return "redirect:list.do";
     }
@@ -72,12 +72,12 @@ public class AdminController extends BaseController{
      */
     @RequestMapping("/off")
     @RequiresPermissions("admin_admin_off")
-    public String off(@ModelAttribute User user){
+    public String off(@ModelAttribute User user) {
         user.setUserStatus(User.OFF);
-        try{
+        try {
             userService.update(user);
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
         return "redirect:list.do";
     }
@@ -87,23 +87,23 @@ public class AdminController extends BaseController{
      */
     @RequestMapping("/showRoles")
     @RequiresPermissions("admin_admin_allocRole")
-    public ModelAndView showRoles(@RequestParam Integer userId){
+    public ModelAndView showRoles(@RequestParam Integer userId) {
         List<Role> hasRoles = null;
-        try{
+        try {
             hasRoles = roleService.getRolesByUserId(userId);
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
         List<Role> allRoles = null;//null 即为查询全部
-        try{
+        try {
             allRoles = roleService.search(null, new Page(0, 0));
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
-        for(Role role : allRoles){
-            if(hasRoles.contains(role)){
+        for (Role role : allRoles) {
+            if (hasRoles.contains(role)) {
                 role.setOwned(true);
-            }else{
+            } else {
                 role.setOwned(false);
             }
         }
@@ -118,11 +118,11 @@ public class AdminController extends BaseController{
      */
     @RequestMapping("/allocRole")
     @RequiresPermissions("admin_admin_allocRole")
-    public String allocRole(@RequestParam Integer userId, @RequestParam Integer[] role){
-        try{
+    public String allocRole(@RequestParam Integer userId, @RequestParam Integer[] role) {
+        try {
             roleService.allocRole(userId, role);
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
         return "redirect:list.do";
     }
@@ -132,7 +132,7 @@ public class AdminController extends BaseController{
      */
     @RequestMapping("/add")
     @RequiresPermissions("admin_admin_add")
-    public ModelAndView add(){
+    public ModelAndView add() {
         Map<String, Object> model = Maps.newHashMap();
         model.put("typeMap", Admin.Type.map());
         return new ModelAndView("system/admin/add", model);
@@ -143,14 +143,14 @@ public class AdminController extends BaseController{
      */
     @RequestMapping("/save")
     @RequiresPermissions("admin_admin_add")
-    public String save(@ModelAttribute Admin admin){
-        admin.setPassword(new Md5Hash(admin.getPassword()).toString());
+    public String save(@ModelAttribute Admin admin) {
+        admin.setPasswd(new Md5Hash(admin.getPasswd()).toString());
         admin.setUserStatus(User.ON);
         admin.setUserType(User.USER_ADMIN);
-        try{
+        try {
             adminService.save(admin);
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
         return "redirect:list.do";
     }
@@ -160,13 +160,13 @@ public class AdminController extends BaseController{
      */
     @RequestMapping("/edit")
     @RequiresPermissions("admin_admin_edit")
-    public ModelAndView edit(@RequestParam Integer id){
+    public ModelAndView edit(@RequestParam Integer id) {
         Map<String, Object> model = Maps.newHashMap();
         model.put("typeMap", Admin.Type.map());
-        try{
+        try {
             model.put("admin", adminService.get(id));
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
         return new ModelAndView("system/admin/edit", model);
     }
@@ -176,11 +176,11 @@ public class AdminController extends BaseController{
      */
     @RequestMapping("/modify")
     @RequiresPermissions("admin_admin_edit")
-    public String modify(@ModelAttribute Admin admin){
-        try{
+    public String modify(@ModelAttribute Admin admin) {
+        try {
             adminService.update(admin);
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
         return "redirect:list.do";
     }

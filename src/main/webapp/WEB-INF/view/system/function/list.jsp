@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="../../../../css/dialogsdk.css">
     <link rel="stylesheet" href="../../../../css/jquery-ui.css">
     <link rel="shortcut icon" href="../../../../img/favicon.ico">
-    <!--[if lt IE 9]>
+    <!-- [if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <![endif] -->
     <script src="../../../../lib/jquery-1.11.2.min.js"></script>
     <script src="../../../../lib/bootstrap.min.js"></script>
     <script src="../../../../lib/jquery.ztree.all-3.5.min.js"></script>
@@ -63,8 +63,7 @@
                                 <div class="col-md-4">
                                     <div class="col-md-10">
                                         <div class="main-menu">
-                                            <ul id="funcTree" class="ztree">
-                                            </ul>
+                                            <ul id="funcTree" class="ztree"></ul>
                                             <div style="margin: 10px 0 15px 10px">
                                                 <input type="button" value="保存" class="btn btn-primary"
                                                        onclick="updateFunc()"/>
@@ -74,9 +73,8 @@
                                 </div>
                                 <div class="col-md-8">
                                     <form id="permForm">
-                                        <input onclick="addPerm()" type="button" value="增加权限"
-                                               class="btn btn-primary"/> <input type="hidden" name="funcId"
-                                                                                id="funcId"/>
+                                        <input onclick="addPerm()" type="button" value="增加权限" class="btn btn-primary"/>
+                                        <input type="hidden" name="funcId" id="funcId"/>
                                         <table id="permTable" class="table table-striped table-bordered "
                                                style="margin-top: 20px">
                                             <thead>
@@ -114,7 +112,7 @@
         $($this).parent().parent().remove();
     }
 
-    function addPerm($this) {
+    function addPerm() {
         var curNode = funcTree.getSelectedNodes()[0];
         if (!curNode) {
             layer.alert("请选择功能", {
@@ -212,7 +210,7 @@
                     var tr = "";
                     tr += "<tr group='" + perm.functionId + "'>";
                     tr += "<td><input class='form-control input-sm' type='text' name='permission' value='" + perm.permission + "' /></td>";
-                    tr += "<td><input class='form-control input-sm' type='text' name='name' value='" + perm.name + "' /></td>";
+                    tr += "<td><input class='form-control input-sm' type='text' name='name' value='" + perm.permissionName + "' /></td>";
                     tr += "<td><button onclick='deletePerm(this)' class='btn btn-primary btn-sm' >删除</button></td>";
                     tr += "</tr>";
                     $("#permTable").append(tr);
@@ -243,7 +241,6 @@
     function beforeDrop(treeId, treeNodes, targetNode, moveType) {
         return targetNode ? targetNode.drop !== false : true;
     }
-
 
     function showRMenu(type, x, y) {
         var sdkContent = $(".sdk-content").offset();
@@ -287,7 +284,7 @@
     }
 
     function updateFunc() {
-        var url = "/sys/func/update.do"
+        var url = "/sys/func/update.do";
         var data = {funcTree: JSON.stringify(funcTree.getNodes())};
         $.post(url, data,
             function (result) {
@@ -297,11 +294,8 @@
                 $.each(result.data, function (tId, id) {
                     funcTree.getNodeByTId(tId).id = id;
                 })
-
-            },
-            "json");
+            }, "json");
     }
-
 
     function removeTreeNode() {
         hideRMenu();
@@ -324,7 +318,7 @@
         {
             id: ${func.id},
             pId: ${func.parentId},
-            name: "${func.name}"
+            name: "${func.functionName}"
         }<c:if test="${!status.last}">, </c:if>
         </c:forEach>
 

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Permission{
     private String permission;
 
-    private String name;
+    private String permissionName;
 
     private Integer functionId;
 
@@ -19,12 +19,12 @@ public class Permission{
         this.permission = permission == null ? null : permission.trim();
     }
 
-    public String getName(){
-        return name;
+    public String getPermissionName(){
+        return permissionName;
     }
 
-    public void setName(String name){
-        this.name = name == null ? null : name.trim();
+    public void setPermissionName(String permisionName){
+        this.permissionName = permisionName == null ? null : permisionName.trim();
     }
 
     public Integer getFunctionId(){

@@ -6,14 +6,14 @@
         <id column="id" property="id"/>
         <result column="permission" property="permission"/>
         <result column="parent_id" property="parentId"/>
-        <result column="name" property="name"/>
+        <result column="menu_name" property="menuName"/>
         <result column="url" property="url"/>
         <result column="menu_index" property="index"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, permission, parent_id, name, url, menu_index, create_time
+        id, permission, parent_id, menu_name, url, menu_index, create_time
     </sql>
 
     <sql id="where_condition">
@@ -27,8 +27,8 @@
             <if test="parentId != null">
                 and parent_id = #{parentId}
             </if>
-            <if test="name != null">
-                and name = #{name}
+            <if test="menuName != null">
+                and menu_name = #{menuName}
             </if>
             <if test="url != null">
                 and url = #{url}
@@ -77,14 +77,14 @@
         (
         permission,
         parent_id,
-        name,
+        menu_name,
         url,
         menu_index
         )
         values (
         #{permission},
         #{parentId},
-        #{name},
+        #{menuName},
         #{url},
         #{index}
         )
@@ -99,8 +99,8 @@
             <if test="parentId != null">
                 parent_id = #{parentId},
             </if>
-            <if test="name != null  ">
-                name = #{name},
+            <if test="menuName != null  ">
+                menu_name = #{menuName},
             </if>
             <if test="url != null">
                 url = #{url},

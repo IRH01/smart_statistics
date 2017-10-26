@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.hhly.smartdata.model.authentication.Menu" %>
 <%@ page import="java.util.Map" %>
@@ -7,54 +6,17 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%
     String menuId = request.getParameter("menuId");
-    if(menuId != null){
+    if (menuId != null) {
         Map<Integer, Menu> menuMap = (Map) session.getAttribute("session_user_menu_map");
-        if(menuMap.keySet().contains(Integer.valueOf(menuId))){
+        if (menuMap.keySet().contains(Integer.valueOf(menuId))) {
             session.setAttribute("menuId", menuId);
-        }else{
+        } else {
             session.setAttribute("menuId", 0);
         }
     }
 %>
-<script type="text/javascript">
-    var curMenu = null, menuId = null, zTree_Menu = null;
-    <c:if test="${null != sessionScope.menuId}">
-    menuId = "${sessionScope.menuId}";
-    </c:if>
-    var setting = {
-        view: {
-            showLine: true,
-            selectedMulti: false,
-            dblClickExpand: false
-        },
-        data: {
-            simpleData: {
-                enable: true
-            }
-        }
-    };
-
-    var zNodes = [
-        <c:forEach items="${sessionScope.session_user_menu}" varStatus="status" var="menu">
-        {
-            id: ${menu.id}, pId: ${menu.parentId}, name: "${menu.name}"
-            <c:if test="${null != menu.url && !fn:contains(menu.url, '?')}">,
-            url: "<c:url value="/${menu.url}?menuId=${menu.id}"/>",
-            target: "_self"
-            </c:if>
-            <c:if test="${null != menu.url && fn:contains(menu.url, '?')}">,
-            url: "<c:url value="/${menu.url}&menuId=${menu.id}"/>",
-            target: "_self"
-            </c:if>
-        }
-        <c:if test="${!status.last}">,
-        </c:if>
-        </c:forEach>
-    ];
-</script>
 <%--1为管理员--%>
 <c:if test="${sessionScope.session_user.userType==1}">
-
     <div class="col-lg-2 col-md-3  sider-box">
         <div class="panel panel-default" id="menuPanel">
             <div class="panel-heading">
@@ -73,6 +35,51 @@
             </div>
         </div>
         <script>
+            var curMenu = null;
+            var menuId = null;
+            var zTree_Menu = null;
+            <c:if test="${null != sessionScope.menuId}">
+            menuId = "${sessionScope.menuId}";
+            </c:if>
+            var setting = {
+                view: {
+                    showLine: true,
+                    selectedMulti: false,
+                    dblClickExpand: false
+                },
+                data: {
+                    key: {
+                        name: "menuName",
+                        url: "url"
+                    },
+                    simpleData: {
+                        enable: true,
+                        idKey: "id",
+                        pIdKey: "pId",
+                        rootPId: null
+                    }
+                }
+            };
+
+            var zNodes = [
+                <c:forEach items="${sessionScope.session_user_menu}" varStatus="status" var="menu">
+                {
+                    id: ${menu.id},
+                    pId: ${menu.parentId},
+                    menuName: "${menu.menuName}"
+                    <c:if test="${null != menu.url && !fn:contains(menu.url, '?')}">,
+                    url: "<c:url value="/${menu.url}?menuId=${menu.id}"/>",
+                    target: "_self"
+                    </c:if>
+                    <%--<c:if test="${null != menu.url && fn:contains(menu.url, '?')}">,
+                        url: "<c:url value="/${menu.url}&menuId=${menu.id}"/>",
+                        target: "_self"
+                    </c:if>--%>
+                }
+                <c:if test="${!status.last}">, </c:if>
+                </c:forEach>
+            ];
+
             function leafFilter(node) {
                 return !node.isParent && !node.url
             }
@@ -116,17 +123,17 @@
             $(zTree_Menu.getNodes()).each(function (i, item) {
                 if (item.children) {
                     var content = "";
-                    content += "<li><a href='javascript:'><span><i class='arrow'></i>" + item.name + "</span></a>";
+                    content += "<li><a href='javascript:'><span><i class='arrow'></i>" + item.menuName + "</span></a>";
                     content += "<ul class='sub-menu'>";
                     $(item.children).each(function (j, data) {
-                        content += ("<li><a href='" + data.url + "'>" + data.name + "</a></li>");
+                        content += ("<li><a href='" + data.url + "'>" + data.menuName + "</a></li>");
                     });
                     content += "</ul>";
                     content += "</li>";
                     $("#siderMenu").append(content);
                 } else {
                     if (item.url) {
-                        $("#siderMenu").append("<li><a href='" + item.url + "'><span>" + item.name + "</span></a></li>");
+                        $("#siderMenu").append("<li><a href='" + item.url + "'><span>" + item.menuName + "</span></a></li>");
                     }
                 }
             });
@@ -150,6 +157,5 @@
                 }
             }
         });
-
     </script>
 </c:if>

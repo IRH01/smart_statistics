@@ -132,13 +132,13 @@
             resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchListReport" parameterType="java.util.Map">
         select a.statistics_time as statisticsTime,a.ybflaunchCount,c.lydjlaunchCount,b.lmdzlaunchCount
         from (select statistics_time,sum(launch_count) as ybflaunchCount from interval_game_launch_report where
-        platform_name="一比分" group by statistics_time order by statistics_time desc) a
+        platform_name='一比分' group by statistics_time order by statistics_time desc) a
         inner join
         (select statistics_time,sum(launch_count) as lmdzlaunchCount from interval_game_launch_report where
-        platform_name="撩妹德州" group by statistics_time order by statistics_time desc) b
+        platform_name='撩妹德州' group by statistics_time order by statistics_time desc) b
         inner join
         (select statistics_time,sum(launch_count) as lydjlaunchCount from interval_game_launch_report where
-        platform_name="乐盈电竞" group by statistics_time order by statistics_time desc) c
+        platform_name='乐盈电竞' group by statistics_time order by statistics_time desc) c
         on a.statistics_time = b.statistics_time
         and a.statistics_time = c.statistics_time
         where a.statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))

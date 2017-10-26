@@ -4,13 +4,13 @@
 
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.authentication.Permission">
         <id column="permission" property="permission"/>
-        <result column="name" property="name"/>
+        <result column="permission_name" property="permissionName"/>
         <result column="function_id" property="functionId"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        permission, name, function_id,create_time
+        permission, permission_name, function_id,create_time
     </sql>
 
     <sql id="where_conditions">
@@ -18,8 +18,8 @@
             <if test="permission != null">
                 and permission = #{permission}
             </if>
-            <if test="name != null">
-                and name = #{name}
+            <if test="permissionName != null">
+                and permission_name = #{permissionName}
             </if>
             <if test="functionId != null">
                 and function_id = #{functionId}
@@ -30,7 +30,7 @@
     <select id="queryByRole" resultMap="BaseResultMap" parameterType="list">
         select
         b.permission ,
-        b.name ,
+        b.permission_name ,
         b.function_id ,
         b.create_time
         from auth_role_permission a , auth_permission b
@@ -40,7 +40,7 @@
                  close=")">
             #{id}
         </foreach>
-        group by b.permission , b.name , b.function_id , b.create_time
+        group by b.permission , b.permission_name , b.function_id , b.create_time
     </select>
 
     <select id="get" resultMap="BaseResultMap">
@@ -77,18 +77,18 @@
     <insert id="insert">
         INSERT INTO auth_permission (
         permission,
-        NAME,
+        permission_name,
         function_id)
         VALUES
-        (#{permission}, #{name},
+        (#{permission}, #{permissionName},
         #{functionId})
     </insert>
 
     <update id="update">
         update auth_permission
         <set>
-            <if test="name != null">
-                name = #{name},
+            <if test="permissionName != null">
+                permission_name = #{permissionName},
             </if>
             <if test="functionId != null">
                 function_id = #{functionId},

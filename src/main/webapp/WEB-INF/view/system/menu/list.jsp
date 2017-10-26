@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -57,14 +57,13 @@
                                    aria-controls="collapseOne" class=""> 菜单管理 </a>
                             </h4>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in"
-                             role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                             aria-labelledby="headingOne" aria-expanded="true">
                             <div class="panel-body">
                                 <div class="col-md-4">
                                     <div class="col-md-10">
                                         <div class="main-menu">
-                                            <ul id="menuTree" class="ztree">
-                                            </ul>
+                                            <ul id="menuTree" class="ztree"></ul>
                                             <div style="margin: 10px 0 15px 10px">
                                                 <input type="button" value="保存" class='btn btn-primary'
                                                        onclick="sortMenu()"/>
@@ -74,9 +73,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <form id="form" class="form-horizontal">
-
                                         <input type="hidden" name="id" id="menuId"/>
-
                                         <div class="form-group form-group-sm">
                                             <label class="col-sm-2 control-label">权限:</label>
                                             <div class="col-sm-6">
@@ -93,7 +90,7 @@
                                         <div class="form-group form-group-sm">
                                             <label class="col-sm-2 control-label">菜单名称:</label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="name" class="form-control" value=""/>
+                                                <input type="text" name="menuName" class="form-control" value=""/>
                                             </div>
                                         </div>
                                         <div class="form-group form-group-sm">
@@ -131,9 +128,9 @@
 </body>
 </html>
 <script type="text/javascript">
-
-    var menuTree, rMenu;
-    var list_setting = {
+    var menuTree;
+    var rMenu;
+    var show_setting = {
         view: {
             showLine: true,
             selectedMulti: false
@@ -147,6 +144,10 @@
             showRenameBtn: false
         },
         data: {
+            key: {
+                name: "menuName",
+                url: "url"
+            },
             simpleData: {
                 enable: true,
                 idKey: "id",
@@ -180,7 +181,7 @@
         $("#menuId").val(menuId);
         $.post("/sys/menu/update.do", $("#form").serialize(), function (result) {
             if (result.status == 1200) {
-                selectedNode.name = $("#form").find("input[name='name']").val();
+                selectedNode.menuName = $("#form").find("input[name='menuName']").val();
                 layer.alert("保存成功", {
                     icon: 6
                 });
@@ -201,14 +202,15 @@
             $("#menuId").val(menuId);
             var url = "/sys/menu/menuDetail.do"
             $.post(url, {id: menuId}, function (result) {
+                debugger;
                 var json = result.data;
-                $("#form").find("input[name='name']").val(json.name);
+                $("#form").find("input[name='menuName']").val(json.menuName);
                 $("#form").find("input[name='permission']").val(json.permission);
                 $("#form").find("input[name='url']").val(json.url);
                 setPermissionContentValue(json.permission);
             }, "json");
         } else {
-            $("#form").find("input[name='name']").val(treeNode.name);
+            $("#form").find("input[name='menuName']").val(treeNode.name);
         }
     }
 
@@ -234,7 +236,6 @@
     function beforeDrop(treeId, treeNodes, targetNode, moveType) {
         return targetNode ? targetNode.drop !== false : true;
     }
-
 
     function showRMenu(type, x, y) {
         var sdkContent = $(".sdk-content").offset();
@@ -303,7 +304,7 @@
     $(document).ready(function () {
         $.post("/sys/menu/menuList.do",
             function (result) {
-                $.fn.zTree.init($("#menuTree"), list_setting, result.data);
+                $.fn.zTree.init($("#menuTree"), show_setting, result.data);
                 menuTree = $.fn.zTree.getZTreeObj("menuTree");
                 menuTree.setting.edit.showRenameBtn = true;
                 menuTree.setting.edit.showRemoveBtn = true;

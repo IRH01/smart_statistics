@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -31,7 +31,6 @@
     <script src="/lib/dialogsdk.js"></script>
     <script src="/lib/tools/tools.js"></script>
     <script src="/lib/layer/layer.js"></script>
-
     <link rel="stylesheet" href="/css/admin-trend.css"/>
     <script src="/lib/laydate/laydate.js"></script>
     <link rel="stylesheet" href="/lib/myPagination/css/style.css"/>
@@ -42,9 +41,6 @@
     <script src="/lib/datecontrol.js"></script>
     <script src="/lib/echart/dist/echarts.js"></script>
     <script src="/lib/tool.js"></script>
-
-
-
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -90,12 +86,11 @@
                                                             <tr >
                                                                 <th style="border:1px solid black">
                                                                     注册请求数<br/>
-                                                                    <lable id="registerRequestNum"></lable>
+                                                                    <label id="registerRequestNum"></label>
                                                                 </th>
-
                                                                 <th style="border:1px solid black">
                                                                     注册完成数<br/>
-                                                                    <label id="registerCompleteNum"></label>
+                                                                    <lable id="registerCompleteNum"></lable>
                                                                 </th>
                                                                 <th style="border:1px solid black">
                                                                     充值请求数<br/>
@@ -132,7 +127,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!--body end-->
                 </div>
@@ -142,66 +136,7 @@
 </body>
 </html>
 <script type="text/javascript">
-    function tijiao(url) {
-        document.form.action = url;
-        document.form.submit();
-    }
-
-    function initPwd(id) {
-        layer.confirm("确认要将密码重置为密码“123456”吗？", {
-            btn: ["确认", "取消"] //可以无限个按钮
-        }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/initPwd.do"/>", {userId: id}, function (result) {
-                if (result.status == 1200) {
-                    layer.alert("设置成功", {icon: 6});
-                }
-            });
-        });
-    }
-
-    function del(id) {
-        layer.confirm("是否要刪除该用户？", {
-            btn: ["确认", "取消"] //可以无限个按钮
-        }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/del.do"/>", {
-                userId: id
-            }, function (result) {
-                if (result.status == 1200) {
-                    layer.alert("删除成功", {
-                        icon: 6
-                    });
-                    tijiao("<%=request.getContextPath()%>/admin/admin/list.do");
-                } else {
-                    layer.alert("删除失败", {
-                        icon: 5
-                    });
-                }
-            });
-        });
-    }
-
-    function disable(url) {
-        layer.confirm("是否要禁用该用户？禁用后，该用户将无法登陆", {
-            btn: ["确认", "取消"]
-        }, function (index, layero) {
-            document.form.action = url;
-            document.form.submit();
-        });
-    }
-
-    function clearSearch() {
-        jQuery("#username").attr("value", "");
-        jQuery("#userStatus").attr("value", "");
-        jQuery("#type").attr("value", "");
-        document.form.action = 'list.do';
-        document.form.submit();
-    }
-    var initSearchDate = [ "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30","07:00", "07:30",
-        "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30","12:00", "12:30","13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
-        "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30","24:00" ];
-
     var date = new Date();
-    var seperator1 = "-";
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
     if (month >= 1 && month <= 9) {
@@ -210,22 +145,13 @@
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-        + " " ;
-
-    // 统计
-    var dateChange = function () {
-        $("#dateType").val(0);
-        search();
-    }
-
 
     var intervalNum = function () {
         $("#registerRequestNum").empty();
         $("#registerCompleteNum").empty();
         $("#rechargeRequestNum").empty();
         $("#rechargeCompleteNum").empty();
-        $.post("/interval/IntervalInterface/intervalNum.do", {
+        $.post("/interval/interface/intervalNum.do", {
             startDate: $('#dateStarts').val(),
             endDate: $('#dateEnds').val()
         }, function (data) {
@@ -289,40 +215,12 @@
         );
     });
 
-
-    var pageSize = 10;
-    var deviceTypeChange = function (ele) {
-        if (ele.id == "cltTypeAll") {
-            $(".deviceType").prop("checked", ele.checked);
-        } else {
-            if (!ele.checked) {
-                $("#cltTypeAll").prop("checked", false);
-            }
-        }
-        loadNewUserDataTrendLine(echartsCopy);
-    }
-
-    var getDeviceType = function () {
-        var devices = $(".deviceType");
-        var deviceTypes = "";
-        for (i = 0; i < devices.length; i++) {
-            if (devices[i].checked) {
-                if ("" != deviceTypes) {
-                    deviceTypes += ",";
-                }
-                deviceTypes += devices.eq(i).val();
-            }
-        }
-        return deviceTypes;
-    }
-
-
     //查询显示
     var search = function () {
         loadRechargeDataTrendLine(echartsCopy);
         loadRegisterDataTrendLine(echartsCopy);
         intervalNum();
-    }
+    };
 
     var registeRtrendline;
     function loadRegisterDataTrendLine(echarts) {
@@ -330,16 +228,13 @@
         var endDate = $("#dateEnds").val();
 
         $.ajax({
-            url: "/interval/IntervalInterface/chart.do",
+            url: "/interval/interface/chart.do",
             data: {
                 startDate: startDate,
                 endDate: endDate,
                 interfaceCode: 1
             },
             success: function (data) {
-
-
-
                 var json = JSON.parse(data);
                 registeRtrendline = echarts.init(document
                     .getElementById('registeRtrendline'));
@@ -471,7 +366,7 @@
         var endDate = $("#dateEnds").val();
 
         $.ajax({
-            url: "/interval/IntervalInterface/chart.do",
+            url: "/interval/interface/chart.do",
             data: {
                 startDate: startDate,
                 endDate: endDate,
@@ -599,8 +494,6 @@
             }
         })
     }
-
-
 
     var echartsCopy;
     // 路径配置

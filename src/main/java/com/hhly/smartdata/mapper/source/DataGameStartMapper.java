@@ -2,10 +2,11 @@ package com.hhly.smartdata.mapper.source;
 
 
 import com.hhly.smartdata.model.source.DataGameStart;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public interface DataGameStartMapper{
     int insert(DataGameStart record) throws Exception;
 

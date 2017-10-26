@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -69,7 +69,7 @@
                                             <c:forEach items="${roleList}" var="role" varStatus="status">
                                                 <label><input id="role" type="checkbox" onclick="checkMove()"
                                                               name="role" value="${role.id}"
-                                                              <c:if test="${role.owned}">checked="checked" </c:if> />${role.name}
+                                                              <c:if test="${role.owned}">checked="checked" </c:if> />${role.roleName}
                                                 </label>&nbsp;&nbsp;
                                             </c:forEach>
                                         </div>

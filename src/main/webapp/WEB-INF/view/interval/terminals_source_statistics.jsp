@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -44,7 +44,6 @@
     <script src="/lib/tool.js"></script>
 
 
-
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -66,7 +65,7 @@
                         <h4 class="panel-title" id="-collapsible-group-item-#1-">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" aria-expanded="true"
-                               aria-controls="collapseOne" class="" >各端实时数据统计</a>
+                               aria-controls="collapseOne" class="">各端实时数据统计</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
@@ -75,19 +74,23 @@
                                 <div class="section-box">
                                     <div class="titleDiv">
                                         <div style="margin-left:8px;">
-                                             <span > 日期：
-                                                <select id="dateStarts" onchange="dateChange()" >
+                                             <span> 日期：
+                                                <select id="dateStarts" onchange="dateChange()">
                                                     <option value="-999" selected>请选择</option>
                                                 </select>
                                                 至
-                                                <select id="dateEnds" onchange = "dateChange()">
+                                                <select id="dateEnds" onchange="dateChange()">
                                                      <option value="-999" selected>请选择</option>
                                                 </select>
-                                                <button type="button" id="search" class="btn btn-primary btn-sm" onclick="search();">
-                                                    <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
+                                                <button type="button" id="search" class="btn btn-primary btn-sm"
+                                                        onclick="search();">
+                                                    <i class="icon-search icon-white"
+                                                       style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
                                                 </button>
-                                                <button type="button" id="reset" class="btn btn-primary btn-sm" onclick="reset();">
-                                                    <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
+                                                <button type="button" id="reset" class="btn btn-primary btn-sm"
+                                                        onclick="reset();">
+                                                    <i class="icon-search icon-white"
+                                                       style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
                                                 </button>
 											</span>
                                         </div>
@@ -123,10 +126,21 @@
                                                     </div>
                                                     <table class="tablePage">
                                                         <tr>
-                                                            <td><div class="divPage"><span class="spanPageSize">每页个数：</span><input id="pageSizes" value="10" class="inputPageSize" onKeypress="return intInput(event);" onKeyup="value=pageSizeLimit(value);" onblur="value=pageSizeNotEmpty(value);"/></div></td>
-                                                            <td><span class="spanPageSize">总记录数：</span><span id="totalCounts" class="spanPageSize"></span></td>
-                                                            <td><span class="spanPageSize">总页数：</span><span id="totalPages" class="spanPageSize"></span></td>
-                                                            <td class="tablePageTd"><div id="pages"></div></td>
+                                                            <td>
+                                                                <div class="divPage"><span
+                                                                        class="spanPageSize">每页个数：</span><input
+                                                                        id="pageSizes" value="10" class="inputPageSize"
+                                                                        onKeypress="return intInput(event);"
+                                                                        onKeyup="value=pageSizeLimit(value);"
+                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                            </td>
+                                                            <td><span class="spanPageSize">总记录数：</span><span
+                                                                    id="totalCounts" class="spanPageSize"></span></td>
+                                                            <td><span class="spanPageSize">总页数：</span><span
+                                                                    id="totalPages" class="spanPageSize"></span></td>
+                                                            <td class="tablePageTd">
+                                                                <div id="pages"></div>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -138,13 +152,13 @@
                                                     <div class="tablePanel">
                                                         <div class="titleDiv">
                                                             <div style="float:left;margin-left:8px;">
-                                                    <span > 终端：
-                                                         <select id="sourceType" onchange="dateChange1()" >
+                                                    <span> 终端：
+                                                         <select id="sourceType" onchange="dateChange1()">
                                                                     <option value="" selected>请选择</option>
-                                                                    <option value="1" >PC</option>
-                                                                    <option value="2" >H5</option>
-                                                                    <option value="3" >IOS</option>
-                                                                    <option value="4" >ANDROID</option>
+                                                                    <option value="1">PC</option>
+                                                                    <option value="2">H5</option>
+                                                                    <option value="3">IOS</option>
+                                                                    <option value="4">ANDROID</option>
                                                                 </select>
                                                     </span>
                                                             </div>
@@ -174,10 +188,21 @@
                                                     <%--<div id="page"></div>--%>
                                                     <table class="tablePage">
                                                         <tr>
-                                                            <td><div class="divPage"><span class="spanPageSize">每页个数：</span><input id="pageSize" value="10" class="inputPageSize" onKeypress="return intInput(event);" onKeyup="value=pageSizeLimit(value);" onblur="value=pageSizeNotEmpty(value);"/></div></td>
-                                                            <td><span class="spanPageSize">总记录数：</span><span id="totalCount" class="spanPageSize"></span></td>
-                                                            <td><span class="spanPageSize">总页数：</span><span id="totalPage" class="spanPageSize"></span></td>
-                                                            <td class="tablePageTd"><div id="page"></div></td>
+                                                            <td>
+                                                                <div class="divPage"><span
+                                                                        class="spanPageSize">每页个数：</span><input
+                                                                        id="pageSize" value="10" class="inputPageSize"
+                                                                        onKeypress="return intInput(event);"
+                                                                        onKeyup="value=pageSizeLimit(value);"
+                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                            </td>
+                                                            <td><span class="spanPageSize">总记录数：</span><span
+                                                                    id="totalCount" class="spanPageSize"></span></td>
+                                                            <td><span class="spanPageSize">总页数：</span><span
+                                                                    id="totalPage" class="spanPageSize"></span></td>
+                                                            <td class="tablePageTd">
+                                                                <div id="page"></div>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -218,63 +243,9 @@
 </body>
 </html>
 <script type="text/javascript">
-    function tijiao(url) {
-        document.form.action = url;
-        document.form.submit();
-    }
-
-    function initPwd(id) {
-        layer.confirm("确认要将密码重置为密码“123456”吗？", {
-            btn: ["确认", "取消"] //可以无限个按钮
-        }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/initPwd.do"/>", {userId: id}, function (result) {
-                if (result.status == 1200) {
-                    layer.alert("设置成功", {icon: 6});
-                }
-            });
-        });
-    }
-
-    function del(id) {
-        layer.confirm("是否要刪除该用户？", {
-            btn: ["确认", "取消"] //可以无限个按钮
-        }, function (index, layero) {
-            $.post("<c:url value="/admin/admin/del.do"/>", {
-                userId: id
-            }, function (result) {
-                if (result.status == 1200) {
-                    layer.alert("删除成功", {
-                        icon: 6
-                    });
-                    tijiao("<%=request.getContextPath()%>/admin/admin/list.do");
-                } else {
-                    layer.alert("删除失败", {
-                        icon: 5
-                    });
-                }
-            });
-        });
-    }
-
-    function disable(url) {
-        layer.confirm("是否要禁用该用户？禁用后，该用户将无法登陆", {
-            btn: ["确认", "取消"]
-        }, function (index, layero) {
-            document.form.action = url;
-            document.form.submit();
-        });
-    }
-
-    function clearSearch() {
-        jQuery("#username").attr("value", "");
-        jQuery("#userStatus").attr("value", "");
-        jQuery("#type").attr("value", "");
-        document.form.action = 'list.do';
-        document.form.submit();
-    }
-   var initSearchDate = [ "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30","07:00", "07:30",
-        "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30","12:00", "12:30","13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
-        "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30","24:00" ];
+    var initSearchDate = ["00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30",
+        "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
+        "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00"];
 
     var date = new Date();
     var seperator1 = "-";
@@ -287,31 +258,27 @@
         strDate = "0" + strDate;
     }
     var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-        + " " ;
+        + " ";
 
     // 统计
     var dateChange = function () {
-        if("-999" != $("#dateStarts").val() && "-999" != $("#dateEnds").val()){
+        if ("-999" != $("#dateStarts").val() && "-999" != $("#dateEnds").val()) {
             var dateEnds = new Date($("#dateEnds").val()).getTime();
             var dateStarts = new Date($("#dateStarts").val()).getTime();
-            if(dateEnds < dateStarts){
+            if (dateEnds < dateStarts) {
                 layer.alert("起始时间必须小于等于结束时间", {
-                    icon : 5
+                    icon: 5
                 });
                 $("#dateStarts").val("-999");
                 $("#dateEnds").val("-999");
             }
         }
-//        $("#dateType").val(0);
-//        search();
-    }
+    };
 
     var reset = function () {
         $("#dateStarts").val("-999");
         $("#dateEnds").val("-999");
-    }
-
-
+    };
 
     $(function () {
         $("#sortable").sortable({cursor: "move", handle: ".sortHandle"});
@@ -332,7 +299,6 @@
         );
     });
 
-
     var pageSize = 10;
     var pageSizes = 10;
     var deviceTypeChange = function (ele) {
@@ -344,7 +310,7 @@
             }
         }
         loadNewUserDataTrendLine(echartsCopy);
-    }
+    };
 
     var getDeviceType = function () {
         var devices = $(".deviceType");
@@ -358,7 +324,7 @@
             }
         }
         return deviceTypes;
-    }
+    };
 
     // 各端实时数据列表展示
     var addTbRow1 = function (data) {
@@ -367,15 +333,15 @@
             ele = ele.replace("sourceType", data.sourceType).replace("registerPopulation", data.registerPopulation).replace("loginPopulation", data.loginPopulation).replace("rechargePopulation", data.rechargePopulation).replace("rechargeCount", data.rechargeCount).replace("rechargeAmount", data.rechargeAmount);
             $("#terminalsIntervalData").append(ele);
         }
-    }
+    };
 
     var showTerminalsIntervalData = function (pageNumber, pageSize) {
-        for(var i=0;i<initSearchDate.length;i++){
-            $("#dateStarts").append("<option value='"+currentdate+initSearchDate[i]+"'>"+initSearchDate[i]+"</option>");
-            $("#dateEnds").append("<option value='"+currentdate+initSearchDate[i]+"'>"+initSearchDate[i]+"</option>");
+        for (var i = 0; i < initSearchDate.length; i++) {
+            $("#dateStarts").append("<option value='" + currentdate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
+            $("#dateEnds").append("<option value='" + currentdate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
         }
         $("#terminalsIntervalData").empty();
-        $.post("/interval/realTimeTerminalsInterval/terminalsList.do", {
+        $.post("/interval/source/terminalsList.do", {
             startDate: $("#dateStarts").val() != -999 ? $("#dateStarts").val() : null,
             endDate: $("#dateEnds").val() != -999 ? $("#dateEnds").val() : null,
             pageNumber: pageNumber,
@@ -401,24 +367,32 @@
                     $("#totalPages").html(0);
                     $("#terminalsIntervalData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
                 } else {
-                    var sumRechargeAmount=0;
-                    var sumRegisterPopulation=0;
-                    var sumLoginPopulation=0;
-                    var sumRechargePopulation=0;
-                    var sumRechargeCount=0;
-                    var terminalsName="";
+                    var sumRechargeAmount = 0;
+                    var sumRegisterPopulation = 0;
+                    var sumLoginPopulation = 0;
+                    var sumRechargePopulation = 0;
+                    var sumRechargeCount = 0;
+                    var terminalsName = "";
                     for (var i = 0; i < infoData.length; i++) {
-                        sumRegisterPopulation = accAdd(sumRegisterPopulation,infoData[i].registerPopulation);
-                        sumLoginPopulation = accAdd(sumLoginPopulation,infoData[i].loginPopulation);
-                        sumRechargePopulation = accAdd(sumRechargePopulation,infoData[i].rechargePopulation);
-                        sumRechargeCount = accAdd(sumRechargeCount,infoData[i].rechargeCount);
-                        sumRechargeAmount = accAdd(sumRechargeAmount,infoData[i].rechargeAmount);
+                        sumRegisterPopulation = accAdd(sumRegisterPopulation, infoData[i].registerPopulation);
+                        sumLoginPopulation = accAdd(sumLoginPopulation, infoData[i].loginPopulation);
+                        sumRechargePopulation = accAdd(sumRechargePopulation, infoData[i].rechargePopulation);
+                        sumRechargeCount = accAdd(sumRechargeCount, infoData[i].rechargeCount);
+                        sumRechargeAmount = accAdd(sumRechargeAmount, infoData[i].rechargeAmount);
 
-                        switch(infoData[i].sourceType) {
-                            case 1:terminalsName="pc"; break;
-                            case 2:terminalsName="android"; break;
-                            case 3:terminalsName="iphone"; break;
-                            case 4:terminalsName="h5"; break;
+                        switch (infoData[i].sourceType) {
+                            case 1:
+                                terminalsName = "pc";
+                                break;
+                            case 2:
+                                terminalsName = "android";
+                                break;
+                            case 3:
+                                terminalsName = "iphone";
+                                break;
+                            case 4:
+                                terminalsName = "h5";
+                                break;
                         }
 
                         var ele = {
@@ -429,26 +403,25 @@
                             rechargePopulation: infoData[i].rechargePopulation,
                             rechargeCount: infoData[i].rechargeCount,
                             rechargeAmount: infoData[i].rechargeAmount
-                        }
+                        };
                         addTbRow1(ele);
                     }
 
                     var ele1 = {
-                        sourceType:"总计",
-                        registerPopulation:sumRegisterPopulation,
-                        loginPopulation:sumLoginPopulation,
-                        rechargePopulation:sumRechargePopulation,
-                        rechargeCount:sumRechargeCount,
-                        rechargeAmount:sumRechargeAmount.toFixed(2)
-                    }
+                        sourceType: "总计",
+                        registerPopulation: sumRegisterPopulation,
+                        loginPopulation: sumLoginPopulation,
+                        rechargePopulation: sumRechargePopulation,
+                        rechargeCount: sumRechargeCount,
+                        rechargeAmount: sumRechargeAmount.toFixed(2)
+                    };
                     addTbRow1(ele1);
                 }
             } else {
-                // $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
+                $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
             }
         });
     };
-
 
 
     // 分时段列表展示
@@ -458,18 +431,18 @@
             ele = ele.replace("statisticsTime", data.statisticsTime).replace("registerPopulation", data.registerPopulation).replace("loginPopulation", data.loginPopulation).replace("rechargePopulation", data.rechargePopulation).replace("rechargeCount", data.rechargeCount).replace("rechargeAmount", data.rechargeAmount);
             $("#newUserData").append(ele);
         }
-    }
+    };
 
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
         $("#newUserData").empty();
-        $.post("/interval/realTimeTerminalsInterval/list.do", {
+        $.post("/interval/source/list.do", {
             startDate: $("#dateStarts").val() != -999 ? $("#dateStarts").val() : null,
             endDate: $("#dateEnds").val() != -999 ? $("#dateEnds").val() : null,
-            deviceType:$('#searchSourceType').val(),
+            deviceType: $('#searchSourceType').val(),
             pageNumber: pageNumber,
             pageSize: pageSize,
-            deviceType:$("#sourceType").val()
+            deviceType: $("#sourceType").val()
         }, function (data) {
             var json = JSON.parse(data);
             if (null != json && undefined != json) {
@@ -491,17 +464,17 @@
                     $("#totalPage").html(0);
                     $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
                 } else {
-                    var sumRechargeAmount=0;
-                    var sumRegisterPopulation=0;
-                    var sumLoginPopulation=0;
-                    var sumRechargePopulation=0;
-                    var sumRechargeCount=0;
+                    var sumRechargeAmount = 0;
+                    var sumRegisterPopulation = 0;
+                    var sumLoginPopulation = 0;
+                    var sumRechargePopulation = 0;
+                    var sumRechargeCount = 0;
                     for (var i = 0; i < infoData.length; i++) {
-                        sumRegisterPopulation = accAdd(sumRegisterPopulation,infoData[i].registerPopulation);
-                        sumLoginPopulation = accAdd(sumLoginPopulation,infoData[i].loginPopulation);
-                        sumRechargePopulation = accAdd(sumRechargePopulation,infoData[i].rechargePopulation);
-                        sumRechargeCount = accAdd(sumRechargeCount,infoData[i].rechargeCount);
-                        sumRechargeAmount = accAdd(sumRechargeAmount,infoData[i].rechargeAmount);
+                        sumRegisterPopulation = accAdd(sumRegisterPopulation, infoData[i].registerPopulation);
+                        sumLoginPopulation = accAdd(sumLoginPopulation, infoData[i].loginPopulation);
+                        sumRechargePopulation = accAdd(sumRechargePopulation, infoData[i].rechargePopulation);
+                        sumRechargeCount = accAdd(sumRechargeCount, infoData[i].rechargeCount);
+                        sumRechargeAmount = accAdd(sumRechargeAmount, infoData[i].rechargeAmount);
                         var ele = {
                             statisticsTime: infoData[i].statisticsTime,
                             registerPopulation: infoData[i].registerPopulation,
@@ -513,20 +486,20 @@
                         addTbRow(ele);
                     }
                     var ele1 = {
-                        statisticsTime:"总计",
-                        registerPopulation:sumRegisterPopulation,
-                        loginPopulation:sumLoginPopulation,
-                        rechargePopulation:sumRechargePopulation,
-                        rechargeCount:sumRechargeCount,
-                        rechargeAmount:sumRechargeAmount.toFixed(2)
+                        statisticsTime: "总计",
+                        registerPopulation: sumRegisterPopulation,
+                        loginPopulation: sumLoginPopulation,
+                        rechargePopulation: sumRechargePopulation,
+                        rechargeCount: sumRechargeCount,
+                        rechargeAmount: sumRechargeAmount.toFixed(2)
                     }
                     addTbRow(ele1);
                 }
             } else {
-               // $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
+                $("#newUserData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
             }
         });
-    }
+    };
 
     //查询显示
     var search = function () {
@@ -535,16 +508,16 @@
         showNewUserData(1, pageSize);
         loadNewUserDataTrendLine(echartsCopy);
         showTerminalsIntervalData(1, pageSizes);
-    }
+    };
 
     var trendline;
 
     function loadNewUserDataTrendLine(echarts) {
         var startDate = $("#dateStarts").val() != -999 ? $("#dateStarts").val() : null;
-        var endDate=$("#dateEnds").val() != -999 ? $("#dateEnds").val() : null;
+        var endDate = $("#dateEnds").val() != -999 ? $("#dateEnds").val() : null;
 
         $.ajax({
-            url: "/interval/realTimeInterval/chart.do",
+            url: "/interval/source/chart.do",
             data: {
                 startDate: startDate,
                 endDate: endDate,
@@ -709,8 +682,7 @@
 
             }
         })
-    }
-
+    };
 
     var echartsCopy;
     // 路径配置

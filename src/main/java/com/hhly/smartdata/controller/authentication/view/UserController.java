@@ -1,5 +1,6 @@
 package com.hhly.smartdata.controller.authentication.view;
 
+import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.UserService;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -21,18 +22,18 @@ import java.io.UnsupportedEncodingException;
  */
 @Controller
 @RequestMapping("/sys/user")
-public class UserController{
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
 
     @RequestMapping("/modifyPasswd")
-    public String modifyPasswd(@ModelAttribute User user, Model model){
-        user.setPassword(new Md5Hash(user.getNewPassword()).toString());
-        try{
+    public String modifyPasswd(@ModelAttribute User user, Model model) {
+        user.setPasswd(new Md5Hash(user.getNewPassword()).toString());
+        try {
             userService.update(user);
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
         model.addAttribute("redirectUrl", "/welcome.do");
         model.addAttribute("msg", "密码修改成功！");
@@ -40,29 +41,29 @@ public class UserController{
     }
 
     @RequestMapping("/editPasswd")
-    public String editPasswd(){
+    public String editPasswd() {
         return "system/admin/edit_passwd";
     }
 
     @RequestMapping("/{random}/valid")
-    public ModelAndView valid(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
+    public ModelAndView valid(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         Boolean b = true;
         String username = new String(request.getParameter("smart.username").getBytes("iso8859_1"), "UTF-8");
         User user = null;
-        try{
+        try {
             user = userService.getUserByUsername(username);
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
         }
-        if(user != null){
+        if (user != null) {
             b = false;
         }
-        try{
+        try {
             PrintWriter out = response.getWriter();
             out.print(b);
             out.close();
-        }catch(IOException e){
-            e.printStackTrace();
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
         }
         return null;
     }

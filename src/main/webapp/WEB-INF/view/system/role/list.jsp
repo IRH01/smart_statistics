@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -70,7 +70,7 @@
                                         <div class="form-group form-group-sm right20">
                                             <label class="control-label" for="name">角色名：</label> <input
                                                 class="form-control" type="text" id="name" name="name"
-                                                value="${role.name}">
+                                                value="${role.roleName}">
                                         </div>
                                         <div class="form-group form-group-sm right20">
                                             <label class="control-label" for="id">角色编号：</label> <input
@@ -105,7 +105,7 @@
                                         <c:forEach var="role" items="${roleList}">
                                             <tr>
                                                 <td class="center">${role.id}</td>
-                                                <td class="center">${role.name}</td>
+                                                <td class="center">${role.roleName}</td>
                                                 <td class="center"><fmt:formatDate
                                                         value="${role.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                                 </td>

@@ -3,9 +3,9 @@
 <mapper namespace="com.hhly.smartdata.mapper.authentication.UserMapper">
 
     <resultMap id="UserMap" type="com.hhly.smartdata.model.authentication.User">
-        <id column="user_id" property="userId"/>
+        <id column="id" property="id"/>
         <result column="username" property="username"/>
-        <result column="password" property="password"/>
+        <result column="passwd" property="passwd"/>
         <result column="user_status" property="userStatus"/>
         <result column="user_type" property="userType"/>
         <result column="create_time" property="createTime"/>
@@ -13,9 +13,9 @@
     </resultMap>
 
     <sql id="User_Base_Column_List">
-        user_id,
+        id,
         username,
-        password,
+        passwd,
         user_status,
         user_type,
         create_time,
@@ -24,15 +24,15 @@
 
     <sql id="where_condition">
         <where>
-            and user_id != -1
-            <if test="user_id != null">
-                and user_id = #{userId}
+            and id != 1
+            <if test="id != null">
+                and id = #{id}
             </if>
             <if test="username != null and username != ''">
                 and username = #{username}
             </if>
-            <if test="password != null">
-                and password = #{password}
+            <if test="passwd != null">
+                and passwd = #{passwd}
             </if>
             <if test="type != null">
                 and user_type = #{userType}
@@ -74,14 +74,14 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="user_id">
         INSERT INTO auth_user (
         username,
-        password,
+        passwd,
         user_status,
         user_type
         )
         VALUES
         (
         #{username},
-        #{password},
+        #{passwd},
         #{userStatus},
         #{userType}
         )
@@ -96,8 +96,8 @@
             <if test="userStatus != null">
                 user_status = #{userStatus},
             </if>
-            <if test="password != null">
-                password = #{password},
+            <if test="passwd != null">
+                passwd = #{passwd},
             </if>
             <if test="userType != null">
                 user_type = #{userType},

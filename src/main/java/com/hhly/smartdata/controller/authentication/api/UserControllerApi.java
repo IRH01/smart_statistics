@@ -21,10 +21,10 @@ public class UserControllerApi extends BaseController{
     public boolean verifyPasswd(@ModelAttribute User user){
         User oldUser = null;
         try{
-            oldUser = userService.getUser(user.getUserId());
+            oldUser = userService.getUser(user.getId());
         }catch(Exception e){
             LOGGER.error("操作失败");
         }
-        return oldUser.getPassword().equals(new Md5Hash(user.getPassword()).toString());
+        return oldUser.getPasswd().equals(new Md5Hash(user.getPasswd()).toString());
     }
 }

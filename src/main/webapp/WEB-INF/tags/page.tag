@@ -2,11 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="page1" type="com.hhly.smartdata.util.page.Page "
               required="true" %>
-<script src="<%=request.getContextPath()%>/lib/layer/layer.js"></script>
-<script src="<%=request.getContextPath()%>/lib/tool.js"></script>
+<script src="../../lib/layer/layer.js"></script>
+<script src="../../lib/tool.js"></script>
 
 <%
-
     int current = page1.getPageNo();
     int begin = 1;
     int end = page1.getTotalPage();
@@ -62,13 +61,13 @@
     }
 </script>
 <div class="page-pull-right">
-    <% if(current != 1 && end != 0){%>
+    <% if (current != 1 && end != 0) {%>
 
     <button class="btn btn-default btn-sm" onclick="pageClick(1)">首页</button>
     <button class="btn btn-default btn-sm"
             onclick="pageClick(${current-1})">前页
     </button>
-    <%}else{%>
+    <%} else {%>
     <button class="btn btn-default btn-sm" disabled="disabled">首页</button>
     <button class="btn btn-default btn-sm" disabled="disabled">前页</button>
     <%} %>
@@ -85,12 +84,12 @@
             </c:otherwise>
         </c:choose>
     </c:forTokens>
-    <% if(current < end && end != 0){%>
+    <% if (current < end && end != 0) {%>
     <button class="btn btn-default btn-sm"
             onclick="pageClick(${current+1})">后页
     </button>
     <button class="btn btn-default btn-sm" onclick="pageClick(${end})">末页</button>
-    <%}else{%>
+    <%} else {%>
     <button class="btn btn-default btn-sm" disabled="disabled">后页</button>
     <button class="btn btn-default btn-sm" disabled="disabled">末页</button>
     <%} %>

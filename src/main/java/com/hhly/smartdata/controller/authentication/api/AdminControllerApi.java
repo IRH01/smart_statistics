@@ -27,7 +27,7 @@ public class AdminControllerApi extends BaseController{
     @RequestMapping("/initPwd")
     @RequiresPermissions("admin_admin_initPwd")
     public Result initPwd(@ModelAttribute User user){
-        user.setPassword(new Md5Hash("123456").toString());
+        user.setPasswd(new Md5Hash("123456").toString());
         try{
             userService.update(user);
         }catch(Exception e){

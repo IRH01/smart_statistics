@@ -21,9 +21,9 @@ public class User{
         statusMap.put(OFF, "禁用");
     }
 
-    private Integer userId;
+    private Integer id;
     private String username;
-    private String password;
+    private String passwd;
     private String userStatus; //0:启用 1:禁用
     private String userType;  //1:内部  2:CP  3：渠道
     private Date createTime;
@@ -40,20 +40,20 @@ public class User{
         this.username = username == null ? null : username.trim();
     }
 
-    public String getPassword(){
-        return password;
+    public String getPasswd(){
+        return passwd;
     }
 
-    public void setPassword(String password){
-        this.password = password == null ? null : password.trim();
+    public void setPasswd(String passwd){
+        this.passwd = passwd == null ? null : passwd.trim();
     }
 
-    public Integer getUserId(){
-        return userId;
+    public Integer getId(){
+        return id;
     }
 
-    public void setUserId(Integer userId){
-        this.userId = userId;
+    public void setId(Integer id){
+        this.id = id;
     }
 
     public String getUserStatus(){
@@ -98,8 +98,8 @@ public class User{
 
     @Override
     public String toString(){
-        return "User [userId=" + userId + ", username=" + username
-                + ", password=" + password + ", userStatus=" + userStatus
+        return "User [id=" + id + ", username=" + username
+                + ", passwd=" + passwd + ", userStatus=" + userStatus
                 + ", userType=" + userType + ", createTime=" + createTime
                 + ", locale=" + locale + ", newPassword=" + newPassword + "]";
     }

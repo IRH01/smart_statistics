@@ -16,7 +16,7 @@ public class Menu implements Serializable{
     @JSONField(name = "pId")
     private Integer parentId;
 
-    private String name;
+    private String menuName;
 
     private String url;
 
@@ -35,7 +35,7 @@ public class Menu implements Serializable{
     @Override
     public String toString(){
         return "Menu [id=" + id + ", permission=" + permission + ", parentId="
-                + parentId + ", name=" + name + ", url=" + url + ", index="
+                + parentId + ", menuName=" + menuName + ", url=" + url + ", index="
                 + index + ", createTime=" + createTime + "]";
     }
 
@@ -55,12 +55,12 @@ public class Menu implements Serializable{
         this.parentId = parentId;
     }
 
-    public String getName(){
-        return name;
+    public String getMenuName(){
+        return menuName;
     }
 
-    public void setName(String name){
-        this.name = name == null ? null : name.trim();
+    public void setMenuName(String menuName){
+        this.menuName = menuName == null ? null : menuName.trim();
     }
 
     public String getUrl(){
