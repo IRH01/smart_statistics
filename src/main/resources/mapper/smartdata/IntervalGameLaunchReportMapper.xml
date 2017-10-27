@@ -129,7 +129,7 @@
     </update>
 
     <select id="selectIntervalGameLaunchListData"
-            resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchListReport" parameterType="java.util.Map">
+            resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchListReport">
         select a.statistics_time as statisticsTime,a.ybflaunchCount,c.lydjlaunchCount,b.lmdzlaunchCount
         from (select statistics_time,sum(launch_count) as ybflaunchCount from interval_game_launch_report where
         platform_name='一比分' group by statistics_time order by statistics_time desc) a
@@ -155,7 +155,7 @@
     </select>
 
     <select id="selectIntervalGameLaunchChatData"
-            resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport" parameterType="java.util.Map">
+            resultType="com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport">
         select
         DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,
         platform_name as platformName,sum(launch_count) as launchCount

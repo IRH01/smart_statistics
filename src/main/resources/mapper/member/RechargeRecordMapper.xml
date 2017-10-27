@@ -79,7 +79,7 @@
         GROUP BY a.source
     </select>
 
-    <select id="findRechargeRecordByTime" resultType="java.lang.Integer" parameterType="java.util.Map">
+    <select id="findRechargeRecordByTime" resultType="java.lang.Integer" >
         select count(DISTINCT (orderno)) as count from tbl_recharge_record where
         status = 1
         <![CDATA[
@@ -103,7 +103,7 @@
         AND TO_DAYS(NOW()) - TO_DAYS(apply_time) &gt; 0
         GROUP BY plateform_id,source,user_id
     </select>
-    <select id="selectFirstThirtyMinRechargeUser" resultType="java.util.Map" parameterType="java.util.Map">
+    <select id="selectFirstThirtyMinRechargeUser" resultType="java.util.Map" >
         select source as osType,count(DISTINCT(user_id)) as rechargePopulation ,sum(apply_amount) as rechargeAmount,count(orderno) as rechargeCount from tbl_recharge_record where
         status=1
         <![CDATA[

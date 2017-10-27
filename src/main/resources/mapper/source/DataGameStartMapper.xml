@@ -158,7 +158,7 @@
         create_time = #{createTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <select id="selectPlatformAllGameStartCount" resultType="java.util.Map" parameterType="java.util.Map">
+    <select id="selectPlatformAllGameStartCount" resultType="java.util.Map">
         select platform_terminal as platformTerminal,platform_id as platformId,platform_name as platformName,count(id) as gameStartCount from data_game_start
         where country = 0
          <![CDATA[
@@ -170,7 +170,7 @@
         group by platform_terminal,platform_id,platform_name
     </select>
 
-    <select id="selectFirstThirtyMinGameStartCount" resultType="java.util.Map" parameterType="java.util.Map">
+    <select id="selectFirstThirtyMinGameStartCount" resultType="java.util.Map">
         select platform_terminal as osType,count(DISTINCT(user_id)) as loginPopulation from data_platform_start
         where country = 0
         <![CDATA[

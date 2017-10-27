@@ -211,8 +211,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectRegisterDataListByTime" parameterType="java.util.Map"
-            resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
+    <select id="selectRegisterDataListByTime" resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         select
         DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
         pc_population as pcPopulation,
@@ -240,8 +239,7 @@
         order by statistics_day desc
     </select>
 
-    <select id="selectYesterdayRegisterData" parameterType="java.util.Map"
-            resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
+    <select id="selectYesterdayRegisterData" resultType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         select
         DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
         pc_population as pcPopulation,

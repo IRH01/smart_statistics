@@ -36,7 +36,7 @@
         #{rechargePopulation,jdbcType=INTEGER}, #{rechargeCount,jdbcType=INTEGER}, #{rechargeAmount,jdbcType=DECIMAL},
         #{executeTime,jdbcType=TIMESTAMP})
     </insert>
-    <select id="selectIntervalSourceTotalData" resultType="java.util.Map" parameterType="java.util.Map">
+    <select id="selectIntervalSourceTotalData" resultType="java.util.Map">
         select sum(register_population) as registerPopulation,sum(login_population) as loginPopulation
         ,sum(recharge_population) as rechargePopulation ,
         sum(recharge_count) as rechargeCount,sum(recharge_amount) as rechargeAmount
@@ -53,7 +53,7 @@
         </if>
     </select>
     <select id="selectIntervalSourceListData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport"
-            parameterType="java.util.Map">
+    >
         select
         statistics_time,
         sum(register_population) as register_population,
@@ -79,7 +79,7 @@
     </select>
 
     <select id="selectIntervalSourceChartData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport"
-            parameterType="java.util.Map">
+    >
         select
         DATE_FORMAT(statistics_time,'%H:%i') as statistics_time,
         sum(register_population) as register_population,
@@ -111,7 +111,7 @@
     </select>
 
     <select id="selectIntervalTerminalsSourceListData"
-            resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="java.util.Map">
+            resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
         select
         source_type as sourceType,
         sum(register_population) as register_population,
@@ -137,7 +137,7 @@
     </select>
 
     <select id="selectIntervalTimeTerminalsSourceListData"
-            resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport" parameterType="java.util.Map">
+            resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
         select
         DATE_FORMAT(statistics_time,'%H:%i') as statistics_time,
         sum(register_population) as register_population,

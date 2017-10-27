@@ -203,8 +203,7 @@
         where id = #{id}
     </update>
 
-    <select id="selectDailyKeepRecordListData" parameterType="java.util.Map"
-            resultType="com.hhly.smartdata.dto.daily.DailyKeepRecordReportResult">
+    <select id="selectDailyKeepRecordListData" resultType="com.hhly.smartdata.dto.daily.DailyKeepRecordReportResult">
         select
         DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
         source_type as sourceType,

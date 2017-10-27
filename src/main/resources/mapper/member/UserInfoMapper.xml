@@ -53,7 +53,7 @@
     </select>
 
     <select id="findUserInfoByTime" resultType="java.lang.Integer"
-            parameterType="java.util.Map">
+            >
         select count(user_id) from tbl_user_info
         where country = 0
         <![CDATA[
@@ -74,7 +74,7 @@
         WHERE TO_DAYS(NOW()) - TO_DAYS(create_time) &gt; 1
     </select>
 
-    <select id="selectFirstThirtyMinRegister" resultType="java.util.Map" parameterType="java.util.Map">
+    <select id="selectFirstThirtyMinRegister" resultType="java.util.Map" >
         select os_type as osType, count(DISTINCT(user_id)) as register_population from tbl_user_info where
         <![CDATA[
               create_time > date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)

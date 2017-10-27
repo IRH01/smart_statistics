@@ -144,7 +144,7 @@
     group by platform_terminal
   </select>
 
-    <select id="selectFirstThirtyMinUserViewAndPageView" resultType="java.util.Map" parameterType="java.util.Map">
+    <select id="selectFirstThirtyMinUserViewAndPageView" resultType="java.util.Map">
     select platform_terminal as osType,count(DISTINCT(user_id)) as loginPopulation from data_view where
     user_id is not null
     <![CDATA[
