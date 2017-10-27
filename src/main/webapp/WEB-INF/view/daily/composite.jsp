@@ -192,7 +192,6 @@
                     $("#totalPage").html(0);
                     $("#data").append("<tr><td colspan=\"26\">没有数据</td></tr>");
                 } else {
-
                         var registerPopulationNum=0;
                         var registerExpCountNum=0;
                         var registerExpCountRateNum=0;
@@ -226,28 +225,27 @@
                         registerExpCountRateNum= accAdd(registerExpCountRateNum, infoData[i].registerExpCountRate);
                         realExpCountNum= accAdd(realExpCountNum, infoData[i].realExpCount);
                         virtualExpCountNum= accAdd(virtualExpCountNum, infoData[i].virtualExpCount);
+
                         newUserRechargePopulationNum= accAdd(newUserRechargePopulationNum, infoData[i].newUserRechargePopulation);
                         newUserRechargeCountNum= accAdd(newUserRechargeCountNum, infoData[i].newUserRechargeCount);
                         newUserRechargeAmountNum= accAdd(newUserRechargeAmountNum, infoData[i].newUserRechargeAmount);
-
                         newUserRechargeRateNum= accAdd(newUserRechargeRateNum, accDiv(infoData[i].newUserRechargePopulation,infoData[i].registerPopulation));
                         newUserARPUNum= accAdd(newUserARPUNum, infoData[i].newUserARPU);
                         newUserARPPUNum= accAdd(newUserARPPUNum, infoData[i].newUserARPPU);
                         newUserLoginCountNum= accAdd(newUserLoginCountNum, infoData[i].newUserLoginCount);
                         newUserPlayCountNum= accAdd(newUserPlayCountNum, infoData[i].newUserPlayCount);
-
                         newUserPlayRateNum= accAdd(newUserPlayRateNum, accDiv(infoData[i].newUserLoginCount,infoData[i].registerPopulation));
+
                         oldUserRechargePopulationNum= accAdd(oldUserRechargePopulationNum, infoData[i].oldUserRechargePopulation);
                         oldUserRechargeCountNum= accAdd(oldUserRechargeCountNum, infoData[i].oldUserRechargeCount);
                         oldUserRechargeAmountNum= accAdd(oldUserRechargeAmountNum, infoData[i].oldUserRechargeAmount);
-
                         oldUserRechargeRateNum= accAdd(oldUserRechargeRateNum, accDiv(infoData[i].oldUserRechargePopulation,infoData[i].registerPopulation));
                         oldUserARPUNum= accAdd(oldUserARPUNum, infoData[i].oldUserARPU);
                         oldUserARPPUNum= accAdd(oldUserARPPUNum, infoData[i].oldUserARPPU);
                         oldUserLoginCountNum= accAdd(oldUserLoginCountNum, infoData[i].oldUserLoginCount);
                         oldUserPlayCountNum= accAdd(oldUserPlayCountNum, infoData[i].oldUserPlayCount);
-
                         oldUserPlayRateNum= accAdd(oldUserPlayRateNum, accDiv(infoData[i].oldUserLoginCount,infoData[i].registerPopulation));
+
                         nextDayStayCountNum= accAdd(nextDayStayCountNum, infoData[i].nextDayStayCount);
 
                         nextDayStayRateNums= accAdd(nextDayStayRateNums, accDiv(infoData[i].oldUserLoginCount,infoData[i].registerPopulation));

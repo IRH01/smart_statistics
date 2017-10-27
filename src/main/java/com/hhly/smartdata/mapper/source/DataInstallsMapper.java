@@ -6,8 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
+
 @Repository
-public interface DataInstallsMapper{
+public interface DataInstallsMapper {
     int insert(DataInstalls record) throws Exception;
 
     int insertSelective(DataInstalls record) throws Exception;
@@ -18,5 +19,5 @@ public interface DataInstallsMapper{
 
     int updateByPrimaryKey(DataInstalls record) throws Exception;
 
-    List<Map<String,Object>> selectYesterdayInstalls()throws Exception;
+    List<Map<String, Object>> selectYesterdayInstalls() throws Exception;
 }

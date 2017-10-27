@@ -30,27 +30,21 @@ public class IntervalSourceService{
      * @return
      * @throws Exception
      */
-    public JSONObject selectIntervalSourceToltalData(String startDate,String endDate) throws Exception{
+    public JSONObject selectIntervalSourceToltalData(String startDate, String endDate) throws Exception{
         // 注册人数 登录人数 充值人数 充值次数 充值金额
-        Map<String,Object> paramMap = new HashMap<>();
-        paramMap.put("startDate",startDate);
-        paramMap.put("endDate",endDate);
-        Map<String,Object> selectIntervalSourceToltalDataMap = intervalSourceReportMapper.selectIntervalSourceToltalData(paramMap);
+        Map<String, Object> selectIntervalSourceToltalDataMap = intervalSourceReportMapper.selectIntervalSourceTotalData(startDate, endDate);
         return JSONObject.fromObject(selectIntervalSourceToltalDataMap);
     }
 
-    public JSONObject selectIntervalSourceListData(String startDate,String endDate,int pageNumber,int pageSize) throws Exception{
+    public JSONObject selectIntervalSourceListData(String startDate, String endDate, int pageNumber, int pageSize) throws Exception{
         // 列表数据
-        Map<String, Object> condition = new HashMap<String, Object>();
-        condition.put("startDate", startDate);
-        condition.put("endDate", endDate);
         PageHelper.startPage(pageNumber, pageSize);
-        List<IntervalSourceReport> values = intervalSourceReportMapper.selectIntervalSourceListData(condition);
+        List<IntervalSourceReport> values = intervalSourceReportMapper.selectIntervalSourceListData(startDate, endDate);
         PageInfo<IntervalSourceReport> pageInfo = new PageInfo<IntervalSourceReport>(values);
         return JSONObject.fromObject(pageInfo);
     }
 
-    public JSONObject selectIntervalSourceChartData(String startDate,String endDate,String deviceTypes,TreeSet<String> scales)throws Exception{
+    public JSONObject selectIntervalSourceChartData(String startDate, String endDate, String deviceTypesStr, TreeSet<String> scales) throws Exception{
         // 曲线图数据
         Map<String, Object> result = new HashMap<String, Object>();
         List<String> scaleList = new LinkedList<String>();
@@ -68,17 +62,13 @@ public class IntervalSourceService{
         Iterator<String> iterator = scales.iterator();
 
         //查询获取数据
-        Map<String, Object> conditions = new HashMap<String, Object>();
-        conditions.put("startDate", startDate);
-        conditions.put("endDate", endDate);
-        String[] deviceTypeIds = new String[]{""};
-        if (!StringUtils.isEmpty(deviceTypes)) {
-            deviceTypeIds = deviceTypes.split(",");
+        String[] deviceTypes = new String[]{""};
+        if(!StringUtils.isEmpty(deviceTypesStr)){
+            deviceTypes = deviceTypesStr.split(",");
         }
-        conditions.put("deviceTypes", deviceTypeIds);
-        List<IntervalSourceReport> values = intervalSourceReportMapper.selectIntervalSourceChartData(conditions);
+        List<IntervalSourceReport> values = intervalSourceReportMapper.selectIntervalSourceChartData(startDate, endDate, deviceTypes);
 
-        while (iterator.hasNext()) {
+        while(iterator.hasNext()){
 
             long registerPopulation = 0;
             long loginPopulation = 0;
@@ -87,16 +77,16 @@ public class IntervalSourceService{
             BigDecimal rechargeAmount = new BigDecimal(0);
 
             String currentScale = iterator.next();
-            for (IntervalSourceReport value : values) {
+            for(IntervalSourceReport value : values){
 
                 // 匹配时间
-                if (currentScale.substring(0, 5).equals(value.getStatisticsTime())) {
+                if(currentScale.substring(0, 5).equals(value.getStatisticsTime())){
 
                     registerPopulation = value.getRegisterPopulation();
                     loginPopulation = value.getLoginPopulation();
                     rechargePopulation = value.getRechargePopulation();
                     rechargeCount = value.getRechargeCount();
-                   rechargeAmount = value.getRechargeAmount();
+                    rechargeAmount = value.getRechargeAmount();
                 }
             }
             registerPopulationList.add(registerPopulation);

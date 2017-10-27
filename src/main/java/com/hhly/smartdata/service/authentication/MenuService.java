@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class MenuService {
+public class MenuService{
 
     protected final static Logger LOGGER = LoggerFactory.getLogger(MenuService.class);
 
@@ -25,45 +25,45 @@ public class MenuService {
     @Autowired
     private RoleMapper roleMapper;
 
-    public List<Menu> getMenuByPerms(List<String> perms) throws Exception {
+    public List<Menu> getMenuByPerms(List<String> perms) throws Exception{
         return menuMapper.getMenuByPerms(perms);
     }
 
-    public List<Menu> getAll() throws Exception {
+    public List<Menu> getAll() throws Exception{
         return searchMenus(null);
     }
 
-    public List<Menu> searchMenus(Menu menu) throws Exception {
+    public List<Menu> searchMenus(Menu menu) throws Exception{
         return menuMapper.searchMenu(menu);
     }
 
-    public Menu get(Integer id) throws Exception {
+    public Menu get(Integer id) throws Exception{
         Menu condition = new Menu();
         condition.setId(id);
         List<Menu> menus = menuMapper.searchMenu(condition);
         return menus.isEmpty() ? null : menus.get(0);
     }
 
-    public void update(Menu menu) throws Exception {
+    public void update(Menu menu) throws Exception{
         menuMapper.update(menu);
     }
 
-    public Map<String, Integer> updateMenuTree(JSONArray menuTree, Integer parentId) throws Exception {
+    public Map<String, Integer> updateMenuTree(JSONArray menuTree, Integer parentId) throws Exception{
         Map<String, Integer> ids = Maps.newHashMap();
-        for (int i = 0; i < menuTree.size(); i++) {
+        for(int i = 0; i < menuTree.size(); i++){
             JSONObject menuJSON = menuTree.getJSONObject(i);
             Menu menu = new Menu();
             menu.setMenuName(menuJSON.getString("name"));
             menu.setIndex(i + 1);
             menu.setParentId(parentId);
-            if (menuJSON.containsKey("id")) {
+            if(menuJSON.containsKey("id")){
                 menu.setId(menuJSON.getInteger("id"));
                 update(menu);
-            } else {
+            }else{
                 menuMapper.insert(menu);
             }
             ids.put(menuJSON.getString("tId"), menu.getId());
-            if (menuJSON.containsKey("children")) {
+            if(menuJSON.containsKey("children")){
                 //遍历子集
                 ids.putAll(updateMenuTree(menuJSON.getJSONArray("children"), menu.getId()));
             }
@@ -71,7 +71,7 @@ public class MenuService {
         return ids;
     }
 
-    public Map<String, Integer> sortAndUpdateMenus(JSONArray menuTree, Integer parentId) throws Exception {
+    public Map<String, Integer> sortAndUpdateMenus(JSONArray menuTree, Integer parentId) throws Exception{
         //1:更新菜单树--树结构的menu
         Map<String, Integer> result = updateMenuTree(menuTree, parentId);
 
@@ -80,15 +80,15 @@ public class MenuService {
 
         //3:剔除1中的菜单id，即为不存在菜单id 进行删除
         Collection<Integer> existIds = result.values();
-        for (Menu menu : allMenu) {
-            if (!existIds.contains(menu.getId())) {
+        for(Menu menu : allMenu){
+            if(!existIds.contains(menu.getId())){
                 menuMapper.delete(menu);
             }
         }
         return result;
     }
 
-    public List<Menu> getMenuListByRole(List<Integer> roleIds) throws Exception {
+    public List<Menu> getMenuListByRole(List<Integer> roleIds) throws Exception{
         List<String> perms = roleMapper.getPerms(roleIds);
         LOGGER.info("" + perms.size());
         List<Menu> menus = this.getMenuByPerms(perms);

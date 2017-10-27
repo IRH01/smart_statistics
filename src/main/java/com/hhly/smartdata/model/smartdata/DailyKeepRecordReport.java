@@ -73,7 +73,6 @@ public class DailyKeepRecordReport {
      */
     private Date executeTime;
 
-
     public Long getId() {
         return id;
     }

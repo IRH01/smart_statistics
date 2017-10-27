@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
+
 @Repository
-public interface PlatformGoldConsumeMapper{
+public interface PlatformGoldConsumeMapper {
 
     List<Map<String, Object>> selectYesterdayConsumeUser() throws Exception;
 }

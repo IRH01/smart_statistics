@@ -7,10 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
-public interface IntervalGameLaunchReportMapper{
+public interface IntervalGameLaunchReportMapper {
     int insert(IntervalGameLaunchReport record) throws Exception;
 
     int insertSelective(IntervalGameLaunchReport record) throws Exception;
@@ -21,9 +20,9 @@ public interface IntervalGameLaunchReportMapper{
 
     int updateByPrimaryKey(IntervalGameLaunchReport record) throws Exception;
 
-    List<IntervalGameLaunchListReport> selectIntervalGameLaunchListData(Map<String, Object> map) throws Exception;
-
-    List<IntervalGameLaunchReport> selectIntervalGameLaunchChatData(Map<String, Object> map) throws Exception;
+    List<IntervalGameLaunchReport> selectIntervalGameLaunchChatData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 
     void deleteByTimeAndSourceTypeAndPlatformId(@Param("statisticsTime") String statisticsTime, @Param("sourceType") Byte sourceType, @Param("platformId") Integer platformId);
+
+    List<IntervalGameLaunchListReport> selectIntervalGameLaunchListData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 }

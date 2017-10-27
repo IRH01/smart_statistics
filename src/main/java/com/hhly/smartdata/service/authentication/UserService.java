@@ -1,6 +1,5 @@
 package com.hhly.smartdata.service.authentication;
 
-import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.mapper.authentication.UserMapper;
 import com.hhly.smartdata.model.authentication.User;
 import org.slf4j.Logger;

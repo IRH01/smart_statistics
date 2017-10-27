@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS month_login_report;
 CREATE TABLE `interval_game_launch_report` (
    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '平台实时统计，游戏启动统计',
    `statistics_time` varchar(20) NOT NULL DEFAULT '' COMMENT '统计时间(半小时)yyyy-MM-dd HH:30:00',
-   `interval_time` int(5) NOT NULL DEFAULT '30' COMMENT '统计间隔时间。单位分钟',
+   `interval_time` int(5) NOT NULL DEFAULT '0' COMMENT '统计间隔时间。单位分钟',
    `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.android 3.IOS 4.H5',
    `platform_id` int(10) NOT NULL DEFAULT '0' COMMENT '平台id或游戏id',
    `platform_name` varchar(50) NOT NULL DEFAULT '' COMMENT '平台名称或游戏名称',
@@ -29,7 +29,7 @@ CREATE TABLE `interval_game_launch_report` (
 CREATE TABLE `interval_interface_report`(
    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '平台实时统计，接口统计',
    `statistics_time` varchar(20) NOT NULL DEFAULT '' COMMENT '统计日期(半小时)yyyy-MM-dd HH:30:00',
-   `interval_time` int(5) DEFAULT '30' COMMENT '统计时间间隔。单位分钟。',
+   `interval_time` int(5) DEFAULT '0' COMMENT '统计时间间隔。单位分钟。',
    `interface_code` int(10) NOT NULL DEFAULT '0' COMMENT '接口编号，1.注册，2充值',
    `interface_name` varchar(50) NOT NULL COMMENT '接口名称',
    `operate_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '操作类型类型：1、请求，2、执行完成',
@@ -42,9 +42,9 @@ CREATE TABLE `interval_interface_report`(
 CREATE TABLE `interval_source_report` (
    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '平台实时统计，各端实时统计',
    `statistics_time` varchar(20) NOT NULL DEFAULT '' COMMENT '统计日期(半小时)yyyy-MM-dd HH:30:00',
-   `interval_time` int(5) NOT NULL DEFAULT '30' COMMENT '统计间隔时间，单位分钟',
+   `interval_time` int(5) NOT NULL DEFAULT '0' COMMENT '统计间隔时间，单位分钟',
    `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.android 3.IOS 4.H5',
-   `register_population` int(10) NOT NULL DEFAULT '0' COMMENT '注册人数',
+   `register_population` int(10) NOT NULL DEFAULT '0' COMMENT '当日注册人数',
    `login_population` int(10) NOT NULL DEFAULT '0' COMMENT '登录人数',
    `recharge_population` int(10) NOT NULL DEFAULT '0' COMMENT '充值人数',
    `recharge_count` int(10) NOT NULL DEFAULT '0' COMMENT '充值次数',
@@ -57,7 +57,8 @@ CREATE TABLE `interval_source_report` (
 CREATE TABLE `daily_composite_report` (
    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '日报表，综合报表',
    `statistics_day` varchar(20) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
-   `register_population` int(10) NOT NULL DEFAULT '0' COMMENT '注册人数',
+   `total_register_population` int(10) NOT NULL DEFAULT '0' COMMENT '总注册人数',
+   `register_population` int(10) NOT NULL DEFAULT '0' COMMENT '当日注册人数',
    `register_exp_count` int(10) NOT NULL DEFAULT '0' COMMENT '注册体验量',
    `real_exp_count` int(10) NOT NULL DEFAULT '0' COMMENT '真体验',
    `virtual_exp_count` int(10) NOT NULL DEFAULT '0' COMMENT '假体验',

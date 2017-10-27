@@ -135,7 +135,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id ="selectIntervalGamelaunch" resultType="java.util.Map">
+  <select id ="selectIntervalGameLaunch" resultType="java.util.Map">
   select platform_terminal, platform_id,
      (select nam)
   gameNamecount(user_id) from data_game_start

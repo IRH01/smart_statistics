@@ -83,19 +83,29 @@
                                                                     <td class="tb1Td">
                                                                         <span class="span">统计时间：</span>
                                                                     </td>
-                                                                    <td><input placeholder="请选择日期" class="laydate-icon" style="height:25px;" id="dateStart" readonly> </td>
+                                                                    <td><input placeholder="请选择日期" class="laydate-icon"
+                                                                               style="height:25px;" id="dateStart"
+                                                                               readonly></td>
                                                                     <td>
                                                                         <span class="span">&nbsp;至&nbsp;</span>
                                                                     </td>
-                                                                    <td><input class="laydate-icon" id="dateEnd" style="height:25px;" placeholder="请选择日期" readonly></td>
+                                                                    <td><input class="laydate-icon" id="dateEnd"
+                                                                               style="height:25px;" placeholder="请选择日期"
+                                                                               readonly></td>
                                                                     <td style="line-height:1;">
-                                                                        <button type="button" id="search" class="btn btn-primary btn-sm" onclick="search();">
-                                                                            <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
+                                                                        <button type="button" id="search"
+                                                                                class="btn btn-primary btn-sm"
+                                                                                onclick="search();">
+                                                                            <i class="icon-search icon-white"
+                                                                               style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
                                                                         </button>
                                                                     </td>
                                                                     <td style="line-height:1;">
-                                                                        <button type="button" id="reset" class="btn btn-primary btn-sm" onclick="reset();">
-                                                                            <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
+                                                                        <button type="button" id="reset"
+                                                                                class="btn btn-primary btn-sm"
+                                                                                onclick="reset();">
+                                                                            <i class="icon-search icon-white"
+                                                                               style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
                                                                         </button>
                                                                     </td>
                                                                 </tr>
@@ -110,10 +120,21 @@
                                                     </div>
                                                     <table class="tablePage">
                                                         <tr>
-                                                            <td><div class="divPage"><span class="spanPageSize">每页个数：</span><input id="pageSize" value="10" class="inputPageSize" onKeypress="return intInput(event);" onKeyup="value=pageSizeLimit(value);" onblur="value=pageSizeNotEmpty(value);"/></div></td>
-                                                            <td><span class="spanPageSize">总记录数：</span><span id="totalCount" class="spanPageSize"></span></td>
-                                                            <td><span class="spanPageSize">总页数：</span><span id="totalPage" class="spanPageSize"></span></td>
-                                                            <td class="tablePageTd"><div id="page"></div></td>
+                                                            <td>
+                                                                <div class="divPage"><span
+                                                                        class="spanPageSize">每页个数：</span><input
+                                                                        id="pageSize" value="10" class="inputPageSize"
+                                                                        onKeypress="return intInput(event);"
+                                                                        onKeyup="value=pageSizeLimit(value);"
+                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                            </td>
+                                                            <td><span class="spanPageSize">总记录数：</span><span
+                                                                    id="totalCount" class="spanPageSize"></span></td>
+                                                            <td><span class="spanPageSize">总页数：</span><span
+                                                                    id="totalPage" class="spanPageSize"></span></td>
+                                                            <td class="tablePageTd">
+                                                                <div id="page"></div>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -134,7 +155,6 @@
 </html>
 <script type="text/javascript">
     var date = new Date();
-    var seperator1 = "-";
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
     if (month >= 1 && month <= 9) {
@@ -149,22 +169,24 @@
         $(".resize").resizable({minHeight: 200, minWidth: 300});
     });
 
-
     var pageSize = 30;
 
-    setDateRangeConfig("dateStart","dateEnd",null,true);
+    setDateRangeConfig("dateStart", "dateEnd", null, true);
 
-    var showTbCl = function(){
+    var showTbCl = function () {
         $("#data").append("<tr><td rowspan=\"2\">日期</td><td rowspan=\"2\">新增用户</td>\n" +
-            "<td colspan=\"9\">留存率</td></tr><tr><td>1天后</td><td>2天后</td><td>3天后</td><td>4天后</td><td>5天后</td><td>6天后</td><td>7天后</td><td>14天后</td><td>30天后</td></tr>");
+            "<td colspan=\"9\">留存率</td></tr><tr><td>1天后</td><td>2天后</td><td>3天后</td><td>4天后</td>" +
+            "<td>5天后</td><td>6天后</td><td>7天后</td><td>14天后</td><td>30天后</td></tr>");
     };
 
     var addTbRow = function (data) {
         if (null != data && undefined != data && "" != data) {
-            var ele = "<tr><td class=\"date\">statisticsDay</td><td>registerCount</td><td>one</td><td>two</td><td>three</td><td>four</td><td>five</td><td>six</td><td>seven</td><td>fourteen</td><td>thirty</td></tr>";
-            ele = ele.replace("statisticsDay", data.statisticsDay).replace("registerCount", data.registerCount).replace("one", data.one).replace("two", data.two).
-            replace("three", data.three).replace("four", data.four).replace("five", data.five).replace("six", data.six)
-                .replace("seven", data.seven).replace("fourteen", data.fourteen).replace("thirty", data.thirty);
+            var ele = "<tr><td class=\"date\">statisticsDay</td><td>registerCount</td><td>oneRemain</td><td>twoRemain</td>" +
+                "<td>threeRemain</td><td>fourRemain</td><td>fiveRemain</td><td>sixRemain</td><td>sevenRemain</td><td>fourteenRemain</td><td>thirtyRemain</td></tr>";
+            ele = ele.replace("statisticsDay", data.statisticsDay).replace("registerCount", data.registerCount)
+                .replace("oneRemain", data.oneRemain).replace("twoRemain", data.twoRemain).replace("threeRemain", data.threeRemain)
+                .replace("fourRemain", data.fourRemain).replace("fiveRemain", data.fiveRemain).replace("sixRemain", data.sixRemain)
+                .replace("sevenRemain", data.sevenRemain).replace("fourteenRemain", data.fourteenRemain).replace("thirtyRemain", data.thirtyRemain);
             $("#data").append(ele);
         }
     };
@@ -212,43 +234,43 @@
                     var count = infoData.length;
                     for (var i = 0; i < infoData.length; i++) {
                         registerCountNum = accAdd(registerCountNum, infoData[i].registerCount);
-                        oneNum = accDiv(accAdd(oneNum, infoData[i].onePercent),count);
-                        twoNum = accDiv(accAdd(twoNum, infoData[i].twoPercent),count);
-                        threeNum = accDiv(accAdd(threeNum, infoData[i].threePercent),count);
-                        fourNum = accDiv(accAdd(fourNum, infoData[i].fourPercent),count);
-                        fiveNum = accDiv(accAdd(fiveNum, infoData[i].fivePercent),count);
-                        sixNum = accDiv(accAdd(sixNum, infoData[i].sixPercent),count);
-                        sevenNum = accDiv(accAdd(sevenNum, infoData[i].sevenPercent),count);
-                        fourteenNum = accDiv(accAdd(fourteenNum, infoData[i].fourteenPercent),count);
-                        thirtyNum = accDiv(accAdd(thirtyNum, infoData[i].thirtyPercent),count);
+                        oneNum = accDiv(accAdd(oneNum, infoData[i].onePercent), count);
+                        twoNum = accDiv(accAdd(twoNum, infoData[i].twoPercent), count);
+                        threeNum = accDiv(accAdd(threeNum, infoData[i].threePercent), count);
+                        fourNum = accDiv(accAdd(fourNum, infoData[i].fourPercent), count);
+                        fiveNum = accDiv(accAdd(fiveNum, infoData[i].fivePercent), count);
+                        sixNum = accDiv(accAdd(sixNum, infoData[i].sixPercent), count);
+                        sevenNum = accDiv(accAdd(sevenNum, infoData[i].sevenPercent), count);
+                        fourteenNum = accDiv(accAdd(fourteenNum, infoData[i].fourteenPercent), count);
+                        thirtyNum = accDiv(accAdd(thirtyNum, infoData[i].thirtyPercent), count);
                         var ele = {
                             statisticsDay: infoData[i].statisticsDay,
                             registerCount: infoData[i].registerCount,
-                            one: infoData[i].one+"("+convertToPercentFormat(infoData[i].onePercent)+")",
-                            two: infoData[i].two+"("+convertToPercentFormat(infoData[i].twoPercent)+")",
-                            three: infoData[i].three+"("+convertToPercentFormat(infoData[i].threePercent)+")",
-                            four: infoData[i].four+"("+convertToPercentFormat(infoData[i].fourPercent)+")",
-                            five: infoData[i].five+"("+convertToPercentFormat(infoData[i].fivePercent)+")",
-                            six: infoData[i].six+"("+convertToPercentFormat(infoData[i].sixPercent)+")",
-                            seven: infoData[i].seven+"("+convertToPercentFormat(infoData[i].sevenPercent)+")",
-                            fourteen: infoData[i].seven+"("+convertToPercentFormat(infoData[i].fourteenPercent)+")",
-                            thirty: infoData[i].thirty+"("+convertToPercentFormat(infoData[i].thirtyPercent)+")"
-                        }
+                            oneRemain: infoData[i].oneRemain + "(" + convertToPercentFormat(infoData[i].onePercent) + ")",
+                            twoRemain: infoData[i].twoRemain + "(" + convertToPercentFormat(infoData[i].twoPercent) + ")",
+                            threeRemain: infoData[i].threeRemain + "(" + convertToPercentFormat(infoData[i].threePercent) + ")",
+                            fourRemain: infoData[i].fourRemain + "(" + convertToPercentFormat(infoData[i].fourPercent) + ")",
+                            fiveRemain: infoData[i].fiveRemain + "(" + convertToPercentFormat(infoData[i].fivePercent) + ")",
+                            sixRemain: infoData[i].sixRemain + "(" + convertToPercentFormat(infoData[i].sixPercent) + ")",
+                            sevenRemain: infoData[i].sevenRemain + "(" + convertToPercentFormat(infoData[i].sevenPercent) + ")",
+                            fourteenRemain: infoData[i].sevenRemain + "(" + convertToPercentFormat(infoData[i].fourteenPercent) + ")",
+                            thirtyRemain: infoData[i].thirtyRemain + "(" + convertToPercentFormat(infoData[i].thirtyPercent) + ")"
+                        };
                         addTbRow(ele);
                     }
 
                     var ele1 = {
                         statisticsDay: "总计",
                         registerCount: registerCountNum,
-                        one: oneNum,
-                        two: twoNum,
-                        three: threeNum,
-                        four: fourNum,
-                        five: fiveNum,
-                        six: sixNum,
-                        seven: sevenNum,
-                        fourteen: sevenNum,
-                        thirty: thirtyNum
+                        oneRemain: oneNum,
+                        twoRemain: twoNum,
+                        threeRemain: threeNum,
+                        fourRemain: fourNum,
+                        fiveRemain: fiveNum,
+                        sixRemain: sixNum,
+                        sevenRemain: sevenNum,
+                        fourteenRemain: sevenNum,
+                        thirtyRemain: thirtyNum
 
                     };
                     addTbRow(ele1);
@@ -259,19 +281,18 @@
                 $("#data").append("<tr><td colspan=\"26\">没有数据</td></tr>");
             }
         });
-    }
+    };
 
     //查询显示
     var search = function () {
         pageSize = $("#pageSize").val();
         showNewUserData(1, pageSize);
-    }
+    };
 
-    var reset = function() {
+    var reset = function () {
         $("#dateStart").val("");
         $("#dateEnd").val("");
-    }
-
+    };
 
 
     var echartsCopy;

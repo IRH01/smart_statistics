@@ -127,7 +127,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectIntervalInterfaceToltalData"
+    <select id="selectIntervalInterfaceTotalData"
             resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport" parameterType="java.util.Map">
         select interface_code as interfaceCode,operate_type as operateType,sum(operate_count) as operateCount
         from interval_interface_report where statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
@@ -145,7 +145,7 @@
     </select>
 
 
-    <select id="selectIntervalIntefaceChartData" resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport"
+    <select id="selectIntervalInterfaceChartData" resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport"
             parameterType="java.util.Map">
         select
         DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,

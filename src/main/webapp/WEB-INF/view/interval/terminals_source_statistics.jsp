@@ -257,8 +257,7 @@
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-        + " ";
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate + " ";
 
     // 统计
     var dateChange = function () {

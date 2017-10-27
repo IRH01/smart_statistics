@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface MonthLoginReportMapper{
+public interface MonthLoginReportMapper {
     int insert(MonthLoginReport record) throws Exception;
 
     int insertSelective(MonthLoginReport record) throws Exception;
@@ -24,7 +24,7 @@ public interface MonthLoginReportMapper{
 
     long searchByTimeCount(TimeFilter filter) throws Exception;
 
-    Map<String,Object> selectByMonth(String month) throws Exception;
+    Map<String, Object> selectByMonth(String month) throws Exception;
 
     void deleteByTime(String statisticsMonth) throws Exception;
 

@@ -282,7 +282,7 @@
 
 
     <select id="selectDailyCompositeListData" parameterType="java.util.Map"
-            resultType="com.hhly.smartdata.model.smartdata.DailyCompositeReport">
+            resultType="com.hhly.smartdata.dto.daily.DailyCompositeReportResult">
         select
         DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
         register_population as registerPopulation,

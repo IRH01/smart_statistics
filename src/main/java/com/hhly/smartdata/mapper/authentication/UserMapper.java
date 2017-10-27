@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserMapper{
+public interface UserMapper {
 
     int delete(Integer id) throws Exception;
 

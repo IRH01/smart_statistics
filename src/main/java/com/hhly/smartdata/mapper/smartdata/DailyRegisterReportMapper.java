@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface DailyRegisterReportMapper{
+public interface DailyRegisterReportMapper {
     int insert(DailyRegisterReport record) throws Exception;
 
     int insertSelective(DailyRegisterReport record) throws Exception;
@@ -22,9 +22,9 @@ public interface DailyRegisterReportMapper{
 
     Map<String, Object> selectLastMonthRegister(@Param("lastMonthFirstDayStr") String lastMonthFirstDayStr, @Param("lastMonthEndDayStr") String lastMonthEndDayStr) throws Exception;
 
-    List<DailyRegisterReport> selectRegisterDataListByTime(Map<String, Object> map) throws Exception;
+    List<DailyRegisterReport> selectRegisterDataListByTime(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 
-    DailyRegisterReport selectYesterdayRegisterData(Map<String, Object> map) throws Exception;
+    DailyRegisterReport selectYesterdayRegisterData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 
     void deleteByTime(String statisticsDay) throws Exception;
 }

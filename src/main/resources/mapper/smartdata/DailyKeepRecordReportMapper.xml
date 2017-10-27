@@ -3,19 +3,19 @@
 <mapper namespace="com.hhly.smartdata.mapper.smartdata.DailyKeepRecordReportMapper">
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.DailyKeepRecordReport">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="statistics_day" property="statisticsDay" jdbcType="VARCHAR"/>
-        <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
-        <result column="register_count" property="registerCount" jdbcType="INTEGER"/>
-        <result column="one_remain" property="oneRemain" jdbcType="INTEGER"/>
-        <result column="two_remain" property="twoRemain" jdbcType="INTEGER"/>
-        <result column="three_remain" property="threeRemain" jdbcType="INTEGER"/>
-        <result column="four_remain" property="fourRemain" jdbcType="INTEGER"/>
-        <result column="five_remain" property="fiveRemain" jdbcType="INTEGER"/>
-        <result column="six_remain" property="sixRemain" jdbcType="INTEGER"/>
-        <result column="seven_remain" property="sevenRemain" jdbcType="INTEGER"/>
-        <result column="fourteen_remain" property="fourteenRemain" jdbcType="INTEGER"/>
-        <result column="thirty_remain" property="thirtyRemain" jdbcType="INTEGER"/>
-        <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
+        <result column="statistics_day" property="statisticsDay"/>
+        <result column="source_type" property="sourceType"/>
+        <result column="register_count" property="registerCount"/>
+        <result column="one_remain" property="oneRemain"/>
+        <result column="two_remain" property="twoRemain"/>
+        <result column="three_remain" property="threeRemain"/>
+        <result column="four_remain" property="fourRemain"/>
+        <result column="five_remain" property="fiveRemain"/>
+        <result column="six_remain" property="sixRemain"/>
+        <result column="seven_remain" property="sevenRemain"/>
+        <result column="fourteen_remain" property="fourteenRemain"/>
+        <result column="thirty_remain" property="thirtyRemain"/>
+        <result column="execute_time" property="executeTime"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, statistics_day, source_type, register_count, one_remain, two_remain, three_remain, four_remain, five_remain, six_remain,
@@ -43,11 +43,11 @@
         three_remain, four_remain, five_remain,
         six_remain, seven_remain, fourteen_remain,
         thirty_remain, execute_time)
-        values (#{id,jdbcType=BIGINT}, #{statisticsDay,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT},
-        #{registerCount,jdbcType=INTEGER}, #{one_remain,jdbcType=INTEGER}, #{two_remain,jdbcType=INTEGER},
-        #{three_remain,jdbcType=INTEGER}, #{four_remain,jdbcType=INTEGER}, #{five_remain,jdbcType=INTEGER},
-        #{six_remain,jdbcType=INTEGER}, #{seven_remain,jdbcType=INTEGER}, #{fourteen_remain,jdbcType=INTEGER},
-        #{thirty_remain,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP})
+        values (#{id}, #{statisticsDay}, #{sourceType},
+        #{registerCount}, #{oneRemain}, #{twoRemain},
+        #{threeRemain}, #{fourRemain}, #{fiveRemain},
+        #{sixRemain}, #{sevenRemain}, #{fourteenRemain},
+        #{thirtyRemain}, #{executeTime})
     </insert>
     <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.DailyKeepRecordReport">
         insert into daily_keep_record_report
@@ -97,46 +97,46 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                #{id,jdbcType=BIGINT},
+                #{id},
             </if>
             <if test="statisticsDay != null">
-                #{statisticsDay,jdbcType=VARCHAR},
+                #{statisticsDay},
             </if>
             <if test="sourceType != null">
-                #{sourceType,jdbcType=TINYINT},
+                #{sourceType},
             </if>
             <if test="registerCount != null">
-                #{registerCount,jdbcType=INTEGER},
+                #{registerCount},
             </if>
             <if test="oneRemain != null">
-                #{one,jdbcType=INTEGER},
+                #{one},
             </if>
             <if test="twoRemain != null">
-                #{twoRemain,jdbcType=INTEGER},
+                #{twoRemain},
             </if>
             <if test="threeRemain != null">
-                #{threeRemain,jdbcType=INTEGER},
+                #{threeRemain},
             </if>
             <if test="fourRemain != null">
-                #{fourRemain,jdbcType=INTEGER},
+                #{fourRemain},
             </if>
             <if test="fiveRemain != null">
-                #{fiveRemain,jdbcType=INTEGER},
+                #{fiveRemain},
             </if>
             <if test="sixRemain != null">
-                #{sixRemain,jdbcType=INTEGER},
+                #{sixRemain},
             </if>
             <if test="sevenRemain != null">
-                #{sevenRemain,jdbcType=INTEGER},
+                #{sevenRemain},
             </if>
             <if test="fourteenRemain != null">
-                #{fourteenRemain,jdbcType=INTEGER},
+                #{fourteenRemain},
             </if>
             <if test="thirtyRemain != null">
-                #{thirtyRemain,jdbcType=INTEGER},
+                #{thirtyRemain},
             </if>
             <if test="executeTime != null">
-                #{executeTime,jdbcType=TIMESTAMP},
+                #{executeTime},
             </if>
         </trim>
     </insert>
@@ -144,63 +144,63 @@
         update daily_keep_record_report
         <set>
             <if test="statisticsDay != null">
-                statistics_day = #{statisticsDay,jdbcType=VARCHAR},
+                statistics_day = #{statisticsDay},
             </if>
             <if test="sourceType != null">
-                source_type = #{sourceType,jdbcType=TINYINT},
+                source_type = #{sourceType},
             </if>
             <if test="registerCount != null">
-                register_count = #{registerCount,jdbcType=INTEGER},
+                register_count = #{registerCount},
             </if>
             <if test="oneRemain != null">
-                one_remain = #{oneRemain,jdbcType=INTEGER},
+                one_remain = #{oneRemain},
             </if>
             <if test="twoRemain != null">
-                two_remain = #{twoRemain,jdbcType=INTEGER},
+                two_remain = #{twoRemain},
             </if>
             <if test="threeRemain != null">
-                three_remain = #{threRemaine,jdbcType=INTEGER},
+                three_remain = #{threRemaine},
             </if>
             <if test="fourRemain != null">
-                four_remain = #{fourRemain,jdbcType=INTEGER},
+                four_remain = #{fourRemain},
             </if>
             <if test="fiveRemain != null">
-                five_remain = #{fiveRemain,jdbcType=INTEGER},
+                five_remain = #{fiveRemain},
             </if>
             <if test="sixRemain != null">
-                six_remain = #{sixRemain,jdbcType=INTEGER},
+                six_remain = #{sixRemain},
             </if>
             <if test="sevenRemain != null">
-                seven_remain = #{sevenRemain,jdbcType=INTEGER},
+                seven_remain = #{sevenRemain},
             </if>
             <if test="fourteenRemain != null">
-                fourteen_remain = #{fourteenRemain,jdbcType=INTEGER},
+                fourteen_remain = #{fourteenRemain},
             </if>
             <if test="thirtyRemain != null">
-                thirty_remain = #{thirtyRemain,jdbcType=INTEGER},
+                thirty_remain = #{thirtyRemain},
             </if>
             <if test="executeTime != null">
-                execute_time = #{executeTime,jdbcType=TIMESTAMP},
+                execute_time = #{executeTime},
             </if>
         </set>
-        where id = #{id,jdbcType=BIGINT}
+        where id = #{id}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.DailyKeepRecordReport">
         update daily_keep_record_report
-        set statistics_day = #{statisticsDay,jdbcType=VARCHAR},
-        source_type = #{sourceType,jdbcType=TINYINT},
-        register_count = #{registerCount,jdbcType=INTEGER},
-        one_remain = #{oneRemain,jdbcType=INTEGER},
-        two_remain = #{twoRemain,jdbcType=INTEGER},
-        three_remain = #{threeRemain,jdbcType=INTEGER},
-        four_remain = #{fourRemain,jdbcType=INTEGER},
-        five_remain = #{fiveRemain,jdbcType=INTEGER},
-        six_remain = #{sixRemain,jdbcType=INTEGER},
-        seven_remain = #{sevenRemain,jdbcType=INTEGER},
-        fourteen_remain = #{fourteenRemain,jdbcType=INTEGER},
-        thirty_remain = #{thirtyRemain,jdbcType=INTEGER},
-        execute_time = #{executeTime,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=BIGINT}
+        set statistics_day = #{statisticsDay},
+        source_type = #{sourceType},
+        register_count = #{registerCount},
+        one_remain = #{oneRemain},
+        two_remain = #{twoRemain},
+        three_remain = #{threeRemain},
+        four_remain = #{fourRemain},
+        five_remain = #{fiveRemain},
+        six_remain = #{sixRemain},
+        seven_remain = #{sevenRemain},
+        fourteen_remain = #{fourteenRemain},
+        thirty_remain = #{thirtyRemain},
+        execute_time = #{executeTime}
+        where id = #{id}
     </update>
 
     <select id="selectDailyKeepRecordListData" parameterType="java.util.Map"

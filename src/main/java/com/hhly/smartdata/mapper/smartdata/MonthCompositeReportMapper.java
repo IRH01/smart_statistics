@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MonthCompositeReportMapper{
+public interface MonthCompositeReportMapper {
     int insert(MonthCompositeReport record) throws Exception;
 
     int insertSelective(MonthCompositeReport record) throws Exception;

@@ -2,11 +2,14 @@ package com.hhly.smartdata.mapper.source;
 
 
 import com.hhly.smartdata.model.source.DataInterfaceInvoke;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
-public interface DataInterfaceInvokeMapper{
+@Repository
+public interface DataInterfaceInvokeMapper {
     int insert(DataInterfaceInvoke record) throws Exception;
 
     int insertSelective(DataInterfaceInvoke record) throws Exception;
@@ -17,6 +20,6 @@ public interface DataInterfaceInvokeMapper{
 
     int updateByPrimaryKey(DataInterfaceInvoke record) throws Exception;
 
-    List<Map<String,Object>> findDataInterfaceInvokeList(Map<String,Object> map)throws Exception;
+    List<Map<String, Object>> findDataInterfaceInvokeList(@Param("startDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
 
 }

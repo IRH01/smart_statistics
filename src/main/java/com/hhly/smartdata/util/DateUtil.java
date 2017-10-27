@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateUtil {
+public class DateUtil{
 
     /**
      * 解析日期成对应的字符串 yyyy-MM-dd HH:mm:ss
@@ -14,8 +14,8 @@ public class DateUtil {
      * @param date 日期
      * @return 字符串
      */
-    public static String date2String(Date date) {
-        if (date == null) {
+    public static String date2String(Date date){
+        if(date == null){
             return null;
         }
         String pattern = "yyyy-MM-dd HH:mm:ss";
@@ -29,8 +29,8 @@ public class DateUtil {
      * @param pattern 日期正则格式
      * @return 字符串
      */
-    public static String date2String(Date date, String pattern) {
-        if (date == null) {
+    public static String date2String(Date date, String pattern){
+        if(date == null){
             return null;
         }
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -43,7 +43,7 @@ public class DateUtil {
      * @param dateStr 日期字符串
      * @return 日期
      */
-    public static Date string2Date(String dateStr) {
+    public static Date string2Date(String dateStr){
         String pattern = "yyyy-MM-dd HH:mm:ss";
         return string2Date(dateStr, pattern);
     }
@@ -55,11 +55,11 @@ public class DateUtil {
      * @param pattern
      * @return
      */
-    public static Date string2Date(String dateStr, String pattern) {
-        try {
+    public static Date string2Date(String dateStr, String pattern){
+        try{
             SimpleDateFormat sdf = new SimpleDateFormat(pattern);
             return sdf.parse(dateStr);
-        } catch (Exception e) {
+        }catch(Exception e){
             return null;
         }
     }
@@ -71,7 +71,7 @@ public class DateUtil {
      * @param field  the calendar field .See {@link  java.util.Calendar}.
      * @param amount the amount of date or time to be added to the field.
      */
-    public static Date add(Date date, int field, int amount) {
+    public static Date add(Date date, int field, int amount){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(field, amount);
@@ -87,7 +87,7 @@ public class DateUtil {
      * @param second
      * @return
      */
-    public static Date getTime(Date date, int hour, int minute, int second) {
+    public static Date getTime(Date date, int hour, int minute, int second){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, hour);
@@ -102,8 +102,8 @@ public class DateUtil {
      * @param date
      * @return String ,"yyyy-MM-dd"
      */
-    public static String getYesterdayStr(Date date) {
-        if (date == null) {
+    public static String getYesterdayStr(Date date){
+        if(date == null){
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -119,8 +119,8 @@ public class DateUtil {
      * @param date
      * @return String ,"yyyy-MM"
      */
-    public static String getLastMonthStr(Date date) {
-        if (date == null) {
+    public static String getLastMonthStr(Date date){
+        if(date == null){
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
@@ -136,8 +136,8 @@ public class DateUtil {
      * @param month
      * @return String ,"yyyy-MM-dd"
      */
-    public static String getMonthFirstDayStr(String month) throws ParseException {
-        if (month == null) {
+    public static String getMonthFirstDayStr(String month) throws ParseException{
+        if(month == null){
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -156,8 +156,8 @@ public class DateUtil {
      * @param month "yyyy-MM"
      * @return String ,"yyyy-MM-dd"
      */
-    public static String getMonthEndDayStr(String month) throws ParseException {
-        if (month == null) {
+    public static String getMonthEndDayStr(String month) throws ParseException{
+        if(month == null){
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -175,8 +175,8 @@ public class DateUtil {
      * @param date
      * @return String ,"yyyy-MM-dd"
      */
-    public static String getLastMonthFirstDayStr(Date date) {
-        if (date == null) {
+    public static String getLastMonthFirstDayStr(Date date){
+        if(date == null){
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -194,8 +194,8 @@ public class DateUtil {
      * @param date
      * @return String ,"yyyy-MM-dd"
      */
-    public static String getLastMonthEndDayStr(Date date) {
-        if (date == null) {
+    public static String getLastMonthEndDayStr(Date date){
+        if(date == null){
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -212,18 +212,18 @@ public class DateUtil {
      * @param date
      * @return String ,"yyyy-MM-dd HH:mm:ss"
      */
-    public static Date getPointByThirtyMinute(Date date) {
+    public static Date getPointByThirtyMinute(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.MINUTE, calendar.getActualMinimum(Calendar.MINUTE));
         calendar.set(Calendar.SECOND, calendar.getActualMinimum(Calendar.SECOND));
         calendar.set(Calendar.MILLISECOND, calendar.getActualMinimum(Calendar.MILLISECOND));
         long interpolation = date.getTime() - calendar.getTime().getTime();
-        if (interpolation >= 30 * 60 * 1000 && interpolation <= 60 * 60 * 1000) {
+        if(interpolation >= 30 * 60 * 1000 && interpolation <= 60 * 60 * 1000){
             calendar.add(Calendar.MINUTE, 30);
         }
 
-        if (interpolation < 0 || interpolation > 60 * 60 * 1000) {
+        if(interpolation < 0 || interpolation > 60 * 60 * 1000){
             throw new IllegalArgumentException("时间参数异常，不能超过制定时间范围，传入时间为：" + date);
         }
         return calendar.getTime();
@@ -235,8 +235,8 @@ public class DateUtil {
      * @param date
      * @return String ,"yyyy-MM-dd HH:mm:ss"
      */
-    public static String getFirstThirtyMinStr(Date date) {
-        if (date == null) {
+    public static String getFirstThirtyMinStr(Date date){
+        if(date == null){
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -248,9 +248,23 @@ public class DateUtil {
     }
 
     /**
+     * 获取当月1日0点时间
+     */
+    public static Date getNowMonthZeroTime(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getActualMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMaximum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getActualMaximum(Calendar.MILLISECOND));
+        return calendar.getTime();
+    }
+
+    /**
      * 获取当日0点时间
      */
-    public static Date getNowZeroTime(Date date) {
+    public static Date getNowZeroTime(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMaximum(Calendar.HOUR_OF_DAY));

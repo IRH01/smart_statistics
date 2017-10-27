@@ -56,7 +56,6 @@ public class DailyExecutorServiceTest extends BaseTest{
         this.dailyExecutorService.keepRecordAnalyzeReport();
     }
 
-
     /**
      * Method: registerStatistic()
      */
@@ -64,7 +63,4 @@ public class DailyExecutorServiceTest extends BaseTest{
     public void testRegisterStatistic() throws Exception{
         this.dailyExecutorService.registerStatistic();
     }
-
-
-
 } 

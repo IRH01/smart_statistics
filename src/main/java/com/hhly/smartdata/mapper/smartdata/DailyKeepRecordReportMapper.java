@@ -7,10 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
-public interface DailyKeepRecordReportMapper{
+public interface DailyKeepRecordReportMapper {
     int insert(DailyKeepRecordReport record) throws Exception;
 
     int insertSelective(DailyKeepRecordReport record) throws Exception;
@@ -21,7 +20,7 @@ public interface DailyKeepRecordReportMapper{
 
     int updateByPrimaryKey(DailyKeepRecordReport record) throws Exception;
 
-    List<DailyKeepRecordReportResult> selectDailyKeepRecordListData(Map<String, Object> map) throws Exception;
+    List<DailyKeepRecordReportResult> selectDailyKeepRecordListData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 
     Float selectAverageOneKeep(@Param("startDay") String startDay, @Param("endDay") String endDay) throws Exception;
 

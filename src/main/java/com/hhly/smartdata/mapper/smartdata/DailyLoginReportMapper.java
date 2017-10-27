@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface DailyLoginReportMapper{
+public interface DailyLoginReportMapper {
     int insert(DailyLoginReport record) throws Exception;
 
     int insertSelective(DailyLoginReport record) throws Exception;

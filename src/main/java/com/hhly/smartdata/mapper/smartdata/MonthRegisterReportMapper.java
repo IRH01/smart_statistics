@@ -1,6 +1,5 @@
 package com.hhly.smartdata.mapper.smartdata;
 
-
 import com.hhly.smartdata.dto.share.TimeFilter;
 import com.hhly.smartdata.model.smartdata.MonthRegisterReport;
 import org.springframework.stereotype.Repository;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface RoleMapper{
+public interface RoleMapper {
 
     List<Role> search(@Param("filter") Role role, @Param("page") Page page) throws Exception;
 

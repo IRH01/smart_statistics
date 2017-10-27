@@ -158,7 +158,7 @@
         create_time = #{createTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <select id="selectPlatformAllGameStartCount"  resultType="java.util.Map" parameterType="java.util.Map">
+    <select id="selectPlatformAllGameStartCount" resultType="java.util.Map" parameterType="java.util.Map">
         select platform_terminal as platformTerminal,platform_id as platformId,platform_name as platformName,count(id) as gameStartCount from data_game_start
         where country = 0
          <![CDATA[
@@ -180,9 +180,6 @@
             and create_time <= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
   		]]>
         and user_id is not null
-        <if test="null != sourceType and sourceType != ''">
-            and platform_terminal = #{sourceType}
-        </if>
         group by platform_terminal
     </select>
 

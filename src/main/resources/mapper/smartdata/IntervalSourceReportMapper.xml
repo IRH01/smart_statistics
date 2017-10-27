@@ -36,7 +36,7 @@
         #{rechargePopulation,jdbcType=INTEGER}, #{rechargeCount,jdbcType=INTEGER}, #{rechargeAmount,jdbcType=DECIMAL},
         #{executeTime,jdbcType=TIMESTAMP})
     </insert>
-    <select id="selectIntervalSourceToltalData" resultType="java.util.Map" parameterType="java.util.Map">
+    <select id="selectIntervalSourceTotalData" resultType="java.util.Map" parameterType="java.util.Map">
         select sum(register_population) as registerPopulation,sum(login_population) as loginPopulation
         ,sum(recharge_population) as rechargePopulation ,
         sum(recharge_count) as rechargeCount,sum(recharge_amount) as rechargeAmount

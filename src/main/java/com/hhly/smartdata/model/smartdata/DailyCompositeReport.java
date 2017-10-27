@@ -15,7 +15,12 @@ public class DailyCompositeReport{
     private String statisticsDay = "";
 
     /**
-     * 注册人数
+     * 总注册人数
+     */
+    private Integer totalRegisterPopulation;
+
+    /**
+     * 当日注册人数
      */
     private Integer registerPopulation = 0;
 
@@ -94,7 +99,6 @@ public class DailyCompositeReport{
      */
     private Date executeTime;
 
-
     public Long getId(){
         return id;
     }
@@ -109,6 +113,14 @@ public class DailyCompositeReport{
 
     public void setStatisticsDay(String statisticsDay){
         this.statisticsDay = statisticsDay;
+    }
+
+    public Integer getTotalRegisterPopulation(){
+        return totalRegisterPopulation;
+    }
+
+    public void setTotalRegisterPopulation(Integer totalRegisterPopulation){
+        this.totalRegisterPopulation = totalRegisterPopulation;
     }
 
     public Integer getRegisterPopulation(){
@@ -238,5 +250,4 @@ public class DailyCompositeReport{
     public void setExecuteTime(Date executeTime){
         this.executeTime = executeTime;
     }
-
 }

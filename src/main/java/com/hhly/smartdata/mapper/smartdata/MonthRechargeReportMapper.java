@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MonthRechargeReportMapper{
+public interface MonthRechargeReportMapper {
     int insert(MonthRechargeReport record) throws Exception;
 
     int insertSelective(MonthRechargeReport record) throws Exception;

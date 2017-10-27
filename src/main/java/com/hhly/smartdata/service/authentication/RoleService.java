@@ -13,24 +13,24 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class RoleService {
+public class RoleService{
 
     @Autowired
     private RoleMapper roleMapper;
 
-    public List<Role> getRolesByUserId(int userId) throws Exception {
+    public List<Role> getRolesByUserId(int userId) throws Exception{
         return roleMapper.getRolesByUserId(userId);
     }
 
-    public List<String> getPerms(List<Integer> roleIds) throws Exception {
+    public List<String> getPerms(List<Integer> roleIds) throws Exception{
         return roleMapper.getPerms(roleIds);
     }
 
-    public List<Role> search(Role role, Page page) throws Exception {
+    public List<Role> search(Role role, Page page) throws Exception{
         return roleMapper.search(role, page);
     }
 
-    public void delete(Integer roleId) throws Exception {
+    public void delete(Integer roleId) throws Exception{
         List<Integer> roleIdList = Lists.newArrayList();
         roleIdList.add(roleId);
         /*删除用户角色关联表*/
@@ -41,19 +41,19 @@ public class RoleService {
         roleMapper.delete(roleId);
     }
 
-    public void insert(Role role) throws Exception {
+    public void insert(Role role) throws Exception{
         roleMapper.insert(role);
         List<RolePermission> rolePermissionList = Lists.newArrayList();
-        if (role.getPermissionIds().length() > 0) {
-            if (role.getPermissionIds().indexOf(",") > 0) {
+        if(role.getPermissionIds().length() > 0){
+            if(role.getPermissionIds().indexOf(",") > 0){
                 String[] permissions = role.getPermissionIds().split(",");
-                for (String permission : permissions) {
+                for(String permission : permissions){
                     RolePermission rolePermission = new RolePermission();
                     rolePermission.setPermission(permission.trim());
                     rolePermission.setRoleId(role.getId());
                     rolePermissionList.add(rolePermission);
                 }
-            } else {
+            }else{
                 RolePermission rolePermission = new RolePermission();
                 rolePermission.setRoleId(role.getId());
                 rolePermission.setPermission(role.getPermissionIds().trim());
@@ -61,12 +61,12 @@ public class RoleService {
             }
         }
         /*插入角色权限关联表*/
-        for (RolePermission rolePermission : rolePermissionList) {
+        for(RolePermission rolePermission : rolePermissionList){
             roleMapper.insertRolePermission(rolePermission);
         }
     }
 
-    public void update(Role role) throws Exception {
+    public void update(Role role) throws Exception{
         List<RolePermission> rolePermissionList = Lists.newArrayList();
 
         List<Integer> roleLists = Lists.newArrayList();
@@ -74,16 +74,16 @@ public class RoleService {
         /*根据角色删除权限（角色权限关联表）*/
         roleMapper.delPermsByRole(roleLists);
 
-        if (role.getPermissionIds().length() > 0) {
-            if (role.getPermissionIds().indexOf(",") > 0) {
+        if(role.getPermissionIds().length() > 0){
+            if(role.getPermissionIds().indexOf(",") > 0){
                 String[] permissions = role.getPermissionIds().split(",");
-                for (String permission : permissions) {
+                for(String permission : permissions){
                     RolePermission rolePermission = new RolePermission();
                     rolePermission.setRoleId(role.getId());
                     rolePermission.setPermission(permission.trim());
                     rolePermissionList.add(rolePermission);
                 }
-            } else {
+            }else{
                 RolePermission rolePermission = new RolePermission();
                 rolePermission.setRoleId(role.getId());
                 rolePermission.setPermission(role.getPermissionIds().trim());
@@ -93,20 +93,20 @@ public class RoleService {
         /*修改角色*/
         roleMapper.update(role);
         /*更新角色权限*/
-        for (RolePermission rolePermission : rolePermissionList) {
+        for(RolePermission rolePermission : rolePermissionList){
             roleMapper.insertRolePermission(rolePermission);
         }
     }
 
-    public Role get(Integer id) throws Exception {
+    public Role get(Integer id) throws Exception{
         return roleMapper.get(id);
     }
 
-    public void allocRole(Integer userId, Integer[] roles) throws Exception {
+    public void allocRole(Integer userId, Integer[] roles) throws Exception{
         roleMapper.deleteUserRoles(userId);
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", userId);
-        for (Integer roleId : roles) {
+        for(Integer roleId : roles){
             params.put("roleId", roleId);
             roleMapper.insertUserRole(params);
         }

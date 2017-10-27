@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface DailyRechargeReportMapper{
+public interface DailyRechargeReportMapper {
     int insert(DailyRechargeReport record) throws Exception;
 
     int insertSelective(DailyRechargeReport record) throws Exception;

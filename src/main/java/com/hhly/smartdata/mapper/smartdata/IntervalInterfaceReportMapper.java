@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public interface IntervalInterfaceReportMapper{
@@ -20,9 +19,9 @@ public interface IntervalInterfaceReportMapper{
 
     int updateByPrimaryKey(IntervalInterfaceReport record) throws Exception;
 
-    List<IntervalInterfaceReport> selectIntervalInterfaceToltalData(Map<String, Object> map) throws Exception;
+    List<IntervalInterfaceReport> selectIntervalInterfaceTotalData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 
-    List<IntervalInterfaceReport> selectIntervalIntefaceChartData(Map<String, Object> map) throws Exception;
+    List<IntervalInterfaceReport> selectIntervalInterfaceChartData(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("interfaceCode") String interfaceCode) throws Exception;
 
     void deleteByTimeAndOperateTypeAndInterfaceCode(@Param("statisticsTime") String statisticsTime, @Param("operateType") Byte operateType, @Param("interfaceCode") Integer interfaceCode) throws Exception;
 }

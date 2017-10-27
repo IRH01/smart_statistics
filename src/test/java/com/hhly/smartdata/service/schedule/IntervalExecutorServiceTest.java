@@ -20,6 +20,7 @@ public class IntervalExecutorServiceTest extends BaseTest{
     @Autowired
     private IntervalExecutorService intervalExecutorService;
 
+
     /**
      * Method: intervalSourceStatistics()
      */

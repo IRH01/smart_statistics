@@ -62,6 +62,7 @@
         <![CDATA[
              and create_time<=DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
 
+
         ]]>
     </select>
 
@@ -74,7 +75,7 @@
     </select>
 
     <select id="selectFirstThirtyMinRegister" resultType="java.util.Map" parameterType="java.util.Map">
-        select os_type, count(DISTINCT(user_id)) as register_population from tbl_user_info where
+        select os_type as osType, count(DISTINCT(user_id)) as register_population from tbl_user_info where
         <![CDATA[
               create_time > date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
   		]]>
