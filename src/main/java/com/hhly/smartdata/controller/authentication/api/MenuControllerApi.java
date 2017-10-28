@@ -49,7 +49,7 @@ public class MenuControllerApi extends BaseController {
         try {
             menuList = menuService.getMenuListByRole(roleIds);
         } catch (Exception e) {
-            LOGGER.error("异常！");
+            LOGGER.error("异常！"+ e.getMessage());
         }
         return Result.success(menuList);
     }
@@ -61,7 +61,7 @@ public class MenuControllerApi extends BaseController {
         try {
             result = menuService.sortAndUpdateMenus(JSONArray.parseArray(menuTree), 0);
         } catch (Exception e) {
-            LOGGER.error("异常！");
+            LOGGER.error("异常！"+ e.getMessage());
         }
         return Result.success(result);
     }
@@ -72,7 +72,7 @@ public class MenuControllerApi extends BaseController {
         try {
             menuService.update(menu);
         } catch (Exception e) {
-            LOGGER.error("异常！");
+            LOGGER.error("异常！"+ e.getMessage());
         }
         return Result.success();
     }
@@ -83,7 +83,7 @@ public class MenuControllerApi extends BaseController {
         try {
             return Result.success(menuService.get(id));
         } catch (Exception e) {
-            LOGGER.error("异常！");
+            LOGGER.error("异常！"+ e.getMessage());
         }
         return Result.fail();
     }

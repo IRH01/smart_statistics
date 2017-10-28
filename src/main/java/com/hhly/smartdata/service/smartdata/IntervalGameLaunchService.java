@@ -7,7 +7,6 @@ import com.google.common.collect.Maps;
 import com.hhly.smartdata.mapper.smartdata.IntervalGameLaunchReportMapper;
 import com.hhly.smartdata.model.smartdata.IntervalGameLaunchListReport;
 import com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +22,14 @@ public class IntervalGameLaunchService{
     private IntervalGameLaunchReportMapper intervalGameLaunchReportMapper;
 
 
-    public JSONObject selectIntervalGameLaunchListData(String startDate, String endDate, int pageNumber, int pageSize) throws Exception{
+    public PageInfo<IntervalGameLaunchListReport> selectIntervalGameLaunchListData(String startDate, String endDate, int pageNumber, int pageSize) throws Exception{
         PageHelper.startPage(pageNumber, pageSize);
         List<IntervalGameLaunchListReport> values = intervalGameLaunchReportMapper.selectIntervalGameLaunchListData(startDate, endDate);
-        PageInfo<IntervalGameLaunchListReport> pageInfo = new PageInfo<IntervalGameLaunchListReport>(values);
-        return JSONObject.fromObject(pageInfo);
+        PageInfo<IntervalGameLaunchListReport> pageInfo = new PageInfo<>(values);
+        return pageInfo;
     }
 
-    public JSONObject selectIntervalGameLaunchChartData(String startDate, String endDate, TreeSet<String> scales) throws Exception{
+    public Map<String, Object> selectIntervalGameLaunchChartData(String startDate, String endDate, TreeSet<String> scales) throws Exception{
         // 曲线图数据
         Map<String, Object> result = Maps.newHashMap();
         List<String> scaleList = Lists.newLinkedList();
@@ -76,7 +75,7 @@ public class IntervalGameLaunchService{
         result.put("yydjList", yydjList);
         result.put("lmdzList", lmdzList);
 
-        return JSONObject.fromObject(result);
+        return result;
     }
 
 }

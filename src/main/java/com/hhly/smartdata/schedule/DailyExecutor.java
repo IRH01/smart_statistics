@@ -26,7 +26,7 @@ public class DailyExecutor{
         try{
             this.dailyExecutorService.compositeReport();
         }catch(Exception e){
-            LOGGER.error("定时器执行失败");
+            LOGGER.error("定时器执行失败"+ e.getMessage());
         }
     }
 
@@ -38,7 +38,7 @@ public class DailyExecutor{
         try{
             dailyExecutorService.registerStatistic();
         }catch(Exception ex){
-            LOGGER.error("定时器执行失败");
+            LOGGER.error("定时器执行失败"+ ex.getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ public class DailyExecutor{
         try{
             dailyExecutorService.rechargeStatistic();
         }catch(Exception ex){
-            LOGGER.error("定时器执行失败");
+            LOGGER.error("定时器执行失败" + ex.getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ public class DailyExecutor{
         try{
             dailyExecutorService.loginStatistic();
         }catch(Exception ex){
-            LOGGER.error("定时器执行失败");
+            LOGGER.error("定时器执行失败"+ ex.getMessage());
         }
     }
 
@@ -74,7 +74,7 @@ public class DailyExecutor{
         try{
             dailyExecutorService.keepRecordAnalyzeReport();
         }catch(Exception e){
-            LOGGER.error("定时器执行失败");
+            LOGGER.error("定时器执行失败"+ e.getMessage());
         }
     }
 }

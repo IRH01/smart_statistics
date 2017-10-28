@@ -24,7 +24,7 @@ public class LoginControllerApi extends BaseController{
         try{
             usr = userService.getUserByUsername(usrName);
         }catch(Exception e){
-            LOGGER.error("异常！");
+            LOGGER.error("异常！"+ e.getMessage());
         }
         if(usr == null){
             return true;
@@ -42,7 +42,7 @@ public class LoginControllerApi extends BaseController{
         try{
             usr = userService.getUserByUsername(usrName);
         }catch(Exception e){
-            LOGGER.error("异常！");
+            LOGGER.error("异常！"+ e.getMessage());
         }
         if(usr == null){
             return false;

@@ -83,19 +83,29 @@
                                                                     <td class="tb1Td">
                                                                         <span class="span">统计时间：</span>
                                                                     </td>
-                                                                    <td><input placeholder="请选择日期" class="laydate-icon" style="height:25px;" id="dateStart" readonly> </td>
+                                                                    <td><input placeholder="请选择日期" class="laydate-icon"
+                                                                               style="height:25px;" id="dateStart"
+                                                                               readonly></td>
                                                                     <td>
                                                                         <span class="span">&nbsp;至&nbsp;</span>
                                                                     </td>
-                                                                    <td><input class="laydate-icon" id="dateEnd" style="height:25px;" placeholder="请选择日期" readonly></td>
+                                                                    <td><input class="laydate-icon" id="dateEnd"
+                                                                               style="height:25px;" placeholder="请选择日期"
+                                                                               readonly></td>
                                                                     <td style="line-height:1;">
-                                                                        <button type="button" id="search" class="btn btn-primary btn-sm" onclick="search();">
-                                                                        <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
+                                                                        <button type="button" id="search"
+                                                                                class="btn btn-primary btn-sm"
+                                                                                onclick="search();">
+                                                                            <i class="icon-search icon-white"
+                                                                               style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
                                                                         </button>
                                                                     </td>
                                                                     <td style="line-height:1;">
-                                                                        <button type="button" id="reset" class="btn btn-primary btn-sm" onclick="reset();">
-                                                                        <i class="icon-search icon-white" style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
+                                                                        <button type="button" id="reset"
+                                                                                class="btn btn-primary btn-sm"
+                                                                                onclick="reset();">
+                                                                            <i class="icon-search icon-white"
+                                                                               style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
                                                                         </button>
                                                                     </td>
                                                                 </tr>
@@ -110,10 +120,21 @@
                                                     </div>
                                                     <table class="tablePage">
                                                         <tr>
-                                                            <td><div class="divPage"><span class="spanPageSize">每页个数：</span><input id="pageSize" value="10" class="inputPageSize" onKeypress="return intInput(event);" onKeyup="value=pageSizeLimit(value);" onblur="value=pageSizeNotEmpty(value);"/></div></td>
-                                                            <td><span class="spanPageSize">总记录数：</span><span id="totalCount" class="spanPageSize"></span></td>
-                                                            <td><span class="spanPageSize">总页数：</span><span id="totalPage" class="spanPageSize"></span></td>
-                                                            <td class="tablePageTd"><div id="page"></div></td>
+                                                            <td>
+                                                                <div class="divPage"><span
+                                                                        class="spanPageSize">每页个数：</span><input
+                                                                        id="pageSize" value="10" class="inputPageSize"
+                                                                        onKeypress="return intInput(event);"
+                                                                        onKeyup="value=pageSizeLimit(value);"
+                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                            </td>
+                                                            <td><span class="spanPageSize">总记录数：</span><span
+                                                                    id="totalCount" class="spanPageSize"></span></td>
+                                                            <td><span class="spanPageSize">总页数：</span><span
+                                                                    id="totalPage" class="spanPageSize"></span></td>
+                                                            <td class="tablePageTd">
+                                                                <div id="page"></div>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -140,9 +161,9 @@
 
     var pageSize = 30;
 
-     setDateRangeConfig("dateStart","dateEnd",null,true);
+    setDateRangeConfig("dateStart", "dateEnd", null, true);
 
-    var showTbCl = function(){
+    var showTbCl = function () {
         $("#data").append("<tr><td rowspan=\"2\" >日期</td><td rowspan=\"2\">注册人数</td>\n" +
             "<td rowspan=\"2\">注册体验量</td><td rowspan=\"2\">注册体验率(%)</td><td rowspan=\"2\">真体验</td><td rowspan=\"2\">假体验</td><td colspan=\"9\">新用户</td><td colspan=\"9\">老用户</td><td rowspan=\"2\">次日留存</td><td rowspan=\"2\">次日留存率(%)</td></tr><tr><td>充值人数</td><td>充值次数</td><td>充值金额</td><td>充值转化率(%)</td><td>ARPU</td><td>ARPPU</td><td>登录人数</td><td>玩游戏人数</td><td>登录转化率(%)</td><td>充值人数</td><td>充值次数</td><td>充值金额</td><td>充值转化率(%)</td><td>ARPU</td><td>ARPPU</td><td>登录人数</td><td>玩游戏人数</td><td>登录转化率(%)</td></tr>");
     };
@@ -152,8 +173,7 @@
             var ele = "<tr><td class=\"date\" style=\"width:100px;\">statisticsDay</td><td>registerPopulation</td><td>registerExpCount</td><td>registerExpCountRate</td><td>realExpCount</td><td>virtualExpCount</td><td>newUserRechargePopulation</td><td>newUserRechargeCount</td><td>newUserRechargeAmount</td><td>newUserRechargeRate</td><td>newUserARPU</td>" +
                 "<td>newUserARPPU</td><td>newUserLoginCount</td><td>newUserPlayCount</td><td>newUserPlayRate</td><td>oldUserRechargePopulation</td><td>oldUserRechargeCount</td><td>oldUserRechargeAmount</td><td>oldUserRechargeRate</td><td>oldUserARPU</td><td>oldUserARPPU</td><td>oldUserLoginCount</td><td>oldUserPlayCount</td><td>oldUserPlayRate</td>" +
                 "<td>nextDayStayCount</td><td>nextDayStayRate</td></tr>";
-            ele = ele.replace("statisticsDay", data.statisticsDay).replace("registerPopulation", data.registerPopulation).replace("registerExpCount", data.registerExpCount).replace("registerExpCountRate", data.registerExpCountRate).
-                 replace("realExpCount", data.realExpCount).replace("virtualExpCount", data.virtualExpCount).replace("newUserRechargePopulation", data.newUserRechargePopulation).replace("newUserRechargeCount", data.newUserRechargeCount)
+            ele = ele.replace("statisticsDay", data.statisticsDay).replace("registerPopulation", data.registerPopulation).replace("registerExpCount", data.registerExpCount).replace("registerExpCountRate", data.registerExpCountRate).replace("realExpCount", data.realExpCount).replace("virtualExpCount", data.virtualExpCount).replace("newUserRechargePopulation", data.newUserRechargePopulation).replace("newUserRechargeCount", data.newUserRechargeCount)
                 .replace("newUserRechargeAmount", data.newUserRechargeAmount).replace("newUserRechargeRate", data.newUserRechargeRate).replace("newUserARPU", data.newUserARPU).replace("newUserARPPU", data.newUserARPPU)
                 .replace("newUserLoginCount", data.newUserLoginCount).replace("newUserPlayCount", data.newUserPlayCount).replace("newUserPlayRate", data.newUserPlayRate).replace("oldUserRechargePopulation", data.oldUserRechargePopulation)
                 .replace("oldUserRechargeCount", data.oldUserRechargeCount).replace("oldUserRechargeAmount", data.oldUserRechargeAmount).replace("oldUserRechargeRate", data.oldUserRechargeRate).replace("oldUserARPU", data.oldUserARPU).replace("oldUserARPPU", data.oldUserARPPU)
@@ -171,8 +191,8 @@
             endDate: $('#dateEnd').val(),
             pageNumber: pageNumber,
             pageSize: pageSize
-        }, function (data) {
-            var json = JSON.parse(data);
+        }, function (result) {
+            var json = result.data;
             if (null != json && undefined != json) {
                 $("#totalCount").html(json.total);
                 $("#totalPage").html(json.pages);
@@ -192,66 +212,64 @@
                     $("#totalPage").html(0);
                     $("#data").append("<tr><td colspan=\"26\">没有数据</td></tr>");
                 } else {
-                        var registerPopulationNum=0;
-                        var registerExpCountNum=0;
-                        var registerExpCountRateNum=0;
-                        var realExpCountNum=0;
-                        var virtualExpCountNum=0;
-                        var newUserRechargePopulationNum=0;
-                        var newUserRechargeCountNum=0;
-                        var newUserRechargeAmountNum=0;
-                        var newUserRechargeRateNum=0;
-                        var newUserARPUNum=0;
-                        var newUserARPPUNum=0;
-                        var newUserLoginCountNum=0;
-                        var newUserPlayCountNum=0;
-                        var newUserPlayRateNum=0;
-                        var oldUserRechargePopulationNum=0;
-                        var oldUserRechargeCountNum=0;
-                        var oldUserRechargeAmountNum=0;
-                        var oldUserRechargeRateNum=0;
-                        var oldUserARPUNum=0;
-                        var oldUserARPPUNum=0;
-                        var oldUserLoginCountNum=0;
-                        var oldUserPlayCountNum=0;
-                        var oldUserPlayRateNum=0;
-                        var nextDayStayCountNum=0;
-                        var nextDayStayRateNums=0;
-                        var count = infoData.length;
+                    var registerPopulationNum = 0;
+                    var registerExpCountNum = 0;
+                    var registerExpCountRateNum = 0;
+                    var realExpCountNum = 0;
+                    var virtualExpCountNum = 0;
+                    var newUserRechargePopulationNum = 0;
+                    var newUserRechargeCountNum = 0;
+                    var newUserRechargeAmountNum = 0;
+                    var newUserRechargeRateNum = 0;
+                    var newUserARPUNum = 0;
+                    var newUserARPPUNum = 0;
+                    var newUserLoginCountNum = 0;
+                    var newUserPlayCountNum = 0;
+                    var newUserPlayRateNum = 0;
+                    var oldUserRechargePopulationNum = 0;
+                    var oldUserRechargeCountNum = 0;
+                    var oldUserRechargeAmountNum = 0;
+                    var oldUserRechargeRateNum = 0;
+                    var oldUserARPUNum = 0;
+                    var oldUserARPPUNum = 0;
+                    var oldUserLoginCountNum = 0;
+                    var oldUserPlayCountNum = 0;
+                    var oldUserPlayRateNum = 0;
+                    var nextDayStayCountNum = 0;
+                    var nextDayStayRateNums = 0;
+                    var count = infoData.length;
                     for (var i = 0; i < infoData.length; i++) {
                         registerPopulationNum = accAdd(registerPopulationNum, infoData[i].registerPopulation);
-                        registerExpCountNum = accAdd(registerExpCountNum, accDiv(infoData[i].registerExpCount,infoData[i].registerPopulation));
+                        registerExpCountNum = accAdd(registerExpCountNum, accDiv(infoData[i].registerExpCount, infoData[i].registerPopulation));
+                        registerExpCountRateNum = accAdd(registerExpCountRateNum, infoData[i].registerExpCountRate);
+                        realExpCountNum = accAdd(realExpCountNum, infoData[i].realExpCount);
+                        virtualExpCountNum = accAdd(virtualExpCountNum, infoData[i].virtualExpCount);
 
-                        registerExpCountRateNum= accAdd(registerExpCountRateNum, infoData[i].registerExpCountRate);
-                        realExpCountNum= accAdd(realExpCountNum, infoData[i].realExpCount);
-                        virtualExpCountNum= accAdd(virtualExpCountNum, infoData[i].virtualExpCount);
+                        newUserRechargePopulationNum = accAdd(newUserRechargePopulationNum, infoData[i].newUserRechargePopulation);
+                        newUserRechargeCountNum = accAdd(newUserRechargeCountNum, infoData[i].newUserRechargeCount);
+                        newUserRechargeAmountNum = accAdd(newUserRechargeAmountNum, infoData[i].newUserRechargeAmount);
+                        newUserRechargeRateNum = accAdd(newUserRechargeRateNum, accDiv(infoData[i].newUserRechargePopulation, infoData[i].registerPopulation));
+                        newUserARPUNum = accAdd(newUserARPUNum, infoData[i].newUserARPU);
+                        newUserARPPUNum = accAdd(newUserARPPUNum, infoData[i].newUserARPPU);
+                        newUserLoginCountNum = accAdd(newUserLoginCountNum, infoData[i].newUserLoginCount);
+                        newUserPlayCountNum = accAdd(newUserPlayCountNum, infoData[i].newUserPlayCount);
+                        newUserPlayRateNum = accAdd(newUserPlayRateNum, accDiv(infoData[i].newUserLoginCount, infoData[i].registerPopulation));
 
-                        newUserRechargePopulationNum= accAdd(newUserRechargePopulationNum, infoData[i].newUserRechargePopulation);
-                        newUserRechargeCountNum= accAdd(newUserRechargeCountNum, infoData[i].newUserRechargeCount);
-                        newUserRechargeAmountNum= accAdd(newUserRechargeAmountNum, infoData[i].newUserRechargeAmount);
-                        newUserRechargeRateNum= accAdd(newUserRechargeRateNum, accDiv(infoData[i].newUserRechargePopulation,infoData[i].registerPopulation));
-                        newUserARPUNum= accAdd(newUserARPUNum, infoData[i].newUserARPU);
-                        newUserARPPUNum= accAdd(newUserARPPUNum, infoData[i].newUserARPPU);
-                        newUserLoginCountNum= accAdd(newUserLoginCountNum, infoData[i].newUserLoginCount);
-                        newUserPlayCountNum= accAdd(newUserPlayCountNum, infoData[i].newUserPlayCount);
-                        newUserPlayRateNum= accAdd(newUserPlayRateNum, accDiv(infoData[i].newUserLoginCount,infoData[i].registerPopulation));
+                        oldUserRechargePopulationNum = accAdd(oldUserRechargePopulationNum, infoData[i].oldUserRechargePopulation);
+                        oldUserRechargeCountNum = accAdd(oldUserRechargeCountNum, infoData[i].oldUserRechargeCount);
+                        oldUserRechargeAmountNum = accAdd(oldUserRechargeAmountNum, infoData[i].oldUserRechargeAmount);
+                        oldUserRechargeRateNum = accAdd(oldUserRechargeRateNum, accDiv(infoData[i].oldUserRechargePopulation, infoData[i].registerPopulation));
+                        oldUserARPUNum = accAdd(oldUserARPUNum, infoData[i].oldUserARPU);
+                        oldUserARPPUNum = accAdd(oldUserARPPUNum, infoData[i].oldUserARPPU);
+                        oldUserLoginCountNum = accAdd(oldUserLoginCountNum, infoData[i].oldUserLoginCount);
+                        oldUserPlayCountNum = accAdd(oldUserPlayCountNum, infoData[i].oldUserPlayCount);
+                        oldUserPlayRateNum = accAdd(oldUserPlayRateNum, accDiv(infoData[i].oldUserLoginCount, infoData[i].registerPopulation));
 
-                        oldUserRechargePopulationNum= accAdd(oldUserRechargePopulationNum, infoData[i].oldUserRechargePopulation);
-                        oldUserRechargeCountNum= accAdd(oldUserRechargeCountNum, infoData[i].oldUserRechargeCount);
-                        oldUserRechargeAmountNum= accAdd(oldUserRechargeAmountNum, infoData[i].oldUserRechargeAmount);
-                        oldUserRechargeRateNum= accAdd(oldUserRechargeRateNum, accDiv(infoData[i].oldUserRechargePopulation,infoData[i].registerPopulation));
-                        oldUserARPUNum= accAdd(oldUserARPUNum, infoData[i].oldUserARPU);
-                        oldUserARPPUNum= accAdd(oldUserARPPUNum, infoData[i].oldUserARPPU);
-                        oldUserLoginCountNum= accAdd(oldUserLoginCountNum, infoData[i].oldUserLoginCount);
-                        oldUserPlayCountNum= accAdd(oldUserPlayCountNum, infoData[i].oldUserPlayCount);
-                        oldUserPlayRateNum= accAdd(oldUserPlayRateNum, accDiv(infoData[i].oldUserLoginCount,infoData[i].registerPopulation));
-
-                        nextDayStayCountNum= accAdd(nextDayStayCountNum, infoData[i].nextDayStayCount);
-
-                        nextDayStayRateNums= accAdd(nextDayStayRateNums, accDiv(infoData[i].oldUserLoginCount,infoData[i].registerPopulation));
+                        nextDayStayCountNum = accAdd(nextDayStayCountNum, infoData[i].nextDayStayCount);
+                        nextDayStayRateNums = accAdd(nextDayStayRateNums, accDiv(infoData[i].oldUserLoginCount, infoData[i].registerPopulation));
                         var nextDayStayRateNum = 0;
-                        if ((i+1)<infoData.length) {
-                            nextDayStayRateNum = accDiv(accAdd(infoData[i].oldUserLoginCount,infoData[i].newUserLoginCount),infoData[i+1].statisticsDay);
+                        if ((i + 1) < infoData.length) {
+                            nextDayStayRateNum = accDiv(accAdd(infoData[i].oldUserLoginCount, infoData[i].newUserLoginCount), infoData[i + 1].statisticsDay);
                         } else {
                             nextDayStayRateNum = 0;
                         }
@@ -260,30 +278,29 @@
                             statisticsDay: infoData[i].statisticsDay,
                             registerPopulation: infoData[i].registerPopulation,
                             registerExpCount: infoData[i].registerExpCount,
-                            registerExpCountRate: convertToPercentFormat(accDiv(infoData[i].registerExpCount,infoData[i].registerPopulation)),
+                            registerExpCountRate: convertToPercentFormat(accDiv(infoData[i].registerExpCount, infoData[i].registerPopulation)),
                             realExpCount: infoData[i].realExpCount,
                             virtualExpCount: infoData[i].virtualExpCount,
                             newUserRechargePopulation: infoData[i].newUserRechargePopulation,
                             newUserRechargeCount: infoData[i].newUserRechargeCount,
                             newUserRechargeAmount: infoData[i].newUserRechargeAmount,
-                            newUserRechargeRate: convertToPercentFormat(accDiv(infoData[i].newUserRechargePopulation,infoData[i].registerPopulation)),
-                            newUserARPU: accDiv(infoData[i].newUserRechargeAmount,infoData[i].newUserLoginCount),
-                            newUserARPPU: accDiv(infoData[i].newUserRechargeAmount,infoData[i].newUserRechargePopulation),
-                            newUserLoginCount:infoData[i].newUserLoginCount,
-                            newUserPlayCount:infoData[i].newUserPlayCount,
-                            newUserPlayRate:convertToPercentFormat(accDiv(infoData[i].newUserLoginCount,infoData[i].registerPopulation)),
+                            newUserRechargeRate: convertToPercentFormat(accDiv(infoData[i].newUserRechargePopulation, infoData[i].registerPopulation)),
+                            newUserARPU: accDiv(infoData[i].newUserRechargeAmount, infoData[i].newUserLoginCount),
+                            newUserARPPU: accDiv(infoData[i].newUserRechargeAmount, infoData[i].newUserRechargePopulation),
+                            newUserLoginCount: infoData[i].newUserLoginCount,
+                            newUserPlayCount: infoData[i].newUserPlayCount,
+                            newUserPlayRate: convertToPercentFormat(accDiv(infoData[i].newUserLoginCount, infoData[i].registerPopulation)),
                             oldUserRechargePopulation: infoData[i].oldUserRechargePopulation,
                             oldUserRechargeCount: infoData[i].oldUserRechargeCount,
                             oldUserRechargeAmount: infoData[i].oldUserRechargeAmount,
-                            oldUserRechargeRate: convertToPercentFormat(accDiv(infoData[i].oldUserRechargePopulation,infoData[i].registerPopulation)),
-                            oldUserARPU: accDiv(infoData[i].oldUserRechargeAmount,infoData[i].oldUserLoginCount),
-                            oldUserARPPU: accDiv(infoData[i].oldUserRechargeAmount,infoData[i].oldUserRechargePopulation),
-                            oldUserLoginCount:infoData[i].oldUserLoginCount,
-                            oldUserPlayCount:infoData[i].oldUserPlayCount,
-                            oldUserPlayRate:convertToPercentFormat(accDiv(infoData[i].oldUserLoginCount,infoData[i].registerPopulation)),
-                            nextDayStayCount:infoData[i].nextDayStayCount,
-                            nextDayStayRate:convertToPercentFormat(nextDayStayRateNum)
-
+                            oldUserRechargeRate: convertToPercentFormat(accDiv(infoData[i].oldUserRechargePopulation, infoData[i].registerPopulation)),
+                            oldUserARPU: accDiv(infoData[i].oldUserRechargeAmount, infoData[i].oldUserLoginCount),
+                            oldUserARPPU: accDiv(infoData[i].oldUserRechargeAmount, infoData[i].oldUserRechargePopulation),
+                            oldUserLoginCount: infoData[i].oldUserLoginCount,
+                            oldUserPlayCount: infoData[i].oldUserPlayCount,
+                            oldUserPlayRate: convertToPercentFormat(accDiv(infoData[i].oldUserLoginCount, infoData[i].registerPopulation)),
+                            nextDayStayCount: infoData[i].nextDayStayCount,
+                            nextDayStayRate: convertToPercentFormat(nextDayStayRateNum)
                         };
                         addTbRow(ele);
                     }
@@ -292,30 +309,29 @@
                         statisticsDay: "总计",
                         registerPopulation: registerPopulationNum,
                         registerExpCount: registerExpCountNum,
-                        registerExpCountRate: accDiv(registerExpCountRateNum,count),
+                        registerExpCountRate: accDiv(registerExpCountRateNum, count),
                         realExpCount: realExpCountNum,
                         virtualExpCount: virtualExpCountNum,
                         newUserRechargePopulation: newUserRechargePopulationNum,
                         newUserRechargeCount: newUserRechargeCountNum,
                         newUserRechargeAmount: newUserRechargeAmountNum,
-                        newUserRechargeRate: accDiv(newUserRechargeRateNum,count),
+                        newUserRechargeRate: accDiv(newUserRechargeRateNum, count),
                         newUserARPU: newUserARPUNum,
                         newUserARPPU: newUserARPPUNum,
-                        newUserLoginCount:newUserLoginCountNum,
-                        newUserPlayCount:newUserPlayCountNum,
-                        newUserPlayRate:accDiv(newUserPlayRateNum,count),
+                        newUserLoginCount: newUserLoginCountNum,
+                        newUserPlayCount: newUserPlayCountNum,
+                        newUserPlayRate: accDiv(newUserPlayRateNum, count),
                         oldUserRechargePopulation: oldUserRechargePopulationNum,
                         oldUserRechargeCount: oldUserRechargeCountNum,
                         oldUserRechargeAmount: oldUserRechargeAmountNum,
-                        oldUserRechargeRate: accDiv(oldUserRechargeRateNum,count),
+                        oldUserRechargeRate: accDiv(oldUserRechargeRateNum, count),
                         oldUserARPU: oldUserARPUNum,
                         oldUserARPPU: oldUserARPPUNum,
-                        oldUserLoginCount:oldUserLoginCountNum,
-                        oldUserPlayCount:oldUserPlayCountNum,
-                        oldUserPlayRate:accDiv(oldUserPlayRateNum,count),
-                        nextDayStayCount:nextDayStayCountNum,
-                        nextDayStayRate:accDiv(nextDayStayRateNums,count)
-
+                        oldUserLoginCount: oldUserLoginCountNum,
+                        oldUserPlayCount: oldUserPlayCountNum,
+                        oldUserPlayRate: accDiv(oldUserPlayRateNum, count),
+                        nextDayStayCount: nextDayStayCountNum,
+                        nextDayStayRate: accDiv(nextDayStayRateNums, count)
                     };
                     addTbRow(ele1);
                 }
@@ -333,7 +349,7 @@
         showNewUserData(1, pageSize);
     };
 
-    var reset = function() {
+    var reset = function () {
         $("#dateStart").val("");
         $("#dateEnd").val("");
     };

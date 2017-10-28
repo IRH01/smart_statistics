@@ -10,40 +10,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>产品运营数据统计后台</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/zTreeStyle.css">
-    <link rel="stylesheet" href="/css/dialogsdk.css">
-    <link rel="stylesheet" href="/css/jquery-ui.css">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <!--[if lt IE 9]>
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/zTreeStyle.css">
+    <link rel="stylesheet" href="../../../css/dialogsdk.css">
+    <link rel="stylesheet" href="../../../css/jquery-ui.css">
+    <link rel="stylesheet" href="../../../css/admin-trend.css"/>
+    <link rel="stylesheet" href="../../../lib/myPagination/css/style.css"/>
+    <link rel="stylesheet" href="../../../lib/myPagination/js/myPagination/page.css"/>
+    <link rel="stylesheet" href="../../../css/jquery-ui.css"/>
+    <!-- [if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script src="/lib/jquery-1.11.2.min.js"></script>
-    <script src="/lib/bootstrap.min.js"></script>
-    <script src="/lib/jquery.ztree.all-3.5.min.js"></script>
-    <script src="/lib/jquery.validate.js"></script>
-    <script src="/lib/additional-methods.min.js" type="text/javascript"></script>
-    <script src="/lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
-    <script src="/lib/jquery.validate.custom.js" type="text/javascript"></script>
-    <script src="/lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
-    <script src="/lib/dialogsdk.js"></script>
-    <script src="/lib/tools/tools.js"></script>
-    <script src="/lib/layer/layer.js"></script>
-
-    <link rel="stylesheet" href="/css/admin-trend.css"/>
-    <script src="/lib/laydate/laydate.js"></script>
-    <link rel="stylesheet" href="/lib/myPagination/css/style.css"/>
-    <link rel="stylesheet" href="/lib/myPagination/js/myPagination/page.css"/>
-    <link rel="stylesheet" href="/css/jquery-ui.css"/>
-    <script src="/lib/myPagination/js/myPagination/jquery.myPagination6.0.js"></script>
-    <script src="/lib/jquery-ui.js"></script>
-    <script src="/lib/datecontrol.js"></script>
-    <script src="/lib/echart/dist/echarts.js"></script>
-    <script src="/lib/tool.js"></script>
-
-
+    <![endif] -->
+    <script src="../../../lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../lib/bootstrap.min.js"></script>
+    <script src="../../../lib/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../../../lib/jquery.validate.js"></script>
+    <script src="../../../lib/additional-methods.min.js" type="text/javascript"></script>
+    <script src="../../../lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
+    <script src="../../../lib/jquery.validate.custom.js" type="text/javascript"></script>
+    <script src="../../../lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
+    <script src="../../../lib/dialogsdk.js"></script>
+    <script src="../../../lib/tools/tools.js"></script>
+    <script src="../../../lib/layer/layer.js"></script>
+    <script src="../../../lib/laydate/laydate.js"></script>
+    <script src="../../../lib/myPagination/js/myPagination/jquery.myPagination6.0.js"></script>
+    <script src="../../../lib/jquery-ui.js"></script>
+    <script src="../../../lib/datecontrol.js"></script>
+    <script src="../../../lib/echart/dist/echarts.js"></script>
+    <script src="../../../lib/tool.js"></script>
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -97,21 +94,26 @@
                                                             <tbody id="terminalsIntervalData"></tbody>
                                                         </table>
                                                     </div>
-                                                    <%--<div id="page"></div>--%>
                                                     <table class="tablePage">
                                                         <tr>
                                                             <td>
-                                                                <div class="divPage"><span
-                                                                        class="spanPageSize">每页个数：</span><input
-                                                                        id="pageSize" value="10" class="inputPageSize"
-                                                                        onKeypress="return intInput(event);"
-                                                                        onKeyup="value=pageSizeLimit(value);"
-                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                                <div class="divPage">
+                                                                    <span class="spanPageSize">每页个数：</span>
+                                                                    <input id="pageSize" value="10"
+                                                                           class="inputPageSize"
+                                                                           onKeypress="return intInput(event);"
+                                                                           onKeyup="value=pageSizeLimit(value);"
+                                                                           onblur="value=pageSizeNotEmpty(value);"/>
+                                                                </div>
                                                             </td>
-                                                            <td><span class="spanPageSize">总记录数：</span><span
-                                                                    id="totalCount" class="spanPageSize"></span></td>
-                                                            <td><span class="spanPageSize">总页数：</span><span
-                                                                    id="totalPage" class="spanPageSize"></span></td>
+                                                            <td>
+                                                                <span class="spanPageSize">总记录数：</span>
+                                                                <span id="totalCount" class="spanPageSize"></span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="spanPageSize">总页数：</span>
+                                                                <span id="totalPage" class="spanPageSize"></span>
+                                                            </td>
                                                             <td class="tablePageTd">
                                                                 <div id="page"></div>
                                                             </td>
@@ -132,7 +134,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!--body end-->
                 </div>
@@ -142,7 +143,7 @@
 </body>
 </html>
 <script type="text/javascript">
-    var initSearchDate = ["00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30",
+    var initSearchDate = ["00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30",
         "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
         "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00"];
 
@@ -215,8 +216,8 @@
             endDate: $('#dateEnds').val(),
             pageNumber: pageNumber,
             pageSize: pageSize
-        }, function (data) {
-            var json = JSON.parse(data);
+        }, function (result) {
+            var json = result.data;
             if (null != json && undefined != json) {
                 $("#totalCount").html(json.total);
                 $("#totalPage").html(json.pages);
@@ -289,9 +290,8 @@
                 endDate: endDate,
                 deviceTypes: getDeviceType()
             },
-            success: function (data) {
-
-                var json = JSON.parse(data);
+            success: function (result) {
+                var json = result.data;
                 trendline = echarts.init(document
                     .getElementById('trendline'));
                 trendline.setOption({
@@ -346,7 +346,7 @@
                     xAxis: [{
                         type: 'category',
                         boundaryGap: false,
-                        data: json.scales,
+                        data: initSearchDate,
                         splitLine: {
                             show: true,
                             lineStyle: {

@@ -25,7 +25,7 @@ public class FunctionControllerApi extends BaseController{
         try{
             result = functionService.batchUpdateFuncs(JSONArray.parseArray(funcTree), 0);
         }catch(Exception e){
-            LOGGER.error("更新异常！");
+            LOGGER.error("更新异常！"+ e.getMessage());
         }
         return Result.success(result);
     }

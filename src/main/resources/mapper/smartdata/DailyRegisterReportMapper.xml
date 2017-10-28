@@ -227,14 +227,10 @@
         from daily_register_report
         where 1=1
         <if test="startDate != null and startDate  != ''">
-            <![CDATA[
-  		     and  statistics_day > DATE_FORMAT(#{startDate},'%Y-%m-%d')
-  		    ]]>
+            and statistics_day &gt;= DATE_FORMAT(#{startDate},'%Y-%m-%d')
         </if>
         <if test="endDate != null and endDate  != ''">
-            <![CDATA[
-  		     and statistics_day <= DATE_FORMAT(#{endDate},'%Y-%m-%d')
-  		    ]]>
+            and statistics_day &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
         </if>
         order by statistics_day desc
     </select>

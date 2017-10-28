@@ -200,8 +200,8 @@
             endDate: $('#dateEnd').val(),
             pageNumber: pageNumber,
             pageSize: pageSize
-        }, function (data) {
-            var json = JSON.parse(data);
+        }, function (result) {
+            var json = result.data;
             if (null != json && undefined != json) {
                 $("#totalCount").html(json.total);
                 $("#totalPage").html(json.pages);

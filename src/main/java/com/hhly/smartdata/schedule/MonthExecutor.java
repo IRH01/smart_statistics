@@ -22,8 +22,8 @@ public class MonthExecutor{
     public void compositeReportExecutor(){
         try{
             this.monthExecutorService.compositeReport();
-        }catch(Exception ex){
-            LOGGER.error("定时器执行失败");
+        }catch(Exception e){
+            LOGGER.error("定时器执行失败"+ e.getMessage());
         }
     }
 
@@ -32,7 +32,7 @@ public class MonthExecutor{
         try{
             this.monthExecutorService.registerReport();
         }catch(Exception e){
-            LOGGER.error("定时器执行失败");
+            LOGGER.error("定时器执行失败"+ e.getMessage());
         }
     }
 
@@ -41,7 +41,7 @@ public class MonthExecutor{
         try{
             this.monthExecutorService.rechargeReport();
         }catch(Exception e){
-            LOGGER.error("定时器执行失败");
+            LOGGER.error("定时器执行失败"+ e.getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ public class MonthExecutor{
         try{
             this.monthExecutorService.loginSourceReport();
         }catch(Exception e){
-            LOGGER.error("定时器执行失败");
+            LOGGER.error("定时器执行失败"+ e.getMessage());
         }
     }
 

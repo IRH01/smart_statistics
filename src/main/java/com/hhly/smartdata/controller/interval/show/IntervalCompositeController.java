@@ -5,15 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 接口统计
+ * 平台数据实时统计
  */
 @Controller
-@RequestMapping(value = "/interval/interface")
-public class IntervalInterfaceController extends BaseController{
+@RequestMapping(value = "/interval/platform")
+public class IntervalCompositeController extends BaseController{
 
     @RequestMapping(value = "/show")
     public String show(){
-        return "interval/interface_statistics";
+        return "interval/composite";
     }
 
 }

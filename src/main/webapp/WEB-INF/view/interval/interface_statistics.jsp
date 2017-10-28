@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="/css/dialogsdk.css">
     <link rel="stylesheet" href="/css/jquery-ui.css">
     <link rel="shortcut icon" href="/img/favicon.ico">
-    <!--[if lt IE 9]>
+    <!-- [if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <![endif] -->
     <script src="/lib/jquery-1.11.2.min.js"></script>
     <script src="/lib/bootstrap.min.js"></script>
     <script src="/lib/jquery.ztree.all-3.5.min.js"></script>
@@ -72,7 +72,7 @@
                                     <div class="whiteDiv tab-content">
                                         <ul id="sortable" class="ui-widget-content sortable">
                                             <li class="ui-state-default">
-                                                <div class="ui-widget-content resize" style="height:300px;">
+                                                <div class="ui-widget-content resize" style="height:80px;">
                                                     <div class="sortHandle">截止目前实时数据</div>
                                                     <div style="width:100%;height:5%;text-align: center;margin:0 auto;">
                                                         <table class="tableList1">
@@ -83,7 +83,7 @@
                                                                 <col width="100"/>
                                                             </colgroup>
                                                             <thead>
-                                                            <tr >
+                                                            <tr>
                                                                 <th style="border:1px solid black">
                                                                     注册请求数<br/>
                                                                     <label id="registerRequestNum"></label>
@@ -95,7 +95,7 @@
                                                                 <th style="border:1px solid black">
                                                                     充值请求数<br/>
                                                                     <label id="rechargeRequestNum"></label>
-                                                                </th >
+                                                                </th>
                                                                 <th style="border:1px solid black">
                                                                     充值完成数<br/>
                                                                     <label id="rechargeCompleteNum"></label>
@@ -110,7 +110,7 @@
                                                 <div class="ui-widget-content resize" style="height:300px;">
                                                     <div class="sortHandle">注册分时段曲线图</div>
                                                     <div style="width:100%;height:95%;">
-                                                        <div id="registeRtrendline" class="trendline"></div>
+                                                        <div id="registerTrendLine" class="trendline"></div>
                                                     </div>
                                                 </div>
                                             </li>
@@ -118,7 +118,7 @@
                                                 <div class="ui-widget-content resize" style="height:300px;">
                                                     <div class="sortHandle">充值分时段曲线图</div>
                                                     <div style="width:100%;height:95%;">
-                                                        <div id="rechargeTrendline" class="trendline"></div>
+                                                        <div id="rechargeTrendLine" class="trendline"></div>
                                                     </div>
                                                 </div>
                                             </li>
@@ -136,6 +136,10 @@
 </body>
 </html>
 <script type="text/javascript">
+    var initSearchDate = ["00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30",
+        "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
+        "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00"];
+
     var date = new Date();
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
@@ -154,18 +158,18 @@
         $.post("/interval/interface/intervalNum.do", {
             startDate: $('#dateStarts').val(),
             endDate: $('#dateEnds').val()
-        }, function (data) {
-            var json = JSON.parse(data);
+        }, function (result) {
+            var json = result.data;
             if (null != json && undefined != json) {
                 var infoData = json.list;
                 for (var i = 0; i < infoData.length; i++) {
-                    if(infoData[i].interfaceCode == 1) { // 注册
+                    if (infoData[i].interfaceCode == 1) { // 注册
                         if (infoData[i].operateType == 1) { // 请求
                             $("#registerRequestNum").html(infoData[i].operateCount);
                         } else if (infoData[i].operateType == 2) { // 完成
                             $("#registerCompleteNum").html(infoData[i].operateCount);
                         }
-                    } else if (infoData[i].interfaceCode == 2){// 充值
+                    } else if (infoData[i].interfaceCode == 2) {// 充值
                         if (infoData[i].operateType == 1) { // 请求
                             $("#rechargeRequestNum").html(infoData[i].operateCount);
                         } else if (infoData[i].operateType == 2) { // 完成
@@ -185,31 +189,31 @@
     $(function () {
         $("#sortable").sortable({cursor: "move", handle: ".sortHandle"});
         $(".resize").resizable({minHeight: 200, minWidth: 300});
-        $("#rechargeTrendline").resize(
+        $("#rechargeTrendLine").resize(
             function () {
-                if (undefined != rechargeTrendline) {
-                    rechargeTrendline.resize();
+                if (undefined != rechargeTrendLine) {
+                    rechargeTrendLine.resize();
                 }
             }
         );
         $(window).resize(
             function () {
-                if (undefined != rechargeTrendline) {
-                    rechargeTrendline.resize();
+                if (undefined != rechargeTrendLine) {
+                    rechargeTrendLine.resize();
                 }
             }
         );
-        $("#registeRtrendline").resize(
+        $("#registerTrendLine").resize(
             function () {
-                if (undefined != registeRtrendline) {
-                    registeRtrendline.resize();
+                if (undefined != registerTrendLine) {
+                    registerTrendLine.resize();
                 }
             }
         );
         $(window).resize(
             function () {
-                if (undefined != registeRtrendline) {
-                    registeRtrendline.resize();
+                if (undefined != registerTrendLine) {
+                    registerTrendLine.resize();
                 }
             }
         );
@@ -222,7 +226,8 @@
         intervalNum();
     };
 
-    var registeRtrendline;
+    var registerTrendLine;
+
     function loadRegisterDataTrendLine(echarts) {
         var startDate = $("#dateStarts").val();
         var endDate = $("#dateEnds").val();
@@ -234,11 +239,10 @@
                 endDate: endDate,
                 interfaceCode: 1
             },
-            success: function (data) {
-                var json = JSON.parse(data);
-                registeRtrendline = echarts.init(document
-                    .getElementById('registeRtrendline'));
-                registeRtrendline.setOption({
+            success: function (result) {
+                var json = result.data;
+                registerTrendLine = echarts.init(document.getElementById("registerTrendLine"));
+                registerTrendLine.setOption({
                     title: {
                         x: '20',
                         text: '',
@@ -250,8 +254,7 @@
                     tooltip: {
                         trigger: 'axis'
                     },
-                    color: ['#2ec7c9', '#b6a2de', '#5ab1ef',
-                        '#ffb980', '#d87a80'],
+                    color: ['#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80'],
                     legend: {
                         show: true,
                         orient: 'horizontal',
@@ -283,7 +286,7 @@
                     xAxis: [{
                         type: 'category',
                         boundaryGap: false,
-                        data: json.scales,
+                        data: initSearchDate,
                         splitLine: {
                             show: true,
                             lineStyle: {
@@ -308,7 +311,7 @@
                             }
                         },
                         axisLabel: {
-                            //interval: 0,
+//                            interval: 0.5,
                             textStyle: {
                                 color: "#999"
                             }
@@ -359,7 +362,7 @@
         })
     }
 
-    var rechargeTrendline;
+    var rechargeTrendLine;
 
     function loadRechargeDataTrendLine(echarts) {
         var startDate = $("#dateStarts").val();
@@ -372,11 +375,10 @@
                 endDate: endDate,
                 interfaceCode: 2
             },
-            success: function (data) {
-                var json = JSON.parse(data);
-                rechargeTrendline = echarts.init(document
-                    .getElementById('rechargeTrendline'));
-                rechargeTrendline.setOption({
+            success: function (result) {
+                var json = result.data;
+                rechargeTrendLine = echarts.init(document.getElementById("rechargeTrendLine"));
+                rechargeTrendLine.setOption({
                     title: {
                         x: '20',
                         text: '',
@@ -421,7 +423,7 @@
                     xAxis: [{
                         type: 'category',
                         boundaryGap: false,
-                        data: json.scales,
+                        data: initSearchDate,
                         splitLine: {
                             show: true,
                             lineStyle: {

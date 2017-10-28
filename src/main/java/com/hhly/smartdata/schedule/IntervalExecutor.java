@@ -25,8 +25,8 @@ public class IntervalExecutor{
     public void intervalSourceStatisticsSchedule(){
         try{
             intervalExecutorService.intervalSourceStatistics();
-        }catch(Exception ex){
-            LOGGER.error("定时器执行失败");
+        }catch(Exception e){
+            LOGGER.error("定时器执行失败"+ e.getMessage());
         }
     }
 
@@ -37,8 +37,8 @@ public class IntervalExecutor{
     public void intervalInterfaceStatisticsExecutor(){
         try{
             intervalExecutorService.intervalInterfaceStatistics();
-        }catch(Exception ex){
-            LOGGER.error("定时器执行失败");
+        }catch(Exception e){
+            LOGGER.error("定时器执行失败"+ e.getMessage());
         }
     }
 
@@ -49,8 +49,8 @@ public class IntervalExecutor{
     public void intervalGameLaunchSchedule(){
         try{
             intervalExecutorService.intervalGameLaunch();
-        }catch(Exception ex){
-            LOGGER.error("定时器执行失败");
+        }catch(Exception e){
+            LOGGER.error("定时器执行失败"+ e.getMessage());
         }
     }
 

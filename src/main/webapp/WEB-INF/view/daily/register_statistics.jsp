@@ -210,8 +210,8 @@
         $.post("/daily/register/intervalNum.do", {
             startDate: $('#dateStarts').val(),
             endDate: $('#dateEnds').val()
-        }, function (data) {
-            var json = JSON.parse(data);
+        }, function (result) {
+            var json = result.data;
             if (null != json && undefined != json) {
                 var totalNum = json.pcPopulation + json.h5Population + json.iosPopulation + json.androidPopulation;
                 if (totalNum > 0) {
@@ -253,8 +253,8 @@
             endDate: $('#dateEnd').val(),
             pageNumber: pageNumber,
             pageSize: pageSize
-        }, function (data) {
-            var json = JSON.parse(data);
+        }, function (result) {
+            var json = result.data;
             if (null != json && undefined != json) {
                 $("#totalCount").html(json.total);
                 $("#totalPage").html(json.pages);

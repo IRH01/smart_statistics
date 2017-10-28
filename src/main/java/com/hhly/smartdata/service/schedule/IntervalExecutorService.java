@@ -1,7 +1,6 @@
 package com.hhly.smartdata.service.schedule;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.hhly.smartdata.dto.enume.InterfaceTypeEnum;
 import com.hhly.smartdata.dto.enume.OperatorTypeEnum;
 import com.hhly.smartdata.dto.enume.PlatformIdEnum;
@@ -20,6 +19,7 @@ import com.hhly.smartdata.model.smartdata.IntervalInterfaceReport;
 import com.hhly.smartdata.model.smartdata.IntervalSourceReport;
 import com.hhly.smartdata.util.DateUtil;
 import com.hhly.smartdata.util.Result;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,40 +90,45 @@ public class IntervalExecutorService{
             report.setExecuteTime(now);
             Integer loginPopulation = 0;
             for(Map<String, Object> firstThirtyMinRegisterMap : firstThirtyMinRegister){
-               if(sourceTypeEnum.getCode() == (firstThirtyMinRegisterMap.get("osType")==null?0:Integer.valueOf(firstThirtyMinRegisterMap.get("osType").toString()))){
+                if(sourceTypeEnum.getCode() == (firstThirtyMinRegisterMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinRegisterMap.get("osType").toString()))){
                     report.setRegisterPopulation(firstThirtyMinRegisterMap.get("registerPopulation") == null ? 0 : Integer.valueOf(firstThirtyMinRegisterMap.get("registerPopulation") + ""));
+                    break;
                 }
             }
 
             for(Map<String, Object> firstThirtyMinLoginUserMap : firstThirtyMinLoginUser){
-                if(sourceTypeEnum.getCode() == (firstThirtyMinLoginUserMap.get("osType")==null?0:Integer.valueOf(firstThirtyMinLoginUserMap.get("osType").toString()))){
+                if(sourceTypeEnum.getCode() == (firstThirtyMinLoginUserMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinLoginUserMap.get("osType").toString()))){
                     loginPopulation = firstThirtyMinLoginUserMap.get("loginPopulation") == null ? 0 : Integer.valueOf(firstThirtyMinLoginUserMap.get("loginPopulation") + "");
                     report.setLoginPopulation(loginPopulation);
+                    break;
                 }
             }
 
             for(Map<String, Object> firstThirtyMinRechargeUserMap : firstThirtyMinRechargeUser){
-                if(sourceTypeEnum.getCode() == (firstThirtyMinRechargeUserMap.get("osType")==null?0:Integer.valueOf(firstThirtyMinRechargeUserMap.get("osType").toString()))){
+                if(sourceTypeEnum.getCode() == (firstThirtyMinRechargeUserMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinRechargeUserMap.get("osType").toString()))){
                     report.setRechargeAmount((BigDecimal) (firstThirtyMinRechargeUserMap.get("rechargeAmount")));
                     report.setRechargeCount(firstThirtyMinRechargeUserMap.get("rechargeCount") == null ? 0 : Integer.valueOf(firstThirtyMinRechargeUserMap.get("rechargeCount") + ""));
                     report.setRechargePopulation(firstThirtyMinRechargeUserMap.get("rechargePopulation") == null ? 0 : Integer.valueOf(firstThirtyMinRechargeUserMap.get("rechargePopulation") + ""));
+                    break;
                 }
             }
 
             for(Map<String, Object> firstThirtyMinGameStartCountMap : firstThirtyMinGameStartCount){
                 if(sourceTypeEnum.getCode() == 1 || sourceTypeEnum.getCode() == 4){
-                    if(sourceTypeEnum.getCode() ==  (firstThirtyMinGameStartCountMap.get("osType")==null?0:Integer.valueOf(firstThirtyMinGameStartCountMap.get("osType").toString()))){
+                    if(sourceTypeEnum.getCode() == (firstThirtyMinGameStartCountMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinGameStartCountMap.get("osType").toString()))){
                         report.setLoginPopulation(loginPopulation + (firstThirtyMinGameStartCountMap.get("loginPopulation") == null ? 0 :
                                 Integer.valueOf(firstThirtyMinGameStartCountMap.get("loginPopulation") + "")));
+                        break;
                     }
                 }
             }
 
             for(Map<String, Object> firstThirtyMinUserViewAndPageViewMap : firstThirtyMinUserViewAndPageView){
                 if(sourceTypeEnum.getCode() == 2 || sourceTypeEnum.getCode() == 3){
-                    if(sourceTypeEnum.getCode() == (firstThirtyMinUserViewAndPageViewMap.get("osType")==null?0:Integer.valueOf(firstThirtyMinUserViewAndPageViewMap.get("osType").toString()))){
+                    if(sourceTypeEnum.getCode() == (firstThirtyMinUserViewAndPageViewMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinUserViewAndPageViewMap.get("osType").toString()))){
                         report.setLoginPopulation(loginPopulation + (firstThirtyMinUserViewAndPageViewMap.get("loginPopulation") == null ? 0 :
                                 Integer.valueOf(firstThirtyMinUserViewAndPageViewMap.get("loginPopulation") + "")));
+                        break;
                     }
                 }
             }
@@ -183,7 +188,6 @@ public class IntervalExecutorService{
                 this.intervalInterfaceReportMapper.insert(intervalInterfaceReport);
                 list.add(intervalInterfaceReport);
             }
-
         }
         return Result.success(list);
     }
@@ -192,28 +196,27 @@ public class IntervalExecutorService{
         Date now = new Date();
         Date nowPointByThirtyMinute = DateUtil.getPointByThirtyMinute(now);
         String startDate = DateUtil.date2String(nowPointByThirtyMinute);
-
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("startDate", startDate);
-        map.put("intervalTime", INTERVAL_TIME);
         // 游戏启动数据
-        List<Map<String, Object>> platformAllGameStartCount = dataGameStartMapper.selectPlatformAllGameStartCount(startDate, INTERVAL_TIME);
+        List<Map<String, Object>> platformAllGameStartCountMapList = dataGameStartMapper.selectPlatformAllGameStartCount(startDate, INTERVAL_TIME);
+        if(CollectionUtils.isEmpty(platformAllGameStartCountMapList)){
+            return Result.fail("没有需要统计的数据");
+        }
 
         List<IntervalGameLaunchReport> list = Lists.newArrayList();
-        for(SourceTypeEnum sourceTypeEnum : SourceTypeEnum.values()){
-            for(PlatformIdEnum platformIdEnum : PlatformIdEnum.values()){
+        for(PlatformIdEnum platformIdEnum : PlatformIdEnum.values()){
+            for(SourceTypeEnum sourceTypeEnum : SourceTypeEnum.values()){
                 IntervalGameLaunchReport intervalGameLaunchReport = new IntervalGameLaunchReport();
                 intervalGameLaunchReport.setExecuteTime(now);
                 intervalGameLaunchReport.setStatisticsTime(startDate);
                 intervalGameLaunchReport.setIntervalTime(INTERVAL_TIME);
-                intervalGameLaunchReport.setPlatformName(platformIdEnum.getDesc());
                 intervalGameLaunchReport.setSourceType(sourceTypeEnum.getCode());
-                for(Map<String, Object> gameStartMap : platformAllGameStartCount){
+                intervalGameLaunchReport.setPlatformId(platformIdEnum.getCode());
+                intervalGameLaunchReport.setPlatformName(platformIdEnum.getDesc());
 
-                    if(sourceTypeEnum.getCode() == (gameStartMap.get("platformTerminal")==null?0:Integer.valueOf(gameStartMap.get("platformTerminal").toString()))
-                            && platformIdEnum.getDesc().indexOf(gameStartMap.get("platformName") == null ? "" : gameStartMap.get("platformName") + "") > 0){
-                        intervalGameLaunchReport.setPlatformId(gameStartMap.get("platformId") == null ? 0 : Integer.valueOf(gameStartMap.get("platformId") + ""));
-                        intervalGameLaunchReport.setLaunchCount(gameStartMap.get("gameStartCount") == null ? 0 : Integer.valueOf(gameStartMap.get("gameStartCount") + ""));
+                for(Map<String, Object> item : platformAllGameStartCountMapList){
+                    if(item.get("sourceType").equals(sourceTypeEnum.getCode()) && item.get("platformId").equals(platformIdEnum.getCode())){
+                        intervalGameLaunchReport.setLaunchCount(item.get("gameStartCount") == null ? 0 : Integer.valueOf(item.get("gameStartCount") + ""));
+                        break;
                     }
                 }
                 // 入库接口统计结果表

@@ -31,7 +31,7 @@ public class AdminControllerApi extends BaseController{
         try{
             userService.update(user);
         }catch(Exception e){
-            LOGGER.error("初始化密码异常！");
+            LOGGER.error("初始化密码异常！"+ e.getMessage());
         }
         return Result.success(null);
     }
@@ -46,7 +46,7 @@ public class AdminControllerApi extends BaseController{
                 return Result.success(null);
             }
         }catch(Exception e){
-            LOGGER.error("删除用户异常！");
+            LOGGER.error("删除用户异常！"+ e.getMessage());
         }
         return Result.fail();
     }

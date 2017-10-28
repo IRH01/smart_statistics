@@ -27,7 +27,7 @@
         select
         <include refid="Base_Column_List"/>
         from daily_login_report
-        where id = #{id,jdbcType=BIGINT}
+        where id = #{id}
     </select>
 
     <select id="selectLastMonthLogin" resultType="java.util.Map">
@@ -87,9 +87,9 @@
         insert into daily_login_report (id, statistics_day, platform_id,
         source_type, platform_name, login_population,
         play_population, execute_time)
-        values (#{id,jdbcType=BIGINT}, #{statisticsDay,jdbcType=VARCHAR}, #{platformId,jdbcType=INTEGER},
-        #{sourceType,jdbcType=TINYINT}, #{platformName,jdbcType=VARCHAR}, #{loginPopulation,jdbcType=INTEGER},
-        #{playPopulation,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP})
+        values (#{id}, #{statisticsDay}, #{platformId},
+        #{sourceType}, #{platformName}, #{loginPopulation},
+        #{playPopulation}, #{executeTime})
     </insert>
 
     <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.DailyLoginReport">
@@ -122,28 +122,28 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                #{id,jdbcType=BIGINT},
+                #{id},
             </if>
             <if test="statisticsDay != null">
-                #{statisticsDay,jdbcType=VARCHAR},
+                #{statisticsDay},
             </if>
             <if test="platformId != null">
-                #{platformId,jdbcType=INTEGER},
+                #{platformId},
             </if>
             <if test="sourceType != null">
-                #{sourceType,jdbcType=TINYINT},
+                #{sourceType},
             </if>
             <if test="platformName != null">
-                #{platformName,jdbcType=VARCHAR},
+                #{platformName},
             </if>
             <if test="loginPopulation != null">
-                #{loginPopulation,jdbcType=INTEGER},
+                #{loginPopulation},
             </if>
             <if test="playPopulation != null">
-                #{playPopulation,jdbcType=INTEGER},
+                #{playPopulation},
             </if>
             <if test="executeTime != null">
-                #{executeTime,jdbcType=TIMESTAMP},
+                #{executeTime},
             </if>
         </trim>
     </insert>
@@ -152,40 +152,40 @@
         update daily_login_report
         <set>
             <if test="statisticsDay != null">
-                statistics_day = #{statisticsDay,jdbcType=VARCHAR},
+                statistics_day = #{statisticsDay},
             </if>
             <if test="platformId != null">
-                platform_id = #{platformId,jdbcType=INTEGER},
+                platform_id = #{platformId},
             </if>
             <if test="sourceType != null">
-                source_type = #{sourceType,jdbcType=TINYINT},
+                source_type = #{sourceType},
             </if>
             <if test="platformName != null">
-                platform_name = #{platformName,jdbcType=VARCHAR},
+                platform_name = #{platformName},
             </if>
             <if test="loginPopulation != null">
-                login_population = #{loginPopulation,jdbcType=INTEGER},
+                login_population = #{loginPopulation},
             </if>
             <if test="playPopulation != null">
-                play_population = #{playPopulation,jdbcType=INTEGER},
+                play_population = #{playPopulation},
             </if>
             <if test="executeTime != null">
-                execute_time = #{executeTime,jdbcType=TIMESTAMP},
+                execute_time = #{executeTime},
             </if>
         </set>
-        where id = #{id,jdbcType=BIGINT}
+        where id = #{id}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.DailyLoginReport">
         update daily_login_report
-        set statistics_day = #{statisticsDay,jdbcType=VARCHAR},
-        platform_id = #{platformId,jdbcType=INTEGER},
-        source_type = #{sourceType,jdbcType=TINYINT},
-        platform_name = #{platformName,jdbcType=VARCHAR},
-        login_population = #{loginPopulation,jdbcType=INTEGER},
-        play_population = #{playPopulation,jdbcType=INTEGER},
-        execute_time = #{executeTime,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=BIGINT}
+        set statistics_day = #{statisticsDay},
+        platform_id = #{platformId},
+        source_type = #{sourceType},
+        platform_name = #{platformName},
+        login_population = #{loginPopulation},
+        play_population = #{playPopulation},
+        execute_time = #{executeTime}
+        where id = #{id}
     </update>
 
 </mapper>

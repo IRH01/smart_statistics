@@ -105,6 +105,7 @@
                                                                 <th style="min-width:70px;">新用户充值金额</th>
                                                                 <th style="min-width:115px;">新用户充值率(%)</th>
                                                                 <th style="min-width:90px;">新用户ARPU</th>
+                                                                <th style="min-width:90px;">新用户ARPPU</th>
                                                                 <th style="min-width:75px;">新用户登录人数</th>
                                                                 <th style="min-width:75px;">新用户玩游戏数</th>
                                                                 <th style="min-width:80px;">新用户登录转化比(%)</th>
@@ -113,6 +114,7 @@
                                                                 <th style="min-width:70px;">老用户充值金额</th>
                                                                 <th style="min-width:70px;">老用户充值率(%)</th>
                                                                 <th style="min-width:90px;">老用户ARPU</th>
+                                                                <th style="min-width:90px;">老用户ARPPU</th>
                                                                 <th style="min-width:70px;">老用户登录人数</th>
                                                                 <th style="min-width:70px;">老用户玩游戏数</th>
                                                                 <th style="min-width:80px;">老用户登录转化比(%)</th>
@@ -205,6 +207,7 @@
                 "<td>newUserRechargeAmount</td>" +
                 "<td>newUserRechargeRate</td>" +
                 "<td>newUserARPU</td>" +
+                "<td>newUserARPPU</td>" +
                 "<td>newUserLoginCount</td>" +
                 "<td>newUserPlayCount</td>" +
                 "<td>newUserLoginTransformRate</td>" +
@@ -213,6 +216,7 @@
                 "<td>oldUserRechargeAmount</td>" +
                 "<td>oldUserRechargeRate</td>" +
                 "<td>oldUserARPU</td>" +
+                "<td>oldUserARPPU</td>" +
                 "<td>oldUserLoginCount</td>" +
                 "<td>oldUserPlayCount</td>" +
                 "<td>oldUserPlayRate</td>" +
@@ -228,6 +232,7 @@
                 .replace("newUserRechargeAmount", data.newUserRechargeAmount)
                 .replace("newUserRechargeRate", data.newUserRechargeRate)
                 .replace("newUserARPU", data.newUserARPU)
+                .replace("newUserARPPU", data.newUserARPPU)
                 .replace("newUserLoginCount", data.newUserLoginCount)
                 .replace("newUserPlayCount", data.newUserPlayCount)
                 .replace("newUserLoginTransformRate", data.newUserLoginTransformRate)
@@ -236,6 +241,7 @@
                 .replace("oldUserRechargeAmount", data.oldUserRechargeAmount)
                 .replace("oldUserRechargeRate", data.oldUserRechargeRate)
                 .replace("oldUserARPU", data.oldUserARPU)
+                .replace("oldUserARPPU", data.oldUserARPPU)
                 .replace("oldUserLoginCount", data.oldUserLoginCount)
                 .replace("oldUserPlayCount", data.oldUserPlayCount)
                 .replace("oldUserPlayRate", data.oldUserPlayRate)
@@ -285,6 +291,7 @@
                     totalInfo.newUserRechargeAmount = 0;
                     totalInfo.newUserRechargeRate = "-";
                     totalInfo.newUserARPU = "-";
+                    totalInfo.newUserARPPU = "-";
                     totalInfo.newUserLoginCount = 0;
                     totalInfo.newUserPlayCount = 0;
                     totalInfo.newUserLoginTransformRate = "-";
@@ -293,6 +300,7 @@
                     totalInfo.oldUserRechargeAmount = 0;
                     totalInfo.oldUserRechargeRate = "-";
                     totalInfo.oldUserARPU = "-";
+                    totalInfo.oldUserARPPU = "-";
                     totalInfo.oldUserLoginCount = 0;
                     totalInfo.oldUserPlayCount = 0;
                     totalInfo.oldUserPlayRate = "-";

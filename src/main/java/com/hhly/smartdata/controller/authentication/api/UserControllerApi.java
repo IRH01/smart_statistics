@@ -23,7 +23,7 @@ public class UserControllerApi extends BaseController{
         try{
             oldUser = userService.getUser(user.getId());
         }catch(Exception e){
-            LOGGER.error("操作失败");
+            LOGGER.error("操作失败" + e.getMessage());
         }
         return oldUser.getPasswd().equals(new Md5Hash(user.getPasswd()).toString());
     }

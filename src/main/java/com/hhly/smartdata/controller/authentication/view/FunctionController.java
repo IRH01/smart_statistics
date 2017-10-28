@@ -27,7 +27,7 @@ public class FunctionController extends BaseController {
         try {
             model.put("funcList", functionService.getAll());
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error(e.getMessage()+ e.getMessage());
         }
         return new ModelAndView("system/function/list", model);
     }

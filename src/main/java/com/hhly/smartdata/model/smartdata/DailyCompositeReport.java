@@ -17,7 +17,7 @@ public class DailyCompositeReport{
     /**
      * 总注册人数
      */
-    private Integer totalRegisterPopulation;
+    private Integer totalRegisterPopulation = 0;
 
     /**
      * 当日注册人数

@@ -28,7 +28,7 @@
         select
         <include refid="Base_Column_List"/>
         from daily_keep_record_report
-        where id = #{id,jdbcType=BIGINT}
+        where id = #{id}
     </select>
     <select id="selectAverageOneKeep" resultType="java.lang.Float">
         SELECT
@@ -200,7 +200,8 @@
         fourteen_remain = #{fourteenRemain},
         thirty_remain = #{thirtyRemain},
         execute_time = #{executeTime}
-        where id = #{id}
+        where
+        id = #{id}
     </update>
 
     <select id="selectDailyKeepRecordListData" resultType="com.hhly.smartdata.dto.daily.DailyKeepRecordReportResult">
@@ -219,17 +220,14 @@
         thirty_remain as thirtyRemain,
         execute_time as executeTime
         from daily_keep_record_report
-        where 1=1
-        <if test="startDate != null and startDate  != ''">
-            <![CDATA[
-  		     and  statistics_day > DATE_FORMAT(#{startDate},'%Y-%m-%d')
-  		    ]]>
-        </if>
-        <if test="endDate != null and endDate  != ''">
-            <![CDATA[
-  		     and statistics_day <= DATE_FORMAT(#{endDate},'%Y-%m-%d')
-  		    ]]>
-        </if>
+        <where>
+            <if test="startDate != null and startDate  != ''">
+                and statistics_day &gt;= DATE_FORMAT(#{startDate},'%Y-%m-%d')
+            </if>
+            <if test="endDate != null and endDate  != ''">
+                and statistics_day &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+            </if>
+        </where>
         order by statistics_day desc
     </select>
 </mapper>

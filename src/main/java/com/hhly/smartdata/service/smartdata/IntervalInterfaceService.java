@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.hhly.smartdata.mapper.smartdata.IntervalInterfaceReportMapper;
 import com.hhly.smartdata.model.smartdata.IntervalInterfaceReport;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,16 +21,15 @@ public class IntervalInterfaceService{
     @Autowired
     IntervalInterfaceReportMapper intervalInterfaceReportMapper;
 
-    public JSONObject selectIntervalInterfaceToltalData(String startDate, String endDate) throws Exception{
+    public PageInfo<IntervalInterfaceReport> selectIntervalInterfaceTotalData(String startDate, String endDate) throws Exception{
         // 注册请求数 注册完成数 充值请求数 充值完成数
         PageHelper.startPage(1, 20);
         List<IntervalInterfaceReport> selectIntervalInterfaceTotalDataMap = intervalInterfaceReportMapper.selectIntervalInterfaceTotalData(startDate, endDate);
-        PageInfo<IntervalInterfaceReport> pageInfo = new PageInfo<IntervalInterfaceReport>(selectIntervalInterfaceTotalDataMap);
-        return JSONObject.fromObject(pageInfo);
-
+        PageInfo<IntervalInterfaceReport> pageInfo = new PageInfo<>(selectIntervalInterfaceTotalDataMap);
+        return pageInfo;
     }
 
-    public JSONObject selectIntervalInterfaceChartData(String startDate, String endDate, String interfaceCode, TreeSet<String> scales) throws Exception{
+    public Map<String, Object> selectIntervalInterfaceChartData(String startDate, String endDate, String interfaceCode, TreeSet<String> scales) throws Exception{
         // 曲线图数据
         Map<String, Object> result = Maps.newHashMap();
 
@@ -72,6 +70,6 @@ public class IntervalInterfaceService{
         result.put("requestList", requestList);
         result.put("completeList", completeList);
 
-        return JSONObject.fromObject(result);
+        return result;
     }
 }

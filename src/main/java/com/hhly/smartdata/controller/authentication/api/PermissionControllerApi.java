@@ -28,7 +28,7 @@ public class PermissionControllerApi extends BaseController{
         try{
             perms = permissionService.searchPerms(condition);
         }catch(Exception e){
-            LOGGER.error("异常！");
+            LOGGER.error("异常！"+ e.getMessage());
         }
         return Result.success(perms);
     }
@@ -40,7 +40,7 @@ public class PermissionControllerApi extends BaseController{
         try{
             permissionService.batchUpdatePerms(funcId, perms);
         }catch(Exception e){
-            LOGGER.error("异常！");
+            LOGGER.error("异常！"+ e.getMessage());
         }
         return Result.success();
     }

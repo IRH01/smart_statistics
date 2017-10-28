@@ -55,8 +55,8 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
      */
     public BigDecimal getNewUserARPU(){
         BigDecimal result = new BigDecimal(0.00);
-        if(this.getNewUserRechargeCount() != 0){
-            result = this.getNewUserRechargeAmount().divide(new BigDecimal(this.getNewUserRechargePopulation()), 2, RoundingMode.HALF_UP);
+        if(this.getNewUserLoginCount() != 0){
+            result = this.getNewUserRechargeAmount().divide(new BigDecimal(this.getNewUserLoginCount()), 2, RoundingMode.HALF_UP);
         }
         return result;
     }
@@ -83,8 +83,8 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
      */
     public BigDecimal getOldUserARPU(){
         BigDecimal result = new BigDecimal(0.00);
-        if(this.getNewUserRechargeCount() != 0){
-            result = this.getOldUserRechargeAmount().divide(new BigDecimal(this.getOldUserRechargePopulation()), 2, RoundingMode.HALF_UP);
+        if(this.getOldUserLoginCount() != 0){
+            result = this.getOldUserRechargeAmount().divide(new BigDecimal(this.getOldUserLoginCount()), 2, RoundingMode.HALF_UP);
         }
         return result;
     }
@@ -119,6 +119,32 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
             return "0.00";
         }
         return numberFormat.format(((float) this.getOldUserLoginCount() / (float) oldRegisterPopulation) * 100);
+    }
+
+    /**
+     * 新用户ARPPU : “平均每付费用户收入”= 新用户充值金额/新用户充值人数
+     *
+     * @return
+     */
+    public BigDecimal getNewUserARPPU(){
+        BigDecimal result = new BigDecimal(0.00);
+        if(this.getNewUserRechargeCount() != 0){
+            result = this.getNewUserRechargeAmount().divide(new BigDecimal(this.getNewUserRechargePopulation()), 2, RoundingMode.HALF_UP);
+        }
+        return result;
+    }
+
+    /**
+     * 老用户ARPPU : “平均每付费用户收入”= 老用户充值金额/老用户充值人数
+     *
+     * @return
+     */
+    public BigDecimal getOldUserARPPU(){
+        BigDecimal result = new BigDecimal(0.00);
+        if(this.getNewUserRechargeCount() != 0){
+            result = this.getOldUserRechargeAmount().divide(new BigDecimal(this.getOldUserRechargePopulation()), 2, RoundingMode.HALF_UP);
+        }
+        return result;
     }
 
     public Float getNextDayKeepRate(){

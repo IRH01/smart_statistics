@@ -17,11 +17,11 @@ public class DailyCompositeService{
     private DailyCompositeReportMapper dailyCompositeReportMapper;
 
 
-    public JSONObject selectDailyCompositeListData(String startDate, String endDate, int pageNumber, int pageSize) throws Exception{
+    public PageInfo<DailyCompositeReportResult> selectDailyCompositeListData(String startDate, String endDate, int pageNumber, int pageSize) throws Exception{
         PageHelper.startPage(pageNumber, pageSize);
         List<DailyCompositeReportResult> dailyCompositeReportList = dailyCompositeReportMapper.selectDailyCompositeListData(startDate, endDate);
         PageInfo<DailyCompositeReportResult> pageInfo = new PageInfo<>(dailyCompositeReportList);
-        return JSONObject.fromObject(pageInfo);
+        return pageInfo;
     }
 
 }
