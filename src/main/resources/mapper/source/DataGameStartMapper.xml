@@ -7,14 +7,15 @@
         <result column="client_identity" property="clientIdentity" jdbcType="VARCHAR"/>
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="platform_terminal" property="platformTerminal" jdbcType="INTEGER"/>
-        <result column="platform_name" property="platformName" jdbcType="VARCHAR"/>
+        <result column="platform_code" property="platformCode" jdbcType="VARCHAR"/>
         <result column="platform_id" property="platformId" jdbcType="INTEGER"/>
+        <result column="platform_name" property="platformName" jdbcType="VARCHAR"/>
         <result column="website_domain" property="websiteDomain" jdbcType="VARCHAR"/>
         <result column="url_path" property="urlPath" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, country, client_identity, user_id, platform_terminal, platform_id,platform_Name, website_domain,
+        id, country, client_identity, user_id, platform_terminal,platform_code,platform_id,platform_Name, website_domain,
         url_path, create_time
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -23,17 +24,19 @@
         from data_game_start
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="selectYesterdayLaunchGameUser" resultType="java.util.Map">
+
+    <select id="selectLaunchGameUserByStartTimeAndEndTime" resultType="java.util.Map">
         SELECT
         platform_id AS platformId,
         platform_terminal AS sourceType,
         user_id AS userId
         FROM
         data_game_start
-        WHERE TO_DAYS(NOW()) - TO_DAYS(create_time) &lt;= 1
-        AND TO_DAYS(NOW()) - TO_DAYS(create_time) &gt; 0
+        WHERE create_time &lt;= #{endTime}
+        AND create_time &gt; #{startTime}
         GROUP BY platform_id,platform_terminal,user_id
     </select>
+
     <insert id="insert" parameterType="com.hhly.smartdata.model.source.DataGameStart">
         insert into data_game_start (id, country, client_identity,
         user_id, platform_terminal, platform_id,platform_Name,
@@ -163,26 +166,26 @@
         SELECT
         COUNT(id) AS gameStartCount,
         platform_terminal AS sourceType,
-        platform_id AS platformId,
+        platform_code AS platformCode,
         platform_name AS platformName
         FROM data_game_start
         WHERE
-        create_time &gt; DATE_SUB(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
-        AND create_time &lt;= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
-        GROUP BY platform_terminal,platform_id,platform_name
+        create_time &gt;= DATE_SUB(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
+        AND create_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+        GROUP BY platform_terminal,platform_code,platform_name
     </select>
 
     <select id="selectFirstThirtyMinGameStartCount" resultType="java.util.Map">
-        select platform_terminal as osType,count(DISTINCT(user_id)) as loginPopulation from data_platform_start
+        select DISTINCT(user_id) as userId,platform_terminal as osType from data_platform_start
         where country = 0
         <![CDATA[
-             and create_time> date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
+             and create_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
         ]]>
         <![CDATA[
-            and create_time <= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+            and create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-        and user_id is not null
-        group by platform_terminal
+        and user_id is not null and user_id != ''
+        group by platform_terminal,user_id
     </select>
 
 </mapper>

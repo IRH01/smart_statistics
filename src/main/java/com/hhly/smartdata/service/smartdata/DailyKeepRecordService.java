@@ -15,10 +15,9 @@ public class DailyKeepRecordService{
     @Autowired
     private DailyKeepRecordReportMapper dailyKeepRecordReportMapper;
 
-    public PageInfo<DailyKeepRecordReportResult> selectDailyKeepRecordListData(String startDate, String endDate, int pageNumber, int pageSize) throws Exception{
+    public PageInfo<DailyKeepRecordReportResult> selectDailyKeepRecordListData(String startDate, String endDate, int pageNumber, int pageSize,Integer  sourceType) throws Exception{
         PageHelper.startPage(pageNumber, pageSize);
-        List<DailyKeepRecordReportResult> dailyKeepRecordList = dailyKeepRecordReportMapper.selectDailyKeepRecordListData(startDate, endDate);
-        PageInfo<DailyKeepRecordReportResult> pageInfo = new PageInfo<DailyKeepRecordReportResult>(dailyKeepRecordList);
-        return pageInfo;
+        List<DailyKeepRecordReportResult> dailyKeepRecordList = dailyKeepRecordReportMapper.selectDailyKeepRecordListData(startDate, endDate, sourceType);
+        return new PageInfo<>(dailyKeepRecordList);
     }
 }

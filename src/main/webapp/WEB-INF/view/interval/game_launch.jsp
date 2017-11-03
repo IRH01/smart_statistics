@@ -76,49 +76,15 @@
                                                      class="ui-widget-content resize resizePanel">
                                                     <div class="sortHandle">分时段列表</div>
                                                     <div class="tablePanel">
-                                                        <table class="tableList1">
-                                                            <colgroup>
-                                                                <col width="120"/>
-                                                                <col width="90"/>
-                                                                <col width="100"/>
-                                                                <col width="100"/>
-                                                            </colgroup>
+                                                        <table id="tbDataList" class="tableList1" style="width: 2600px">
                                                             <thead>
-                                                            <tr>
-                                                                <th>日期</th>
-                                                                <th>撩妹德州</th>
-                                                                <th>乐盈电竞</th>
-                                                                <th>一比分</th>
-                                                            </tr>
+                                                                <tr>
+                                                                    <th width="100">平台</th>
+                                                                </tr>
                                                             </thead>
                                                             <tbody id="terminalsIntervalData"></tbody>
                                                         </table>
                                                     </div>
-                                                    <table class="tablePage">
-                                                        <tr>
-                                                            <td>
-                                                                <div class="divPage">
-                                                                    <span class="spanPageSize">每页个数：</span>
-                                                                    <input id="pageSize" value="10"
-                                                                           class="inputPageSize"
-                                                                           onKeypress="return intInput(event);"
-                                                                           onKeyup="value=pageSizeLimit(value);"
-                                                                           onblur="value=pageSizeNotEmpty(value);"/>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <span class="spanPageSize">总记录数：</span>
-                                                                <span id="totalCount" class="spanPageSize"></span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="spanPageSize">总页数：</span>
-                                                                <span id="totalPage" class="spanPageSize"></span>
-                                                            </td>
-                                                            <td class="tablePageTd">
-                                                                <div id="page"></div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
                                                 </div>
                                             </li>
                                             <li class="ui-state-default">
@@ -148,7 +114,7 @@
         "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00"];
 
     var date = new Date();
-    var seperator1 = "-";
+    var separator = "-";
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
     if (month >= 1 && month <= 9) {
@@ -157,7 +123,7 @@
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
-    var currentDate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+    var currentDate = date.getFullYear() + separator + month + separator + strDate
         + " ";
 
     $(function () {
@@ -205,6 +171,39 @@
         }
     }
 
+    // 添加表格列
+    var addTableTh = function (timeData) {
+        console.log(timeData)
+        $.each(timeData, function(i, n){
+            console.log('<th>'+ n +'</th>');
+            $("#tbDataList>thead>tr").append('<th width="60">'+ n +'</th>');
+        });
+    }
+
+    // 添加数据行
+    var addTableTr = function (dataList) {
+        console.log(dataList);
+        $.each(dataList, function(i, n){
+            var trHtml = '<tr><td class="date">'+n.name+'</td>';
+
+            $.each(n.list, function(j, m){
+                trHtml += '<td class="date">'+m.launchCount+'</td>'
+            });
+            $("#tbDataList>tbody").append(trHtml);
+        });
+    }
+
+    // 添加统计行
+    var addTableSumTr = function (data) {
+        console.log(data);
+        var trHtml = '<tr><td class="date">总计</td>';
+
+        $.each(data, function(j, m){
+            trHtml += '<td class="date">'+m.launchCount+'</td>'
+        });
+        $("#tbDataList>tbody").append(trHtml);
+    }
+
     var showTerminalsIntervalData = function (pageNumber, pageSize) {
         for (var i = 0; i < initSearchDate.length; i++) {
             $("#dateStarts").append("<option value='" + currentDate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
@@ -217,50 +216,22 @@
             pageNumber: pageNumber,
             pageSize: pageSize
         }, function (result) {
-            var json = result.data;
+            var json = result;
+            console.log(json);
             if (null != json && undefined != json) {
-                $("#totalCount").html(json.total);
-                $("#totalPage").html(json.pages);
-                $("#page").myPagination({
-                    currPage: pageNumber,
-                    pageCount: json.pages,
-                    ajax: {
-                        on: false,
-                        onClick: function (page) {
-                            showTerminalsIntervalData(page, pageSize);
-                        }
-                    }
-                });
-                var infoData = json.list;
+
+                //添加时间列
+                addTableTh(json.time);
+
+                var infoData = json.data;
                 if (null == infoData || undefined == infoData || 0 >= infoData.length) {
-                    $("#totalCount").html(0);
-                    $("#totalPage").html(0);
-                    $("#terminalsIntervalData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
+                    $("#terminalsIntervalData").append("<tr><td colspan=\"49\">没有数据</td></tr>");
                 } else {
-                    var sumlydj = 0;
-                    var sumybf = 0;
-                    var sumlmdz = 0;
-                    for (var i = 0; i < infoData.length; i++) {
-                        sumlmdz = accAdd(sumlmdz, infoData[i].lmdzlaunchCount);
-                        sumybf = accAdd(sumybf, infoData[i].ybflaunchCount);
-                        sumlydj = accAdd(sumlydj, infoData[i].lydjlaunchCount);
+                    //添加数据行
+                    addTableTr(json.data);
 
-                        var ele = {
-                            statisticsTime: infoData[i].statisticsTime,
-                            ybflaunchCount: infoData[i].ybflaunchCount,
-                            lmdzlaunchCount: infoData[i].lmdzlaunchCount,
-                            lydjlaunchCount: infoData[i].lydjlaunchCount
-                        }
-                        addTbRow1(ele);
-                    }
-
-                    var ele1 = {
-                        statisticsTime: "总计",
-                        ybflaunchCount: sumybf,
-                        lmdzlaunchCount: sumlmdz,
-                        lydjlaunchCount: sumlydj
-                    }
-                    addTbRow1(ele1);
+                    //添加统计行
+                    addTableSumTr(json.sumData);
                 }
             } else {
                 $("#totalCount").html(0);
@@ -311,30 +282,7 @@
                     legend: {
                         show: true,
                         orient: 'horizontal',
-                        data: [{
-                            name: '撩妹德州',
-                            textStyle: {
-                                fontSize: 12,
-                                color: '#666'
-                            },
-                            icon: 'roundRect'
-                        }, {
-                            name: '乐盈电竞',
-                            textStyle: {
-                                fontSize: 12,
-                                color: '#666'
-                            },
-                            icon: 'roundRect'
-                        }, {
-                            name: '一比分',
-                            textStyle: {
-                                fontSize: 12,
-                                color: '#666'
-                            },
-                            icon: 'roundRect'
-                        }
-                        ]
-
+                        data: json.platform
                     },
                     grid: {
                         borderWidth: 0,
@@ -346,80 +294,21 @@
                     xAxis: [{
                         type: 'category',
                         boundaryGap: false,
-                        data: initSearchDate,
+                        data: json.time,
                         splitLine: {
                             show: true,
                             lineStyle: {
                                 color: '#f5f5f5',
                                 width: 1,
                                 type: 'solid'
-                            }
-                        },
-                        axisTick: {
-                            show: true,
-                            lineStyle: {
-                                color: '#ccc',
-                                width: 1,
-                                type: 'solid'
-                            }
-                        },
-                        axisLine: {
-                            lineStyle: {
-                                color: '#ccc',
-                                width: 1,
-                                type: 'solid'
-                            }
-                        },
-                        axisLabel: {
-                            textStyle: {
-                                color: "#999"
                             }
                         }
                     }],
                     yAxis: [{
-                        type: 'value',
-                        axisLine: {
-                            show: true
-                        },
-                        axisTick: {
-                            show: true
-                        },
-                        axisLabel: {
-                            show: true,
-                            formatter: function (val) {
-                                return val;
-                            }
-                        },
-                        splitArea: {
-                            show: false
-                        },
-                        splitLine: {
-                            show: true,
-                            lineStyle: {
-                                color: '#f5f5f5',
-                                width: 1,
-                                type: 'solid'
-                            }
-                        }
+                        type: 'value'
                     }],
 
-                    series: [
-                        {
-                            name: '撩妹德州',
-                            type: 'line',
-                            data: json.lmdzList
-                        },
-                        {
-                            name: '乐盈电竞',
-                            type: 'line',
-                            data: json.yydjList
-                        },
-                        {
-                            name: '一比分',
-                            type: 'line',
-                            data: json.ybfList
-                        }
-                    ]
+                    series: json.data
                 });
 
             }

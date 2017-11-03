@@ -52,7 +52,7 @@ public class DailyCompositeReport{
     /**
      * 新用户充值金额
      */
-    private BigDecimal newUserRechargeAmount = new BigDecimal(0);
+    private BigDecimal newUserRechargeAmount = new BigDecimal(0.00);
 
     /**
      * 新用户登录人数
@@ -77,7 +77,7 @@ public class DailyCompositeReport{
     /**
      * 老用户充值金额
      */
-    private BigDecimal oldUserRechargeAmount = new BigDecimal(0);
+    private BigDecimal oldUserRechargeAmount = new BigDecimal(0.00);
 
     /**
      * 老用户登录人数
@@ -172,7 +172,7 @@ public class DailyCompositeReport{
     }
 
     public BigDecimal getNewUserRechargeAmount(){
-        return newUserRechargeAmount;
+        return newUserRechargeAmount.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     public void setNewUserRechargeAmount(BigDecimal newUserRechargeAmount){
@@ -216,7 +216,7 @@ public class DailyCompositeReport{
     }
 
     public void setOldUserRechargeAmount(BigDecimal oldUserRechargeAmount){
-        this.oldUserRechargeAmount = oldUserRechargeAmount;
+        this.oldUserRechargeAmount = oldUserRechargeAmount.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     public Integer getOldUserLoginCount(){

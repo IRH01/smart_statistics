@@ -20,6 +20,6 @@ public interface DataInterfaceInvokeMapper {
 
     int updateByPrimaryKey(DataInterfaceInvoke record) throws Exception;
 
-    List<Map<String, Object>> findDataInterfaceInvokeList(@Param("startDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
+    List<Map<String, Object>> findDataInterfaceInvokeList(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
 
 }

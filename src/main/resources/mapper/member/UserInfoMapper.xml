@@ -52,18 +52,11 @@
         where user_id = #{userId,jdbcType=VARCHAR}
     </select>
 
-    <select id="findUserInfoByTime" resultType="java.lang.Integer"
-            >
+    <select id="findUserInfoByTime" resultType="java.lang.Integer">
         select count(user_id) from tbl_user_info
         where country = 0
-        <![CDATA[
-             and create_time> date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
-  	    ]]>
-        <![CDATA[
-             and create_time<=DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
-
-
-        ]]>
+        and create_time &gt;= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
+        and create_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
     </select>
 
     <select id="selectOldRegisterUser" resultType="java.lang.String">
@@ -74,25 +67,53 @@
         WHERE TO_DAYS(NOW()) - TO_DAYS(create_time) &gt; 1
     </select>
 
-    <select id="selectFirstThirtyMinRegister" resultType="java.util.Map" >
-        select os_type as osType, count(DISTINCT(user_id)) as register_population from tbl_user_info where
-        <![CDATA[
-              create_time > date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
-  		]]>
-        and
-        <![CDATA[
-  		      create_time <= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
-  		]]>
-        group by os_type
-    </select>
-
-    <select id="selectBeforeHowManyDayRegisterUser" resultType="java.lang.String">
+    <select id="selectOldRegisterUserByTime" resultType="java.lang.String">
         SELECT
         user_id as UserId
         FROM
         tbl_user_info
+        WHERE create_time &lt; #{time}
+    </select>
+
+    <select id="selectFirstThirtyMinRegister" resultType="java.util.Map">
+        SELECT
+        os_type as osType,
+        count(DISTINCT(user_id)) as registerPopulation
+        from tbl_user_info
+        WHERE
+        create_time &gt;= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
+        AND
+        create_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+        GROUP BY os_type
+    </select>
+
+    <select id="selectBeforeHowManyDayRegisterUser" resultType="java.util.Map">
+        SELECT
+        user_id as UserId,
+        os_type as osType
+        FROM
+        tbl_user_info
         WHERE TO_DAYS(NOW()) - TO_DAYS(create_time) &lt;= #{days}
-        AND TO_DAYS(NOW()) - TO_DAYS(create_time) &gt;= (#{days} - 1)
+        AND TO_DAYS(NOW()) - TO_DAYS(create_time) >= (#{days} - 1)
+    </select>
+
+    <select id="selectRegisterUserByStartTimeAndEndTime" resultType="java.util.Map">
+        SELECT
+        user_id as UserId,
+        os_type as osType
+        FROM
+        tbl_user_info
+        WHERE create_time &lt;= #{endTime}
+        AND create_time >= #{startTime}
+    </select>
+
+    <select id="selectUserIdByStartTimeAndEndTime" resultType="java.lang.String">
+        SELECT
+        user_id as UserId
+        FROM
+        tbl_user_info
+        WHERE create_time &lt;= #{endTime}
+        AND create_time &gt;= #{startTime}
     </select>
 
     <select id="selectYesterdayRegisterUserIdAndTerminal" resultType="java.util.Map">
@@ -106,6 +127,19 @@
         AND TO_DAYS(NOW()) - TO_DAYS(create_time) &gt;= 0
         group by osType
     </select>
+
+    <select id="selectRegisterUserIdAndTerminalByStartTimeAndEndTime" resultType="java.util.Map">
+        SELECT
+        count(user_id) as UserCount,
+        os_type as osType
+        FROM
+        tbl_user_info
+        WHERE country =0
+        AND create_time &lt;= #{endTime}
+        AND create_time &gt;= #{startTime}
+        group by osType
+    </select>
+
     <select id="selectUserCount" resultType="java.lang.Long">
         SELECT
         count(user_id)

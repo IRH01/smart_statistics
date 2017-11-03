@@ -16,7 +16,7 @@ public class DailyLoginReport{
     /**
      * 游戏编码
      */
-    private Integer platformId = 0;
+    private String platformCode = "";
 
     /**
      * 源端类型：1、PC 2.H5 3.IOS 4.android
@@ -59,12 +59,12 @@ public class DailyLoginReport{
         this.statisticsDay = statisticsDay;
     }
 
-    public Integer getPlatformId(){
-        return platformId;
+    public String getPlatformCode(){
+        return platformCode;
     }
 
-    public void setPlatformId(Integer platformId){
-        this.platformId = platformId;
+    public void setPlatformCode(String platformCode){
+        this.platformCode = platformCode;
     }
 
     public Byte getSourceType(){

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 /**
  * Created by Iritchie.ren on 2017/9/25.
  */
@@ -23,10 +25,11 @@ public class DailyExecutor{
      */
     @Scheduled(cron = "* * 1 * * MON-FRI")
     public void dailyCompositeExecutor(){
+        Date now = new Date();
         try{
-            this.dailyExecutorService.compositeReport();
+            this.dailyExecutorService.compositeReport(now);
         }catch(Exception e){
-            LOGGER.error("定时器执行失败"+ e.getMessage());
+            LOGGER.error("定时器执行失败" + e.getMessage());
         }
     }
 
@@ -35,10 +38,11 @@ public class DailyExecutor{
      */
     @Scheduled(cron = "* * 1 * * MON-FRI")
     public void dailyRegisterSchedule(){
+        Date now = new Date();
         try{
-            dailyExecutorService.registerStatistic();
+            dailyExecutorService.registerStatistic(now);
         }catch(Exception ex){
-            LOGGER.error("定时器执行失败"+ ex.getMessage());
+            LOGGER.error("定时器执行失败" + ex.getMessage());
         }
     }
 
@@ -47,8 +51,9 @@ public class DailyExecutor{
      */
     @Scheduled(cron = "* * 1 * * MON-FRI")
     public void rechargeExecutor(){
+        Date now = new Date();
         try{
-            dailyExecutorService.rechargeStatistic();
+            dailyExecutorService.rechargeStatistic(now);
         }catch(Exception ex){
             LOGGER.error("定时器执行失败" + ex.getMessage());
         }
@@ -59,10 +64,11 @@ public class DailyExecutor{
      */
     @Scheduled(cron = "* * 1 * * MON-FRI")
     public void loginSourceExecutor(){
+        Date now = new Date();
         try{
-            dailyExecutorService.loginStatistic();
+            dailyExecutorService.loginStatistic(now);
         }catch(Exception ex){
-            LOGGER.error("定时器执行失败"+ ex.getMessage());
+            LOGGER.error("定时器执行失败" + ex.getMessage());
         }
     }
 
@@ -71,10 +77,11 @@ public class DailyExecutor{
      */
     @Scheduled(cron = "* * 1 * * MON-FRI")
     public void keepRecordAnalyzeExecutor(){
+        Date now = new Date();
         try{
-            dailyExecutorService.keepRecordAnalyzeReport();
+            dailyExecutorService.keepRecordAnalyzeReport(now);
         }catch(Exception e){
-            LOGGER.error("定时器执行失败"+ e.getMessage());
+            LOGGER.error("定时器执行失败" + e.getMessage());
         }
     }
 }

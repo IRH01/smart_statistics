@@ -29,14 +29,19 @@ public class DataGameStart{
     private Integer platformTerminal = 0;
 
     /**
-     * 平台名称
+     * 平台游戏编码
      */
-    private String platformName = "";
+    private String platformCode = "";
 
     /**
      * 平台Id:默认为玩一下平台;PC=1,移动端为31111
      */
+
     private Integer platformId = 0;
+    /**
+     * 平台名称
+     */
+    private String platformName = "";
 
     /**
      * 域名
@@ -93,6 +98,14 @@ public class DataGameStart{
         this.platformTerminal = platformTerminal;
     }
 
+    public String getPlatformCode(){
+        return platformCode;
+    }
+
+    public void setPlatformCode(String platformCode){
+        this.platformCode = platformCode;
+    }
+
     public Integer getPlatformId(){
         return platformId;
     }
@@ -131,7 +144,6 @@ public class DataGameStart{
 
     public void setCreateTime(Date createTime){
         this.createTime = createTime;
-
     }
 
 }

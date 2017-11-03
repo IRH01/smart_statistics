@@ -92,6 +92,16 @@
                                                                     <td><input class="laydate-icon" id="dateEnd"
                                                                                style="height:25px;" placeholder="请选择日期"
                                                                                readonly></td>
+                                                                    <td class="tb1Td">
+                                                                        <span class="span">终端：</span>
+                                                                    </td>
+                                                                    <td><select id="sourceType">
+                                                                        <option value="" selected>请选择</option>
+                                                                        <option value="1">PC</option>
+                                                                        <option value="2">H5</option>
+                                                                        <option value="3">IOS</option>
+                                                                        <option value="4">ANDROID</option>
+                                                                    </select></td>
                                                                     <td style="line-height:1;">
                                                                         <button type="button" id="search"
                                                                                 class="btn btn-primary btn-sm"
@@ -174,22 +184,24 @@
     setDateRangeConfig("dateStart", "dateEnd", null, true);
 
     var showTbCl = function () {
-        $("#data").append("<tr><td rowspan=\"2\">日期</td><td rowspan=\"2\">新增用户</td>\n" +
+        $("#data").append("<tr><td rowspan=\"2\">日期</td><td rowspan=\"2\">终端</td><td rowspan=\"2\">新增用户</td>\n" +
             "<td colspan=\"9\">留存率</td></tr><tr><td>1天后</td><td>2天后</td><td>3天后</td><td>4天后</td>" +
             "<td>5天后</td><td>6天后</td><td>7天后</td><td>14天后</td><td>30天后</td></tr>");
     };
 
     var addTbRow = function (data) {
         if (null != data && undefined != data && "" != data) {
-            var ele = "<tr><td class=\"date\">statisticsDay</td><td>registerCount</td><td>oneRemain</td><td>twoRemain</td>" +
+            var ele = "<tr><td class=\"date\">statisticsDay</td><td>sourceType</td><td>registerCount</td><td>oneRemain</td><td>twoRemain</td>" +
                 "<td>threeRemain</td><td>fourRemain</td><td>fiveRemain</td><td>sixRemain</td><td>sevenRemain</td><td>fourteenRemain</td><td>thirtyRemain</td></tr>";
-            ele = ele.replace("statisticsDay", data.statisticsDay).replace("registerCount", data.registerCount)
+            ele = ele.replace("statisticsDay", data.statisticsDay).replace("sourceType", data.sourceType).replace("registerCount", data.registerCount)
                 .replace("oneRemain", data.oneRemain).replace("twoRemain", data.twoRemain).replace("threeRemain", data.threeRemain)
                 .replace("fourRemain", data.fourRemain).replace("fiveRemain", data.fiveRemain).replace("sixRemain", data.sixRemain)
                 .replace("sevenRemain", data.sevenRemain).replace("fourteenRemain", data.fourteenRemain).replace("thirtyRemain", data.thirtyRemain);
             $("#data").append(ele);
         }
     };
+
+
 
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
@@ -198,6 +210,7 @@
         $.post("/daily/keep/record/list.do", {
             startDate: $('#dateStart').val(),
             endDate: $('#dateEnd').val(),
+            sourceType:$("#sourceType").val(),
             pageNumber: pageNumber,
             pageSize: pageSize
         }, function (result) {
@@ -245,6 +258,7 @@
                         thirtyNum = accDiv(accAdd(thirtyNum, infoData[i].thirtyPercent), count);
                         var ele = {
                             statisticsDay: infoData[i].statisticsDay,
+                            sourceType:infoData[i].sourceType,
                             registerCount: infoData[i].registerCount,
                             oneRemain: infoData[i].oneRemain + "(" + convertToPercentFormat(infoData[i].onePercent) + ")",
                             twoRemain: infoData[i].twoRemain + "(" + convertToPercentFormat(infoData[i].twoPercent) + ")",
@@ -260,7 +274,8 @@
                     }
 
                     var ele1 = {
-                        statisticsDay: "总计",
+                        statisticsDay:"",
+                        sourceType: "总计",
                         registerCount: registerCountNum,
                         oneRemain: oneNum,
                         twoRemain: twoNum,

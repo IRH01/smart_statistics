@@ -4,7 +4,7 @@ package com.hhly.smartdata.model.smartdata;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class IntervalSourceReport {
+public class IntervalSourceReport{
     /**
      * 平台实时统计，各端实时统计
      */
@@ -48,7 +48,7 @@ public class IntervalSourceReport {
     /**
      * 充值金额
      */
-    private BigDecimal rechargeAmount = new BigDecimal(0);
+    private BigDecimal rechargeAmount = new BigDecimal(0.00);
 
     /**
      * 统计执行日期
@@ -121,7 +121,7 @@ public class IntervalSourceReport {
     }
 
     public BigDecimal getRechargeAmount(){
-        return rechargeAmount;
+        return rechargeAmount.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     public void setRechargeAmount(BigDecimal rechargeAmount){
@@ -135,6 +135,4 @@ public class IntervalSourceReport {
     public void setExecuteTime(Date executeTime){
         this.executeTime = executeTime;
     }
-
-
 }

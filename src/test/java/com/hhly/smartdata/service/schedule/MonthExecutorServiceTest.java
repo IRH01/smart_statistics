@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Date;
+
 /**
  * MonthExecutorService Tester.
  *
@@ -25,7 +27,7 @@ public class MonthExecutorServiceTest extends BaseTest{
      */
     @Test
     public void testCompositeReport() throws Exception{
-        this.monthExecutorService.compositeReport();
+        this.monthExecutorService.compositeReport(new Date());
     }
 
     /**
@@ -33,7 +35,7 @@ public class MonthExecutorServiceTest extends BaseTest{
      */
     @Test
     public void testRegisterReport() throws Exception{
-        this.monthExecutorService.registerReport();
+        this.monthExecutorService.registerReport(new Date());
     }
 
     /**
@@ -41,7 +43,7 @@ public class MonthExecutorServiceTest extends BaseTest{
      */
     @Test
     public void testRechargeReport() throws Exception{
-        this.monthExecutorService.rechargeReport();
+        this.monthExecutorService.rechargeReport(new Date());
     }
 
     /**
@@ -49,6 +51,6 @@ public class MonthExecutorServiceTest extends BaseTest{
      */
     @Test
     public void testLoginSourceReport() throws Exception{
-        this.monthExecutorService.loginSourceReport();
+        this.monthExecutorService.loginSourceReport(new Date());
     }
 } 

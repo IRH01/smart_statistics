@@ -18,31 +18,7 @@
         <javaClientGenerator targetPackage="com.hhly.generator.dao"
                              targetProject="${generator.dir}"
                              type="XMLMAPPER"/>
-        <table tableName="tbl_user_info" domainObjectName="UserInfo"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"
-               enableDeleteByPrimaryKey="false"
-               enableInsert="true"
-               enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-        />
-
-        <table tableName="tbl_login_track" domainObjectName="LoginTrack"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"
-               enableDeleteByPrimaryKey="false"
-               enableInsert="true"
-               enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-        />
-
-        <table tableName="tbl_recharge_record" domainObjectName="RechargeRecord"
+        <table tableName="tbl_system_config" domainObjectName="SystemConfig"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

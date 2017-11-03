@@ -286,7 +286,7 @@
                     xAxis: [{
                         type: 'category',
                         boundaryGap: false,
-                        data: initSearchDate,
+                        data: json.scales,
                         splitLine: {
                             show: true,
                             lineStyle: {

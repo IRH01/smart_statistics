@@ -47,7 +47,7 @@ public class MonthCompositeReport{
     /**
      * 新用户充值金额
      */
-    private BigDecimal newUserRechargeAmount = new BigDecimal(0);
+    private BigDecimal newUserRechargeAmount = new BigDecimal(0.00);
 
     /**
      * 新用户登录人数
@@ -77,7 +77,7 @@ public class MonthCompositeReport{
     /**
      * 老用户充值金额
      */
-    private BigDecimal oldUserRechargeAmount = new BigDecimal(0);
+    private BigDecimal oldUserRechargeAmount = new BigDecimal(0.00);
 
     /**
      * 老用户登录人数
@@ -169,7 +169,7 @@ public class MonthCompositeReport{
     }
 
     public void setNewUserRechargeAmount(BigDecimal newUserRechargeAmount){
-        this.newUserRechargeAmount = newUserRechargeAmount;
+        this.newUserRechargeAmount = newUserRechargeAmount.setScale(2, BigDecimal.ROUND_HALF_UP);;
     }
 
     public Integer getNewUserLoginCount(){
@@ -213,7 +213,7 @@ public class MonthCompositeReport{
     }
 
     public BigDecimal getOldUserRechargeAmount(){
-        return oldUserRechargeAmount;
+        return oldUserRechargeAmount.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     public void setOldUserRechargeAmount(BigDecimal oldUserRechargeAmount){

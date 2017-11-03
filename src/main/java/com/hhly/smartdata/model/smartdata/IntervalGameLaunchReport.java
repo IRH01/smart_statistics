@@ -26,7 +26,7 @@ public class IntervalGameLaunchReport{
     /**
      * 平台id或游戏id
      */
-    private Integer platformId = 0;
+    private String platformCode = "";
 
     /**
      * 平台名称或游戏名称
@@ -67,12 +67,12 @@ public class IntervalGameLaunchReport{
         this.intervalTime = intervalTime;
     }
 
-    public Integer getPlatformId(){
-        return platformId;
+    public String getPlatformCode(){
+        return platformCode;
     }
 
-    public void setPlatformId(Integer platformId){
-        this.platformId = platformId;
+    public void setPlatformCode(String platformCode){
+        this.platformCode = platformCode;
     }
 
     public String getPlatformName(){

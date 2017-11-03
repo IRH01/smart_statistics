@@ -1,0 +1,35 @@
+#####
+#时段统计情况需要注意：统计临界值是以整点30分钟为界限，界限分别为……9:30  10:00  10:30……
+#程序自动定时统计，延后5分钟执行前面整30分钟内的数据，例如10:35执行统计的是10：00 ~ 10:30段的数据。
+#手动触发统计，是统计当前时间所在整30分钟内数据，例如10:35执行统计的是10：30 ~ 11:00段的数据。
+####################################
+##时段统计-实时统计，各端统计
+http://192.168.74.163:8086/interval/executor/source/statistics.do?statisticsTime='2017-11-01 10:00:00'
+##时段统计-实时统计，接口统计
+http://192.168.74.163:8086/interval/executor/interface/statistics.do?statisticsTime='2017-11-01 10:00:00'
+##时段统计-实时统计，游戏启动统计
+http://192.168.74.163:8086/interval/executor/game/launch.do?statisticsTime='2017-11-01 10:00:00'
+
+
+##日统计，综合报表统计
+####统计的是url参数代表的时间的那天数据
+http://192.168.74.163:8086/daily/executor/composite.do?statisticsTime='2017-11-01 10:00:00'
+##日统计，注册来源统计
+http://192.168.74.163:8086/daily/executor/register.do?statisticsTime='2017-11-01 10:00:00'
+##日统计，充值来源统计
+http://192.168.74.163:8086/daily/executor/recharge.do?statisticsTime='2017-11-01 10:00:00'
+##日统计，登录来源统计
+http://192.168.74.163:8086/daily/executor/login/source.do?statisticsTime='2017-11-01 10:00:00'
+##日统计，留存分析统计
+http://192.168.74.163:8086/daily/executor/keep/record/analyze.do?statisticsTime='2017-11-01 10:00:00'
+
+
+##月统计，月综合报表统计
+####统计的是url参数代表的时间的那月数据
+http://192.168.74.163:8086/month/executor/composite/report.do?statisticsTime='2017-11-01 10:00:00'
+##月统计，注册来源统计
+http://192.168.74.163:8086/month/executor/register.do?statisticsTime='2017-11-01 10:00:00'
+##月统计，充值来源统计
+http://192.168.74.163:8086/month/executor/recharge.do?statisticsTime='2017-11-01 10:00:00'
+##月统计，各端来源统计
+http://192.168.74.163:8086/month/executor/login/source.do?statisticsTime='2017-11-01 10:00:00'

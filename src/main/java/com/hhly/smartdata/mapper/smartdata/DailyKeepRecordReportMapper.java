@@ -20,7 +20,7 @@ public interface DailyKeepRecordReportMapper {
 
     int updateByPrimaryKey(DailyKeepRecordReport record) throws Exception;
 
-    List<DailyKeepRecordReportResult> selectDailyKeepRecordListData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
+    List<DailyKeepRecordReportResult> selectDailyKeepRecordListData(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("sourceType") Integer sourceType) throws Exception;
 
     Float selectAverageOneKeep(@Param("startDay") String startDay, @Param("endDay") String endDay) throws Exception;
 

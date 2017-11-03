@@ -219,7 +219,7 @@
                 "<td>oldUserARPPU</td>" +
                 "<td>oldUserLoginCount</td>" +
                 "<td>oldUserPlayCount</td>" +
-                "<td>oldUserPlayRate</td>" +
+                "<td>oldUserLoginTransformRate</td>" +
                 "<td>nextDayKeepRate</td>";
             ele = ele.replace("statisticsMonth", data.statisticsMonth)
                 .replace("registerPopulation", data.registerPopulation)
@@ -244,7 +244,7 @@
                 .replace("oldUserARPPU", data.oldUserARPPU)
                 .replace("oldUserLoginCount", data.oldUserLoginCount)
                 .replace("oldUserPlayCount", data.oldUserPlayCount)
-                .replace("oldUserPlayRate", data.oldUserPlayRate)
+                .replace("oldUserLoginTransformRate", data.oldUserLoginTransformRate)
                 .replace("nextDayKeepRate", data.nextDayKeepRate);
             $("#data").append(ele);
         }
@@ -303,7 +303,7 @@
                     totalInfo.oldUserARPPU = "-";
                     totalInfo.oldUserLoginCount = 0;
                     totalInfo.oldUserPlayCount = 0;
-                    totalInfo.oldUserPlayRate = "-";
+                    totalInfo.oldUserLoginTransformRate = "-";
                     totalInfo.nextDayKeepRate = "-";
                     for (var i = 0; i < infoData.length; i++) {
                         addTbRow(infoData[i]);

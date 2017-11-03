@@ -171,13 +171,13 @@
     var addTbRow = function (data) {
         if (null != data && undefined != data && "" != data) {
             var ele = "<tr><td class=\"date\" style=\"width:100px;\">statisticsDay</td><td>registerPopulation</td><td>registerExpCount</td><td>registerExpCountRate</td><td>realExpCount</td><td>virtualExpCount</td><td>newUserRechargePopulation</td><td>newUserRechargeCount</td><td>newUserRechargeAmount</td><td>newUserRechargeRate</td><td>newUserARPU</td>" +
-                "<td>newUserARPPU</td><td>newUserLoginCount</td><td>newUserPlayCount</td><td>newUserPlayRate</td><td>oldUserRechargePopulation</td><td>oldUserRechargeCount</td><td>oldUserRechargeAmount</td><td>oldUserRechargeRate</td><td>oldUserARPU</td><td>oldUserARPPU</td><td>oldUserLoginCount</td><td>oldUserPlayCount</td><td>oldUserPlayRate</td>" +
+                "<td>newUserARPPU</td><td>newUserLoginCount</td><td>newUserPlayCount</td><td>newUserLoginTransformRate</td><td>oldUserRechargePopulation</td><td>oldUserRechargeCount</td><td>oldUserRechargeAmount</td><td>oldUserRechargeRate</td><td>oldUserARPU</td><td>oldUserARPPU</td><td>oldUserLoginCount</td><td>oldUserPlayCount</td><td>oldUserLoginTransformRate</td>" +
                 "<td>nextDayStayCount</td><td>nextDayStayRate</td></tr>";
             ele = ele.replace("statisticsDay", data.statisticsDay).replace("registerPopulation", data.registerPopulation).replace("registerExpCount", data.registerExpCount).replace("registerExpCountRate", data.registerExpCountRate).replace("realExpCount", data.realExpCount).replace("virtualExpCount", data.virtualExpCount).replace("newUserRechargePopulation", data.newUserRechargePopulation).replace("newUserRechargeCount", data.newUserRechargeCount)
                 .replace("newUserRechargeAmount", data.newUserRechargeAmount).replace("newUserRechargeRate", data.newUserRechargeRate).replace("newUserARPU", data.newUserARPU).replace("newUserARPPU", data.newUserARPPU)
-                .replace("newUserLoginCount", data.newUserLoginCount).replace("newUserPlayCount", data.newUserPlayCount).replace("newUserPlayRate", data.newUserPlayRate).replace("oldUserRechargePopulation", data.oldUserRechargePopulation)
+                .replace("newUserLoginCount", data.newUserLoginCount).replace("newUserPlayCount", data.newUserPlayCount).replace("newUserLoginTransformRate", data.newUserLoginTransformRate).replace("oldUserRechargePopulation", data.oldUserRechargePopulation)
                 .replace("oldUserRechargeCount", data.oldUserRechargeCount).replace("oldUserRechargeAmount", data.oldUserRechargeAmount).replace("oldUserRechargeRate", data.oldUserRechargeRate).replace("oldUserARPU", data.oldUserARPU).replace("oldUserARPPU", data.oldUserARPPU)
-                .replace("oldUserLoginCount", data.oldUserLoginCount).replace("oldUserPlayCount", data.oldUserPlayCount).replace("oldUserPlayRate", data.oldUserPlayRate).replace("nextDayStayCount", data.nextDayStayCount).replace("nextDayStayRate", data.nextDayStayRate);
+                .replace("oldUserLoginCount", data.oldUserLoginCount).replace("oldUserPlayCount", data.oldUserPlayCount).replace("oldUserLoginTransformRate", data.oldUserLoginTransformRate).replace("nextDayStayCount", data.nextDayStayCount).replace("nextDayStayRate", data.nextDayStayRate);
             $("#data").append(ele);
         }
     };
@@ -225,7 +225,7 @@
                     var newUserARPPUNum = 0;
                     var newUserLoginCountNum = 0;
                     var newUserPlayCountNum = 0;
-                    var newUserPlayRateNum = 0;
+                    var newUserLoginTransformRateNum = 0;
                     var oldUserRechargePopulationNum = 0;
                     var oldUserRechargeCountNum = 0;
                     var oldUserRechargeAmountNum = 0;
@@ -234,7 +234,7 @@
                     var oldUserARPPUNum = 0;
                     var oldUserLoginCountNum = 0;
                     var oldUserPlayCountNum = 0;
-                    var oldUserPlayRateNum = 0;
+                    var oldUserLoginTransformRateNum = 0;
                     var nextDayStayCountNum = 0;
                     var nextDayStayRateNums = 0;
                     var count = infoData.length;
@@ -253,7 +253,7 @@
                         newUserARPPUNum = accAdd(newUserARPPUNum, infoData[i].newUserARPPU);
                         newUserLoginCountNum = accAdd(newUserLoginCountNum, infoData[i].newUserLoginCount);
                         newUserPlayCountNum = accAdd(newUserPlayCountNum, infoData[i].newUserPlayCount);
-                        newUserPlayRateNum = accAdd(newUserPlayRateNum, accDiv(infoData[i].newUserLoginCount, infoData[i].registerPopulation));
+                        newUserLoginTransformRateNum = accAdd(newUserLoginTransformRateNum, accDiv(infoData[i].newUserLoginCount, infoData[i].registerPopulation));
 
                         oldUserRechargePopulationNum = accAdd(oldUserRechargePopulationNum, infoData[i].oldUserRechargePopulation);
                         oldUserRechargeCountNum = accAdd(oldUserRechargeCountNum, infoData[i].oldUserRechargeCount);
@@ -263,7 +263,7 @@
                         oldUserARPPUNum = accAdd(oldUserARPPUNum, infoData[i].oldUserARPPU);
                         oldUserLoginCountNum = accAdd(oldUserLoginCountNum, infoData[i].oldUserLoginCount);
                         oldUserPlayCountNum = accAdd(oldUserPlayCountNum, infoData[i].oldUserPlayCount);
-                        oldUserPlayRateNum = accAdd(oldUserPlayRateNum, accDiv(infoData[i].oldUserLoginCount, infoData[i].registerPopulation));
+                        oldUserLoginTransformRateNum = accAdd(oldUserLoginTransformRateNum, accDiv(infoData[i].oldUserLoginCount, infoData[i].registerPopulation));
 
                         nextDayStayCountNum = accAdd(nextDayStayCountNum, infoData[i].nextDayStayCount);
                         nextDayStayRateNums = accAdd(nextDayStayRateNums, accDiv(infoData[i].oldUserLoginCount, infoData[i].registerPopulation));
@@ -278,29 +278,29 @@
                             statisticsDay: infoData[i].statisticsDay,
                             registerPopulation: infoData[i].registerPopulation,
                             registerExpCount: infoData[i].registerExpCount,
-                            registerExpCountRate: convertToPercentFormat(accDiv(infoData[i].registerExpCount, infoData[i].registerPopulation)),
+                            registerExpCountRate: infoData[i].registerExpCountRate,
                             realExpCount: infoData[i].realExpCount,
                             virtualExpCount: infoData[i].virtualExpCount,
                             newUserRechargePopulation: infoData[i].newUserRechargePopulation,
                             newUserRechargeCount: infoData[i].newUserRechargeCount,
                             newUserRechargeAmount: infoData[i].newUserRechargeAmount,
-                            newUserRechargeRate: convertToPercentFormat(accDiv(infoData[i].newUserRechargePopulation, infoData[i].registerPopulation)),
-                            newUserARPU: accDiv(infoData[i].newUserRechargeAmount, infoData[i].newUserLoginCount),
-                            newUserARPPU: accDiv(infoData[i].newUserRechargeAmount, infoData[i].newUserRechargePopulation),
+                            newUserRechargeRate: infoData[i].newUserRechargeRate,
+                            newUserARPU: infoData[i].newUserARPU,
+                            newUserARPPU: infoData[i].newUserARPPU,
                             newUserLoginCount: infoData[i].newUserLoginCount,
                             newUserPlayCount: infoData[i].newUserPlayCount,
-                            newUserPlayRate: convertToPercentFormat(accDiv(infoData[i].newUserLoginCount, infoData[i].registerPopulation)),
+                            newUserLoginTransformRate: infoData[i].newUserLoginTransformRate,
                             oldUserRechargePopulation: infoData[i].oldUserRechargePopulation,
                             oldUserRechargeCount: infoData[i].oldUserRechargeCount,
                             oldUserRechargeAmount: infoData[i].oldUserRechargeAmount,
-                            oldUserRechargeRate: convertToPercentFormat(accDiv(infoData[i].oldUserRechargePopulation, infoData[i].registerPopulation)),
-                            oldUserARPU: accDiv(infoData[i].oldUserRechargeAmount, infoData[i].oldUserLoginCount),
-                            oldUserARPPU: accDiv(infoData[i].oldUserRechargeAmount, infoData[i].oldUserRechargePopulation),
+                            oldUserRechargeRate: infoData[i].oldUserRechargeRate,
+                            oldUserARPU: infoData[i].oldUserARPU,
+                            oldUserARPPU: infoData[i].oldUserARPPU,
                             oldUserLoginCount: infoData[i].oldUserLoginCount,
                             oldUserPlayCount: infoData[i].oldUserPlayCount,
-                            oldUserPlayRate: convertToPercentFormat(accDiv(infoData[i].oldUserLoginCount, infoData[i].registerPopulation)),
+                            oldUserLoginTransformRate: infoData[i].oldUserLoginTransformRate,
                             nextDayStayCount: infoData[i].nextDayStayCount,
-                            nextDayStayRate: convertToPercentFormat(nextDayStayRateNum)
+                            nextDayStayRate: infoData[i].nextDayStayRate
                         };
                         addTbRow(ele);
                     }
@@ -320,7 +320,7 @@
                         newUserARPPU: newUserARPPUNum,
                         newUserLoginCount: newUserLoginCountNum,
                         newUserPlayCount: newUserPlayCountNum,
-                        newUserPlayRate: accDiv(newUserPlayRateNum, count),
+                        newUserLoginTransformRate: accDiv(newUserLoginTransformRateNum, count),
                         oldUserRechargePopulation: oldUserRechargePopulationNum,
                         oldUserRechargeCount: oldUserRechargeCountNum,
                         oldUserRechargeAmount: oldUserRechargeAmountNum,
@@ -329,7 +329,7 @@
                         oldUserARPPU: oldUserARPPUNum,
                         oldUserLoginCount: oldUserLoginCountNum,
                         oldUserPlayCount: oldUserPlayCountNum,
-                        oldUserPlayRate: accDiv(oldUserPlayRateNum, count),
+                        oldUserLoginTransformRate: accDiv(oldUserLoginTransformRateNum, count),
                         nextDayStayCount: nextDayStayCountNum,
                         nextDayStayRate: accDiv(nextDayStayRateNums, count)
                     };

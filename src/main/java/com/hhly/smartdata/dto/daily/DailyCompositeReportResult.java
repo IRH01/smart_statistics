@@ -12,6 +12,13 @@ import java.text.NumberFormat;
 public class DailyCompositeReportResult extends DailyCompositeReport{
 
     /**
+     * 次日留存率=次日登录的用户数/前一日注册的用户数*100%
+     *
+     * @return
+     */
+    private String nextDayStayRate;
+
+    /**
      * 注册体验率(%)=体验人数/注册人数*100%
      *
      * @return
@@ -103,7 +110,7 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      *
      * @return
      */
-    public String getOldUserPlayRate(){
+    public String getOldUserLoginTransformRate(){
         NumberFormat numberFormat = NumberFormat.getInstance();
         // 设置精确到小数点后2位
         numberFormat.setMaximumFractionDigits(2);
@@ -138,5 +145,25 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
             result = this.getOldUserRechargeAmount().divide(new BigDecimal(this.getOldUserRechargePopulation()), 2, RoundingMode.HALF_UP);
         }
         return result;
+    }
+
+    public String getNextDayStayRate(){
+        return nextDayStayRate;
+    }
+
+    /**
+     * 次日留存率=次日登录的用户数/前一日注册的用户数*100%
+     *
+     * @return
+     */
+    public void setNextDayKeepRate(Integer nextDayStayCount, Integer registerPopulation){
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        // 设置精确到小数点后2位
+        numberFormat.setMaximumFractionDigits(2);
+        if(registerPopulation == 0){
+            this.nextDayStayRate = "0.00";
+        }else{
+            this.nextDayStayRate = numberFormat.format(((float) nextDayStayCount / (float) registerPopulation) * 100);
+        }
     }
 }

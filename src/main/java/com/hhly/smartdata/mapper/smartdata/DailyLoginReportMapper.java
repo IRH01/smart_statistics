@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface DailyLoginReportMapper {
+public interface DailyLoginReportMapper{
     int insert(DailyLoginReport record) throws Exception;
 
     int insertSelective(DailyLoginReport record) throws Exception;
@@ -28,5 +28,5 @@ public interface DailyLoginReportMapper {
 
     Map<String, Object> selectByMonth(String daily) throws Exception;
 
-    void deleteByTimeAndPlatformIdAndSourceType(@Param("statisticsDay") String statisticsDay, @Param("platformId") Integer platformId, @Param("sourceType") Byte sourceType) throws Exception;
+    void deleteByTimeAndPlatformCodeAndSourceType(@Param("statisticsDay") String statisticsDay, @Param("platformCode") String platformCode, @Param("sourceType") Byte sourceType) throws Exception;
 }

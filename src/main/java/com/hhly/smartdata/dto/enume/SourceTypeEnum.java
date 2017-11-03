@@ -7,7 +7,7 @@ public enum SourceTypeEnum{
 
     PC_WEB(Byte.parseByte("1"), "pc"),
     ANDROID(Byte.parseByte("2"), "android"),
-    IPHONE(Byte.parseByte("3"), "iphone"),
+    IPHONE(Byte.parseByte("3"), "ios"),
     H5(Byte.parseByte("4"), "h5");
 
     private Byte code;

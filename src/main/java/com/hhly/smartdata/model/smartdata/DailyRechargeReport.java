@@ -27,7 +27,7 @@ public class DailyRechargeReport{
     /**
      * 充值金额
      */
-    private BigDecimal rechargeAmount = new BigDecimal(0);
+    private BigDecimal rechargeAmount = new BigDecimal(0.00);
 
     /**
      * 充值次数
@@ -82,7 +82,7 @@ public class DailyRechargeReport{
     }
 
     public BigDecimal getRechargeAmount(){
-        return rechargeAmount;
+        return rechargeAmount.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     public void setRechargeAmount(BigDecimal rechargeAmount){

@@ -16,7 +16,7 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
      *
      * @return
      */
-    private Float NextDayKeepRate;
+    private Float nextDayKeepRate;
 
     /**
      * 注册体验率(%)=体验人数/注册人数*100%
@@ -110,7 +110,7 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
      *
      * @return
      */
-    public String getOldUserPlayRate(){
+    public String getOldUserLoginTransformRate(){
         NumberFormat numberFormat = NumberFormat.getInstance();
         // 设置精确到小数点后2位
         numberFormat.setMaximumFractionDigits(2);
@@ -148,10 +148,10 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
     }
 
     public Float getNextDayKeepRate(){
-        return NextDayKeepRate;
+        return nextDayKeepRate;
     }
 
     public void setNextDayKeepRate(Float nextDayKeepRate){
-        NextDayKeepRate = nextDayKeepRate;
+        this.nextDayKeepRate = nextDayKeepRate;
     }
 }

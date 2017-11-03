@@ -1,7 +1,7 @@
 package com.hhly.smartdata.mapper.smartdata;
 
 
-import com.hhly.smartdata.model.smartdata.IntervalGameLaunchListReport;
+import com.hhly.smartdata.dto.current.IntervalGameLaunchTimeListReport;
 import com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IntervalGameLaunchReportMapper {
+public interface IntervalGameLaunchReportMapper{
     int insert(IntervalGameLaunchReport record) throws Exception;
 
     int insertSelective(IntervalGameLaunchReport record) throws Exception;
@@ -20,9 +20,17 @@ public interface IntervalGameLaunchReportMapper {
 
     int updateByPrimaryKey(IntervalGameLaunchReport record) throws Exception;
 
-    List<IntervalGameLaunchReport> selectIntervalGameLaunchChatData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
+    void deleteByTimeAndSourceTypeAndPlatformCode(@Param("statisticsTime") String statisticsTime, @Param("sourceType") Byte sourceType, @Param("platformCode") String platformCode);
 
-    void deleteByTimeAndSourceTypeAndPlatformId(@Param("statisticsTime") String statisticsTime, @Param("sourceType") Byte sourceType, @Param("platformId") Integer platformId);
+    /**
+     * 根据平台编码获取游戏启动次数
+     *
+     * @param platformCode
+     * @return
+     * @throws Exception
+     * @author hejh
+     * @date 2017-11-01 20:39
+     */
+    List<IntervalGameLaunchTimeListReport> selectIntervalGameLaunchTimeListData(@Param("platformCode") String platformCode) throws Exception;
 
-    List<IntervalGameLaunchListReport> selectIntervalGameLaunchListData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 }

@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.DailyLoginReport">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="statistics_day" property="statisticsDay" jdbcType="VARCHAR"/>
-        <result column="platform_id" property="platformId" jdbcType="INTEGER"/>
+        <result column="platform_code" property="platformCode" jdbcType="VARCHAR"/>
         <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
         <result column="platform_name" property="platformName" jdbcType="VARCHAR"/>
         <result column="login_population" property="loginPopulation" jdbcType="INTEGER"/>
@@ -13,13 +13,13 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, statistics_day, platform_id, source_type, platform_name, login_population, play_population,
+        id, statistics_day, platform_code, source_type, platform_name, login_population, play_population,
         execute_time
     </sql>
 
-    <delete id="deleteByTimeAndPlatformIdAndSourceType">
+    <delete id="deleteByTimeAndPlatformCodeAndSourceType">
         delete from daily_login_report
-        where statistics_day = #{statisticsDay} AND platform_id = #{platformId} AND
+        where statistics_day = #{statisticsDay} AND platform_code = #{platformCode} AND
         source_type = #{sourceType}
     </delete>
 
@@ -32,7 +32,7 @@
 
     <select id="selectLastMonthLogin" resultType="java.util.Map">
         SELECT
-        platform_id AS platform_id,
+        platform_code AS platform_code,
         source_type AS source_type,
         platform_name AS platform_name,
         SUM(login_population) AS login_population_sum,
@@ -41,8 +41,9 @@
         daily_login_report
         WHERE statistics_day &gt;= #{lastMonthFirstDayStr}
         AND statistics_day &lt;= #{lastMonthEndDayStr}
-        GROUP BY platform_id, source_type
+        GROUP BY platform_code, source_type
     </select>
+
     <select id="searchByTime" resultType="com.hhly.smartdata.model.smartdata.DailyLoginReport">
         SELECT
         <include refid="Base_Column_List"/>
@@ -84,10 +85,10 @@
     </select>
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyLoginReport">
-        insert into daily_login_report (id, statistics_day, platform_id,
+        insert into daily_login_report (id, statistics_day, platform_code,
         source_type, platform_name, login_population,
         play_population, execute_time)
-        values (#{id}, #{statisticsDay}, #{platformId},
+        values (#{id}, #{statisticsDay}, #{platformCode},
         #{sourceType}, #{platformName}, #{loginPopulation},
         #{playPopulation}, #{executeTime})
     </insert>
@@ -101,8 +102,8 @@
             <if test="statisticsDay != null">
                 statistics_day,
             </if>
-            <if test="platformId != null">
-                platform_id,
+            <if test="platformCode != null">
+                platform_code,
             </if>
             <if test="sourceType != null">
                 source_type,
@@ -127,8 +128,8 @@
             <if test="statisticsDay != null">
                 #{statisticsDay},
             </if>
-            <if test="platformId != null">
-                #{platformId},
+            <if test="platformCode != null">
+                #{platformCode},
             </if>
             <if test="sourceType != null">
                 #{sourceType},
@@ -154,8 +155,8 @@
             <if test="statisticsDay != null">
                 statistics_day = #{statisticsDay},
             </if>
-            <if test="platformId != null">
-                platform_id = #{platformId},
+            <if test="platformCode != null">
+                platform_code = #{platformCode},
             </if>
             <if test="sourceType != null">
                 source_type = #{sourceType},
@@ -179,7 +180,7 @@
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.DailyLoginReport">
         update daily_login_report
         set statistics_day = #{statisticsDay},
-        platform_id = #{platformId},
+        platform_code = #{platformCode},
         source_type = #{sourceType},
         platform_name = #{platformName},
         login_population = #{loginPopulation},

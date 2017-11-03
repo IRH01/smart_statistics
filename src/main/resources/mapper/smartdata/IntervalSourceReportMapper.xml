@@ -44,17 +44,16 @@
         SUM(recharge_count) AS rechargeCount,
         SUM(recharge_amount) AS rechargeAmount
         FROM interval_source_report
-        WHERE
-        statistics_time LIKE CONCAT(DATE_FORMAT(NOW(),'%Y-%m-%d '),'%')
-        <if test="startDate != null and startDate  != ''">
-            AND statistics_time &gt; DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="endDate != null and endDate  != ''">
-            AND statistics_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-        </if>
+        <where>
+            <if test="startDate != null and startDate  != ''">
+                AND statistics_time &gt; #{startDate}
+            </if>
+            <if test="endDate != null and endDate  != ''">
+                AND statistics_time &lt;= #{endDate}
+            </if>
+        </where>
     </select>
-    <select id="selectIntervalSourceListData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport"
-    >
+    <select id="selectIntervalSourceListData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
         select
         statistics_time,
         sum(register_population) as register_population,
@@ -63,43 +62,42 @@
         sum(recharge_count) as rechargeCount,
         sum(recharge_amount) as rechargeAmount
         from interval_source_report
-        where
-        statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
-        <if test="startDate != null and startDate  != ''">
-            and statistics_time &gt;= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="endDate != null and endDate  != ''">
-            and statistics_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-        </if>
+        <where>
+            <if test="startDate != null and startDate  != ''">
+                and statistics_time &gt; #{startDate}
+            </if>
+            <if test="endDate != null and endDate  != ''">
+                and statistics_time &lt;= #{endDate}
+            </if>
+        </where>
         group by statistics_time
         order by statistics_time desc
     </select>
 
-    <select id="selectIntervalSourceChartData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport"
-    >
+    <select id="selectIntervalSourceChartData" resultType="java.util.HashMap">
         select
-        DATE_FORMAT(statistics_time,'%H:%i') as statistics_time,
-        sum(register_population) as register_population,
-        sum(login_population) as loginPopulation,
-        sum(recharge_population) as rechargePopulation,
-        sum(recharge_count) as rechargeCount,
-        sum(recharge_amount) as rechargeAmount
+        statistics_time as statistics_time,
+        sum(register_population) as register_population_sum,
+        sum(login_population) as login_population_sum,
+        sum(recharge_population) as recharge_population_sum,
+        sum(recharge_count) as recharge_count_sum,
+        sum(recharge_amount) as recharge_amount_sum
         from interval_source_report
-        where
-        statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
-        <if test="startDate != null and startDate  != ''">
-            and statistics_time &gt;= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="endDate != null and endDate  != ''">
-            and statistics_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="deviceTypes">
-            and source_type in
-            <foreach item="item" index="index" collection="deviceTypes"
-                     open="(" separator="," close=")">
-                #{item}
-            </foreach>
-        </if>
+        <where>
+            <if test="startDate != null and startDate  != ''">
+                and statistics_time &gt; #{startDate}
+            </if>
+            <if test="endDate != null and endDate  != ''">
+                and statistics_time &lt;= #{endDate}
+            </if>
+            <if test="deviceTypes!=null">
+                and source_type in
+                <foreach item="item" index="index" collection="deviceTypes"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
         group by statistics_time
     </select>
 
@@ -107,20 +105,20 @@
             resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
         select
         source_type as sourceType,
-        sum(register_population) as register_population,
+        sum(register_population) as registerPopulation,
         sum(login_population) as loginPopulation,
         sum(recharge_population) as rechargePopulation,
         sum(recharge_count) as rechargeCount,
         sum(recharge_amount) as rechargeAmount
         from interval_source_report
-        where
-        statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
-        <if test="startDate != null and startDate  != ''">
-            and statistics_time &gt;= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="endDate != null and endDate  != ''">
-            and statistics_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-        </if>
+        <where>
+            <if test="startDate != null and startDate  != ''">
+                and statistics_time &gt; #{startDate}
+            </if>
+            <if test="endDate != null and endDate  != ''">
+                and statistics_time &lt;= #{endDate}
+            </if>
+        </where>
         group by source_type
         order by source_type asc
     </select>
@@ -128,24 +126,24 @@
     <select id="selectIntervalTimeTerminalsSourceListData"
             resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
         select
-        DATE_FORMAT(statistics_time,'%H:%i') as statistics_time,
-        sum(register_population) as register_population,
+        DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,
+        sum(register_population) as registerPopulation,
         sum(login_population) as loginPopulation,
         sum(recharge_population) as rechargePopulation,
         sum(recharge_count) as rechargeCount,
         sum(recharge_amount) as rechargeAmount
         from interval_source_report
-        where
-        statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
-        <if test="startDate != null and startDate  != ''">
-            and statistics_time &gt;= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="endDate != null and endDate  != ''">
-            and statistics_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="deviceType != null and deviceType !=''">
-            and source_type = #{deviceType}
-        </if>
+        <where>
+            <if test="startDate != null and startDate  != ''">
+                and statistics_time &gt; #{startDate}
+            </if>
+            <if test="endDate != null and endDate  != ''">
+                and statistics_time &lt;= #{endDate}
+            </if>
+            <if test="deviceType != null and deviceType !=''">
+                and source_type = #{deviceType}
+            </if>
+        </where>
         group by statistics_time
         order by statistics_time desc
     </select>

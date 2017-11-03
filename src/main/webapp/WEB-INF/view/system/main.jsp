@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%--<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +15,7 @@
     <link rel="stylesheet" href="../../../css/dialogsdk.css">
     <link rel="stylesheet" href="../../../css/jquery-ui.css">
     <!-- The fav icon -->
-    <link rel="shortcut icon" href="<c:url value="/img/favicon.ico"/>">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * 各端实时数据
  */
@@ -20,10 +22,10 @@ public class IntervalSourceControllerApi extends BaseController{
     private IntervalSourceService intervalTerminalsSourceService;
 
     @RequestMapping(value = "/terminalsList")
-    public Result getTerminalsList(String startDate, String endDate, int pageNumber, int pageSize){
-        PageInfo<IntervalSourceReport> result = null;
+    public Result getTerminalsList(){
+        List<IntervalSourceReport> result = null;
         try{
-            result = intervalTerminalsSourceService.selectIntervalTerminalsSourceListData(startDate, endDate, pageNumber, pageSize);
+            result = intervalTerminalsSourceService.selectTotalDaySourceListData();
         }catch(Exception e){
             LOGGER.error("获取各端数据异常" + e.getMessage());
         }

@@ -19,6 +19,11 @@ public class DataInterfaceInvoke{
     private String userId = "";
 
     /**
+     * 平台游戏编码
+     */
+    private String platformCode = "";
+
+    /**
      * 平台Id:默认为玩一下平台;PC=1,移动端为31111
      */
     private Integer platformId = 0;
@@ -70,6 +75,14 @@ public class DataInterfaceInvoke{
 
     public void setUserId(String userId){
         this.userId = userId;
+    }
+
+    public String getPlatformCode(){
+        return platformCode;
+    }
+
+    public void setPlatformCode(String platformCode){
+        this.platformCode = platformCode;
     }
 
     public Integer getPlatformId(){

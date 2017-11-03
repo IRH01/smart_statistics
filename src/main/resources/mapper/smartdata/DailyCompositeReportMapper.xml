@@ -311,4 +311,11 @@
         order by statistics_day desc
     </select>
 
+    <select id="selectByDaily" resultType="com.hhly.smartdata.model.smartdata.DailyCompositeReport">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM daily_composite_report
+        WHERE statistics_day =#{daily}
+    </select>
+
 </mapper>

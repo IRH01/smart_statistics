@@ -20,10 +20,10 @@ public class DailyKeepRecordControllerApi extends BaseController{
     private DailyKeepRecordService dailyKeepRecordService;
 
     @RequestMapping(value = "/list")
-    public Result search(String startDate, String endDate, int pageNumber, int pageSize){
+    public Result search(String startDate, String endDate,Integer sourceType, int pageNumber, int pageSize){
         PageInfo<DailyKeepRecordReportResult> result = null;
         try{
-            result = dailyKeepRecordService.selectDailyKeepRecordListData(startDate, endDate, pageNumber, pageSize);
+            result = dailyKeepRecordService.selectDailyKeepRecordListData(startDate, endDate, pageNumber, pageSize,sourceType);
         }catch(Exception e){
             LOGGER.error("获取留存分析报表数据异常" + e.getMessage());
         }

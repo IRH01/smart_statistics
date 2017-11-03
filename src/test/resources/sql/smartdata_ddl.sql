@@ -18,7 +18,7 @@ CREATE TABLE `interval_game_launch_report` (
    `statistics_time` varchar(20) NOT NULL DEFAULT '' COMMENT '统计时间(半小时)yyyy-MM-dd HH:30:00',
    `interval_time` int(5) NOT NULL DEFAULT '0' COMMENT '统计间隔时间。单位分钟',
    `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.android 3.IOS 4.H5',
-   `platform_id` int(10) NOT NULL DEFAULT '0' COMMENT '平台id或游戏id',
+   `platform_code` int(10) NOT NULL DEFAULT '0' COMMENT '平台id或游戏id',
    `platform_name` varchar(50) NOT NULL DEFAULT '' COMMENT '平台名称或游戏名称',
    `launch_count` int(10) NOT NULL DEFAULT '0' COMMENT '游戏启动次数',
    `execute_time` timestamp NULL DEFAULT NULL COMMENT '统计执行日期',
@@ -113,7 +113,7 @@ CREATE TABLE `daily_recharge_report` (
 CREATE TABLE `daily_login_report` (
    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '日报表，游戏登录统计报表',
    `statistics_day` varchar(10) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM-dd',
-   `platform_id` int(10) NOT NULL DEFAULT '0' COMMENT '游戏编码',
+   `platform_code` int(10) NOT NULL DEFAULT '0' COMMENT '游戏编码',
    `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.android 3.IOS 4.H5',
    `platform_name` varchar(10) NOT NULL DEFAULT '' COMMENT '游戏名称',
    `login_population` int(10) NOT NULL DEFAULT '0' COMMENT '登录人数',
@@ -201,7 +201,7 @@ CREATE TABLE `month_recharge_report` (
 CREATE TABLE `month_login_report` (
    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '日报表，游戏登录统计报表',
    `statistics_month` varchar(10) NOT NULL DEFAULT '' COMMENT '统计日期(日)yyyy-MM',
-   `platform_id` int(10) NOT NULL DEFAULT '0' COMMENT '平台id或者游戏id',
+   `platform_code` int(10) NOT NULL DEFAULT '0' COMMENT '平台id或者游戏id',
    `platform_name` varchar(10) NOT NULL DEFAULT '' COMMENT '平台或游戏名称',
    `source_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '源端类型：1、PC 2.android 3.IOS 4.H5',
    `login_population` int(10) NOT NULL DEFAULT '0' COMMENT '登录人数',

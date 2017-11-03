@@ -5,11 +5,12 @@ import com.hhly.smartdata.model.source.DataView;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface DataViewMapper {
+public interface DataViewMapper{
     int insert(DataView record) throws Exception;
 
     int insertSelective(DataView record) throws Exception;
@@ -20,7 +21,7 @@ public interface DataViewMapper {
 
     int updateByPrimaryKey(DataView record) throws Exception;
 
-    List<Map<String, Object>> selectYesterdayUserViewAndPageView() throws Exception;
+    List<Map<String, Object>> selectUserViewAndPageViewByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 
-    List<Map<String, Object>> selectFirstThirtyMinUserViewAndPageView(@Param("startDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
+    List<Map<String, Object>> selectFirstThirtyMinUserViewAndPageView(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
 }

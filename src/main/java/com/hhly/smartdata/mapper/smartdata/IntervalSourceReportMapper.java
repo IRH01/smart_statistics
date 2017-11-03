@@ -5,11 +5,12 @@ import com.hhly.smartdata.model.smartdata.IntervalSourceReport;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Repository
-public interface IntervalSourceReportMapper {
+public interface IntervalSourceReportMapper{
     int insert(IntervalSourceReport record) throws Exception;
 
     IntervalSourceReport selectByPrimaryKey(Long id) throws Exception;
@@ -18,7 +19,7 @@ public interface IntervalSourceReportMapper {
 
     List<IntervalSourceReport> selectIntervalSourceListData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 
-    List<IntervalSourceReport> selectIntervalSourceChartData(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("deviceTypes") String[] deviceTypes) throws Exception;
+    List<HashMap<String, Object>> selectIntervalSourceChartData(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("deviceTypes") String[] deviceTypes) throws Exception;
 
     List<IntervalSourceReport> selectIntervalTerminalsSourceListData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 

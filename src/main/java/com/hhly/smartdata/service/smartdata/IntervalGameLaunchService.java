@@ -1,81 +1,154 @@
 package com.hhly.smartdata.service.smartdata;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.hhly.smartdata.dto.current.ChartSeriesData;
+import com.hhly.smartdata.dto.current.IntervalGameLaunchTimeListReport;
 import com.hhly.smartdata.mapper.smartdata.IntervalGameLaunchReportMapper;
-import com.hhly.smartdata.model.smartdata.IntervalGameLaunchListReport;
-import com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport;
+import com.hhly.smartdata.service.source.SystemConfigServer;
+import com.hhly.smartdata.util.HourListUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 
 @Service
 public class IntervalGameLaunchService{
+    protected final static Logger LOGGER = LoggerFactory.getLogger(IntervalGameLaunchService.class);
 
     @Autowired
     private IntervalGameLaunchReportMapper intervalGameLaunchReportMapper;
 
+    @Autowired
+    private SystemConfigServer systemConfigServer;
 
-    public PageInfo<IntervalGameLaunchListReport> selectIntervalGameLaunchListData(String startDate, String endDate, int pageNumber, int pageSize) throws Exception{
-        PageHelper.startPage(pageNumber, pageSize);
-        List<IntervalGameLaunchListReport> values = intervalGameLaunchReportMapper.selectIntervalGameLaunchListData(startDate, endDate);
-        PageInfo<IntervalGameLaunchListReport> pageInfo = new PageInfo<>(values);
-        return pageInfo;
-    }
-
-    public Map<String, Object> selectIntervalGameLaunchChartData(String startDate, String endDate, TreeSet<String> scales) throws Exception{
-        // 曲线图数据
+    /**
+     * 获取游戏启动次数
+     *
+     * @return
+     * @throws Exception
+     */
+    public Map<String, Object> selectIntervalGameLaunchTimeListData() throws Exception{
         Map<String, Object> result = Maps.newHashMap();
-        List<String> scaleList = Lists.newLinkedList();
-        // 一比分
-        List<Long> ybfList = Lists.newLinkedList();
-        // 乐盈电竞
-        List<Long> yydjList = Lists.newLinkedList();
-        // 撩妹德州
-        List<Long> lmdzList = Lists.newLinkedList();
 
-        Iterator<String> iterator = scales.iterator();
+        //时刻
+        TreeSet<String> hourSet = HourListUtil.getHourListPerHour();
+        result.put("time", hourSet);
 
-        //查询获取数据
-        List<IntervalGameLaunchReport> values = intervalGameLaunchReportMapper.selectIntervalGameLaunchChatData(startDate, endDate);
+        //平台信息
+        Map<String, String> platformMap = systemConfigServer.getPlatformMap();
 
-        while(iterator.hasNext()){
-            long ybfNum = 0;
-            long yydjNum = 0;
-            long lmdzNum = 0;
+        Set<Object> listSet = Sets.newHashSet();
+        Map<String, Integer> dataSum = Maps.newHashMap();
 
-            String currentScale = iterator.next();
-            for(IntervalGameLaunchReport value : values){
-                // 匹配时间
-                if(currentScale.substring(0, 5).equals(value.getStatisticsTime())){
-                    if("撩妹德州".equals(value.getPlatformName())){
-                        lmdzNum = value.getLaunchCount();
-                    }else if("乐盈电竞".equals(value.getPlatformName())){
-                        yydjNum = value.getLaunchCount();
-                    }else if("一比分".equals(value.getPlatformName())){
-                        ybfNum = value.getLaunchCount();
+        for(Map.Entry<String, String> platform : platformMap.entrySet()){
+            //统计数据
+            List<IntervalGameLaunchTimeListReport> list = intervalGameLaunchReportMapper.selectIntervalGameLaunchTimeListData(platform.getKey());
+
+            List<IntervalGameLaunchTimeListReport> listNew = Lists.newArrayList();
+
+            for(String timeStr : hourSet){
+                boolean isInclude = false; //是否有数据
+                for(IntervalGameLaunchTimeListReport item : list){
+                    if(timeStr.equals(item.getStatisticTime())){
+                        listNew.add(item);
+                        isInclude = true;
+
+                        //统计每时刻总额
+                        int sum = dataSum.get(timeStr) == null ? 0 : dataSum.get(timeStr);
+                        sum += item.getLaunchCount();
+                        dataSum.put(timeStr, sum);
                     }
+                }
 
+                //如果数据不存在则补全数据
+                if(!isInclude){
+                    IntervalGameLaunchTimeListReport newIltlr = new IntervalGameLaunchTimeListReport();
+                    newIltlr.setLaunchCount(0);
+                    newIltlr.setStatisticTime(timeStr);
+                    listNew.add(newIltlr);
                 }
             }
-            ybfList.add(ybfNum);
-            yydjList.add(yydjNum);
-            lmdzList.add(lmdzNum);
-            scaleList.add(currentScale);
+
+            Map<String, Object> dataResult = Maps.newHashMap();
+            dataResult.put("name", platform.getValue());
+            dataResult.put("list", listNew);
+            listSet.add(dataResult);
+        }
+        result.put("data", listSet);
+
+        //添加统计总额
+        List<IntervalGameLaunchTimeListReport> listSum = Lists.newArrayList();
+        for(String timeStr : hourSet){
+            int sum = dataSum.get(timeStr) == null ? 0 : dataSum.get(timeStr);
+            IntervalGameLaunchTimeListReport intervalGameLaunchTimeListReport = new IntervalGameLaunchTimeListReport();
+            intervalGameLaunchTimeListReport.setLaunchCount(sum);
+            intervalGameLaunchTimeListReport.setStatisticTime(timeStr);
+            listSum.add(intervalGameLaunchTimeListReport);
         }
 
-        result.put("scales", scaleList);
-        result.put("ybfList", ybfList);
-        result.put("yydjList", yydjList);
-        result.put("lmdzList", lmdzList);
+        result.put("sumData", listSum);
 
         return result;
     }
 
+    /**
+     * 获取游戏启动次数图形数据
+     *
+     * @return
+     * @throws Exception
+     */
+    public Map<String, Object> selectIntervalGameLaunchChartTimeData() throws Exception{
+        Map<String, Object> result = Maps.newHashMap();
+
+        //时刻
+        TreeSet<String> hourSet = HourListUtil.getHourListPerHour();
+        result.put("time", hourSet);
+
+        //平台信息
+        Map<String, String> platformMap = systemConfigServer.getPlatformMap();
+        Set<String> platformSet = new HashSet<>();
+        for(Map.Entry<String, String> platform : platformMap.entrySet()){
+            platformSet.add(platform.getValue());
+        }
+        result.put("platform", platformSet);
+
+        //统计数据
+        List<ChartSeriesData> seriesData = new ArrayList<>();
+
+        for(Map.Entry<String, String> platform : platformMap.entrySet()){
+            ChartSeriesData csData = new ChartSeriesData();
+            csData.setName(platform.getValue()); //平台名称
+            csData.setType("line"); //线条类型
+
+            //统计数据
+            List<IntervalGameLaunchTimeListReport> list = intervalGameLaunchReportMapper.selectIntervalGameLaunchTimeListData(platform.getKey());
+
+            int[] dataSum = new int[48];
+
+            int i = 0;
+            for(String timeStr : hourSet){
+                for(IntervalGameLaunchTimeListReport item : list){
+                    if(timeStr.equals(item.getStatisticTime())){
+                        dataSum[i] = item.getLaunchCount();
+                    }
+                }
+                i++;
+            }
+            csData.setData(dataSum);
+
+            seriesData.add(csData);
+        }
+
+        result.put("data", seriesData);
+        return result;
+    }
 }

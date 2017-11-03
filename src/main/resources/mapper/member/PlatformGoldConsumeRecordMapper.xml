@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hhly.smartdata.mapper.member.PlatformGoldConsumeMapper">
+
     <select id="selectYesterdayConsumeUser" resultType="java.util.Map">
         SELECT
         platform_id AS platformId,
@@ -12,6 +13,20 @@
         tbl_platform_goldconsume_record
         WHERE TO_DAYS(NOW()) - TO_DAYS(consume_time) &lt;= 1
         AND TO_DAYS(NOW()) - TO_DAYS(consume_time) &gt; 0
+        GROUP BY platform_id,terminal,user_id
+    </select>
+
+    <select id="selectConsumeUserByStartTimeAndEndTime" resultType="java.util.Map">
+        SELECT
+        platform_id AS platformId,
+        terminal AS sourceType,
+        user_id AS userId,
+        COUNT(order_no) AS orderCount,
+        SUM(gold) AS applyAmountSum
+        FROM
+        tbl_platform_goldconsume_record
+        WHERE consume_time &lt;= #{endTime}
+        AND consume_time &gt; #{startTime}
         GROUP BY platform_id,terminal,user_id
     </select>
 

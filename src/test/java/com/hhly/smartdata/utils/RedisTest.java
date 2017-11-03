@@ -67,5 +67,4 @@ public class RedisTest{
         System.err.println("Number of items added to set: " + txResults.get(0));
     }
 
-
 }

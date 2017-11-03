@@ -72,7 +72,7 @@
                                 <div class="section-box">
                                     <div class="titleDiv">
                                         <div style="margin-left:8px;">
-                                            <span> 日期：
+                                            <span> 时间段选择：
                                                 <select id="dateStarts" onchange="dateChange()">
                                                     <option value="-999" selected>请选择</option>
                                                 </select>
@@ -114,7 +114,7 @@
                                                                     <label id="registerPopulationNum"></label>
                                                                 </th>
                                                                 <th style="border:1px solid black">
-                                                                    登陆人数<br/>
+                                                                    登录人数<br/>
                                                                     <label id="loginPopulationNum"></label>
                                                                 </th>
                                                                 <th style="border:1px solid black">
@@ -144,18 +144,14 @@
                                                             <input type="checkbox" id="cltTypeAll"
                                                                    onchange="deviceTypeChange(this);" checked/>
                                                             全部
-                                                            <input type="checkbox" value="1" class="deviceType"
-                                                                   onchange="deviceTypeChange(this);" checked title=""/>
-                                                            PC
-                                                            <input type="checkbox" value="2" class="deviceType"
-                                                                   onchange="deviceTypeChange(this);" checked title=""/>
-                                                            Android
-                                                            <input type="checkbox" value="3" class="deviceType"
-                                                                   onchange="deviceTypeChange(this);" checked title=""/>
-                                                            IOS
-                                                            <input type="checkbox" value="4" class="deviceType"
-                                                                   onchange="deviceTypeChange(this);" checked title=""/>
-                                                            H5
+                                                            <c:if test="${deviceTypes != null}">
+                                                                <c:forEach items="${deviceTypes}" var="deviceType">
+                                                                    <input type="checkbox" class="deviceType"
+                                                                           onchange="deviceTypeChange(this);"
+                                                                           value="${deviceType.code}"
+                                                                           checked/>${deviceType.desc}
+                                                                </c:forEach>
+                                                            </c:if>
                                                         </div>
                                                         <div id="trendline" class="trendline"></div>
                                                     </div>
@@ -177,7 +173,7 @@
                                                             </colgroup>
                                                             <thead>
                                                             <tr>
-                                                                <th>日期</th>
+                                                                <th>时间段尾</th>
                                                                 <th>注册人数</th>
                                                                 <th>登陆人数</th>
                                                                 <th>充值人数</th>
@@ -192,17 +188,23 @@
                                                     <table class="tablePage">
                                                         <tr>
                                                             <td>
-                                                                <div class="divPage"><span
-                                                                        class="spanPageSize">每页个数：</span><input
-                                                                        id="pageSize" value="10" class="inputPageSize"
-                                                                        onKeypress="return intInput(event);"
-                                                                        onKeyup="value=pageSizeLimit(value);"
-                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                                <div class="divPage">
+                                                                    <span class="spanPageSize">每页个数：</span>
+                                                                    <input id="pageSize" value="10"
+                                                                           class="inputPageSize"
+                                                                           onKeypress="return intInput(event);"
+                                                                           onKeyup="value=pageSizeLimit(value);"
+                                                                           onblur="value=pageSizeNotEmpty(value);"/>
+                                                                </div>
                                                             </td>
-                                                            <td><span class="spanPageSize">总记录数：</span><span
-                                                                    id="totalCount" class="spanPageSize"></span></td>
-                                                            <td><span class="spanPageSize">总页数：</span><span
-                                                                    id="totalPage" class="spanPageSize"></span></td>
+                                                            <td>
+                                                                <span class="spanPageSize">总记录数：</span>
+                                                                <span id="totalCount" class="spanPageSize"></span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="spanPageSize">总页数：</span>
+                                                                <span id="totalPage" class="spanPageSize"></span>
+                                                            </td>
                                                             <td class="tablePageTd">
                                                                 <div id="page"></div>
                                                             </td>
@@ -229,7 +231,7 @@
         "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00"];
 
     var date = new Date();
-    var seperator1 = "-";
+    var separator = "-";
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
     if (month >= 1 && month <= 9) {
@@ -238,8 +240,7 @@
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
-    var currentDate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-        + " ";
+    var currentDate = date.getFullYear() + separator + month + separator + strDate + " ";
 
     // js定时器
     window.setInterval("search()", 30 * 60 * 1000);
@@ -259,16 +260,20 @@
         }
     };
 
+
+    window.onload = function () {
+        for (var i = 0; i < initSearchDate.length; i++) {
+            $("#dateStarts").append("<option value='" + currentDate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
+            $("#dateEnds").append("<option value='" + currentDate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
+        }
+    }
+
     var reset = function () {
         $("#dateStarts").val("-999");
         $("#dateEnds").val("-999");
     };
 
     var intervalNum = function () {
-        for (var i = 0; i < initSearchDate.length; i++) {
-            $("#dateStarts").append("<option value='" + currentDate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
-            $("#dateEnds").append("<option value='" + currentDate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
-        }
         $("#registerPopulationNum").empty();
         $("#loginPopulationNum").empty();
         $("#rechargePopulationNum").empty();
@@ -408,12 +413,12 @@
                         sumRechargeCount = accAdd(sumRechargeCount, infoData[i].rechargeCount);
                         sumRechargeAmount = accAdd(sumRechargeAmount, infoData[i].rechargeAmount);
                         var ele = {
-                            statisticsTime: infoData[i].statisticsTime,
+                            statisticsTime: infoData[i].statisticsTime.slice(10, 16),
                             registerPopulation: infoData[i].registerPopulation,
                             loginPopulation: infoData[i].loginPopulation,
                             rechargePopulation: infoData[i].rechargePopulation,
                             rechargeCount: infoData[i].rechargeCount,
-                            rechargeAmount: infoData[i].rechargeAmount
+                            rechargeAmount: infoData[i].rechargeAmount.toFixed(2)
                         };
                         addTbRow(ele);
                     }
@@ -522,7 +527,7 @@
                     xAxis: [{
                         type: 'category',
                         boundaryGap: false,
-                        data: initSearchDate,
+                        data: json.scales,
                         splitLine: {
                             show: true,
                             lineStyle: {

@@ -130,36 +130,37 @@
     <select id="selectIntervalInterfaceTotalData"
             resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport">
         select interface_code as interfaceCode,operate_type as operateType,sum(operate_count) as operateCount
-        from interval_interface_report where statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
-        <if test="startDate != null and startDate  != ''">
-            and statistics_time &gt;= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="endDate != null and endDate  != ''">
-            and statistics_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-        </if>
+        from interval_interface_report
+        <where>
+            <if test="startDate != null and startDate  != ''">
+                and statistics_time &gt; #{startDate}
+            </if>
+            <if test="endDate != null and endDate  != ''">
+                and statistics_time &lt;= #{endDate}
+            </if>
+        </where>
         group by interface_code,operate_type
     </select>
 
 
     <select id="selectIntervalInterfaceChartData"
-            resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport"
-    >
+            resultType="com.hhly.smartdata.model.smartdata.IntervalInterfaceReport">
         select
         DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,
         operate_type as operateType,
         sum(operate_count) as operateCount
         from interval_interface_report
-        where
-        statistics_time like concat(concat('%',DATE_FORMAT(now(),'%Y-%m-%d '),'%'))
-        <if test="startDate != null and startDate  != ''">
-            and statistics_time &gt;= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="endDate != null and endDate  != ''">
-            and statistics_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="interfaceCode != null and interfaceCode  != ''">
-            and interface_code = #{interfaceCode}
-        </if>
+        <where>
+            <if test="startDate != null and startDate  != ''">
+                and statistics_time &gt; #{startDate}
+            </if>
+            <if test="endDate != null and endDate  != ''">
+                and statistics_time &lt;= #{endDate}
+            </if>
+            <if test="interfaceCode != null and interfaceCode  != ''">
+                and interface_code = #{interfaceCode}
+            </if>
+        </where>
         group by statistics_time,operate_type
     </select>
 

@@ -5,7 +5,7 @@
 
     <absolute-ordering/>
 
-    <display-name>Archetype Created Web Application</display-name>
+    <display-name>smart data Web Application</display-name>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>

@@ -34,12 +34,12 @@ public class LoginController extends BaseController{
 
     @RequestMapping("/welcome.do")
     @RequiresPermissions("welcome")
-    public String welcome(HttpServletRequest request, Model model){
+    public String welcome(){
         return "system/main";
     }
 
     @RequestMapping("/login")
-    public String login(HttpServletRequest req, HttpServletResponse resp){
+    public String login(HttpServletRequest req){
         //如果用户已登录,直接跳转欢迎页面
         Subject subject = SecurityUtils.getSubject();
         if(subject != null && subject.isAuthenticated()){

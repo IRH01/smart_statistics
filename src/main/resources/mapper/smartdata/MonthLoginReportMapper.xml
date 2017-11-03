@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.MonthLoginReport">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="statistics_month" property="statisticsMonth" jdbcType="VARCHAR"/>
-        <result column="platform_id" property="platformId" jdbcType="VARCHAR"/>
+        <result column="platform_code" property="platformCode" jdbcType="VARCHAR"/>
         <result column="platform_name" property="platformName" jdbcType="VARCHAR"/>
         <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
         <result column="login_population" property="loginPopulation" jdbcType="INTEGER"/>
@@ -12,7 +12,7 @@
         <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, statistics_month, platform_id, platform_name, source_type, login_population,
+        id, statistics_month, platform_code, platform_name, source_type, login_population,
         play_population, execute_time
     </sql>
     <delete id="deleteByTime">
@@ -64,10 +64,10 @@
         WHERE statistics_month = #{month}
     </select>
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
-        insert into month_login_report (id, statistics_month, platform_id,
+        insert into month_login_report (id, statistics_month, platform_code,
         platform_name, source_type, login_population,
         play_population, execute_time)
-        values (#{id,jdbcType=BIGINT}, #{statisticsMonth,jdbcType=VARCHAR}, #{platformId,jdbcType=VARCHAR},
+        values (#{id,jdbcType=BIGINT}, #{statisticsMonth,jdbcType=VARCHAR}, #{platformCode,jdbcType=VARCHAR},
         #{platformName,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT}, #{loginPopulation,jdbcType=INTEGER},
         #{playPopulation,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP})
     </insert>
@@ -80,8 +80,8 @@
             <if test="statisticsMonth != null">
                 statistics_month,
             </if>
-            <if test="platformId != null">
-                platform_id,
+            <if test="platformCode != null">
+                platform_code,
             </if>
             <if test="platformName != null">
                 platform_name,
@@ -106,8 +106,8 @@
             <if test="statisticsMonth != null">
                 #{statisticsMonth,jdbcType=VARCHAR},
             </if>
-            <if test="platformId != null">
-                #{platformId,jdbcType=VARCHAR},
+            <if test="platformCode != null">
+                #{platformCode,jdbcType=VARCHAR},
             </if>
             <if test="platformName != null">
                 #{platformName,jdbcType=VARCHAR},
@@ -132,8 +132,8 @@
             <if test="statisticsMonth != null">
                 statistics_month = #{statisticsMonth,jdbcType=VARCHAR},
             </if>
-            <if test="platformId != null">
-                platform_id = #{platformId,jdbcType=VARCHAR},
+            <if test="platformCode != null">
+                platform_code = #{platformCode,jdbcType=VARCHAR},
             </if>
             <if test="platformName != null">
                 platform_name = #{platformName,jdbcType=VARCHAR},
@@ -156,7 +156,7 @@
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
         update month_login_report
         set statistics_month = #{statisticsMonth,jdbcType=VARCHAR},
-        platform_id = #{platformId,jdbcType=VARCHAR},
+        platform_code = #{platformCode,jdbcType=VARCHAR},
         platform_name = #{platformName,jdbcType=VARCHAR},
         source_type = #{sourceType,jdbcType=TINYINT},
         login_population = #{loginPopulation,jdbcType=INTEGER},

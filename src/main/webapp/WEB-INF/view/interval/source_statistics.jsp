@@ -69,31 +69,8 @@
                         <div class="panel-body">
                             <div class="admin-content">
                                 <div class="section-box">
-                                    <div class="titleDiv">
-                                        <div style="margin-left:8px;">
-                                             <span> 日期：
-                                                <select id="dateStarts" onchange="dateChange()">
-                                                    <option value="-999" selected>请选择</option>
-                                                </select>
-                                                至
-                                                <select id="dateEnds" onchange="dateChange()">
-                                                     <option value="-999" selected>请选择</option>
-                                                </select>
-                                                <button type="button" id="search" class="btn btn-primary btn-sm"
-                                                        onclick="search();">
-                                                    <i class="icon-search icon-white"
-                                                       style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
-                                                </button>
-                                                <button type="button" id="reset" class="btn btn-primary btn-sm"
-                                                        onclick="reset();">
-                                                    <i class="icon-search icon-white"
-                                                       style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
-                                                </button>
-											</span>
-                                        </div>
-                                    </div>
                                     <div class="whiteDiv tab-content">
-                                        <ul id="sortable" class="ui-widget-content sortable">
+                                        <ul class="ui-widget-content sortable">
                                             <li class="ui-state-default">
                                                 <div style="padding-bottom:60px;"
                                                      class="ui-widget-content resize resizePanel">
@@ -121,27 +98,36 @@
                                                             <tbody id="terminalsIntervalData"></tbody>
                                                         </table>
                                                     </div>
-                                                    <table class="tablePage">
-                                                        <tr>
-                                                            <td>
-                                                                <div class="divPage"><span
-                                                                        class="spanPageSize">每页个数：</span><input
-                                                                        id="pageSizes" value="10" class="inputPageSize"
-                                                                        onKeypress="return intInput(event);"
-                                                                        onKeyup="value=pageSizeLimit(value);"
-                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
-                                                            </td>
-                                                            <td><span class="spanPageSize">总记录数：</span><span
-                                                                    id="totalCounts" class="spanPageSize"></span></td>
-                                                            <td><span class="spanPageSize">总页数：</span><span
-                                                                    id="totalPages" class="spanPageSize"></span></td>
-                                                            <td class="tablePageTd">
-                                                                <div id="pages"></div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+
                                                 </div>
                                             </li>
+                                        </ul>
+                                    </div>
+                                    <div class="titleDiv">
+                                        <div style="margin-left:8px;">
+                                             <span> 时间段选择：
+                                                <select id="dateStarts" onchange="dateChange()">
+                                                    <option value="-999" selected>请选择</option>
+                                                </select>
+                                                至
+                                                <select id="dateEnds" onchange="dateChange()">
+                                                     <option value="-999" selected>请选择</option>
+                                                </select>
+                                                <button type="button" id="search" class="btn btn-primary btn-sm"
+                                                        onclick="search();">
+                                                    <i class="icon-search icon-white"
+                                                       style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;查&nbsp;&nbsp;询&nbsp;
+                                                </button>
+                                                <button type="button" id="reset" class="btn btn-primary btn-sm"
+                                                        onclick="reset();">
+                                                    <i class="icon-search icon-white"
+                                                       style="height: 24px;padding-top:0px;padding-bottom:0px;"></i>&nbsp;重&nbsp;&nbsp;置&nbsp;
+                                                </button>
+											</span>
+                                        </div>
+                                    </div>
+                                    <div class="whiteDiv tab-content">
+                                        <ul id="sortable" class="ui-widget-content sortable">
                                             <li class="ui-state-default">
                                                 <div style="padding-bottom:60px;"
                                                      class="ui-widget-content resize resizePanel">
@@ -171,7 +157,7 @@
                                                             </colgroup>
                                                             <thead>
                                                             <tr>
-                                                                <th>日期</th>
+                                                                <th>时间段尾</th>
                                                                 <th>注册人数</th>
                                                                 <th>登陆人数</th>
                                                                 <th>充值人数</th>
@@ -186,17 +172,23 @@
                                                     <table class="tablePage">
                                                         <tr>
                                                             <td>
-                                                                <div class="divPage"><span
-                                                                        class="spanPageSize">每页个数：</span><input
-                                                                        id="pageSize" value="10" class="inputPageSize"
-                                                                        onKeypress="return intInput(event);"
-                                                                        onKeyup="value=pageSizeLimit(value);"
-                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                                <div class="divPage">
+                                                                    <span class="spanPageSize">每页个数：</span>
+                                                                    <input id="pageSize" value="10"
+                                                                           class="inputPageSize"
+                                                                           onKeypress="return intInput(event);"
+                                                                           onKeyup="value=pageSizeLimit(value);"
+                                                                           onblur="value=pageSizeNotEmpty(value);"/>
+                                                                </div>
                                                             </td>
-                                                            <td><span class="spanPageSize">总记录数：</span><span
-                                                                    id="totalCount" class="spanPageSize"></span></td>
-                                                            <td><span class="spanPageSize">总页数：</span><span
-                                                                    id="totalPage" class="spanPageSize"></span></td>
+                                                            <td>
+                                                                <span class="spanPageSize">总记录数：</span>
+                                                                <span id="totalCount" class="spanPageSize"></span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="spanPageSize">总页数：</span>
+                                                                <span id="totalPage" class="spanPageSize"></span>
+                                                            </td>
                                                             <td class="tablePageTd">
                                                                 <div id="page"></div>
                                                             </td>
@@ -235,7 +227,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!--body end-->
                 </div>
@@ -250,7 +241,7 @@
         "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00"];
 
     var date = new Date();
-    var seperator1 = "-";
+    var delimiter = "-";
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
     if (month >= 1 && month <= 9) {
@@ -259,27 +250,7 @@
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate + " ";
-
-    // 统计
-    var dateChange = function () {
-        if ("-999" != $("#dateStarts").val() && "-999" != $("#dateEnds").val()) {
-            var dateEnds = new Date($("#dateEnds").val()).getTime();
-            var dateStarts = new Date($("#dateStarts").val()).getTime();
-            if (dateEnds < dateStarts) {
-                layer.alert("起始时间必须小于等于结束时间", {
-                    icon: 5
-                });
-                $("#dateStarts").val("-999");
-                $("#dateEnds").val("-999");
-            }
-        }
-    };
-
-    var reset = function () {
-        $("#dateStarts").val("-999");
-        $("#dateEnds").val("-999");
-    };
+    var currentDate = date.getFullYear() + delimiter + month + delimiter + strDate + " ";
 
     $(function () {
         $("#sortable").sortable({cursor: "move", handle: ".sortHandle"});
@@ -300,6 +271,11 @@
         );
     });
 
+    var reset = function () {
+        $("#dateStarts").val("-999");
+        $("#dateEnds").val("-999");
+    };
+
     var pageSize = 10;
     var pageSizes = 10;
     var deviceTypeChange = function (ele) {
@@ -318,7 +294,7 @@
         var deviceTypes = "";
         for (i = 0; i < devices.length; i++) {
             if (devices[i].checked) {
-                if ("" != deviceTypes) {
+                if (deviceTypes != "") {
                     deviceTypes += ",";
                 }
                 deviceTypes += devices.eq(i).val();
@@ -336,34 +312,16 @@
         }
     };
 
-    var showTerminalsIntervalData = function (pageNumber, pageSize) {
+    var showTerminalsIntervalData = function () {
         for (var i = 0; i < initSearchDate.length; i++) {
-            $("#dateStarts").append("<option value='" + currentdate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
-            $("#dateEnds").append("<option value='" + currentdate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
+            $("#dateStarts").append("<option value='" + currentDate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
+            $("#dateEnds").append("<option value='" + currentDate + initSearchDate[i] + "'>" + initSearchDate[i] + "</option>");
         }
         $("#terminalsIntervalData").empty();
-        $.post("/interval/source/terminalsList.do", {
-            startDate: $("#dateStarts").val() != -999 ? $("#dateStarts").val() : null,
-            endDate: $("#dateEnds").val() != -999 ? $("#dateEnds").val() : null,
-            pageNumber: pageNumber,
-            pageSize: pageSize
-        }, function (result) {
+        $.post("/interval/source/terminalsList.do", {}, function (result) {
             var json = result.data;
             if (null != json && undefined != json) {
-                $("#totalCounts").html(json.total);
-                $("#totalPages").html(json.pages);
-                $("#pages").myPagination({
-                    currPage: pageNumber,
-                    pageCount: json.pages,
-                    ajax: {
-                        on: false,
-                        onClick: function (page) {
-                            showTerminalsIntervalData(page, pageSize);
-                        }
-                    }
-                });
-                var infoData = json.list;
-                if (null == infoData || undefined == infoData || 0 >= infoData.length) {
+                if (null == json || undefined == json || 0 >= json.length) {
                     $("#totalCounts").html(0);
                     $("#totalPages").html(0);
                     $("#terminalsIntervalData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
@@ -374,14 +332,14 @@
                     var sumRechargePopulation = 0;
                     var sumRechargeCount = 0;
                     var terminalsName = "";
-                    for (var i = 0; i < infoData.length; i++) {
-                        sumRegisterPopulation = accAdd(sumRegisterPopulation, infoData[i].registerPopulation);
-                        sumLoginPopulation = accAdd(sumLoginPopulation, infoData[i].loginPopulation);
-                        sumRechargePopulation = accAdd(sumRechargePopulation, infoData[i].rechargePopulation);
-                        sumRechargeCount = accAdd(sumRechargeCount, infoData[i].rechargeCount);
-                        sumRechargeAmount = accAdd(sumRechargeAmount, infoData[i].rechargeAmount);
+                    for (var i = 0; i < json.length; i++) {
+                        sumRegisterPopulation = accAdd(sumRegisterPopulation, json[i].registerPopulation);
+                        sumLoginPopulation = accAdd(sumLoginPopulation, json[i].loginPopulation);
+                        sumRechargePopulation = accAdd(sumRechargePopulation, json[i].rechargePopulation);
+                        sumRechargeCount = accAdd(sumRechargeCount, json[i].rechargeCount);
+                        sumRechargeAmount = accAdd(sumRechargeAmount, json[i].rechargeAmount);
 
-                        switch (infoData[i].sourceType) {
+                        switch (json[i].sourceType) {
                             case 1:
                                 terminalsName = "pc";
                                 break;
@@ -389,7 +347,7 @@
                                 terminalsName = "android";
                                 break;
                             case 3:
-                                terminalsName = "iphone";
+                                terminalsName = "ios";
                                 break;
                             case 4:
                                 terminalsName = "h5";
@@ -397,13 +355,12 @@
                         }
 
                         var ele = {
-
                             sourceType: terminalsName,
-                            registerPopulation: infoData[i].registerPopulation,
-                            loginPopulation: infoData[i].loginPopulation,
-                            rechargePopulation: infoData[i].rechargePopulation,
-                            rechargeCount: infoData[i].rechargeCount,
-                            rechargeAmount: infoData[i].rechargeAmount
+                            registerPopulation: json[i].registerPopulation,
+                            loginPopulation: json[i].loginPopulation,
+                            rechargePopulation: json[i].rechargePopulation,
+                            rechargeCount: json[i].rechargeCount,
+                            rechargeAmount: json[i].rechargeAmount.toFixed(2)
                         };
                         addTbRow1(ele);
                     }
@@ -482,8 +439,8 @@
                             loginPopulation: infoData[i].loginPopulation,
                             rechargePopulation: infoData[i].rechargePopulation,
                             rechargeCount: infoData[i].rechargeCount,
-                            rechargeAmount: infoData[i].rechargeAmount
-                        }
+                            rechargeAmount: infoData[i].rechargeAmount.toFixed(2)
+                        };
                         addTbRow(ele);
                     }
                     var ele1 = {
@@ -493,7 +450,7 @@
                         rechargePopulation: sumRechargePopulation,
                         rechargeCount: sumRechargeCount,
                         rechargeAmount: sumRechargeAmount.toFixed(2)
-                    }
+                    };
                     addTbRow(ele1);
                 }
             } else {
@@ -502,13 +459,14 @@
         });
     };
 
+    showTerminalsIntervalData();
+
     //查询显示
     var search = function () {
         pageSize = $("#pageSize").val();
         pageSizes = $("#pageSizes").val();
         showNewUserData(1, pageSize);
         loadNewUserDataTrendLine(echartsCopy);
-        showTerminalsIntervalData(1, pageSizes);
     };
 
     var trendline;
@@ -594,7 +552,7 @@
                     xAxis: [{
                         type: 'category',
                         boundaryGap: false,
-                        data: initSearchDate,
+                        data: json.scales,
                         splitLine: {
                             show: true,
                             lineStyle: {

@@ -114,6 +114,18 @@ public class DateUtil{
     }
 
     /**
+     * 获取前一天的日期字符串
+     *
+     * @param dateStr "yyyy-MM-dd"
+     * @return String ,"yyyy-MM-dd"
+     */
+    public static String getYesterdayStr(String dateStr) throws ParseException{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse(dateStr);
+        return getYesterdayStr(date);
+    }
+
+    /**
      * 获取前一月的日期字符串
      *
      * @param date
@@ -207,12 +219,36 @@ public class DateUtil{
     }
 
     /**
-     * 获取离当前时间最近的整点30分钟的日期
+     * 获取离当前时间最近的靠后的整点30分钟的日期
      *
      * @param date
      * @return String ,"yyyy-MM-dd HH:mm:ss"
      */
-    public static Date getPointByThirtyMinute(Date date){
+    public static Date getThirtyMinutePoint(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, 1);
+        calendar.set(Calendar.MINUTE, calendar.getActualMinimum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMinimum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getActualMinimum(Calendar.MILLISECOND));
+        long interpolation = calendar.getTime().getTime() - date.getTime();
+        if(interpolation >= 30 * 60 * 1000 && interpolation <= 60 * 60 * 1000){
+            calendar.add(Calendar.MINUTE, -30);
+        }
+
+        if(interpolation < 0 || interpolation > 60 * 60 * 1000){
+            throw new IllegalArgumentException("时间参数异常，不能超过制定时间范围，传入时间为：" + date);
+        }
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取离当前时间最近的靠前的整点30分钟的日期
+     *
+     * @param date
+     * @return String ,"yyyy-MM-dd HH:mm:ss"
+     */
+    public static Date getBeforeThirtyMinutePoint(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.MINUTE, calendar.getActualMinimum(Calendar.MINUTE));
@@ -267,12 +303,126 @@ public class DateUtil{
     public static Date getNowZeroTime(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMinimum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getActualMinimum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMinimum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getActualMinimum(Calendar.MILLISECOND));
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取当日23:59:59时间
+     */
+    public static Date getNowLongestTime(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMaximum(Calendar.HOUR_OF_DAY));
         calendar.set(Calendar.MINUTE, calendar.getActualMaximum(Calendar.MINUTE));
         calendar.set(Calendar.SECOND, calendar.getActualMaximum(Calendar.SECOND));
         calendar.set(Calendar.MILLISECOND, calendar.getActualMaximum(Calendar.MILLISECOND));
         return calendar.getTime();
     }
+
+    /**
+     * 获取某时，位移多少天的最小时间时间
+     *
+     * @param date
+     * @param offset
+     * @return
+     */
+    public static Date offsetDayStartTime(Date date, int offset){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, offset);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMinimum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getActualMinimum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMinimum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getActualMinimum(Calendar.MILLISECOND));
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取某时，位移多少天的最大时间时间
+     *
+     * @param date
+     * @param offset
+     * @return
+     */
+    public static Date offsetDayTime(Date date, int offset){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, offset);
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取某时，位移多少天的最大时间时间
+     *
+     * @param date
+     * @param offset
+     * @return
+     */
+    public static Date offsetDayEndTime(Date date, int offset){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, offset);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getActualMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMaximum(Calendar.SECOND));
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取某时，位移多少月的最小时间时间
+     *
+     * @param date
+     * @param offset
+     * @return
+     */
+    public static Date offsetMonthTime(Date date, int offset){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, offset);
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取某时，位移多少月的最小时间时间
+     *
+     * @param date
+     * @param offset
+     * @return
+     */
+    public static Date offsetMonthStartTime(Date date, int offset){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, offset);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMinimum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getActualMinimum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMinimum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getActualMinimum(Calendar.MILLISECOND));
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取某时，位移多少月的最大时间时间
+     *
+     * @param date
+     * @param offset
+     * @return
+     */
+    public static Date offsetMonthEndTime(Date date, int offset){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, offset);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getActualMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMaximum(Calendar.SECOND));
+        return calendar.getTime();
+    }
+
 }
 
 

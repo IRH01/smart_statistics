@@ -20,13 +20,11 @@ public class DailyRegisterService{
         //查询注册来源统计列表数据
         PageHelper.startPage(pageNumber, pageSize);
         List<DailyRegisterReport> selectIntervalInterfaceToltalDataMap = dailyRegisterReportMapper.selectRegisterDataListByTime(startDate, endDate);
-        PageInfo<DailyRegisterReport> pageInfo = new PageInfo<DailyRegisterReport>(selectIntervalInterfaceToltalDataMap);
-        return pageInfo;
+        return new PageInfo<>(selectIntervalInterfaceToltalDataMap);
     }
 
     public DailyRegisterReport selectYesterdayRegisterData(String startDate, String endDate) throws Exception{
-        DailyRegisterReport dailyRegisterReport = dailyRegisterReportMapper.selectYesterdayRegisterData(startDate, endDate);
-        return dailyRegisterReport;
+        return dailyRegisterReportMapper.selectYesterdayRegisterData(startDate, endDate);
 
     }
 

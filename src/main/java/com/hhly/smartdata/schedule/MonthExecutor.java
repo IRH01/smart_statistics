@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 /**
  * Created by Iritchie.ren on 2017/9/25.
  */
@@ -20,37 +22,41 @@ public class MonthExecutor{
 
     @Scheduled(cron = "* * 1 1 * MON-FRI")
     public void compositeReportExecutor(){
+        Date date = new Date();
         try{
-            this.monthExecutorService.compositeReport();
+            this.monthExecutorService.compositeReport(date);
         }catch(Exception e){
-            LOGGER.error("定时器执行失败"+ e.getMessage());
+            LOGGER.error("定时器执行失败" + e.getMessage());
         }
     }
 
     @Scheduled(cron = "* * 1 1 * MON-FRI")
     public void registerExecutor(){
+        Date date = new Date();
         try{
-            this.monthExecutorService.registerReport();
+            this.monthExecutorService.registerReport(date);
         }catch(Exception e){
-            LOGGER.error("定时器执行失败"+ e.getMessage());
+            LOGGER.error("定时器执行失败" + e.getMessage());
         }
     }
 
     @Scheduled(cron = "* * 1 1 * MON-FRI")
     public void rechargeExecutor(){
+        Date date = new Date();
         try{
-            this.monthExecutorService.rechargeReport();
+            this.monthExecutorService.rechargeReport(date);
         }catch(Exception e){
-            LOGGER.error("定时器执行失败"+ e.getMessage());
+            LOGGER.error("定时器执行失败" + e.getMessage());
         }
     }
 
     @Scheduled(cron = "* * 1 1 * MON-FRI")
     public void loginSourceExecutor(){
+        Date date = new Date();
         try{
-            this.monthExecutorService.loginSourceReport();
+            this.monthExecutorService.loginSourceReport(date);
         }catch(Exception e){
-            LOGGER.error("定时器执行失败"+ e.getMessage());
+            LOGGER.error("定时器执行失败" + e.getMessage());
         }
     }
 

@@ -1,6 +1,4 @@
-package com.hhly.smartdata.model.smartdata;
-
-import java.util.Date;
+package com.hhly.smartdata.dto.current;
 
 public class IntervalGameLaunchListReport{
     /**

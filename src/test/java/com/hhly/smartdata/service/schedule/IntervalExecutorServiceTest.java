@@ -1,11 +1,14 @@
 package com.hhly.smartdata.service.schedule;
 
 import com.hhly.smartdata.common.BaseTest;
+import com.hhly.smartdata.util.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Date;
 
 /**
  * IntervalExecutorService Tester.
@@ -20,13 +23,17 @@ public class IntervalExecutorServiceTest extends BaseTest{
     @Autowired
     private IntervalExecutorService intervalExecutorService;
 
+    private static final Integer INTERVAL_TIME = 30;
 
     /**
      * Method: intervalSourceStatistics()
      */
     @Test
     public void testIntervalSourceStatistics() throws Exception{
-        this.intervalExecutorService.intervalSourceStatistics();
+        Date now = new Date();
+        Date nowPointByThirtyMinute = DateUtil.getBeforeThirtyMinutePoint(now);
+        String startDate = DateUtil.date2String(nowPointByThirtyMinute);
+        this.intervalExecutorService.intervalSourceStatistics(startDate, INTERVAL_TIME);
     }
 
     /**
@@ -34,7 +41,10 @@ public class IntervalExecutorServiceTest extends BaseTest{
      */
     @Test
     public void testIntervalInterfaceStatistics() throws Exception{
-        this.intervalExecutorService.intervalInterfaceStatistics();
+        Date now = new Date();
+        Date nowPointByThirtyMinute = DateUtil.getBeforeThirtyMinutePoint(now);
+        String startDate = DateUtil.date2String(nowPointByThirtyMinute);
+        this.intervalExecutorService.intervalInterfaceStatistics(startDate, INTERVAL_TIME);
     }
 
     /**
@@ -42,7 +52,10 @@ public class IntervalExecutorServiceTest extends BaseTest{
      */
     @Test
     public void testIntervalGameLaunch() throws Exception{
-        this.intervalExecutorService.intervalGameLaunch();
+        Date now = new Date();
+        Date nowPointByThirtyMinute = DateUtil.getBeforeThirtyMinutePoint(now);
+        String startDate = DateUtil.date2String(nowPointByThirtyMinute);
+        this.intervalExecutorService.intervalGameLaunch(startDate, INTERVAL_TIME);
     }
 
 

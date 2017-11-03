@@ -227,6 +227,9 @@
             <if test="endDate != null and endDate  != ''">
                 and statistics_day &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
             </if>
+            <if test="sourceType != null and sourceType  != ''">
+                and source_type = #{sourceType}
+            </if>
         </where>
         order by statistics_day desc
     </select>

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Date;
+
 /**
  * DailyExecutorService Tester.
  *
@@ -27,17 +29,16 @@ public class DailyExecutorServiceTest extends BaseTest{
      */
     @Test
     public void testCompositeReport() throws Exception{
-        Result result = this.dailyExecutorService.compositeReport();
+        Result result = this.dailyExecutorService.compositeReport(new Date());
         System.err.println(JSONObject.toJSONString(result.getData()));
     }
-
 
     /**
      * Method: rechargeStatistic()
      */
     @Test
     public void testRechargeStatistic() throws Exception{
-        this.dailyExecutorService.rechargeStatistic();
+        this.dailyExecutorService.rechargeStatistic(new Date());
     }
 
     /**
@@ -45,15 +46,7 @@ public class DailyExecutorServiceTest extends BaseTest{
      */
     @Test
     public void testLoginStatistic() throws Exception{
-        this.dailyExecutorService.loginStatistic();
-    }
-
-    /**
-     * Method: keepRecordAnalyzeReport()
-     */
-    @Test
-    public void testKeepRecordAnalyzeReport() throws Exception{
-        this.dailyExecutorService.keepRecordAnalyzeReport();
+        this.dailyExecutorService.loginStatistic(new Date());
     }
 
     /**
@@ -61,6 +54,14 @@ public class DailyExecutorServiceTest extends BaseTest{
      */
     @Test
     public void testRegisterStatistic() throws Exception{
-        this.dailyExecutorService.registerStatistic();
+        this.dailyExecutorService.registerStatistic(new Date());
     }
-} 
+
+    /**
+     * Method: keepRecordAnalyzeReport()
+     */
+    @Test
+    public void testKeepRecordAnalyzeReport() throws Exception{
+        this.dailyExecutorService.keepRecordAnalyzeReport(new Date());
+    }
+}

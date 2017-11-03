@@ -13,9 +13,9 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, country, client_identity, user_id, platform_terminal, website_domain, page_view, 
-    url_path, create_time
-  </sql>
+        id, country, client_identity, user_id, platform_terminal, website_domain, page_view,
+        url_path, create_time
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -23,15 +23,15 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <insert id="insert" parameterType="com.hhly.smartdata.model.source.DataView">
-    insert into data_view (id, country, client_identity, 
-      user_id, platform_terminal, website_domain, 
-      page_view, url_path, create_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{country,jdbcType=INTEGER}, #{clientIdentity,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{platformTerminal,jdbcType=INTEGER}, #{websiteDomain,jdbcType=VARCHAR}, 
-      #{pageView,jdbcType=INTEGER}, #{urlPath,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
+        insert into data_view (id, country, client_identity,
+        user_id, platform_terminal, website_domain,
+        page_view, url_path, create_time
+        )
+        values (#{id,jdbcType=BIGINT}, #{country,jdbcType=INTEGER}, #{clientIdentity,jdbcType=VARCHAR},
+        #{userId,jdbcType=VARCHAR}, #{platformTerminal,jdbcType=INTEGER}, #{websiteDomain,jdbcType=VARCHAR},
+        #{pageView,jdbcType=INTEGER}, #{urlPath,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
     <insert id="insertSelective" parameterType="com.hhly.smartdata.model.source.DataView">
         insert into data_view
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -124,36 +124,37 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.source.DataView">
-    update data_view
-    set country = #{country,jdbcType=INTEGER},
-      client_identity = #{clientIdentity,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR},
-      platform_terminal = #{platformTerminal,jdbcType=INTEGER},
-      website_domain = #{websiteDomain,jdbcType=VARCHAR},
-      page_view = #{pageView,jdbcType=INTEGER},
-      url_path = #{urlPath,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update data_view
+        set country = #{country,jdbcType=INTEGER},
+        client_identity = #{clientIdentity,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=VARCHAR},
+        platform_terminal = #{platformTerminal,jdbcType=INTEGER},
+        website_domain = #{websiteDomain,jdbcType=VARCHAR},
+        page_view = #{pageView,jdbcType=INTEGER},
+        url_path = #{urlPath,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
-    <select id="selectYesterdayUserViewAndPageView" resultType="java.util.Map">
-    select platform_terminal  as platformTerminal ,count(DISTINCT(client_identity)) as userCount, count(id) as pageCount from data_view
-    where country =0
-    AND TO_DAYS(NOW()) - TO_DAYS(create_time) &lt;= 1
-    AND TO_DAYS(NOW()) - TO_DAYS(create_time) &gt;= 0
-    group by platform_terminal
-  </select>
+    <select id="selectUserViewAndPageViewByStartTimeAndEndTime" resultType="java.util.Map">
+        select platform_terminal as platformTerminal ,count(DISTINCT(client_identity)) as userCount, count(id) as
+        pageCount from data_view
+        where country =0
+        AND create_time &lt;= #{startTime}
+        AND create_time &gt;= #{endTime}
+        group by platform_terminal
+    </select>
 
     <select id="selectFirstThirtyMinUserViewAndPageView" resultType="java.util.Map">
-    select platform_terminal as osType,count(DISTINCT(user_id)) as loginPopulation from data_view where
-    user_id is not null
-    <![CDATA[
-              and create_time> date_sub(DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
+        select DISTINCT(user_id) as userId,platform_terminal as osType from data_view where
+        user_id is not null and user_id != ''
+        <![CDATA[
+              and create_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
         ]]>
-    <![CDATA[
-              and create_time <= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%S')
+        <![CDATA[
+              and create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-    group by platform_terminal
-  </select>
+        group by platform_terminal,user_id
+    </select>
 
 </mapper>
