@@ -16,18 +16,18 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/sys/func")
-public class FunctionController extends BaseController {
+public class FunctionController extends BaseController{
     @Autowired
     private FunctionService functionService;
 
     @RequestMapping("/list")
     @RequiresPermissions("!sys_func_list")
-    public ModelAndView list() {
+    public ModelAndView list(){
         Map<String, Object> model = Maps.newHashMap();
-        try {
+        try{
             model.put("funcList", functionService.getAll());
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage()+ e.getMessage());
+        }catch(Exception e){
+            LOGGER.error(e.getMessage());
         }
         return new ModelAndView("system/function/list", model);
     }

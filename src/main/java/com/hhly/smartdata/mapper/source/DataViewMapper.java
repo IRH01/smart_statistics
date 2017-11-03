@@ -24,4 +24,6 @@ public interface DataViewMapper{
     List<Map<String, Object>> selectUserViewAndPageViewByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 
     List<Map<String, Object>> selectFirstThirtyMinUserViewAndPageView(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
+
+    List<Map<String, Object>> selectYesterdayUserViewAndPageViewList(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 }

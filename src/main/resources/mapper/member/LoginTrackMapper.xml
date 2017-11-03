@@ -44,7 +44,9 @@
         os_type AS sourceType
         FROM
         tbl_login_track
+        where
         login_time &lt;= #{endTime}
+        and
         login_time &gt;= #{startTime}
         group by user_name,os_type
     </select>
@@ -62,7 +64,7 @@
     </select>
 
     <select id="selectFirstThirtyMinLoginUser" resultType="java.util.Map">
-        select DISTINCT(user_name) as userId,os_type as osType from tbl_login_track where
+        select user_name as userId,os_type as osType from tbl_login_track where
         <![CDATA[
               login_time >= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
   		]]>
@@ -70,7 +72,7 @@
         <![CDATA[
   		      login_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
   		]]>
-        group by os_type
+        group by  user_name,os_type
     </select>
 
 </mapper>

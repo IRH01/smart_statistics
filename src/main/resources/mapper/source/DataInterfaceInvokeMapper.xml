@@ -143,7 +143,7 @@
              and create_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
   	    ]]>
    <![CDATA[
-             and create_time<=DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+             and create_time<DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
   	 ]]>
     group by interface_type
   </select>

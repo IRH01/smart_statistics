@@ -56,7 +56,7 @@
         select count(user_id) from tbl_user_info
         where country = 0
         and create_time &gt;= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
-        and create_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+        and create_time &lt; DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
     </select>
 
     <select id="selectOldRegisterUser" resultType="java.lang.String">
@@ -83,7 +83,7 @@
         WHERE
         create_time &gt;= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
         AND
-        create_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+        create_time &lt; DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
         GROUP BY os_type
     </select>
 
@@ -104,7 +104,7 @@
         FROM
         tbl_user_info
         WHERE create_time &lt;= #{endTime}
-        AND create_time >= #{startTime}
+        AND create_time > #{startTime}
     </select>
 
     <select id="selectUserIdByStartTimeAndEndTime" resultType="java.lang.String">
@@ -113,7 +113,7 @@
         FROM
         tbl_user_info
         WHERE create_time &lt;= #{endTime}
-        AND create_time &gt;= #{startTime}
+        AND create_time &gt; #{startTime}
     </select>
 
     <select id="selectYesterdayRegisterUserIdAndTerminal" resultType="java.util.Map">
@@ -136,7 +136,7 @@
         tbl_user_info
         WHERE country =0
         AND create_time &lt;= #{endTime}
-        AND create_time &gt;= #{startTime}
+        AND create_time &gt; #{startTime}
         group by osType
     </select>
 

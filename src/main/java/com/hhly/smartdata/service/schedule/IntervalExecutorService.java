@@ -101,7 +101,6 @@ public class IntervalExecutorService{
                 if(sourceTypeEnum.getCode() == (firstThirtyMinLoginUserMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinLoginUserMap.get("osType").toString()))){
                     userId = firstThirtyMinLoginUserMap.get("userId") == null ? null : firstThirtyMinLoginUserMap.get("userId") + "";
                     loginCount.add(userId);
-                    break;
                 }
             }
 
@@ -119,7 +118,6 @@ public class IntervalExecutorService{
                     if(sourceTypeEnum.getCode() == (firstThirtyMinGameStartCountMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinGameStartCountMap.get("osType").toString()))){
                         userId = firstThirtyMinGameStartCountMap.get("userId") == null ? null : firstThirtyMinGameStartCountMap.get("userId") + "";
                         loginCount.add(userId);
-                        break;
                     }
                 }
             }
@@ -129,7 +127,6 @@ public class IntervalExecutorService{
                     if(sourceTypeEnum.getCode() == (firstThirtyMinUserViewAndPageViewMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinUserViewAndPageViewMap.get("osType").toString()))){
                         userId = firstThirtyMinUserViewAndPageViewMap.get("userId") == null ? null : firstThirtyMinUserViewAndPageViewMap.get("userId") + "";
                         loginCount.add(userId);
-                        break;
                     }
                 }
             }

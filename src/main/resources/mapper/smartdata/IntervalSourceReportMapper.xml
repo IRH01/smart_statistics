@@ -55,8 +55,8 @@
     </select>
     <select id="selectIntervalSourceListData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
         select
-        statistics_time,
-        sum(register_population) as register_population,
+        statistics_time as  statisticsTime,
+        sum(register_population) as registerPopulation,
         sum(login_population) as loginPopulation,
         sum(recharge_population) as rechargePopulation,
         sum(recharge_count) as rechargeCount,

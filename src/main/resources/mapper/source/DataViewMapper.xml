@@ -139,17 +139,17 @@
     <select id="selectUserViewAndPageViewByStartTimeAndEndTime" resultType="java.util.Map">
         select platform_terminal as platformTerminal ,count(DISTINCT(client_identity)) as userCount, count(id) as
         pageCount from data_view
-        where country =0
+        where country = 0
         AND create_time &lt;= #{startTime}
         AND create_time &gt;= #{endTime}
         group by platform_terminal
     </select>
 
     <select id="selectFirstThirtyMinUserViewAndPageView" resultType="java.util.Map">
-        select DISTINCT(user_id) as userId,platform_terminal as osType from data_view where
+        select user_id as userId,platform_terminal as osType from data_view where
         user_id is not null and user_id != ''
         <![CDATA[
-              and create_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
+              and create_time >= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
         ]]>
         <![CDATA[
               and create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
@@ -157,4 +157,11 @@
         group by platform_terminal,user_id
     </select>
 
+    <select id="selectYesterdayUserViewAndPageViewList" resultType="java.util.Map">
+        select user_id as userId,platform_terminal as osType from data_view where
+        user_id is not null and user_id != ''
+        AND create_time &lt;= #{startTime}
+        AND create_time &gt;= #{endTime}
+        group by platform_terminal,user_id
+    </select>
 </mapper>

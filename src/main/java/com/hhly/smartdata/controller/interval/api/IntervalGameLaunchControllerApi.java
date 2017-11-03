@@ -31,7 +31,7 @@ public class IntervalGameLaunchControllerApi extends BaseController{
         try{
             result = intervalGameLaunchService.selectIntervalGameLaunchTimeListData();
         }catch(Exception e){
-            LOGGER.error("获取平台各游戏启动列表数据异常:" + e);
+            LOGGER.error("获取平台各游戏启动列表数据异常:" + e.getMessage());
             e.printStackTrace();
         }
         return result;

@@ -367,9 +367,15 @@ public class DailyExecutorService{
     }
 
     public Result keepRecordAnalyzeReport(Date date) throws Exception{
-        // 昨日登录用户列表
+        // 昨日登录用户列表  登陆日志表
         List<Map<String, Object>> yesterdayLoginUserList = this.loginTrackMapper.selectLoginUserGroupByUserAndOsType(DateUtil.offsetDayStartTime(date, -1), DateUtil.offsetDayEndTime(date, -1));
-        //
+
+        //启动表
+        List<Map<String, Object>> yesterdayGameStartList = dataGameStartMapper.selectYesterdayGameStartList(DateUtil.offsetDayStartTime(date, -1), DateUtil.offsetDayEndTime(date, -1));
+
+        // uv
+        List<Map<String, Object>> yesterdayUserViewAndPageViewList = dataViewMapper.selectYesterdayUserViewAndPageViewList(DateUtil.offsetDayStartTime(date, -1), DateUtil.offsetDayEndTime(date, -1));
+
         // 1天前注册用户列表，为了计算当日注册数
         List<Map<String, Object>> beforeDayRegisterUserList_0 = this.userInfoMapper.selectRegisterUserByStartTimeAndEndTime(DateUtil.offsetDayStartTime(date, -1), DateUtil.offsetDayEndTime(date, -1));
         // 2天前注册用户列表，前日注册用户列表,为了计算1日留存（次留）
@@ -415,6 +421,15 @@ public class DailyExecutorService{
                     for(Map<String, Object> map : yesterdayLoginUserList){
                         yesterdayLoginUserSet.add((String) map.get("userId"));
                     }
+
+                    for(Map<String, Object> map : yesterdayGameStartList){
+                        yesterdayLoginUserSet.add((String) map.get("userId"));
+                    }
+
+                    for(Map<String, Object> map : yesterdayUserViewAndPageViewList){
+                        yesterdayLoginUserSet.add((String) map.get("userId"));
+                    }
+
                     dailyKeepRecordReport.setRegisterCount(beforeDayRegisterUserList_0.size());
                     break;
                 case 1:
@@ -424,6 +439,13 @@ public class DailyExecutorService{
                             yesterdayLoginUserSet.add((String) map.get("userId"));
                         }
                     }
+
+                    for(Map<String, Object> map : yesterdayUserViewAndPageViewList){
+                        if("1".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
+                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                        }
+                    }
+
                     for(Map<String, Object> map : beforeDayRegisterUserList_0){
                         if("1".equals(map.get("osType") == null ? "" : map.get("osType").toString())){
                             count++;
@@ -434,6 +456,12 @@ public class DailyExecutorService{
                 case 2:
                     // android
                     for(Map<String, Object> map : yesterdayLoginUserList){
+                        if("2".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
+                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                        }
+                    }
+
+                    for(Map<String, Object> map : yesterdayGameStartList){
                         if("2".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
                             yesterdayLoginUserSet.add((String) map.get("userId"));
                         }
@@ -453,6 +481,13 @@ public class DailyExecutorService{
                             yesterdayLoginUserSet.add((String) map.get("userId"));
                         }
                     }
+
+                    for(Map<String, Object> map : yesterdayGameStartList){
+                        if("3".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
+                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                        }
+                    }
+
                     for(Map<String, Object> map : beforeDayRegisterUserList_0){
                         if("3".equals(map.get("osType") == null ? "" : map.get("osType").toString())){
                             count++;
@@ -463,6 +498,12 @@ public class DailyExecutorService{
                 case 4:
                     // h5
                     for(Map<String, Object> map : yesterdayLoginUserList){
+                        if("4".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
+                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                        }
+                    }
+
+                    for(Map<String, Object> map : yesterdayUserViewAndPageViewList){
                         if("4".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
                             yesterdayLoginUserSet.add((String) map.get("userId"));
                         }

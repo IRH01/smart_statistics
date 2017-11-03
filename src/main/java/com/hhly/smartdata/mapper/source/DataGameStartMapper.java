@@ -27,4 +27,6 @@ public interface DataGameStartMapper{
 
     List<Map<String, Object>> selectFirstThirtyMinGameStartCount(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
 
+    List<Map<String, Object>>  selectYesterdayGameStartList(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
 }

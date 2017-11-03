@@ -176,7 +176,7 @@
     </select>
 
     <select id="selectFirstThirtyMinGameStartCount" resultType="java.util.Map">
-        select DISTINCT(user_id) as userId,platform_terminal as osType from data_platform_start
+        select user_id as userId,platform_terminal as osType from data_platform_start
         where country = 0
         <![CDATA[
              and create_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
@@ -184,6 +184,15 @@
         <![CDATA[
             and create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
   		]]>
+        and user_id is not null and user_id != ''
+        group by platform_terminal,user_id
+    </select>
+
+
+    <select id="selectYesterdayGameStartList" resultType="java.util.Map">
+        select user_id as userId,platform_terminal as osType from data_platform_start
+        WHERE create_time &lt;= #{endTime}
+        AND create_time &gt; #{startTime}
         and user_id is not null and user_id != ''
         group by platform_terminal,user_id
     </select>
