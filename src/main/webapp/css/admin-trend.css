@@ -91,7 +91,7 @@ table{ width: 100%; border-collapse: collapse; border-spacing: 0;}
 .tableList td{ border-bottom: 1px solid #d4dcde; border-right:1px solid #d4dcde; height: 40px;  }
 .tableList tr td:first-child{ border-left: 1px solid #d4dcde;}
 .tableList tr:hover td{ background: #f0f6fc;}
-.tableList tr:first-child td,.tableList tr:first-child:hover td{ border-top: 1px solid #d4dcde; background: #e1e7e9; font-weight: bold;}
+.tableList thead:first-child td,.tableList thead tr{ border-top: 1px solid #d4dcde; background: #e1e7e9; font-weight: bold;}
 .xiangqing{ background: url(../img/xiangqing.png) no-repeat; width: 20px; height: 20px; display: inline-block;}
 .xiangqing2{ background: url(../img/xiangqing2.png) no-repeat; width: 20px; height: 20px; display: inline-block;}
 td.time{ color: #999; font-size: 12px;}
@@ -131,7 +131,7 @@ td.time{ color: #999; font-size: 12px;}
 .tablePageTd{}
 .spanPageSize{color:#004276;}
 .divPage{float:left;margin-left:20px;}
-.tablePanel{height:90%;width:100%;overflow-x:scroll;overflow-y:auto;background:white;}
+.tablePanel{height:100%;width:100%;overflow-x:scroll;overflow-y:auto;background:white;}
 .pagePanel{height:5%;}
 .trendlinePanel{ margin: 0px 0;width:100%;background:white;}
 .barPanel{width:50%;height:100%;float:left;}
@@ -144,6 +144,6 @@ td.time{ color: #999; font-size: 12px;}
 .tableListGame th{ border-bottom: 1px solid #d4dcde; border-right:1px solid #d4dcde; height: 40px;text-align: center;}
 .tableListGame tr:hover td{ background: #f0f6fc;}
 .tableListGame tr:hover th{ background: #f0f6fc;}
-.tableListGame tr:first-child th,.tableList tr:first-child:hover th{ border-top: 1px solid #d4dcde; background: #e1e7e9; font-weight: bold;}
+.tableListGame tr:first-child th, .tableList tr:first-child:hover th { border-top: 1px solid #d4dcde; background: #e1e7e9; font-weight: bold;}
 .expand{width: 32px; height: 32px; display: inline-block;background-size: contain;border:none;}
 .partner-link{color:#0066ff!important;cursor:pointer;}

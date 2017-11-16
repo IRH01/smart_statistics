@@ -16,26 +16,17 @@
         <result column="login_ip_area" property="loginIpArea" jdbcType="VARCHAR"/>
         <result column="is_third" property="isThird" jdbcType="INTEGER"/>
     </resultMap>
+
     <sql id="Base_Column_List">
         id, user_name, login_result, login_time, login_ip, os_type, version_code, version_name,
         platformid, gamearea_id, service_id, login_ip_area, is_third
     </sql>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from tbl_login_track
         WHERE id = #{id,jdbcType=BIGINT}
-    </select>
-
-    <select id="selectYesterdayLoginUser" resultType="java.util.Map">
-        SELECT
-        user_name AS userId,
-        os_type AS sourceType
-        FROM
-        tbl_login_track
-        WHERE TO_DAYS(NOW()) - TO_DAYS(login_time) &lt;= 1
-        AND TO_DAYS(NOW()) - TO_DAYS(login_time) &gt; 0
-        group by user_name,os_type
     </select>
 
     <select id="selectLoginUserGroupByUserAndOsType" resultType="java.util.Map">
@@ -48,31 +39,57 @@
         login_time &lt;= #{endTime}
         and
         login_time &gt;= #{startTime}
-        group by user_name,os_type
+        and user_name != ''
+        and os_type != ''
+        group by BINARY  user_name,os_type
     </select>
 
-    <select id="selectLoginUserByStartTimeAndEndTime" resultType="java.util.Map">
+    <select id="selectLoginUserGroupByUser" resultType="java.util.Map">
         SELECT
-        platformid AS platformId,
-        os_type AS sourceType,
         user_name AS userId
         FROM
         tbl_login_track
         WHERE login_time &lt;= #{endTime}
         AND login_time &gt;= #{startTime}
-        GROUP BY platformid, os_type, user_name;
+        GROUP BY BINARY  user_name;
     </select>
 
-    <select id="selectFirstThirtyMinLoginUser" resultType="java.util.Map">
-        select user_name as userId,os_type as osType from tbl_login_track where
-        <![CDATA[
-              login_time >= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
-  		]]>
+    <select id="selectLoginUserPopulationByTimeGroupBySource" resultType="java.util.Map">
+        SELECT
+        os_type AS sourceType,
+        user_name AS userId
+        FROM
+        tbl_login_track
+        WHERE
+        user_name is not null
+        and user_name != ''
+        and login_time &lt;= #{endTime}
+        AND login_time &gt;= #{startTime}
+        GROUP BY os_type, BINARY  user_name;
+    </select>
+
+    <select id="selectLoginUserGroupBySourceType" resultType="java.util.Map">
+        select
+        os_type as sourceType,
+        user_name as userId
+        from
+        tbl_login_track
+        where
+        user_name is not null
+        and user_name != ''
+        and login_time &gt;= #{startTime}
+        and login_time &lt; #{endTime}
+        group by BINARY  user_name,os_type
+    </select>
+
+    <select id="selectLoginUserPopulationByTime" resultType="java.lang.String">
+        select
+        user_name
+        from tbl_login_track
+        where
+        login_time &gt;= #{startTime}
         and
-        <![CDATA[
-  		      login_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-  		]]>
-        group by  user_name,os_type
+        login_time &lt; #{endTime}
     </select>
 
 </mapper>

@@ -1,21 +1,22 @@
 package com.hhly.smartdata.controller.daily.api;
 
+import com.google.common.collect.Maps;
 import com.hhly.smartdata.controller.BaseController;
-import com.hhly.smartdata.dto.share.TimeFilter;
 import com.hhly.smartdata.service.daily.DailyLoginStatisticsService;
-import com.hhly.smartdata.service.month.MonthLoginStatisticsService;
 import com.hhly.smartdata.util.Result;
-import com.hhly.smartdata.util.page.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Iritchie.ren on 2017/10/10.
  */
 @RestController
+@Scope(value = "prototype")
 @RequestMapping("/daily/login/statistics")
 public class DailyLoginStatisticsControllerApi extends BaseController{
 
@@ -23,14 +24,14 @@ public class DailyLoginStatisticsControllerApi extends BaseController{
     private DailyLoginStatisticsService dailyLoginStatisticsService;
 
     @RequestMapping("list")
-    public Result search(TimeFilter filter){
-        Pagination pagination = null;
+    public Result search(String monthOfYear){
+        Map<String, List> searchMap = Maps.newHashMap();
         try{
-            pagination = this.dailyLoginStatisticsService.search(filter);
+            searchMap = this.dailyLoginStatisticsService.search(monthOfYear);
         }catch(Exception e){
             LOGGER.error("查询月登录报表报错：" + e.getMessage());
         }
-        return Result.success(pagination);
+        return Result.success(searchMap);
     }
 
     @RequestMapping("last/total")
@@ -43,5 +44,6 @@ public class DailyLoginStatisticsControllerApi extends BaseController{
         }
         return Result.success(lastTotalRegisterMap);
     }
+
 
 }

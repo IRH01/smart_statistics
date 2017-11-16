@@ -20,27 +20,31 @@ public class MonthRechargeReport{
     private Byte sourceType = 0;
 
     /**
-     * PC-充值人数
+     * 登录人数
+     */
+    private Integer loginPopulation = 0;
+    /**
+     * 充值人数
      */
     private Integer rechargePopulation = 0;
 
     /**
-     * PC-充值金额
+     * 充值金额
      */
     private BigDecimal rechargeAmount = new BigDecimal(0.00);
 
     /**
-     * PC-充值次数
+     * 充值次数
      */
     private Integer rechargeCount = 0;
 
     /**
-     * PC-新用户充值人数
+     * 新用户充值人数
      */
     private Integer newRechargePopulation = 0;
 
     /**
-     * PC-老用户充值人数
+     * 老用户充值人数
      */
     private Integer oldRechargePopulation = 0;
 
@@ -112,6 +116,14 @@ public class MonthRechargeReport{
 
     public void setOldRechargePopulation(Integer oldRechargePopulation){
         this.oldRechargePopulation = oldRechargePopulation;
+    }
+
+    public Integer getLoginPopulation(){
+        return loginPopulation;
+    }
+
+    public void setLoginPopulation(Integer loginPopulation){
+        this.loginPopulation = loginPopulation;
     }
 
     public Date getExecuteTime(){

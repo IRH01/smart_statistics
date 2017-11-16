@@ -4,12 +4,14 @@ import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
+@Scope(value = "prototype")
 public class LoginControllerApi extends BaseController{
     @Autowired
     private UserService userService;
@@ -24,7 +26,7 @@ public class LoginControllerApi extends BaseController{
         try{
             usr = userService.getUserByUsername(usrName);
         }catch(Exception e){
-            LOGGER.error("异常！"+ e.getMessage());
+            LOGGER.error("异常！" + e.getMessage());
         }
         if(usr == null){
             return true;
@@ -42,7 +44,7 @@ public class LoginControllerApi extends BaseController{
         try{
             usr = userService.getUserByUsername(usrName);
         }catch(Exception e){
-            LOGGER.error("异常！"+ e.getMessage());
+            LOGGER.error("异常！" + e.getMessage());
         }
         if(usr == null){
             return false;

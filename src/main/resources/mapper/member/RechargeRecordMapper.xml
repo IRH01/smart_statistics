@@ -40,7 +40,9 @@
     </select>
 
     <select id="selectByStartTimeAndEndTime" resultType="java.util.Map">
-        SELECT COUNT(DISTINCT(user_id)) as userCount,
+        SELECT
+        source AS sourceType,
+        COUNT(DISTINCT(BINARY user_id)) as userCount,
         SUM(apply_amount) as amountSum,
         COUNT(orderno) as orderCount
         FROM tbl_recharge_record
@@ -51,84 +53,119 @@
         GROUP BY source
     </select>
 
-    <select id="selectYesterdayNewUser" resultType="java.util.Map">
-        SELECT a.source as source,
-        COUNT(DISTINCT(a.user_id)) as userCount
-        FROM tbl_recharge_record a INNER JOIN tbl_user_info b ON a.user_id = b.user_id
-        WHERE TO_DAYS(NOW()) - TO_DAYS(b.create_time) &lt;= 1
-        AND TO_DAYS(NOW()) - TO_DAYS(b.create_time) &gt; 0
-        AND TO_DAYS(NOW()) - TO_DAYS(a.apply_time) &lt;= 1
-        AND TO_DAYS(NOW()) - TO_DAYS(a.apply_time) &gt; 0
-        GROUP BY a.source;
-    </select>
-
     <select id="selectNewUserAndRechargeByStartTimeAndEndTime" resultType="java.util.Map">
-        SELECT a.source as source,
-        COUNT(DISTINCT(a.user_id)) as userCount
+        SELECT a.source as sourceType,
+        COUNT(DISTINCT(BINARY a.user_id)) as userCount
         FROM tbl_recharge_record a INNER JOIN tbl_user_info b ON a.user_id = b.user_id
         WHERE b.create_time &lt;= #{endTime}
         AND b.create_time &gt;= #{startTime}
-        AND a.apply_time &lt;= #{endTime}
-        AND a.apply_time &gt;= #{startTime}
+        AND a.pay_time &lt;= #{endTime}
+        AND a.pay_time &gt;= #{startTime}
+        and b.status = 2
         GROUP BY a.source;
     </select>
 
-    <select id="selectYesterdayOldUser" resultType="java.util.Map">
-        SELECT a.source as source,
-        COUNT(DISTINCT(a.user_id)) as userCount
-        FROM tbl_recharge_record a INNER JOIN tbl_user_info b ON a.user_id = b.user_id
-        WHERE TO_DAYS(NOW()) - TO_DAYS(b.create_time) &gt; 1
-        AND TO_DAYS(NOW()) - TO_DAYS(apply_time) &lt;= 1
-        AND TO_DAYS(NOW()) - TO_DAYS(apply_time) &gt; 0
-        GROUP BY a.source
-    </select>
-
     <select id="selectOldUserAndRechargeByStartTimeAndEndTime" resultType="java.util.Map">
-        SELECT a.source as source,
-        COUNT(DISTINCT(a.user_id)) as userCount
-        FROM tbl_recharge_record a INNER JOIN tbl_user_info b ON a.user_id = b.user_id
+        SELECT a.source as sourceType,
+        COUNT(DISTINCT(BINARY a.user_id)) as userCount
+        FROM
+        tbl_recharge_record a
+        INNER JOIN
+        tbl_user_info b
+        ON a.user_id = b.user_id
         WHERE b.create_time &lt; #{startTime}
-        AND apply_time) &lt;= #{endTime}
-        AND apply_time) &gt;= #{startTime}
+        AND a.pay_time &lt;= #{endTime}
+        AND a.pay_time &gt;= #{startTime}
+        AND a.status != 0
+        and b.status = 2
         GROUP BY a.source
     </select>
 
     <select id="findRechargeRecordByTime" resultType="java.lang.Integer">
-        select count(DISTINCT (orderno)) as count from tbl_recharge_record where
+        select count(DISTINCT (BINARY orderno)) as count from tbl_recharge_record where
         status != 0
         <![CDATA[
-             and apply_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval  #{intervalTime} minute)
+             and pay_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval  #{intervalTime} minute)
   	    ]]>
         <![CDATA[
              and apply_time<=DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+
+
+
+
+
+
         ]]>
     </select>
 
-    <select id="selectYesterdayRechargeUser" resultType="java.util.Map">
+    <select id="selectRechargeUserByTime" resultType="java.util.Map">
         SELECT
-        plateform_id AS platformId,
+        user_id AS userId,
+        COUNT(orderno) AS orderCount,
+        SUM(apply_amount) AS applyAmountSum
+        FROM
+        tbl_recharge_record
+        WHERE
+        status != 0
+        AND pay_time &lt;= #{endTime}
+        AND pay_time &gt;= #{startTime}
+        GROUP BY BINARY user_id
+    </select>
+
+    <select id="selectRechargeGroupBySourceType" resultType="java.util.Map">
+        select
+        source as sourceType,
+        count(DISTINCT(BINARY user_id)) as rechargePopulation,
+        sum(apply_amount) as rechargeAmount,
+        count(orderno) as rechargeCount
+        from tbl_recharge_record
+        where
+        status != 0
+        and pay_time &gt;= #{startTime}
+        and pay_time &lt; #{endTime}
+        group by source
+    </select>
+
+    <select id="selectRechargeUserGroupByUserAndOsType" resultType="java.util.Map">
+        SELECT
         source AS sourceType,
         user_id AS userId,
         COUNT(orderno) AS orderCount,
         SUM(apply_amount) AS applyAmountSum
         FROM
         tbl_recharge_record
-        WHERE TO_DAYS(NOW()) - TO_DAYS(apply_time) &lt;= 1
-        AND TO_DAYS(NOW()) - TO_DAYS(apply_time) &gt; 0
-        GROUP BY plateform_id,source,user_id
+        WHERE
+        status != 0
+        AND pay_time &lt;= #{endTime}
+        AND pay_time &gt;= #{startTime}
+        GROUP BY source,BINARY user_id
     </select>
 
-    <select id="selectFirstThirtyMinRechargeUser" resultType="java.util.Map">
-        select source as osType,count(DISTINCT(user_id)) as rechargePopulation ,sum(apply_amount) as
-        rechargeAmount,count(orderno) as rechargeCount from tbl_recharge_record
-        where
+    <select id="selectRechargeUserGroupByUser" resultType="java.util.Map">
+        SELECT
+        user_id AS userId,
+        COUNT(orderno) AS orderCount,
+        SUM(apply_amount) AS applyAmountSum
+        FROM
+        tbl_recharge_record
+        WHERE
         status != 0
-        <![CDATA[
-                  and pay_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
-  	     ]]>
-        <![CDATA[
-                 and pay_time<=DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-         ]]>
-        group by source
+        AND pay_time &lt;= #{endTime}
+        AND pay_time &gt;= #{startTime}
+        GROUP BY BINARY user_id
     </select>
+
+    <select id="selectRechargeRecordByTime" resultType="java.util.Map">
+        SELECT
+        user_id AS userId,
+        orderno AS orderNo,
+        apply_amount AS applyAmount
+        FROM
+        tbl_recharge_record
+        WHERE
+        status != 0
+        AND pay_time &lt; #{endTime}
+        AND pay_time &gt;= #{startTime}
+    </select>
+
 </mapper>

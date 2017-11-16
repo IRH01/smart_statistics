@@ -3,9 +3,9 @@ package com.hhly.smartdata.dto.enume;
 /**
  * Created by Iritchie.ren on 2017/9/25.
  */
-public enum KeepRecordEnum{
+public enum SourceTypeAndAllEnum{
 
-    All(Byte.parseByte("0"),"All"),
+    All(Byte.parseByte("0"), "All"),
     PC_WEB(Byte.parseByte("1"), "pc"),
     ANDROID(Byte.parseByte("2"), "android"),
     IPHONE(Byte.parseByte("3"), "iphone"),
@@ -14,7 +14,7 @@ public enum KeepRecordEnum{
     private Byte code;
     private String desc;
 
-    KeepRecordEnum(Byte code, String desc){
+    SourceTypeAndAllEnum(Byte code, String desc){
         this.code = code;
         this.desc = desc;
     }
@@ -27,8 +27,8 @@ public enum KeepRecordEnum{
         return desc;
     }
 
-    public static KeepRecordEnum getEnum(Byte code){
-        for(KeepRecordEnum item : values()){
+    public static SourceTypeAndAllEnum getEnum(Byte code){
+        for(SourceTypeAndAllEnum item : values()){
             if(item.getCode().equals(code)){
                 return item;
             }

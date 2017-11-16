@@ -33,7 +33,7 @@ public class DailyRechargeStatisticsService{
 
     public BigDecimal getLastTotalRecharge() throws Exception{
         Date now = new Date();
-        String month = DateUtil.getLastMonthStr(now);
+        String month = DateUtil.getYesterdayStr(now);
         List<DailyRechargeReport> monthRechargeReportList = this.dailyRechargeReportMapper.selectByMonth(month);
         BigDecimal total = new BigDecimal(0.00);
         if(monthRechargeReportList != null){

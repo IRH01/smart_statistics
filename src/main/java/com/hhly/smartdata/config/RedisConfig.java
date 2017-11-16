@@ -19,6 +19,9 @@ import java.util.List;
 @Profile("dev")
 public class RedisConfig{
 
+    @Value("#{configProperties['redis.model']}")
+    private String model;
+
     @Value("#{configProperties['redis.maxIdle']}")
     private Integer maxIdle;
 
@@ -27,9 +30,6 @@ public class RedisConfig{
 
     @Value("#{configProperties['redis.testOnBorrow']}")
     private boolean testOnBorrow;
-
-    @Value("#{configProperties['redis.model']}")
-    private String model;
 
     @Value("#{configProperties['redis.cluster.nodes']}")
     private List<String> nodes;

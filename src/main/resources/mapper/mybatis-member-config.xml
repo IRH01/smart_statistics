@@ -18,5 +18,6 @@
         <mapper resource="mapper/member/UserInfoMapper.xml"/>
         <mapper resource="mapper/member/PlatformGoldConsumeRecordMapper.xml"/>
         <mapper resource="mapper/member/SystemConfigMapper.xml"/>
+        <mapper resource="mapper/member/PlatformInfoMapper.xml"/>
     </mappers>
 </configuration>

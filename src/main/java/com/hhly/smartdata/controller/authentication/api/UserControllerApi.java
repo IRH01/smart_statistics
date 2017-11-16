@@ -5,12 +5,14 @@ import com.hhly.smartdata.model.authentication.User;
 import com.hhly.smartdata.service.authentication.UserService;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Scope(value = "prototype")
 @RequestMapping("/sys/user")
 public class UserControllerApi extends BaseController{
     @Autowired

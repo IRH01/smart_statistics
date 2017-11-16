@@ -16,21 +16,16 @@ public interface UserInfoMapper{
 
     Integer findUserInfoByTime(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
 
-    List<Map<String, Object>> selectYesterdayRegisterUserIdAndTerminal() throws Exception;
-
     List<Map<String, Object>> selectRegisterUserIdAndTerminalByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 
-    List<String> selectOldRegisterUser() throws Exception;
-
     List<String> selectOldRegisterUserByTime(Date time) throws Exception;
-
-    List<Map<String, Object>> selectBeforeHowManyDayRegisterUser(int days) throws Exception;
 
     List<Map<String, Object>> selectRegisterUserByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 
     List<String> selectUserIdByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 
-    List<Map<String, Object>> selectFirstThirtyMinRegister(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
+    List<Map<String, Object>> selectRegisterCountGroupBySourceType(@Param("startTime") String startTime, @Param("endTime") String endTime) throws Exception;
 
     Long selectUserCount(Date time) throws Exception;
+
 }

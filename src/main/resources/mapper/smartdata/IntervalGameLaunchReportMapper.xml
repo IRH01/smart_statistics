@@ -134,8 +134,12 @@
             resultType="com.hhly.smartdata.dto.current.IntervalGameLaunchTimeListReport">
         select DATE_FORMAT(a.statistics_time,'%H:%i') as statisticTime, sum(a.launch_count) as launchCount
         from interval_game_launch_report a
-        where DATE_FORMAT(a.statistics_time,'%Y-%m-%d')=DATE_FORMAT(NOW(),'%Y-%m-%d')
+        WHERE
+        DATE_FORMAT(a.statistics_time,'%Y-%m-%d')=DATE_FORMAT(NOW(),'%Y-%m-%d')
         and a.platform_code=#{platformCode}
+        <if test="sourceType!=null and sourceType != ''">
+            and source_type = #{sourceType}
+        </if>
         group by a.statistics_time
         order by a.statistics_time
     </select>

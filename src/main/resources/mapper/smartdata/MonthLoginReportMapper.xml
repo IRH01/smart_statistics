@@ -11,58 +11,49 @@
         <result column="play_population" property="playPopulation" jdbcType="INTEGER"/>
         <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
     <sql id="Base_Column_List">
         id, statistics_month, platform_code, platform_name, source_type, login_population,
         play_population, execute_time
     </sql>
-    <delete id="deleteByTime">
-        delete from month_login_report where statistics_month = #{statisticsMonth}
+
+    <delete id="deleteByTimeAndPlatformCodeAndSourceType">
+        delete from month_login_report where statistics_month = #{statisticsMonth} and platform_code = #{platformCode}
+        and source_type = #{sourceType}
     </delete>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from month_login_report
         where id = #{id,jdbcType=BIGINT}
     </select>
+
     <select id="searchByTime" resultType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
         SELECT
         <include refid="Base_Column_List"/>
         FROM month_login_report
         <where>
-            <if test="timeStart != null and timeStart != ''">
-                statistics_month &gt;= #{timeStart}
+            <if test="startTime != null and startTime != ''">
+                statistics_month &gt;= #{startTime}
             </if>
-            <if test="timeEnd != null and timeEnd != ''">
-                AND statistics_month &lt;= #{timeEnd}
+            <if test="endTime != null and endTime != ''">
+                AND statistics_month &lt;= #{endTime}
             </if>
         </where>
         ORDER BY statistics_month DESC, source_type ASC
-        <if test="pageNo != null">
-            <bind name="offset" value="(pageNo-1) * pageSize * 12"/>
-            <bind name="pageSize12" value="pageSize * 12"/>
-            LIMIT #{offset}, #{pageSize12}
-        </if>
     </select>
-    <select id="searchByTimeCount" resultType="java.lang.Long">
-        SELECT
-        COUNT(id)
-        FROM month_login_report
-        <where>
-            <if test="timeStart != null and timeStart != ''">
-                statistics_month &gt;= #{timeStart}
-            </if>
-            <if test="timeEnd != null and timeEnd != ''">
-                AND statistics_month &lt;= #{timeEnd}
-            </if>
-        </where>
-    </select>
+
     <select id="selectByMonth" resultType="java.util.Map">
         SELECT
-        SUM(login_population) AS loginPopulationSum,
-        SUM(play_population) AS playPopulationSum
+        login_population AS loginPopulationSum,
+        play_population AS playPopulationSum
         FROM month_login_report
-        WHERE statistics_month = #{month}
+        WHERE
+        platform_code = 'all'
+        AND statistics_month = #{month}
     </select>
+
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
         insert into month_login_report (id, statistics_month, platform_code,
         platform_name, source_type, login_population,
@@ -71,6 +62,7 @@
         #{platformName,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT}, #{loginPopulation,jdbcType=INTEGER},
         #{playPopulation,jdbcType=INTEGER}, #{executeTime,jdbcType=TIMESTAMP})
     </insert>
+
     <insert id="insertSelective" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
         insert into month_login_report
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -126,6 +118,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
         update month_login_report
         <set>
@@ -153,6 +146,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.MonthLoginReport">
         update month_login_report
         set statistics_month = #{statisticsMonth,jdbcType=VARCHAR},

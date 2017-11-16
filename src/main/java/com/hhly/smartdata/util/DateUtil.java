@@ -182,6 +182,45 @@ public class DateUtil{
     }
 
     /**
+     * 获取当年的第一月
+     *
+     * @param year
+     * @return String ,"yyyy-MM-dd"
+     */
+    public static String getYearFirstMonthStr(String year) throws ParseException{
+        if(year == null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        SimpleDateFormat sdfMonth = new SimpleDateFormat("yyyy");
+        Date date = sdfMonth.parse(year);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.MONTH, calendar.getActualMinimum(Calendar.MONTH));
+        return sdf.format(calendar.getTime());
+    }
+
+    /**
+     * dd
+     * 获取当年的最后一月
+     *
+     * @param year "yyyy-MM"
+     * @return String ,"yyyy-MM-dd"
+     */
+    public static String getYearEndMonthStr(String year) throws ParseException{
+        if(year == null){
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+        SimpleDateFormat sdfMonth = new SimpleDateFormat("yyyy");
+        Date date = sdfMonth.parse(year);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.MONTH, calendar.getActualMaximum(Calendar.MONTH));
+        return sdf.format(calendar.getTime());
+    }
+
+    /**
      * 获取前一月的第一天
      *
      * @param date
@@ -324,10 +363,34 @@ public class DateUtil{
     }
 
     /**
+     * 获取某时，位移多少分钟
+     *
+     * @param date   .
+     * @param offset .
+     * @return .
+     */
+    public static Date offsetMinuteTime(Date date, int offset){
+        long dateLong = date.getTime() + offset * 60 * 1000;
+        return new Date(dateLong);
+    }
+
+    /**
+     * 获取某时，位移多少分钟
+     *
+     * @param date   .yyyy-MM-dd HH:mm:ss
+     * @param offset .
+     * @return .
+     */
+    public static String offsetMinuteTime(String date, int offset){
+        Date result = DateUtil.offsetMinuteTime(DateUtil.string2Date(date), offset);
+        return DateUtil.date2String(result);
+    }
+
+    /**
      * 获取某时，位移多少天的最小时间时间
      *
-     * @param date
-     * @param offset
+     * @param date   .
+     * @param offset .
      * @return
      */
     public static Date offsetDayStartTime(Date date, int offset){
@@ -344,9 +407,9 @@ public class DateUtil{
     /**
      * 获取某时，位移多少天的最大时间时间
      *
-     * @param date
-     * @param offset
-     * @return
+     * @param date   .
+     * @param offset .
+     * @return .
      */
     public static Date offsetDayTime(Date date, int offset){
         Calendar calendar = Calendar.getInstance();
@@ -358,9 +421,9 @@ public class DateUtil{
     /**
      * 获取某时，位移多少天的最大时间时间
      *
-     * @param date
-     * @param offset
-     * @return
+     * @param date   。
+     * @param offset 。
+     * @return 。
      */
     public static Date offsetDayEndTime(Date date, int offset){
         Calendar calendar = Calendar.getInstance();
@@ -375,9 +438,9 @@ public class DateUtil{
     /**
      * 获取某时，位移多少月的最小时间时间
      *
-     * @param date
-     * @param offset
-     * @return
+     * @param date   .
+     * @param offset .
+     * @return .
      */
     public static Date offsetMonthTime(Date date, int offset){
         Calendar calendar = Calendar.getInstance();
@@ -387,11 +450,11 @@ public class DateUtil{
     }
 
     /**
-     * 获取某时，位移多少月的最小时间时间
+     * 获取某时，位移多少月的最小月份
      *
-     * @param date
-     * @param offset
-     * @return
+     * @param date   .
+     * @param offset .
+     * @return .
      */
     public static Date offsetMonthStartTime(Date date, int offset){
         Calendar calendar = Calendar.getInstance();
@@ -408,9 +471,9 @@ public class DateUtil{
     /**
      * 获取某时，位移多少月的最大时间时间
      *
-     * @param date
-     * @param offset
-     * @return
+     * @param date   。
+     * @param offset 。
+     * @return 。
      */
     public static Date offsetMonthEndTime(Date date, int offset){
         Calendar calendar = Calendar.getInstance();
@@ -422,6 +485,23 @@ public class DateUtil{
         calendar.set(Calendar.SECOND, calendar.getActualMaximum(Calendar.SECOND));
         return calendar.getTime();
     }
+
+
+    /**
+     * 获取之前某一天的日期字符串
+     *
+     * @param date
+     * @return String ,"yyyy-MM-dd"
+     */
+    public static String offsetDayStr(Date date,int offset){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_YEAR, offset);//日期加-1天
+        return sdf.format(calendar.getTime());
+    }
+
+
 
 }
 

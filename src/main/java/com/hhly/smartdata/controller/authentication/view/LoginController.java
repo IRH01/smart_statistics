@@ -12,8 +12,8 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +27,7 @@ import java.awt.image.BufferedImage;
  * Created by Iritchie.ren on 2017/9/22.
  */
 @Controller
+@Scope(value = "prototype")
 public class LoginController extends BaseController{
 
     @Autowired

@@ -5,6 +5,7 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="statistics_day" property="statisticsDay" jdbcType="VARCHAR"/>
         <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
+        <result column="login_population" property="loginPopulation" jdbcType="INTEGER"/>
         <result column="recharge_population" property="rechargePopulation" jdbcType="INTEGER"/>
         <result column="recharge_amount" property="rechargeAmount" jdbcType="DECIMAL"/>
         <result column="recharge_count" property="rechargeCount" jdbcType="INTEGER"/>
@@ -14,7 +15,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, statistics_day, source_type, recharge_population, recharge_amount, recharge_count,
+        id, statistics_day, source_type,login_population, recharge_population, recharge_amount, recharge_count,
         new_recharge_population, old_recharge_population, execute_time
     </sql>
 
@@ -29,21 +30,6 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
 
-    <select id="selectLastMonthRecharge" resultType="java.util.Map">
-        SELECT
-        source_type AS source_type,
-        SUM(recharge_population) AS recharge_population_sum,
-        SUM(recharge_amount) AS recharge_amount_sum,
-        SUM(recharge_count) AS recharge_count_sum,
-        SUM(new_recharge_population) AS new_recharge_population_sum,
-        SUM(old_recharge_population) AS old_recharge_population_sum
-        FROM
-        daily_recharge_report
-        WHERE statistics_day &gt;= #{lastMonthFirstDayStr}
-        AND statistics_day &lt;= #{lastMonthEndDayStr}
-        GROUP BY source_type ;
-    </select>
-
     <select id="searchByTime" resultType="com.hhly.smartdata.dto.daily.DailyRechargeReportResult">
         SELECT
         <include refid="Base_Column_List"/>
@@ -53,7 +39,7 @@
                 statistics_day &gt;= #{timeStart}
             </if>
             <if test="timeEnd != null and timeEnd != ''">
-                AND statistics_day &lt;= #{dailyEnd}
+                AND statistics_day &lt;= #{timeEnd}
             </if>
         </where>
         ORDER BY statistics_day DESC, source_type ASC
@@ -86,11 +72,11 @@
     </select>
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyRechargeReport">
-        insert into daily_recharge_report (id, statistics_day, source_type,
+        insert into daily_recharge_report (id, statistics_day, source_type,login_population,
         recharge_population, recharge_amount, recharge_count,
         new_recharge_population, old_recharge_population,
         execute_time)
-        values (#{id,jdbcType=BIGINT}, #{statisticsDay,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT},
+        values (#{id,jdbcType=BIGINT}, #{statisticsDay,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT},#{loginPopulation,jdbcType=INTEGER},
         #{rechargePopulation,jdbcType=INTEGER}, #{rechargeAmount,jdbcType=DECIMAL}, #{rechargeCount,jdbcType=INTEGER},
         #{newRechargePopulation,jdbcType=INTEGER}, #{oldRechargePopulation,jdbcType=INTEGER},
         #{executeTime,jdbcType=TIMESTAMP})
@@ -107,6 +93,9 @@
             </if>
             <if test="sourceType != null">
                 source_type,
+            </if>
+            <if test="loginPopulation != null">
+                login_population,
             </if>
             <if test="rechargePopulation != null">
                 recharge_population,
@@ -136,6 +125,9 @@
             </if>
             <if test="sourceType != null">
                 #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="loginPopulation != null">
+                #{loginPopulation,jdbcType=INTEGER},
             </if>
             <if test="rechargePopulation != null">
                 #{rechargePopulation,jdbcType=INTEGER},
@@ -167,6 +159,9 @@
             <if test="sourceType != null">
                 source_type = #{sourceType,jdbcType=TINYINT},
             </if>
+            <if test="loginPopulation != null">
+                login_population = #{loginPopulation,jdbcType=INTEGER},
+            </if>
             <if test="rechargePopulation != null">
                 recharge_population = #{rechargePopulation,jdbcType=INTEGER},
             </if>
@@ -193,6 +188,7 @@
         update daily_recharge_report
         set statistics_day = #{statisticsDay,jdbcType=VARCHAR},
         source_type = #{sourceType,jdbcType=TINYINT},
+        login_population = #{loginPopulation,jdbcType=INTEGER},
         recharge_population = #{rechargePopulation,jdbcType=INTEGER},
         recharge_amount = #{rechargeAmount,jdbcType=DECIMAL},
         recharge_count = #{rechargeCount,jdbcType=INTEGER},

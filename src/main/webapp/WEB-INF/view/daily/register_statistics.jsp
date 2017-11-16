@@ -53,7 +53,7 @@
                     <ul class="breadcrumb">
                         <li>您当前的位置：</li>
                         <tags:breadcrumb/>
-                        <li>平台日报表</li>
+                        <li>用户来源统计</li>
                     </ul>
                 </div>
                 <!--body start-->
@@ -62,7 +62,7 @@
                         <h4 class="panel-title" id="-collapsible-group-item-#1-">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" aria-expanded="true"
-                               aria-controls="collapseOne" class="">注册来源统计</a>
+                               aria-controls="collapseOne" class="">用户来源统计</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
@@ -164,11 +164,17 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="divPage"><span
-                                                                        class="spanPageSize">每页个数：</span><input
-                                                                        id="pageSize" value="10" class="inputPageSize"
-                                                                        onKeypress="return intInput(event);"
-                                                                        onKeyup="value=pageSizeLimit(value);"
-                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                                        class="spanPageSize">每页个数：</span>
+                                                                    <select id="pageSize" class="inputPageSize"
+                                                                            title="页记录数">
+                                                                        <option value="10" aria-checked="true">10
+                                                                        </option>
+                                                                        <option value="20">20</option>
+                                                                        <option value="30">30</option>
+                                                                        <option value="40">40</option>
+                                                                        <option value="50">50</option>
+                                                                    </select>
+                                                                </div>
                                                             </td>
                                                             <td><span class="spanPageSize">总记录数：</span><span
                                                                     id="totalCount" class="spanPageSize"></span></td>
@@ -195,6 +201,8 @@
 </body>
 </html>
 <script type="text/javascript">
+
+    var pageSize = 10;
     var date = new Date();
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
@@ -204,6 +212,21 @@
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
+    var pageSizeNotEmpty = function (value) {
+        if ("" == value) {
+            layer.alert("每页个数不能为空", {
+                icon: 5
+            });
+            value = 10;
+        }
+
+        if (value >= 30) {
+            value = 30
+        }
+        showNewUserData(1,value);
+        return value;
+    };
+
 
     var intervalNum = function () {
         $("#yesterdayRegisterPopulationNum").empty();
@@ -232,7 +255,6 @@
     });
 
 
-    var pageSize = 10;
 
     setDateRangeConfig("dateStart", "dateEnd", null, true);
 

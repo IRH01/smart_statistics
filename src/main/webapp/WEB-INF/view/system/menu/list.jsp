@@ -202,7 +202,6 @@
             $("#menuId").val(menuId);
             var url = "/sys/menu/menuDetail.do"
             $.post(url, {id: menuId}, function (result) {
-                debugger;
                 var json = result.data;
                 $("#form").find("input[name='menuName']").val(json.menuName);
                 $("#form").find("input[name='permission']").val(json.permission);

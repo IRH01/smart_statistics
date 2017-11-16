@@ -1,6 +1,7 @@
 package com.hhly.smartdata.service.schedule;
 
 import com.hhly.smartdata.common.BaseTest;
+import com.hhly.smartdata.util.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,11 @@ public class MonthExecutorServiceTest extends BaseTest{
      */
     @Test
     public void testCompositeReport() throws Exception{
-        this.monthExecutorService.compositeReport(new Date());
+        this.monthExecutorService.compositeReport(DateUtil.string2Date("2017-12-03 01:00:00"));
+        String[] yue = {"11-30", "12-03"};
+        for(String item : yue){
+            this.monthExecutorService.compositeReport(DateUtil.string2Date("2017-" + item + " 01:00:00"));
+        }
     }
 
     /**
@@ -36,6 +41,10 @@ public class MonthExecutorServiceTest extends BaseTest{
     @Test
     public void testRegisterReport() throws Exception{
         this.monthExecutorService.registerReport(new Date());
+        String[] yue = {"11-30", "12-03"};
+        for(String item : yue){
+            this.monthExecutorService.registerReport(DateUtil.string2Date("2017-" + item + " 01:00:00"));
+        }
     }
 
     /**
@@ -44,6 +53,10 @@ public class MonthExecutorServiceTest extends BaseTest{
     @Test
     public void testRechargeReport() throws Exception{
         this.monthExecutorService.rechargeReport(new Date());
+        String[] yue = {"11-30", "12-03"};
+        for(String item : yue){
+            this.monthExecutorService.rechargeReport(DateUtil.string2Date("2017-" + item + " 01:00:00"));
+        }
     }
 
     /**
@@ -52,5 +65,9 @@ public class MonthExecutorServiceTest extends BaseTest{
     @Test
     public void testLoginSourceReport() throws Exception{
         this.monthExecutorService.loginSourceReport(new Date());
+        String[] yue = {"11-20", "12-03"};
+        for(String item : yue){
+            this.monthExecutorService.loginSourceReport(DateUtil.string2Date("2017-" + item + " 01:00:00"));
+        }
     }
 } 

@@ -18,6 +18,7 @@ import com.hhly.smartdata.mapper.source.DataViewMapper;
 import com.hhly.smartdata.model.smartdata.IntervalGameLaunchReport;
 import com.hhly.smartdata.model.smartdata.IntervalInterfaceReport;
 import com.hhly.smartdata.model.smartdata.IntervalSourceReport;
+import com.hhly.smartdata.util.DateUtil;
 import com.hhly.smartdata.util.JsonUtil;
 import com.hhly.smartdata.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,24 +65,31 @@ public class IntervalExecutorService{
 
 
     public Result intervalSourceStatistics(String endDate, Integer intervalTime) throws Exception{
+        Date now = new Date();
+        String startDate = DateUtil.offsetMinuteTime(endDate, -30);
 
         //注册人数
-        List<Map<String, Object>> firstThirtyMinRegister = userInfoMapper.selectFirstThirtyMinRegister(endDate, intervalTime);
+        List<Map<String, Object>> firstThirtyMinRegister = userInfoMapper.selectRegisterCountGroupBySourceType(startDate, endDate);
 
         //登陆人数
-        List<Map<String, Object>> firstThirtyMinLoginUser = loginTrackMapper.selectFirstThirtyMinLoginUser(endDate, intervalTime);
+        List<Map<String, Object>> firstThirtyMinLoginUser = loginTrackMapper.selectLoginUserGroupBySourceType(startDate, endDate);
 
         // 充值人数、充值金额、充值次数
-        List<Map<String, Object>> firstThirtyMinRechargeUser = rechargeRecordMapper.selectFirstThirtyMinRechargeUser(endDate, intervalTime);
+        List<Map<String, Object>> firstThirtyMinRechargeUser = rechargeRecordMapper.selectRechargeGroupBySourceType(startDate, endDate);
 
         //启动表
-        List<Map<String, Object>> firstThirtyMinGameStartCount = dataGameStartMapper.selectFirstThirtyMinGameStartCount(endDate, intervalTime);
+        List<Map<String, Object>> firstThirtyMinGameStartCount = dataGameStartMapper.selectGameStartGroupBySourceType(startDate, endDate);
 
         // uv
-        List<Map<String, Object>> firstThirtyMinUserViewAndPageView = dataViewMapper.selectFirstThirtyMinUserViewAndPageView(endDate, intervalTime);
+        List<Map<String, Object>> firstThirtyMinUserViewAndPageView = dataViewMapper.selectUserViewAndPageViewGroupBySourceType(startDate, endDate);
 
         List<IntervalSourceReport> list = Lists.newArrayList();
         Set<String> loginCount = Sets.newHashSet();
+        Integer loginPopulationNum = 0;
+        Integer registerPopulationNum = 0;
+        Integer rechargePopulationNum = 0;
+        BigDecimal rechargeAmountNum = new BigDecimal(0.00);
+        Integer rechargeCountNum = 0;
         for(SourceTypeEnum sourceTypeEnum : SourceTypeEnum.values()){
             IntervalSourceReport report = new IntervalSourceReport();
             report.setIntervalTime(intervalTime);
@@ -91,31 +99,34 @@ public class IntervalExecutorService{
             String userId;
             loginCount.clear();
             for(Map<String, Object> firstThirtyMinRegisterMap : firstThirtyMinRegister){
-                if(sourceTypeEnum.getCode() == (firstThirtyMinRegisterMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinRegisterMap.get("osType").toString()))){
+                if(sourceTypeEnum.getCode() == (firstThirtyMinRegisterMap.get("sourceType") == null ? 0 : Integer.valueOf(firstThirtyMinRegisterMap.get("sourceType").toString()))){
                     report.setRegisterPopulation(firstThirtyMinRegisterMap.get("registerPopulation") == null ? 0 : Integer.valueOf(firstThirtyMinRegisterMap.get("registerPopulation") + ""));
-                    break;
+                    registerPopulationNum += report.getRegisterPopulation();
                 }
             }
 
             for(Map<String, Object> firstThirtyMinLoginUserMap : firstThirtyMinLoginUser){
-                if(sourceTypeEnum.getCode() == (firstThirtyMinLoginUserMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinLoginUserMap.get("osType").toString()))){
+                if(sourceTypeEnum.getCode() == (firstThirtyMinLoginUserMap.get("sourceType") == null ? 0 : Integer.valueOf(firstThirtyMinLoginUserMap.get("sourceType").toString()))){
                     userId = firstThirtyMinLoginUserMap.get("userId") == null ? null : firstThirtyMinLoginUserMap.get("userId") + "";
                     loginCount.add(userId);
                 }
             }
 
             for(Map<String, Object> firstThirtyMinRechargeUserMap : firstThirtyMinRechargeUser){
-                if(sourceTypeEnum.getCode() == (firstThirtyMinRechargeUserMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinRechargeUserMap.get("osType").toString()))){
+                if(sourceTypeEnum.getCode() == (firstThirtyMinRechargeUserMap.get("sourceType") == null ? 0 : Integer.valueOf(firstThirtyMinRechargeUserMap.get("sourceType").toString()))){
                     report.setRechargeAmount((BigDecimal) (firstThirtyMinRechargeUserMap.get("rechargeAmount")));
                     report.setRechargeCount(firstThirtyMinRechargeUserMap.get("rechargeCount") == null ? 0 : Integer.valueOf(firstThirtyMinRechargeUserMap.get("rechargeCount") + ""));
                     report.setRechargePopulation(firstThirtyMinRechargeUserMap.get("rechargePopulation") == null ? 0 : Integer.valueOf(firstThirtyMinRechargeUserMap.get("rechargePopulation") + ""));
-                    break;
+                    rechargePopulationNum += report.getRechargePopulation();
+                    rechargeAmountNum = report.getRechargeAmount().add(rechargeAmountNum);
+                    rechargeCountNum += report.getRechargeCount();
+
                 }
             }
 
             for(Map<String, Object> firstThirtyMinGameStartCountMap : firstThirtyMinGameStartCount){
                 if(sourceTypeEnum.getCode() == 2 || sourceTypeEnum.getCode() == 3){
-                    if(sourceTypeEnum.getCode() == (firstThirtyMinGameStartCountMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinGameStartCountMap.get("osType").toString()))){
+                    if(sourceTypeEnum.getCode() == (firstThirtyMinGameStartCountMap.get("sourceType") == null ? 0 : Integer.valueOf(firstThirtyMinGameStartCountMap.get("sourceType").toString()))){
                         userId = firstThirtyMinGameStartCountMap.get("userId") == null ? null : firstThirtyMinGameStartCountMap.get("userId") + "";
                         loginCount.add(userId);
                     }
@@ -124,19 +135,36 @@ public class IntervalExecutorService{
 
             for(Map<String, Object> firstThirtyMinUserViewAndPageViewMap : firstThirtyMinUserViewAndPageView){
                 if(sourceTypeEnum.getCode() == 1 || sourceTypeEnum.getCode() == 4){
-                    if(sourceTypeEnum.getCode() == (firstThirtyMinUserViewAndPageViewMap.get("osType") == null ? 0 : Integer.valueOf(firstThirtyMinUserViewAndPageViewMap.get("osType").toString()))){
+                    if(sourceTypeEnum.getCode() == (firstThirtyMinUserViewAndPageViewMap.get("sourceType") == null ? 0 : Integer.valueOf(firstThirtyMinUserViewAndPageViewMap.get("sourceType").toString()))){
                         userId = firstThirtyMinUserViewAndPageViewMap.get("userId") == null ? null : firstThirtyMinUserViewAndPageViewMap.get("userId") + "";
                         loginCount.add(userId);
                     }
                 }
             }
-
             report.setLoginPopulation(loginCount.size());
+            loginPopulationNum += loginCount.size();
             //先删除，再插入
             this.intervalSourceReportMapper.deleteByTimeSourceType(report.getStatisticsTime(), report.getSourceType());
             this.intervalSourceReportMapper.insert(report);
             list.add(report);
         }
+
+        //全部综合统计sourceType.code=0
+        IntervalSourceReport reportZero = new IntervalSourceReport();
+        reportZero.setIntervalTime(intervalTime);
+        reportZero.setSourceType(Byte.parseByte("0"));
+        reportZero.setStatisticsTime(endDate);
+        reportZero.setExecuteTime(now);
+
+        reportZero.setRegisterPopulation(registerPopulationNum);
+        reportZero.setRechargePopulation(rechargePopulationNum);
+        reportZero.setRechargeAmount(rechargeAmountNum);
+        reportZero.setRechargeCount(rechargeCountNum);
+        reportZero.setLoginPopulation(loginPopulationNum);
+
+        //先删除，再插入
+        this.intervalSourceReportMapper.deleteByTimeSourceType(reportZero.getStatisticsTime(), reportZero.getSourceType());
+        this.intervalSourceReportMapper.insert(reportZero);
         return Result.success(list);
     }
 
@@ -209,7 +237,6 @@ public class IntervalExecutorService{
                 for(Map<String, Object> item : platformAllGameStartCountMapList){
                     if(item.get("sourceType").equals(sourceTypeEnum.getCode().intValue()) && item.get("platformCode").equals(platformCode)){
                         intervalGameLaunchReport.setLaunchCount(item.get("gameStartCount") == null ? 0 : Integer.valueOf(item.get("gameStartCount") + ""));
-                        break;
                     }
                 }
                 // 入库接口统计结果表

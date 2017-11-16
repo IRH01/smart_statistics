@@ -6,6 +6,7 @@ import com.hhly.smartdata.model.smartdata.DailyRegisterReport;
 import com.hhly.smartdata.service.smartdata.DailyRegisterService;
 import com.hhly.smartdata.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 注册来源统计
  */
 @RestController
+@Scope(value = "prototype")
 @RequestMapping(value = "/daily/register")
 public class DailyRegisterControllerApi extends BaseController{
 

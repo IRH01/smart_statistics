@@ -123,9 +123,8 @@
     </update>
 
     <select id="selectInstallsByStartTimeAndEndTime" resultType="java.util.Map">
-        select platform_terminal as platformTerminal,count(DISTINCT(unique_no)) as uniqueCount FROM data_installs
-        where country =0
-        AND create_time &lt;= #{endTime}
+        select platform_terminal as platformTerminal,count(DISTINCT(BINARY unique_no)) as uniqueCount FROM data_installs
+        where create_time &lt;= #{endTime}
         AND create_time &gt;= #{startTime}
         group by platform_terminal
     </select>

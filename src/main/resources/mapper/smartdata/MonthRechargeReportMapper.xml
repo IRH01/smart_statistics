@@ -5,6 +5,7 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="statistics_month" property="statisticsMonth" jdbcType="VARCHAR"/>
         <result column="source_type" property="sourceType" jdbcType="TINYINT"/>
+        <result column="login_population" property="loginPopulation" jdbcType="INTEGER"/>
         <result column="recharge_population" property="rechargePopulation" jdbcType="INTEGER"/>
         <result column="recharge_amount" property="rechargeAmount" jdbcType="DECIMAL"/>
         <result column="recharge_count" property="rechargeCount" jdbcType="INTEGER"/>
@@ -13,7 +14,7 @@
         <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, statistics_month, source_type, recharge_population, recharge_amount, recharge_count,
+        id, statistics_month, source_type, login_population, recharge_population, recharge_amount, recharge_count,
         new_recharge_population, old_recharge_population, execute_time
     </sql>
     <delete id="deleteByTimeAndSourceType">
@@ -67,11 +68,11 @@
     </select>
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.MonthRechargeReport">
         insert into month_recharge_report (id, statistics_month, source_type,
-        recharge_population, recharge_amount, recharge_count,
+        login_population,recharge_population, recharge_amount, recharge_count,
         new_recharge_population, old_recharge_population,
         execute_time)
         values (#{id,jdbcType=BIGINT}, #{statisticsMonth,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT},
-        #{rechargePopulation,jdbcType=INTEGER}, #{rechargeAmount,jdbcType=DECIMAL}, #{rechargeCount,jdbcType=INTEGER},
+         #{loginPopulation,jdbcType=INTEGER},#{rechargePopulation,jdbcType=INTEGER}, #{rechargeAmount,jdbcType=DECIMAL}, #{rechargeCount,jdbcType=INTEGER},
         #{newRechargePopulation,jdbcType=INTEGER}, #{oldRechargePopulation,jdbcType=INTEGER},
         #{executeTime,jdbcType=TIMESTAMP})
     </insert>
@@ -89,6 +90,9 @@
             </if>
             <if test="rechargePopulation != null">
                 recharge_population,
+            </if>
+            <if test="loginPopulation != null">
+                login_population,
             </if>
             <if test="rechargeAmount != null">
                 recharge_amount,
@@ -115,6 +119,9 @@
             </if>
             <if test="sourceType != null">
                 #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="loginPopulation != null">
+                #{loginPopulation,jdbcType=INTEGER},
             </if>
             <if test="rechargePopulation != null">
                 #{rechargePopulation,jdbcType=INTEGER},
@@ -148,6 +155,9 @@
             <if test="rechargePopulation != null">
                 recharge_population = #{rechargePopulation,jdbcType=INTEGER},
             </if>
+            <if test="loginPopulation != null">
+                login_population = #{loginPopulation,jdbcType=INTEGER},
+            </if>
             <if test="rechargeAmount != null">
                 recharge_amount = #{rechargeAmount,jdbcType=DECIMAL},
             </if>
@@ -170,6 +180,7 @@
         update month_recharge_report
         set statistics_month = #{statisticsMonth,jdbcType=VARCHAR},
         source_type = #{sourceType,jdbcType=TINYINT},
+        login_population = #{loginPopulation,jdbcType=INTEGER},
         recharge_population = #{rechargePopulation,jdbcType=INTEGER},
         recharge_amount = #{rechargeAmount,jdbcType=DECIMAL},
         recharge_count = #{rechargeCount,jdbcType=INTEGER},

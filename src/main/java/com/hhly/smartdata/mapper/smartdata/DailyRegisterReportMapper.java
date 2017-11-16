@@ -20,8 +20,6 @@ public interface DailyRegisterReportMapper {
 
     int updateByPrimaryKey(DailyRegisterReport record) throws Exception;
 
-    Map<String, Object> selectLastMonthRegister(@Param("lastMonthFirstDayStr") String lastMonthFirstDayStr, @Param("lastMonthEndDayStr") String lastMonthEndDayStr) throws Exception;
-
     List<DailyRegisterReport> selectRegisterDataListByTime(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 
     DailyRegisterReport selectYesterdayRegisterData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;

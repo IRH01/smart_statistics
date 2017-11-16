@@ -4,7 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +20,7 @@
     <link type="text/css" rel="stylesheet" href="../../../css/jquery-ui.css"/>
     <link rel="stylesheet" type="text/css" href="../../../lib/monthpicker/skin/jquery.monthpicker.css"/>
     <link rel="stylesheet" type="text/css" href="../../../lib/myPagination/js/myPagination/page.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../lib/datepicker/css/bootstrap-datepicker3.css"/>
     <!--[if lt IE 9]>
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -43,6 +44,7 @@
     <script src="../../../lib/jquery-ui.js"></script>
     <script src="../../../lib/layer/layer.js"></script>
     <script src="../../../lib/monthpicker/jquery.monthpicker.js"></script>
+    <script src="../../../lib/datepicker/js/bootstrap-datepicker.min.js"></script>
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -54,7 +56,7 @@
                     <ul class="breadcrumb">
                         <li>您当前的位置：</li>
                         <tags:breadcrumb/>
-                        <li>综合数据</li>
+                        <li>平台月数据-综合数据</li>
                     </ul>
                 </div>
                 <!--body start-->
@@ -63,7 +65,7 @@
                         <h4 class="panel-title" id="-collapsible-group-item-#1-">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" aria-expanded="true"
-                               aria-controls="collapseOne">平台月数据</a>
+                               aria-controls="collapseOne">综合数据</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
@@ -75,9 +77,9 @@
                                         <div class="select-fr" style="padding-right: 30px;">
 											<span class="laydateBox">
                                                 月份区间：<input type="text" id="monthStart" class="laydate-icon"
-                                                            style="width:140px;" title=""/>
+                                                            style="width:140px;" title="" readonly/>
                                                 至 &nbsp;<input type="text" id="monthEnd" class="laydate-icon"
-                                                               style="width:140px;" title=""/>
+                                                               style="width:140px;" title="" readonly/>
 											</span>
                                             <button type="button" id="search" class="btn btn-primary btn-sm">
                                                 查询
@@ -87,38 +89,40 @@
                                     <div class="whiteDiv">
                                         <ul id="sortable" class="ui-widget-content sortable">
                                             <li class="ui-state-default">
-                                                <div style="padding-bottom:35px;" class="ui-widget-content resize">
-                                                    <div class="sortHandle">
-                                                    </div>
-                                                    <div class="tablePanel">
+                                                <div style="padding-bottom:35px;" class="ui-widget-content">
+                                                    <div class="tablePanel resize">
                                                         <table class="tableListGame">
                                                             <thead>
                                                             <tr>
-                                                                <th style="min-width:70px;">月份</th>
-                                                                <th style="min-width:90px;">注册用户数</th>
-                                                                <th style="min-width:90px;">注册体验量</th>
-                                                                <th style="min-width:100px;">注册体验率(%)</th>
-                                                                <th style="min-width:80px;">真体验</th>
-                                                                <th style="min-width:80px;">假体验</th>
-                                                                <th style="min-width:70px;">新用户充值人数</th>
-                                                                <th style="min-width:70px;">新用户充值次数</th>
-                                                                <th style="min-width:70px;">新用户充值金额</th>
-                                                                <th style="min-width:115px;">新用户充值率(%)</th>
-                                                                <th style="min-width:90px;">新用户ARPU</th>
-                                                                <th style="min-width:90px;">新用户ARPPU</th>
-                                                                <th style="min-width:75px;">新用户登录人数</th>
-                                                                <th style="min-width:75px;">新用户玩游戏数</th>
-                                                                <th style="min-width:80px;">新用户登录转化比(%)</th>
-                                                                <th style="min-width:70px;">老用户充值次数</th>
-                                                                <th style="min-width:70px;">老用户充值人数</th>
-                                                                <th style="min-width:70px;">老用户充值金额</th>
-                                                                <th style="min-width:70px;">老用户充值率(%)</th>
-                                                                <th style="min-width:90px;">老用户ARPU</th>
-                                                                <th style="min-width:90px;">老用户ARPPU</th>
-                                                                <th style="min-width:70px;">老用户登录人数</th>
-                                                                <th style="min-width:70px;">老用户玩游戏数</th>
-                                                                <th style="min-width:80px;">老用户登录转化比(%)</th>
-                                                                <th style="min-width:70px;">平均次日留存率(%)</th>
+                                                                <th style="min-width:70px;" rowspan="2">月份</th>
+                                                                <th style="min-width:90px;" rowspan="2">注册用户数</th>
+                                                                <th style="min-width:90px;" rowspan="2">注册体验量</th>
+                                                                <th style="min-width:100px;" rowspan="2">注册体验率(%)</th>
+                                                                <th style="min-width:80px;" rowspan="2">真体验</th>
+                                                                <th style="min-width:80px;" rowspan="2">假体验</th>
+                                                                <th colspan="9">新用户</th>
+                                                                <th colspan="9">老用户</th>
+                                                                <th style="min-width:140px;" rowspan="2">平均次日留存率(%)</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="min-width:130px;">新用户充值人数</th>
+                                                                <th style="min-width:130px;">新用户充值次数</th>
+                                                                <th style="min-width:130px;">新用户充值金额</th>
+                                                                <th style="min-width:130px;">新用户充值转化率(%)</th>
+                                                                <th style="min-width:120px;">新用户ARPU</th>
+                                                                <th style="min-width:120px;">新用户ARPPU</th>
+                                                                <th style="min-width:130px;">新用户登录人数</th>
+                                                                <th style="min-width:130px;">新用户玩游戏数</th>
+                                                                <th style="min-width:140px;">新用户登录转化率(%)</th>
+                                                                <th style="min-width:130px;">老用户充值次数</th>
+                                                                <th style="min-width:130px;">老用户充值人数</th>
+                                                                <th style="min-width:130px;">老用户充值金额</th>
+                                                                <th style="min-width:130px;">老用户充值转化率(%)</th>
+                                                                <th style="min-width:120px;">老用户ARPU</th>
+                                                                <th style="min-width:120px;">老用户ARPPU</th>
+                                                                <th style="min-width:130px;">老用户登录人数</th>
+                                                                <th style="min-width:130px;">老用户玩游戏数</th>
+                                                                <th style="min-width:150px;">老用户登录转化率(%)</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody id="data">
@@ -130,8 +134,15 @@
                                                             <tr>
                                                                 <td>
                                                                     <div class="divPage"><span class="spanPageSize">每页记录数：</span>
-                                                                        <input id="pageSize" value="12"
-                                                                               class="inputPageSize" title="页数"/>
+                                                                        <select id="pageSize" class="inputPageSize"
+                                                                                title="页记录数">
+                                                                            <option value="10" aria-checked="true">10
+                                                                            </option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="30">30</option>
+                                                                            <option value="40">40</option>
+                                                                            <option value="50">50</option>
+                                                                        </select>
                                                                     </div>
                                                                 </td>
                                                                 <td>
@@ -192,7 +203,12 @@
             onMonthSelect: function (m, y) {
             }
         });
-    }
+    };
+    setMonthConfig();
+
+    $('#monthStart').change(function () {
+
+    });
 
     var addTbRow = function (data) {
         if (null !== data && undefined !== data && "" !== data) {
@@ -336,7 +352,6 @@
     };
 
     search();
-    setMonthConfig();
 
     $("#search").click(function () {
         search();

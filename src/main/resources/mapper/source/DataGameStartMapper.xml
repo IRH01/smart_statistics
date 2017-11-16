@@ -27,14 +27,17 @@
 
     <select id="selectLaunchGameUserByStartTimeAndEndTime" resultType="java.util.Map">
         SELECT
-        platform_id AS platformId,
+        platform_code AS platformCode,
         platform_terminal AS sourceType,
         user_id AS userId
         FROM
         data_game_start
-        WHERE create_time &lt;= #{endTime}
+        WHERE
+        create_time &lt;= #{endTime}
+        and user_id is not null
+        and user_id != ''
         AND create_time &gt; #{startTime}
-        GROUP BY platform_id,platform_terminal,user_id
+        GROUP BY platform_code,platform_terminal,BINARY user_id
     </select>
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.source.DataGameStart">
@@ -148,6 +151,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.source.DataGameStart">
         update data_game_start
         set country = #{country,jdbcType=INTEGER},
@@ -164,28 +168,27 @@
 
     <select id="selectPlatformAllGameStartCount" resultType="java.util.Map">
         SELECT
-        COUNT(id) AS gameStartCount,
         platform_terminal AS sourceType,
         platform_code AS platformCode,
-        platform_name AS platformName
+        platform_name AS platformName,
+        COUNT(id) AS gameStartCount
         FROM data_game_start
         WHERE
         create_time &gt;= DATE_SUB(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
         AND create_time &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
+        and platform_code is not null  and platform_code != ''
         GROUP BY platform_terminal,platform_code,platform_name
     </select>
 
-    <select id="selectFirstThirtyMinGameStartCount" resultType="java.util.Map">
-        select user_id as userId,platform_terminal as osType from data_platform_start
-        where country = 0
-        <![CDATA[
-             and create_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
-        ]]>
-        <![CDATA[
-            and create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-  		]]>
-        and user_id is not null and user_id != ''
-        group by platform_terminal,user_id
+    <select id="selectGameStartGroupBySourceType" resultType="java.util.Map">
+        select user_id as userId,
+        platform_terminal as sourceType
+        from data_platform_start
+        where user_id is not null
+        and user_id != ''
+        and create_time &gt;= #{startTime}
+        and create_time &lt; #{endTime}
+        group by platform_terminal,BINARY user_id
     </select>
 
 
@@ -194,7 +197,50 @@
         WHERE create_time &lt;= #{endTime}
         AND create_time &gt; #{startTime}
         and user_id is not null and user_id != ''
-        group by platform_terminal,user_id
+        group by platform_terminal,BINARY user_id
+    </select>
+
+
+    <select id="selectTodayGameStartCountGroupByUser" resultType="java.util.Map">
+        select
+        user_id as userId
+        from data_platform_start
+        where create_time &lt;= #{endTime}
+            and  create_time &gt; #{startTime}
+        and user_id is not null and user_id != ''
+        group by BINARY user_id
+    </select>
+
+    <select id="selectTodayGameStartCountGroupByUserAndOsType" resultType="java.util.Map">
+        select user_id as userId,platform_terminal as osType from data_platform_start
+        where create_time &lt;= #{endTime}
+        and  create_time &gt; #{startTime}
+        and user_id is not null and user_id != ''
+        group by BINARY user_id,platform_terminal
+    </select>
+
+    <select id="selectGameStartByTime" resultType="java.lang.String">
+        select
+        user_id as userId
+        from data_game_start
+        where  user_id is not null
+        and user_id != ''
+        and create_time &gt;= #{startTime}
+        and create_time &lt; #{endTime}
+    </select>
+
+    <select id="selectGameStartByTimeGroupBySource" resultType="java.util.Map">
+        SELECT
+        platform_terminal AS sourceType,
+        user_id AS userId
+        FROM
+        data_game_start
+        WHERE
+        user_id is not null
+        and user_id != ''
+        and create_time &lt;= #{endTime}
+        AND create_time &gt;= #{startTime}
+        GROUP BY platform_terminal, BINARY user_id
     </select>
 
 </mapper>

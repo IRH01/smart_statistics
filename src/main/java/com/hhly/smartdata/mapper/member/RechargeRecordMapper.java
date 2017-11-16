@@ -20,17 +20,20 @@ public interface RechargeRecordMapper{
      */
     List<Map<String, Object>> selectByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 
-    List<Map<String, Object>> selectYesterdayNewUser() throws Exception;
-
     List<Map<String, Object>> selectNewUserAndRechargeByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
-
-    List<Map<String, Object>> selectYesterdayOldUser() throws Exception;
 
     List<Map<String, Object>> selectOldUserAndRechargeByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 
     Integer findRechargeRecordByTime(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
 
-    List<Map<String, Object>> selectYesterdayRechargeUser() throws Exception;
+    List<Map<String, Object>> selectRechargeUserByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 
-    List<Map<String, Object>> selectFirstThirtyMinRechargeUser(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
+    List<Map<String, Object>> selectRechargeGroupBySourceType(@Param("startTime") String startTime, @Param("endTime") String endTime) throws Exception;
+
+    List<Map<String, Object>> selectRechargeUserGroupByUserAndOsType(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
+    List<Map<String, Object>> selectRechargeUserGroupByUser(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
+    List<Map<String, Object>> selectRechargeRecordByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
 }

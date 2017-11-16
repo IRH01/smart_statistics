@@ -2,6 +2,7 @@ package com.hhly.smartdata.controller.authentication.view;
 
 import com.hhly.smartdata.controller.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by Iritchie.ren on 2017/9/22.
  */
 @Controller
+@Scope(value = "prototype")
 @RequestMapping("/sys/menu")
-public class MenuController extends BaseController {
+public class MenuController extends BaseController{
 
     /**
      * 菜单列表查询
@@ -19,7 +21,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("/list")
     @RequiresPermissions("sys_menu_list")
-    public String list() {
+    public String list(){
         return "system/menu/list";
     }
 }

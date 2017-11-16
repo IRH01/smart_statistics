@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class DailyRechargeReport{
+
     /**
      * 日报表，充值来源统计报表
      */
@@ -18,6 +19,11 @@ public class DailyRechargeReport{
      * 源端类型：1、PC 2.android 3.IOS 4.H5
      */
     private Byte sourceType = 0;
+
+    /**
+     * 用户登录人数。
+     */
+    private Integer loginPopulation = 0;
 
     /**
      * 充值人数
@@ -111,6 +117,14 @@ public class DailyRechargeReport{
 
     public void setOldRechargePopulation(Integer oldRechargePopulation){
         this.oldRechargePopulation = oldRechargePopulation;
+    }
+
+    public Integer getLoginPopulation(){
+        return loginPopulation;
+    }
+
+    public void setLoginPopulation(Integer loginPopulation){
+        this.loginPopulation = loginPopulation;
     }
 
     public Date getExecuteTime(){

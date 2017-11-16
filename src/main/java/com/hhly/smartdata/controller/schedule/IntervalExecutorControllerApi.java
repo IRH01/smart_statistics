@@ -5,16 +5,17 @@ import com.hhly.smartdata.service.schedule.IntervalExecutorService;
 import com.hhly.smartdata.util.DateUtil;
 import com.hhly.smartdata.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * Created by Iritchie.ren on 2017/10/30.
  */
 @RestController
+@Scope(value = "prototype")
 @RequestMapping("/interval/executor")
 public class IntervalExecutorControllerApi extends BaseController{
 

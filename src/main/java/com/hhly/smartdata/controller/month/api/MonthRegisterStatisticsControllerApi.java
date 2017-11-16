@@ -6,6 +6,7 @@ import com.hhly.smartdata.service.month.MonthRegisterStatisticsService;
 import com.hhly.smartdata.util.Result;
 import com.hhly.smartdata.util.page.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by Iritchie.ren on 2017/10/10.
  */
 @RestController
+@Scope(value = "prototype")
 @RequestMapping("/month/register/statistics/")
 public class MonthRegisterStatisticsControllerApi extends BaseController{
 

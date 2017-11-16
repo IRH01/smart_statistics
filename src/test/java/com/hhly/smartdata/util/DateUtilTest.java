@@ -24,6 +24,7 @@ public class DateUtilTest extends BaseTest{
         System.err.println(result);
     }
 
+
     /**
      * Method: date2String(Date date, String pattern)
      */
@@ -198,5 +199,13 @@ public class DateUtilTest extends BaseTest{
 
         Date result = DateUtil.offsetMonthEndTime(now, amount);
         System.err.println(sdf.format(result));
+    }
+
+    /**
+     * Method: offsetMinuteTime(Date date, int offset)
+     */
+    @Test
+    public void testOffsetMinuteTimeForDateOffset() throws Exception{
+        System.err.println(DateUtil.offsetMinuteTime("2017-11-05 23:30:00", -30));
     }
 } 

@@ -227,10 +227,35 @@
             <if test="endDate != null and endDate  != ''">
                 and statistics_day &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
             </if>
-            <if test="sourceType != null and sourceType  != ''">
                 and source_type = #{sourceType}
+        </where>
+        order by statistics_day asc
+    </select>
+
+
+    <select id="selectDailyKeepRecordListDataByStartDayNumAndEndDayNum" resultType="com.hhly.smartdata.dto.daily.DailyKeepRecordReportResult">
+        select
+        id as id,
+        DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
+        source_type as sourceType,
+        register_count as registerCount,
+        one_remain as oneRemain,
+        two_remain as twoRemain,
+        three_remain as threeRemain,
+        four_remain as fourRemain,
+        five_remain as fiveRemain,
+        six_remain as sixRemain,
+        seven_remain as sevenRemain,
+        fourteen_remain as fourteenRemain,
+        thirty_remain as thirtyRemain,
+        execute_time as executeTime
+        from daily_keep_record_report
+        <where>
+            <if test="statisticsDay != null and statisticsDay !=''">
+                AND statistics_day = #{statisticsDay}
             </if>
         </where>
-        order by statistics_day desc
+        order by statistics_day asc
     </select>
+
 </mapper>

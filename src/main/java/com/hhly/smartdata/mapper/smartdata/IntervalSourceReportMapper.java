@@ -15,15 +15,13 @@ public interface IntervalSourceReportMapper{
 
     IntervalSourceReport selectByPrimaryKey(Long id) throws Exception;
 
-    Map<String, Object> selectIntervalSourceTotalData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
-
     List<IntervalSourceReport> selectIntervalSourceListData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 
-    List<HashMap<String, Object>> selectIntervalSourceChartData(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("deviceTypes") String[] deviceTypes) throws Exception;
+    List<HashMap<String, Object>> selectIntervalSourceChartData(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("sourceType") String sourceType) throws Exception;
 
     List<IntervalSourceReport> selectIntervalTerminalsSourceListData(@Param("startDate") String startDate, @Param("endDate") String endDate) throws Exception;
 
-    List<IntervalSourceReport> selectIntervalTimeTerminalsSourceListData(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("deviceType") String deviceType) throws Exception;
+    List<IntervalSourceReport> selectIntervalTimeTerminalsSourceListData(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("sourceType") String sourceType) throws Exception;
 
     void deleteByTimeSourceType(@Param("statisticsTime") String statisticsTime, @Param("sourceType") Byte sourceType) throws Exception;
 }

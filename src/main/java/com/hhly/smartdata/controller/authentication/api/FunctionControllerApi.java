@@ -6,6 +6,7 @@ import com.hhly.smartdata.service.authentication.FunctionService;
 import com.hhly.smartdata.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
+@Scope(value = "prototype")
 @RequestMapping("/sys/func")
 public class FunctionControllerApi extends BaseController{
     @Autowired
@@ -25,7 +27,7 @@ public class FunctionControllerApi extends BaseController{
         try{
             result = functionService.batchUpdateFuncs(JSONArray.parseArray(funcTree), 0);
         }catch(Exception e){
-            LOGGER.error("更新异常！"+ e.getMessage());
+            LOGGER.error("更新异常！" + e.getMessage());
         }
         return Result.success(result);
     }

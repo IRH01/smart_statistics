@@ -33,24 +33,6 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
 
-    <select id="selectLastMonthRegister" resultType="java.util.Map">
-        SELECT
-        SUM(pc_population) AS pc_population_sum,
-        SUM(pc_page_view) AS pc_page_view_sum,
-        SUM(pc_user_view) AS pc_user_view_sum,
-        SUM(h5_population) AS h5_population_sum,
-        SUM(h5_page_view) AS h5_page_view_sum,
-        SUM(h5_user_view) AS h5_user_view_sum,
-        SUM(ios_population) AS ios_population_sum,
-        SUM(ios_install_count) AS ios_install_count_sum,
-        SUM(android_population) AS android_population_sum,
-        SUM(android_install_count) AS android_install_count_sum
-        FROM
-        daily_register_report
-        WHERE statistics_day &gt;= #{lastMonthFirstDayStr}
-        AND statistics_day &lt;= #{lastMonthEndDayStr}
-    </select>
-
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyRegisterReport">
         insert into daily_register_report (id, statistics_day, pc_population,pc_page_view,
         pc_user_view, h5_population, h5_page_view,

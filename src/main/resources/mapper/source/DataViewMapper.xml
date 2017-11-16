@@ -136,32 +136,95 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectUserViewAndPageViewByStartTimeAndEndTime" resultType="java.util.Map">
-        select platform_terminal as platformTerminal ,count(DISTINCT(client_identity)) as userCount, count(id) as
-        pageCount from data_view
-        where country = 0
-        AND create_time &lt;= #{startTime}
-        AND create_time &gt;= #{endTime}
+    <select id="selectUserViewByStartTimeAndEndTime" resultType="java.util.Map">
+        select
+        platform_terminal as sourceType ,
+        count(DISTINCT(BINARY client_identity)) as userCount
+        from
+        data_view
+        where  client_identity != ''
+        AND create_time &lt; #{endTime}
+        AND create_time &gt;= #{startTime}
         group by platform_terminal
     </select>
 
-    <select id="selectFirstThirtyMinUserViewAndPageView" resultType="java.util.Map">
-        select user_id as userId,platform_terminal as osType from data_view where
-        user_id is not null and user_id != ''
-        <![CDATA[
-              and create_time >= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
-        ]]>
-        <![CDATA[
-              and create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')
-  		]]>
-        group by platform_terminal,user_id
+    <select id="selectPageViewByStartTimeAndEndTime" resultType="java.util.Map">
+        select
+        platform_terminal as sourceType,
+        count(id) as pageCount
+         from data_view
+        where create_time &lt; #{endTime}
+        AND create_time &gt;= #{startTime}
+        group by platform_terminal
+    </select>
+
+    <select id="selectUserViewAndPageViewGroupBySourceType" resultType="java.util.Map">
+        select
+        user_id as userId,
+        platform_terminal as sourceType
+        from data_view
+        where
+        user_id is not null
+        and user_id != ''
+        and create_time &gt;= #{startTime}
+        and create_time &lt; #{endTime}
+        group by platform_terminal,BINARY user_id
     </select>
 
     <select id="selectYesterdayUserViewAndPageViewList" resultType="java.util.Map">
         select user_id as userId,platform_terminal as osType from data_view where
         user_id is not null and user_id != ''
-        AND create_time &lt;= #{startTime}
-        AND create_time &gt;= #{endTime}
-        group by platform_terminal,user_id
+        and create_time &gt;= #{startTime}
+        and create_time &lt; #{endTime}
+        group by platform_terminal,BINARY user_id
+    </select>
+
+    <select id="selectTodayGameStartCountGroupByUser" resultType="java.util.Map">
+        select user_id as userId from data_view where
+        user_id is not null and user_id != ''
+        and create_time &gt;= #{startTime}
+        and create_time &lt; #{endTime}
+        group by BINARY user_id
+    </select>
+
+    <select id="selectTodayGameStartCountGroupByUserAndOsType" resultType="java.util.Map">
+        select user_id as userId,platform_terminal as osType  from data_view where
+        user_id is not null and user_id != ''
+         and create_time &gt;= #{startTime}
+        and create_time &lt; #{endTime}
+        group by platform_terminal,BINARY user_id
+        order by create_time desc
+    </select>
+    <select id="selectUserViewAndPageViewByTime" resultType="java.lang.String">
+        select
+        user_id
+        from data_view
+        where
+        user_id is not null and user_id != ''
+        and create_time &gt;= #{startTime}
+        and create_time &lt; #{endTime}
+    </select>
+
+    <select id="selectUserViewAndPageViewByTimeGroupBySource" resultType="java.util.Map">
+        SELECT
+        platform_terminal AS sourceType,
+        user_id AS userId
+        FROM
+        data_view
+        WHERE
+        user_id is not null and user_id != ''
+        and create_time &lt;= #{endTime}
+        AND create_time &gt;= #{startTime}
+        GROUP BY platform_terminal,BINARY  user_id
+    </select>
+
+    <select id="selectOldUserViewAndPageViewByTime" resultType="java.lang.String">
+        select
+        user_id
+        from
+        data_view
+        where
+        user_id is not null and user_id != ''
+        and create_time &lt; #{time}
     </select>
 </mapper>

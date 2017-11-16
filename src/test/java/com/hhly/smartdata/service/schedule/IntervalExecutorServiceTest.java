@@ -33,7 +33,21 @@ public class IntervalExecutorServiceTest extends BaseTest{
         Date now = new Date();
         Date nowPointByThirtyMinute = DateUtil.getBeforeThirtyMinutePoint(now);
         String startDate = DateUtil.date2String(nowPointByThirtyMinute);
-        this.intervalExecutorService.intervalSourceStatistics(startDate, INTERVAL_TIME);
+        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11"};
+        for(String item : yue){
+            for(int i = 0; i < 10; i++){
+                this.intervalExecutorService.intervalSourceStatistics("2017-" + item + " 0" + i + ":00:00", INTERVAL_TIME);
+                this.intervalExecutorService.intervalSourceStatistics("2017-" + item + " 0" + i + ":30:00", INTERVAL_TIME);
+            }
+            for(int i = 0; i < 10; i++){
+                this.intervalExecutorService.intervalSourceStatistics("2017-" + item + " 1" + i + ":00:00", INTERVAL_TIME);
+                this.intervalExecutorService.intervalSourceStatistics("2017-" + item + " 1" + i + ":30:00", INTERVAL_TIME);
+            }
+            for(int i = 0; i < 5; i++){
+                this.intervalExecutorService.intervalSourceStatistics("2017-" + item + " 2" + i + ":00:00", INTERVAL_TIME);
+                this.intervalExecutorService.intervalSourceStatistics("2017-" + item + " 2" + i + ":30:00", INTERVAL_TIME);
+            }
+        }
     }
 
     /**
@@ -44,7 +58,22 @@ public class IntervalExecutorServiceTest extends BaseTest{
         Date now = new Date();
         Date nowPointByThirtyMinute = DateUtil.getBeforeThirtyMinutePoint(now);
         String startDate = DateUtil.date2String(nowPointByThirtyMinute);
-        this.intervalExecutorService.intervalInterfaceStatistics(startDate, INTERVAL_TIME);
+//        this.intervalExecutorService.intervalInterfaceStatistics(startDate, INTERVAL_TIME);
+        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11"};
+        for(String item : yue){
+            for(int i = 0; i < 10; i++){
+                this.intervalExecutorService.intervalInterfaceStatistics("2017-" + item + " 0" + i + ":00:00", INTERVAL_TIME);
+                this.intervalExecutorService.intervalInterfaceStatistics("2017-" + item + " 0" + i + ":30:00", INTERVAL_TIME);
+            }
+            for(int i = 0; i < 10; i++){
+                this.intervalExecutorService.intervalInterfaceStatistics("2017-" + item + " 1" + i + ":00:00", INTERVAL_TIME);
+                this.intervalExecutorService.intervalInterfaceStatistics("2017-" + item + " 1" + i + ":30:00", INTERVAL_TIME);
+            }
+            for(int i = 0; i < 5; i++){
+                this.intervalExecutorService.intervalInterfaceStatistics("2017-" + item + " 2" + i + ":00:00", INTERVAL_TIME);
+                this.intervalExecutorService.intervalInterfaceStatistics("2017-" + item + " 2" + i + ":30:00", INTERVAL_TIME);
+            }
+        }
     }
 
     /**
@@ -55,8 +84,23 @@ public class IntervalExecutorServiceTest extends BaseTest{
         Date now = new Date();
         Date nowPointByThirtyMinute = DateUtil.getBeforeThirtyMinutePoint(now);
         String startDate = DateUtil.date2String(nowPointByThirtyMinute);
-        this.intervalExecutorService.intervalGameLaunch(startDate, INTERVAL_TIME);
+//        this.intervalExecutorService.intervalGameLaunch(startDate, INTERVAL_TIME);
+        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11"};
+        for(String item : yue){
+            for(int i = 0; i < 10; i++){
+                this.intervalExecutorService.intervalGameLaunch("2017-" + item + " 0" + i + ":00:00", INTERVAL_TIME);
+                this.intervalExecutorService.intervalGameLaunch("2017-" + item + " 0" + i + ":30:00", INTERVAL_TIME);
+            }
+            for(int i = 0; i < 10; i++){
+                this.intervalExecutorService.intervalGameLaunch("2017-" + item + " 1" + i + ":00:00", INTERVAL_TIME);
+                this.intervalExecutorService.intervalGameLaunch("2017-" + item + " 1" + i + ":30:00", INTERVAL_TIME);
+            }
+            for(int i = 0; i < 5; i++){
+                this.intervalExecutorService.intervalGameLaunch("2017-" + item + " 2" + i + ":00:00", INTERVAL_TIME);
+                this.intervalExecutorService.intervalGameLaunch("2017-" + item + " 2" + i + ":30:00", INTERVAL_TIME);
+            }
+        }
     }
 
 
-} 
+}

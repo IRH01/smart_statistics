@@ -45,7 +45,7 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
         if(this.getRegisterPopulation() == 0){
             return "0.00";
         }
-        return numberFormat.format(((float) this.getNewUserRechargeCount() / (float) this.getRegisterPopulation()) * 100);
+        return numberFormat.format(((float) this.getNewUserRechargePopulation() / (float) this.getRegisterPopulation()) * 100);
     }
 
     /**
@@ -90,7 +90,7 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
     }
 
     /**
-     * 老用户充值转化率(%)=老用户充值人数/当月以前注册的人数*100%
+     * 老用户充值转化率(%)=老用户充值人数/当天以前注册的人数*100%
      *
      * @return
      */
@@ -106,7 +106,7 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
     }
 
     /**
-     * 老用户登录转化率(%)=老用户登录人数/当月以前注册的人数*100%
+     * 老用户登录转化率(%)=老用户登录人数/当天以前注册的人数*100%
      *
      * @return
      */

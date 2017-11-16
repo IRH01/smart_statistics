@@ -1,4 +1,4 @@
-package com.hhly.smartdata.service.smartdata;
+package com.hhly.smartdata.service.interval;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -39,13 +39,12 @@ public class IntervalInterfaceService{
         Map<String, Object> result = Maps.newHashMap();
 
         List<String> scaleList = Lists.newArrayList();
-        scaleList.add("00:00");
         //请求数
         List<Long> requestList = Lists.newArrayList();
-        requestList.add(0L);
+        //requestList.add(0L);
         //完成数
         List<Long> completeList = Lists.newArrayList();
-        completeList.add(0L);
+        //completeList.add(0L);
 
         Iterator<String> iterator = scales.iterator();
         Date now = new Date();

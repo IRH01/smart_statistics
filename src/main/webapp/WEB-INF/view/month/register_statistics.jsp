@@ -54,7 +54,7 @@
                     <ul class="breadcrumb">
                         <li>您当前的位置：</li>
                         <tags:breadcrumb/>
-                        <li>综合数据</li>
+                        <li>用户来源统计</li>
                     </ul>
                 </div>
                 <!--body start-->
@@ -63,7 +63,7 @@
                         <h4 class="panel-title" id="-collapsible-group-item-#1-">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" aria-expanded="true"
-                               aria-controls="collapseOne">平台月数据</a>
+                               aria-controls="collapseOne">用户来源统计</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
@@ -73,14 +73,14 @@
                                 <div class="section-box">
                                     <div class="titleDiv">
                                         <div class="notice-div">
-                                            月新增注册用户：<span id="last_month_total">*</span>
+                                            上月新增注册用户：<span id="last_month_total">*</span>
                                         </div>
                                         <div class="select-fr" style="padding-right: 30px;">
 											<span class="laydateBox">
                                                 月份区间：<input type="text" id="monthStart" class="laydate-icon"
-                                                            style="width:140px;" title=""/>
+                                                            style="width:140px;" title="" readonly/>
                                                 至 &nbsp;<input type="text" id="monthEnd" class="laydate-icon"
-                                                               style="width:140px;" title=""/>
+                                                               style="width:140px;" title="" readonly/>
 											</span>
                                             <button type="button" id="search" class="btn btn-primary btn-sm">
                                                 查询
@@ -119,8 +119,15 @@
                                                             <tr>
                                                                 <td>
                                                                     <div class="divPage"><span class="spanPageSize">每页记录数：</span>
-                                                                        <input id="pageSize" value="12"
-                                                                               class="inputPageSize" title="页数"/>
+                                                                        <select id="pageSize" class="inputPageSize"
+                                                                                title="页记录数">
+                                                                            <option value="10" aria-checked="true">10
+                                                                            </option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="30">30</option>
+                                                                            <option value="40">40</option>
+                                                                            <option value="50">50</option>
+                                                                        </select>
                                                                     </div>
                                                                 </td>
                                                                 <td>

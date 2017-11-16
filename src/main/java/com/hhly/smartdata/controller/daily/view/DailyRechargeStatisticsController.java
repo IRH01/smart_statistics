@@ -1,6 +1,7 @@
 package com.hhly.smartdata.controller.daily.view;
 
 import com.hhly.smartdata.controller.BaseController;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by Iritchie.ren on 2017/10/10.
  */
 @Controller
+@Scope(value = "prototype")
 @RequestMapping("/daily/recharge/statistics")
 public class DailyRechargeStatisticsController extends BaseController{
 

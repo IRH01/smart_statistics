@@ -3,10 +3,11 @@ package com.hhly.smartdata.controller.interval.api;
 import com.github.pagehelper.PageInfo;
 import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.model.smartdata.IntervalInterfaceReport;
-import com.hhly.smartdata.service.smartdata.IntervalInterfaceService;
+import com.hhly.smartdata.service.interval.IntervalInterfaceService;
 import com.hhly.smartdata.util.HourListUtil;
 import com.hhly.smartdata.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ import java.util.TreeSet;
  * 接口统计
  */
 @RestController
+@Scope(value = "prototype")
 @RequestMapping(value = "/interval/interface")
 public class IntervalInterfaceControllerApi extends BaseController{
 

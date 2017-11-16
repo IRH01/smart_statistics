@@ -6,6 +6,7 @@ import com.hhly.smartdata.dto.daily.DailyCompositeReportResult;
 import com.hhly.smartdata.service.smartdata.DailyCompositeService;
 import com.hhly.smartdata.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 平台日综合报表
  */
 @RestController
+@Scope(value = "prototype")
 @RequestMapping(value = "/daily/composite")
 public class DailyCompositeControllerApi extends BaseController{
 

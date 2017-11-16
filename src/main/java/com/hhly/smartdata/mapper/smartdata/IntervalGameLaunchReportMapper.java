@@ -26,11 +26,12 @@ public interface IntervalGameLaunchReportMapper{
      * 根据平台编码获取游戏启动次数
      *
      * @param platformCode
+     * @param sourceType
      * @return
      * @throws Exception
      * @author hejh
      * @date 2017-11-01 20:39
      */
-    List<IntervalGameLaunchTimeListReport> selectIntervalGameLaunchTimeListData(@Param("platformCode") String platformCode) throws Exception;
+    List<IntervalGameLaunchTimeListReport> selectIntervalGameLaunchTimeListData(@Param("platformCode") String platformCode, @Param("sourceType") String sourceType) throws Exception;
 
 }

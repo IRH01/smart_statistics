@@ -45,7 +45,7 @@ public class MonthCompositeReportResult extends MonthCompositeReport{
         if(this.getRegisterPopulation() == 0){
             return "0.00";
         }
-        return numberFormat.format(((float) this.getNewUserRechargeCount() / (float) this.getRegisterPopulation()) * 100);
+        return numberFormat.format(((float) this.getNewUserRechargePopulation() / (float) this.getRegisterPopulation()) * 100);
     }
 
     /**

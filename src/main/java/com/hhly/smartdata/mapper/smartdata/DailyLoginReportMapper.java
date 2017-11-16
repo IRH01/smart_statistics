@@ -20,13 +20,11 @@ public interface DailyLoginReportMapper{
 
     int updateByPrimaryKey(DailyLoginReport record) throws Exception;
 
-    List<Map<String, Object>> selectLastMonthLogin(@Param("lastMonthFirstDayStr") String lastMonthFirstDayStr, @Param("lastMonthEndDayStr") String lastMonthEndDayStr) throws Exception;
+    List<DailyLoginReport> searchByTime(@Param("startTime") String startTime, @Param("endTime") String endTime) throws Exception;
 
-    List<DailyLoginReport> searchByTime(TimeFilter filter) throws Exception;
-
-    long searchByTimeCount(TimeFilter filter) throws Exception;
-
-    Map<String, Object> selectByMonth(String daily) throws Exception;
+    Map<String, Object> selectByDaily(String daily) throws Exception;
 
     void deleteByTimeAndPlatformCodeAndSourceType(@Param("statisticsDay") String statisticsDay, @Param("platformCode") String platformCode, @Param("sourceType") Byte sourceType) throws Exception;
+
+
 }

@@ -36,42 +36,25 @@
         #{rechargePopulation,jdbcType=INTEGER}, #{rechargeCount,jdbcType=INTEGER}, #{rechargeAmount,jdbcType=DECIMAL},
         #{executeTime,jdbcType=TIMESTAMP})
     </insert>
-    <select id="selectIntervalSourceTotalData" resultType="java.util.Map">
-        SELECT
-        SUM(register_population) AS registerPopulation,
-        SUM(login_population) AS loginPopulation,
-        SUM(recharge_population) AS rechargePopulation ,
-        SUM(recharge_count) AS rechargeCount,
-        SUM(recharge_amount) AS rechargeAmount
-        FROM interval_source_report
-        <where>
-            <if test="startDate != null and startDate  != ''">
-                AND statistics_time &gt; #{startDate}
-            </if>
-            <if test="endDate != null and endDate  != ''">
-                AND statistics_time &lt;= #{endDate}
-            </if>
-        </where>
-    </select>
+
     <select id="selectIntervalSourceListData" resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
         select
-        statistics_time as  statisticsTime,
+        statistics_time as statisticsTime,
         sum(register_population) as registerPopulation,
         sum(login_population) as loginPopulation,
         sum(recharge_population) as rechargePopulation,
         sum(recharge_count) as rechargeCount,
         sum(recharge_amount) as rechargeAmount
         from interval_source_report
-        <where>
-            <if test="startDate != null and startDate  != ''">
-                and statistics_time &gt; #{startDate}
-            </if>
-            <if test="endDate != null and endDate  != ''">
-                and statistics_time &lt;= #{endDate}
-            </if>
-        </where>
+        where  source_type  != 0
+        <if test="startDate != null and startDate  != ''">
+            and statistics_time &gt; #{startDate}
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            and statistics_time &lt;= #{endDate}
+        </if>
         group by statistics_time
-        order by statistics_time desc
+        order by statistics_time asc
     </select>
 
     <select id="selectIntervalSourceChartData" resultType="java.util.HashMap">
@@ -84,19 +67,15 @@
         sum(recharge_amount) as recharge_amount_sum
         from interval_source_report
         <where>
-            <if test="startDate != null and startDate  != ''">
-                and statistics_time &gt; #{startDate}
-            </if>
-            <if test="endDate != null and endDate  != ''">
-                and statistics_time &lt;= #{endDate}
-            </if>
-            <if test="deviceTypes!=null">
-                and source_type in
-                <foreach item="item" index="index" collection="deviceTypes"
-                         open="(" separator="," close=")">
-                    #{item}
-                </foreach>
-            </if>
+        <if test="startDate != null and startDate  != ''">
+            and statistics_time &gt; #{startDate}
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            and statistics_time &lt;= #{endDate}
+        </if>
+        <if test="sourceType!=null">
+            and source_type = #{sourceType}
+        </if>
         </where>
         group by statistics_time
     </select>
@@ -111,14 +90,13 @@
         sum(recharge_count) as rechargeCount,
         sum(recharge_amount) as rechargeAmount
         from interval_source_report
-        <where>
-            <if test="startDate != null and startDate  != ''">
-                and statistics_time &gt; #{startDate}
-            </if>
-            <if test="endDate != null and endDate  != ''">
-                and statistics_time &lt;= #{endDate}
-            </if>
-        </where>
+        where 1= 1
+        <if test="startDate != null and startDate  != ''">
+            and statistics_time &gt; #{startDate}
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            and statistics_time &lt;= #{endDate}
+        </if>
         group by source_type
         order by source_type asc
     </select>
@@ -126,26 +104,25 @@
     <select id="selectIntervalTimeTerminalsSourceListData"
             resultType="com.hhly.smartdata.model.smartdata.IntervalSourceReport">
         select
-        DATE_FORMAT(statistics_time,'%H:%i') as statisticsTime,
+        statistics_time as statisticsTime,
         sum(register_population) as registerPopulation,
         sum(login_population) as loginPopulation,
         sum(recharge_population) as rechargePopulation,
         sum(recharge_count) as rechargeCount,
         sum(recharge_amount) as rechargeAmount
         from interval_source_report
-        <where>
-            <if test="startDate != null and startDate  != ''">
-                and statistics_time &gt; #{startDate}
-            </if>
-            <if test="endDate != null and endDate  != ''">
-                and statistics_time &lt;= #{endDate}
-            </if>
-            <if test="deviceType != null and deviceType !=''">
-                and source_type = #{deviceType}
-            </if>
-        </where>
+        where 1=1
+        <if test="startDate != null and startDate  != ''">
+            and statistics_time &gt; #{startDate}
+        </if>
+        <if test="endDate != null and endDate  != ''">
+            and statistics_time &lt;= #{endDate}
+        </if>
+        <if test="sourceType != null ">
+            and source_type = #{sourceType}
+        </if>
         group by statistics_time
-        order by statistics_time desc
+        order by statistics_time asc
     </select>
 
 </mapper>

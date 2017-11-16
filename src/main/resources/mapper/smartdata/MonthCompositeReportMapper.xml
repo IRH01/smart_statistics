@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.MonthCompositeReport">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="statistics_month" property="statisticsMonth" jdbcType="VARCHAR"/>
+        <result column="total_register_population" property="totalRegisterPopulation" jdbcType="INTEGER"/>
         <result column="register_population" property="registerPopulation" jdbcType="INTEGER"/>
         <result column="register_exp_count" property="registerExpCount" jdbcType="INTEGER"/>
         <result column="real_exp_count" property="realExpCount" jdbcType="INTEGER"/>
@@ -23,7 +24,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, statistics_month, register_population, register_exp_count, real_exp_count, virtual_exp_count,
+        id, statistics_month,total_register_population, register_population, register_exp_count, real_exp_count, virtual_exp_count,
         new_user_recharge_population, new_user_recharge_count, new_user_recharge_amount,
         new_user_login_count, new_user_play_count, old_user_recharge_population, old_user_recharge_count,
         old_user_recharge_amount, old_user_login_count, old_user_play_count, next_day_stay_count,
@@ -75,7 +76,7 @@
     </select>
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.MonthCompositeReport">
-        insert into month_composite_report (id, statistics_month, register_population,
+        insert into month_composite_report (id, statistics_month,total_register_population, register_population,
         register_exp_count, real_exp_count, virtual_exp_count,
         new_user_recharge_population, new_user_recharge_count,
         new_user_recharge_amount, new_user_login_count,
@@ -83,7 +84,7 @@
         old_user_recharge_count, old_user_recharge_amount,
         old_user_login_count, old_user_play_count, next_day_stay_count,
         execute_time)
-        values (#{id,jdbcType=BIGINT}, #{statisticsMonth,jdbcType=VARCHAR}, #{registerPopulation,jdbcType=INTEGER},
+        values (#{id,jdbcType=BIGINT}, #{statisticsMonth,jdbcType=VARCHAR},  #{totalRegisterPopulation,jdbcType=INTEGER},#{registerPopulation,jdbcType=INTEGER},
         #{registerExpCount,jdbcType=INTEGER}, #{realExpCount,jdbcType=INTEGER}, #{virtualExpCount,jdbcType=INTEGER},
         #{newUserRechargePopulation,jdbcType=INTEGER}, #{newUserRechargeCount,jdbcType=INTEGER},
         #{newUserRechargeAmount,jdbcType=DECIMAL}, #{newUserLoginCount,jdbcType=INTEGER},
@@ -102,6 +103,9 @@
             </if>
             <if test="statisticsMonth != null">
                 statistics_month,
+            </if>
+            <if test="totalRegisterPopulation != null">
+                total_register_population,
             </if>
             <if test="registerPopulation != null">
                 register_population,
@@ -158,6 +162,9 @@
             </if>
             <if test="statisticsMonth != null">
                 #{statisticsMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="totalRegisterPopulation != null">
+                #{totalRegisterPopulation,jdbcType=INTEGER},
             </if>
             <if test="registerPopulation != null">
                 #{registerPopulation,jdbcType=INTEGER},
@@ -219,6 +226,9 @@
             <if test="registerPopulation != null">
                 register_population = #{registerPopulation,jdbcType=INTEGER},
             </if>
+            <if test="totalRegisterPopulation != null">
+                register_population = #{total_register_population,jdbcType=INTEGER},
+            </if>
             <if test="registerExpCount != null">
                 register_exp_count = #{registerExpCount,jdbcType=INTEGER},
             </if>
@@ -271,6 +281,7 @@
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.MonthCompositeReport">
         update month_composite_report
         set statistics_month = #{statisticsMonth,jdbcType=VARCHAR},
+        total_register_population = #{totalRegisterPopulation,jdbcType=INTEGER},
         register_population = #{registerPopulation,jdbcType=INTEGER},
         register_exp_count = #{registerExpCount,jdbcType=INTEGER},
         real_exp_count = #{realExpCount,jdbcType=INTEGER},

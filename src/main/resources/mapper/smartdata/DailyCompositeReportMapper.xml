@@ -58,7 +58,7 @@
         SUM(old_user_recharge_amount) AS old_user_recharge_amount_sum,
         SUM(old_user_login_count) AS old_user_login_count_sum,
         SUM(old_user_play_count) AS old_user_play_count_sum,
-        SUM(next_day_stay_count) AS next_day_stay_count_sum
+        AVG (next_day_stay_count) AS next_day_stay_count_avg
         FROM
         daily_composite_report
         WHERE statistics_day &gt;= #{lastMonthFirstDayStr}
@@ -284,6 +284,7 @@
     <select id="selectDailyCompositeListData" resultType="com.hhly.smartdata.dto.daily.DailyCompositeReportResult">
         select
         DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,
+        total_register_population as totalRegisterPopulation,
         register_population as registerPopulation,
         register_exp_count as registerExpCount,
         real_exp_count as realExpCount,

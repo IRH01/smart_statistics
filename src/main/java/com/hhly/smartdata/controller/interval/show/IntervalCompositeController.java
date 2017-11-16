@@ -3,6 +3,7 @@ package com.hhly.smartdata.controller.interval.show;
 import com.google.common.collect.Maps;
 import com.hhly.smartdata.controller.BaseController;
 import com.hhly.smartdata.dto.enume.SourceTypeEnum;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,6 +14,7 @@ import java.util.Map;
  * 平台数据实时统计
  */
 @Controller
+@Scope(value = "prototype")
 @RequestMapping(value = "/interval/platform")
 public class IntervalCompositeController extends BaseController{
 

@@ -8,12 +8,14 @@ import com.hhly.smartdata.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Scope(value = "prototype")
 @RequestMapping("/admin/admin")
 public class AdminControllerApi extends BaseController{
     @Autowired
@@ -31,7 +33,7 @@ public class AdminControllerApi extends BaseController{
         try{
             userService.update(user);
         }catch(Exception e){
-            LOGGER.error("初始化密码异常！"+ e.getMessage());
+            LOGGER.error("初始化密码异常！" + e.getMessage());
         }
         return Result.success(null);
     }
@@ -46,7 +48,7 @@ public class AdminControllerApi extends BaseController{
                 return Result.success(null);
             }
         }catch(Exception e){
-            LOGGER.error("删除用户异常！"+ e.getMessage());
+            LOGGER.error("删除用户异常！" + e.getMessage());
         }
         return Result.fail();
     }

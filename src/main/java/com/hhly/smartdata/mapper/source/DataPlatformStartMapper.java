@@ -19,5 +19,4 @@ public interface DataPlatformStartMapper {
 
     int updateByPrimaryKey(DataPlatformStart record) throws Exception;
 
-    List<Map<String, Object>> selectIntervalGameLaunch() throws Exception;
 }

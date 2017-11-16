@@ -20,6 +20,7 @@
     <link type="text/css" rel="stylesheet" href="../../../css/jquery-ui.css"/>
     <link rel="stylesheet" type="text/css" href="../../../lib/monthpicker/skin/jquery.monthpicker.css"/>
     <link rel="stylesheet" type="text/css" href="../../../lib/myPagination/js/myPagination/page.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../lib/datepicker/css/bootstrap-datepicker.css"/>
     <!--[if lt IE 9]>
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -31,7 +32,6 @@
     <script src="../../../lib/additional-methods.min.js" type="text/javascript"></script>
     <script src="../../../lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
     <script src="../../../lib/jquery.validate.custom.js" type="text/javascript"></script>
-    <script src="../../../lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
     <script src="../../../lib/dialogsdk.js"></script>
     <script src="../../../lib/tools/tools.js"></script>
     <script src="../../../lib/layer/layer.js"></script>
@@ -42,7 +42,7 @@
     <script src="../../../lib/datecontrol.js"></script>
     <script src="../../../lib/jquery-ui.js"></script>
     <script src="../../../lib/layer/layer.js"></script>
-    <script src="../../../lib/monthpicker/jquery.monthpicker.js"></script>
+    <script src="../../../lib/datepicker/js/bootstrap-datepicker.min.js"></script>
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -54,7 +54,7 @@
                     <ul class="breadcrumb">
                         <li>您当前的位置：</li>
                         <tags:breadcrumb/>
-                        <li>综合数据</li>
+                        <li>登录来源统计</li>
                     </ul>
                 </div>
                 <!--body start-->
@@ -63,7 +63,7 @@
                         <h4 class="panel-title" id="-collapsible-group-item-#1-">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" aria-expanded="true"
-                               aria-controls="collapseOne">平台月数据</a>
+                               aria-controls="collapseOne">登录来源统计</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
@@ -79,12 +79,10 @@
                                             上月玩游戏总数：<span id="last_month_play">*</span>
                                         </div>
                                         <div class="select-fr" style="padding-right: 30px;">
-											<span class="laydateBox">
-                                                月份区间：<input type="text" id="monthStart" class="laydate-icon"
-                                                            style="width:140px;" title=""/>
-                                                至 &nbsp;<input type="text" id="monthEnd" class="laydate-icon"
-                                                               style="width:140px;" title=""/>
-											</span>
+                                              <span class="spanPageSize">筛选年份：
+                                              <input type="text" id="monthPage" class="laydate-icon" style="width:140px"
+                                                     title="" readonly/>
+                                              </span>
                                             <button type="button" id="search" class="btn btn-primary btn-sm">
                                                 查询
                                             </button>
@@ -97,30 +95,10 @@
                                                     <div class="sortHandle">
                                                     </div>
                                                     <div class="tablePanel">
-                                                        <table class="tableListGame">
+                                                        <table id="tbDataList" class="tableListGame">
                                                             <thead>
                                                             <tr>
-                                                                <th style="min-width:70px;">月份</th>
-                                                                <th style="min-width:70px;">PC-登录人数</th>
-                                                                <th style="min-width:70px;">PC-玩游戏人数</th>
-                                                                <th style="min-width:70px;">PC-撩妹德州</th>
-                                                                <th style="min-width:70px;">PC-乐盈电竞</th>
-                                                                <th style="min-width:70px;">PC-一比分</th>
-                                                                <th style="min-width:90px;">H5-登录人数</th>
-                                                                <th style="min-width:90px;">H5-玩游戏人数</th>
-                                                                <th style="min-width:100px;">H5-撩妹德州</th>
-                                                                <th style="min-width:80px;">H5-乐盈电竞</th>
-                                                                <th style="min-width:80px;">H5-一比分</th>
-                                                                <th style="min-width:90px;">ios-登录人数</th>
-                                                                <th style="min-width:90px;">ios-玩游戏人数</th>
-                                                                <th style="min-width:100px;">ios-撩妹德州</th>
-                                                                <th style="min-width:80px;">ios-乐盈电竞</th>
-                                                                <th style="min-width:80px;">ios-一比分</th>
-                                                                <th style="min-width:90px;">android-登录人数</th>
-                                                                <th style="min-width:90px;">android-玩游戏人数</th>
-                                                                <th style="min-width:100px;">android-撩妹德州</th>
-                                                                <th style="min-width:80px;">android-乐盈电竞</th>
-                                                                <th style="min-width:80px;">android-一比分</th>
+
                                                             </tr>
                                                             </thead>
                                                             <tbody id="data">
@@ -131,21 +109,10 @@
                                                         <table class="tablePage">
                                                             <tr>
                                                                 <td>
-                                                                    <div class="divPage"><span class="spanPageSize">每页记录数：</span>
-                                                                        <input id="pageSize" value="12"
-                                                                               class="inputPageSize" title="页数"/>
+                                                                    <div class="divPage"><span class="spanPageSize">当页记录数：</span>
+                                                                        <span id="totalCount"
+                                                                              class="spanPageSize"></span>
                                                                     </div>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="spanPageSize">总记录数：</span>
-                                                                    <span id="totalCount" class="spanPageSize"></span>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="spanPageSize">总页数：</span>
-                                                                    <span id="totalPage" class="spanPageSize"></span>
-                                                                </td>
-                                                                <td class="tablePageTd">
-                                                                    <div id="page"></div>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -172,236 +139,36 @@
 
     $("#pageSize").val(pageSize);
 
-    var setMonthConfig = function () {
-        var date = new Date();
-        var year = date.getFullYear();
-        var years = new Array();
-        var startYear = 2010;
-        for (var i = 0; year >= startYear; year--, i++) {
-            years[i] = year;
-        }
-        $("#monthStart").monthpicker({
-            years: years,
-            topOffset: 6,
-            width: "140px",
-            onMonthSelect: function (m, y) {
-            }
-        });
-        $("#monthEnd").monthpicker({
-            years: years,
-            topOffset: 6,
-            width: "140px",
-            onMonthSelect: function (m, y) {
-            }
+    $('#monthPage').datepicker({
+        format: "yyyy",
+        startView: 2,
+        minViewMode: 2,
+        maxViewMode: 2,
+        orientation: "bottom auto"
+    }).on('changeDate', function (ev) {
+        $("#monthPage").datepicker('hide');
+    });
+
+    //添加表格数据行
+    var addTbRow = function (dataList) {
+        console.log(dataList);
+        $.each(dataList, function (i, n) {
+            var trHtml = '<tr><td class="date">' + n.time + '</td>';
+
+            $.each(n.data, function (j, m) {
+                trHtml += '<td class="date">' + m + '</td>'
+            });
+            trHtml += '</tr>';
+            $("#tbDataList>tbody").append(trHtml);
         });
     };
 
-    var addTbRow = function (data) {
-        if (null !== data && undefined !== data && "" !== data) {
-            var ele = "<tr><td>statisticsMonth</td>" +
-                "<td>PC_loginPopulation</td>" +
-                "<td>PC_playPopulation</td>" +
-                "<td>PC_liaoMeiDeZhou_loginPopulation</td>" +
-                "<td>PC_leYinDianJing_loginPopulation</td>" +
-                "<td>PC_yiBiFen_loginPopulation</td>" +
-                "<td>H5_loginPopulation</td>" +
-                "<td>H5_playPopulation</td>" +
-                "<td>H5_liaoMeiDeZhou_loginPopulation</td>" +
-                "<td>H5_leYinDianJing_loginPopulation</td>" +
-                "<td>H5_yiBiFen_loginPopulation</td>" +
-                "<td>ios_loginPopulation</td>" +
-                "<td>ios_playPopulation</td>" +
-                "<td>ios_liaoMeiDeZhou_loginPopulation</td>" +
-                "<td>ios_leYinDianJing_loginPopulation</td>" +
-                "<td>ios_yiBiFen_loginPopulation</td>" +
-                "<td>android_loginPopulation</td>" +
-                "<td>android_playPopulation</td>" +
-                "<td>android_liaoMeiDeZhou_loginPopulation</td>" +
-                "<td>android_leYinDianJing_loginPopulation</td>" +
-                "<td>android_yiBiFen_loginPopulation</td>";
-            ele = ele.replace("statisticsMonth", data.statisticsMonth)
-                .replace("PC_loginPopulation", data.PC_loginPopulation)
-                .replace("PC_playPopulation", data.PC_playPopulation)
-                .replace("PC_liaoMeiDeZhou_loginPopulation", data.PC_liaoMeiDeZhou_loginPopulation)
-                .replace("PC_leYinDianJing_loginPopulation", data.PC_leYinDianJing_loginPopulation)
-                .replace("PC_yiBiFen_loginPopulation", data.PC_yiBiFen_loginPopulation)
-                .replace("H5_loginPopulation", data.h5_loginPopulation)
-                .replace("H5_playPopulation", data.h5_playPopulation)
-                .replace("H5_liaoMeiDeZhou_loginPopulation", data.h5_liaoMeiDeZhou_loginPopulation)
-                .replace("H5_leYinDianJing_loginPopulation", data.h5_leYinDianJing_loginPopulation)
-                .replace("H5_yiBiFen_loginPopulation", data.h5_yiBiFen_loginPopulation)
-                .replace("ios_loginPopulation", data.ios_loginPopulation)
-                .replace("ios_playPopulation", data.ios_playPopulation)
-                .replace("ios_liaoMeiDeZhou_loginPopulation", data.ios_liaoMeiDeZhou_loginPopulation)
-                .replace("ios_leYinDianJing_loginPopulation", data.ios_leYinDianJing_loginPopulation)
-                .replace("ios_yiBiFen_loginPopulation", data.ios_yiBiFen_loginPopulation)
-                .replace("android_loginPopulation", data.android_loginPopulation)
-                .replace("android_playPopulation", data.android_playPopulation)
-                .replace("android_liaoMeiDeZhou_loginPopulation", data.android_liaoMeiDeZhou_loginPopulation)
-                .replace("android_leYinDianJing_loginPopulation", data.android_leYinDianJing_loginPopulation)
-                .replace("android_yiBiFen_loginPopulation", data.android_yiBiFen_loginPopulation);
-            $("#data").append(ele);
-        }
-    };
-
-    //显示统计列表
-    var showNewUserData = function (pageNumber, pageSize) {
-        $("#data").empty();
-        $.get("/month/login/statistics/list.do", {
-            timeStart: $('#monthStart').val(),
-            timeEnd: $('#monthEnd').val(),
-            pageNo: pageNumber,
-            pageSize: pageSize
-        }, function (result) {
-            var pagination = result.data;
-            if (pagination !== null && pagination !== undefined) {
-                $("#totalCount").html(pagination.total);
-                $("#totalPage").html(parseInt((pagination.total + pageSize - 1) / pageSize));
-                $("#page").myPagination({
-                    currPage: pageNumber,
-                    pageCount: parseInt((pagination.total + pageSize - 1) / pageSize),
-                    ajax: {
-                        on: false,
-                        onClick: function (page) {
-                            showNewUserData(page, pageSize);
-                        }
-                    }
-                });
-                var infoData = pagination.data;
-                if (null === infoData || undefined === infoData || 0 >= infoData.length) {
-                    $("#totalCount").html(0);
-                    $("#totalPage").html(0);
-                    $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");
-                } else {
-                    var info = {};
-                    var pc_login = 0;
-                    var pc_play = 0;
-                    var h5_login = 0;
-                    var h5_play = 0;
-                    var ios_login = 0;
-                    var ios_play = 0;
-                    var android_login = 0;
-                    var android_play = 0;
-                    var totalInfo = {};
-                    totalInfo.statisticsMonth = "总计";
-                    totalInfo.PC_loginPopulation = 0;
-                    totalInfo.PC_playPopulation = 0;
-                    totalInfo.PC_liaoMeiDeZhou_loginPopulation = 0;
-                    totalInfo.PC_leYinDianJing_loginPopulation = 0;
-                    totalInfo.PC_yiBiFen_loginPopulation = 0;
-                    totalInfo.h5_loginPopulation = 0;
-                    totalInfo.h5_playPopulation = 0;
-                    totalInfo.h5_liaoMeiDeZhou_loginPopulation = 0;
-                    totalInfo.h5_leYinDianJing_loginPopulation = 0;
-                    totalInfo.h5_yiBiFen_loginPopulation = 0;
-                    totalInfo.ios_loginPopulation = 0;
-                    totalInfo.ios_playPopulation = 0;
-                    totalInfo.ios_liaoMeiDeZhou_loginPopulation = 0;
-                    totalInfo.ios_leYinDianJing_loginPopulation = 0;
-                    totalInfo.ios_yiBiFen_loginPopulation = 0;
-                    totalInfo.android_loginPopulation = 0;
-                    totalInfo.android_playPopulation = 0;
-                    totalInfo.android_liaoMeiDeZhou_loginPopulation = 0;
-                    totalInfo.android_leYinDianJing_loginPopulation = 0;
-                    totalInfo.android_yiBiFen_loginPopulation = 0;
-                    //1、PC 2.android 3.IOS 4.H5
-                    for (var i = 0; i < infoData.length; i++) {
-                        if (infoData[i].sourceType == 1) {
-                            if (infoData[i].platformId == 1) {
-                                info.PC_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
-                            }
-                            if (infoData[i].platformId == 2) {
-                                info.PC_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
-                            }
-                            if (infoData[i].platformId == 3) {
-                                info.PC_yiBiFen_loginPopulation = infoData[i].loginPopulation;
-                            }
-                            pc_login = accAdd(pc_login, infoData[i].loginPopulation);
-                            pc_play = accAdd(pc_play, infoData[i].playPopulation);
-                        }
-                        if (infoData[i].sourceType == 2) {
-                            if (infoData[i].platformId == 1) {
-                                info.android_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
-                                totalInfo.android_liaoMeiDeZhou_loginPopulation = accAdd(totalInfo.android_liaoMeiDeZhou_loginPopulation, parseFloat(infoData[i].loginPopulation));
-                            }
-                            if (infoData[i].platformId == 2) {
-                                info.android_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
-                                totalInfo.android_leYinDianJing_loginPopulation = accAdd(totalInfo.android_leYinDianJing_loginPopulation, parseFloat(infoData[i].loginPopulation));
-                            }
-                            if (infoData[i].platformId == 3) {
-                                info.android_yiBiFen_loginPopulation = infoData[i].loginPopulation;
-                                totalInfo.android_yiBiFen_loginPopulation = accAdd(totalInfo.android_yiBiFen_loginPopulation, parseFloat(infoData[i].loginPopulation));
-                            }
-                            android_login = accAdd(android_login, infoData[i].loginPopulation);
-                            android_play = accAdd(android_play, infoData[i].playPopulation);
-                        }
-                        if (infoData[i].sourceType == 3) {
-                            if (infoData[i].platformId == 1) {
-                                info.ios_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
-                                totalInfo.ios_liaoMeiDeZhou_loginPopulation = accAdd(totalInfo.ios_liaoMeiDeZhou_loginPopulation, parseFloat(infoData[i].loginPopulation));
-                            }
-                            if (infoData[i].platformId == 2) {
-                                info.ios_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
-                                totalInfo.ios_leYinDianJing_loginPopulation = accAdd(totalInfo.ios_leYinDianJing_loginPopulation, parseFloat(infoData[i].loginPopulation));
-                            }
-                            if (infoData[i].platformId == 3) {
-                                info.ios_yiBiFen_loginPopulation = infoData[i].loginPopulation;
-                                totalInfo.ios_yiBiFen_loginPopulation = accAdd(totalInfo.ios_yiBiFen_loginPopulation, parseFloat(infoData[i].loginPopulation));
-                            }
-                            ios_login = accAdd(ios_login, infoData[i].loginPopulation);
-                            ios_play = accAdd(ios_play, infoData[i].playPopulation);
-                        }
-                        if (infoData[i].sourceType == 4) {
-                            if (infoData[i].platformId == 1) {
-                                info.h5_liaoMeiDeZhou_loginPopulation = infoData[i].loginPopulation;
-                                totalInfo.h5_liaoMeiDeZhou_loginPopulation = accAdd(totalInfo.h5_liaoMeiDeZhou_loginPopulation, parseFloat(infoData[i].loginPopulation));
-                            }
-                            if (infoData[i].platformId == 2) {
-                                info.h5_leYinDianJing_loginPopulation = infoData[i].loginPopulation;
-                                totalInfo.h5_leYinDianJing_loginPopulation = accAdd(totalInfo.h5_leYinDianJing_loginPopulation, parseFloat(infoData[i].loginPopulation));
-                            }
-                            if (infoData[i].platformId == 3) {
-                                info.h5_yiBiFen_loginPopulation = infoData[i].loginPopulation;
-                                totalInfo.h5_yiBiFen_loginPopulation = accAdd(totalInfo.h5_yiBiFen_loginPopulation, parseFloat(infoData[i].loginPopulation));
-                            }
-                            h5_login = accAdd(h5_login, infoData[i].loginPopulation);
-                            h5_play = accAdd(h5_play, infoData[i].playPopulation);
-                        }
-                        if ((i % 12) == 11) {
-                            info.statisticsMonth = infoData[i].statisticsMonth;
-                            info.PC_loginPopulation = pc_login;
-                            info.PC_playPopulation = pc_play;
-                            info.h5_loginPopulation = h5_login;
-                            info.h5_playPopulation = h5_play;
-                            info.ios_loginPopulation = ios_login;
-                            info.ios_playPopulation = ios_play;
-                            info.android_loginPopulation = android_login;
-                            info.android_playPopulation = android_play;
-                            totalInfo.PC_loginPopulation = accAdd(totalInfo.PC_loginPopulation, pc_login);
-                            totalInfo.PC_playPopulation = accAdd(totalInfo.PC_playPopulation, pc_play);
-                            totalInfo.h5_loginPopulation = accAdd(totalInfo.h5_loginPopulation, h5_login);
-                            totalInfo.h5_playPopulation = accAdd(totalInfo.h5_playPopulation, h5_play);
-                            totalInfo.ios_loginPopulation = accAdd(totalInfo.ios_loginPopulation, ios_login);
-                            totalInfo.ios_playPopulation = accAdd(totalInfo.ios_playPopulation, ios_play);
-                            totalInfo.android_loginPopulation = accAdd(totalInfo.android_loginPopulation, android_login);
-                            totalInfo.android_playPopulation = accAdd(totalInfo.android_playPopulation, android_play);
-                            addTbRow(info);
-                            info = {};
-                            pc_login = 0;
-                            pc_play = 0;
-                            h5_login = 0;
-                            h5_play = 0;
-                            ios_login = 0;
-                            ios_play = 0;
-                            android_login = 0;
-                            android_play = 0;
-                        }
-                    }
-                    addTbRow(totalInfo);
-                }
-            } else {
-                $("#data").append("<tr><td colspan=\"23\">没有数据</td></tr>");
-            }
+    // 添加表格列
+    var addTableTh = function (titleData) {
+        console.log(titleData);
+        $("#tbDataList>thead>tr").append('<th style="min-width:90px;">月份</th>');
+        $.each(titleData, function (i, n) {
+            $("#tbDataList>thead>tr").append('<th style="min-width:150px;">' + n + '</th>');
         });
     };
 
@@ -412,14 +179,36 @@
         });
     };
 
+    //显示统计列表
+    var showNewUserData = function () {
+        $("#data").empty();
+        $("#tbDataList>thead>tr").empty();
+        $.get("/month/login/statistics/list.do", {
+            year: $("#monthPage").val()
+        }, function (result) {
+            var data = result.data;
+            if (data !== null && data !== undefined) {
+                addTableTh(data.title);
+                if (data.list === null || data.list === undefined || data.list.length <= 0) {
+                    $("#totalCount").html(0);
+                    $("#data").append("<tr><td colspan=\"15\">没有数据</td></tr>");
+                } else {
+                    $("#totalCount").html(data.list.length);
+                    addTbRow(data.list);
+                }
+            } else {
+                $("#data").append("<tr><td colspan=\"15\">没有数据</td></tr>");
+            }
+        });
+    };
+
     //查询显示
     var search = function () {
-        showNewUserData(1, pageSize);
+        showNewUserData();
     };
 
     getLastMonthTotal();
     search();
-    setMonthConfig();
 
     $("#search").click(function () {
         search();

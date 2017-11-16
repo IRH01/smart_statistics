@@ -1,13 +1,14 @@
-package com.hhly.smartdata.service.smartdata;
+package com.hhly.smartdata.service.interval;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.hhly.smartdata.dto.current.ChartSeriesData;
 import com.hhly.smartdata.dto.current.IntervalGameLaunchTimeListReport;
+import com.hhly.smartdata.mapper.member.SystemConfigMapper;
 import com.hhly.smartdata.mapper.smartdata.IntervalGameLaunchReportMapper;
-import com.hhly.smartdata.service.source.SystemConfigServer;
 import com.hhly.smartdata.util.HourListUtil;
+import com.hhly.smartdata.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,16 @@ public class IntervalGameLaunchService{
     private IntervalGameLaunchReportMapper intervalGameLaunchReportMapper;
 
     @Autowired
-    private SystemConfigServer systemConfigServer;
+    private SystemConfigMapper systemConfigMapper;
 
     /**
      * 获取游戏启动次数
      *
+     * @param sourceType
      * @return
      * @throws Exception
      */
-    public Map<String, Object> selectIntervalGameLaunchTimeListData() throws Exception{
+    public Map<String, Object> selectIntervalGameLaunchTimeListData(String sourceType) throws Exception{
         Map<String, Object> result = Maps.newHashMap();
 
         //时刻
@@ -44,14 +46,15 @@ public class IntervalGameLaunchService{
         result.put("time", hourSet);
 
         //平台信息
-        Map<String, String> platformMap = systemConfigServer.getPlatformMap();
+        String configValue = systemConfigMapper.getConfigValueByKey("hhly:playOne:systemConfig:common:platformCode");
+        Map<String, String> platformMap = JsonUtil.jsonStr2Map(configValue);
 
         Set<Object> listSet = Sets.newHashSet();
         Map<String, Integer> dataSum = Maps.newHashMap();
 
-        for(Map.Entry<String, String> platform : platformMap.entrySet()){
+        for(String platformCode : platformMap.keySet()){
             //统计数据
-            List<IntervalGameLaunchTimeListReport> list = intervalGameLaunchReportMapper.selectIntervalGameLaunchTimeListData(platform.getKey());
+            List<IntervalGameLaunchTimeListReport> list = intervalGameLaunchReportMapper.selectIntervalGameLaunchTimeListData(platformCode, sourceType);
 
             List<IntervalGameLaunchTimeListReport> listNew = Lists.newArrayList();
 
@@ -79,7 +82,7 @@ public class IntervalGameLaunchService{
             }
 
             Map<String, Object> dataResult = Maps.newHashMap();
-            dataResult.put("name", platform.getValue());
+            dataResult.put("name", platformMap.get(platformCode));
             dataResult.put("list", listNew);
             listSet.add(dataResult);
         }
@@ -103,10 +106,11 @@ public class IntervalGameLaunchService{
     /**
      * 获取游戏启动次数图形数据
      *
+     * @param sourceType
      * @return
      * @throws Exception
      */
-    public Map<String, Object> selectIntervalGameLaunchChartTimeData() throws Exception{
+    public Map<String, Object> selectIntervalGameLaunchChartTimeData(String sourceType) throws Exception{
         Map<String, Object> result = Maps.newHashMap();
 
         //时刻
@@ -114,7 +118,10 @@ public class IntervalGameLaunchService{
         result.put("time", hourSet);
 
         //平台信息
-        Map<String, String> platformMap = systemConfigServer.getPlatformMap();
+        //平台信息
+        String configValue = systemConfigMapper.getConfigValueByKey("hhly:playOne:systemConfig:common:platformCode");
+        Map<String, String> platformMap = JsonUtil.jsonStr2Map(configValue);
+
         Set<String> platformSet = new HashSet<>();
         for(Map.Entry<String, String> platform : platformMap.entrySet()){
             platformSet.add(platform.getValue());
@@ -124,13 +131,13 @@ public class IntervalGameLaunchService{
         //统计数据
         List<ChartSeriesData> seriesData = new ArrayList<>();
 
-        for(Map.Entry<String, String> platform : platformMap.entrySet()){
+        for(String platformCode : platformMap.keySet()){
             ChartSeriesData csData = new ChartSeriesData();
-            csData.setName(platform.getValue()); //平台名称
+            csData.setName(platformMap.get(platformCode)); //平台名称
             csData.setType("line"); //线条类型
 
             //统计数据
-            List<IntervalGameLaunchTimeListReport> list = intervalGameLaunchReportMapper.selectIntervalGameLaunchTimeListData(platform.getKey());
+            List<IntervalGameLaunchTimeListReport> list = intervalGameLaunchReportMapper.selectIntervalGameLaunchTimeListData(platformCode, sourceType);
 
             int[] dataSum = new int[48];
 

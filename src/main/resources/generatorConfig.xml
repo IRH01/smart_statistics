@@ -18,7 +18,7 @@
         <javaClientGenerator targetPackage="com.hhly.generator.dao"
                              targetProject="${generator.dir}"
                              type="XMLMAPPER"/>
-        <table tableName="tbl_system_config" domainObjectName="SystemConfig"
+        <table tableName="tbl_platform_goldconsume_record" domainObjectName="PlatformGoldconsumeRecord"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

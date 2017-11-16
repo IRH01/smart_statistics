@@ -99,7 +99,6 @@ public class MonthCompositeReport{
      */
     private Date executeTime;
 
-
     public Long getId(){
         return id;
     }
@@ -169,7 +168,7 @@ public class MonthCompositeReport{
     }
 
     public void setNewUserRechargeAmount(BigDecimal newUserRechargeAmount){
-        this.newUserRechargeAmount = newUserRechargeAmount.setScale(2, BigDecimal.ROUND_HALF_UP);;
+        this.newUserRechargeAmount = newUserRechargeAmount;
     }
 
     public Integer getNewUserLoginCount(){
@@ -213,7 +212,7 @@ public class MonthCompositeReport{
     }
 
     public BigDecimal getOldUserRechargeAmount(){
-        return oldUserRechargeAmount.setScale(2, BigDecimal.ROUND_HALF_UP);
+        return oldUserRechargeAmount;
     }
 
     public void setOldUserRechargeAmount(BigDecimal oldUserRechargeAmount){
@@ -251,5 +250,4 @@ public class MonthCompositeReport{
     public void setExecuteTime(Date executeTime){
         this.executeTime = executeTime;
     }
-
 }

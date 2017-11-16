@@ -53,7 +53,7 @@
                     <ul class="breadcrumb">
                         <li>您当前的位置：</li>
                         <tags:breadcrumb/>
-                        <li>平台日报表</li>
+                        <li>留存分析</li>
                     </ul>
                 </div>
                 <!--body start-->
@@ -62,7 +62,7 @@
                         <h4 class="panel-title" id="-collapsible-group-item-#1-">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" aria-expanded="true"
-                               aria-controls="collapseOne" class="">综合数据</a>
+                               aria-controls="collapseOne" class="">留存分析</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
@@ -96,11 +96,11 @@
                                                                         <span class="span">终端：</span>
                                                                     </td>
                                                                     <td><select id="sourceType">
-                                                                        <option value="" selected>请选择</option>
+                                                                        <option value="0" selected>请选择</option>
                                                                         <option value="1">PC</option>
-                                                                        <option value="2">H5</option>
+                                                                        <option value="2">ANDROID</option>
                                                                         <option value="3">IOS</option>
-                                                                        <option value="4">ANDROID</option>
+                                                                        <option value="4">H5</option>
                                                                     </select></td>
                                                                     <td style="line-height:1;">
                                                                         <button type="button" id="search"
@@ -124,6 +124,30 @@
                                                     </div>
                                                     <div class="tablePanel">
                                                         <table class="tableList">
+                                                            <thead>
+                                                            <tr>
+                                                                <td rowspan="2" style="width:100px;">
+                                                                    日期
+                                                                </td>
+                                                                <td rowspan="2">
+                                                                    新增用户
+                                                                </td>
+                                                                <td colspan="9">
+                                                                    留存率
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1天后</td>
+                                                                <td>2天后</td>
+                                                                <td>3天后</td>
+                                                                <td>4天后</td>
+                                                                <td>5天后</td>
+                                                                <td>6天后</td>
+                                                                <td>7天后</td>
+                                                                <td>14天后</td>
+                                                                <td>30天后</td>
+                                                            </tr>
+                                                            </thead>
                                                             <tbody id="data">
                                                             </tbody>
                                                         </table>
@@ -132,11 +156,17 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="divPage"><span
-                                                                        class="spanPageSize">每页个数：</span><input
-                                                                        id="pageSize" value="10" class="inputPageSize"
-                                                                        onKeypress="return intInput(event);"
-                                                                        onKeyup="value=pageSizeLimit(value);"
-                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                                        class="spanPageSize">每页个数：</span>
+                                                                    <select id="pageSize" class="inputPageSize"
+                                                                            title="页记录数">
+                                                                        <option value="10" aria-checked="true">10
+                                                                        </option>
+                                                                        <option value="20">20</option>
+                                                                        <option value="30">30</option>
+                                                                        <option value="40">40</option>
+                                                                        <option value="50">50</option>
+                                                                    </select>
+                                                                </div>
                                                             </td>
                                                             <td><span class="spanPageSize">总记录数：</span><span
                                                                     id="totalCount" class="spanPageSize"></span></td>
@@ -154,7 +184,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!--body end-->
                 </div>
@@ -164,6 +193,7 @@
 </body>
 </html>
 <script type="text/javascript">
+    var pageSize = 10;
     var date = new Date();
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
@@ -179,21 +209,35 @@
         $(".resize").resizable({minHeight: 200, minWidth: 300});
     });
 
-    var pageSize = 30;
+    var pageSizeNotEmpty = function (value) {
+        if ("" == value) {
+            layer.alert("每页个数不能为空", {
+                icon: 5
+            });
+            value = 10;
+        }
+        if (value >= 30) {
+            value = 30
+        }
+        showNewUserData(1,value);
+        return value;
+    };
+
 
     setDateRangeConfig("dateStart", "dateEnd", null, true);
 
     var showTbCl = function () {
-        $("#data").append("<tr><td rowspan=\"2\">日期</td><td rowspan=\"2\">终端</td><td rowspan=\"2\">新增用户</td>\n" +
-            "<td colspan=\"9\">留存率</td></tr><tr><td>1天后</td><td>2天后</td><td>3天后</td><td>4天后</td>" +
-            "<td>5天后</td><td>6天后</td><td>7天后</td><td>14天后</td><td>30天后</td></tr>");
+        //<td rowspan="2">终端</td>
+//        $("#data").append("<tr><td rowspan=\"2\">日期</td><td rowspan=\"2\">新增用户</td>\n" +
+//            "<td colspan=\"9\">留存率</td></tr><tr><td>1天后</td><td>2天后</td><td>3天后</td><td>4天后</td>" +
+//            "<td>5天后</td><td>6天后</td><td>7天后</td><td>14天后</td><td>30天后</td></tr>");
     };
 
     var addTbRow = function (data) {
         if (null != data && undefined != data && "" != data) {
-            var ele = "<tr><td class=\"date\">statisticsDay</td><td>sourceType</td><td>registerCount</td><td>oneRemain</td><td>twoRemain</td>" +
+            var ele = "<tr><td class=\"date\">statisticsDay</td><td>registerCount</td><td>oneRemain</td><td>twoRemain</td>" +
                 "<td>threeRemain</td><td>fourRemain</td><td>fiveRemain</td><td>sixRemain</td><td>sevenRemain</td><td>fourteenRemain</td><td>thirtyRemain</td></tr>";
-            ele = ele.replace("statisticsDay", data.statisticsDay).replace("sourceType", data.sourceType).replace("registerCount", data.registerCount)
+            ele = ele.replace("statisticsDay", data.statisticsDay).replace("registerCount", data.registerCount)
                 .replace("oneRemain", data.oneRemain).replace("twoRemain", data.twoRemain).replace("threeRemain", data.threeRemain)
                 .replace("fourRemain", data.fourRemain).replace("fiveRemain", data.fiveRemain).replace("sixRemain", data.sixRemain)
                 .replace("sevenRemain", data.sevenRemain).replace("fourteenRemain", data.fourteenRemain).replace("thirtyRemain", data.thirtyRemain);
@@ -244,48 +288,68 @@
                     var sevenNum = 0;
                     var fourteenNum = 0;
                     var thirtyNum = 0;
+
+                    var oneNumRate = 0;
+                    var twoNumRate = 0;
+                    var threeNumRate = 0;
+                    var fourNumRate = 0;
+                    var fiveNumRate = 0;
+                    var sixNumRate = 0;
+                    var sevenNumRate = 0;
+                    var fourteenNumRate = 0;
+                    var thirtyNumRate = 0;
+
                     var count = infoData.length;
                     for (var i = 0; i < infoData.length; i++) {
-                        registerCountNum = accAdd(registerCountNum, infoData[i].registerCount);
-                        oneNum = accDiv(accAdd(oneNum, infoData[i].onePercent), count);
-                        twoNum = accDiv(accAdd(twoNum, infoData[i].twoPercent), count);
-                        threeNum = accDiv(accAdd(threeNum, infoData[i].threePercent), count);
-                        fourNum = accDiv(accAdd(fourNum, infoData[i].fourPercent), count);
-                        fiveNum = accDiv(accAdd(fiveNum, infoData[i].fivePercent), count);
-                        sixNum = accDiv(accAdd(sixNum, infoData[i].sixPercent), count);
-                        sevenNum = accDiv(accAdd(sevenNum, infoData[i].sevenPercent), count);
-                        fourteenNum = accDiv(accAdd(fourteenNum, infoData[i].fourteenPercent), count);
-                        thirtyNum = accDiv(accAdd(thirtyNum, infoData[i].thirtyPercent), count);
+//                        registerCountNum = accAdd(registerCountNum, infoData[i].registerCount);
+//                        oneNumRate = accAdd(oneNumRate, infoData[i].onePercent);
+//                        twoNumRate = accAdd(twoNumRate, infoData[i].twoPercent);
+//                        threeNumRate =accAdd(threeNumRate, infoData[i].threePercent);
+//                        fourNumRate = accAdd(fourNumRate, infoData[i].fourPercent);
+//                        fiveNumRate = accAdd(fiveNumRate, infoData[i].fivePercent);
+//                        sixNumRate = accAdd(sixNumRate, infoData[i].sixPercent);
+//                        sevenNumRate = accAdd(sevenNumRate, infoData[i].sevenPercent);
+//                        fourteenNumRate = accAdd(fourteenNumRate, infoData[i].fourteenPercent);
+//                        thirtyNumRate = accAdd(thirtyNumRate, infoData[i].thirtyPercent);
+//
+//                        oneNum = accDiv(oneNum, infoData[i].oneRemain);
+//                        twoNum = accDiv(oneNum, infoData[i].oneRemain);
+//                        threeNum = accDiv(oneNum, infoData[i].oneRemain);
+//                        fourNum = accDiv(oneNum, infoData[i].oneRemain);
+//                        fiveNum = accDiv(oneNum, infoData[i].oneRemain);
+//                        sixNum = accDiv(oneNum, infoData[i].oneRemain);
+//                        sevenNum = accDiv(oneNum, infoData[i].oneRemain);
+//                        fourteenNum = accDiv(oneNum, infoData[i].oneRemain);
+//                        thirtyNum = accDiv(oneNum, infoData[i].oneRemain);
+
                         var ele = {
                             statisticsDay: infoData[i].statisticsDay,
-                            sourceType:infoData[i].sourceType,
                             registerCount: infoData[i].registerCount,
-                            oneRemain: infoData[i].oneRemain + "(" + convertToPercentFormat(infoData[i].onePercent) + ")",
-                            twoRemain: infoData[i].twoRemain + "(" + convertToPercentFormat(infoData[i].twoPercent) + ")",
-                            threeRemain: infoData[i].threeRemain + "(" + convertToPercentFormat(infoData[i].threePercent) + ")",
-                            fourRemain: infoData[i].fourRemain + "(" + convertToPercentFormat(infoData[i].fourPercent) + ")",
-                            fiveRemain: infoData[i].fiveRemain + "(" + convertToPercentFormat(infoData[i].fivePercent) + ")",
-                            sixRemain: infoData[i].sixRemain + "(" + convertToPercentFormat(infoData[i].sixPercent) + ")",
-                            sevenRemain: infoData[i].sevenRemain + "(" + convertToPercentFormat(infoData[i].sevenPercent) + ")",
-                            fourteenRemain: infoData[i].sevenRemain + "(" + convertToPercentFormat(infoData[i].fourteenPercent) + ")",
-                            thirtyRemain: infoData[i].thirtyRemain + "(" + convertToPercentFormat(infoData[i].thirtyPercent) + ")"
+                            oneRemain: infoData[i].oneRemain == -1?"--":infoData[i].oneRemain+ "(" + convertToPercentFormat(infoData[i].onePercent) + ")",
+                            twoRemain: infoData[i].twoRemain == -1?"--":infoData[i].twoRemain + "(" + convertToPercentFormat(infoData[i].twoPercent) + ")",
+                            threeRemain: infoData[i].threeRemain == -1?"--":infoData[i].threeRemain + "(" + convertToPercentFormat(infoData[i].threePercent) + ")",
+                            fourRemain: infoData[i].fourRemain == -1?"--":infoData[i].fourRemain + "(" + convertToPercentFormat(infoData[i].fourPercent) + ")",
+                            fiveRemain: infoData[i].fiveRemain == -1?"--":infoData[i].fiveRemain + "(" + convertToPercentFormat(infoData[i].fivePercent) + ")",
+                            sixRemain: infoData[i].sixRemain == -1?"--":infoData[i].sixRemain + "(" + convertToPercentFormat(infoData[i].sixPercent) + ")",
+                            sevenRemain: infoData[i].sevenRemain == -1?"--":infoData[i].sevenRemain + "(" + convertToPercentFormat(infoData[i].sevenPercent) + ")",
+                            fourteenRemain: infoData[i].fourteenRemain == -1?"--":infoData[i].fourteenRemain + "(" + convertToPercentFormat(infoData[i].fourteenPercent) + ")",
+                            thirtyRemain: infoData[i].thirtyRemain == -1?"--":infoData[i].thirtyRemain + "(" + convertToPercentFormat(infoData[i].thirtyPercent) + ")"
                         };
                         addTbRow(ele);
                     }
 
                     var ele1 = {
-                        statisticsDay:"",
-                        sourceType: "总计",
+                        statisticsDay:"总计",
                         registerCount: registerCountNum,
-                        oneRemain: oneNum,
-                        twoRemain: twoNum,
-                        threeRemain: threeNum,
-                        fourRemain: fourNum,
-                        fiveRemain: fiveNum,
-                        sixRemain: sixNum,
-                        sevenRemain: sevenNum,
-                        fourteenRemain: sevenNum,
-                        thirtyRemain: thirtyNum
+                        oneRemain: oneNum(accDiv(oneNumRate,count)),
+                        twoRemain: twoNum(accDiv(twoNumRate,count)),
+                        threeRemain: threeNum(accDiv(threeNumRate,count)),
+                        fourRemain: fourNum(accDiv(fourNumRate,count)),
+                        fiveRemain: fiveNum(accDiv(fiveNumRate,count)),
+                        sixRemain: sixNum(accDiv(sixNumRate,count)),
+                        sevenRemain: sevenNum(accDiv(sevenNumRate,count)),
+                        fourteenRemain: sevenNum(accDiv(sevenNumRate,count)),
+                        thirtyRemain: thirtyNum(accDiv(thirtyNumRate,count))
 
                     };
                     addTbRow(ele1);
@@ -307,6 +371,7 @@
     var reset = function () {
         $("#dateStart").val("");
         $("#dateEnd").val("");
+        $("#sourceType").val(0);
     };
 
 

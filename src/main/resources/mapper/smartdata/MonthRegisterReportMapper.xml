@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.hhly.smartdata.model.smartdata.MonthRegisterReport">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="statistics_month" property="statisticsMonth" jdbcType="VARCHAR"/>
+        <result column="pc_population" property="pcPopulation" jdbcType="INTEGER"/>
         <result column="pc_page_view" property="pcPageView" jdbcType="BIGINT"/>
         <result column="pc_user_view" property="pcUserView" jdbcType="INTEGER"/>
         <result column="h5_population" property="h5Population" jdbcType="INTEGER"/>
@@ -17,7 +18,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, statistics_month, pc_page_view, pc_user_view, h5_population, h5_page_view, h5_user_view,
+        id, statistics_month, pc_population, pc_page_view, pc_user_view, h5_population, h5_page_view, h5_user_view,
         ios_population, ios_install_count, android_population, android_install_count, execute_time
     </sql>
 
@@ -73,12 +74,12 @@
     </select>
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.MonthRegisterReport">
-        insert into month_register_report (id, statistics_month, pc_page_view,
+        insert into month_register_report (id, statistics_month,pc_population, pc_page_view,
         pc_user_view, h5_population, h5_page_view,
         h5_user_view, ios_population, ios_install_count,
         android_population, android_install_count,
         execute_time)
-        values (#{id,jdbcType=BIGINT}, #{statisticsMonth,jdbcType=VARCHAR}, #{pcPageView,jdbcType=BIGINT},
+        values (#{id,jdbcType=BIGINT}, #{statisticsMonth,jdbcType=VARCHAR},#{pcPopulation,jdbcType=INTEGER}, #{pcPageView,jdbcType=BIGINT},
         #{pcUserView,jdbcType=INTEGER}, #{h5Population,jdbcType=INTEGER}, #{h5PageView,jdbcType=BIGINT},
         #{h5UserView,jdbcType=INTEGER}, #{iosPopulation,jdbcType=INTEGER}, #{iosInstallCount,jdbcType=INTEGER},
         #{androidPopulation,jdbcType=INTEGER}, #{androidInstallCount,jdbcType=INTEGER},
@@ -93,6 +94,9 @@
             </if>
             <if test="statisticsMonth != null">
                 statistics_month,
+            </if>
+            <if test="pcPopulation != null">
+                pc_population,
             </if>
             <if test="pcPageView != null">
                 pc_page_view,
@@ -131,6 +135,9 @@
             </if>
             <if test="statisticsMonth != null">
                 #{statisticsMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="pcPopulation != null">
+                #{pcPopulation,jdbcType=INTEGER},
             </if>
             <if test="pcPageView != null">
                 #{pcPageView,jdbcType=BIGINT},
@@ -171,6 +178,9 @@
             <if test="statisticsMonth != null">
                 statistics_month = #{statisticsMonth,jdbcType=VARCHAR},
             </if>
+            <if test="pcPopulation != null">
+                pc_population = #{pcPopulation,jdbcType=INTEGER},
+            </if>
             <if test="pcPageView != null">
                 pc_page_view = #{pcPageView,jdbcType=BIGINT},
             </if>
@@ -208,6 +218,7 @@
     <update id="updateByPrimaryKey" parameterType="com.hhly.smartdata.model.smartdata.MonthRegisterReport">
         update month_register_report
         set statistics_month = #{statisticsMonth,jdbcType=VARCHAR},
+        pc_population = #{pcPopulation,jdbcType=INTEGER},
         pc_page_view = #{pcPageView,jdbcType=BIGINT},
         pc_user_view = #{pcUserView,jdbcType=INTEGER},
         h5_population = #{h5Population,jdbcType=INTEGER},

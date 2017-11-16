@@ -129,6 +129,37 @@
                                     <div class="whiteDiv tab-content">
                                         <ul id="sortable" class="ui-widget-content sortable">
                                             <li class="ui-state-default">
+                                                <div class="ui-widget-content resize" style="height:300px;">
+                                                    <div class="sortHandle">分时段曲线图</div>
+                                                    <div style="width:100%;height:95%;">
+                                                        <div style="margin-left: -10px;">
+                                                            <span>客户端类型：</span>
+                                                            <input type="radio" name="sourceType" value="0"
+                                                                   class="sourceType"
+                                                                   onchange="deviceTypeChange();" checked title=""/>
+                                                            全部
+                                                            <input type="radio" name="sourceType" value="1"
+                                                                   class="sourceType"
+                                                                   onchange="deviceTypeChange();" title=""/>
+                                                            PC
+                                                            <input type="radio" name="sourceType" value="2"
+                                                                   class="sourceType"
+                                                                   onchange="deviceTypeChange();" title=""/>
+                                                            Android
+                                                            <input type="radio" name="sourceType" value="3"
+                                                                   class="sourceType"
+                                                                   onchange="deviceTypeChange();" title=""/>
+                                                            IOS
+                                                            <input type="radio" name="sourceType" value="4"
+                                                                   class="sourceType"
+                                                                   onchange="deviceTypeChange();" title=""/>
+                                                            H5
+                                                        </div>
+                                                        <div id="trendline" class="trendline"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="ui-state-default">
                                                 <div style="padding-bottom:60px;"
                                                      class="ui-widget-content resize resizePanel">
                                                     <div class="sortHandle">分时段列表</div>
@@ -139,9 +170,9 @@
                                                          <select id="sourceType">
                                                                     <option value="" selected>请选择</option>
                                                                     <option value="1">PC</option>
-                                                                    <option value="2">H5</option>
+                                                                    <option value="2">ANDROID</option>
                                                                     <option value="3">IOS</option>
-                                                                    <option value="4">ANDROID</option>
+                                                                    <option value="4">H5</option>
                                                                 </select>
                                                     </span>
                                                             </div>
@@ -159,7 +190,7 @@
                                                             <tr>
                                                                 <th>时间段尾</th>
                                                                 <th>注册人数</th>
-                                                                <th>登陆人数</th>
+                                                                <th>登录人数</th>
                                                                 <th>充值人数</th>
                                                                 <th>充值次数</th>
                                                                 <th>充值金额</th>
@@ -174,11 +205,15 @@
                                                             <td>
                                                                 <div class="divPage">
                                                                     <span class="spanPageSize">每页个数：</span>
-                                                                    <input id="pageSize" value="10"
-                                                                           class="inputPageSize"
-                                                                           onKeypress="return intInput(event);"
-                                                                           onKeyup="value=pageSizeLimit(value);"
-                                                                           onblur="value=pageSizeNotEmpty(value);"/>
+                                                                    <select id="pageSize" class="inputPageSize"
+                                                                            title="页记录数">
+                                                                        <option value="10" aria-checked="true">10
+                                                                        </option>
+                                                                        <option value="20">20</option>
+                                                                        <option value="30">30</option>
+                                                                        <option value="40">40</option>
+                                                                        <option value="50">50</option>
+                                                                    </select>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -194,32 +229,6 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                </div>
-                                            </li>
-                                            <li class="ui-state-default">
-                                                <div class="ui-widget-content resize" style="height:300px;">
-                                                    <div class="sortHandle">分时段曲线图</div>
-                                                    <div style="width:100%;height:95%;">
-                                                        <div style="margin-left: -10px;">
-                                                            <span>客户端类型：</span>
-                                                            <input type="checkbox" id="cltTypeAll"
-                                                                   onchange="deviceTypeChange(this);" checked/>
-                                                            全部
-                                                            <input type="checkbox" value="1" class="deviceType"
-                                                                   onchange="deviceTypeChange(this);" checked title=""/>
-                                                            PC
-                                                            <input type="checkbox" value="2" class="deviceType"
-                                                                   onchange="deviceTypeChange(this);" checked title=""/>
-                                                            Android
-                                                            <input type="checkbox" value="3" class="deviceType"
-                                                                   onchange="deviceTypeChange(this);" checked title=""/>
-                                                            IOS
-                                                            <input type="checkbox" value="4" class="deviceType"
-                                                                   onchange="deviceTypeChange(this);" checked title=""/>
-                                                            H5
-                                                        </div>
-                                                        <div id="trendline" class="trendline"></div>
-                                                    </div>
                                                 </div>
                                             </li>
                                         </ul>
@@ -271,6 +280,21 @@
         );
     });
 
+    var pageSizeNotEmpty = function (value) {
+        if ("" == value) {
+            layer.alert("每页个数不能为空", {
+                icon: 5
+            });
+            value = 10;
+        }
+        if (value >= 30) {
+            value = 30
+        }
+        showNewUserData(1,value);
+        return value;
+    };
+
+
     var reset = function () {
         $("#dateStarts").val("-999");
         $("#dateEnds").val("-999");
@@ -278,29 +302,8 @@
 
     var pageSize = 10;
     var pageSizes = 10;
-    var deviceTypeChange = function (ele) {
-        if (ele.id == "cltTypeAll") {
-            $(".deviceType").prop("checked", ele.checked);
-        } else {
-            if (!ele.checked) {
-                $("#cltTypeAll").prop("checked", false);
-            }
-        }
+    var deviceTypeChange = function () {
         loadNewUserDataTrendLine(echartsCopy);
-    };
-
-    var getDeviceType = function () {
-        var devices = $(".deviceType");
-        var deviceTypes = "";
-        for (i = 0; i < devices.length; i++) {
-            if (devices[i].checked) {
-                if (deviceTypes != "") {
-                    deviceTypes += ",";
-                }
-                deviceTypes += devices.eq(i).val();
-            }
-        }
-        return deviceTypes;
     };
 
     // 各端实时数据列表展示
@@ -326,19 +329,12 @@
                     $("#totalPages").html(0);
                     $("#terminalsIntervalData").append("<tr><td colspan=\"10\">没有数据</td></tr>");
                 } else {
-                    var sumRechargeAmount = 0;
-                    var sumRegisterPopulation = 0;
-                    var sumLoginPopulation = 0;
-                    var sumRechargePopulation = 0;
-                    var sumRechargeCount = 0;
-                    var terminalsName = "";
+                    var registerPopulationNum = 0;
+                    var loginPopulationNum = 0;
+                    var rechargePopulationNum = 0;
+                    var rechargeCountNum = 0.00;
+                    var rechargeAmountNum = 0;
                     for (var i = 0; i < json.length; i++) {
-                        sumRegisterPopulation = accAdd(sumRegisterPopulation, json[i].registerPopulation);
-                        sumLoginPopulation = accAdd(sumLoginPopulation, json[i].loginPopulation);
-                        sumRechargePopulation = accAdd(sumRechargePopulation, json[i].rechargePopulation);
-                        sumRechargeCount = accAdd(sumRechargeCount, json[i].rechargeCount);
-                        sumRechargeAmount = accAdd(sumRechargeAmount, json[i].rechargeAmount);
-
                         switch (json[i].sourceType) {
                             case 1:
                                 terminalsName = "pc";
@@ -353,25 +349,30 @@
                                 terminalsName = "h5";
                                 break;
                         }
-
-                        var ele = {
-                            sourceType: terminalsName,
-                            registerPopulation: json[i].registerPopulation,
-                            loginPopulation: json[i].loginPopulation,
-                            rechargePopulation: json[i].rechargePopulation,
-                            rechargeCount: json[i].rechargeCount,
-                            rechargeAmount: json[i].rechargeAmount.toFixed(2)
-                        };
-                        addTbRow1(ele);
+                        if (json[i].sourceType != 0) {
+                        registerPopulationNum = accAdd(registerPopulationNum, json[i].registerPopulation);
+                        loginPopulationNum = accAdd(loginPopulationNum, json[i].loginPopulation);
+                        rechargePopulationNum = accAdd(rechargePopulationNum, json[i].rechargePopulation);
+                        rechargeCountNum = accAdd(rechargeCountNum, json[i].rechargeCount);
+                        rechargeAmountNum = accAdd(rechargeAmountNum, json[i].rechargeAmount.toFixed(2));
+                            var ele = {
+                                sourceType: terminalsName,
+                                registerPopulation: json[i].registerPopulation,
+                                loginPopulation: json[i].loginPopulation,
+                                rechargePopulation: json[i].rechargePopulation,
+                                rechargeCount: json[i].rechargeCount,
+                                rechargeAmount: json[i].rechargeAmount.toFixed(2)
+                            };
+                            addTbRow1(ele);
+                        }
                     }
-
                     var ele1 = {
                         sourceType: "总计",
-                        registerPopulation: sumRegisterPopulation,
-                        loginPopulation: sumLoginPopulation,
-                        rechargePopulation: sumRechargePopulation,
-                        rechargeCount: sumRechargeCount,
-                        rechargeAmount: sumRechargeAmount.toFixed(2)
+                        registerPopulation: registerPopulationNum,
+                        loginPopulation: loginPopulationNum,
+                        rechargePopulation: rechargePopulationNum,
+                        rechargeCount: rechargeCountNum,
+                        rechargeAmount: rechargeAmountNum
                     };
                     addTbRow1(ele1);
                 }
@@ -391,6 +392,11 @@
         }
     };
 
+    $("#sourceType").change(function () {
+        search();
+        loadNewUserDataTrendLine(echartsCopy);
+    });
+
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
         $("#newUserData").empty();
@@ -400,7 +406,7 @@
             deviceType: $('#searchSourceType').val(),
             pageNumber: pageNumber,
             pageSize: pageSize,
-            deviceType: $("#sourceType").val()
+            sourceType: $("#sourceType").val()
         }, function (result) {
             var json = result.data;
             if (null != json && undefined != json) {
@@ -434,7 +440,7 @@
                         sumRechargeCount = accAdd(sumRechargeCount, infoData[i].rechargeCount);
                         sumRechargeAmount = accAdd(sumRechargeAmount, infoData[i].rechargeAmount);
                         var ele = {
-                            statisticsTime: infoData[i].statisticsTime,
+                            statisticsTime: infoData[i].statisticsTime.slice(10, 16),
                             registerPopulation: infoData[i].registerPopulation,
                             loginPopulation: infoData[i].loginPopulation,
                             rechargePopulation: infoData[i].rechargePopulation,
@@ -480,7 +486,7 @@
             data: {
                 startDate: startDate,
                 endDate: endDate,
-                deviceTypes: getDeviceType()
+                sourceType: $('.sourceType:radio:checked').val()
             },
             success: function (result) {
                 var json = result.data;

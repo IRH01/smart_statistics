@@ -1,5 +1,6 @@
 package com.hhly.smartdata.controller.remitreport.view;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -7,11 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by Iritchie.ren on 2017/10/23.
  */
 @Controller
+@Scope(value = "prototype")
 @RequestMapping("/remit/report/user/manager")
-public class UserManagerController {
+public class UserManagerController{
 
     @RequestMapping(value = "/show")
-    public String show() {
+    public String show(){
         return "remit_report/user_manager";
     }
 

@@ -138,9 +138,9 @@
 
     <select id="findDataInterfaceInvokeList" resultType="java.util.Map">
    select interface_type as interfaceType, count(user_id) as invokeCount from data_interface_invoke
-   where country = 0
+   where
     <![CDATA[
-             and create_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
+             create_time>= date_sub(DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S'), interval #{intervalTime} minute)
   	    ]]>
    <![CDATA[
              and create_time<DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%S')

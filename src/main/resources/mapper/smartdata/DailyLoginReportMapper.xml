@@ -30,58 +30,30 @@
         where id = #{id}
     </select>
 
-    <select id="selectLastMonthLogin" resultType="java.util.Map">
-        SELECT
-        platform_code AS platform_code,
-        source_type AS source_type,
-        platform_name AS platform_name,
-        SUM(login_population) AS login_population_sum,
-        SUM(play_population) AS play_population_sum
-        FROM
-        daily_login_report
-        WHERE statistics_day &gt;= #{lastMonthFirstDayStr}
-        AND statistics_day &lt;= #{lastMonthEndDayStr}
-        GROUP BY platform_code, source_type
-    </select>
-
     <select id="searchByTime" resultType="com.hhly.smartdata.model.smartdata.DailyLoginReport">
         SELECT
         <include refid="Base_Column_List"/>
         FROM daily_login_report
         <where>
-            <if test="timeStart != null and timeStart != ''">
-                statistics_day &gt;= #{timeStart}
+            <if test="startTime != null and startTime != ''">
+                statistics_day &gt;= #{startTime}
             </if>
-            <if test="timeEnd != null and timeEnd != ''">
-                AND statistics_day &lt;= #{timeEnd}
+            <if test="endTime != null and endTime != ''">
+                AND statistics_day &lt;= #{endTime}
             </if>
         </where>
         ORDER BY statistics_day DESC, source_type ASC
-        <if test="pageNo != null">
-            <bind name="offset" value="(pageNo-1) * pageSize * 12"/>
-            <bind name="pageSize12" value="pageSize * 12"/>
-            LIMIT #{offset}, #{pageSize12}
-        </if>
     </select>
-    <select id="searchByTimeCount" resultType="java.lang.Long">
+
+    <select id="selectByDaily" resultType="java.util.Map">
         SELECT
-        COUNT(id)
-        FROM daily_login_report
-        <where>
-            <if test="timeStart != null and timeStart != ''">
-                statistics_day &gt;= #{timeStart}
-            </if>
-            <if test="timeEnd != null and timeEnd != ''">
-                AND statistics_day &lt;= #{timeEnd}
-            </if>
-        </where>
-    </select>
-    <select id="selectByMonth" resultType="java.util.Map">
-        SELECT
-        SUM(login_population) AS loginPopulationSum,
-        SUM(play_population) AS playPopulationSum
-        FROM daily_login_report
-        WHERE statistics_day = #{daily}
+        login_population AS loginPopulationSum,
+        play_population AS playPopulationSum
+        FROM
+        daily_login_report
+        WHERE
+        platform_code = 'all'
+        AND statistics_day = #{daily}
     </select>
 
     <insert id="insert" parameterType="com.hhly.smartdata.model.smartdata.DailyLoginReport">

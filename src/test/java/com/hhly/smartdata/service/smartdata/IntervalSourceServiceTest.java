@@ -1,11 +1,15 @@
 package com.hhly.smartdata.service.smartdata;
 
 import com.hhly.smartdata.common.BaseTest;
+import com.hhly.smartdata.service.interval.IntervalSourceService;
+import com.hhly.smartdata.util.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Date;
 
 /**
  * IntervalSourceService Tester.
@@ -25,7 +29,10 @@ public class IntervalSourceServiceTest extends BaseTest{
      */
     @Test
     public void testSelectTotalDaySourceListData() throws Exception{
-        this.intervalSourceService.selectTotalDaySourceListData();
+        Date now = new Date();
+        String startTime = DateUtil.date2String(DateUtil.getNowZeroTime(now));
+        String endTime = DateUtil.date2String(DateUtil.getNowLongestTime(now));
+        this.intervalSourceService.selectTotalDaySourceListData(startTime, endTime);
     }
 
     /**

@@ -53,7 +53,7 @@
                     <ul class="breadcrumb">
                         <li>您当前的位置：</li>
                         <tags:breadcrumb/>
-                        <li>平台日报表</li>
+                        <li>平台日报表-综合数据</li>
                     </ul>
                 </div>
                 <!--body start-->
@@ -74,7 +74,6 @@
                                             <li class="ui-state-default">
                                                 <div style="padding-bottom:60px;"
                                                      class="ui-widget-content resize resizePanel">
-
                                                     <div class="titleDiv" style="height:65px;">
                                                         <div style="display: inline;width:500px;text-align: center;"></div>
                                                         <div class="select-fr" style="padding-right: 30px;float:left;">
@@ -112,21 +111,90 @@
                                                             </table>
                                                         </div>
                                                     </div>
-                                                    <div class="tablePanel">
-                                                        <table class="tableList">
-                                                            <tbody id="data">
-                                                            </tbody>
-                                                        </table>
+                                                    <div class="whiteDiv">
+                                                        <ul class="ui-widget-content sortable">
+                                                            <li class="ui-state-default">
+                                                                <div style="padding-bottom:35px;"
+                                                                     class="ui-widget-content">
+                                                                    <div class="tablePanel resize">
+                                                                        <table class="tableList">
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <td rowspan="2" style="width:100px;">
+                                                                                    日期
+                                                                                </td>
+                                                                                <td rowspan="2">
+                                                                                    注册人数
+                                                                                </td>
+                                                                                <td rowspan="2">
+                                                                                    注册体验量
+                                                                                </td>
+                                                                                <td rowspan="2">
+                                                                                    注册体验率(%)
+                                                                                </td>
+                                                                                <td rowspan="2">
+                                                                                    真体验
+                                                                                </td>
+                                                                                <td rowspan="2">
+                                                                                    假体验
+                                                                                </td>
+                                                                                <td colspan="9">
+                                                                                    新用户
+                                                                                </td>
+                                                                                <td colspan="9">
+                                                                                    老用户
+                                                                                </td>
+                                                                                <td rowspan="2" style="width:70px;">
+                                                                                    次日留存
+                                                                                </td>
+                                                                                <td rowspan="2" style="width:70px;">
+                                                                                    次日留存率(%)
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>充值人数</td>
+                                                                                <td>充值次数</td>
+                                                                                <td>充值金额</td>
+                                                                                <td>用户充值转化率(%)</td>
+                                                                                <td>ARPU</td>
+                                                                                <td>ARPPU</td>
+                                                                                <td>登录人数</td>
+                                                                                <td>玩游戏人数</td>
+                                                                                <td>用户登录转化率(%)</td>
+                                                                                <td>充值人数</td>
+                                                                                <td>充值次数</td>
+                                                                                <td>充值金额</td>
+                                                                                <td>用户充值转化率(%)</td>
+                                                                                <td>ARPU</td>
+                                                                                <td>ARPPU</td>
+                                                                                <td>登录人数</td>
+                                                                                <td>玩游戏人数</td>
+                                                                                <td>用户登录转化率(%)</td>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody id="data">
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                     <table class="tablePage">
                                                         <tr>
                                                             <td>
                                                                 <div class="divPage"><span
-                                                                        class="spanPageSize">每页个数：</span><input
-                                                                        id="pageSize" value="10" class="inputPageSize"
-                                                                        onKeypress="return intInput(event);"
-                                                                        onKeyup="value=pageSizeLimit(value);"
-                                                                        onblur="value=pageSizeNotEmpty(value);"/></div>
+                                                                        class="spanPageSize">每页个数：</span>
+                                                                    <select id="pageSize" class="inputPageSize"
+                                                                            title="页记录数">
+                                                                        <option value="10" aria-checked="true">10
+                                                                        </option>
+                                                                        <option value="20">20</option>
+                                                                        <option value="30">30</option>
+                                                                        <option value="40">40</option>
+                                                                        <option value="50">50</option>
+                                                                    </select>
+                                                                </div>
                                                             </td>
                                                             <td><span class="spanPageSize">总记录数：</span><span
                                                                     id="totalCount" class="spanPageSize"></span></td>
@@ -154,23 +222,33 @@
 </html>
 <script type="text/javascript">
 
+    var pageSize = 10;
+
     $(function () {
-        $("#sortable").sortable({cursor: "move", handle: ".sortHandle"});
         $(".resize").resizable({minHeight: 200, minWidth: 300});
     });
 
-    var pageSize = 30;
+
+    var pageSizeNotEmpty = function (value) {
+        if ("" == value) {
+            layer.alert("每页个数不能为空", {
+                icon: 5
+            });
+            value = 10;
+        }
+        if (value >= 30) {
+            value = 30
+        }
+        showNewUserData(1,value);
+        return value;
+    };
+
 
     setDateRangeConfig("dateStart", "dateEnd", null, true);
 
-    var showTbCl = function () {
-        $("#data").append("<tr><td rowspan=\"2\" >日期</td><td rowspan=\"2\">注册人数</td>\n" +
-            "<td rowspan=\"2\">注册体验量</td><td rowspan=\"2\">注册体验率(%)</td><td rowspan=\"2\">真体验</td><td rowspan=\"2\">假体验</td><td colspan=\"9\">新用户</td><td colspan=\"9\">老用户</td><td rowspan=\"2\">次日留存</td><td rowspan=\"2\">次日留存率(%)</td></tr><tr><td>充值人数</td><td>充值次数</td><td>充值金额</td><td>充值转化率(%)</td><td>ARPU</td><td>ARPPU</td><td>登录人数</td><td>玩游戏人数</td><td>登录转化率(%)</td><td>充值人数</td><td>充值次数</td><td>充值金额</td><td>充值转化率(%)</td><td>ARPU</td><td>ARPPU</td><td>登录人数</td><td>玩游戏人数</td><td>登录转化率(%)</td></tr>");
-    };
-
     var addTbRow = function (data) {
         if (null != data && undefined != data && "" != data) {
-            var ele = "<tr><td class=\"date\" style=\"width:100px;\">statisticsDay</td><td>registerPopulation</td><td>registerExpCount</td><td>registerExpCountRate</td><td>realExpCount</td><td>virtualExpCount</td><td>newUserRechargePopulation</td><td>newUserRechargeCount</td><td>newUserRechargeAmount</td><td>newUserRechargeRate</td><td>newUserARPU</td>" +
+            var ele = "<tr><td class=\"date\">statisticsDay</td><td>registerPopulation</td><td>registerExpCount</td><td>registerExpCountRate</td><td>realExpCount</td><td>virtualExpCount</td><td>newUserRechargePopulation</td><td>newUserRechargeCount</td><td>newUserRechargeAmount</td><td>newUserRechargeRate</td><td>newUserARPU</td>" +
                 "<td>newUserARPPU</td><td>newUserLoginCount</td><td>newUserPlayCount</td><td>newUserLoginTransformRate</td><td>oldUserRechargePopulation</td><td>oldUserRechargeCount</td><td>oldUserRechargeAmount</td><td>oldUserRechargeRate</td><td>oldUserARPU</td><td>oldUserARPPU</td><td>oldUserLoginCount</td><td>oldUserPlayCount</td><td>oldUserLoginTransformRate</td>" +
                 "<td>nextDayStayCount</td><td>nextDayStayRate</td></tr>";
             ele = ele.replace("statisticsDay", data.statisticsDay).replace("registerPopulation", data.registerPopulation).replace("registerExpCount", data.registerExpCount).replace("registerExpCountRate", data.registerExpCountRate).replace("realExpCount", data.realExpCount).replace("virtualExpCount", data.virtualExpCount).replace("newUserRechargePopulation", data.newUserRechargePopulation).replace("newUserRechargeCount", data.newUserRechargeCount)
@@ -185,7 +263,6 @@
     //显示统计列表
     var showNewUserData = function (pageNumber, pageSize) {
         $("#data").empty();
-        showTbCl();
         $.post("/daily/composite/list.do", {
             startDate: $('#dateStart').val(),
             endDate: $('#dateEnd').val(),
@@ -240,7 +317,7 @@
                     var count = infoData.length;
                     for (var i = 0; i < infoData.length; i++) {
                         registerPopulationNum = accAdd(registerPopulationNum, infoData[i].registerPopulation);
-                        registerExpCountNum = accAdd(registerExpCountNum, accDiv(infoData[i].registerExpCount, infoData[i].registerPopulation));
+                        registerExpCountNum = accAdd(registerExpCountNum, infoData[i].registerExpCount);
                         registerExpCountRateNum = accAdd(registerExpCountRateNum, infoData[i].registerExpCountRate);
                         realExpCountNum = accAdd(realExpCountNum, infoData[i].realExpCount);
                         virtualExpCountNum = accAdd(virtualExpCountNum, infoData[i].virtualExpCount);
@@ -248,32 +325,25 @@
                         newUserRechargePopulationNum = accAdd(newUserRechargePopulationNum, infoData[i].newUserRechargePopulation);
                         newUserRechargeCountNum = accAdd(newUserRechargeCountNum, infoData[i].newUserRechargeCount);
                         newUserRechargeAmountNum = accAdd(newUserRechargeAmountNum, infoData[i].newUserRechargeAmount);
-                        newUserRechargeRateNum = accAdd(newUserRechargeRateNum, accDiv(infoData[i].newUserRechargePopulation, infoData[i].registerPopulation));
+                        newUserRechargeRateNum = accAdd(newUserRechargeRateNum, infoData[i].newUserRechargeRate);
                         newUserARPUNum = accAdd(newUserARPUNum, infoData[i].newUserARPU);
                         newUserARPPUNum = accAdd(newUserARPPUNum, infoData[i].newUserARPPU);
                         newUserLoginCountNum = accAdd(newUserLoginCountNum, infoData[i].newUserLoginCount);
                         newUserPlayCountNum = accAdd(newUserPlayCountNum, infoData[i].newUserPlayCount);
-                        newUserLoginTransformRateNum = accAdd(newUserLoginTransformRateNum, accDiv(infoData[i].newUserLoginCount, infoData[i].registerPopulation));
+                        newUserLoginTransformRateNum = accAdd(newUserLoginTransformRateNum, infoData[i].newUserLoginTransformRate);
 
                         oldUserRechargePopulationNum = accAdd(oldUserRechargePopulationNum, infoData[i].oldUserRechargePopulation);
                         oldUserRechargeCountNum = accAdd(oldUserRechargeCountNum, infoData[i].oldUserRechargeCount);
                         oldUserRechargeAmountNum = accAdd(oldUserRechargeAmountNum, infoData[i].oldUserRechargeAmount);
-                        oldUserRechargeRateNum = accAdd(oldUserRechargeRateNum, accDiv(infoData[i].oldUserRechargePopulation, infoData[i].registerPopulation));
+                        oldUserRechargeRateNum = accAdd(oldUserRechargeRateNum, infoData[i].oldUserRechargeRate);
                         oldUserARPUNum = accAdd(oldUserARPUNum, infoData[i].oldUserARPU);
                         oldUserARPPUNum = accAdd(oldUserARPPUNum, infoData[i].oldUserARPPU);
                         oldUserLoginCountNum = accAdd(oldUserLoginCountNum, infoData[i].oldUserLoginCount);
                         oldUserPlayCountNum = accAdd(oldUserPlayCountNum, infoData[i].oldUserPlayCount);
-                        oldUserLoginTransformRateNum = accAdd(oldUserLoginTransformRateNum, accDiv(infoData[i].oldUserLoginCount, infoData[i].registerPopulation));
+                        oldUserLoginTransformRateNum = accAdd(oldUserLoginTransformRateNum, infoData[i].oldUserLoginTransformRate);
 
                         nextDayStayCountNum = accAdd(nextDayStayCountNum, infoData[i].nextDayStayCount);
-                        nextDayStayRateNums = accAdd(nextDayStayRateNums, accDiv(infoData[i].oldUserLoginCount, infoData[i].registerPopulation));
-                        var nextDayStayRateNum = 0;
-                        if ((i + 1) < infoData.length) {
-                            nextDayStayRateNum = accDiv(accAdd(infoData[i].oldUserLoginCount, infoData[i].newUserLoginCount), infoData[i + 1].statisticsDay);
-                        } else {
-                            nextDayStayRateNum = 0;
-                        }
-
+                        nextDayStayRateNums = accAdd(nextDayStayRateNums, accDiv(infoData[i].oldUserLoginCount, infoData[i].nextDayStayRate));
                         var ele = {
                             statisticsDay: infoData[i].statisticsDay,
                             registerPopulation: infoData[i].registerPopulation,

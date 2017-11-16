@@ -25,8 +25,16 @@ public interface DataGameStartMapper{
 
     List<Map<String, Object>> selectPlatformAllGameStartCount(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
 
-    List<Map<String, Object>> selectFirstThirtyMinGameStartCount(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
+    List<Map<String, Object>> selectGameStartGroupBySourceType(@Param("startTime") String startTime, @Param("endTime") String endTime) throws Exception;
 
-    List<Map<String, Object>>  selectYesterdayGameStartList(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+    List<Map<String, Object>> selectYesterdayGameStartList(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
+    List<Map<String, Object>> selectTodayGameStartCountGroupByUser(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
+    List<Map<String, Object>> selectTodayGameStartCountGroupByUserAndOsType(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
+    List<String> selectGameStartByTime(@Param("startTime") String startTime, @Param("endTime") String endTime) throws Exception;
+
+    List<Map<String,Object>> selectGameStartByTimeGroupBySource(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
 
 }

@@ -15,4 +15,6 @@ public interface PlatformGoldConsumeMapper{
 
     List<Map<String, Object>> selectConsumeUserByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 
+    List<String> selectConsumeUserIdByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
 }

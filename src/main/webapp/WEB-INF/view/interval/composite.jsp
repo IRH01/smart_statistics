@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="../../../lib/myPagination/css/style.css"/>
     <link rel="stylesheet" href="../../../lib/myPagination/js/myPagination/page.css"/>
     <link rel="stylesheet" href="../../../css/jquery-ui.css"/>
+    <link rel="stylesheet" href="../../../css/interval/tipso.css"/>
+    <link rel="stylesheet" href="../../../css/interval/tipso.min.css"/>
     <!-- [if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -41,6 +43,9 @@
     <script src="../../../lib/datecontrol.js"></script>
     <script src="../../../lib/echart/dist/echarts.js"></script>
     <script src="../../../lib/tool.js"></script>
+    <script src="../../../lib/tool.js"></script>
+    <script src="../../../js/interval/tipso.js"></script>
+    <script src="../../../js/interval/tipso.min.js"></script>
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -63,7 +68,7 @@
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" aria-expanded="true"
                                aria-controls="collapseOne" class="">平台数据实时统计</a>
-                            <a title="内容来自 title 属性" style="cursor:pointer">?</a>
+                            <span class="inner"><span id="tip2" data-tipso="平台数据实时统计：统计当日数据，每30分钟请求一次数据。00:00-23:59为一日。">？</span></span>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
@@ -136,28 +141,6 @@
                                                 </div>
                                             </li>
                                             <li class="ui-state-default">
-                                                <div class="ui-widget-content resize" style="height:300px;">
-                                                    <div class="sortHandle">分时段曲线图</div>
-                                                    <div style="width:100%;height:95%;">
-                                                        <div style="margin-left: -10px;">
-                                                            <span>客户端类型：</span>
-                                                            <input type="checkbox" id="cltTypeAll"
-                                                                   onchange="deviceTypeChange(this);" checked/>
-                                                            全部
-                                                            <c:if test="${deviceTypes != null}">
-                                                                <c:forEach items="${deviceTypes}" var="deviceType">
-                                                                    <input type="checkbox" class="deviceType"
-                                                                           onchange="deviceTypeChange(this);"
-                                                                           value="${deviceType.code}"
-                                                                           checked/>${deviceType.desc}
-                                                                </c:forEach>
-                                                            </c:if>
-                                                        </div>
-                                                        <div id="trendline" class="trendline"></div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="ui-state-default">
                                                 <div style="padding-bottom:60px;"
                                                      class="ui-widget-content resize resizePanel">
                                                     <div class="sortHandle">分时段列表</div>
@@ -190,11 +173,15 @@
                                                             <td>
                                                                 <div class="divPage">
                                                                     <span class="spanPageSize">每页个数：</span>
-                                                                    <input id="pageSize" value="10"
-                                                                           class="inputPageSize"
-                                                                           onKeypress="return intInput(event);"
-                                                                           onKeyup="value=pageSizeLimit(value);"
-                                                                           onblur="value=pageSizeNotEmpty(value);"/>
+                                                                    <select id="pageSize" class="inputPageSize"
+                                                                            title="页记录数">
+                                                                        <option value="10" aria-checked="true">10
+                                                                        </option>
+                                                                        <option value="20">20</option>
+                                                                        <option value="30">30</option>
+                                                                        <option value="40">40</option>
+                                                                        <option value="50">50</option>
+                                                                    </select>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -210,6 +197,37 @@
                                                             </td>
                                                         </tr>
                                                     </table>
+                                                </div>
+                                            </li>
+                                            <li class="ui-state-default">
+                                                <div class="ui-widget-content resize" style="height:300px;">
+                                                    <div class="sortHandle">分时段曲线图</div>
+                                                    <div style="width:100%;height:95%;">
+                                                        <div style="margin-left: -10px;">
+                                                            <span>客户端类型：</span>
+                                                            <input type="radio" name="sourceType" value="0"
+                                                                   class="sourceType"
+                                                                   onchange="deviceTypeChange(this);" checked title=""/>
+                                                            全部
+                                                            <input type="radio" name="sourceType" value="1"
+                                                                   class="sourceType"
+                                                                   onchange="deviceTypeChange(this);" title=""/>
+                                                            PC
+                                                            <input type="radio" name="sourceType" value="2"
+                                                                   class="sourceType"
+                                                                   onchange="deviceTypeChange(this);" title=""/>
+                                                            Android
+                                                            <input type="radio" name="sourceType" value="3"
+                                                                   class="sourceType"
+                                                                   onchange="deviceTypeChange(this);" title=""/>
+                                                            IOS
+                                                            <input type="radio" name="sourceType" value="4"
+                                                                   class="sourceType"
+                                                                   onchange="deviceTypeChange(this);" title=""/>
+                                                            H5
+                                                        </div>
+                                                        <div id="trendline" class="trendline"></div>
+                                                    </div>
                                                 </div>
                                             </li>
                                         </ul>
@@ -244,6 +262,14 @@
 
     // js定时器
     window.setInterval("search()", 30 * 60 * 1000);
+
+    // 加载tips
+    $('#tip2').tipso({
+        useTitle: false,
+        position: 'bottom'
+    });
+
+
 
     // 统计
     var dateChange = function () {
@@ -335,6 +361,10 @@
             });
             value = 10;
         }
+        if (value >= 30) {
+            value = 30
+        }
+        showNewUserData(1,value);
         return value;
     };
 
@@ -457,7 +487,7 @@
             data: {
                 startDate: startDate,
                 endDate: endDate,
-                deviceTypes: getDeviceType()
+                sourceType: $('.sourceType:radio:checked').val()
             },
             success: function (result) {
                 var json = result.data;

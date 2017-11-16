@@ -54,7 +54,7 @@
                     <ul class="breadcrumb">
                         <li>您当前的位置：</li>
                         <tags:breadcrumb/>
-                        <li>综合数据</li>
+                        <li>充值来源统计</li>
                     </ul>
                 </div>
                 <!--body start-->
@@ -63,7 +63,7 @@
                         <h4 class="panel-title" id="-collapsible-group-item-#1-">
                             <a data-toggle="collapse" data-parent="#accordion"
                                href="#collapseOne" aria-expanded="true"
-                               aria-controls="collapseOne">平台月数据</a>
+                               aria-controls="collapseOne">充值来源统计</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
@@ -78,9 +78,9 @@
                                         <div class="select-fr" style="padding-right: 30px;">
 											<span class="laydateBox">
                                                 月份区间：<input type="text" id="monthStart" class="laydate-icon"
-                                                            style="width:140px;" title=""/>
+                                                            style="width:140px;" title="" readonly/>
                                                 至 &nbsp;<input type="text" id="monthEnd" class="laydate-icon"
-                                                               style="width:140px;" title=""/>
+                                                               style="width:140px;" title="" readonly/>
 											</span>
                                             <button type="button" id="search" class="btn btn-primary btn-sm">
                                                 查询
@@ -104,24 +104,24 @@
                                                                 <th style="min-width:80px;">PC-新用户充值</th>
                                                                 <th style="min-width:80px;">PC-老用户充值</th>
                                                                 <th style="min-width:70px;">PC-ARPU</th>
-                                                                <th style="min-width:90px;">H5-充值人数</th>
-                                                                <th style="min-width:90px;">H5-充值金额</th>
-                                                                <th style="min-width:100px;">H5-充值次数</th>
-                                                                <th style="min-width:80px;">H5-新用户充值</th>
-                                                                <th style="min-width:80px;">H5-老用户充值</th>
-                                                                <th style="min-width:70px;">H5-ARPU</th>
-                                                                <th style="min-width:90px;">IOS-充值人数</th>
-                                                                <th style="min-width:90px;">IOS-充值金额</th>
-                                                                <th style="min-width:100px;">IOS-充值次数</th>
-                                                                <th style="min-width:80px;">IOS-新用户充值</th>
-                                                                <th style="min-width:80px;">IOS-老用户充值</th>
-                                                                <th style="min-width:70px;">IOS-ARPU</th>
                                                                 <th style="min-width:90px;">android-充值人数</th>
                                                                 <th style="min-width:90px;">android-充值金额</th>
                                                                 <th style="min-width:100px;">android-充值次数</th>
                                                                 <th style="min-width:80px;">android-新用户充值</th>
                                                                 <th style="min-width:80px;">android-老用户充值</th>
                                                                 <th style="min-width:70px;">android-ARPU</th>
+                                                                <th style="min-width:90px;">IOS-充值人数</th>
+                                                                <th style="min-width:90px;">IOS-充值金额</th>
+                                                                <th style="min-width:100px;">IOS-充值次数</th>
+                                                                <th style="min-width:80px;">IOS-新用户充值</th>
+                                                                <th style="min-width:80px;">IOS-老用户充值</th>
+                                                                <th style="min-width:70px;">IOS-ARPU</th>
+                                                                <th style="min-width:90px;">H5-充值人数</th>
+                                                                <th style="min-width:90px;">H5-充值金额</th>
+                                                                <th style="min-width:100px;">H5-充值次数</th>
+                                                                <th style="min-width:80px;">H5-新用户充值</th>
+                                                                <th style="min-width:80px;">H5-老用户充值</th>
+                                                                <th style="min-width:70px;">H5-ARPU</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody id="data">
@@ -133,8 +133,15 @@
                                                             <tr>
                                                                 <td>
                                                                     <div class="divPage"><span class="spanPageSize">每页记录数：</span>
-                                                                        <input id="pageSize" value="12"
-                                                                               class="inputPageSize" title="页数"/>
+                                                                        <select id="pageSize" class="inputPageSize"
+                                                                                title="页记录数">
+                                                                            <option value="10" aria-checked="true">10
+                                                                            </option>
+                                                                            <option value="20">20</option>
+                                                                            <option value="30">30</option>
+                                                                            <option value="40">40</option>
+                                                                            <option value="50">50</option>
+                                                                        </select>
                                                                     </div>
                                                                 </td>
                                                                 <td>
@@ -206,24 +213,24 @@
                 "<td>pc_newRechargePopulation</td>" +
                 "<td>pc_oldRechargePopulation</td>" +
                 "<td>pc_ARPU</td>" +
-                "<td>h5_rechargePopulation</td>" +
-                "<td>h5_rechargeAmount</td>" +
-                "<td>h5_rechargeCount</td>" +
-                "<td>h5_newRechargePopulation</td>" +
-                "<td>h5_oldRechargePopulation</td>" +
-                "<td>h5_ARPU</td>" +
+                "<td>android_rechargePopulation</td>" +
+                "<td>android_rechargeAmount</td>" +
+                "<td>android_rechargeCount</td>" +
+                "<td>android_newRechargePopulation</td>" +
+                "<td>android_oldRechargePopulation</td>" +
+                "<td>android_ARPU</td>" +
                 "<td>ios_rechargePopulation</td>" +
                 "<td>ios_rechargeAmount</td>" +
                 "<td>ios_rechargeCount</td>" +
                 "<td>ios_newRechargePopulation</td>" +
                 "<td>ios_oldRechargePopulation</td>" +
                 "<td>ios_ARPU</td>" +
-                "<td>android_rechargePopulation</td>" +
-                "<td>android_rechargeAmount</td>" +
-                "<td>android_rechargeCount</td>" +
-                "<td>android_newRechargePopulation</td>" +
-                "<td>android_oldRechargePopulation</td>" +
-                "<td>android_ARPU</td>";
+                "<td>h5_rechargePopulation</td>" +
+                "<td>h5_rechargeAmount</td>" +
+                "<td>h5_rechargeCount</td>" +
+                "<td>h5_newRechargePopulation</td>" +
+                "<td>h5_oldRechargePopulation</td>" +
+                "<td>h5_ARPU</td>";
             ele = ele.replace("statisticsMonth", data.statisticsMonth)
                 .replace("pc_rechargePopulation", data.pc_rechargePopulation)
                 .replace("pc_rechargeAmount", data.pc_rechargeAmount)
@@ -231,24 +238,24 @@
                 .replace("pc_newRechargePopulation", data.pc_newRechargePopulation)
                 .replace("pc_oldRechargePopulation", data.pc_oldRechargePopulation)
                 .replace("pc_ARPU", data.pc_ARPU)
-                .replace("h5_rechargePopulation", data.h5_rechargePopulation)
-                .replace("h5_rechargeAmount", data.h5_rechargeAmount)
-                .replace("h5_rechargeCount", data.h5_rechargeCount)
-                .replace("h5_newRechargePopulation", data.h5_newRechargePopulation)
-                .replace("h5_oldRechargePopulation", data.h5_oldRechargePopulation)
-                .replace("h5_ARPU", data.h5_ARPU)
+                .replace("android_rechargePopulation", data.android_rechargePopulation)
+                .replace("android_rechargeAmount", data.android_rechargeAmount)
+                .replace("android_rechargeCount", data.android_rechargeCount)
+                .replace("android_newRechargePopulation", data.android_newRechargePopulation)
+                .replace("android_oldRechargePopulation", data.android_oldRechargePopulation)
+                .replace("android_ARPU", data.android_ARPU)
                 .replace("ios_rechargePopulation", data.ios_rechargePopulation)
                 .replace("ios_rechargeAmount", data.ios_rechargeAmount)
                 .replace("ios_rechargeCount", data.ios_rechargeCount)
                 .replace("ios_newRechargePopulation", data.ios_newRechargePopulation)
                 .replace("ios_oldRechargePopulation", data.ios_oldRechargePopulation)
                 .replace("ios_ARPU", data.ios_ARPU)
-                .replace("android_rechargePopulation", data.android_rechargePopulation)
-                .replace("android_rechargeAmount", data.android_rechargeAmount)
-                .replace("android_rechargeCount", data.android_rechargeCount)
-                .replace("android_newRechargePopulation", data.android_newRechargePopulation)
-                .replace("android_oldRechargePopulation", data.android_oldRechargePopulation)
-                .replace("android_ARPU", data.android_ARPU);
+                .replace("h5_rechargePopulation", data.h5_rechargePopulation)
+                .replace("h5_rechargeAmount", data.h5_rechargeAmount)
+                .replace("h5_rechargeCount", data.h5_rechargeCount)
+                .replace("h5_newRechargePopulation", data.h5_newRechargePopulation)
+                .replace("h5_oldRechargePopulation", data.h5_oldRechargePopulation)
+                .replace("h5_ARPU", data.h5_ARPU);
             $("#data").append(ele);
         }
     };
@@ -325,17 +332,17 @@
                             totalInfo.pc_oldRechargePopulation = accAdd(totalInfo.pc_oldRechargePopulation, parseFloat(infoData[i].oldRechargePopulation));
                         }
                         if (infoData[i].sourceType == 2) {
-                            info.h5_rechargePopulation = infoData[i].rechargePopulation;
-                            info.h5_rechargeAmount = infoData[i].rechargeAmount;
-                            info.h5_rechargeCount = infoData[i].rechargeCount;
-                            info.h5_newRechargePopulation = infoData[i].newRechargePopulation;
-                            info.h5_oldRechargePopulation = infoData[i].oldRechargePopulation;
-                            info.h5_ARPU = infoData[i].arpu;
-                            totalInfo.h5_rechargePopulation = accAdd(totalInfo.h5_rechargePopulation, parseFloat(infoData[i].rechargePopulation));
-                            totalInfo.h5_rechargeAmount = accAdd(totalInfo.h5_rechargeAmount, parseFloat(infoData[i].rechargeAmount));
-                            totalInfo.h5_rechargeCount = accAdd(totalInfo.h5_rechargeCount, parseFloat(infoData[i].rechargeCount));
-                            totalInfo.h5_newRechargePopulation = accAdd(totalInfo.h5_newRechargePopulation, parseFloat(infoData[i].newRechargePopulation));
-                            totalInfo.h5_oldRechargePopulation = accAdd(totalInfo.h5_oldRechargePopulation, parseFloat(infoData[i].oldRechargePopulation));
+                            info.android_rechargePopulation = infoData[i].rechargePopulation;
+                            info.android_rechargeAmount = infoData[i].rechargeAmount;
+                            info.android_rechargeCount = infoData[i].rechargeCount;
+                            info.android_newRechargePopulation = infoData[i].newRechargePopulation;
+                            info.android_oldRechargePopulation = infoData[i].oldRechargePopulation;
+                            info.android_ARPU = infoData[i].arpu;
+                            totalInfo.android_rechargePopulation = accAdd(totalInfo.android_rechargePopulation, parseFloat(infoData[i].rechargePopulation));
+                            totalInfo.android_rechargeAmount = accAdd(totalInfo.android_rechargeAmount, parseFloat(infoData[i].rechargeAmount));
+                            totalInfo.android_rechargeCount = accAdd(totalInfo.android_rechargeCount, parseFloat(infoData[i].rechargeCount));
+                            totalInfo.android_newRechargePopulation = accAdd(totalInfo.android_newRechargePopulation, parseFloat(infoData[i].newRechargePopulation));
+                            totalInfo.android_oldRechargePopulation = accAdd(totalInfo.android_oldRechargePopulation, parseFloat(infoData[i].oldRechargePopulation));
                         }
                         if (infoData[i].sourceType == 3) {
                             info.ios_rechargePopulation = infoData[i].rechargePopulation;
@@ -351,17 +358,17 @@
                             totalInfo.ios_oldRechargePopulation = accAdd(totalInfo.ios_oldRechargePopulation, parseFloat(infoData[i].oldRechargePopulation));
                         }
                         if (infoData[i].sourceType == 4) {
-                            info.android_rechargePopulation = infoData[i].rechargePopulation;
-                            info.android_rechargeAmount = infoData[i].rechargeAmount;
-                            info.android_rechargeCount = infoData[i].rechargeCount;
-                            info.android_newRechargePopulation = infoData[i].newRechargePopulation;
-                            info.android_oldRechargePopulation = infoData[i].oldRechargePopulation;
-                            info.android_ARPU = infoData[i].arpu;
-                            totalInfo.android_rechargePopulation = accAdd(totalInfo.android_rechargePopulation, parseFloat(infoData[i].rechargePopulation));
-                            totalInfo.android_rechargeAmount = accAdd(totalInfo.android_rechargeAmount, parseFloat(infoData[i].rechargeAmount));
-                            totalInfo.android_rechargeCount = accAdd(totalInfo.android_rechargeCount, parseFloat(infoData[i].rechargeCount));
-                            totalInfo.android_newRechargePopulation = accAdd(totalInfo.android_newRechargePopulation, parseFloat(infoData[i].newRechargePopulation));
-                            totalInfo.android_oldRechargePopulation = accAdd(totalInfo.android_oldRechargePopulation, parseFloat(infoData[i].oldRechargePopulation));
+                            info.h5_rechargePopulation = infoData[i].rechargePopulation;
+                            info.h5_rechargeAmount = infoData[i].rechargeAmount;
+                            info.h5_rechargeCount = infoData[i].rechargeCount;
+                            info.h5_newRechargePopulation = infoData[i].newRechargePopulation;
+                            info.h5_oldRechargePopulation = infoData[i].oldRechargePopulation;
+                            info.h5_ARPU = infoData[i].arpu;
+                            totalInfo.h5_rechargePopulation = accAdd(totalInfo.h5_rechargePopulation, parseFloat(infoData[i].rechargePopulation));
+                            totalInfo.h5_rechargeAmount = accAdd(totalInfo.h5_rechargeAmount, parseFloat(infoData[i].rechargeAmount));
+                            totalInfo.h5_rechargeCount = accAdd(totalInfo.h5_rechargeCount, parseFloat(infoData[i].rechargeCount));
+                            totalInfo.h5_newRechargePopulation = accAdd(totalInfo.h5_newRechargePopulation, parseFloat(infoData[i].newRechargePopulation));
+                            totalInfo.h5_oldRechargePopulation = accAdd(totalInfo.h5_oldRechargePopulation, parseFloat(infoData[i].oldRechargePopulation));
                         }
                         if ((i % 4) == 3) {
                             info.statisticsMonth = infoData[i].statisticsMonth

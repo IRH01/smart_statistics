@@ -75,12 +75,22 @@
                                                 <div style="padding-bottom:60px;"
                                                      class="ui-widget-content resize resizePanel">
                                                     <div class="sortHandle">分时段列表</div>
+                                                    <div style="margin-left: -10px;float:right;">
+                                                        <span> 终端：
+                                                         <select id="sourceType" onchange="search()">
+                                                                    <option value="" selected>请选择</option>
+                                                                    <option value="1">PC</option>
+                                                                    <option value="2">ANDROID</option>
+                                                                    <option value="3">IOS</option>
+                                                                    <option value="4">H5</option>
+                                                                </select>
+                                                        </span>
+                                                    </div>
                                                     <div class="tablePanel">
                                                         <table id="tbDataList" class="tableList1" style="width: 2600px">
                                                             <thead>
-                                                                <tr>
-                                                                    <th width="100">平台</th>
-                                                                </tr>
+                                                            <tr>
+                                                            </tr>
                                                             </thead>
                                                             <tbody id="terminalsIntervalData"></tbody>
                                                         </table>
@@ -162,47 +172,43 @@
         return deviceTypes;
     }
 
-    // 各端实时数据列表展示
-    var addTbRow1 = function (data) {
-        if (null != data && undefined != data && "" != data) {
-            var ele = "<tr><td class=\"date\">statisticsTime</td><td>ybflaunchCount</td><td>lmdzlaunchCount</td><td>lydjlaunchCount</td></tr>";
-            ele = ele.replace("statisticsTime", data.statisticsTime).replace("ybflaunchCount", data.ybflaunchCount).replace("lmdzlaunchCount", data.lmdzlaunchCount).replace("lydjlaunchCount", data.lydjlaunchCount);
-            $("#terminalsIntervalData").append(ele);
-        }
-    }
+    var pageSize = 10;
 
     // 添加表格列
     var addTableTh = function (timeData) {
-        console.log(timeData)
-        $.each(timeData, function(i, n){
-            console.log('<th>'+ n +'</th>');
-            $("#tbDataList>thead>tr").append('<th width="60">'+ n +'</th>');
+        $("#tbDataList>thead>tr").html("<th width=\"60\">平台</th>");
+        $.each(timeData, function (i, n) {
+            $("#tbDataList>thead>tr").append('<th width="60">' + n + '</th>');
         });
-    }
+
+    };
 
     // 添加数据行
     var addTableTr = function (dataList) {
         console.log(dataList);
-        $.each(dataList, function(i, n){
-            var trHtml = '<tr><td class="date">'+n.name+'</td>';
+        $.each(dataList, function (i, n) {
+            var trHtml = '<tr><td class="date">' + n.name + '</td>';
 
-            $.each(n.list, function(j, m){
-                trHtml += '<td class="date">'+m.launchCount+'</td>'
+            $.each(n.list, function (j, m) {
+                trHtml += '<td class="date">' + m.launchCount + '</td>'
             });
+            trHtml+='</tr>';
             $("#tbDataList>tbody").append(trHtml);
         });
-    }
+    };
 
     // 添加统计行
     var addTableSumTr = function (data) {
         console.log(data);
         var trHtml = '<tr><td class="date">总计</td>';
 
-        $.each(data, function(j, m){
-            trHtml += '<td class="date">'+m.launchCount+'</td>'
+        $.each(data, function (j, m) {
+            trHtml += '<td class="date">' + m.launchCount + '</td>'
         });
+
+        trHtml+='</tr>';
         $("#tbDataList>tbody").append(trHtml);
-    }
+    };
 
     var showTerminalsIntervalData = function (pageNumber, pageSize) {
         for (var i = 0; i < initSearchDate.length; i++) {
@@ -213,13 +219,13 @@
         $.post("/interval/game/launch/list.do", {
             startDate: $('#dateStarts').val(),
             endDate: $('#dateEnds').val(),
+            sourceType: $("#sourceType").val(),
             pageNumber: pageNumber,
             pageSize: pageSize
         }, function (result) {
             var json = result;
             console.log(json);
             if (null != json && undefined != json) {
-
                 //添加时间列
                 addTableTh(json.time);
 
@@ -259,7 +265,7 @@
             data: {
                 startDate: startDate,
                 endDate: endDate,
-                deviceTypes: getDeviceType()
+                sourceType: $("#sourceType").val()
             },
             success: function (result) {
                 var json = result.data;
@@ -271,7 +277,7 @@
                         text: '',
                         textStyle: {
                             fontSize: '16',
-                            fontWeight: 'bold',
+                            fontWeight: 'bold'
                         }
                     },
                     tooltip: {

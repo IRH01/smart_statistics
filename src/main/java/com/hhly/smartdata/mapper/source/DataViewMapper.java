@@ -21,9 +21,19 @@ public interface DataViewMapper{
 
     int updateByPrimaryKey(DataView record) throws Exception;
 
-    List<Map<String, Object>> selectUserViewAndPageViewByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+    List<Map<String, Object>> selectUserViewByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 
-    List<Map<String, Object>> selectFirstThirtyMinUserViewAndPageView(@Param("endDate") String startDate, @Param("intervalTime") Integer intervalTime) throws Exception;
+    List<Map<String, Object>> selectUserViewAndPageViewGroupBySourceType(@Param("startTime") String startTime, @Param("endTime") String endTime) throws Exception;
 
     List<Map<String, Object>> selectYesterdayUserViewAndPageViewList(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
+    List<Map<String, Object>> selectTodayGameStartCountGroupByUser(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
+    List<Map<String, Object>> selectTodayGameStartCountGroupByUserAndOsType(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
+
+    List<String> selectUserViewAndPageViewByTime(@Param("startTime") String startTime, @Param("endTime") String endTime) throws Exception;
+
+    List<Map<String, Object>> selectUserViewAndPageViewByTimeGroupBySource(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
+
+    List<Map<String, Object>> selectPageViewByStartTimeAndEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime) throws Exception;
 }

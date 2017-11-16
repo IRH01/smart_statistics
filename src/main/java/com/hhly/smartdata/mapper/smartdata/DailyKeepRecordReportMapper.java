@@ -6,7 +6,9 @@ import com.hhly.smartdata.model.smartdata.DailyKeepRecordReport;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface DailyKeepRecordReportMapper {
@@ -25,4 +27,6 @@ public interface DailyKeepRecordReportMapper {
     Float selectAverageOneKeep(@Param("startDay") String startDay, @Param("endDay") String endDay) throws Exception;
 
     void deleteByTime(String statisticsDay) throws Exception;
+
+    List<DailyKeepRecordReportResult> selectDailyKeepRecordListDataByStartDayNumAndEndDayNum(@Param("statisticsDay") String statisticsDay) throws Exception;
 }

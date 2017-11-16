@@ -22,8 +22,6 @@ public interface DailyRechargeReportMapper {
 
     int updateByPrimaryKey(DailyRechargeReport record) throws Exception;
 
-    List<Map<String, Object>> selectLastMonthRecharge(@Param("lastMonthFirstDayStr") String lastMonthFirstDayStr, @Param("lastMonthEndDayStr") String lastMonthEndDayStr) throws Exception;
-
     List<DailyRechargeReportResult> searchByTime(TimeFilter filter) throws Exception;
 
     long searchByTimeCount(TimeFilter filter) throws Exception;

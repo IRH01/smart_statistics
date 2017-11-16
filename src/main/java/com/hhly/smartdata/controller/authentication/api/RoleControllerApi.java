@@ -15,6 +15,7 @@ import com.hhly.smartdata.util.SysConstant;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +23,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
+@Scope(value = "prototype")
 @RequestMapping("/sys/role")
-public class RoleControllerApi extends BaseController {
+public class RoleControllerApi extends BaseController{
     @Autowired
     public RoleService roleService;
     @Autowired
@@ -33,17 +35,17 @@ public class RoleControllerApi extends BaseController {
 
     @RequestMapping("/{random}/tree")
     @RequiresPermissions(value = {"sys_role_add", "!sys_func_update"}, logical = Logical.OR)
-    public Result tree(HttpServletRequest request) {
+    public Result tree(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute(SysConstant.SESSION_USER);
         return Result.success(nodeList(user.getId()));
     }
 
     /*获取系统的功能权限树*/
-    private List<Node> nodeList(int userId) {
+    private List<Node> nodeList(int userId){
         List<Role> roleList = null;
-        try {
+        try{
             roleList = roleService.getRolesByUserId(userId);
-        } catch (Exception e) {
+        }catch(Exception e){
             LOGGER.error(e.getMessage());
         }
         List<Integer> idList = Lists.newArrayList();
@@ -51,31 +53,31 @@ public class RoleControllerApi extends BaseController {
         List<Function> functionList = null;
         List<Node> nodeList = Lists.newArrayList();
 
-        for (Role role : roleList) {
+        for(Role role : roleList){
             idList.add(role.getId());
         }
 
-        if (idList.size() > 0) {
-            try {
+        if(idList.size() > 0){
+            try{
                 permissionList = permissionService.getAll();
-            } catch (Exception e) {
+            }catch(Exception e){
                 LOGGER.error(e.getMessage());
             }
-            try {
+            try{
                 functionList = functionService.getAll();
-            } catch (Exception e) {
+            }catch(Exception e){
                 LOGGER.error(e.getMessage());
             }
 
-            if (functionList.size() > 0) {
-                for (Function function : functionList) {
+            if(functionList.size() > 0){
+                for(Function function : functionList){
                     Node node = new Node();
                     node.setLeaf(false);
-                    if (function.getParentId() == 0) {
+                    if(function.getParentId() == 0){
                         node.setId(function.getId().toString());
                         node.setName(function.getFunctionName());
                         node.setpId("0");
-                    } else {
+                    }else{
                         node.setId(function.getId().toString());
                         node.setName(function.getFunctionName());
                         node.setpId(function.getParentId().toString());
@@ -83,8 +85,8 @@ public class RoleControllerApi extends BaseController {
                     nodeList.add(node);
                 }
             }
-            if (permissionList.size() > 0) {
-                for (Permission permission : permissionList) {
+            if(permissionList.size() > 0){
+                for(Permission permission : permissionList){
                     Node node = new Node();
                     node.setLeaf(true);
                     node.setId(permission.getPermission());
@@ -93,7 +95,7 @@ public class RoleControllerApi extends BaseController {
                     nodeList.add(node);
                 }
             }
-        } else {
+        }else{
             return null;
         }
         return nodeList;
