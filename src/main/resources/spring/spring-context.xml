@@ -17,8 +17,8 @@
     </bean>
 
     <import resource="spring-mvc.xml"/>
-    <import resource="spring-shiro.xml"/>
-    <import resource="spring-member-dao.xml"/>
+    <!--<import resource="spring-shiro.xml"/>-->
+    <!--<import resource="spring-member-dao.xml"/>-->
     <import resource="spring-smart-dao.xml"/>
     <import resource="spring-schedule.xml"/>
 </beans>

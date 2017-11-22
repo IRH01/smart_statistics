@@ -85,9 +85,10 @@
     </bean>
 
     <bean id="html_viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="order" value="10"></property>
-        <property name="prefix" value="/"></property>
+        <property name="prefix" value="/WEB-INF/view/"/>
+        <property name="suffix" value=".html"/>
         <property name="contentType" value="text/html"></property>
+        <property name="order" value="1"></property>
     </bean>
 
 

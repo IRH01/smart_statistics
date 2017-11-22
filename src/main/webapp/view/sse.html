@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="../lib/bootstrap.min.css">
+<link rel="shortcut icon" href="../img/favicon.ico">
+<script src="../lib/jquery-1.11.2.min.js"></script>
+<script src="../lib/bootstrap.min.js"></script>
+<body>
+<div>push 测试</div>
+<div id="msgShow">
+</div>
+</body>
+<script>
+    if (!!window.EventSource) {
+        var source = new EventSource('push.do');
+        s = '';
+        source.addListener('message', function (e) {
+            s += e.data + "<br/>";
+            $("#msgShow").html(s);
+        });
+
+        source.addListener('open', function (e) {
+            console.log("连接打开");
+        }, false);
+
+        source.addListener('error', function (e) {
+            if (e.readyState == EventSource.CLOSE) {
+                console.log("连接关闭");
+            } else {
+                console.log(e.readyState);
+            }
+        }, false);
+    } else {
+        console.log("你的浏览器不支持");
+    }
+</script>
+</html>

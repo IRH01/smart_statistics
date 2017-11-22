@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>产品运营数据统计后台</title>
-    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../lib/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/zTreeStyle.css">
     <link rel="stylesheet" href="../../../css/dialogsdk.css">
