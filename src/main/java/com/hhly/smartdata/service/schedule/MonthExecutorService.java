@@ -254,16 +254,16 @@ public class MonthExecutorService{
             Integer sourceType = (Integer) registerMap.get("osType");
             switch(sourceType){
                 case 1:
-                    monthRegisterReport.setPcPopulation(registerMap.get("UserCount") == null ? 0 : ((Long) registerMap.get("UserCount")).intValue());
+                    monthRegisterReport.setPcPopulation(registerMap.get("userCount") == null ? 0 : ((Long) registerMap.get("userCount")).intValue());
                     break;
                 case 2:
-                    monthRegisterReport.setAndroidPopulation(registerMap.get("UserCount") == null ? 0 : ((Long) registerMap.get("UserCount")).intValue());
+                    monthRegisterReport.setAndroidPopulation(registerMap.get("userCount") == null ? 0 : ((Long) registerMap.get("userCount")).intValue());
                     break;
                 case 3:
-                    monthRegisterReport.setIosPopulation(registerMap.get("UserCount") == null ? 0 : ((Long) registerMap.get("UserCount")).intValue());
+                    monthRegisterReport.setIosPopulation(registerMap.get("userCount") == null ? 0 : ((Long) registerMap.get("userCount")).intValue());
                     break;
                 case 4:
-                    monthRegisterReport.setH5Population(registerMap.get("UserCount") == null ? 0 : ((Long) registerMap.get("UserCount")).intValue());
+                    monthRegisterReport.setH5Population(registerMap.get("userCount") == null ? 0 : ((Long) registerMap.get("userCount")).intValue());
                     break;
             }
         }
@@ -363,7 +363,7 @@ public class MonthExecutorService{
             Set<String> loginUserIdSet = Sets.newHashSet();
             for(Map<String, Object> map : loginUserTotalList){
                 if(((Integer) map.get("sourceType")).byteValue() == item.getCode()){
-                    loginUserIdSet.add((String) map.get("userId"));
+                    loginUserIdSet.add(new String((byte[]) map.get("userId")));
                 }
             }
             monthRechargeReport.setLoginPopulation(loginUserIdSet.size());
@@ -410,14 +410,14 @@ public class MonthExecutorService{
         //初始化临时容器
         tempUserIdSet.clear();
         for(Map<String, Object> item : loginUserTotalList){
-            tempUserIdSet.add((String) item.get("userId"));
+            tempUserIdSet.add(new String((byte[]) item.get("userId")));
         }
         monthLoginReportAll.setLoginPopulation(tempUserIdSet.size());
 
         //初始化临时容器
         tempUserIdSet.clear();
         for(Map<String, Object> item : launchGameUserList){
-            tempUserIdSet.add((String) item.get("userId"));
+            tempUserIdSet.add(new String((byte[]) item.get("userId")));
         }
         monthLoginReportAll.setPlayPopulation(tempUserIdSet.size());
 
@@ -439,7 +439,7 @@ public class MonthExecutorService{
             for(Map<String, Object> item : loginUserTotalList){
                 Integer sourceType = (Integer) item.get("sourceType");
                 if(sourceType == sourceTypeEnum.getCode().intValue()){
-                    tempUserIdSet.add((String) item.get("userId"));
+                    tempUserIdSet.add(new String((byte[]) item.get("userId")));
                 }
             }
             monthLoginReportComp.setLoginPopulation(tempUserIdSet.size());
@@ -449,7 +449,7 @@ public class MonthExecutorService{
             for(Map<String, Object> item : launchGameUserList){
                 Integer sourceType = (Integer) item.get("sourceType");
                 if(sourceType == sourceTypeEnum.getCode().intValue()){
-                    tempUserIdSet.add((String) item.get("userId"));
+                    tempUserIdSet.add(new String((byte[]) item.get("userId")));
                 }
             }
             monthLoginReportComp.setPlayPopulation(tempUserIdSet.size());
@@ -475,7 +475,7 @@ public class MonthExecutorService{
                     String platformCodeStr = (String) item.get("platformCode");
                     Integer sourceType = (Integer) item.get("sourceType");
                     if(sourceType == sourceTypeEnum.getCode().intValue() && platformCodeStr != null && platformCodeStr.equals(platformCode)){
-                        tempUserIdSet.add((String) item.get("userId"));
+                        tempUserIdSet.add(new String((byte[]) item.get("userId")));
                     }
                 }
                 monthLoginReport.setPlayPopulation(tempUserIdSet.size());

@@ -96,7 +96,6 @@ public class IntervalExecutorService{
             report.setSourceType(sourceTypeEnum.getCode());
             report.setStatisticsTime(endDate);
             report.setExecuteTime(new Date());
-            String userId;
             loginCount.clear();
             for(Map<String, Object> firstThirtyMinRegisterMap : firstThirtyMinRegister){
                 if(sourceTypeEnum.getCode() == (firstThirtyMinRegisterMap.get("sourceType") == null ? 0 : Integer.valueOf(firstThirtyMinRegisterMap.get("sourceType").toString()))){
@@ -107,8 +106,7 @@ public class IntervalExecutorService{
 
             for(Map<String, Object> firstThirtyMinLoginUserMap : firstThirtyMinLoginUser){
                 if(sourceTypeEnum.getCode() == (firstThirtyMinLoginUserMap.get("sourceType") == null ? 0 : Integer.valueOf(firstThirtyMinLoginUserMap.get("sourceType").toString()))){
-                    userId = firstThirtyMinLoginUserMap.get("userId") == null ? null : firstThirtyMinLoginUserMap.get("userId") + "";
-                    loginCount.add(userId);
+                    loginCount.add(new String((byte[]) firstThirtyMinLoginUserMap.get("userId")));
                 }
             }
 
@@ -120,15 +118,13 @@ public class IntervalExecutorService{
                     rechargePopulationNum += report.getRechargePopulation();
                     rechargeAmountNum = report.getRechargeAmount().add(rechargeAmountNum);
                     rechargeCountNum += report.getRechargeCount();
-
                 }
             }
 
             for(Map<String, Object> firstThirtyMinGameStartCountMap : firstThirtyMinGameStartCount){
                 if(sourceTypeEnum.getCode() == 2 || sourceTypeEnum.getCode() == 3){
                     if(sourceTypeEnum.getCode() == (firstThirtyMinGameStartCountMap.get("sourceType") == null ? 0 : Integer.valueOf(firstThirtyMinGameStartCountMap.get("sourceType").toString()))){
-                        userId = firstThirtyMinGameStartCountMap.get("userId") == null ? null : firstThirtyMinGameStartCountMap.get("userId") + "";
-                        loginCount.add(userId);
+                        loginCount.add(new String((byte[]) firstThirtyMinGameStartCountMap.get("userId")));
                     }
                 }
             }
@@ -136,8 +132,7 @@ public class IntervalExecutorService{
             for(Map<String, Object> firstThirtyMinUserViewAndPageViewMap : firstThirtyMinUserViewAndPageView){
                 if(sourceTypeEnum.getCode() == 1 || sourceTypeEnum.getCode() == 4){
                     if(sourceTypeEnum.getCode() == (firstThirtyMinUserViewAndPageViewMap.get("sourceType") == null ? 0 : Integer.valueOf(firstThirtyMinUserViewAndPageViewMap.get("sourceType").toString()))){
-                        userId = firstThirtyMinUserViewAndPageViewMap.get("userId") == null ? null : firstThirtyMinUserViewAndPageViewMap.get("userId") + "";
-                        loginCount.add(userId);
+                        loginCount.add(new String((byte[]) firstThirtyMinUserViewAndPageViewMap.get("userId")));
                     }
                 }
             }

@@ -31,7 +31,7 @@
 
     <select id="selectLoginUserGroupByUserAndOsType" resultType="java.util.Map">
         SELECT
-        user_name AS userId,
+        BINARY user_name AS userId,
         os_type AS sourceType
         FROM
         tbl_login_track
@@ -57,7 +57,7 @@
     <select id="selectLoginUserPopulationByTimeGroupBySource" resultType="java.util.Map">
         SELECT
         os_type AS sourceType,
-        user_name AS userId
+       BINARY user_name AS userId
         FROM
         tbl_login_track
         WHERE
@@ -71,7 +71,7 @@
     <select id="selectLoginUserGroupBySourceType" resultType="java.util.Map">
         select
         os_type as sourceType,
-        user_name as userId
+        BINARY user_name as userId
         from
         tbl_login_track
         where
@@ -79,7 +79,7 @@
         and user_name != ''
         and login_time &gt;= #{startTime}
         and login_time &lt; #{endTime}
-        group by BINARY  user_name,os_type
+        group by BINARY user_name,os_type
     </select>
 
     <select id="selectLoginUserPopulationByTime" resultType="java.lang.String">

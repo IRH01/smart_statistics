@@ -108,7 +108,7 @@
                                                                 <th style="min-width:130px;">新用户充值人数</th>
                                                                 <th style="min-width:130px;">新用户充值次数</th>
                                                                 <th style="min-width:130px;">新用户充值金额</th>
-                                                                <th style="min-width:130px;">新用户充值转化率(%)</th>
+                                                                <th style="min-width:140px;">新用户充值转化率(%)</th>
                                                                 <th style="min-width:120px;">新用户ARPU</th>
                                                                 <th style="min-width:120px;">新用户ARPPU</th>
                                                                 <th style="min-width:130px;">新用户登录人数</th>
@@ -117,7 +117,7 @@
                                                                 <th style="min-width:130px;">老用户充值次数</th>
                                                                 <th style="min-width:130px;">老用户充值人数</th>
                                                                 <th style="min-width:130px;">老用户充值金额</th>
-                                                                <th style="min-width:130px;">老用户充值转化率(%)</th>
+                                                                <th style="min-width:140px;">老用户充值转化率(%)</th>
                                                                 <th style="min-width:120px;">老用户ARPU</th>
                                                                 <th style="min-width:120px;">老用户ARPPU</th>
                                                                 <th style="min-width:130px;">老用户登录人数</th>
@@ -215,28 +215,28 @@
             var ele = "<tr><td>statisticsMonth</td>" +
                 "<td>registerPopulation</td>" +
                 "<td>registerExpCount</td>" +
-                "<td>registerExpRate</td>" +
+                "<td>registerExpRate%</td>" +
                 "<td>realExpCount</td>" +
                 "<td>virtualExpCount</td>" +
                 "<td>newUserRechargePopulation</td>" +
                 "<td>newUserRechargeCount</td>" +
                 "<td>newUserRechargeAmount</td>" +
-                "<td>newUserRechargeRate</td>" +
+                "<td>newUserRechargeRate%</td>" +
                 "<td>newUserARPU</td>" +
                 "<td>newUserARPPU</td>" +
                 "<td>newUserLoginCount</td>" +
                 "<td>newUserPlayCount</td>" +
-                "<td>newUserLoginTransformRate</td>" +
+                "<td>newUserLoginTransformRate%</td>" +
                 "<td>oldUserRechargeCount</td>" +
                 "<td>oldUserRechargePopulation</td>" +
                 "<td>oldUserRechargeAmount</td>" +
-                "<td>oldUserRechargeRate</td>" +
+                "<td>oldUserRechargeRate%</td>" +
                 "<td>oldUserARPU</td>" +
                 "<td>oldUserARPPU</td>" +
                 "<td>oldUserLoginCount</td>" +
                 "<td>oldUserPlayCount</td>" +
-                "<td>oldUserLoginTransformRate</td>" +
-                "<td>nextDayKeepRate</td>";
+                "<td>oldUserLoginTransformRate%</td>" +
+                "<td>nextDayKeepRate%</td>";
             ele = ele.replace("statisticsMonth", data.statisticsMonth)
                 .replace("registerPopulation", data.registerPopulation)
                 .replace("registerExpCount", data.registerExpCount)
@@ -299,45 +299,61 @@
                     totalInfo.statisticsMonth = "总计";
                     totalInfo.registerPopulation = 0;
                     totalInfo.registerExpCount = 0;
-                    totalInfo.registerExpRate = "-";
+                    totalInfo.registerExpRate = 0;
                     totalInfo.realExpCount = 0;
                     totalInfo.virtualExpCount = 0;
                     totalInfo.newUserRechargePopulation = 0;
                     totalInfo.newUserRechargeCount = 0;
                     totalInfo.newUserRechargeAmount = 0;
-                    totalInfo.newUserRechargeRate = "-";
+                    totalInfo.newUserRechargeRate = 0;
                     totalInfo.newUserARPU = "-";
                     totalInfo.newUserARPPU = "-";
                     totalInfo.newUserLoginCount = 0;
                     totalInfo.newUserPlayCount = 0;
-                    totalInfo.newUserLoginTransformRate = "-";
+                    totalInfo.newUserLoginTransformRate = 0;
                     totalInfo.oldUserRechargeCount = 0;
                     totalInfo.oldUserRechargePopulation = 0;
                     totalInfo.oldUserRechargeAmount = 0;
-                    totalInfo.oldUserRechargeRate = "-";
+                    totalInfo.oldUserRechargeRate = 0;
                     totalInfo.oldUserARPU = "-";
                     totalInfo.oldUserARPPU = "-";
                     totalInfo.oldUserLoginCount = 0;
                     totalInfo.oldUserPlayCount = 0;
-                    totalInfo.oldUserLoginTransformRate = "-";
-                    totalInfo.nextDayKeepRate = "-";
+                    totalInfo.oldUserLoginTransformRate = 0;
+                    totalInfo.nextDayKeepRate = 0;
                     for (var i = 0; i < infoData.length; i++) {
                         addTbRow(infoData[i]);
                         totalInfo.registerPopulation = accAdd(totalInfo.registerPopulation, parseFloat(infoData[i].registerPopulation));
                         totalInfo.registerExpCount = accAdd(totalInfo.registerExpCount, parseFloat(infoData[i].registerExpCount));
+                        totalInfo.registerExpRate = accAdd(parseFloat(totalInfo.registerExpRate), parseFloat(infoData[i].registerExpRate));
                         totalInfo.realExpCount = accAdd(totalInfo.realExpCount, parseFloat(infoData[i].realExpCount));
                         totalInfo.virtualExpCount = accAdd(totalInfo.virtualExpCount, parseFloat(infoData[i].virtualExpCount));
                         totalInfo.newUserRechargePopulation = accAdd(totalInfo.newUserRechargePopulation, parseFloat(infoData[i].newUserRechargePopulation));
                         totalInfo.newUserRechargeCount = accAdd(totalInfo.newUserRechargeCount, parseFloat(infoData[i].newUserRechargeCount));
                         totalInfo.newUserRechargeAmount = accAdd(totalInfo.newUserRechargeAmount, parseFloat(infoData[i].newUserRechargeAmount));
+                        totalInfo.newUserRechargeRate = accAdd(parseFloat(totalInfo.newUserRechargeRate), parseFloat(infoData[i].newUserRechargeRate));
                         totalInfo.newUserLoginCount = accAdd(totalInfo.newUserLoginCount, parseFloat(infoData[i].newUserLoginCount));
                         totalInfo.newUserPlayCount = accAdd(totalInfo.newUserPlayCount, parseFloat(infoData[i].newUserPlayCount));
+                        totalInfo.newUserLoginTransformRate = accAdd(parseFloat(totalInfo.newUserLoginTransformRate), parseFloat(infoData[i].newUserLoginTransformRate));
                         totalInfo.oldUserRechargeCount = accAdd(totalInfo.oldUserRechargeCount, parseFloat(infoData[i].oldUserRechargeCount));
                         totalInfo.oldUserRechargePopulation = accAdd(totalInfo.oldUserRechargePopulation, parseFloat(infoData[i].oldUserRechargePopulation));
                         totalInfo.oldUserRechargeAmount = accAdd(totalInfo.oldUserRechargeAmount, parseFloat(infoData[i].oldUserRechargeAmount));
+                        totalInfo.oldUserRechargeRate = accAdd(parseFloat(totalInfo.oldUserRechargeRate), parseFloat(infoData[i].oldUserRechargeRate));
                         totalInfo.oldUserLoginCount = accAdd(totalInfo.oldUserLoginCount, parseFloat(infoData[i].oldUserLoginCount));
                         totalInfo.oldUserPlayCount = accAdd(totalInfo.oldUserPlayCount, parseFloat(infoData[i].oldUserPlayCount));
+                        totalInfo.oldUserLoginTransformRate = accAdd(parseFloat(totalInfo.oldUserLoginTransformRate), parseFloat(infoData[i].oldUserLoginTransformRate));
+                        totalInfo.nextDayKeepRate = accAdd(parseFloat(totalInfo.nextDayKeepRate), parseFloat(infoData[i].nextDayKeepRate));
                     }
+                    totalInfo.registerExpRate = accDiv2(totalInfo.registerExpRate, infoData.length);
+                    totalInfo.newUserRechargeRate = accDiv2(totalInfo.newUserRechargeRate, infoData.length);
+                    totalInfo.newUserARPU = "-";
+                    totalInfo.newUserARPPU = "-";
+                    totalInfo.newUserLoginTransformRate = accDiv2(totalInfo.newUserLoginTransformRate, infoData.length);
+                    totalInfo.oldUserRechargeRate = accDiv2(totalInfo.oldUserRechargeRate, infoData.length);
+                    totalInfo.oldUserARPU = "-";
+                    totalInfo.oldUserARPPU = "-";
+                    totalInfo.oldUserLoginTransformRate = accDiv2(totalInfo.oldUserLoginTransformRate, infoData.length);
+                    totalInfo.nextDayKeepRate = accDiv2(totalInfo.nextDayKeepRate, infoData.length);
                     addTbRow(totalInfo);
                 }
             } else {

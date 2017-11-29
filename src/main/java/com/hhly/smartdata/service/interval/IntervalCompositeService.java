@@ -118,22 +118,16 @@ public class IntervalCompositeService{
         // 曲线图数据
         Map<String, Object> result = Maps.newHashMap();
         List<String> scaleList = Lists.newArrayList();
-        //scaleList.add("00:00");
         // 注册人数
         List<Long> registerPopulationList = Lists.newArrayList();
-        //registerPopulationList.add(0L);
         //登录人数
         List<Long> loginCountList = Lists.newArrayList();
-        //loginCountList.add(0L);
         //充值人数
         List<Long> rechargePopulationList = Lists.newArrayList();
-        //rechargePopulationList.add(0L);
         //充值次数
         List<Long> rechargeCountList = Lists.newArrayList();
-        //rechargeCountList.add(0L);
         //充值金额
         List<BigDecimal> rechargeAmountList = Lists.newArrayList();
-        rechargeAmountList.add(new BigDecimal(0));
 
         //查询获取数据
         String startTime = (StringUtils.isEmpty(startDate) ? DateUtil.date2String(now, "yyyy-MM-dd") + " 00:00" : startDate) + ":00";

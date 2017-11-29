@@ -32,7 +32,7 @@
     </select>
     <select id="selectAverageOneKeep" resultType="java.lang.Float">
         SELECT
-        ROUND(AVG(one_remain),2)
+        ROUND(AVG(one_remain),4)
         FROM daily_keep_record_report
         WHERE statistics_day &gt;= #{startDay}
         AND statistics_day &lt;= #{endDay} ;

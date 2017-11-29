@@ -20,7 +20,7 @@
         SELECT
         platform_id AS platformId,
         terminal AS sourceType,
-        user_id AS userId,
+        BINARY user_id AS userId,
         COUNT(order_no) AS orderCount,
         SUM(gold) AS applyAmountSum
         FROM

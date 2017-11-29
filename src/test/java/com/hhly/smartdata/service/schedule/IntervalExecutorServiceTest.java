@@ -33,7 +33,9 @@ public class IntervalExecutorServiceTest extends BaseTest{
         Date now = new Date();
         Date nowPointByThirtyMinute = DateUtil.getBeforeThirtyMinutePoint(now);
         String startDate = DateUtil.date2String(nowPointByThirtyMinute);
-        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11"};
+        this.intervalExecutorService.intervalSourceStatistics(startDate, INTERVAL_TIME);
+//        String[] yue = {"11-10", "11-11", "11-12", "11-13", "11-14", "11-15", "11-16", "11-17", "11-18", "11-19", "11-20", "11-21", "11-22",};
+        String[] yue = {"11-22", "11-23", "11-24", "11-25", "11-26", "11-27"};
         for(String item : yue){
             for(int i = 0; i < 10; i++){
                 this.intervalExecutorService.intervalSourceStatistics("2017-" + item + " 0" + i + ":00:00", INTERVAL_TIME);
@@ -58,8 +60,8 @@ public class IntervalExecutorServiceTest extends BaseTest{
         Date now = new Date();
         Date nowPointByThirtyMinute = DateUtil.getBeforeThirtyMinutePoint(now);
         String startDate = DateUtil.date2String(nowPointByThirtyMinute);
-//        this.intervalExecutorService.intervalInterfaceStatistics(startDate, INTERVAL_TIME);
-        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11"};
+        this.intervalExecutorService.intervalInterfaceStatistics(startDate, INTERVAL_TIME);
+        String[] yue = {"11-22", "11-23", "11-24", "11-25", "11-26", "11-27"};
         for(String item : yue){
             for(int i = 0; i < 10; i++){
                 this.intervalExecutorService.intervalInterfaceStatistics("2017-" + item + " 0" + i + ":00:00", INTERVAL_TIME);
@@ -84,8 +86,8 @@ public class IntervalExecutorServiceTest extends BaseTest{
         Date now = new Date();
         Date nowPointByThirtyMinute = DateUtil.getBeforeThirtyMinutePoint(now);
         String startDate = DateUtil.date2String(nowPointByThirtyMinute);
-//        this.intervalExecutorService.intervalGameLaunch(startDate, INTERVAL_TIME);
-        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11"};
+        this.intervalExecutorService.intervalGameLaunch(startDate, INTERVAL_TIME);
+        String[] yue = {"11-22", "11-23", "11-24", "11-25", "11-26", "11-27"};
         for(String item : yue){
             for(int i = 0; i < 10; i++){
                 this.intervalExecutorService.intervalGameLaunch("2017-" + item + " 0" + i + ":00:00", INTERVAL_TIME);
@@ -101,6 +103,4 @@ public class IntervalExecutorServiceTest extends BaseTest{
             }
         }
     }
-
-
 }

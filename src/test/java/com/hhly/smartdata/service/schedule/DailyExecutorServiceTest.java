@@ -29,7 +29,8 @@ public class DailyExecutorServiceTest extends BaseTest{
     @Test
     public void testCompositeReport() throws Exception{
         this.dailyExecutorService.compositeReport(new Date());
-        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11", "11-12"};
+        String[] yue = {"11-22", "11-23", "11-24", "11-25", "11-26", "11-27"};
+//        String[] yue = {"11-22"};
         for(String item : yue){
             this.dailyExecutorService.compositeReport(DateUtil.string2Date("2017-" + item + " 01:00:00"));
         }
@@ -41,7 +42,7 @@ public class DailyExecutorServiceTest extends BaseTest{
     @Test
     public void testRechargeStatistic() throws Exception{
         this.dailyExecutorService.rechargeStatistic(new Date());
-        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11", "11-12"};
+        String[] yue = {"11-22", "11-23", "11-24", "11-25", "11-26", "11-27"};
         for(String item : yue){
             this.dailyExecutorService.rechargeStatistic(DateUtil.string2Date("2017-" + item + " 01:00:00"));
         }
@@ -53,7 +54,7 @@ public class DailyExecutorServiceTest extends BaseTest{
     @Test
     public void testLoginStatistic() throws Exception{
         this.dailyExecutorService.loginStatistic(new Date());
-        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11", "11-12"};
+        String[] yue = {"11-22", "11-23", "11-24", "11-25", "11-26", "11-27"};
         for(String item : yue){
             this.dailyExecutorService.loginStatistic(DateUtil.string2Date("2017-" + item + " 01:00:00"));
         }
@@ -65,7 +66,7 @@ public class DailyExecutorServiceTest extends BaseTest{
     @Test
     public void testRegisterStatistic() throws Exception{
         this.dailyExecutorService.registerStatistic(new Date());
-        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11", "11-12"};
+        String[] yue = {"11-22", "11-23", "11-24", "11-25", "11-26", "11-27"};
         for(String item : yue){
             this.dailyExecutorService.registerStatistic(DateUtil.string2Date("2017-" + item + " 01:00:00"));
         }
@@ -77,7 +78,7 @@ public class DailyExecutorServiceTest extends BaseTest{
     @Test
     public void testKeepRecordAnalyzeReport() throws Exception{
         this.dailyExecutorService.keepRecordAnalyzeReport(new Date());
-        String[] yue = {"10-30", "10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06", "11-07", "11-08", "11-09", "11-10", "11-11", "11-12"};
+        String[] yue = {"11-22", "11-23", "11-24", "11-25", "11-26", "11-27"};
         for(String item : yue){
             this.dailyExecutorService.keepRecordAnalyzeReport(DateUtil.string2Date("2017-" + item + " 01:00:00"));
         }

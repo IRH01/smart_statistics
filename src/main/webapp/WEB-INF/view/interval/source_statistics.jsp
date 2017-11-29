@@ -452,8 +452,8 @@
                     var ele1 = {
                         statisticsTime: "总计",
                         registerPopulation: sumRegisterPopulation,
-                        loginPopulation: sumLoginPopulation,
-                        rechargePopulation: sumRechargePopulation,
+                        loginPopulation: "--",
+                        rechargePopulation: "--",
                         rechargeCount: sumRechargeCount,
                         rechargeAmount: sumRechargeAmount.toFixed(2)
                     };

@@ -83,18 +83,22 @@
 
     <select id="selectRegisterUserByStartTimeAndEndTime" resultType="java.util.Map">
         SELECT
-        user_id as UserId,
+        BINARY user_id as userId,
         os_type as osType
         FROM
         tbl_user_info
         WHERE create_time &lt;= #{endTime}
         AND create_time > #{startTime}
+        AND os_type is not null
+        AND os_type != ''
+        AND user_id is not null
+        AND user_id != ''
         and status = 2
     </select>
 
     <select id="selectUserIdByStartTimeAndEndTime" resultType="java.lang.String">
         SELECT
-        user_id as UserId
+        user_id
         FROM
         tbl_user_info
         WHERE create_time &lt;= #{endTime}
@@ -104,7 +108,7 @@
 
     <select id="selectRegisterUserIdAndTerminalByStartTimeAndEndTime" resultType="java.util.Map">
         SELECT
-        count(user_id) as UserCount,
+        count(user_id) as userCount,
         os_type as osType
         FROM
         tbl_user_info

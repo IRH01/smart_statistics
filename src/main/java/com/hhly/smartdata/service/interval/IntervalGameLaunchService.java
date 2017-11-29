@@ -49,7 +49,7 @@ public class IntervalGameLaunchService{
         String configValue = systemConfigMapper.getConfigValueByKey("hhly:playOne:systemConfig:common:platformCode");
         Map<String, String> platformMap = JsonUtil.jsonStr2Map(configValue);
 
-        Set<Object> listSet = Sets.newHashSet();
+        Set<Object> listSet = Sets.newLinkedHashSet();
         Map<String, Integer> dataSum = Maps.newHashMap();
 
         for(String platformCode : platformMap.keySet()){

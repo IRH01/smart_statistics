@@ -25,10 +25,10 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      */
     public String getRegisterExpCountRate(){
         NumberFormat numberFormat = NumberFormat.getInstance();
-        // 设置精确到小数点后2位
-        numberFormat.setMaximumFractionDigits(2);
+        // 设置精确到小数点后4位
+        numberFormat.setMaximumFractionDigits(4);
         if(this.getRegisterPopulation() == 0){
-            return "0.00";
+            return "0";
         }
         return numberFormat.format(((float) this.getRegisterExpCount() / (float) this.getRegisterPopulation()) * 100);
     }
@@ -40,10 +40,10 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      */
     public String getNewUserRechargeRate(){
         NumberFormat numberFormat = NumberFormat.getInstance();
-        // 设置精确到小数点后2位
-        numberFormat.setMaximumFractionDigits(2);
+        // 设置精确到小数点后4位
+        numberFormat.setMaximumFractionDigits(4);
         if(this.getRegisterPopulation() == 0){
-            return "0.00";
+            return "0";
         }
         return numberFormat.format(((float) this.getNewUserRechargePopulation() / (float) this.getRegisterPopulation()) * 100);
     }
@@ -54,9 +54,9 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      * @return
      */
     public BigDecimal getNewUserARPU(){
-        BigDecimal result = new BigDecimal(0.00);
+        BigDecimal result = new BigDecimal(0);
         if(this.getNewUserLoginCount() != 0){
-            result = this.getNewUserRechargeAmount().divide(new BigDecimal(this.getNewUserLoginCount()), 2, RoundingMode.HALF_UP);
+            result = this.getNewUserRechargeAmount().divide(new BigDecimal(this.getNewUserLoginCount()), 4, RoundingMode.HALF_UP);
         }
         return result;
     }
@@ -68,10 +68,10 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      */
     public String getNewUserLoginTransformRate(){
         NumberFormat numberFormat = NumberFormat.getInstance();
-        // 设置精确到小数点后2位
-        numberFormat.setMaximumFractionDigits(2);
+        // 设置精确到小数点后4位
+        numberFormat.setMaximumFractionDigits(4);
         if(this.getRegisterPopulation() == 0){
-            return "0.00";
+            return "0";
         }
         return numberFormat.format(((float) this.getNewUserLoginCount() / (float) this.getRegisterPopulation()) * 100);
     }
@@ -82,9 +82,9 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      * @return
      */
     public BigDecimal getOldUserARPU(){
-        BigDecimal result = new BigDecimal(0.00);
+        BigDecimal result = new BigDecimal(0);
         if(this.getOldUserLoginCount() != 0){
-            result = this.getOldUserRechargeAmount().divide(new BigDecimal(this.getOldUserLoginCount()), 2, RoundingMode.HALF_UP);
+            result = this.getOldUserRechargeAmount().divide(new BigDecimal(this.getOldUserLoginCount()), 4, RoundingMode.HALF_UP);
         }
         return result;
     }
@@ -96,11 +96,11 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      */
     public String getOldUserRechargeRate(){
         NumberFormat numberFormat = NumberFormat.getInstance();
-        // 设置精确到小数点后2位
-        numberFormat.setMaximumFractionDigits(2);
+        // 设置精确到小数点后4位
+        numberFormat.setMaximumFractionDigits(4);
         Integer oldRegisterPopulation = this.getTotalRegisterPopulation() - this.getRegisterPopulation();
         if(oldRegisterPopulation == 0){
-            return "0.00";
+            return "0";
         }
         return numberFormat.format(((float) (this.getOldUserRechargePopulation()) / (float) oldRegisterPopulation) * 100);
     }
@@ -112,11 +112,11 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      */
     public String getOldUserLoginTransformRate(){
         NumberFormat numberFormat = NumberFormat.getInstance();
-        // 设置精确到小数点后2位
-        numberFormat.setMaximumFractionDigits(2);
+        // 设置精确到小数点后4位
+        numberFormat.setMaximumFractionDigits(4);
         Integer oldRegisterPopulation = this.getTotalRegisterPopulation() - this.getRegisterPopulation();
         if(oldRegisterPopulation == 0){
-            return "0.00";
+            return "0";
         }
         return numberFormat.format(((float) this.getOldUserLoginCount() / (float) oldRegisterPopulation) * 100);
     }
@@ -127,9 +127,9 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      * @return
      */
     public BigDecimal getNewUserARPPU(){
-        BigDecimal result = new BigDecimal(0.00);
-        if(this.getNewUserRechargeCount() != 0){
-            result = this.getNewUserRechargeAmount().divide(new BigDecimal(this.getNewUserRechargePopulation()), 2, RoundingMode.HALF_UP);
+        BigDecimal result = new BigDecimal(0);
+        if(this.getNewUserRechargePopulation() != 0){
+            result = this.getNewUserRechargeAmount().divide(new BigDecimal(this.getNewUserRechargePopulation()), 4, RoundingMode.HALF_UP);
         }
         return result;
     }
@@ -140,9 +140,9 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      * @return
      */
     public BigDecimal getOldUserARPPU(){
-        BigDecimal result = new BigDecimal(0.00);
-        if(this.getNewUserRechargeCount() != 0){
-            result = this.getOldUserRechargeAmount().divide(new BigDecimal(this.getOldUserRechargePopulation()), 2, RoundingMode.HALF_UP);
+        BigDecimal result = new BigDecimal(0);
+        if(this.getOldUserRechargePopulation() != 0){
+            result = this.getOldUserRechargeAmount().divide(new BigDecimal(this.getOldUserRechargePopulation()), 4, RoundingMode.HALF_UP);
         }
         return result;
     }
@@ -158,10 +158,10 @@ public class DailyCompositeReportResult extends DailyCompositeReport{
      */
     public void setNextDayKeepRate(Integer nextDayStayCount, Integer registerPopulation){
         NumberFormat numberFormat = NumberFormat.getInstance();
-        // 设置精确到小数点后2位
-        numberFormat.setMaximumFractionDigits(2);
+        // 设置精确到小数点后4位
+        numberFormat.setMaximumFractionDigits(4);
         if(registerPopulation == 0){
-            this.nextDayStayRate = "0.00";
+            this.nextDayStayRate = "0";
         }else{
             this.nextDayStayRate = numberFormat.format(((float) nextDayStayCount / (float) registerPopulation) * 100);
         }

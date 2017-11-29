@@ -93,21 +93,21 @@ public class DailyExecutorService{
         List<Map<String, Object>> yesterdayLaunchGameUserList = this.dataGameStartMapper.selectLaunchGameUserByStartTimeAndEndTime(DateUtil.offsetDayStartTime(date, -1), DateUtil.offsetDayEndTime(date, -1));
         Set<String> yesterdayLaunchGameUserSet = Sets.newHashSet();
         for(Map<String, Object> map : yesterdayLaunchGameUserList){
-            yesterdayLaunchGameUserSet.add((String) map.get("userId"));
+            yesterdayLaunchGameUserSet.add(new String((byte[]) map.get("userId")));
         }
 
         // 昨日充值的用户列表,并转换成Set集合。
         List<Map<String, Object>> yesterdayRechargeUserList = this.rechargeRecordMapper.selectRechargeUserByTime(DateUtil.offsetDayStartTime(date, -1), DateUtil.offsetDayEndTime(date, -1));
         Map<String, Map<String, Object>> yesterdayRechargeUserMap = Maps.newHashMap();
         for(Map<String, Object> map : yesterdayRechargeUserList){
-            yesterdayRechargeUserMap.put((String) map.get("userId"), map);
+            yesterdayRechargeUserMap.put(new String((byte[]) map.get("userId")), map);
         }
 
         // 昨日产生消费记录的用户列表,并转换成Set集合。
         List<Map<String, Object>> yesterdayConsumeUserList = this.platformGoldConsumeMapper.selectConsumeUserByStartTimeAndEndTime(DateUtil.offsetDayStartTime(date, -1), DateUtil.offsetDayEndTime(date, -1));
         Map<String, Map<String, Object>> yesterdayConsumeUserMap = Maps.newHashMap();
         for(Map<String, Object> map : yesterdayConsumeUserList){
-            yesterdayConsumeUserMap.put((String) map.get("userId"), map);
+            yesterdayConsumeUserMap.put(new String((byte[]) map.get("userId")), map);
         }
         // 昨日登录用户列表
         List<String> yesterdayLoginUserList = this.loginTrackMapper.selectLoginUserPopulationByTime(DateUtil.date2String(DateUtil.offsetDayStartTime(date, -1)), DateUtil.date2String(DateUtil.offsetDayEndTime(date, -1)));
@@ -266,7 +266,7 @@ public class DailyExecutorService{
             Set<String> loginUserIdSet = Sets.newHashSet();
             for(Map<String, Object> map : loginUserTotalList){
                 if(((Integer) map.get("sourceType")).byteValue() == item.getCode()){
-                    loginUserIdSet.add((String) map.get("userId"));
+                    loginUserIdSet.add(new String((byte[]) map.get("userId")));
                 }
             }
             dailyRechargeReport.setLoginPopulation(loginUserIdSet.size());
@@ -315,14 +315,14 @@ public class DailyExecutorService{
         //初始化临时容器
         tempUserIdSet.clear();
         for(Map<String, Object> item : loginUserTotalList){
-            tempUserIdSet.add((String) item.get("userId"));
+            tempUserIdSet.add(new String((byte[]) item.get("userId")));
         }
         dailyLoginReportAll.setLoginPopulation(tempUserIdSet.size());
 
         //初始化临时容器
         tempUserIdSet.clear();
         for(Map<String, Object> item : launchGameUserList){
-            tempUserIdSet.add((String) item.get("userId"));
+            tempUserIdSet.add(new String((byte[]) item.get("userId")));
         }
         dailyLoginReportAll.setPlayPopulation(tempUserIdSet.size());
 
@@ -345,7 +345,7 @@ public class DailyExecutorService{
             for(Map<String, Object> item : loginUserTotalList){
                 Integer sourceType = (Integer) item.get("sourceType");
                 if(sourceType == sourceTypeEnum.getCode().intValue()){
-                    tempUserIdSet.add((String) item.get("userId"));
+                    tempUserIdSet.add(new String((byte[]) item.get("userId")));
                 }
             }
             dailyLoginReportComp.setLoginPopulation(tempUserIdSet.size());
@@ -355,7 +355,7 @@ public class DailyExecutorService{
             for(Map<String, Object> item : launchGameUserList){
                 Integer sourceType = (Integer) item.get("sourceType");
                 if(sourceType == sourceTypeEnum.getCode().intValue()){
-                    tempUserIdSet.add((String) item.get("userId"));
+                    tempUserIdSet.add(new String((byte[]) item.get("userId")));
                 }
             }
             dailyLoginReportComp.setPlayPopulation(tempUserIdSet.size());
@@ -382,7 +382,7 @@ public class DailyExecutorService{
                     Integer sourceType = (Integer) item.get("sourceType");
                     String platformCodeStr = (String) item.get("platformCode");
                     if(sourceType == sourceTypeEnum.getCode().intValue() && platformCodeStr != null && platformCodeStr.equals(platformCode)){
-                        tempUserIdSet.add((String) item.get("userId"));
+                        tempUserIdSet.add(new String((byte[]) item.get("userId")));
                     }
                 }
                 dailyLoginReport.setPlayPopulation(tempUserIdSet.size());
@@ -421,16 +421,16 @@ public class DailyExecutorService{
             }
             switch(sourceType){
                 case 1:
-                    dailyRegisterReport.setPcPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
+                    dailyRegisterReport.setPcPopulation(registerMap.get("userCount") == null ? 0 : Integer.valueOf(registerMap.get("userCount") + ""));
                     break;
                 case 2:
-                    dailyRegisterReport.setAndroidPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
+                    dailyRegisterReport.setAndroidPopulation(registerMap.get("userCount") == null ? 0 : Integer.valueOf(registerMap.get("userCount") + ""));
                     break;
                 case 3:
-                    dailyRegisterReport.setIosPopulation(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
+                    dailyRegisterReport.setIosPopulation(registerMap.get("userCount") == null ? 0 : Integer.valueOf(registerMap.get("userCount") + ""));
                     break;
                 case 4:
-                    dailyRegisterReport.setH5Population(registerMap.get("UserCount") == null ? 0 : Integer.valueOf(registerMap.get("UserCount") + ""));
+                    dailyRegisterReport.setH5Population(registerMap.get("userCount") == null ? 0 : Integer.valueOf(registerMap.get("userCount") + ""));
                     break;
             }
         }
@@ -558,15 +558,15 @@ public class DailyExecutorService{
                 case 0:
                     // 全部
                     for(Map<String, Object> map : yesterdayLoginUserList){
-                        yesterdayLoginUserSet.add((String) map.get("userId"));
+                        yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                     }
 
                     for(Map<String, Object> map : yesterdayGameStartList){
-                        yesterdayLoginUserSet.add((String) map.get("userId"));
+                        yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                     }
 
                     for(Map<String, Object> map : yesterdayUserViewAndPageViewList){
-                        yesterdayLoginUserSet.add((String) map.get("userId"));
+                        yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                     }
 
                     dailyKeepRecordReport.setRegisterCount(beforeDayRegisterUserList_0.size());
@@ -575,13 +575,13 @@ public class DailyExecutorService{
                     // pc
                     for(Map<String, Object> map : yesterdayLoginUserList){
                         if("1".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                            yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
                     for(Map<String, Object> map : yesterdayUserViewAndPageViewList){
                         if("1".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                            yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
@@ -590,19 +590,19 @@ public class DailyExecutorService{
                             count++;
                         }
                     }
-                   dailyKeepRecordReport.setRegisterCount(count);
+                    dailyKeepRecordReport.setRegisterCount(count);
                     break;
                 case 2:
                     // android
                     for(Map<String, Object> map : yesterdayLoginUserList){
                         if("2".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                            yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
                     for(Map<String, Object> map : yesterdayGameStartList){
                         if("2".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                            yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
@@ -617,13 +617,13 @@ public class DailyExecutorService{
                     // ios;
                     for(Map<String, Object> map : yesterdayLoginUserList){
                         if("3".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                            yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
                     for(Map<String, Object> map : yesterdayGameStartList){
                         if("3".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                            yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
@@ -638,13 +638,13 @@ public class DailyExecutorService{
                     // h5
                     for(Map<String, Object> map : yesterdayLoginUserList){
                         if("4".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                            yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
                     for(Map<String, Object> map : yesterdayUserViewAndPageViewList){
                         if("4".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            yesterdayLoginUserSet.add((String) map.get("userId"));
+                            yesterdayLoginUserSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
                     for(Map<String, Object> map : beforeDayRegisterUserList_0){
@@ -679,12 +679,12 @@ public class DailyExecutorService{
             dailyKeepRecordReport.setThirtyRemain(-1);
 
             // 更新留存率
-            for(DailyKeepRecordReport oneDayReport :beforeDayDailyKeepRecordReportList_1){
-                if(keepRecordEnum.getCode().intValue() == oneDayReport.getSourceType().intValue()) {
+            for(DailyKeepRecordReport oneDayReport : beforeDayDailyKeepRecordReportList_1){
+                if(keepRecordEnum.getCode().intValue() == oneDayReport.getSourceType().intValue()){
                     oneDayReport.setOneRemain(oneRemain);
                     oneDayReport.setTwoRemain(-1);
-                    oneDayReport.setThirtyRemain(-1);
-                    oneDayReport.setFourteenRemain(-1);
+                    oneDayReport.setThreeRemain(-1);
+                    oneDayReport.setFourRemain(-1);
                     oneDayReport.setFiveRemain(-1);
                     oneDayReport.setSixRemain(-1);
                     oneDayReport.setSevenRemain(-1);
@@ -695,11 +695,11 @@ public class DailyExecutorService{
                 }
             }
 
-            for(DailyKeepRecordReport twoDayReport :beforeDayDailyKeepRecordReportList_2){
-                if(keepRecordEnum.getCode().intValue() == twoDayReport.getSourceType().intValue()) {
+            for(DailyKeepRecordReport twoDayReport : beforeDayDailyKeepRecordReportList_2){
+                if(keepRecordEnum.getCode().intValue() == twoDayReport.getSourceType().intValue()){
                     twoDayReport.setTwoRemain(twoRemain);
-                    twoDayReport.setThirtyRemain(-1);
-                    twoDayReport.setFourteenRemain(-1);
+                    twoDayReport.setThreeRemain(-1);
+                    twoDayReport.setFourRemain(-1);
                     twoDayReport.setFiveRemain(-1);
                     twoDayReport.setSixRemain(-1);
                     twoDayReport.setSevenRemain(-1);
@@ -710,10 +710,10 @@ public class DailyExecutorService{
                 }
             }
 
-            for(DailyKeepRecordReport threeDayReport :beforeDayDailyKeepRecordReportList_3){
-                if(keepRecordEnum.getCode().intValue() == threeDayReport.getSourceType().intValue()) {
+            for(DailyKeepRecordReport threeDayReport : beforeDayDailyKeepRecordReportList_3){
+                if(keepRecordEnum.getCode().intValue() == threeDayReport.getSourceType().intValue()){
                     threeDayReport.setThreeRemain(threeRemain);
-                    threeDayReport.setFourteenRemain(-1);
+                    threeDayReport.setFourRemain(-1);
                     threeDayReport.setFiveRemain(-1);
                     threeDayReport.setSixRemain(-1);
                     threeDayReport.setSevenRemain(-1);
@@ -724,8 +724,8 @@ public class DailyExecutorService{
                 }
             }
 
-            for(DailyKeepRecordReport fourDayReport :beforeDayDailyKeepRecordReportList_4){
-                if(keepRecordEnum.getCode().intValue() == fourDayReport.getSourceType().intValue()) {
+            for(DailyKeepRecordReport fourDayReport : beforeDayDailyKeepRecordReportList_4){
+                if(keepRecordEnum.getCode().intValue() == fourDayReport.getSourceType().intValue()){
                     fourDayReport.setFourRemain(fourRemain);
                     fourDayReport.setFiveRemain(-1);
                     fourDayReport.setSixRemain(-1);
@@ -737,8 +737,8 @@ public class DailyExecutorService{
                 }
             }
 
-            for(DailyKeepRecordReport fiveDayReport :beforeDayDailyKeepRecordReportList_5){
-                if(keepRecordEnum.getCode().intValue() == fiveDayReport.getSourceType().intValue()) {
+            for(DailyKeepRecordReport fiveDayReport : beforeDayDailyKeepRecordReportList_5){
+                if(keepRecordEnum.getCode().intValue() == fiveDayReport.getSourceType().intValue()){
                     fiveDayReport.setFiveRemain(fiveRemain);
                     fiveDayReport.setSixRemain(-1);
                     fiveDayReport.setSevenRemain(-1);
@@ -749,8 +749,8 @@ public class DailyExecutorService{
                 }
             }
 
-            for(DailyKeepRecordReport sixDayReport :beforeDayDailyKeepRecordReportList_6){
-                if(keepRecordEnum.getCode().intValue() == sixDayReport.getSourceType().intValue()) {
+            for(DailyKeepRecordReport sixDayReport : beforeDayDailyKeepRecordReportList_6){
+                if(keepRecordEnum.getCode().intValue() == sixDayReport.getSourceType().intValue()){
                     sixDayReport.setSixRemain(sixRemain);
                     sixDayReport.setSevenRemain(-1);
                     sixDayReport.setFourteenRemain(-1);
@@ -760,8 +760,8 @@ public class DailyExecutorService{
                 }
             }
 
-            for(DailyKeepRecordReport sevenDayReport :beforeDayDailyKeepRecordReportList_7){
-                if(keepRecordEnum.getCode().intValue() == sevenDayReport.getSourceType().intValue()) {
+            for(DailyKeepRecordReport sevenDayReport : beforeDayDailyKeepRecordReportList_7){
+                if(keepRecordEnum.getCode().intValue() == sevenDayReport.getSourceType().intValue()){
                     sevenDayReport.setSevenRemain(sevenRemain);
                     sevenDayReport.setFourteenRemain(-1);
                     sevenDayReport.setThirtyRemain(-1);
@@ -770,8 +770,8 @@ public class DailyExecutorService{
                 }
             }
 
-            for(DailyKeepRecordReport fourteenDayReport :beforeDayDailyKeepRecordReportList_14){
-                if(keepRecordEnum.getCode().intValue() == fourteenDayReport.getSourceType().intValue()) {
+            for(DailyKeepRecordReport fourteenDayReport : beforeDayDailyKeepRecordReportList_14){
+                if(keepRecordEnum.getCode().intValue() == fourteenDayReport.getSourceType().intValue()){
                     fourteenDayReport.setFourteenRemain(fourteenRemain);
                     fourteenDayReport.setThirtyRemain(-1);
                     this.dailyKeepRecordReportMapper.updateByPrimaryKey(fourteenDayReport);
@@ -779,8 +779,8 @@ public class DailyExecutorService{
                 }
             }
 
-            for(DailyKeepRecordReport thirtyDayReport :beforeDayDailyKeepRecordReportList_30){
-                if(keepRecordEnum.getCode().intValue() == thirtyDayReport.getSourceType().intValue()) {
+            for(DailyKeepRecordReport thirtyDayReport : beforeDayDailyKeepRecordReportList_30){
+                if(keepRecordEnum.getCode().intValue() == thirtyDayReport.getSourceType().intValue()){
                     thirtyDayReport.setThirtyRemain(thirtyRemain);
                     this.dailyKeepRecordReportMapper.updateByPrimaryKey(thirtyDayReport);
                     break;
@@ -796,10 +796,14 @@ public class DailyExecutorService{
     private Integer calculateRemain(List<Map<String, Object>> list, Set<String> yesterdayLoginUserSet, Integer code){
         Integer count = 0;
         for(Map<String, Object> map : list){
-            String userId = (String) map.get("UserId");
+            String userId =  new String((byte[]) map.get("userId"));
             if(yesterdayLoginUserSet.contains(userId)){
-                if(code == 0) count++;
-                else if(map.get("osType").equals(code)) count++;
+                Integer osType = (Integer) map.get("osType");
+                if(code == 0 ){
+                    count++;
+                } else if (osType.equals(code)){
+                    count++;
+                }
             }
         }
         return count;

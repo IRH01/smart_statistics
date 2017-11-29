@@ -29,7 +29,7 @@
         SELECT
         platform_code AS platformCode,
         platform_terminal AS sourceType,
-        user_id AS userId
+        BINARY user_id AS userId
         FROM
         data_game_start
         WHERE
@@ -181,7 +181,8 @@
     </select>
 
     <select id="selectGameStartGroupBySourceType" resultType="java.util.Map">
-        select user_id as userId,
+        select
+        BINARY user_id as userId,
         platform_terminal as sourceType
         from data_platform_start
         where user_id is not null
@@ -193,7 +194,7 @@
 
 
     <select id="selectYesterdayGameStartList" resultType="java.util.Map">
-        select user_id as userId,platform_terminal as osType from data_platform_start
+        select BINARY user_id as userId,platform_terminal as osType from data_platform_start
         WHERE create_time &lt;= #{endTime}
         AND create_time &gt; #{startTime}
         and user_id is not null and user_id != ''
@@ -212,7 +213,7 @@
     </select>
 
     <select id="selectTodayGameStartCountGroupByUserAndOsType" resultType="java.util.Map">
-        select user_id as userId,platform_terminal as osType from data_platform_start
+        select BINARY user_id as userId,platform_terminal as osType from data_platform_start
         where create_time &lt;= #{endTime}
         and  create_time &gt; #{startTime}
         and user_id is not null and user_id != ''
@@ -232,7 +233,7 @@
     <select id="selectGameStartByTimeGroupBySource" resultType="java.util.Map">
         SELECT
         platform_terminal AS sourceType,
-        user_id AS userId
+        BINARY user_id AS userId
         FROM
         data_game_start
         WHERE

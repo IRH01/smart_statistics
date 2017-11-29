@@ -68,14 +68,14 @@ public class IntervalSourceService{
                     // pc
                     for(Map<String, Object> map : loginUser){
                         if("1".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            intervalSourceTotalDataSet.add((String) map.get("userId"));
+                            intervalSourceTotalDataSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
 
                     for(Map<String, Object> map : firstThirtyMinUserViewAndPageView){
                         if("1".equals(map.get("osType") == null ? "" : map.get("osType").toString())){
-                            intervalSourceTotalDataSet.add((String) map.get("userId"));
+                            intervalSourceTotalDataSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
@@ -91,13 +91,13 @@ public class IntervalSourceService{
                     // android
                     for(Map<String, Object> map : loginUser){
                         if("2".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            intervalSourceTotalDataSet.add((String) map.get("userId"));
+                            intervalSourceTotalDataSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
                     for(Map<String, Object> map : firstThirtyMinGameStartCount){
                         if("2".equals(map.get("osType") == null ? "" : map.get("osType").toString())){
-                            intervalSourceTotalDataSet.add((String) map.get("userId"));
+                            intervalSourceTotalDataSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
@@ -113,13 +113,13 @@ public class IntervalSourceService{
                     // ios;
                     for(Map<String, Object> map : loginUser){
                         if("3".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            intervalSourceTotalDataSet.add((String) map.get("userId"));
+                            intervalSourceTotalDataSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
                     for(Map<String, Object> map : firstThirtyMinGameStartCount){
                         if("3".equals(map.get("osType") == null ? "" : map.get("osType").toString())){
-                            intervalSourceTotalDataSet.add((String) map.get("userId"));
+                            intervalSourceTotalDataSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
@@ -135,13 +135,13 @@ public class IntervalSourceService{
                     // h5
                     for(Map<String, Object> map : loginUser){
                         if("4".equals(map.get("sourceType") == null ? "" : map.get("sourceType").toString())){
-                            intervalSourceTotalDataSet.add((String) map.get("userId"));
+                            intervalSourceTotalDataSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
 
                     for(Map<String, Object> map : firstThirtyMinUserViewAndPageView){
                         if("4".equals(map.get("osType") == null ? "" : map.get("osType").toString())){
-                            intervalSourceTotalDataSet.add((String) map.get("userId"));
+                            intervalSourceTotalDataSet.add(new String((byte[]) map.get("userId")));
                         }
                     }
                     for(Map<String, Object> map : rechargeRecord){

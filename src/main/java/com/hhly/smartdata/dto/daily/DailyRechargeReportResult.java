@@ -11,17 +11,17 @@ import java.math.RoundingMode;
 public class DailyRechargeReportResult extends DailyRechargeReport{
 
     public BigDecimal getArppu(){
-        BigDecimal result = new BigDecimal(0.00);
+        BigDecimal result = new BigDecimal(0.0000);
         if(this.getNewRechargePopulation() != 0){
-            result = this.getRechargeAmount().divide(new BigDecimal(this.getNewRechargePopulation()), 2, RoundingMode.HALF_UP);
+            result = this.getRechargeAmount().divide(new BigDecimal(this.getNewRechargePopulation()), 4, RoundingMode.HALF_UP);
         }
         return result;
     }
 
     public BigDecimal getArpu(){
-        BigDecimal result = new BigDecimal(0.00);
+        BigDecimal result = new BigDecimal(0.0000);
         if(this.getLoginPopulation() != 0){
-            result = this.getRechargeAmount().divide(new BigDecimal(this.getLoginPopulation()), 2, RoundingMode.HALF_UP);
+            result = this.getRechargeAmount().divide(new BigDecimal(this.getLoginPopulation()), 4, RoundingMode.HALF_UP);
         }
         return result;
     }

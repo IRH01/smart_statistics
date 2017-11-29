@@ -117,6 +117,13 @@ function accDiv(arg1, arg2) {
       }
  }
 
+ function accDiv2(arg1,arg2) {
+	 if (arg1 == 0 ||arg2 ==0) {
+	 	return 0;
+	 }
+     return parseFloat((arg1/arg2).toFixed(4));
+ }
+
 
 ///////排序相关Start
 //重置排序样式
