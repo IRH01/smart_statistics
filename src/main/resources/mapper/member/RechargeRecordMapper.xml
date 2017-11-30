@@ -103,6 +103,8 @@
         status != 0
         AND pay_time &lt;= #{endTime}
         AND pay_time &gt;= #{startTime}
+        AND apply_amount is not null
+        AND apply_amount != ''
         GROUP BY BINARY user_id
     </select>
 
@@ -123,7 +125,7 @@
     <select id="selectRechargeUserGroupByUserAndOsType" resultType="java.util.Map">
         SELECT
         source AS sourceType,
-        BINARY user_id AS userId,
+        user_id AS userId,
         COUNT(orderno) AS orderCount,
         SUM(apply_amount) AS applyAmountSum
         FROM
@@ -146,6 +148,11 @@
         status != 0
         AND pay_time &lt;= #{endTime}
         AND pay_time &gt;= #{startTime}
+        AND apply_amount != ''
+        AND apply_amount is not null
+        AND user_id != ''
+        AND user_id is not null
+        AND user_id != 'null'
         GROUP BY BINARY user_id
     </select>
 

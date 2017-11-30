@@ -93,6 +93,7 @@
         AND os_type != ''
         AND user_id is not null
         AND user_id != ''
+        AND user_id != 'null'
         and status = 2
     </select>
 
