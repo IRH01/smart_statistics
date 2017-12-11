@@ -10,37 +10,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>产品运营数据统计后台</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/zTreeStyle.css">
-    <link rel="stylesheet" href="/css/dialogsdk.css">
-    <link rel="stylesheet" href="/css/jquery-ui.css">
-    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/zTreeStyle.css">
+    <link rel="stylesheet" href="../../../css/dialogsdk.css">
+    <link rel="stylesheet" href="../../../css/jquery-ui.css">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
     <!--[if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="/lib/jquery-1.11.2.min.js"></script>
-    <script src="/lib/bootstrap.min.js"></script>
-    <script src="/lib/jquery.ztree.all-3.5.min.js"></script>
-    <script src="/lib/jquery.validate.js"></script>
-    <script src="/lib/additional-methods.min.js" type="text/javascript"></script>
-    <script src="/lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
-    <script src="/lib/jquery.validate.custom.js" type="text/javascript"></script>
-    <script src="/lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
-    <script src="/lib/dialogsdk.js"></script>
-    <script src="/lib/tools/tools.js"></script>
-    <script src="/lib/layer/layer.js"></script>
-    <link rel="stylesheet" href="/css/admin-trend.css"/>
-    <script src="/lib/laydate/laydate.js"></script>
-    <link rel="stylesheet" href="/lib/myPagination/css/style.css"/>
-    <link rel="stylesheet" href="/lib/myPagination/js/myPagination/page.css"/>
-    <link rel="stylesheet" href="/css/jquery-ui.css"/>
-    <script src="/lib/myPagination/js/myPagination/jquery.myPagination6.0.js"></script>
-    <script src="/lib/jquery-ui.js"></script>
-    <script src="/lib/datecontrol.js"></script>
-    <script src="/lib/echart/dist/echarts.js"></script>
-    <script src="/lib/tool.js"></script>
+    <script src="../../../lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../lib/bootstrap.min.js"></script>
+    <script src="../../../lib/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../../../lib/jquery.validate.js"></script>
+    <script src="../../../lib/additional-methods.min.js" type="text/javascript"></script>
+    <script src="../../../lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
+    <script src="../../../lib/jquery.validate.custom.js" type="text/javascript"></script>
+    <script src="../../../lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
+    <script src="../../../lib/dialogsdk.js"></script>
+    <script src="../../../lib/tools/tools.js"></script>
+    <script src="../../../lib/layer/layer.js"></script>
+    <link rel="stylesheet" href="../../../css/admin-trend.css"/>
+    <script src="../../../lib/laydate/laydate.js"></script>
+    <link rel="stylesheet" href="../../../lib/myPagination/css/style.css"/>
+    <link rel="stylesheet" href="../../../lib/myPagination/js/myPagination/page.css"/>
+    <link rel="stylesheet" href="../../../css/jquery-ui.css"/>
+    <script src="../../../lib/myPagination/js/myPagination/jquery.myPagination6.0.js"></script>
+    <script src="../../../lib/jquery-ui.js"></script>
+    <script src="../../../lib/datecontrol.js"></script>
+    <script src="../../../lib/echart/dist/echarts.js"></script>
+    <script src="../../../lib/tool.js"></script>
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -239,7 +239,7 @@
         if (value >= 30) {
             value = 30
         }
-        showNewUserData(1,value);
+        showNewUserData(1, value);
         return value;
     };
 
@@ -343,67 +343,67 @@
                         oldUserPlayCountNum = accAdd(oldUserPlayCountNum, infoData[i].oldUserPlayCount);
                         oldUserLoginTransformRateNum = accAdd(oldUserLoginTransformRateNum, infoData[i].oldUserLoginTransformRate);
 
-                        nextDayStayCountNum = accAdd(nextDayStayCountNum, infoData[i].nextDayStayCount);
-                        nextDayStayRateNums = accAdd(nextDayStayRateNums, infoData[i].nextDayStayRate);
+                        nextDayStayCountNum = accAdd(nextDayStayCountNum, infoData[i].nextDayStayCount === -1 ? 0 : infoData[i].nextDayStayCount);
+                        nextDayStayRateNums = accAdd(nextDayStayRateNums, infoData[i].nextDayStayCount === -1 ? 0 : infoData[i].nextDayStayRate);
                         var ele = {
                             statisticsDay: infoData[i].statisticsDay,
                             registerPopulation: infoData[i].registerPopulation,
                             registerExpCount: infoData[i].registerExpCount,
-                            registerExpCountRate: infoData[i].registerExpCountRate+"%",
+                            registerExpCountRate: infoData[i].registerExpCountRate + "%",
                             realExpCount: infoData[i].realExpCount,
                             virtualExpCount: infoData[i].virtualExpCount,
                             newUserRechargePopulation: infoData[i].newUserRechargePopulation,
                             newUserRechargeCount: infoData[i].newUserRechargeCount,
                             newUserRechargeAmount: infoData[i].newUserRechargeAmount,
-                            newUserRechargeRate: infoData[i].newUserRechargeRate+"%",
+                            newUserRechargeRate: infoData[i].newUserRechargeRate + "%",
                             newUserARPU: infoData[i].newUserARPU,
                             newUserARPPU: infoData[i].newUserARPPU,
                             newUserLoginCount: infoData[i].newUserLoginCount,
                             newUserPlayCount: infoData[i].newUserPlayCount,
-                            newUserLoginTransformRate: infoData[i].newUserLoginTransformRate+"%",
+                            newUserLoginTransformRate: infoData[i].newUserLoginTransformRate + "%",
                             oldUserRechargePopulation: infoData[i].oldUserRechargePopulation,
                             oldUserRechargeCount: infoData[i].oldUserRechargeCount,
                             oldUserRechargeAmount: infoData[i].oldUserRechargeAmount,
-                            oldUserRechargeRate: infoData[i].oldUserRechargeRate+"%",
+                            oldUserRechargeRate: infoData[i].oldUserRechargeRate + "%",
                             oldUserARPU: infoData[i].oldUserARPU,
                             oldUserARPPU: infoData[i].oldUserARPPU,
                             oldUserLoginCount: infoData[i].oldUserLoginCount,
                             oldUserPlayCount: infoData[i].oldUserPlayCount,
-                            oldUserLoginTransformRate: infoData[i].oldUserLoginTransformRate+"%",
-                            nextDayStayCount: infoData[i].nextDayStayCount,
-                            nextDayStayRate: infoData[i].nextDayStayRate+"%"
+                            oldUserLoginTransformRate: infoData[i].oldUserLoginTransformRate + "%",
+                            nextDayStayCount: infoData[i].nextDayStayCount === -1 ? "--" : infoData[i].nextDayStayCount,
+                            nextDayStayRate: infoData[i].nextDayStayCount === -1 ? "--" : infoData[i].nextDayStayRate + "%"
                         };
                         addTbRow(ele);
                     }
 
-                    console.log(registerExpCountRateNum +":"+ count);
+                    console.log(registerExpCountRateNum + ":" + count);
                     var ele1 = {
                         statisticsDay: "总计",
                         registerPopulation: registerPopulationNum,
                         registerExpCount: registerExpCountNum,
-                        registerExpCountRate: accDiv2(registerExpCountRateNum, count)+"%",
+                        registerExpCountRate: accDiv2(registerExpCountRateNum, count) + "%",
                         realExpCount: realExpCountNum,
                         virtualExpCount: virtualExpCountNum,
                         newUserRechargePopulation: newUserRechargePopulationNum,
                         newUserRechargeCount: newUserRechargeCountNum,
                         newUserRechargeAmount: newUserRechargeAmountNum,
-                        newUserRechargeRate: accDiv2(newUserRechargeRateNum, count)+"%",
+                        newUserRechargeRate: accDiv2(newUserRechargeRateNum, count) + "%",
                         newUserARPU: "--",
                         newUserARPPU: "--",
                         newUserLoginCount: newUserLoginCountNum,
                         newUserPlayCount: newUserPlayCountNum,
-                        newUserLoginTransformRate: accDiv2(newUserLoginTransformRateNum, count)+"%",
+                        newUserLoginTransformRate: accDiv2(newUserLoginTransformRateNum, count) + "%",
                         oldUserRechargePopulation: oldUserRechargePopulationNum,
                         oldUserRechargeCount: oldUserRechargeCountNum,
                         oldUserRechargeAmount: oldUserRechargeAmountNum,
-                        oldUserRechargeRate: accDiv2(oldUserRechargeRateNum, count)+"%",
+                        oldUserRechargeRate: accDiv2(oldUserRechargeRateNum, count) + "%",
                         oldUserARPU: "--",
                         oldUserARPPU: "--",
                         oldUserLoginCount: oldUserLoginCountNum,
                         oldUserPlayCount: oldUserPlayCountNum,
-                        oldUserLoginTransformRate: accDiv2(oldUserLoginTransformRateNum, count)+"%",
+                        oldUserLoginTransformRate: accDiv2(oldUserLoginTransformRateNum, count) + "%",
                         nextDayStayCount: nextDayStayCountNum,
-                        nextDayStayRate: accDiv2(nextDayStayRateNums, count)+"%"
+                        nextDayStayRate: accDiv2(nextDayStayRateNums, count) + "%"
                     };
                     addTbRow(ele1);
                 }

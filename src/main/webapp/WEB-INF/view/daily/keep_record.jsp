@@ -10,37 +10,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>产品运营数据统计后台</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/zTreeStyle.css">
-    <link rel="stylesheet" href="/css/dialogsdk.css">
-    <link rel="stylesheet" href="/css/jquery-ui.css">
-    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/zTreeStyle.css">
+    <link rel="stylesheet" href="../../../css/dialogsdk.css">
+    <link rel="stylesheet" href="../../../css/jquery-ui.css">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
     <!--[if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="/lib/jquery-1.11.2.min.js"></script>
-    <script src="/lib/bootstrap.min.js"></script>
-    <script src="/lib/jquery.ztree.all-3.5.min.js"></script>
-    <script src="/lib/jquery.validate.js"></script>
-    <script src="/lib/additional-methods.min.js" type="text/javascript"></script>
-    <script src="/lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
-    <script src="/lib/jquery.validate.custom.js" type="text/javascript"></script>
-    <script src="/lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
-    <script src="/lib/dialogsdk.js"></script>
-    <script src="/lib/tools/tools.js"></script>
-    <script src="/lib/layer/layer.js"></script>
-    <link rel="stylesheet" href="/css/admin-trend.css"/>
-    <script src="/lib/laydate/laydate.js"></script>
-    <link rel="stylesheet" href="/lib/myPagination/css/style.css"/>
-    <link rel="stylesheet" href="/lib/myPagination/js/myPagination/page.css"/>
-    <link rel="stylesheet" href="/css/jquery-ui.css"/>
-    <script src="/lib/myPagination/js/myPagination/jquery.myPagination6.0.js"></script>
-    <script src="/lib/jquery-ui.js"></script>
-    <script src="/lib/datecontrol.js"></script>
-    <script src="/lib/echart/dist/echarts.js"></script>
-    <script src="/lib/tool.js"></script>
+    <script src="../../../lib/jquery-1.11.2.min.js"></script>
+    <script src="../../../lib/bootstrap.min.js"></script>
+    <script src="../../../lib/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../../../lib/jquery.validate.js"></script>
+    <script src="../../../lib/additional-methods.min.js" type="text/javascript"></script>
+    <script src="../../../lib/jquery-validate.bootstrap-tooltip.js" type="text/javascript"></script>
+    <script src="../../../lib/jquery.validate.custom.js" type="text/javascript"></script>
+    <script src="../../../lib/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
+    <script src="../../../lib/dialogsdk.js"></script>
+    <script src="../../../lib/tools/tools.js"></script>
+    <script src="../../../lib/layer/layer.js"></script>
+    <link rel="stylesheet" href="../../../css/admin-trend.css"/>
+    <script src="../../../lib/laydate/laydate.js"></script>
+    <link rel="stylesheet" href="../../../lib/myPagination/css/style.css"/>
+    <link rel="stylesheet" href="../../../lib/myPagination/js/myPagination/page.css"/>
+    <link rel="stylesheet" href="../../../css/jquery-ui.css"/>
+    <script src="../../../lib/myPagination/js/myPagination/jquery.myPagination6.0.js"></script>
+    <script src="../../../lib/jquery-ui.js"></script>
+    <script src="../../../lib/datecontrol.js"></script>
+    <script src="../../../lib/echart/dist/echarts.js"></script>
+    <script src="../../../lib/tool.js"></script>
 <body>
 <div class="wrap">
     <jsp:include page="../template/header.jsp"/>
@@ -301,27 +301,6 @@
 
                     var count = infoData.length;
                     for (var i = 0; i < infoData.length; i++) {
-//                        registerCountNum = accAdd(registerCountNum, infoData[i].registerCount);
-//                        oneNumRate = accAdd(oneNumRate, infoData[i].onePercent);
-//                        twoNumRate = accAdd(twoNumRate, infoData[i].twoPercent);
-//                        threeNumRate =accAdd(threeNumRate, infoData[i].threePercent);
-//                        fourNumRate = accAdd(fourNumRate, infoData[i].fourPercent);
-//                        fiveNumRate = accAdd(fiveNumRate, infoData[i].fivePercent);
-//                        sixNumRate = accAdd(sixNumRate, infoData[i].sixPercent);
-//                        sevenNumRate = accAdd(sevenNumRate, infoData[i].sevenPercent);
-//                        fourteenNumRate = accAdd(fourteenNumRate, infoData[i].fourteenPercent);
-//                        thirtyNumRate = accAdd(thirtyNumRate, infoData[i].thirtyPercent);
-//
-//                        oneNum = accDiv(oneNum, infoData[i].oneRemain);
-//                        twoNum = accDiv(oneNum, infoData[i].oneRemain);
-//                        threeNum = accDiv(oneNum, infoData[i].oneRemain);
-//                        fourNum = accDiv(oneNum, infoData[i].oneRemain);
-//                        fiveNum = accDiv(oneNum, infoData[i].oneRemain);
-//                        sixNum = accDiv(oneNum, infoData[i].oneRemain);
-//                        sevenNum = accDiv(oneNum, infoData[i].oneRemain);
-//                        fourteenNum = accDiv(oneNum, infoData[i].oneRemain);
-//                        thirtyNum = accDiv(oneNum, infoData[i].oneRemain);
-
                         var ele = {
                             statisticsDay: infoData[i].statisticsDay,
                             registerCount: infoData[i].registerCount,

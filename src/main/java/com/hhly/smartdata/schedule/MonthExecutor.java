@@ -20,7 +20,7 @@ public class MonthExecutor{
     @Autowired
     private MonthExecutorService monthExecutorService;
 
-    @Scheduled(cron = "* * 1 1 * MON-FRI")
+    @Scheduled(cron = "* * 1 1 * ?")
     public void compositeReportExecutor(){
         Date date = new Date();
         try{
@@ -30,7 +30,7 @@ public class MonthExecutor{
         }
     }
 
-    @Scheduled(cron = "* * 1 1 * MON-FRI")
+    @Scheduled(cron = "* * 1 1 * ?")
     public void registerExecutor(){
         Date date = new Date();
         try{
@@ -40,7 +40,7 @@ public class MonthExecutor{
         }
     }
 
-    @Scheduled(cron = "* * 1 1 * MON-FRI")
+    @Scheduled(cron = "* * 1 1 * ?")
     public void rechargeExecutor(){
         Date date = new Date();
         try{
@@ -50,7 +50,7 @@ public class MonthExecutor{
         }
     }
 
-    @Scheduled(cron = "* * 1 1 * MON-FRI")
+    @Scheduled(cron = "* * 1 1 * ?")
     public void loginSourceExecutor(){
         Date date = new Date();
         try{

@@ -23,7 +23,7 @@ public class DailyExecutor{
     /**
      * 平台综合报表
      */
-    @Scheduled(cron = "* * 1 * * MON-FRI")
+    @Scheduled(cron = "* * 1 * * ?")
     public void dailyCompositeExecutor(){
         Date now = new Date();
         try{
@@ -36,7 +36,7 @@ public class DailyExecutor{
     /**
      * 注册统计
      */
-    @Scheduled(cron = "* * 1 * * MON-FRI")
+    @Scheduled(cron = "* * 1 * * ?")
     public void dailyRegisterSchedule(){
         Date now = new Date();
         try{
@@ -49,7 +49,7 @@ public class DailyExecutor{
     /**
      * 充值报表
      */
-    @Scheduled(cron = "* * 1 * * MON-FRI")
+    @Scheduled(cron = "* * 1 * * ?")
     public void rechargeExecutor(){
         Date now = new Date();
         try{
@@ -62,7 +62,7 @@ public class DailyExecutor{
     /**
      * 登录，用户来源报表
      */
-    @Scheduled(cron = "* * 1 * * MON-FRI")
+    @Scheduled(cron = "* * 1 * * ?")
     public void loginSourceExecutor(){
         Date now = new Date();
         try{
@@ -75,7 +75,7 @@ public class DailyExecutor{
     /**
      * 留存分析
      */
-    @Scheduled(cron = "* * 1 * * MON-FRI")
+    @Scheduled(cron = "* * 1 * * ?")
     public void keepRecordAnalyzeExecutor(){
         Date now = new Date();
         try{

@@ -27,6 +27,8 @@
         tbl_platform_goldconsume_record
         WHERE consume_time &lt;= #{endTime}
         AND consume_time &gt; #{startTime}
+        and user_id is not null
+        and user_id != ''
         GROUP BY platform_id,terminal,BINARY user_id
     </select>
 

@@ -28,4 +28,6 @@ public interface DailyCompositeReportMapper{
     void deleteByDaily(String daily) throws Exception;
 
     DailyCompositeReport selectByDaily(String daily) throws Exception;
+
+    void updateNextDayStayByDaily(@Param("statisticsDay") String statisticsDay, @Param("nextDayStayCount") Integer nextDayStayCount);
 }

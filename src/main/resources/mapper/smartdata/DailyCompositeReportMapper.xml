@@ -281,6 +281,12 @@
         where id = #{id}
     </update>
 
+    <update id="updateNextDayStayByDaily">
+        update daily_composite_report
+        set next_day_stay_count = #{nextDayStayCount}
+        where statistics_day = #{statisticsDay}
+    </update>
+
     <select id="selectDailyCompositeListData" resultType="com.hhly.smartdata.dto.daily.DailyCompositeReportResult">
         select
         DATE_FORMAT(statistics_day,'%Y-%m-%d') as statisticsDay,

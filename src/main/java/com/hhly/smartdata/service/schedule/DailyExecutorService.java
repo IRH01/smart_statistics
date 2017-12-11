@@ -206,7 +206,15 @@ public class DailyExecutorService{
                 nextDayStayCount++;
             }
         }
-        dailyCompositeReport.setNextDayStayCount(nextDayStayCount);
+        dailyCompositeReport.setNextDayStayCount(-1);
+        String beforeYesterday = DateUtil.getYesterdayStr(yesterdayStr);
+
+        //次日留存，今天计算前天在昨日的次日留存
+        DailyCompositeReport dailyCompositeReportOfBeforeYesterday = this.dailyCompositeReportMapper.selectByDaily(beforeYesterday);
+        if(dailyCompositeReportOfBeforeYesterday != null){
+            this.dailyCompositeReportMapper.updateNextDayStayByDaily(beforeYesterday, nextDayStayCount);
+        }
+
 
         //先删除，防止重复记录
         this.dailyCompositeReportMapper.deleteByDaily(yesterdayStr);
@@ -796,12 +804,12 @@ public class DailyExecutorService{
     private Integer calculateRemain(List<Map<String, Object>> list, Set<String> yesterdayLoginUserSet, Integer code){
         Integer count = 0;
         for(Map<String, Object> map : list){
-            String userId =  new String((byte[]) map.get("userId"));
+            String userId = new String((byte[]) map.get("userId"));
             if(yesterdayLoginUserSet.contains(userId)){
                 Integer osType = (Integer) map.get("osType");
-                if(code == 0 ){
+                if(code == 0){
                     count++;
-                } else if (osType.equals(code)){
+                }else if(osType.equals(code)){
                     count++;
                 }
             }

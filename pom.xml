@@ -253,7 +253,24 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>smartData</finalName>
+        <finalName>ROOT</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <excludes>
+                    <exclude>env/dev/**</exclude>
+                    <exclude>env/test/**</exclude>
+                    <exclude>env/pre/**</exclude>
+                    <exclude>env/production/**</exclude>
+                    <exclude>logback.xml</exclude>
+                    <exclude>spring.properties</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/env/${environment}</directory>
+                <targetPath>./</targetPath>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
@@ -284,5 +301,62 @@
                 </configuration>
             </plugin>
         </plugins>
+        <defaultGoal>compile</defaultGoal>
     </build>
+
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>local</id>
+            <properties>
+                <environment>local</environment>
+                <deploy.url>http://localhost:7080</deploy.url>
+                <deploy.server>tomcat8-local</deploy.server>
+                <profiles.active>local</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 开发环境 -->
+            <id>dev</id>
+            <properties>
+                <environment>dev</environment>
+                <deploy.url>http://dev.smartdata.w1x.com/</deploy.url>
+                <deploy.server>tomcat8-dev</deploy.server>
+                <profiles.active>dev</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 测试环境 -->
+            <id>test</id>
+            <properties>
+                <environment>test</environment>
+                <deploy.url>http://test.smartdata.w1x.com/</deploy.url>
+                <deploy.server>tomcat8-test</deploy.server>
+                <profiles.active>test</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <!--预发布环境 pre-production -->
+            <id>pre</id>
+            <properties>
+                <environment>pre</environment>
+                <deploy.url>http://pre.smartdata.w1x.com/</deploy.url>
+                <deploy.server>tomcat8-pre</deploy.server>
+                <profiles.active>pre</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 生产环境 production-->
+            <id>production</id>
+            <properties>
+                <environment>production</environment>
+                <deploy.url>http://smartdata.w1x.com/</deploy.url>
+                <deploy.server>tomcat8-production</deploy.server>
+                <profiles.active>production</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
 </project>
