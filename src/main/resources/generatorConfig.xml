@@ -9,16 +9,23 @@
             <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
             <property name="suppressDate" value="true"/><!-- 是否生成注释代时间戳-->
         </commentGenerator>
-        <jdbcConnection driverClass="${db.driverClassName}" connectionURL="${db.url}"
-                        userId="${db.username}" password="${db.password}"/>
-        <javaModelGenerator targetPackage="com.hhly.generator.model"
-                            targetProject="${generator.dir}"/>
-        <sqlMapGenerator targetPackage="com.hhly.generator.mapper"
-                         targetProject="${generator.dir}"/>
-        <javaClientGenerator targetPackage="com.hhly.generator.dao"
-                             targetProject="${generator.dir}"
-                             type="XMLMAPPER"/>
-        <table tableName="tbl_platform_goldconsume_record" domainObjectName="PlatformGoldconsumeRecord"
+        <jdbcConnection driverClass="${db.driverClassName}" connectionURL="${db.url}" userId="${db.username}"
+                        password="${db.password}"/>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="com.hhly.generator.model" targetProject="${generator.dir}">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="com.hhly.generator.mapper" targetProject="${generator.dir}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator targetPackage="com.hhly.generator.dao" targetProject="${generator.dir}" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="sys_user_delivery_station" domainObjectName="SysUserDeliveryStation"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
@@ -29,5 +36,17 @@
                enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
         />
+
+ <!--       <table tableName="trial_delivery_station" domainObjectName="TrialDeliveryStation"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"
+               enableDeleteByPrimaryKey="false"
+               enableInsert="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+        />-->
     </context>
 </generatorConfiguration>
